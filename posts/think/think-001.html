@@ -95,6 +95,29 @@
     .nav__cta .status{display:none}
   }
 
+  /* ───────────────── nav dropdown ───────────────── */
+  .nav__menu .has-drop{position:relative}
+  .nav__menu .drop{
+    position:absolute;top:calc(100% + 16px);left:50%;
+    transform:translateX(-50%) translateY(-10px);
+    min-width:210px;background:var(--bg);border:1px solid var(--rule);
+    padding:4px;opacity:0;pointer-events:none;
+    transition:opacity .22s ease,transform .22s cubic-bezier(.2,.8,.2,1);z-index:200;
+  }
+  .nav__menu .has-drop:hover .drop{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+  .nav__menu .drop a{
+    display:block;padding:10px 14px;border-radius:2px;
+    font-family:var(--f-kr);font-size:13px;font-weight:400;
+    letter-spacing:-.01em;text-transform:none;color:var(--ink-2);
+    transition:background .15s ease,color .15s ease;
+  }
+  .nav__menu .drop a::after{content:none!important}
+  .nav__menu .drop a:hover{background:var(--bg-2);color:var(--ink)}
+  .sub-idx{
+    display:block;font-family:var(--f-mono);font-size:9px;
+    text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin-bottom:2px;
+  }
+
   /* ───────────────── post layout ───────────────── */
   .post{
     max-width:740px;
@@ -248,9 +271,28 @@
     <span class="dot" aria-hidden="true"></span>byKimjak
   </a>
   <div class="nav__menu" role="navigation">
-    <a href="../../index.html#watch"><span class="idx">01</span>WATCH</a>
-    <a href="../../index.html#make"><span class="idx">02</span>MAKE</a>
-    <a href="../../index.html#think"><span class="idx">03</span>THINK</a>
+    <div class="has-drop">
+      <a href="../../watch/"><span class="idx">01</span>WATCH</a>
+      <div class="drop">
+        <a href="../../watch/ai-film.html"><span class="sub-idx">01–A</span>AI 영상 · 티저</a>
+        <a href="../../watch/ost.html"><span class="sub-idx">01–B</span>OST · 음악</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../../make/"><span class="idx">02</span>MAKE</a>
+      <div class="drop">
+        <a href="../../make/eastwar.html"><span class="sub-idx">02–A</span>EASTWAR 개발일지</a>
+        <a href="../../make/grandslam.html"><span class="sub-idx">02–B</span>GrandSlam 개발일지</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../../think/"><span class="idx">03</span>THINK</a>
+      <div class="drop">
+        <a href="../../think/ai-coach.html"><span class="sub-idx">03–A</span>AI 코치들과의 수다</a>
+        <a href="../../think/architect-notes.html"><span class="sub-idx">03–B</span>아키텍트 노트</a>
+        <a href="../../think/personal-essay.html"><span class="sub-idx">03–C</span>개인 에세이</a>
+      </div>
+    </div>
     <a href="../../index.html#about"><span class="idx">04</span>ABOUT</a>
   </div>
   <div class="nav__cta">
@@ -262,7 +304,7 @@
 <!-- ─────────── POST ─────────── -->
 <main class="post">
 
-  <a href="../../index.html#think" class="post__back rev">
+  <a href="../../think/personal-essay.html" class="post__back rev">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
     Think / 목록으로
   </a>
@@ -271,7 +313,7 @@
     <div class="post__meta">
       <span>2026.05.25</span>
       <span class="sep">·</span>
-      <span class="cat">THINK · AI CONVERSATIONS</span>
+      <span class="cat">THINK · 개인에세이</span>
     </div>
 
     <h1 class="post__title kr">손가락 딸깍으로 AI가 다 해준다는 착각에 대하여</h1>
