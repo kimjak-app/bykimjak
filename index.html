@@ -1,0 +1,1071 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>byKimjak — IP Architect</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<script src="image-slot.js"></script>
+
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --bg-2:#F2F2F2;
+    --ink:#0A0A0A;
+    --ink-2:#2A2A2A;
+    --ink-3:#6B6B6B;
+    --rule:#0A0A0A1A;
+    --dark:#0D0B09;
+    --dark-2:#1A1714;
+    --dark-ink:#FAF7F2;
+    --dark-ink-2:#9C948A;
+    --dark-rule:#FAF7F21A;
+    --accent:oklch(68% 0.08 70);
+    --accent-soft:oklch(68% 0.08 70 / 0.12);
+
+    --f-display:"Space Grotesk","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;
+    --f-body:"Inter","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;
+    --f-mono:"JetBrains Mono",ui-monospace,monospace;
+    --f-kr:"Pretendard Variable","Inter",ui-sans-serif,system-ui,sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--f-body);
+    background:var(--bg);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    font-feature-settings:"ss01","cv11";
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+  .mono{font-family:var(--f-mono);font-weight:400;letter-spacing:.02em;font-size:11px;text-transform:uppercase}
+  .kr{font-family:var(--f-kr);letter-spacing:-.01em}
+
+  /* ───────────────── grain overlay ───────────────── */
+  body::before{
+    content:none;
+  }
+
+  /* ───────────────── nav ───────────────── */
+  .nav{
+    position:fixed;inset:0 0 auto 0;z-index:100;
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+    padding:18px clamp(20px,4vw,48px);
+    transition:background .35s ease,backdrop-filter .35s ease,border-color .35s ease;
+    border-bottom:1px solid transparent;
+  }
+  .nav.scrolled{
+    background:color-mix(in srgb,var(--bg) 78%,transparent);
+    backdrop-filter:saturate(1.2) blur(14px);
+    -webkit-backdrop-filter:saturate(1.2) blur(14px);
+    border-bottom-color:var(--rule);
+  }
+  .nav__logo{font-family:var(--f-display);font-weight:600;font-size:18px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+  .nav__logo .dot{width:8px;height:8px;border-radius:999px;background:var(--ink);display:inline-block;transform:translateY(-1px)}
+  .nav__menu{display:flex;gap:36px;justify-content:center}
+  .nav__menu a{
+    font-family:var(--f-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;
+    position:relative;padding:6px 2px;color:var(--ink);
+  }
+  .nav__menu a::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);
+    transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.6,0,.2,1);
+  }
+  .nav__menu a:hover::after{transform:scaleX(1)}
+  .nav__menu a .idx{
+    font-family:var(--f-mono);font-size:9px;vertical-align:super;margin-right:4px;color:var(--ink-3);
+  }
+  .nav__cta{justify-self:end;display:flex;align-items:center;gap:14px}
+  .nav__cta .status{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+  .nav__cta .pulse{width:6px;height:6px;border-radius:999px;background:#3CB371;box-shadow:0 0 0 0 #3CB37166;animation:pulse 2s infinite}
+  @keyframes pulse{50%{box-shadow:0 0 0 6px transparent}}
+  .nav__cta a.contact{
+    border:1px solid var(--ink);padding:10px 16px;border-radius:999px;
+    font-family:var(--f-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+    transition:background .25s ease,color .25s ease;
+  }
+  .nav__cta a.contact:hover{background:var(--ink);color:var(--bg)}
+  @media (max-width:780px){
+    .nav{grid-template-columns:1fr auto;padding:14px 20px}
+    .nav__menu{display:none}
+    .nav__cta .status{display:none}
+  }
+
+  /* ───────────────── hero ───────────────── */
+  .hero{
+    position:relative;padding:80px clamp(20px,4vw,48px) 36px;
+    display:grid;grid-template-columns:repeat(12,1fr);gap:24px;
+  }
+  .hero__meta{
+    grid-column:1 / span 12;display:flex;justify-content:space-between;align-items:end;
+    color:var(--ink-3);
+  }
+  .hero__meta .left,.hero__meta .right{display:flex;gap:18px;flex-wrap:wrap}
+  .hero__meta .right{justify-content:flex-end}
+  .hero__title{
+    grid-column:1 / span 12;
+    font-family:var(--f-display);font-weight:500;font-size:clamp(64px,15vw,260px);
+    line-height:.86;letter-spacing:-.045em;margin:24px 0 0;
+    text-wrap:balance;
+  }
+  .hero__logo{
+    grid-column:1 / span 12;
+    margin:12px 0 0;display:flex;flex-direction:column;align-items:flex-start;gap:14px;
+  }
+  .hero__logo img{
+    display:block;width:100%;max-width:1100px;height:auto;
+    margin-left:-2%;
+  }
+  .hero__logo .role{
+    display:flex;align-items:center;gap:14px;
+    font-family:var(--f-display);font-weight:500;
+    font-size:clamp(14px,1vw,16px);letter-spacing:.4em;text-transform:uppercase;color:var(--ink);
+    padding-left:2px;
+  }
+  .hero__logo .role::before,
+  .hero__logo .role::after{content:"";display:inline-block;width:42px;height:1px;background:var(--ink)}
+  .hero__logo .role .sup{
+    font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;color:var(--ink-3);
+    text-transform:uppercase;font-weight:400;
+  }
+  .hero__title .arc{display:block;position:relative}
+  .hero__title .arc .o{display:inline-block;position:relative}
+  .hero__title .arc .o::after{
+    content:"";position:absolute;left:-6%;right:-6%;top:8%;bottom:8%;
+    border:2px solid var(--ink);border-radius:50%;
+    transform:rotate(-8deg);
+  }
+  .hero__title .sup{
+    font-family:var(--f-mono);font-size:13px;font-weight:400;letter-spacing:.04em;
+    vertical-align:top;color:var(--ink-3);text-transform:uppercase;
+    display:inline-block;transform:translateY(.4em);margin-left:.6em;
+  }
+  .hero__row{
+    grid-column:1 / span 12;display:grid;grid-template-columns:repeat(12,1fr);gap:24px;
+    margin-top:6px;align-items:end;
+  }
+  .hero__lede{
+    grid-column:1 / span 5;
+    font-family:var(--f-kr);font-size:clamp(16px,1.25vw,19px);line-height:1.65;color:var(--ink-2);
+    letter-spacing:-.005em;
+  }
+  .hero__lede p + p{margin-top:1em}
+  .hero__lede strong{font-weight:600;color:var(--ink)}
+  .hero__lede .footnote{
+    margin-top:1.4em;font-size:12px;color:var(--ink-3);font-weight:400;letter-spacing:0;
+    line-height:1.5;
+  }
+  .hero__index{
+    grid-column:7 / span 6;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  }
+  .hero__index .cell{
+    background:var(--bg);padding:22px 18px 22px;display:flex;flex-direction:column;gap:10px;
+    min-height:140px;
+  }
+  .hero__index .cell .k{font-family:var(--f-mono);font-size:10px;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase}
+  .hero__index .cell .v{font-family:var(--f-display);font-size:clamp(20px,2vw,28px);font-weight:500;letter-spacing:-.01em;line-height:1.1}
+  .hero__index .cell .sub{font-family:var(--f-kr);font-size:12px;color:var(--ink-3);margin-top:auto}
+
+  .hero__scroll{
+    position:absolute;left:clamp(20px,4vw,48px);bottom:14px;
+    font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
+    display:flex;align-items:center;gap:10px;
+  }
+  .hero__scroll .line{display:block;width:48px;height:1px;background:var(--ink-3);position:relative;overflow:hidden}
+  .hero__scroll .line::after{content:"";position:absolute;inset:0;background:var(--ink);transform:translateX(-100%);animation:scrollline 2.4s cubic-bezier(.6,0,.2,1) infinite}
+  @keyframes scrollline{0%{transform:translateX(-100%)}60%,100%{transform:translateX(100%)}}
+
+  @media (max-width:980px){
+    .hero__lede{grid-column:1 / span 12}
+    .hero__index{grid-column:1 / span 12;margin-top:24px}
+  }
+  @media (max-width:600px){
+    .hero{padding:110px 20px 60px}
+    .hero__index{grid-template-columns:1fr 1fr}
+    .hero__index .cell:last-child{grid-column:1 / span 2}
+  }
+
+  /* ───────────────── about ───────────────── */
+  .about{
+    padding:80px clamp(20px,4vw,48px) 100px;
+    border-top:1px solid var(--rule);
+    display:grid;grid-template-columns:repeat(12,1fr);gap:24px;
+    align-items:start;
+  }
+  .about__label{grid-column:1 / span 12;color:var(--ink-3);display:flex;justify-content:space-between;margin-bottom:14px}
+  .about__photo{grid-column:1 / span 5;position:relative;display:flex;flex-direction:column}
+  .about__photo .frame{
+    width:100%;aspect-ratio:4/5;overflow:hidden;
+    border:1px solid var(--rule);background:var(--bg-2);
+  }
+  .about__photo .frame img{
+    width:100%;height:100%;object-fit:cover;display:block;
+  }
+  .about__photo .cap{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-top:12px;color:var(--ink-3);
+    font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  }
+  .about__photo .cap .d{width:6px;height:6px;border-radius:999px;background:var(--ink-3);display:inline-block;margin-right:8px;transform:translateY(-1px)}
+
+  .about__body{grid-column:7 / span 6;display:flex;flex-direction:column;gap:28px}
+  .about__name{
+    font-family:var(--f-display);font-weight:500;font-size:clamp(40px,5.5vw,84px);
+    letter-spacing:-.035em;line-height:.95;margin:0;
+  }
+  .about__name .role{
+    display:block;margin-top:14px;
+    font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);
+  }
+  .about__bio{font-family:var(--f-kr);font-size:16px;line-height:1.7;color:var(--ink-2);max-width:48ch}
+  .about__bio p + p{margin-top:1em}
+  .about__bio strong{font-weight:600;color:var(--ink)}
+
+  .about__facts{
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    display:grid;grid-template-columns:1fr 1fr;
+  }
+  .about__facts .row{
+    display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;
+    padding:14px 0;border-bottom:1px solid var(--rule);
+    font-size:14px;
+  }
+  .about__facts .row:nth-last-child(-n+2){border-bottom:0}
+  .about__facts .row:nth-child(odd){padding-right:24px;border-right:1px solid var(--rule)}
+  .about__facts .row:nth-child(even){padding-left:24px}
+  .about__facts .k{font-family:var(--f-mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3)}
+  .about__facts .v{font-family:var(--f-display);font-weight:500;letter-spacing:-.005em}
+  .about__facts .v .ko{font-family:var(--f-kr);font-size:12px;color:var(--ink-3);font-weight:400;display:block;margin-top:2px}
+
+  .about__cta{display:flex;gap:10px;flex-wrap:wrap}
+  .about__cta a{
+    border:1px solid var(--ink);padding:11px 18px;border-radius:999px;
+    font-family:var(--f-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+    transition:background .25s ease,color .25s ease;
+  }
+  .about__cta a:hover{background:var(--ink);color:var(--bg)}
+  .about__cta a.solid{background:var(--ink);color:var(--bg)}
+  .about__cta a.solid:hover{background:transparent;color:var(--ink)}
+
+  @media (max-width:980px){
+    .about__photo{grid-column:1 / span 12}
+    .about__body{grid-column:1 / span 12;margin-top:24px}
+  }
+  @media (max-width:600px){
+    .about__facts{grid-template-columns:1fr}
+    .about__facts .row:nth-child(odd){padding-right:0;border-right:0}
+    .about__facts .row:nth-child(even){padding-left:0}
+  }
+
+  /* ───────────────── featured video ───────────────── */
+  .featured{padding:60px clamp(20px,4vw,48px) 120px;border-top:1px solid var(--rule)}
+  .featured__head{
+    display:grid;grid-template-columns:repeat(12,1fr);gap:24px;margin-bottom:32px;align-items:end;
+  }
+  .featured__label{grid-column:1 / span 4;color:var(--ink-3)}
+  .featured__title{
+    grid-column:5 / span 8;
+    font-family:var(--f-display);font-weight:500;font-size:clamp(28px,3.4vw,52px);
+    letter-spacing:-.02em;line-height:1.05;margin:0;
+  }
+  .featured__title em{font-style:normal;color:var(--ink-3)}
+
+  .featured__frame{
+    position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;
+    background:var(--dark);color:var(--dark-ink);
+    border-radius:4px;
+    cursor:pointer;
+  }
+  .featured__frame .ph{
+    position:absolute;inset:0;
+    background:
+      repeating-linear-gradient(135deg,#16130F 0 22px,#1C1814 22px 44px);
+  }
+  .featured__frame .glow{
+    position:absolute;inset:-20%;
+    background:radial-gradient(50% 40% at 30% 60%,oklch(68% 0.08 70 / .35),transparent 60%);
+    mix-blend-mode:screen;
+    transition:transform .6s ease;
+  }
+  .featured__frame:hover .glow{transform:translate(2%,-2%)}
+  .featured__frame .overlay{
+    position:absolute;inset:0;padding:clamp(20px,3vw,40px);
+    display:flex;flex-direction:column;justify-content:space-between;
+  }
+  .featured__frame .tag{
+    align-self:flex-start;font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    border:1px solid var(--dark-rule);padding:8px 12px;border-radius:999px;color:var(--dark-ink-2);
+    display:flex;align-items:center;gap:8px;
+  }
+  .featured__frame .tag .rec{width:6px;height:6px;border-radius:999px;background:#E25C45;animation:pulse 2s infinite}
+  .featured__frame .bottom{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+  .featured__frame .name{
+    font-family:var(--f-display);font-weight:500;font-size:clamp(20px,2.4vw,36px);
+    letter-spacing:-.01em;line-height:1.05;max-width:60%;
+  }
+  .featured__frame .name .ko{font-family:var(--f-kr);font-weight:500;display:block;font-size:.7em;color:var(--dark-ink-2);margin-top:6px}
+  .featured__frame .meta-r{
+    display:flex;gap:18px;align-items:center;color:var(--dark-ink-2);
+    font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;
+  }
+  .featured__frame .play{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:clamp(64px,7vw,96px);height:clamp(64px,7vw,96px);border-radius:999px;
+    border:1px solid var(--dark-ink);
+    display:grid;place-items:center;
+    transition:background .3s ease,color .3s ease,transform .3s ease;
+    color:var(--dark-ink);
+  }
+  .featured__frame:hover .play{background:var(--dark-ink);color:var(--dark);transform:translate(-50%,-50%) scale(1.05)}
+  .featured__frame .play svg{width:36%;height:36%;margin-left:8%}
+  .featured__frame .timecode{
+    position:absolute;right:clamp(20px,3vw,40px);top:clamp(20px,3vw,40px);
+    font-family:var(--f-mono);font-size:11px;color:var(--dark-ink-2);letter-spacing:.08em;
+  }
+  .featured__caption{margin-top:18px;display:flex;justify-content:space-between;color:var(--ink-3);flex-wrap:wrap;gap:12px}
+
+  /* ───────────────── gallery (dark) ───────────────── */
+  .gallery{background:var(--dark);color:var(--dark-ink);padding:120px 0 140px;position:relative;overflow:hidden}
+  .gallery__inner{padding:0 clamp(20px,4vw,48px)}
+  .gallery__head{
+    display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:end;margin-bottom:48px;
+  }
+  .gallery__head .label{grid-column:1 / span 5;color:var(--dark-ink-2)}
+  .gallery__head h2{
+    grid-column:1 / span 12;
+    font-family:var(--f-display);font-weight:400;font-size:clamp(40px,7vw,120px);
+    letter-spacing:-.04em;line-height:.95;margin:14px 0 0;color:var(--dark-ink);
+    text-wrap:balance;
+  }
+  .gallery__head h2 em{font-style:italic;font-family:"Times New Roman",serif;font-weight:400;color:#A99A85}
+  .gallery__head .desc{grid-column:8 / span 5;color:var(--dark-ink-2);font-family:var(--f-kr);font-size:14px;line-height:1.6;margin-top:14px}
+  @media (max-width:780px){.gallery__head .desc{grid-column:1 / span 12}}
+
+  .grid{
+    display:grid;grid-template-columns:repeat(12,1fr);gap:14px;
+  }
+  .tile{
+    position:relative;overflow:hidden;background:var(--dark-2);
+    aspect-ratio:4/5;cursor:pointer;
+  }
+  .tile .ph{position:absolute;inset:0}
+  .tile .ph.s1{background:repeating-linear-gradient(135deg,#191512 0 18px,#221C18 18px 36px)}
+  .tile .ph.s2{background:repeating-linear-gradient(0deg,#16130F 0 12px,#1F1A16 12px 24px)}
+  .tile .ph.s3{background:repeating-linear-gradient(90deg,#1A1612 0 28px,#251F1A 28px 56px)}
+  .tile .ph.s4{background:repeating-linear-gradient(45deg,#13110E 0 10px,#1B1814 10px 20px)}
+  .tile .ph.s5{background:repeating-linear-gradient(135deg,oklch(28% 0.04 70) 0 14px,oklch(22% 0.03 60) 14px 28px)}
+  .tile .ph.s6{background:repeating-linear-gradient(160deg,#181410 0 32px,#221C17 32px 64px)}
+  .tile::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,transparent 50%,#0009 100%);
+    transition:opacity .4s ease;
+  }
+  .tile:hover::after{opacity:.6}
+  .tile .badge{
+    position:absolute;top:14px;left:14px;
+    font-family:var(--f-mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--dark-ink);background:#0008;padding:6px 10px;border-radius:999px;border:1px solid var(--dark-rule);
+    display:flex;align-items:center;gap:6px;z-index:2;
+  }
+  .tile .meta{
+    position:absolute;left:14px;right:14px;bottom:14px;z-index:2;
+    display:flex;justify-content:space-between;align-items:end;gap:10px;
+    transform:translateY(8px);opacity:.92;transition:transform .4s ease,opacity .4s ease;
+  }
+  .tile:hover .meta{transform:translateY(0);opacity:1}
+  .tile .meta .t{font-family:var(--f-display);font-weight:500;font-size:18px;letter-spacing:-.005em;line-height:1.1}
+  .tile .meta .t .ko{display:block;font-family:var(--f-kr);font-size:11px;color:var(--dark-ink-2);font-weight:400;margin-top:4px}
+  .tile .meta .n{font-family:var(--f-mono);font-size:10px;color:var(--dark-ink-2);letter-spacing:.06em}
+  .tile .center-icon{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:56px;height:56px;border-radius:999px;border:1px solid #ffffff44;
+    display:grid;place-items:center;color:var(--dark-ink);opacity:.8;
+    transition:opacity .3s ease,background .3s ease,transform .3s ease;z-index:2;
+  }
+  .tile:hover .center-icon{opacity:1;background:#0006;transform:translate(-50%,-50%) scale(1.05)}
+  .tile .center-icon svg{width:40%;height:40%}
+
+  .tile.t-wide{grid-column:span 8}
+  .tile.t-tall{grid-column:span 4;aspect-ratio:4/5}
+  .tile.t-square{grid-column:span 4;aspect-ratio:1/1}
+  .tile.t-half{grid-column:span 6;aspect-ratio:16/11}
+  .tile.t-third{grid-column:span 4;aspect-ratio:4/5}
+  .tile.t-strip{grid-column:span 12;aspect-ratio:16/4}
+
+  /* music card */
+  .tile.t-music{background:#16120E;color:var(--dark-ink)}
+  .tile.t-music::after{display:none}
+  .tile.t-music .body{
+    position:absolute;inset:0;padding:22px;display:flex;flex-direction:column;justify-content:space-between;
+    z-index:2;
+  }
+  .tile.t-music .cover{
+    position:absolute;inset:auto 22px 22px auto;width:50%;aspect-ratio:1/1;
+    background:
+      conic-gradient(from 180deg at 50% 50%, oklch(68% 0.08 70 / .6), oklch(45% 0.06 60 / .3), oklch(68% 0.08 70 / .6));
+    border-radius:999px;
+    box-shadow:0 0 0 1px #ffffff14, inset 0 0 0 18px #0008, inset 0 0 0 19px #ffffff10, inset 0 0 0 38px #0008, inset 0 0 0 39px #ffffff10;
+    animation:spin 22s linear infinite;
+  }
+  .tile.t-music .cover::after{
+    content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:14%;height:14%;border-radius:999px;background:#0D0B09;box-shadow:0 0 0 1px #ffffff22;
+  }
+  @keyframes spin{to{transform:rotate(1turn)}}
+  .tile.t-music .eq{display:flex;align-items:flex-end;gap:3px;height:18px;margin-top:10px}
+  .tile.t-music .eq span{display:block;width:3px;background:var(--accent);animation:eq 1.2s ease-in-out infinite}
+  .tile.t-music .eq span:nth-child(1){animation-delay:0s}
+  .tile.t-music .eq span:nth-child(2){animation-delay:.15s}
+  .tile.t-music .eq span:nth-child(3){animation-delay:.3s}
+  .tile.t-music .eq span:nth-child(4){animation-delay:.45s}
+  .tile.t-music .eq span:nth-child(5){animation-delay:.6s}
+  @keyframes eq{0%,100%{height:20%}50%{height:100%}}
+
+  @media (max-width:980px){
+    .tile.t-wide{grid-column:span 12}
+    .tile.t-tall{grid-column:span 6}
+    .tile.t-square{grid-column:span 6}
+    .tile.t-half{grid-column:span 6}
+    .tile.t-third{grid-column:span 6}
+  }
+  @media (max-width:600px){
+    .tile{grid-column:span 12 !important}
+  }
+
+  /* marquee */
+  .marquee{
+    margin-top:60px;border-top:1px solid var(--dark-rule);border-bottom:1px solid var(--dark-rule);
+    overflow:hidden;white-space:nowrap;
+  }
+  .marquee__track{display:inline-flex;gap:48px;padding:22px 0;animation:marq 38s linear infinite;will-change:transform}
+  .marquee__track span{
+    font-family:var(--f-display);font-weight:400;font-size:clamp(28px,4vw,56px);letter-spacing:-.02em;color:var(--dark-ink);
+    display:inline-flex;align-items:center;gap:48px;
+  }
+  .marquee__track i{display:inline-block;width:8px;height:8px;border-radius:999px;background:var(--accent);font-style:normal}
+  .marquee__track em{font-style:italic;font-family:"Times New Roman",serif;color:#A99A85}
+  @keyframes marq{to{transform:translateX(-50%)}}
+
+  /* ───────────────── categories ───────────────── */
+  .cats{padding:140px clamp(20px,4vw,48px)}
+  .cats__head{
+    display:grid;grid-template-columns:repeat(12,1fr);gap:24px;align-items:end;margin-bottom:60px;
+  }
+  .cats__label{grid-column:1 / span 4;color:var(--ink-3)}
+  .cats__title{
+    grid-column:1 / span 12;margin:14px 0 0;
+    font-family:var(--f-display);font-weight:400;font-size:clamp(40px,6.5vw,104px);
+    letter-spacing:-.04em;line-height:.95;
+  }
+  .cats__title em{font-style:italic;font-family:"Times New Roman",serif;color:var(--ink-3)}
+
+  .cats__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media (max-width:980px){.cats__grid{grid-template-columns:1fr}}
+
+  .card{
+    position:relative;background:var(--bg);border:1px solid var(--rule);
+    padding:28px 28px 26px;min-height:480px;
+    display:flex;flex-direction:column;gap:18px;
+    transition:transform .5s cubic-bezier(.6,0,.2,1),background .5s ease,color .5s ease,border-color .5s ease;
+    overflow:hidden;
+    cursor:pointer;
+  }
+  .card:hover{background:var(--ink);color:var(--bg);border-color:var(--ink);transform:translateY(-4px)}
+  .card .num{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:inherit;opacity:.55;display:flex;justify-content:space-between}
+  .card .name{
+    font-family:var(--f-display);font-weight:500;font-size:clamp(36px,4vw,60px);
+    letter-spacing:-.03em;line-height:1;margin:8px 0 0;
+  }
+  .card .ko{font-family:var(--f-kr);font-size:13px;opacity:.65;letter-spacing:-.005em}
+  .card .desc{font-family:var(--f-kr);font-size:14px;line-height:1.6;opacity:.8;margin-top:4px}
+  .card .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+  .card .tags span{
+    font-family:var(--f-mono);font-size:10px;text-transform:uppercase;letter-spacing:.06em;
+    padding:6px 10px;border:1px solid currentColor;border-radius:999px;opacity:.7;
+  }
+  .card .preview{
+    position:relative;width:100%;aspect-ratio:16/9;margin-top:6px;overflow:hidden;background:#0D0B09;
+  }
+  .card .preview .ph{position:absolute;inset:0;opacity:.85}
+  .card .arrow{
+    position:absolute;right:24px;top:24px;width:36px;height:36px;border-radius:999px;
+    border:1px solid currentColor;display:grid;place-items:center;
+    transition:transform .4s ease,background .4s ease,color .4s ease;
+  }
+  .card:hover .arrow{transform:rotate(-45deg);background:var(--bg);color:var(--ink)}
+  .card .arrow svg{width:38%;height:38%}
+
+  /* ───────────────── notes strip ───────────────── */
+  .notes{padding:0 clamp(20px,4vw,48px) 140px}
+  .notes__row{
+    display:grid;grid-template-columns:repeat(12,1fr);gap:24px;border-top:1px solid var(--rule);padding:36px 0;
+    align-items:center;
+    transition:background .3s ease;
+  }
+  .notes__row:hover{background:linear-gradient(90deg,transparent,var(--accent-soft) 20%,var(--accent-soft) 80%,transparent)}
+  .notes__num{grid-column:1 / span 1;font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
+  .notes__cat{grid-column:2 / span 2;font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3)}
+  .notes__t{grid-column:4 / span 7;font-family:var(--f-display);font-weight:500;font-size:clamp(20px,2vw,30px);letter-spacing:-.015em;line-height:1.2}
+  .notes__t .ko{display:block;font-family:var(--f-kr);font-size:13px;color:var(--ink-3);font-weight:400;margin-top:4px}
+  .notes__date{grid-column:11 / span 2;justify-self:end;font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
+  @media (max-width:780px){
+    .notes__num{grid-column:1 / span 2}
+    .notes__cat{grid-column:3 / span 4}
+    .notes__t{grid-column:1 / span 12;order:3;margin-top:8px}
+    .notes__date{grid-column:7 / span 6;order:2;justify-self:end}
+  }
+
+  /* ───────────────── footer ───────────────── */
+  footer{
+    background:var(--dark);color:var(--dark-ink);padding:90px clamp(20px,4vw,48px) 36px;
+    position:relative;overflow:hidden;
+  }
+  footer .big{
+    font-family:var(--f-display);font-weight:400;font-size:clamp(44px,7vw,108px);
+    letter-spacing:-.04em;line-height:.95;color:var(--dark-ink);margin:0 0 48px;
+    text-wrap:balance;
+  }
+  footer .big em{font-style:italic;font-family:"Times New Roman",serif;color:#A99A85}
+  footer .grid{
+    display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding-top:36px;
+    border-top:1px solid var(--dark-rule);
+  }
+  footer .col{display:flex;flex-direction:column;gap:10px}
+  footer .col h6{margin:0 0 6px;font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--dark-ink-2);font-weight:400}
+  footer .col a{font-family:var(--f-display);font-size:15px;color:var(--dark-ink);transition:color .3s ease;display:inline-flex;align-items:center;gap:6px}
+  footer .col a:hover{color:#A99A85}
+  footer .col a .ext{font-family:var(--f-mono);font-size:9px;opacity:.5}
+  footer .c1{grid-column:1 / span 5}
+  footer .c2{grid-column:6 / span 2}
+  footer .c3{grid-column:8 / span 2}
+  footer .c4{grid-column:10 / span 3}
+  footer .c1 p{font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0}
+  footer .bottom{
+    margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-rule);
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+    font-family:var(--f-mono);font-size:11px;color:var(--dark-ink-2);text-transform:uppercase;letter-spacing:.06em;
+  }
+  @media (max-width:780px){
+    footer .c1,footer .c2,footer .c3,footer .c4{grid-column:1 / span 12}
+  }
+
+  /* ───────────────── reveal ───────────────── */
+  .rev{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  .rev.in{opacity:1;transform:none}
+  .rev.d1{transition-delay:.08s} .rev.d2{transition-delay:.16s} .rev.d3{transition-delay:.24s} .rev.d4{transition-delay:.32s} .rev.d5{transition-delay:.4s}
+
+  /* Hero word splits */
+  .splitline{display:block;overflow:hidden}
+  .splitline > span{display:inline-block;transform:translateY(110%);transition:transform 1s cubic-bezier(.2,.8,.2,1)}
+  .in .splitline > span{transform:none}
+  .splitline.delay2 > span{transition-delay:.1s}
+  .splitline.delay3 > span{transition-delay:.2s}
+</style>
+</head>
+<body>
+
+<template id="__bundler_thumbnail">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+    <rect width="200" height="200" fill="#0E1318"/>
+    <g transform="translate(100 100)" fill="none" stroke="#F8F5F0" stroke-width="1.4">
+      <circle r="58"/>
+      <circle r="42"/>
+      <circle r="26"/>
+    </g>
+    <text x="100" y="174" text-anchor="middle"
+      font-family="ui-sans-serif,system-ui" font-size="14" font-weight="600"
+      letter-spacing="2" fill="#F8F5F0">byKimjak</text>
+  </svg>
+</template>
+
+<!-- ─────────── NAV ─────────── -->
+<nav class="nav" id="nav" data-screen-label="00 Nav">
+  <a href="#top" class="nav__logo" data-comment-anchor="logo">
+    <span class="dot" aria-hidden="true"></span>byKimjak
+  </a>
+  <div class="nav__menu" role="navigation">
+    <a href="#watch"><span class="idx">01</span>WATCH</a>
+    <a href="#make"><span class="idx">02</span>MAKE</a>
+    <a href="#think"><span class="idx">03</span>THINK</a>
+    <a href="#about"><span class="idx">04</span>ABOUT</a>
+  </div>
+  <div class="nav__cta">
+    <span class="status"><span class="pulse"></span>Available · Seoul</span>
+    <a href="#contact" class="contact">Contact ↗</a>
+  </div>
+</nav>
+
+<!-- ─────────── HERO ─────────── -->
+<section class="hero" id="top" data-screen-label="01 Hero">
+
+  <div class="hero__logo rev">
+    <img src="assets/bykimjak-logo.png" alt="byKimjak" />
+  </div>
+
+  <div class="hero__row">
+    <div class="hero__lede rev kr">
+      <p>
+        <strong>상상 속 세계관을 설계하고, AI와 바이브 코딩으로 현실을 만드는 창작자.</strong>
+      </p>
+      <p>
+        시나리오·드라마 작가의 상상력으로 이야기를 기획하고, AI 영상과 바이브 코딩으로 직접 구현합니다.
+        1인 창작자, 1인 개발자, 1인 기업.
+      </p>
+      <p>
+        IP 아키텍트 <strong>byKimjak</strong>입니다.
+      </p>
+      <p class="footnote">
+        * IP(지식재산권) : 창작물이 만들어내는 모든 가치.
+      </p>
+    </div>
+
+    <div class="hero__index rev d2">
+      <div class="cell">
+        <span class="k">A. Role</span>
+        <span class="v">Writer ／ Director</span>
+        <span class="sub kr">시나리오·드라마 기획</span>
+      </div>
+      <div class="cell">
+        <span class="k">B. Stack</span>
+        <span class="v">AI Video ／ Vibe Code</span>
+        <span class="sub kr">생성형 영상 + 바이브 코딩</span>
+      </div>
+      <div class="cell">
+        <span class="k">C. Studio</span>
+        <span class="v">Solo Co.</span>
+        <span class="sub kr">1인 창작 · 1인 개발 · 1인 기업</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ─────────── FEATURED VIDEO ─────────── -->
+<section class="featured" id="featured" data-screen-label="02 Featured">
+  <div class="featured__head">
+    <h2 class="featured__title rev d1">
+      A new world, <em>built sentence by sentence,</em> rendered frame by frame.
+    </h2>
+  </div>
+
+  <div class="featured__frame rev d2" role="button" aria-label="Play featured reel">
+    <div class="ph"></div>
+    <div class="glow"></div>
+    <div class="timecode mono">TC · 00:00:42:18 / 00:03:21:00</div>
+    <div class="overlay">
+      <span class="tag"><span class="rec"></span>REEL · 2026 · 16∶9 · DOLBY VISION</span>
+      <div class="bottom">
+        <div class="name">
+          The Cartographer of Imaginary Cities
+          <span class="ko">상상도시 지도제작자 — 단편 영상 시리즈</span>
+        </div>
+        <div class="meta-r">
+          <span>04 EPISODES</span>
+          <span>·</span>
+          <span>AI · DIRECTED BY KIMJAK</span>
+        </div>
+      </div>
+    </div>
+    <button class="play" aria-label="Play">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3v18l16-9z"/></svg>
+    </button>
+  </div>
+
+  <div class="featured__caption mono" style="display:none">
+    <span>FIG. 002 ／ Hero Reel ／ Drop drag a clip into the frame above.</span>
+    <span>Runtime · 03∶21 ／ Score by KIMJAK</span>
+  </div>
+</section>
+
+<!-- ─────────── GALLERY (DARK) ─────────── -->
+<section class="gallery" id="gallery" data-screen-label="03 Gallery">
+  <div class="gallery__inner">
+    <div class="gallery__head">
+      <h2 class="rev d1">
+        Imagery, motion, sound — <em>fragments</em> of a still-forming world.
+      </h2>
+      <p class="desc rev d2 kr">
+        AI 영상, 드라마 시놉시스, 게임 빌드, 음악 트랙 — 단일 미디어가 아닌
+        세계관(IP) 단위로 묶어 보관합니다. 모든 작업은 직접 기획·연출·구현.
+      </p>
+    </div>
+
+    <div class="grid">
+
+      <div class="tile t-wide rev">
+        <div class="ph s1"></div>
+        <span class="badge"><span class="rec" style="background:#E25C45;animation:pulse 2s infinite"></span>AI FILM</span>
+        <div class="center-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3v18l16-9z"/></svg></div>
+        <div class="meta">
+          <div class="t">Static City, Moving Light
+            <span class="ko">정지된 도시, 움직이는 빛 — 04:12</span>
+          </div>
+          <div class="n">2026 · 4K · REEL 01</div>
+        </div>
+      </div>
+
+      <div class="tile t-tall rev d1">
+        <div class="ph s2"></div>
+        <span class="badge">STILL</span>
+        <div class="meta">
+          <div class="t">Plate 07
+            <span class="ko">콘셉트 스틸 — 항구의 새벽</span>
+          </div>
+          <div class="n">2026 · 6048×8064</div>
+        </div>
+      </div>
+
+      <div class="tile t-third rev">
+        <div class="ph s3"></div>
+        <span class="badge">CHARACTER</span>
+        <div class="meta">
+          <div class="t">Operator 88
+            <span class="ko">오퍼레이터 88 — 캐릭터 시트</span>
+          </div>
+          <div class="n">CHR. 011</div>
+        </div>
+      </div>
+
+      <div class="tile t-third rev d1">
+        <div class="ph s4"></div>
+        <span class="badge"><span class="rec" style="background:#E25C45;animation:pulse 2s infinite"></span>SCENE</span>
+        <div class="center-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3v18l16-9z"/></svg></div>
+        <div class="meta">
+          <div class="t">Corridor 12B
+            <span class="ko">통로 12B — 시퀀스 컷</span>
+          </div>
+          <div class="n">02:48</div>
+        </div>
+      </div>
+
+      <div class="tile t-third t-music rev d2">
+        <div class="cover" aria-hidden="true"></div>
+        <div class="body">
+          <span class="badge" style="position:static">TRACK · OST</span>
+          <div>
+            <div class="t" style="font-family:var(--f-display);font-weight:500;font-size:22px;letter-spacing:-.01em;line-height:1.05">
+              Inverse Tide
+              <span class="ko">역조 — 메인 테마</span>
+            </div>
+            <div class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="n" style="font-family:var(--f-mono);font-size:10px;color:var(--dark-ink-2);letter-spacing:.06em;margin-top:8px">03:42 · WAV · STEREO</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tile t-half rev">
+        <div class="ph s5"></div>
+        <span class="badge"><span class="rec" style="background:#E25C45;animation:pulse 2s infinite"></span>GAME</span>
+        <div class="center-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3v18l16-9z"/></svg></div>
+        <div class="meta">
+          <div class="t">Build · v0.4 “Strata”
+            <span class="ko">스트라타 빌드 — 플레이 영상</span>
+          </div>
+          <div class="n">PC · WEBGL · 12FPS PREVIEW</div>
+        </div>
+      </div>
+
+      <div class="tile t-half rev d1">
+        <div class="ph s6"></div>
+        <span class="badge">SET DESIGN</span>
+        <div class="meta">
+          <div class="t">Lobby of the Slow Hotel
+            <span class="ko">슬로우 호텔 로비 — 공간 설정</span>
+          </div>
+          <div class="n">2025 · 3D PLATE</div>
+        </div>
+      </div>
+
+      <div class="tile t-strip rev">
+        <div class="ph" style="background:linear-gradient(90deg,#16130F,#1F1A16 30%,oklch(38% 0.05 70 / .55) 50%,#1F1A16 70%,#16130F)"></div>
+        <span class="badge">EPISODE INDEX</span>
+        <div class="meta">
+          <div class="t" style="font-size:22px">EP.01 · EP.02 · EP.03 · EP.04
+            <span class="ko">상상도시 지도제작자 — 4편 시리즈 트레일러</span>
+          </div>
+          <div class="n">SERIES · 13:08 TOTAL</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>WORLDBUILDING <i></i> AI CINEMA <i></i> <em>solo studio</em> <i></i> SCENARIO <i></i> VIBE CODE <i></i> GAME DEV <i></i> <em>seoul, kr</em> <i></i> WORLDBUILDING <i></i> AI CINEMA <i></i> <em>solo studio</em> <i></i> SCENARIO <i></i> VIBE CODE <i></i> GAME DEV <i></i> <em>seoul, kr</em> <i></i></span>
+        <span>WORLDBUILDING <i></i> AI CINEMA <i></i> <em>solo studio</em> <i></i> SCENARIO <i></i> VIBE CODE <i></i> GAME DEV <i></i> <em>seoul, kr</em> <i></i> WORLDBUILDING <i></i> AI CINEMA <i></i> <em>solo studio</em> <i></i> SCENARIO <i></i> VIBE CODE <i></i> GAME DEV <i></i> <em>seoul, kr</em> <i></i></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── CATEGORIES ─────────── -->
+<section class="cats" id="categories" data-screen-label="04 Categories">
+  <div class="cats__head">
+    <h2 class="cats__title rev d1">Watch. <em>Make.</em> Think.</h2>
+  </div>
+
+  <div class="cats__grid">
+
+    <a href="#watch" class="card rev" id="watch">
+      <div class="num"><span>01 / Watch</span><span>↗</span></div>
+      <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 17 7M9 7h8v8"/></svg></div>
+      <div>
+        <div class="name">WATCH</div>
+        <div class="ko">AI 영상 & 음악 · Visual + Sonic Worlds</div>
+      </div>
+      <div class="preview"><div class="ph s1"></div>
+        <div class="center-icon" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:999px;border:1px solid #ffffff66;color:#fff;display:grid;place-items:center">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:38%"><path d="M5 3v18l16-9z"/></svg>
+        </div>
+      </div>
+      <div class="desc kr">
+        AI로 만든 단편 영상 시리즈와 자작 OST를 모아 두는 곳. 한 편의 영화처럼 보고, 한 곡의 사운드트랙처럼 듣습니다.
+      </div>
+      <div class="tags">
+        <span>AI Film</span><span>OST</span><span>Trailer</span><span>16∶9</span>
+      </div>
+    </a>
+
+    <a href="#make" class="card rev d1" id="make">
+      <div class="num"><span>02 / Make</span><span>↗</span></div>
+      <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 17 7M9 7h8v8"/></svg></div>
+      <div>
+        <div class="name">MAKE</div>
+        <div class="ko">게임 개발 + 앱 개발 · Built with Vibe Code</div>
+      </div>
+      <div class="preview"><div class="ph s5"></div>
+        <div style="position:absolute;left:18px;bottom:14px;font-family:var(--f-mono);font-size:10px;color:#F2EFEAcc;letter-spacing:.08em">BUILD v0.4 · 12FPS · PREVIEW</div>
+      </div>
+      <div class="desc kr">
+        세계관을 직접 만질 수 있도록 게임과 앱으로 구현합니다. 바이브 코딩 기반의 1인 개발 로그도 함께.
+      </div>
+      <div class="tags">
+        <span>Game Dev</span><span>App</span><span>WebGL</span><span>Vibe Code</span>
+      </div>
+    </a>
+
+    <a href="#think" class="card rev d2" id="think">
+      <div class="num"><span>03 / Think</span><span>↗</span></div>
+      <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 17 7M9 7h8v8"/></svg></div>
+      <div>
+        <div class="name">THINK</div>
+        <div class="ko">아키텍트 노트 + AI 대화록 · Notes from the Studio</div>
+      </div>
+      <div class="preview" style="background:#0D0B09;display:flex;align-items:center;justify-content:center">
+        <div style="font-family:var(--f-mono);font-size:10px;color:#F2EFEAaa;letter-spacing:.06em;line-height:1.7;padding:18px;text-align:left;width:100%">
+          &gt; THINKING.LOG · 0241<br/>
+          &gt; "If a world is built only in&nbsp;<br/>
+          &nbsp;&nbsp;&nbsp;one head, is it real yet?"<br/>
+          &gt; — entry · 2026.04.11<br/>
+          &gt; _
+        </div>
+      </div>
+      <div class="desc kr">
+        세계관을 짓는 동안 떠오른 생각, AI와 나눈 대화의 단편, 창작 노트. 정리된 글보다는 진행 중인 생각에 가깝습니다.
+      </div>
+      <div class="tags">
+        <span>Essay</span><span>AI Logs</span><span>Notes</span><span>Process</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ─────────── NOTES STRIP (preview of Think) ─────────── -->
+<section class="notes" aria-labelledby="recent" data-screen-label="05 Recent">
+  <div style="display:flex;justify-content:space-between;align-items:end;padding:20px 0;border-bottom:1px solid var(--rule)">
+    <div class="mono" style="color:var(--ink-3)">From the Studio</div>
+    <a href="#" class="mono" style="color:var(--ink-3)">View all entries ↗</a>
+  </div>
+
+  <a href="#" class="notes__row rev">
+    <div class="notes__num">N° 014</div>
+    <div class="notes__cat">Architect Notes</div>
+    <div class="notes__t">A world is a contract between a sentence and a frame.
+      <span class="ko">세계관은 문장과 프레임 사이의 계약이다</span>
+    </div>
+    <div class="notes__date">2026 · 05 · 18</div>
+  </a>
+
+  <a href="#" class="notes__row rev">
+    <div class="notes__num">N° 013</div>
+    <div class="notes__cat">AI Conversations</div>
+    <div class="notes__t">On building scenes that the model cannot quite predict.
+      <span class="ko">모델이 예측할 수 없는 장면에 관하여</span>
+    </div>
+    <div class="notes__date">2026 · 05 · 09</div>
+  </a>
+
+  <a href="#" class="notes__row rev">
+    <div class="notes__num">N° 012</div>
+    <div class="notes__cat">Process · Vibe Code</div>
+    <div class="notes__t">Solo studio, solo developer, solo company — a workflow.
+      <span class="ko">1인 창작자, 1인 개발자, 1인 기업의 워크플로우</span>
+    </div>
+    <div class="notes__date">2026 · 04 · 27</div>
+  </a>
+
+  <a href="#" class="notes__row rev" style="border-bottom:1px solid var(--rule)">
+    <div class="notes__num">N° 011</div>
+    <div class="notes__cat">Architect Notes</div>
+    <div class="notes__t">Why I stopped calling them "projects" and started calling them worlds.
+      <span class="ko">왜 ‘프로젝트’ 대신 ‘세계관’이라 부르기 시작했나</span>
+    </div>
+    <div class="notes__date">2026 · 04 · 12</div>
+  </a>
+</section>
+
+<!-- ─────────── ABOUT ─────────── -->
+<section class="about" id="about" data-screen-label="07 About">
+  <div class="about__photo rev">
+    <div class="frame">
+      <img src="assets/kimjak-portrait.jpg" alt="Kimjak · 김성현 (Seonghyun Kim), IP Architect, Seoul." />
+    </div>
+    <div class="cap">
+      <span><span class="d"></span>KIMJAK · PORTRAIT 2026</span>
+      <span>FIG. 007</span>
+    </div>
+  </div>
+
+  <div class="about__body rev d1">
+    <h2 class="about__name">
+      Kimjak <span style="font-family:var(--f-kr);font-weight:400;color:var(--ink-3);font-size:.55em;letter-spacing:-.01em;white-space:nowrap">— 김성현 <span style="font-family:var(--f-display);color:var(--ink-3)">(Seonghyun Kim)</span></span>
+      <span class="role">IP Architect · Writer · Director · Solo Developer</span>
+    </h2>
+
+    <div class="about__bio kr">
+      <p>
+        <strong>제76회 베를린 국제 영화제 포럼 부문 초청작</strong>이자 2026년 개봉작
+        <strong>&lt;내이름은&gt;</strong>으로 2021년 <strong>제주 4.3재단 극본공모</strong>에
+        당선된 시나리오·드라마 작가.
+      </p>
+      <p>
+        AI 영상 제작과 바이브 코딩으로 영역을 확장했습니다.
+        글, 영상, 앱, 게임 — <strong>1인 기획하고 혼자 만듭니다.</strong>
+      </p>
+      <p>
+        협업과 외주가 아닌, 작가 한 명이 한 세계관을 완성합니다.
+      </p>
+    </div>
+
+    <div class="about__facts">
+      <div class="row">
+        <span class="k">Based</span>
+        <span class="v">Seoul, KR<span class="ko">서울 · 대한민국</span></span>
+      </div>
+      <div class="row">
+        <span class="k">Studio</span>
+        <span class="v">Solo Co. — 1<span class="ko">1인 창작 · 1인 개발 · 1인 기업</span></span>
+      </div>
+      <div class="row">
+        <span class="k">Background</span>
+        <span class="v">Scenario / Drama<span class="ko">시나리오 · 드라마 작가 출신</span></span>
+      </div>
+      <div class="row">
+        <span class="k">Stack</span>
+        <span class="v">AI Cinema · Vibe Code<span class="ko">생성형 영상 + 바이브 코딩</span></span>
+      </div>
+      <div class="row">
+        <span class="k">Open To</span>
+        <span class="v">IP / PD / Partner<span class="ko">IP 라이선싱 · 공동제작 · 투자</span></span>
+      </div>
+      <div class="row">
+        <span class="k">Since</span>
+        <span class="v">byKimjak · 2024<span class="ko">2024년부터 단독 활동</span></span>
+      </div>
+    </div>
+
+    <div class="about__cta">
+      <a href="#contact" class="solid">Get in touch ↗</a>
+      <a href="#">Press kit · PDF</a>
+      <a href="#gallery">See selected works</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── FOOTER ─────────── -->
+<footer id="contact" data-screen-label="06 Footer">
+  <p class="big rev">
+    Let’s build a <em>world</em> →
+  </p>
+
+  <div class="grid">
+    <div class="col c1 rev">
+      <h6>byKimjak Studio</h6>
+      <p class="kr">
+        IP Architect · Seoul, Korea. 시나리오·드라마 기획부터 AI 영상, 게임, 앱까지 — 한 사람이 하나의 세계관을 끝까지 설계합니다.
+      </p>
+    </div>
+    <div class="col c2 rev d1">
+      <h6>Sections</h6>
+      <a href="#watch">Watch <span class="ext">/01</span></a>
+      <a href="#make">Make <span class="ext">/02</span></a>
+      <a href="#think">Think <span class="ext">/03</span></a>
+    </div>
+    <div class="col c3 rev d2">
+      <h6>Social</h6>
+      <a href="#">Instagram <span class="ext">↗</span></a>
+      <a href="#">YouTube <span class="ext">↗</span></a>
+      <a href="#">Vimeo <span class="ext">↗</span></a>
+      <a href="#">Threads <span class="ext">↗</span></a>
+    </div>
+    <div class="col c4 rev d3">
+      <h6>Contact</h6>
+      <a href="mailto:oropa@kakao.com">oropa@kakao.com</a>
+      <a href="#">Press kit <span class="ext">PDF</span></a>
+      <a href="#">For PDs & Investors <span class="ext">↗</span></a>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <span>byKimjak © 2026  ／  All rights, all worlds, reserved.</span>
+    <span>Built solo · with AI · in Seoul</span>
+    <span>v.04 / 2026.05</span>
+  </div>
+</footer>
+
+<script>
+  // Nav scrolled state
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    if (window.scrollY > 24) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  // Reveal on scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+
+  // Featured frame click placeholder
+  document.querySelector('.featured__frame')?.addEventListener('click', ()=>{
+    const tag = document.querySelector('.featured__frame .tag');
+    tag.style.background = 'oklch(68% 0.08 70 / .25)';
+    tag.style.borderColor = 'oklch(68% 0.08 70)';
+    setTimeout(()=>{ tag.style.background=''; tag.style.borderColor=''; }, 1200);
+  });
+</script>
+
+
+</body>
+</html>
