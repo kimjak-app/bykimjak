@@ -60,6 +60,34 @@ footer .c1{grid-column:1/span 5}footer .c2{grid-column:6/span 2}footer .c3{grid-
 footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-family:var(--f-mono);font-size:11px;color:var(--dark-ink-2);text-transform:uppercase;letter-spacing:.06em}
 @media(max-width:780px){footer .c1,footer .c2,footer .c3,footer .c4{grid-column:1/span 12}}
 .rev{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}.rev.in{opacity:1;transform:none}
+
+/* ── Gallery ── */
+.gallery-section{padding:48px clamp(20px,4vw,48px) 140px}
+.gallery-count{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:32px;padding-top:32px;border-top:1px solid var(--rule)}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+@media(max-width:900px){.gallery{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:500px){.gallery{grid-template-columns:1fr}}
+.g-item{position:relative;overflow:hidden;cursor:pointer;background:var(--bg-2);aspect-ratio:3/4}
+.g-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.g-item:hover img{transform:scale(1.04)}
+.g-over{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,10,.85) 0%,transparent 55%);opacity:0;transition:opacity .35s ease;display:flex;flex-direction:column;justify-content:flex-end;padding:20px}
+.g-item:hover .g-over{opacity:1}
+.g-over .g-title{font-family:var(--f-kr);font-size:14px;font-weight:600;color:#FAF7F2;margin:0 0 4px;line-height:1.3}
+.g-over .g-date{font-family:var(--f-mono);font-size:10px;color:#9C948A;text-transform:uppercase;letter-spacing:.06em}
+
+/* ── Lightbox ── */
+#lb{position:fixed;inset:0;z-index:1000;background:rgba(13,11,9,.94);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s ease;padding:24px}
+#lb.open{opacity:1;pointer-events:all}
+#lb-inner{position:relative;display:flex;max-width:1100px;width:100%;max-height:calc(100vh - 48px);background:var(--dark);overflow:hidden}
+#lb-img-wrap{flex:0 0 62%;display:flex;align-items:stretch}
+#lb-img-wrap img{display:block;width:100%;height:100%;object-fit:contain;max-height:calc(100vh - 48px)}
+#lb-meta{flex:1;padding:40px 36px;display:flex;flex-direction:column;justify-content:center;gap:16px;border-left:1px solid var(--dark-rule)}
+.lb-date{font-family:var(--f-mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--dark-ink-2)}
+.lb-title{font-family:var(--f-kr);font-size:clamp(16px,2vw,22px);font-weight:700;color:var(--dark-ink);line-height:1.3;margin:0}
+.lb-desc{font-family:var(--f-kr);font-size:14px;line-height:1.75;color:var(--dark-ink-2);margin:0}
+#lb-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border:1px solid var(--dark-rule);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--dark-ink-2);transition:border-color .2s,color .2s;padding:0;line-height:1}
+#lb-close:hover{border-color:var(--dark-ink);color:var(--dark-ink)}
+@media(max-width:700px){#lb-inner{flex-direction:column;overflow-y:auto}#lb-img-wrap{flex:none;width:100%;max-height:55vh}#lb-meta{border-left:none;border-top:1px solid var(--dark-rule);padding:24px 20px}}
 </style>
 </head>
 <body>
@@ -107,10 +135,20 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     <p class="listing-desc">AI로 생성한 컨셉 이미지, 캐릭터 아트, 세계관 비주얼 아카이브.</p>
   </div>
 
-  <div class="post-list">
-    <div class="empty rev">
-      <span class="num">01–C</span>
-      <p>첫 이미지가 곧 업로드됩니다 · Coming soon</p>
+  <div class="gallery-section">
+    <p class="gallery-count rev">1 이미지 · 1 Image</p>
+    <div class="gallery">
+      <div class="g-item rev"
+        data-src="../images/make/samwar-poster-01.png"
+        data-title="삼국워(EASTWAR) 티저 포스터01"
+        data-desc="&ldquo;천하를 삼키는 자 역사가 된다!&rdquo;란 컨셉으로 1인제작을 시작한 전략가상역사시뮬레이션게임."
+        data-date="2026년 05월 25일">
+        <img src="../images/make/samwar-poster-01.png" alt="삼국워(EASTWAR) 티저 포스터01" loading="lazy" />
+        <div class="g-over">
+          <p class="g-title">삼국워(EASTWAR) 티저 포스터01</p>
+          <span class="g-date">2026년 05월 25일</span>
+        </div>
+      </div>
     </div>
   </div>
 </main>
@@ -126,11 +164,42 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
   <div class="bottom"><span>byKimjak © 2026  ／  All rights, all worlds, reserved.</span><span>Built solo · with AI · in Seoul</span><span>v.04 / 2026.05</span></div>
 </footer>
 
+<div id="lb" role="dialog" aria-modal="true" aria-label="이미지 뷰어">
+  <div id="lb-inner">
+    <div id="lb-img-wrap"><img id="lb-img" src="" alt="" /></div>
+    <div id="lb-meta">
+      <span class="lb-date" id="lb-date"></span>
+      <h2 class="lb-title" id="lb-title"></h2>
+      <p class="lb-desc" id="lb-desc"></p>
+    </div>
+    <button id="lb-close" aria-label="닫기">&times;</button>
+  </div>
+</div>
+
 <script>
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+
+/* ── Lightbox ── */
+const lb=document.getElementById('lb');
+const lbImg=document.getElementById('lb-img');
+const lbTitle=document.getElementById('lb-title');
+const lbDesc=document.getElementById('lb-desc');
+const lbDate=document.getElementById('lb-date');
+function openLb(el){
+  lbImg.src=el.dataset.src;lbImg.alt=el.dataset.title;
+  lbTitle.textContent=el.dataset.title;
+  lbDesc.textContent=el.dataset.desc;
+  lbDate.textContent=el.dataset.date;
+  lb.classList.add('open');document.body.style.overflow='hidden';
+}
+function closeLb(){lb.classList.remove('open');document.body.style.overflow='';}
+document.querySelectorAll('.g-item').forEach(el=>el.addEventListener('click',()=>openLb(el)));
+document.getElementById('lb-close').addEventListener('click',closeLb);
+lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb();});
 </script>
 </body>
 </html>
