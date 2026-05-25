@@ -43,7 +43,11 @@ a{color:inherit;text-decoration:none}
 .listing-head h1{font-family:var(--f-display);font-weight:500;font-size:clamp(44px,9vw,120px);letter-spacing:-.04em;line-height:.92;margin:0 0 8px}
 .listing-head .sub-ko{font-family:var(--f-kr);font-size:clamp(16px,2vw,22px);color:var(--ink-3);margin:0 0 20px;font-weight:400}
 .listing-head .listing-desc{font-family:var(--f-kr);font-size:15px;line-height:1.65;color:var(--ink-3);max-width:48ch}
-.lang-switch{margin-bottom:24px}.lang-switch a{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);border:1px solid var(--rule);padding:7px 14px;border-radius:999px;display:inline-flex;align-items:center;gap:6px;transition:color .2s,border-color .2s}.lang-switch a:hover{color:var(--ink);border-color:var(--ink)}
+.lang-switch{display:inline-flex;align-items:center;margin-bottom:28px}
+.lang-current{font-family:var(--f-display);font-size:14px;font-weight:700;color:var(--ink);padding:10px 20px;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px;cursor:default;letter-spacing:.01em}
+.lang-sep{font-family:var(--f-mono);font-size:14px;color:var(--ink-3);opacity:.35;user-select:none;line-height:1}
+.lang-other{font-family:var(--f-display);font-size:14px;font-weight:400;color:var(--ink-3);padding:10px 20px;transition:color .2s;letter-spacing:.01em}
+.lang-other:hover{color:var(--ink)}
 .post-list{padding:0 clamp(20px,4vw,48px) 140px}
 .empty{padding:100px 0 120px;text-align:center;border-top:1px solid var(--rule)}
 .empty .num{font-family:var(--f-display);font-weight:500;font-size:clamp(80px,15vw,200px);letter-spacing:-.04em;color:var(--bg-2);line-height:1;display:block}
@@ -132,7 +136,11 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     <div class="breadcrumb">
       <a href="../make/">MAKE</a><span class="sep">›</span><span>EASTWAR 개발일지</span>
     </div>
-    <div class="lang-switch"><a href="eastwar-en.html">English →</a></div>
+    <div class="lang-switch">
+      <span class="lang-current">🇰🇷 한국어</span>
+      <span class="lang-sep">|</span>
+      <a href="eastwar-en.html" class="lang-other">🇺🇸 English</a>
+    </div>
     <h1>EASTWAR</h1>
     <p class="sub-ko">개발일지 — Dev Log</p>
     <p class="listing-desc">전략 가상역사 시뮬레이션 게임 EASTWAR(가칭). Godot 엔진 기반, 전투 시스템 설계부터 세계관 구축까지의 1인 개발 기록.</p>
