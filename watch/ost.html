@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
 <style>
-:root{--bg:#FFFFFF;--bg-2:#F2F2F2;--ink:#0A0A0A;--ink-2:#2A2A2A;--ink-3:#6B6B6B;--rule:#0A0A0A1A;--dark:#0D0B09;--dark-ink:#FAF7F2;--dark-ink-2:#9C948A;--dark-rule:#FAF7F21A;--accent:oklch(68% 0.08 70);--accent-soft:oklch(68% 0.08 70 / 0.12);--f-display:"Space Grotesk","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-body:"Inter","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-mono:"JetBrains Mono",ui-monospace,monospace;--f-kr:"Pretendard Variable","Inter",ui-sans-serif,system-ui,sans-serif}
+:root{--bg:#FFFFFF;--bg-2:#F2F2F2;--ink:#0A0A0A;--ink-2:#2A2A2A;--ink-3:#6B6B6B;--rule:#0A0A0A1A;--dark:#0D0B09;--dark-2:#1A1714;--dark-ink:#FAF7F2;--dark-ink-2:#9C948A;--dark-rule:#FAF7F21A;--accent:oklch(68% 0.08 70);--accent-soft:oklch(68% 0.08 70 / 0.12);--f-display:"Space Grotesk","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-body:"Inter","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-mono:"JetBrains Mono",ui-monospace,monospace;--f-kr:"Pretendard Variable","Inter",ui-sans-serif,system-ui,sans-serif}
 *{box-sizing:border-box}html,body{margin:0;padding:0}html{scroll-behavior:smooth}
 body{font-family:var(--f-body);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
@@ -43,10 +43,7 @@ a{color:inherit;text-decoration:none}
 .breadcrumb .sep{opacity:.4}
 .listing-head h1{font-family:var(--f-kr);font-weight:700;font-size:clamp(44px,9vw,120px);letter-spacing:-.04em;line-height:.92;margin:0 0 20px}
 .listing-head .listing-desc{font-family:var(--f-kr);font-size:15px;line-height:1.65;color:var(--ink-3);max-width:48ch}
-.post-list{padding:0 clamp(20px,4vw,48px) 140px}
-.empty{padding:100px 0 120px;text-align:center;border-top:1px solid var(--rule)}
-.empty .num{font-family:var(--f-display);font-weight:500;font-size:clamp(80px,15vw,200px);letter-spacing:-.04em;color:var(--bg-2);line-height:1;display:block}
-.empty p{font-family:var(--f-kr);font-size:14px;color:var(--ink-3);margin-top:12px}
+
 footer{background:var(--dark);color:var(--dark-ink);padding:90px clamp(20px,4vw,48px) 36px;overflow:hidden}
 footer .big{font-family:var(--f-display);font-weight:400;font-size:clamp(44px,7vw,108px);letter-spacing:-.04em;line-height:.95;color:var(--dark-ink);margin:0 0 48px;text-wrap:balance}
 footer .big em{font-style:italic;font-family:"Times New Roman",serif;color:#A99A85}
@@ -60,6 +57,56 @@ footer .c1{grid-column:1/span 5}footer .c2{grid-column:6/span 2}footer .c3{grid-
 footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-family:var(--f-mono);font-size:11px;color:var(--dark-ink-2);text-transform:uppercase;letter-spacing:.06em}
 @media(max-width:780px){footer .c1,footer .c2,footer .c3,footer .c4{grid-column:1/span 12}}
 .rev{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}.rev.in{opacity:1;transform:none}
+
+/* ── Audio Section ── */
+.audio-section{padding:48px clamp(20px,4vw,48px) 140px}
+.audio-count{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:40px;padding-top:32px;border-top:1px solid var(--rule)}
+.audio-card{display:flex;flex-direction:column;gap:0;max-width:960px}
+.audio-card+.audio-card{margin-top:64px;padding-top:64px;border-top:1px solid var(--rule)}
+.audio-card__player{
+  background:var(--dark);
+  padding:28px 32px;
+  display:flex;
+  align-items:center;
+  gap:20px;
+  position:relative;
+  overflow:hidden;
+}
+.audio-card__player::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:repeating-linear-gradient(90deg,#1A1612 0 2px,transparent 2px 10px);
+  opacity:.25;
+  pointer-events:none;
+}
+.audio-card__icon{
+  flex-shrink:0;
+  width:40px;height:40px;
+  border-radius:999px;
+  border:1px solid var(--dark-rule);
+  display:grid;place-items:center;
+  color:var(--dark-ink-2);
+  position:relative;z-index:1;
+}
+.audio-card__icon svg{width:16px;height:16px}
+.audio-card__player audio{
+  flex:1;
+  min-width:0;
+  height:36px;
+  accent-color:var(--accent);
+  position:relative;z-index:1;
+}
+.audio-card__meta{
+  display:flex;flex-direction:column;gap:10px;
+  padding-top:20px;border-top:1px solid var(--rule);
+  margin-top:0;
+}
+.audio-card__num{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.audio-card__title{font-family:var(--f-display);font-weight:500;font-size:clamp(22px,3vw,38px);letter-spacing:-.02em;line-height:1.1;margin:0}
+.audio-card__desc{font-family:var(--f-kr);font-size:15px;line-height:1.7;color:var(--ink-2);margin:0;max-width:54ch}
+.audio-card__info{display:flex;align-items:center;flex-wrap:wrap;gap:10px;font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-top:4px}
+.audio-card__info .sep{opacity:.35}
 </style>
 </head>
 <body>
@@ -107,11 +154,149 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     <p class="listing-desc">세계관을 위해 직접 만든 오리지널 사운드트랙. 영상 없이도 이야기가 들립니다.</p>
   </div>
 
-  <div class="post-list">
-    <div class="empty rev">
-      <span class="num">01–B</span>
-      <p>첫 트랙이 곧 업로드됩니다 · Coming soon</p>
+  <div class="audio-section">
+    <p class="audio-count rev">7 트랙 · 7 Tracks</p>
+
+    <div class="audio-card rev">
+      <div class="audio-card__player">
+        <div class="audio-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19V6l12-3v13"/><circle cx="6" cy="19" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <audio controls preload="none" src="../assets/ost/Dawn_Over_the_Iron_Pass.mp3"></audio>
+      </div>
+      <div class="audio-card__meta">
+        <span class="audio-card__num">N° 001 · 01–B · OST</span>
+        <h2 class="audio-card__title">Dawn Over the Iron Pass</h2>
+        <div class="audio-card__info">
+          <span>2026</span>
+          <span class="sep">·</span>
+          <span>OST</span>
+          <span class="sep">·</span>
+          <span>EASTWAR IP</span>
+        </div>
+      </div>
     </div>
+
+    <div class="audio-card rev">
+      <div class="audio-card__player">
+        <div class="audio-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19V6l12-3v13"/><circle cx="6" cy="19" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <audio controls preload="none" src="../assets/ost/east_asia_heroes_theme.mp3"></audio>
+      </div>
+      <div class="audio-card__meta">
+        <span class="audio-card__num">N° 002 · 01–B · OST</span>
+        <h2 class="audio-card__title">East Asia Heroes Theme</h2>
+        <div class="audio-card__info">
+          <span>2026</span>
+          <span class="sep">·</span>
+          <span>OST</span>
+          <span class="sep">·</span>
+          <span>EASTWAR IP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="audio-card rev">
+      <div class="audio-card__player">
+        <div class="audio-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19V6l12-3v13"/><circle cx="6" cy="19" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <audio controls preload="none" src="../assets/ost/east_asia_domestic_affairs_theme.mp3"></audio>
+      </div>
+      <div class="audio-card__meta">
+        <span class="audio-card__num">N° 003 · 01–B · OST</span>
+        <h2 class="audio-card__title">East Asia Domestic Affairs Theme</h2>
+        <div class="audio-card__info">
+          <span>2026</span>
+          <span class="sep">·</span>
+          <span>OST</span>
+          <span class="sep">·</span>
+          <span>EASTWAR IP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="audio-card rev">
+      <div class="audio-card__player">
+        <div class="audio-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19V6l12-3v13"/><circle cx="6" cy="19" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <audio controls preload="none" src="../assets/ost/east_asia_domestic_affairs_5min_perfect_v2.mp3"></audio>
+      </div>
+      <div class="audio-card__meta">
+        <span class="audio-card__num">N° 004 · 01–B · OST</span>
+        <h2 class="audio-card__title">East Asia Domestic Affairs (5min)</h2>
+        <div class="audio-card__info">
+          <span>2026</span>
+          <span class="sep">·</span>
+          <span>OST · 5MIN</span>
+          <span class="sep">·</span>
+          <span>EASTWAR IP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="audio-card rev">
+      <div class="audio-card__player">
+        <div class="audio-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19V6l12-3v13"/><circle cx="6" cy="19" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <audio controls preload="none" src="../assets/ost/Before_the_Charge.mp3"></audio>
+      </div>
+      <div class="audio-card__meta">
+        <span class="audio-card__num">N° 005 · 01–B · OST</span>
+        <h2 class="audio-card__title">Before the Charge</h2>
+        <div class="audio-card__info">
+          <span>2026</span>
+          <span class="sep">·</span>
+          <span>OST</span>
+          <span class="sep">·</span>
+          <span>EASTWAR IP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="audio-card rev">
+      <div class="audio-card__player">
+        <div class="audio-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19V6l12-3v13"/><circle cx="6" cy="19" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <audio controls preload="none" src="../assets/ost/The_Last_Banner.mp3"></audio>
+      </div>
+      <div class="audio-card__meta">
+        <span class="audio-card__num">N° 006 · 01–B · OST</span>
+        <h2 class="audio-card__title">The Last Banner</h2>
+        <div class="audio-card__info">
+          <span>2026</span>
+          <span class="sep">·</span>
+          <span>OST</span>
+          <span class="sep">·</span>
+          <span>EASTWAR IP</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="audio-card rev">
+      <div class="audio-card__player">
+        <div class="audio-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19V6l12-3v13"/><circle cx="6" cy="19" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <audio controls preload="none" src="../assets/ost/The_Morning_After_Victory.mp3"></audio>
+      </div>
+      <div class="audio-card__meta">
+        <span class="audio-card__num">N° 007 · 01–B · OST</span>
+        <h2 class="audio-card__title">The Morning After Victory</h2>
+        <div class="audio-card__info">
+          <span>2026</span>
+          <span class="sep">·</span>
+          <span>OST</span>
+          <span class="sep">·</span>
+          <span>EASTWAR IP</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 </main>
 
