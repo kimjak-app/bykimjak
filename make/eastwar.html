@@ -96,8 +96,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
 /* ── Dev Log Article ── */
 .devlog{padding:0 0 140px}
-.devlog__poster{width:100%;line-height:0;overflow:hidden;border-bottom:1px solid var(--rule)}
-.devlog__poster img{width:100%;display:block;max-height:80vh;object-fit:cover}
+.body-poster{width:100%;display:block;max-height:400px;object-fit:cover;object-position:center top;margin-bottom:40px;border:1px solid var(--rule)}
 .devlog__body{padding:64px clamp(20px,4vw,48px) 0;max-width:760px}
 .devlog__body .log-num{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:12px}
 .devlog__body h1{font-family:var(--f-display);font-weight:500;font-size:clamp(26px,4vw,48px);letter-spacing:-.03em;line-height:1.1;margin:0 0 10px}
@@ -173,15 +172,12 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
   <article class="devlog" id="log-001">
 
-    <div class="devlog__poster rev">
-      <img src="../assets/eastwar/eastwar-poster-01.png" alt="EASTWAR 포스터 01" loading="lazy" />
-    </div>
-
     <div class="devlog__body rev">
       <span class="log-num">Dev Log · #001</span>
       <h1>EASTWAR 개발일지 #001</h1>
       <h2>무모한 도전의 시작 — 1인 작가, 게임을 만들다</h2>
       <span class="log-date">2026년 4월 22일</span>
+      <img class="body-poster" src="../assets/eastwar/eastwar-poster-01.png" alt="EASTWAR 포스터 01" loading="lazy" />
 
       <p>대학생 시절, KOEI의 삼국지3를 처음 손에 쥐었을 때부터 나는 이미 빠져들었다. 그리고 삼국지14, 삼국지8 리메이크까지 — 수십 년이 지난 지금도 나는 여전히 열혈 삼국지 팬이다.</p>
       <p>그 시절부터 늘 마음 한켠에 욕망 하나가 자리잡고 있었다.</p>

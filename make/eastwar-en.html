@@ -95,8 +95,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
 /* ── Dev Log Article ── */
 .devlog{padding:0 0 140px}
-.devlog__poster{width:100%;line-height:0;overflow:hidden;border-bottom:1px solid var(--rule)}
-.devlog__poster img{width:100%;display:block;max-height:80vh;object-fit:cover}
+.body-poster{width:100%;display:block;max-height:400px;object-fit:cover;object-position:center top;margin-bottom:40px;border:1px solid var(--rule)}
 .devlog__body{padding:64px clamp(20px,4vw,48px) 0;max-width:760px}
 .devlog__body .log-num{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:12px}
 .devlog__body h1{font-family:var(--f-display);font-weight:500;font-size:clamp(26px,4vw,48px);letter-spacing:-.03em;line-height:1.1;margin:0 0 10px}
@@ -172,15 +171,12 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
   <article class="devlog" id="log-001">
 
-    <div class="devlog__poster rev">
-      <img src="../assets/eastwar/eastwar-poster-01.png" alt="EASTWAR Poster 01" loading="lazy" />
-    </div>
-
     <div class="devlog__body rev">
       <span class="log-num">Dev Log · #001</span>
       <h1>EASTWAR Dev Log #001</h1>
       <h2>The Reckless Beginning — A Solo Writer Makes a Game</h2>
       <span class="log-date">April 22, 2026</span>
+      <img class="body-poster" src="../assets/eastwar/eastwar-poster-01.png" alt="EASTWAR Poster 01" loading="lazy" />
 
       <p>It started with KOEI's Romance of the Three Kingdoms III in college. I was hooked from the first play session. Decades later — through RTK14 and the RTK8 Remake — I'm still a die-hard fan.</p>
       <p>And for all those years, a quiet desire lived in the back of my mind.</p>
