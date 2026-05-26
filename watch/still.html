@@ -91,6 +91,18 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 #lb-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border:1px solid var(--dark-rule);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--dark-ink-2);transition:border-color .2s,color .2s;padding:0;line-height:1}
 #lb-close:hover{border-color:var(--dark-ink);color:var(--dark-ink)}
 @media(max-width:700px){#lb-inner{flex-direction:column;overflow-y:auto}#lb-img-wrap{flex:none;width:100%;max-height:55vh}#lb-meta{border-left:none;border-top:1px solid var(--dark-rule);padding:24px 20px}}
+
+/* ── Hero Showcase ── */
+.hero-showcase{padding:52px 0 0;margin-top:48px;border-top:1px solid var(--rule)}
+.hero-showcase__title{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0 0 32px;padding-bottom:0}
+.hero-card{display:grid;grid-template-columns:clamp(120px,16vw,200px) 1fr;gap:36px;align-items:start;padding:36px 0;border-bottom:1px solid var(--rule)}
+.hero-card img{width:100%;display:block;object-fit:cover;aspect-ratio:3/4}
+.hero-card__name{font-family:var(--f-display);font-weight:600;font-size:clamp(18px,2.5vw,28px);letter-spacing:-.02em;margin:0 0 2px;line-height:1.1}
+.hero-card__name-en{font-family:var(--f-display);font-weight:400;font-size:clamp(13px,1.4vw,16px);color:var(--ink-3);letter-spacing:-.01em;display:block;margin-bottom:8px}
+.hero-card__role{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0 0 18px;display:block}
+.hero-card__desc-kr{font-family:var(--f-kr);font-size:15px;line-height:1.85;color:var(--ink-2);margin:0 0 14px}
+.hero-card__desc-en{font-family:var(--f-body);font-size:14px;line-height:1.8;color:var(--ink-3);margin:0;padding-top:14px;border-top:1px solid var(--rule)}
+@media(max-width:600px){.hero-card{grid-template-columns:1fr;gap:20px}}
 </style>
 </head>
 <body>
@@ -139,7 +151,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
   </div>
 
   <div class="gallery-section">
-    <p class="gallery-count rev">1 이미지 · 1 Image</p>
+    <p class="gallery-count rev">6 이미지 · 6 Images</p>
     <div class="gallery">
       <div class="g-item rev"
         data-src="../images/make/samwar-poster-01.png"
@@ -155,6 +167,66 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
           <span class="g-date">2026년 05월 25일</span>
         </div>
       </div>
+    </div>
+
+    <div class="hero-showcase">
+      <p class="hero-showcase__title rev">EASTWAR 영웅 캐릭터 · Character Art</p>
+
+      <div class="hero-card rev">
+        <img src="../assets/eastwar/eastwar-hero-yi-sunshin.png" alt="이순신" loading="lazy" />
+        <div>
+          <h3 class="hero-card__name">이순신</h3>
+          <span class="hero-card__name-en">Yi Sun-sin</span>
+          <span class="hero-card__role">조선 수군 통사령관 · JOSEON NAVY</span>
+          <p class="hero-card__desc-kr">임진왜란에서 단 한 번도 패배하지 않은 불패의 전략가. 거북선을 이끌고 수전을 지배한 이 게임의 핵심 영웅. 동아시아를 통일하는 자리에 그의 이름이 가장 먼저 오른다.</p>
+          <p class="hero-card__desc-en">Korea's undefeated naval strategist. Never lost a single battle during the Imjin War. The central hero of EASTWAR — commanding the seas with the Turtle Ship, his dominion over water makes him the most dangerous force on any map.</p>
+        </div>
+      </div>
+
+      <div class="hero-card rev">
+        <img src="../assets/eastwar/eastwar-hero-gwanwoo.png" alt="관우" loading="lazy" />
+        <div>
+          <h3 class="hero-card__name">관우</h3>
+          <span class="hero-card__name-en">Guan Yu</span>
+          <span class="hero-card__role">촉한 오호대장 · GENERAL OF THE FIVE TIGERS</span>
+          <p class="hero-card__desc-kr">의(義)의 화신. 삼국지 최강의 무장으로 불리며 전장에서 적을 압도하는 존재. EASTWAR에서 중원을 대표하는 핵심 전력.</p>
+          <p class="hero-card__desc-en">The embodiment of loyalty and righteousness. Feared across the Three Kingdoms as the mightiest warrior of his era. In EASTWAR, he stands as the supreme force of the Central Plains.</p>
+        </div>
+      </div>
+
+      <div class="hero-card rev">
+        <img src="../assets/eastwar/eastwar-hero-jangbi.png" alt="장비" loading="lazy" />
+        <div>
+          <h3 class="hero-card__name">장비</h3>
+          <span class="hero-card__name-en">Zhang Fei</span>
+          <span class="hero-card__role">연인(燕人) 장익덕 · ZHANG YIDE OF YAN</span>
+          <p class="hero-card__desc-kr">천둥 같은 목소리로 적진을 무너뜨린 맹장. 전장에서 가장 먼저 돌격하는 용맹의 상징. 그의 함성 하나가 전세를 바꾼다.</p>
+          <p class="hero-card__desc-en">The ferocious general whose war cry shook enemy lines. First to charge, last to retreat. In EASTWAR, his raw power on the battlefield turns the tide of any engagement.</p>
+        </div>
+      </div>
+
+      <div class="hero-card rev">
+        <img src="../assets/eastwar/eastwar-hero-oda-nobunaga.png" alt="오다 노부나가" loading="lazy" />
+        <div>
+          <h3 class="hero-card__name">오다 노부나가</h3>
+          <span class="hero-card__name-en">Oda Nobunaga</span>
+          <span class="hero-card__role">천하포무(天下布武) · LORD OF THE JAPANESE ARCHIPELAGO</span>
+          <p class="hero-card__desc-kr">철포 부대와 냉철한 전략으로 일본 열도를 장악한 지배자. 두려움 없는 혁신가. EASTWAR에서 일본을 대표하는 최강의 군주.</p>
+          <p class="hero-card__desc-en">The iron-willed conqueror who unified Japan through gunpowder and ruthless strategy. A fearless innovator centuries ahead of his time. In EASTWAR, he commands the full might of the Japanese archipelago.</p>
+        </div>
+      </div>
+
+      <div class="hero-card rev">
+        <img src="../assets/eastwar/eastwar-hero-jeong-dojeon.png" alt="정도전" loading="lazy" />
+        <div>
+          <h3 class="hero-card__name">정도전</h3>
+          <span class="hero-card__name-en">Jeong Do-jeon</span>
+          <span class="hero-card__role">조선 개국 공신 · ARCHITECT OF JOSEON</span>
+          <p class="hero-card__desc-kr">조선을 설계한 최고의 책사. 칼보다 붓이 강하다는 것을 증명한 전략의 화신. EASTWAR에서 한반도의 두뇌로 활약한다.</p>
+          <p class="hero-card__desc-en">The master strategist who designed the Joseon dynasty from the ground up. Proof that the pen outweighs the sword. In EASTWAR, he serves as the supreme intellect of the Korean Peninsula.</p>
+        </div>
+      </div>
+
     </div>
   </div>
 </main>
