@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+  <title>수요일 오전 날씨 정보</title>
+  
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="수요날씨">
+  <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/869/869869.png">
+
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif; margin: 20px; background-color: #f4f7f6; color: #333; }
+    .card { max-width: 100%; border: none; border-radius: 24px; padding: 24px; background: #fff; box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+    h1 { font-size: 22px; margin: 0 0 8px; color: #1a1a1a; letter-spacing: -0.5px; }
+    .meta { color: #999; font-size: 13px; margin-bottom: 20px; line-height: 1.4; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    th, td { text-align: left; padding: 14px 8px; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
+    th { font-size: 12px; color: #bbb; font-weight: 600; text-transform: uppercase; }
+    .row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin: 15px 0; }
+    input { flex: 1; padding: 14px; border: 1px solid #eee; border-radius: 14px; font-size: 15px; background: #f9f9f9; }
+    button { padding: 14px 18px; border: none; border-radius: 14px; background: #007AFF; color: #fff; font-weight: 600; cursor: pointer; }
+    button#btnRefresh { background: #34C759; }
+    button#btnNext { background: #5856D6; }
+    #status { font-weight: 600; margin: 15px 0; font-size: 14px; border-radius: 10px; padding: 10px; display: none; }
+    .ok { display: block !important; background: #e8f9ee; color: #34C759; }
+    pre { margin-top: 15px; padding: 18px; border-radius: 18px; background: #f8f9fa; font-size: 13px; line-height: 1.6; white-space: pre-wrap; border: 1px solid #eee; }
+    .copy-section { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; }
+    .copy-btn { background: #636366; font-size: 12px; padding: 8px 12px; color: #fff; border-radius: 8px; border: none; }
+    /* 팁 박스 디자인 */
+    .tip-box { margin-top: 25px; padding: 18px; background: #f0f7ff; border-radius: 16px; border-left: 5px solid #007AFF; transition: all 0.3s; }
+    .tip-text { font-size: 15px; color: #004a99; font-weight: 600; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>수요일 오전 날씨 🌤️</h1>
+    <div class="meta">
+      매주 수요일 05:00~12:00 상세 분석<br/>
+      <span style="font-size: 11px;">Data by Open-Meteo (KST)</span>
+    </div>
+
+    <div class="row">
+      <input id="city" value="Gwangmyeong" placeholder="도시명 입력" />
+      <button id="btn">검색</button>
+    </div>
+    
+    <div class="row" style="margin-top:0;">
+      <button id="btnRefresh" style="flex:1;">이번 주</button>
+      <button id="btnNext" style="flex:1;">다음 주</button>
+    </div>
+
+    <div id="status"></div>
+
+    <div id="hourlyText" style="display:none;">
+      <div class="copy-section">
+        <span style="font-weight:bold; font-size:13px;">📋 요약 결과</span>
+        <button class="copy-btn" id="btnCopy">텍스트 복사</button>
+      </div>
+      <pre id="hourlyPre"></pre>
+      <div id="copyMsg" style="font-size:11px; color:#007AFF; margin-top:5px; text-align:right;"></div>
+    </div>
+
+    <div style="overflow-x:auto;">
+      <table id="tbl" style="display:none;">
+        <thead>
+          <tr>
+            <th>시간</th>
+            <th>날씨</th>
+            <th>강수</th>
+            <th>바람</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    
+    <div id="dynamicTip" class="tip-box" style="display:none;">
+      <div id="tipContent" class="tip-text"></div>
+    </div>
+  </div>
+
+<script>
+  const DEFAULT_LOC = { name: "Gwangmyeong", country: "KR", latitude: 37.48, longitude: 126.86 };
+  const WX = { 0: "맑음☀️", 1: "대체로 맑음🌤️", 2: "구름 조금⛅", 3: "흐림☁️", 45: "안개🌫️", 61: "약한 비🌦️", 63: "비🌧️", 71: "눈❄️", 80: "소나기🚿" };
+
+  const $ = (id) => document.getElementById(id);
+
+  function fmtDate(d) {
+    const offset = d.getTimezoneOffset() * 60000;
+    return (new Date(d.getTime() - offset)).toISOString().slice(0, 10);
+  }
+
+  function upcomingWednesday(base = new Date()) {
+    const d = new Date(base);
+    const day = d.getDay();
+    const diff = (3 - day + 7) % 7;
+    d.setDate(d.getDate() + diff);
+    d.setHours(0,0,0,0);
+    return d;
+  }
+
+  async function load(targetDateObj) {
+    $("status").textContent = "로딩 중...";
+    $("status").className = "";
+    try {
+      const q = $("city").value.trim();
+      const loc = (q === "Gwangmyeong" || q === "광명") ? DEFAULT_LOC : await (async () => {
+        const r = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=1`);
+        const j = await r.json();
+        return j.results ? j.results[0] : DEFAULT_LOC;
+      })();
+
+      const dateStr = fmtDate(targetDateObj);
+      // 온도 데이터(temperature_2m)도 가져오도록 API 수정
+      const api = `https://api.open-meteo.com/v1/forecast?latitude=${loc.latitude}&longitude=${loc.longitude}&hourly=temperature_2m,weather_code,precipitation,wind_speed_10m&timezone=Asia/Seoul&start_date=${dateStr}&end_date=${dateStr}`;
+      
+      const r = await fetch(api);
+      const j = await r.json();
+      
+      let lines = [`${dateStr} (수) · ${loc.name} 날씨`];
+      $("tbody").innerHTML = "";
+
+      // 평균값 계산을 위한 변수
+      let totalRain = 0;
+      let maxWind = 0;
+      let avgTemp = 0;
+      let isClear = true;
+      let isSnow = false;
+      
+      for (let i=5; i<=12; i++) {
+        const temp = j.hourly.temperature_2m[i];
+        const code = j.hourly.weather_code[i];
+        const rain = j.hourly.precipitation[i];
+        const wind = j.hourly.wind_speed_10m[i];
+        const time = `${String(i).padStart(2,'0')}:00`;
+        const wxTxt = WX[code] || "구름";
+
+        if (code > 2) isClear = false;
+        if (code >= 71 && code <= 77) isSnow = true;
+        totalRain += rain;
+        if (wind > maxWind) maxWind = wind;
+        avgTemp += temp;
+
+        $("tbody").innerHTML += `<tr><td>${time}</td><td>${wxTxt}</td><td>${rain.toFixed(1)}mm</td><td>${wind.toFixed(1)}m/s</td></tr>`;
+        lines.push(`${time} ${wxTxt} / ${rain.toFixed(1)}mm / ${wind.toFixed(1)}m/s`);
+      }
+      avgTemp = avgTemp / 8;
+
+      // --- 김작의 요청에 따른 동적 멘트 로직 ---
+      let tip = "";
+      if (totalRain > 0 || isSnow) {
+        tip = "💡 비나 눈 소식이 있네요. 아쉽지만 오늘 테니스는 어렵겠어요. ☔";
+      } else if (maxWind >= 5) {
+        tip = "💡 바람이 꽤 세요! 바람막이 꼭 챙기세요! 💨";
+      } else if (avgTemp <= 5) {
+        tip = "💡 날이 많이 추워요. 손난로 챙기시고, 판피린 마시고 치세요! ^^ ☕";
+      } else if (avgTemp >= 25) {
+        tip = "💡 날이 덥네요! 시원한 아이스 아메리카노 마시면서 치세요! 🥤";
+      } else if (isClear) {
+        tip = "💡 맑고 바람 없는 좋은 날씨네요! 선글라스 챙기세요! 😎";
+      } else {
+        tip = "💡 테니스 치기 딱 좋은 날씨입니다. 즐거운 게임 하세요! 🎾";
+      }
+
+      $("tipContent").innerHTML = tip;
+      $("dynamicTip").style.display = "block";
+      $("hourlyPre").textContent = lines.join("\n");
+      $("tbl").style.display = "table";
+      $("hourlyText").style.display = "block";
+      $("status").textContent = `✅ ${dateStr} 업데이트 완료`;
+      $("status").className = "ok";
+    } catch (e) {
+      $("status").textContent = "❌ 오류가 발생했습니다.";
+    }
+  }
+
+  $("btn").onclick = () => load(upcomingWednesday());
+  $("btnRefresh").onclick = () => load(upcomingWednesday());
+  $("btnNext").onclick = () => {
+    const d = upcomingWednesday(); d.setDate(d.getDate() + 7); load(d);
+  };
+  $("btnCopy").onclick = () => {
+    navigator.clipboard.writeText($("hourlyPre").textContent);
+    $("copyMsg").textContent = "복사 완료!";
+    setTimeout(() => $("copyMsg").textContent = "", 2000);
+  };
+
+  load(upcomingWednesday());
+</script>
+</body>
+</html>
