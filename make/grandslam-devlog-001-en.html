@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>GrandSlam 개발일지 — MAKE · byKimjak</title>
+<title>Grand Slam Dev Log #001 — MAKE · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -41,12 +41,13 @@ a{color:inherit;text-decoration:none}
 .breadcrumb a{transition:color .2s}.breadcrumb a:hover{color:var(--ink)}
 .breadcrumb .sep{opacity:.4}
 .listing-head h1{font-family:var(--f-display);font-weight:500;font-size:clamp(44px,9vw,120px);letter-spacing:-.04em;line-height:.92;margin:0 0 8px}
-.listing-head .sub-ko{font-family:var(--f-kr);font-size:clamp(16px,2vw,22px);color:var(--ink-3);margin:0 0 20px;font-weight:400}
-.listing-head .listing-desc{font-family:var(--f-kr);font-size:15px;line-height:1.65;color:var(--ink-3);max-width:48ch}
-.post-list{padding:0 clamp(20px,4vw,48px) 140px}
-.empty{padding:100px 0 120px;text-align:center;border-top:1px solid var(--rule)}
-.empty .num{font-family:var(--f-display);font-weight:500;font-size:clamp(80px,15vw,200px);letter-spacing:-.04em;color:var(--bg-2);line-height:1;display:block}
-.empty p{font-family:var(--f-kr);font-size:14px;color:var(--ink-3);margin-top:12px}
+.listing-head .sub-en{font-family:var(--f-display);font-size:clamp(16px,2vw,22px);color:var(--ink-3);margin:0 0 20px;font-weight:400;letter-spacing:-.01em}
+.listing-head .listing-desc{font-family:var(--f-body);font-size:15px;line-height:1.65;color:var(--ink-3);max-width:52ch}
+.lang-switch{display:inline-flex;align-items:center;margin-bottom:28px}
+.lang-current{font-family:var(--f-display);font-size:14px;font-weight:700;color:var(--ink);padding:10px 20px;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px;cursor:default;letter-spacing:.01em}
+.lang-sep{font-family:var(--f-mono);font-size:14px;color:var(--ink-3);opacity:.35;user-select:none;line-height:1}
+.lang-other{font-family:var(--f-display);font-size:14px;font-weight:400;color:var(--ink-3);padding:10px 20px;transition:color .2s;letter-spacing:.01em}
+.lang-other:hover{color:var(--ink)}
 footer{background:var(--dark);color:var(--dark-ink);padding:90px clamp(20px,4vw,48px) 36px;overflow:hidden}
 footer .big{font-family:var(--f-display);font-weight:400;font-size:clamp(44px,7vw,108px);letter-spacing:-.04em;line-height:.95;color:var(--dark-ink);margin:0 0 48px;text-wrap:balance}
 footer .big em{font-style:italic;font-family:"Times New Roman",serif;color:#A99A85}
@@ -60,15 +61,36 @@ footer .c1{grid-column:1/span 5}footer .c2{grid-column:6/span 2}footer .c3{grid-
 footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-family:var(--f-mono);font-size:11px;color:var(--dark-ink-2);text-transform:uppercase;letter-spacing:.06em}
 @media(max-width:780px){footer .c1,footer .c2,footer .c3,footer .c4{grid-column:1/span 12}}
 .rev{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}.rev.in{opacity:1;transform:none}
-.notes__row{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;border-top:1px solid var(--rule);padding:36px 0;align-items:baseline;cursor:pointer;transition:background .25s}
-.notes__row:last-child{border-bottom:1px solid var(--rule)}
-.notes__row:hover{background:linear-gradient(90deg,transparent,var(--accent-soft) 20%,var(--accent-soft) 80%,transparent)}
-.notes__num{grid-column:1 / span 1;font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
-.notes__cat{grid-column:2 / span 2;font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3)}
-.notes__t{grid-column:4 / span 7;font-family:var(--f-display);font-weight:500;font-size:clamp(20px,2vw,30px);letter-spacing:-.015em;line-height:1.2}
-.notes__t .ko{display:block;font-family:var(--f-kr);font-size:13px;color:var(--ink-3);font-weight:400;margin-top:4px}
-.notes__date{grid-column:11 / span 2;justify-self:end;font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
-@media(max-width:780px){.notes__num{grid-column:1 / span 2}.notes__cat{grid-column:3 / span 4}.notes__t{grid-column:1 / span 12;order:3;margin-top:8px}.notes__date{grid-column:7 / span 6;order:2;justify-self:end}}
+
+/* ── Dev Log Article ── */
+.devlog{padding:0 0 140px}
+.devlog__body{padding:64px clamp(20px,4vw,48px) 0;max-width:760px}
+.devlog__body .log-num{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:12px}
+.devlog__body h1{font-family:var(--f-display);font-weight:500;font-size:clamp(26px,4vw,48px);letter-spacing:-.03em;line-height:1.1;margin:0 0 10px}
+.devlog__body h2{font-family:var(--f-display);font-size:clamp(15px,1.8vw,20px);font-weight:400;color:var(--ink-3);margin:0;line-height:1.5;letter-spacing:-.01em}
+.devlog__body .log-date{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);display:block;margin:24px 0 40px;padding-top:20px;border-top:1px solid var(--rule)}
+.devlog__body h3{font-family:var(--f-display);font-weight:500;font-size:clamp(16px,2vw,22px);letter-spacing:-.02em;margin:56px 0 18px;padding-top:48px;border-top:1px solid var(--rule)}
+.devlog__body p{font-family:var(--f-body);font-size:16px;line-height:1.9;color:var(--ink-2);margin:0 0 22px}
+.devlog__body strong{font-weight:700;color:var(--ink)}
+.devlog__body em{font-style:italic;color:var(--ink)}
+.devlog__body hr{border:none;border-top:1px solid var(--rule);margin:52px 0}
+.devlog__body ul{padding-left:20px;margin:0 0 24px}
+.devlog__body li{font-family:var(--f-body);font-size:16px;line-height:1.85;color:var(--ink-2);margin-bottom:10px}
+.body-img{display:block;width:100%;margin:32px 0;border:1px solid var(--rule)}
+.body-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--ink);padding:12px 20px;margin:8px 0 32px;transition:background .25s,color .25s;color:var(--ink)}
+.body-btn:hover{background:var(--ink);color:var(--bg)}
+/* ── Log Index ── */
+.log-index{padding:0 clamp(20px,4vw,48px)}
+.log-index__hd{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0;padding:32px 0 0}
+.log-index__item{display:grid;grid-template-columns:52px 1fr auto;gap:20px;align-items:baseline;padding:20px 0;border-top:1px solid var(--rule);transition:background .25s;text-decoration:none}
+.log-index__item:last-child{border-bottom:1px solid var(--rule);margin-bottom:48px}
+.log-index__item:hover{background:linear-gradient(90deg,transparent,var(--accent-soft) 20%,var(--accent-soft) 80%,transparent)}
+.log-index__num{font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
+.log-index__t{font-family:var(--f-display);font-size:clamp(14px,1.6vw,18px);font-weight:500;letter-spacing:-.01em;line-height:1.2;color:var(--ink)}
+.log-index__t .ko{display:block;font-family:var(--f-kr);font-size:12px;color:var(--ink-3);font-weight:400;margin-top:3px}
+.log-index__date{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);white-space:nowrap}
+.log-index__item--current{pointer-events:none}
+.log-index__item--current .log-index__num{color:var(--accent)}
 </style>
 </head>
 <body>
@@ -110,23 +132,88 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 <main>
   <div class="listing-head rev">
     <div class="breadcrumb">
-      <a href="../make/">MAKE</a><span class="sep">›</span><span>GrandSlam 개발일지</span>
+      <a href="../make/">MAKE</a><span class="sep">›</span>
+      <a href="grandslam.html">← Grand Slam Dev Log List</a>
     </div>
-    <h1>GrandSlam</h1>
-    <p class="sub-ko">개발일지 — Dev Log</p>
-    <p class="listing-desc">테니스 클럽에서 두 달째 실전 테스트 중인 앱. 웹 MVP부터 현재까지의 바이브 코딩 개발 로그와 사용자 피드백 기록.</p>
+    <div class="lang-switch">
+      <a href="grandslam-devlog-001.html" class="lang-other">🇰🇷 한국어</a>
+      <span class="lang-sep">|</span>
+      <span class="lang-current">🇺🇸 English</span>
+    </div>
+    <h1>Grand Slam</h1>
+    <p class="sub-en">Dev Log #001 — 개발일지</p>
+    <p class="listing-desc">Building an app without code — first encounter with vibe coding, and how Grand Slam began.</p>
   </div>
 
-  <div class="post-list">
-    <a href="grandslam-devlog-001.html" class="notes__row rev">
-      <div class="notes__num">#001</div>
-      <div class="notes__cat">Dev Log</div>
-      <div class="notes__t">바이브 코딩과의 첫 만남
-        <span class="ko">수요일 날씨 앱에서 시작된 이야기</span>
-      </div>
-      <div class="notes__date">2026 · 01</div>
+  <section class="log-index rev">
+    <p class="log-index__hd">All Dev Logs · 전체 개발일지</p>
+    <a href="grandslam-devlog-001-en.html" class="log-index__item log-index__item--current">
+      <span class="log-index__num">#001</span>
+      <span class="log-index__t">First Encounter with Vibe Coding
+        <span class="ko">How a Weather App Started Everything</span>
+      </span>
+      <span class="log-index__date">2026 · 01</span>
     </a>
-  </div>
+  </section>
+
+  <article class="devlog" id="log-001">
+    <div class="devlog__body rev">
+      <span class="log-num">Dev Log · #001</span>
+      <h1>Grand Slam Dev Log #001</h1>
+      <h2>First Encounter with Vibe Coding — How a Weather App Started Everything</h2>
+      <span class="log-date">January 2026</span>
+
+      <p>In January 2026, a YouTube video stopped me cold.</p>
+      <p><em>"You can build apps with AI without knowing how to code at all."</em></p>
+      <p><strong>Vibe Coding.</strong> A term I'd never heard before that day. Describe what you want to an AI in plain language, and it writes the code. I'd never studied programming. But building an app without coding?</p>
+      <p>I had to try.</p>
+
+      <hr />
+
+      <h3>The First App — Wednesday Weather</h3>
+
+      <p>What to build came quickly. Something I actually needed. Something I wondered about every week.</p>
+      <p>For almost three years, I've played tennis every Wednesday morning at the Gwangmyeong Municipal Tennis Court. Living in Seoul and driving out to Gwangmyeong every week — the weather was always on my mind. Rain? Strong winds? I'd shown up to an empty court more times than I could count.</p>
+      <p><em>"Let me build an app that shows me the Gwangmyeong weather every Wednesday."</em></p>
+      <p>A simple, clear goal. Something I'd actually use myself.</p>
+
+      <hr />
+
+      <h3>MyWeather — The First Vibe Coding Result</h3>
+
+      <p>I told ChatGPT what I wanted: a Wednesday weather app for Gwangmyeong.</p>
+      <p>My requirements were simple:</p>
+      <ul>
+        <li>Show me the hours around my tennis time — <strong>8AM to 12PM</strong>, with some buffer before and after</li>
+        <li>Display weather conditions, rainfall, and wind speed clearly at a glance</li>
+        <li>Let me check <strong>not just this week, but next week too</strong></li>
+      </ul>
+      <p>ChatGPT wrote the code. A single HTML file. I had no idea what any of it meant. I just pasted it in and ran it.</p>
+      <p>The screen came to life.</p>
+      <p>Then ChatGPT added something I never asked for.</p>
+      <p>A <strong>dynamic message system</strong> — analyzing the weather data and generating a personalized one-liner for the day's conditions. Entirely ChatGPT's idea.</p>
+      <p>Rain: <em>"Looks like rain or snow. Tennis might be tough today. ☔"</em><br />
+      High winds: <em>"It's quite windy! Don't forget your windbreaker! 💨"</em><br />
+      Cold: <em>"It's really cold out. Grab a hand warmer and some medicine just in case! ☕"</em><br />
+      Clear skies: <em>"Beautiful clear day with no wind! Grab your sunglasses! 😎"</em></p>
+      <p>An app built exactly for me. With a bonus touch from ChatGPT that I never requested but immediately loved. Not a single line of code written by hand — and something real was running in front of me.</p>
+      <p><em>"So this is vibe coding."</em></p>
+
+      <img class="body-img" src="../assets/grandslam/myweather-app.png" alt="MyWeather app screenshot" loading="lazy" />
+      <a href="../apps/myweather/index.html" class="body-btn">Try MyWeather App →</a>
+
+      <hr />
+
+      <h3>Toward Grand Slam</h3>
+
+      <p>After MyWeather was done, I wanted more. It felt too small to stop there.</p>
+      <p>There's a pattern that repeats every week on the tennis court. Teams get picked, doubles matches get played, and when it's over — nothing is recorded. Who won, who's improving, who's the strongest player in the group. It all just evaporates. That always bothered me.</p>
+      <p><em>"Let me add a feature that tracks wins and losses and shows a live ranking."</em></p>
+      <p>That would make it something more than a weather app — a place to record results, track standings, and check the forecast all in one. The name had to change too. And the name that came to mind was <strong>Grand Slam</strong>.</p>
+      <p>That was Grand Slam's first step.</p>
+      <p><em>Next log: designing Grand Slam's core features — and hitting the first wall.</em></p>
+    </div>
+  </article>
 </main>
 
 <footer id="contact">

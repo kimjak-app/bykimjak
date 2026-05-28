@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>GrandSlam 개발일지 — MAKE · byKimjak</title>
+<title>그랜드슬램 개발일지 #001 — MAKE · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -43,10 +43,11 @@ a{color:inherit;text-decoration:none}
 .listing-head h1{font-family:var(--f-display);font-weight:500;font-size:clamp(44px,9vw,120px);letter-spacing:-.04em;line-height:.92;margin:0 0 8px}
 .listing-head .sub-ko{font-family:var(--f-kr);font-size:clamp(16px,2vw,22px);color:var(--ink-3);margin:0 0 20px;font-weight:400}
 .listing-head .listing-desc{font-family:var(--f-kr);font-size:15px;line-height:1.65;color:var(--ink-3);max-width:48ch}
-.post-list{padding:0 clamp(20px,4vw,48px) 140px}
-.empty{padding:100px 0 120px;text-align:center;border-top:1px solid var(--rule)}
-.empty .num{font-family:var(--f-display);font-weight:500;font-size:clamp(80px,15vw,200px);letter-spacing:-.04em;color:var(--bg-2);line-height:1;display:block}
-.empty p{font-family:var(--f-kr);font-size:14px;color:var(--ink-3);margin-top:12px}
+.lang-switch{display:inline-flex;align-items:center;margin-bottom:28px}
+.lang-current{font-family:var(--f-display);font-size:14px;font-weight:700;color:var(--ink);padding:10px 20px;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px;cursor:default;letter-spacing:.01em}
+.lang-sep{font-family:var(--f-mono);font-size:14px;color:var(--ink-3);opacity:.35;user-select:none;line-height:1}
+.lang-other{font-family:var(--f-display);font-size:14px;font-weight:400;color:var(--ink-3);padding:10px 20px;transition:color .2s;letter-spacing:.01em}
+.lang-other:hover{color:var(--ink)}
 footer{background:var(--dark);color:var(--dark-ink);padding:90px clamp(20px,4vw,48px) 36px;overflow:hidden}
 footer .big{font-family:var(--f-display);font-weight:400;font-size:clamp(44px,7vw,108px);letter-spacing:-.04em;line-height:.95;color:var(--dark-ink);margin:0 0 48px;text-wrap:balance}
 footer .big em{font-style:italic;font-family:"Times New Roman",serif;color:#A99A85}
@@ -60,15 +61,36 @@ footer .c1{grid-column:1/span 5}footer .c2{grid-column:6/span 2}footer .c3{grid-
 footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-family:var(--f-mono);font-size:11px;color:var(--dark-ink-2);text-transform:uppercase;letter-spacing:.06em}
 @media(max-width:780px){footer .c1,footer .c2,footer .c3,footer .c4{grid-column:1/span 12}}
 .rev{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}.rev.in{opacity:1;transform:none}
-.notes__row{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;border-top:1px solid var(--rule);padding:36px 0;align-items:baseline;cursor:pointer;transition:background .25s}
-.notes__row:last-child{border-bottom:1px solid var(--rule)}
-.notes__row:hover{background:linear-gradient(90deg,transparent,var(--accent-soft) 20%,var(--accent-soft) 80%,transparent)}
-.notes__num{grid-column:1 / span 1;font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
-.notes__cat{grid-column:2 / span 2;font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3)}
-.notes__t{grid-column:4 / span 7;font-family:var(--f-display);font-weight:500;font-size:clamp(20px,2vw,30px);letter-spacing:-.015em;line-height:1.2}
-.notes__t .ko{display:block;font-family:var(--f-kr);font-size:13px;color:var(--ink-3);font-weight:400;margin-top:4px}
-.notes__date{grid-column:11 / span 2;justify-self:end;font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
-@media(max-width:780px){.notes__num{grid-column:1 / span 2}.notes__cat{grid-column:3 / span 4}.notes__t{grid-column:1 / span 12;order:3;margin-top:8px}.notes__date{grid-column:7 / span 6;order:2;justify-self:end}}
+
+/* ── Dev Log Article ── */
+.devlog{padding:0 0 140px}
+.devlog__body{padding:64px clamp(20px,4vw,48px) 0;max-width:760px}
+.devlog__body .log-num{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:12px}
+.devlog__body h1{font-family:var(--f-display);font-weight:500;font-size:clamp(26px,4vw,48px);letter-spacing:-.03em;line-height:1.1;margin:0 0 10px}
+.devlog__body h2{font-family:var(--f-kr);font-size:clamp(15px,1.8vw,20px);font-weight:400;color:var(--ink-3);margin:0;line-height:1.5}
+.devlog__body .log-date{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);display:block;margin:24px 0 40px;padding-top:20px;border-top:1px solid var(--rule)}
+.devlog__body h3{font-family:var(--f-display);font-weight:500;font-size:clamp(16px,2vw,22px);letter-spacing:-.02em;margin:56px 0 18px;padding-top:48px;border-top:1px solid var(--rule)}
+.devlog__body p{font-family:var(--f-kr);font-size:16px;line-height:1.95;color:var(--ink-2);margin:0 0 22px}
+.devlog__body strong{font-weight:700;color:var(--ink)}
+.devlog__body em{font-style:italic;color:var(--ink)}
+.devlog__body hr{border:none;border-top:1px solid var(--rule);margin:52px 0}
+.devlog__body ul{padding-left:20px;margin:0 0 24px}
+.devlog__body li{font-family:var(--f-kr);font-size:16px;line-height:1.85;color:var(--ink-2);margin-bottom:10px}
+.body-img{display:block;width:100%;margin:32px 0;border:1px solid var(--rule)}
+.body-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--ink);padding:12px 20px;margin:8px 0 32px;transition:background .25s,color .25s;color:var(--ink)}
+.body-btn:hover{background:var(--ink);color:var(--bg)}
+/* ── Log Index ── */
+.log-index{padding:0 clamp(20px,4vw,48px)}
+.log-index__hd{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0;padding:32px 0 0}
+.log-index__item{display:grid;grid-template-columns:52px 1fr auto;gap:20px;align-items:baseline;padding:20px 0;border-top:1px solid var(--rule);transition:background .25s;text-decoration:none}
+.log-index__item:last-child{border-bottom:1px solid var(--rule);margin-bottom:48px}
+.log-index__item:hover{background:linear-gradient(90deg,transparent,var(--accent-soft) 20%,var(--accent-soft) 80%,transparent)}
+.log-index__num{font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
+.log-index__t{font-family:var(--f-display);font-size:clamp(14px,1.6vw,18px);font-weight:500;letter-spacing:-.01em;line-height:1.2;color:var(--ink)}
+.log-index__t .ko{display:block;font-family:var(--f-kr);font-size:12px;color:var(--ink-3);font-weight:400;margin-top:3px}
+.log-index__date{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);white-space:nowrap}
+.log-index__item--current{pointer-events:none}
+.log-index__item--current .log-index__num{color:var(--accent)}
 </style>
 </head>
 <body>
@@ -110,23 +132,88 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 <main>
   <div class="listing-head rev">
     <div class="breadcrumb">
-      <a href="../make/">MAKE</a><span class="sep">›</span><span>GrandSlam 개발일지</span>
+      <a href="../make/">MAKE</a><span class="sep">›</span>
+      <a href="grandslam.html">← GrandSlam 개발일지 목록</a>
     </div>
-    <h1>GrandSlam</h1>
-    <p class="sub-ko">개발일지 — Dev Log</p>
-    <p class="listing-desc">테니스 클럽에서 두 달째 실전 테스트 중인 앱. 웹 MVP부터 현재까지의 바이브 코딩 개발 로그와 사용자 피드백 기록.</p>
+    <div class="lang-switch">
+      <span class="lang-current">🇰🇷 한국어</span>
+      <span class="lang-sep">|</span>
+      <a href="grandslam-devlog-001-en.html" class="lang-other">🇺🇸 English</a>
+    </div>
+    <h1>Grand Slam</h1>
+    <p class="sub-ko">개발일지 #001 — Dev Log</p>
+    <p class="listing-desc">코딩 없이 앱을 만들다 — 바이브 코딩과의 첫 만남, 그리고 그랜드슬램의 시작.</p>
   </div>
 
-  <div class="post-list">
-    <a href="grandslam-devlog-001.html" class="notes__row rev">
-      <div class="notes__num">#001</div>
-      <div class="notes__cat">Dev Log</div>
-      <div class="notes__t">바이브 코딩과의 첫 만남
+  <section class="log-index rev">
+    <p class="log-index__hd">전체 개발일지 · All Dev Logs</p>
+    <a href="grandslam-devlog-001.html" class="log-index__item log-index__item--current">
+      <span class="log-index__num">#001</span>
+      <span class="log-index__t">바이브 코딩과의 첫 만남
         <span class="ko">수요일 날씨 앱에서 시작된 이야기</span>
-      </div>
-      <div class="notes__date">2026 · 01</div>
+      </span>
+      <span class="log-index__date">2026 · 01</span>
     </a>
-  </div>
+  </section>
+
+  <article class="devlog" id="log-001">
+    <div class="devlog__body rev">
+      <span class="log-num">Dev Log · #001</span>
+      <h1>그랜드슬램 개발일지 #001</h1>
+      <h2>바이브 코딩과의 첫 만남 — 수요일 날씨 앱에서 시작된 이야기</h2>
+      <span class="log-date">2026년 1월 중순</span>
+
+      <p>2026년 1월, 유튜브를 보다가 눈이 번쩍 뜨이는 영상을 봤다.</p>
+      <p><em>"코딩을 전혀 몰라도 AI와 대화하듯 앱을 만들 수 있다."</em></p>
+      <p><strong>바이브 코딩(Vibe Coding)</strong>. 그날 처음 들어본 단어였다. AI에게 원하는 것을 말로 설명하면, AI가 코드를 짜준다. 나는 코딩을 배운 적이 없었다. 그런데 코딩 없이 앱을 만들 수 있다고?</p>
+      <p>해보자는 생각이 들었다.</p>
+
+      <hr />
+
+      <h3>첫 번째 앱 — 수요일 날씨</h3>
+
+      <p>무엇을 만들지는 금방 정해졌다. 내가 가장 필요한 것, 내가 가장 자주 궁금해하던 것.</p>
+      <p>나는 거의 3년째 매주 수요일 아침, 광명시립테니스장에서 테니스를 치고 있다. 서울에 살면서 광명까지 나가는 길 — 매주 수요일마다 날씨가 항상 걱정이었다. 비가 오면? 바람이 세면? 코트에 나갔다가 허탕 치는 날이 한두 번이 아니었다.</p>
+      <p><em>"매주 수요일 광명시 날씨를 알려주는 앱을 만들어보자."</em></p>
+      <p>단순하고 명확한 목표였다. 그리고 내가 직접 쓸 앱이었다.</p>
+
+      <hr />
+
+      <h3>MyWeather — 첫 바이브 코딩의 결과물</h3>
+
+      <p>채코치(ChatGPT)에게 말했다. 매주 수요일, 광명시 날씨를 시간대별로 보여주는 앱을 만들고 싶다고.</p>
+      <p>내가 원한 건 딱 세 가지였다.</p>
+      <ul>
+        <li>내가 테니스 치는 시간인 <strong>오전 8시~12시</strong>, 그 전후까지 한눈에 볼 것</li>
+        <li>날씨·강수량·풍속을 깔끔하게 정리할 것</li>
+        <li><strong>이번 주뿐 아니라 다음 주 날씨도 미리 확인</strong>할 수 있을 것</li>
+      </ul>
+      <p>채코치가 코드를 짜줬다. HTML 파일 하나. 나는 그 코드가 뭘 의미하는지 전혀 몰랐다. 그냥 붙여넣고 실행했다.</p>
+      <p>화면이 떴다.</p>
+      <p>그런데 채코치가 거기서 한 가지를 더 얹었다. 내가 요청하지 않은 것이었다.</p>
+      <p><strong>동적 멘트 시스템</strong> — 날씨 데이터를 분석해서 그날 상황에 맞는 한마디를 자동으로 띄워주는 기능. 순전히 채코치의 아이디어였다.</p>
+      <p>비가 오면 <em>"비나 눈 소식이 있네요. 아쉽지만 오늘 테니스는 어렵겠어요. ☔"</em><br />
+      바람이 세면 <em>"바람이 꽤 세요! 바람막이 꼭 챙기세요! 💨"</em><br />
+      추우면 <em>"날이 많이 추워요. 손난로 챙기시고, 판피린 마시고 치세요! ☕"</em><br />
+      맑으면 <em>"맑고 바람 없는 좋은 날씨네요! 선글라스 챙기세요! 😎"</em></p>
+      <p>나를 위해, 내가 원하는 정보만 담은 앱. 그리고 채코치가 알아서 추가해준 센스. 코드 한 줄 직접 짜지 않았는데, 실제로 동작하는 앱이 만들어졌다.</p>
+      <p><em>"아, 이게 바이브 코딩이구나."</em></p>
+
+      <img class="body-img" src="../assets/grandslam/myweather-app.png" alt="MyWeather 앱 화면" loading="lazy" />
+      <a href="../apps/myweather/index.html" class="body-btn">MyWeather 앱 직접 써보기 →</a>
+
+      <hr />
+
+      <h3>그랜드슬램을 향해</h3>
+
+      <p>MyWeather가 완성되고 나서 욕심이 생겼다. 이것만 담기엔 너무 아쉬운 앱이었다.</p>
+      <p>테니스를 치다 보면 매주 비슷한 풍경이 반복된다. 그냥 의미 없이 편을 갈라 복식 경기를 하고, 경기가 끝나면 아무 기록도 남지 않는다. 누가 이겼는지, 누가 강한지 — 그냥 소모성으로 끝나버린다. 그게 항상 아쉬웠다.</p>
+      <p><em>"승패를 기록하고 순위를 한눈에 볼 수 있는 기능을 넣자!"</em></p>
+      <p>그렇게 되면 날씨만 보여주는 앱이 아니라, 승패를 기록하고 순위까지 확인할 수 있는 앱이 된다. 앱 이름도 바꿔야 했다. 그렇게 생각해낸 것이 바로 <strong>그랜드슬램(Grand Slam)</strong>이었다.</p>
+      <p>이렇게 그랜드슬램의 첫발을 내딛었다.</p>
+      <p><em>다음 일지에서는 그랜드슬램 본격 개발 — 기능 설계부터 첫 번째 벽에 부딪히는 이야기를 담겠습니다.</em></p>
+    </div>
+  </article>
 </main>
 
 <footer id="contact">
