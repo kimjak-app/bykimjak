@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>EASTWAR 개발일지 #002 — MAKE · byKimjak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<style>
+:root{--bg:#FFFFFF;--bg-2:#F2F2F2;--ink:#0A0A0A;--ink-2:#2A2A2A;--ink-3:#6B6B6B;--rule:#0A0A0A1A;--dark:#0D0B09;--dark-ink:#FAF7F2;--dark-ink-2:#9C948A;--dark-rule:#FAF7F21A;--accent:oklch(68% 0.08 70);--accent-soft:oklch(68% 0.08 70 / 0.12);--f-display:"Space Grotesk","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-body:"Inter","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-mono:"JetBrains Mono",ui-monospace,monospace;--f-kr:"Pretendard Variable","Inter",ui-sans-serif,system-ui,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:var(--f-body);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.nav{position:fixed;inset:0 0 auto 0;z-index:100;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:18px clamp(20px,4vw,48px);transition:background .35s ease,backdrop-filter .35s ease,border-color .35s ease;border-bottom:1px solid transparent}
+.nav.scrolled{background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:saturate(1.2) blur(14px);-webkit-backdrop-filter:saturate(1.2) blur(14px);border-bottom-color:var(--rule)}
+.nav__logo{font-family:var(--f-display);font-weight:600;font-size:18px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.nav__logo .dot{width:8px;height:8px;border-radius:999px;background:var(--ink);display:inline-block;transform:translateY(-1px)}
+.nav__menu{display:flex;gap:36px;justify-content:center;align-items:center}
+.nav__menu > a,.nav__menu .has-drop > a{font-family:var(--f-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;position:relative;padding:6px 2px;color:var(--ink)}
+.nav__menu > a::after,.nav__menu .has-drop > a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.6,0,.2,1)}
+.nav__menu > a:hover::after,.nav__menu .has-drop:hover > a::after{transform:scaleX(1)}
+.nav__menu .idx{font-family:var(--f-mono);font-size:9px;vertical-align:super;margin-right:4px;color:var(--ink-3)}
+.nav__cta{justify-self:end;display:flex;align-items:center;gap:14px}
+.nav__cta .status{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+.nav__cta .pulse{width:6px;height:6px;border-radius:999px;background:#3CB371;animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px transparent}}
+.nav__cta a.contact{border:1px solid var(--ink);padding:10px 16px;border-radius:999px;font-family:var(--f-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .25s,color .25s}
+.nav__cta a.contact:hover{background:var(--ink);color:var(--bg)}
+.nav__menu .has-drop{position:relative}
+.nav__menu .drop{position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%) translateY(-10px);min-width:210px;background:var(--bg);border:1px solid var(--rule);padding:4px;opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s cubic-bezier(.2,.8,.2,1);z-index:200}
+.nav__menu .has-drop:hover .drop{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.nav__menu .drop a{display:block;padding:10px 14px;border-radius:2px;font-family:var(--f-kr);font-size:13px;font-weight:400;letter-spacing:-.01em;text-transform:none;color:var(--ink-2);transition:background .15s,color .15s}
+.nav__menu .drop a::after{content:none!important}
+.nav__menu .drop a:hover{background:var(--bg-2);color:var(--ink)}
+.sub-idx{display:block;font-family:var(--f-mono);font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin-bottom:2px}
+@media(max-width:780px){.nav{grid-template-columns:1fr auto;padding:14px 20px}.nav__menu{display:none}.nav__cta .status{display:none}}
+.listing-head{padding:120px clamp(20px,4vw,48px) 64px;border-bottom:1px solid var(--rule)}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:28px}
+.breadcrumb a{transition:color .2s}.breadcrumb a:hover{color:var(--ink)}
+.breadcrumb .sep{opacity:.4}
+.listing-head h1{font-family:var(--f-display);font-weight:500;font-size:clamp(44px,9vw,120px);letter-spacing:-.04em;line-height:.92;margin:0 0 8px}
+.listing-head .sub-ko{font-family:var(--f-kr);font-size:clamp(16px,2vw,22px);color:var(--ink-3);margin:0 0 20px;font-weight:400}
+.listing-head .listing-desc{font-family:var(--f-kr);font-size:15px;line-height:1.65;color:var(--ink-3);max-width:48ch}
+.lang-switch{display:inline-flex;align-items:center;margin-bottom:28px}
+.lang-current{font-family:var(--f-display);font-size:14px;font-weight:700;color:var(--ink);padding:10px 20px;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px;cursor:default;letter-spacing:.01em}
+.lang-sep{font-family:var(--f-mono);font-size:14px;color:var(--ink-3);opacity:.35;user-select:none;line-height:1}
+.lang-other{font-family:var(--f-display);font-size:14px;font-weight:400;color:var(--ink-3);padding:10px 20px;transition:color .2s;letter-spacing:.01em}
+.lang-other:hover{color:var(--ink)}
+footer{background:var(--dark);color:var(--dark-ink);padding:90px clamp(20px,4vw,48px) 36px;overflow:hidden}
+footer .big{font-family:var(--f-display);font-weight:400;font-size:clamp(44px,7vw,108px);letter-spacing:-.04em;line-height:.95;color:var(--dark-ink);margin:0 0 48px;text-wrap:balance}
+footer .big em{font-style:italic;font-family:"Times New Roman",serif;color:#A99A85}
+footer .grid-ft{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding-top:36px;border-top:1px solid var(--dark-rule)}
+footer .col{display:flex;flex-direction:column;gap:10px}
+footer .col h6{margin:0 0 6px;font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--dark-ink-2);font-weight:400}
+footer .col a{font-family:var(--f-display);font-size:15px;color:var(--dark-ink);transition:color .3s;display:inline-flex;align-items:center;gap:6px}
+footer .col a:hover{color:#A99A85}
+footer .col a .ext{font-family:var(--f-mono);font-size:9px;opacity:.5}
+footer .c1{grid-column:1/span 5}footer .c2{grid-column:6/span 2}footer .c3{grid-column:8/span 2}footer .c4{grid-column:10/span 3}
+footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-family:var(--f-mono);font-size:11px;color:var(--dark-ink-2);text-transform:uppercase;letter-spacing:.06em}
+@media(max-width:780px){footer .c1,footer .c2,footer .c3,footer .c4{grid-column:1/span 12}}
+.rev{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}.rev.in{opacity:1;transform:none}
+
+/* ── Dev Log Article ── */
+.devlog{padding:0 0 140px}
+.devlog__body{padding:64px clamp(20px,4vw,48px) 0;max-width:760px}
+.devlog__body .log-num{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:12px}
+.devlog__body h1{font-family:var(--f-display);font-weight:500;font-size:clamp(26px,4vw,48px);letter-spacing:-.03em;line-height:1.1;margin:0 0 10px}
+.devlog__body h2{font-family:var(--f-kr);font-size:clamp(15px,1.8vw,20px);font-weight:400;color:var(--ink-3);margin:0;line-height:1.5}
+.devlog__body .log-date{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);display:block;margin:24px 0 40px;padding-top:20px;border-top:1px solid var(--rule)}
+.devlog__body h3{font-family:var(--f-display);font-weight:500;font-size:clamp(16px,2vw,22px);letter-spacing:-.02em;margin:56px 0 10px;padding-top:48px;border-top:1px solid var(--rule)}
+.devlog__body .section-date{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 28px}
+.devlog__body p{font-family:var(--f-kr);font-size:16px;line-height:1.95;color:var(--ink-2);margin:0 0 22px}
+.devlog__body strong{font-weight:700;color:var(--ink)}
+.devlog__body em{font-style:italic;color:var(--ink)}
+.devlog__body hr{border:none;border-top:1px solid var(--rule);margin:52px 0}
+.devlog__body ul{padding-left:20px;margin:0 0 24px}
+.devlog__body li{font-family:var(--f-kr);font-size:16px;line-height:1.85;color:var(--ink-2);margin-bottom:10px}
+.body-img{display:block;width:100%;margin:32px 0;border:1px solid var(--rule)}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav__logo"><span class="dot" aria-hidden="true"></span>byKimjak</a>
+  <div class="nav__menu" role="navigation">
+    <div class="has-drop">
+      <a href="../watch/"><span class="idx">01</span>WATCH</a>
+      <div class="drop">
+        <a href="../watch/ai-film.html"><span class="sub-idx">01–A</span>AI 영상 · 티저</a>
+        <a href="../watch/ost.html"><span class="sub-idx">01–B</span>OST · 음악</a>
+        <a href="../watch/still.html"><span class="sub-idx">01–C</span>스틸 이미지</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../make/"><span class="idx">02</span>MAKE</a>
+      <div class="drop">
+        <a href="../make/eastwar.html"><span class="sub-idx">02–A</span>EASTWAR 개발일지</a>
+        <a href="../make/grandslam.html"><span class="sub-idx">02–B</span>GrandSlam 개발일지</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../think/"><span class="idx">03</span>THINK</a>
+      <div class="drop">
+        <a href="../think/ai-coach.html"><span class="sub-idx">03–A</span>AI 코치들과의 수다</a>
+        <a href="../think/architect-notes.html"><span class="sub-idx">03–B</span>아키텍트 노트</a>
+        <a href="../think/personal-essay.html"><span class="sub-idx">03–C</span>개인 에세이</a>
+      </div>
+    </div>
+    <a href="../index.html#about"><span class="idx">04</span>ABOUT</a>
+  </div>
+  <div class="nav__cta">
+    <span class="status"><span class="pulse"></span>Available · Seoul</span>
+    <a href="../index.html#contact" class="contact">Contact ↗</a>
+  </div>
+</nav>
+
+<main>
+  <div class="listing-head rev">
+    <div class="breadcrumb">
+      <a href="../make/">MAKE</a><span class="sep">›</span>
+      <a href="eastwar.html">← EASTWAR 개발일지 목록</a>
+    </div>
+    <div class="lang-switch">
+      <span class="lang-current">🇰🇷 한국어</span>
+      <span class="lang-sep">|</span>
+      <a href="eastwar-devlog-002-en.html" class="lang-other">🇺🇸 English</a>
+    </div>
+    <h1>EASTWAR</h1>
+    <p class="sub-ko">개발일지 #002 — Dev Log</p>
+    <p class="listing-desc">Godot 엔진 첫 입문. 강아지 게임 동경이로 워밍업하고, 전투 엔진과 월드맵 기초를 완성한 7일의 기록.</p>
+  </div>
+
+  <article class="devlog" id="log-002">
+    <div class="devlog__body rev">
+      <span class="log-num">Dev Log · #002</span>
+      <h1>EASTWAR 개발일지 #002</h1>
+      <h2>엔진을 선택하다 — 동경이와 함께 시작된 고도 입문기</h2>
+      <span class="log-date">2026년 4월 23일 ~ 4월 30일</span>
+
+      <p>포스터가 완성됐다. 세계관도 잡혔다. 이제 실제로 게임을 만들어야 했다.</p>
+      <p>그런데 문제가 있었다. 나는 게임을 만들어본 적이 단 한 번도 없었다.</p>
+
+      <hr />
+
+      <h3>동경이 — 예상치 못한 첫 걸음</h3>
+      <p class="section-date">4월 23일 ~ 25일</p>
+
+      <p>게임 엔진을 선택하기 전에, 먼저 게임이라는 것 자체를 한 번 만들어봐야 했다. EASTWAR 같은 전략 시뮬레이션을 처음부터 만드는 건 무모했다. 워밍업이 필요했다.</p>
+      <p>그때 마음 한켠에 있던 아이디어 하나를 꺼냈다. <strong>동경이</strong> — 잡혀간 주인을 찾아 떠나는 강아지의 횡스크롤 어드벤처. 메이플스토리 같은 느낌의 작은 게임이었다.</p>
+      <p>채코치(ChatGPT)에게 물었다. 횡스크롤 게임을 만들기 가장 좋은 엔진이 뭐냐고.</p>
+      <p>답은 명확했다. <strong>Godot 엔진.</strong></p>
+      <p><em>"오픈소스에 무료, 2D 게임에 최적화, GDScript는 Python처럼 읽기 쉽고, 커뮤니티도 활발합니다."</em></p>
+      <p>그렇게 고도 엔진과의 첫 만남이 시작됐다.</p>
+
+      <hr />
+
+      <h3>3일 동안의 동경이 MVP</h3>
+
+      <p>고도 엔진을 설치하는 것부터 시작했다. 모르는 게 너무 많았다. 채코치가 채팅창에서 하나씩 알려주는 대로 천천히 따라했다.</p>
+      <p><strong>고도 엔진 설치 → 프로젝트 생성 → 배경 넣기 → 동경이 캐릭터 등록</strong></p>
+      <p>스프라이트라는 개념을 처음 배웠다. 동경이 캐릭터 스프라이트는 채코치가 생성해줬고, 각 프레임을 나누고 크기와 비율을 재조정하는 작업은 포토샵으로 직접 했다. 달리기 6프레임, 점프 3프레임, 피격 1프레임 — 하나씩 잘라내고 맞추는 과정이었다.</p>
+
+      <img class="body-img" src="../assets/eastwar/donggyeong-sprite-sheet.png" alt="동경이 스프라이트 시트" loading="lazy" />
+
+      <p>배경도 채코치가 생성해줬다. 햇살 가득한 숲 입구 — 동경이가 주인을 찾아 처음 발을 내딛는 Stage 1의 시작 지점이었다.</p>
+
+      <img class="body-img" src="../assets/eastwar/donggyeong-stage1-bg.png" alt="동경이 Stage 1 배경" loading="lazy" />
+
+      <p>그다음엔 하나씩 기능을 붙여나갔다.</p>
+      <ul>
+        <li>달리기, 걷기, 점프</li>
+        <li>장애물 바위 배치</li>
+        <li>맷돼지 적 캐릭터 추가</li>
+        <li>충돌 감지와 공격 판정</li>
+      </ul>
+      <p>맷돼지도 스프라이트 시트를 만들었다. 달리기 2프레임, 돌진 4프레임, 쓰러지는 4프레임 — 흙먼지를 날리며 돌격하는 맷돼지의 움직임까지 구현했다.</p>
+
+      <img class="body-img" src="../assets/eastwar/boar-sprite-sheet.png" alt="맷돼지 스프라이트 시트" loading="lazy" />
+
+      <p>3일 만에 동경이 Stage 1 MVP가 완성됐다. 코딩은 전혀 하지 않았다. GDScript는 채코치가 짜줬고, 나는 고도 엔진의 구조와 UI를 직접 손으로 익혔다. 씬(Scene), 노드(Node), 스프라이트(Sprite), 콜리전(Collision) — 고도 엔진의 기초 원리를 몸으로 배운 3일이었다.</p>
+
+      <img class="body-img" src="../assets/eastwar/donggyeong-gameplay.png" alt="동경이 게임플레이" loading="lazy" />
+
+      <p>자신감이 생겼다. <em>"이거, 할 수 있겠다."</em></p>
+
+      <hr />
+
+      <h3>본게임으로 — 전투 엔진 구현</h3>
+      <p class="section-date">4월 27일 ~ 30일</p>
+
+      <p>동경이로 고도 엔진에 익숙해진 뒤, 이제 진짜 목표로 방향을 틀었다. EASTWAR의 핵심인 <strong>턴제 전투 엔진</strong> 구현이었다.</p>
+      <p>여기서 작업 방식을 바꿨다. 채코치와 채팅으로 설계를 논의하고, 실제 코드 구현은 <strong>Codex(로컬 AI 코딩 에이전트)</strong>에게 맡겼다. Codex가 GDScript를 짜면 고도 엔진에서 직접 실행해보고, 결과를 채코치와 상의해서 다시 Codex에게 수정을 지시하는 방식이었다.</p>
+      <p><em>채코치 → 설계 논의 → Codex → 코드 구현 → 고도 실행 → 피드백 → 반복</em></p>
+      <p>이 루틴으로 이틀 만에 전투 엔진 초기 버전이 완성됐다.</p>
+      <p>그리드 기반 10×7 전장. 영웅들이 격자 위에서 이동하고 공격한다. 방향(↑↓←→)에 따라 측면·배후 공격 보너스가 붙는다. 자동전투와 수동전투를 선택할 수 있다.</p>
+
+      <img class="body-img" src="../assets/eastwar/godot-battle-engine-early.png" alt="고도 전투 엔진 초기 버전" loading="lazy" />
+
+      <p><strong>4인의 영웅과 고유특기:</strong></p>
+      <ul>
+        <li><strong>이순신</strong> — <em>학익진 포격</em> : 원거리 3칸 범위 포격. 크리티컬 보너스 +15%. 거북선 전술의 핵심</li>
+        <li><strong>정도전</strong> — <em>개혁령</em> : 아군 전체 공격력 15% 증가, 2턴 지속. 책사의 전략적 버프</li>
+        <li><strong>노부나가(적)</strong> — <em>화승총 사격</em> : 원거리 2칸 총격. 화승총 부대 특유의 정밀 타격</li>
+        <li><strong>겐신(적)</strong> — <em>돌격</em> : 이동 후 즉시 강습. 전장을 가로지르는 맹장의 돌진</li>
+      </ul>
+      <p><strong>책략 시스템:</strong> 지력(Intelligence) 80 이상의 영웅은 책략을 사용할 수 있다. <strong>동요</strong> — 적의 공격력과 방어력을 30% 감소. <strong>혼란</strong> — 적이 해당 턴 행동 불가. 단순한 전투를 넘어 전략적 깊이를 더하는 시스템이었다.</p>
+
+      <hr />
+
+      <h3>하루 만의 월드맵 기초</h3>
+      <p class="section-date">4월 30일</p>
+
+      <p>전투 엔진 다음, 월드맵 기초 구현에 도전했다.</p>
+      <p>4개의 도시 — <strong>한성(아군), 평양(적군), 낙양(적군), 건업(아군)</strong> — 이 화면에 배치되고 선으로 연결됐다. 도시를 클릭하면 전투씬으로 이동하는 구조였다.</p>
+      <p>턴 시스템도 붙었다. 플레이어 턴이 끝나면 적군이 인접한 아군 도시를 침공한다. 직접 방어할지, 자동 전투로 넘길지 선택할 수 있었다. 작지만 완전한 하나의 전략 루프였다.</p>
+
+      <img class="body-img" src="../assets/eastwar/godot-worldmap-early.png" alt="고도 월드맵 초기 버전" loading="lazy" />
+
+      <p>4월 23일부터 30일까지 — 동경이 3일, 전투엔진 2일, 월드맵 1일 — 의 작업으로 EASTWAR의 뼈대가 세워졌다.</p>
+      <p><em>다음 일지에서는 내가 고도 엔진을 거의 모르는 상태에서 개발에 한계를 느끼고, 채코치와 잼코치의 조언으로 웹 버전으로 전환을 결정하게 된 이야기를 담겠습니다.</em></p>
+    </div>
+  </article>
+</main>
+
+<footer id="contact">
+  <p class="big">Let's build a <em>world</em> →</p>
+  <div class="grid-ft">
+    <div class="col c1"><h6>byKimjak Studio</h6><p style="font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0">IP Architect · Seoul, Korea. 시나리오·드라마 기획부터 AI 영상, 게임, 앱까지 — 한 사람이 하나의 세계관을 끝까지 설계합니다.</p></div>
+    <div class="col c2"><h6>Sections</h6><a href="../watch/">Watch <span class="ext">/01</span></a><a href="../make/">Make <span class="ext">/02</span></a><a href="../think/">Think <span class="ext">/03</span></a></div>
+    <div class="col c3"><h6>Social</h6><a href="#">Instagram <span class="ext">↗</span></a><a href="#">YouTube <span class="ext">↗</span></a><a href="#">Vimeo <span class="ext">↗</span></a><a href="#">Threads <span class="ext">↗</span></a></div>
+    <div class="col c4"><h6>Contact</h6><a href="mailto:oropa@kakao.com">oropa@kakao.com</a><a href="#">Press kit <span class="ext">PDF</span></a><a href="#">For PDs &amp; Investors <span class="ext">↗</span></a></div>
+  </div>
+  <div class="bottom"><span>byKimjak © 2026  ／  All rights, all worlds, reserved.</span><span>Built solo · with AI · in Seoul</span><span>v.04 / 2026.05</span></div>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
