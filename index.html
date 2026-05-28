@@ -557,6 +557,22 @@
     .notes__date{grid-column:7 / span 6;order:2;justify-self:end}
   }
 
+  /* ── Dark notes row ── */
+  .notes__row--dark{
+    background:var(--dark);
+    color:var(--dark-ink);
+    border-top:none;
+    margin-left:calc(-1 * clamp(20px,4vw,48px));
+    margin-right:calc(-1 * clamp(20px,4vw,48px));
+    padding-left:clamp(20px,4vw,48px);
+    padding-right:clamp(20px,4vw,48px);
+  }
+  .notes__row--dark:hover{background:var(--dark-2)}
+  .notes__row--dark .notes__num,
+  .notes__row--dark .notes__cat,
+  .notes__row--dark .notes__date{color:var(--dark-ink-2)}
+  .notes__row--dark .notes__t .ko{color:var(--dark-ink-2)}
+
   /* ───────────────── footer ───────────────── */
   footer{
     background:var(--dark);color:var(--dark-ink);padding:90px clamp(20px,4vw,48px) 36px;
@@ -645,6 +661,7 @@
       <div class="drop">
         <a href="make/eastwar.html"><span class="sub-idx">02–A</span>EASTWAR 개발일지</a>
         <a href="make/grandslam.html"><span class="sub-idx">02–B</span>GrandSlam 개발일지</a>
+        <a href="make/takezero.html"><span class="sub-idx">02–C</span>TakeZero · 프롬프트 엔진</a>
       </div>
     </div>
     <div class="has-drop">
@@ -993,6 +1010,15 @@
       <span class="ko">왜 ‘프로젝트’ 대신 ‘세계관’이라 부르기 시작했나</span>
     </div>
     <div class="notes__date">2026 · 04 · 12</div>
+  </a>
+
+  <a href="make/takezero.html" class="notes__row notes__row--dark rev">
+    <div class="notes__num">N° 010</div>
+    <div class="notes__cat">Make · 02–C</div>
+    <div class="notes__t">TakeZero — AI 캐릭터 프롬프트 엔진
+      <span class="ko">선택만으로 디테일한 나만의 캐릭터 프롬프트를 완성하는 AI 엔진. 지금 사용 가능.</span>
+    </div>
+    <div class="notes__date">2026 · 05</div>
   </a>
 </section>
 
