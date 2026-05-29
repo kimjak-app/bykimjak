@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>TakeZero</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/sequence.css" />
+</head>
+
+<body>
+
+    <header
+        style="display:flex;justify-content:space-between;align-items:center;height:44px;padding:0 20px;background:var(--bg-mid);border-bottom:1px solid var(--border);position:relative;">
+        <div style="display:flex;align-items:center;gap:10px;margin-right:12px;">
+            <div class="logo">
+                <img src="assets/logo.png"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';" />
+                <span class="logo-text" style="display:none;">TAKE ZERO</span>
+            </div>
+        </div>
+        <nav style="display:flex;align-items:center;gap:24px;height:100%;">
+            <button class="main-nav-btn active" data-target="view-character">CHARACTER</button>
+            <button class="main-nav-btn" data-target="view-image">IMAGE</button>
+            <button class="main-nav-btn" data-target="view-sequence" style="display:none;">SEQUENCE</button>
+        </nav>
+        <div style="display:flex;align-items:center;gap:16px;">
+            <span class="material-symbols-outlined" id="btn-settings"
+                style="color:var(--text-sub);cursor:pointer;font-size:20px;" title="테마 설정">settings</span>
+        </div>
+        <div class="settings-dropdown" id="settings-dropdown">
+            <div
+                style="font-size:8px;font-family:'JetBrains Mono',monospace;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.12em;padding:4px 12px 8px;border-bottom:1px solid var(--border-m);margin-bottom:6px;">
+                테마 선택</div>
+            <button class="theme-btn active" data-theme-val="dark">● DARK</button>
+            <button class="theme-btn" data-theme-val="gray">◐ GRAY</button>
+            <button class="theme-btn" data-theme-val="light">○ LIGHT</button>
+        </div>
+    </header>
+
+    <main style="display:flex;height:calc(100vh - 44px);">
+
+        
+        <section style="flex-grow:1;overflow:hidden;position:relative;">
+            
+            <div id="view-character" class="main-view active">
+                <div style="max-width:740px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:20px;">
+                    <div style="border-bottom:1px solid var(--border);padding-bottom:14px;">
+                        <div
+                            style="font-size:22px;font-weight:900;letter-spacing:-0.02em;text-transform:uppercase;color:var(--text);">
+                            캐릭터 제너레이터</div>
+                        <div style="font-size:12px;color:var(--text-dim);line-height:1.75;margin-top:10px;">
+                            외형, 성격, 음성, 의상 정보를 조합해 AI가 일관된 인물 프롬프트를 이해하도록 만드는 캐릭터 설계 카테고리입니다.
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="sec-title">🗂️ 시트 비율</div>
+                        <div style="font-size:12px;color:var(--text-dim);margin-bottom:10px;">캐릭터 시트 구성에 맞는 기준 비율을 고릅니다.</div>
+                        <div class="character-sheet-frame-chips" style="display:flex;flex-wrap:wrap;gap:6px;">
+                            <button class="chip char-sheet-chip active" data-char-sheet-frame="16:9">16:9 · 기본 시트</button>
+                            <button class="chip char-sheet-chip" data-char-sheet-frame="4:3">4:3 · 안정형 시트</button>
+                            <button class="chip char-sheet-chip" data-char-sheet-frame="7:5">7:5 · 인스타형 시트</button>
+                        </div>
+                        <div class="character-sheet-guide" style="font-size:11px;line-height:1.7;color:var(--text-sub);padding:8px 10px;background:var(--bg);border-left:2px solid var(--acc);margin-top:10px;">
+                            <strong style="color:var(--acc-hi);">16:9</strong> — 캐릭터 레퍼런스 시트 기본 비율. 전신과 디테일 컷을 함께 배치하기 좋습니다.
+                        </div>
+                    </div>
+
+                    <div style="display:flex;gap:0;border-bottom:1px solid var(--border);">
+                        <button class="tab-btn active" data-tab="profile">프로필</button>
+                        <button class="tab-btn" data-tab="physical">신체&amp;외모</button>
+                        <button class="tab-btn" data-tab="personality">성격&amp;성향</button>
+                        <button class="tab-btn" data-tab="voice">음성</button>
+                        <button class="tab-btn" data-tab="attire">의상&amp;악세서리</button>
+                    </div>
+
+                    <div id="tab-profile" class="tab-panel active" style="display:flex;flex-direction:column;gap:24px;">
+                        <div>
+                            <div class="sec-sub">캐릭터 이름</div>
+                            <input id="input-name" type="text" class="tz-input"
+                                style="max-width:260px;padding:6px 10px;height:auto;background:#1a1a1a!important;-webkit-background-fill-color:#1a1a1a!important;-webkit-box-shadow:0 0 0px 1000px #1a1a1a inset!important;-webkit-text-fill-color:var(--text-hi)!important;"
+                                autocomplete="off"
+                                placeholder="이름 입력 (예: JI-HYE)" />
+                        </div>
+                        <div>
+                            <div class="sec-title">성별</div>
+                            <div
+                                style="display:flex;justify-content:space-between;font-size:9px;font-family:'JetBrains Mono',monospace;margin-bottom:6px;">
+                                <span style="color:#4a9eff;font-weight:700;">남성</span>
+                                <span id="val-gender" style="color:var(--acc);font-weight:700;">중성 (ANDROGYNOUS)</span>
+                                <span style="color:#ff6b9d;font-weight:700;">여성</span>
+                            </div>
+                            <input id="slider-gender" type="range" min="0" max="100" value="50" />
+                        </div>
+                        <div>
+                            <div class="sec-title">나이</div>
+                            <div
+                                style="display:flex;justify-content:space-between;font-size:9px;font-family:'JetBrains Mono',monospace;margin-bottom:4px;">
+                                <span style="color:var(--text-sub);">나이 (AGE)</span>
+                                <span id="val-age" style="color:var(--acc);">25세 (청년)</span>
+                            </div>
+                            <input id="slider-age" type="range" min="0" max="100" value="25" />
+                            <div class="age-ruler">
+                                <span class="age-tick" style="left:0%">0<br>유아</span>
+                                <span class="age-tick" style="left:10%">10<br>어린이</span>
+                                <span class="age-tick" style="left:20%">20<br>청소년</span>
+                                <span class="age-tick" style="left:40%">40<br>중년</span>
+                                <span class="age-tick" style="left:65%">65<br>노년</span>
+                                <span class="age-tick" style="left:100%">100+</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sec-title">인종 &amp; 혼혈</div>
+                            <!-- 1단계: 대분류 -->
+                            <div style="margin-bottom:10px;">
+                                <div class="sec-sub">인종 대분류</div>
+                                <div id="race-tier1-chips" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+                            </div>
+                            <!-- 2단계: 국가/지역 (동적) -->
+                            <div id="race-tier2-wrap" style="display:none;margin-bottom:10px;">
+                                <div class="sec-sub" id="race-tier2-label">지역 선택</div>
+                                <div id="race-tier2-chips" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+                            </div>
+                            <!-- 3단계: 세부 프리셋 (동적) -->
+                            <div id="race-tier3-wrap" style="display:none;margin-bottom:10px;">
+                                <div class="sec-sub" id="race-tier3-label">세부 프리셋</div>
+                                <div id="race-tier3-chips" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+                            </div>
+                            <!-- 혼혈 슬라이더 유지 -->
+                            <div class="card" style="margin-top:4px;">
+                                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+                                    <div class="sec-sub" style="margin-bottom:0;">혼혈 비율 <span style="font-weight:400;font-size:8px;text-transform:none;">(하나 활성화 시 나머지 잠금)</span></div>
+                                    <button id="btn-mix-reset" style="font-size:8px;font-family:'JetBrains Mono',monospace;color:var(--text-dim);background:none;border:none;cursor:pointer;text-transform:uppercase;letter-spacing:0.08em;">↺ 초기화</button>
+                                </div>
+                                <div style="display:flex;flex-direction:column;gap:10px;">
+                                    <div>
+                                        <div style="display:flex;justify-content:space-between;font-size:9px;font-family:'JetBrains Mono',monospace;color:var(--text-sub);margin-bottom:3px;">
+                                            <span>백인 ↔ 동양인</span><span id="val-mix-ca" style="color:var(--acc);">0%</span>
+                                        </div>
+                                        <input id="slider-mix-ca" type="range" min="0" max="100" value="0" />
+                                        <div class="mix-bar"><div id="bar-mix-ca" class="mix-fill" style="background:linear-gradient(90deg,#f5c0a0,#f0d090);width:0%"></div></div>
+                                    </div>
+                                    <div>
+                                        <div style="display:flex;justify-content:space-between;font-size:9px;font-family:'JetBrains Mono',monospace;color:var(--text-sub);margin-bottom:3px;">
+                                            <span>흑인 ↔ 동양인</span><span id="val-mix-ba" style="color:var(--acc);">0%</span>
+                                        </div>
+                                        <input id="slider-mix-ba" type="range" min="0" max="100" value="0" />
+                                        <div class="mix-bar"><div id="bar-mix-ba" class="mix-fill" style="background:linear-gradient(90deg,#8b5e3c,#d4a373);width:0%"></div></div>
+                                    </div>
+                                    <div>
+                                        <div style="display:flex;justify-content:space-between;font-size:9px;font-family:'JetBrains Mono',monospace;color:var(--text-sub);margin-bottom:3px;">
+                                            <span>백인 ↔ 흑인</span><span id="val-mix-cb" style="color:var(--acc);">0%</span>
+                                        </div>
+                                        <input id="slider-mix-cb" type="range" min="0" max="100" value="0" />
+                                        <div class="mix-bar"><div id="bar-mix-cb" class="mix-fill" style="background:linear-gradient(90deg,#f5c0a0,#8b5e3c);width:0%"></div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab-physical" class="tab-panel" style="display:flex;flex-direction:column;gap:24px;">
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+                            <div>
+                                <div class="sec-title">신체 지표</div>
+                                <div style="display:flex;flex-direction:column;gap:14px;">
+                                    <div>
+                                        <div
+                                            style="display:flex;justify-content:space-between;font-size:12px;font-family:'Inter','Apple SD Gothic Neo','Noto Sans KR',sans-serif;font-weight:600;color:var(--text-sub);margin-bottom:6px;">
+                                            <span>신장</span><span id="val-height" style="color:var(--acc);">185cm</span>
+                                        </div>
+                                        <input id="slider-height" type="range" min="140" max="220" value="185" />
+                                    </div>
+                                    <div>
+                                        <div
+                                            style="display:flex;justify-content:space-between;font-size:12px;font-family:'Inter','Apple SD Gothic Neo','Noto Sans KR',sans-serif;font-weight:600;color:var(--text-sub);margin-bottom:6px;">
+                                            <span>체지방</span><span id="val-fat" style="color:var(--acc);">12%</span>
+                                        </div>
+                                        <input id="slider-fat" type="range" min="3" max="40" value="12" />
+                                    </div>
+                                    <div>
+                                        <div
+                                            style="display:flex;justify-content:space-between;font-size:12px;font-family:'Inter','Apple SD Gothic Neo','Noto Sans KR',sans-serif;font-weight:600;color:var(--text-sub);margin-bottom:6px;">
+                                            <span>근육량</span><span id="val-muscle" style="color:var(--acc);">82%</span>
+                                        </div>
+                                        <input id="slider-muscle" type="range" min="0" max="100" value="82" />
+                                        <div
+                                            style="font-size:10px;font-family:'Inter',sans-serif;color:var(--text-dim);margin-top:4px;">
+                                            * 체지방↓ → 근육 하한 자동조정</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="sec-title">신체 비율</div>
+                                <div style="display:flex;flex-direction:column;gap:14px;">
+                                    <div>
+                                        <div
+                                            style="display:flex;justify-content:space-between;font-size:12px;font-family:'Inter','Apple SD Gothic Neo','Noto Sans KR',sans-serif;font-weight:600;color:var(--text-sub);margin-bottom:6px;">
+                                            <span>머리 크기</span><span id="val-head" style="color:var(--acc);">0.85x</span>
+                                        </div>
+                                        <input id="slider-head" type="range" min="60" max="200" value="85" />
+                                    </div>
+                                    <div>
+                                        <div
+                                            style="display:flex;justify-content:space-between;font-size:12px;font-family:'Inter','Apple SD Gothic Neo','Noto Sans KR',sans-serif;font-weight:600;color:var(--text-sub);margin-bottom:6px;">
+                                            <span>상체 / 하체</span><span id="val-torsoleg"
+                                                style="color:var(--acc);">50/50</span>
+                                        </div>
+                                        <input id="slider-torsoleg" type="range" min="0" max="100" value="50" />
+                                    </div>
+                                    <div>
+                                        <div
+                                            style="display:flex;justify-content:space-between;font-size:12px;font-family:'Inter','Apple SD Gothic Neo','Noto Sans KR',sans-serif;font-weight:600;color:var(--text-sub);margin-bottom:6px;">
+                                            <span>어깨 너비</span><span id="val-shoulder"
+                                                style="color:var(--acc);">1.00x</span>
+                                        </div>
+                                        <input id="slider-shoulder" type="range" min="60" max="150" value="100" />
+                                    </div>
+                                    <div id="bust-panel" class="cond-panel" style="margin-top:2px;">
+                                        <div class="sec-sub" style="margin-top:4px;">가슴 크기 (여성 전용)</div>
+                                        <div id="bust-chips" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sec-title">안면 정밀 설계</div>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                                <div>
+                                    <div class="sec-sub">얼굴형</div>
+                                    <div id="face-shape-group"
+                                        style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px;"></div>
+                                    <div
+                                        style="display:flex;justify-content:space-between;font-size:12px;font-family:'Inter','Apple SD Gothic Neo','Noto Sans KR',sans-serif;font-weight:600;color:var(--text-sub);margin-bottom:6px;">
+                                        <span>펑퍼짐함</span><span id="val-roundness" style="color:var(--acc);">50%</span>
+                                    </div>
+                                    <input id="slider-roundness" type="range" min="0" max="100" value="50" />
+                                </div>
+                                <div>
+                                    <div class="sec-sub">이마</div>
+                                    <div id="forehead-group" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+                                </div>
+                            </div>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px;">
+                                <div>
+                                    <div class="sec-sub">눈매</div>
+                                    <div id="eye-shape-group" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+                                </div>
+                                <div>
+                                    <div class="sec-sub">눈썹</div>
+                                    <div id="eyebrow-group" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+                                </div>
+                            </div>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px;">
+                                <div>
+                                    <div class="sec-sub">코</div>
+                                    <div id="nose-group" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+                                </div>
+                                <div>
+                                    <div class="sec-sub">입</div>
+                                    <div id="lip-group" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sec-title">눈 색상</div>
+                            <div id="eye-color-chips" style="display:flex;gap:6px;flex-wrap:wrap;"></div>
+                        </div>
+                        <div>
+                            <div class="sec-title">헤어스타일</div>
+                            <div id="hair-style-group" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+                        </div>
+                        <div>
+                            <div class="sec-title">머리 색상</div>
+                            <div id="hair-color-group" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+                        </div>
+                        <div>
+                            <div class="sec-title">피부 질감 <span style="font-size:10px;color:var(--text-dim);font-weight:400;">최대 3개</span></div>
+                            <div id="skin-texture-group" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+                        </div>
+                        <div>
+                            <div class="sec-title">신체 추가 묘사</div>
+                            <textarea id="body-extra" class="tz-textarea" rows="2"
+                                placeholder="예: 오른쪽 눈 아래 점, 목 문신..."></textarea>
+                        </div>
+                    </div>
+                    <div id="tab-personality" class="tab-panel" style="display:flex;flex-direction:column;gap:20px;">
+                        <div
+                            style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg-lo);border:1px solid var(--border);">
+                            <div style="font-size:10px;color:var(--text-sub);">최대 3개까지 선택 · <span
+                                    style="color:var(--text-dim);">반대 성향은 자동 비활성화됩니다</span></div>
+                            <div id="personality-counter"
+                                style="font-size:11px;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--acc);">
+                                0 / 3</div>
+                        </div>
+                        <div id="personality-chips-container" style="display:flex;flex-direction:column;gap:16px;">
+                        </div>
+                    </div>
+
+                    <div id="tab-voice" class="tab-panel" style="display:flex;flex-direction:column;gap:20px;">
+                        <div
+                            style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--bg-lo);border:1px solid var(--border);">
+                            <div style="font-size:10px;color:var(--text-sub);">최대 2개까지 선택 · <span
+                                    style="color:var(--text-dim);">반대 성향은 자동 비활성화됩니다</span></div>
+                            <div id="voice-counter"
+                                style="font-size:11px;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--acc);">
+                                0 / 2</div>
+                        </div>
+                        <div id="voice-chips-container" style="display:flex;flex-direction:column;gap:16px;"></div>
+                    </div>
+
+                    <div id="tab-attire" class="tab-panel" style="display:flex;flex-direction:column;gap:20px;">
+                        <!-- 1. 의상 프리셋 3단계 -->
+                        <div>
+                            <div class="sec-title">의상 프리셋</div>
+                            <!-- Tier1 대분류 -->
+                            <div style="margin-bottom:10px;">
+                                <div class="sec-sub">카테고리</div>
+                                <div id="outfit-tier1-chips" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+                            </div>
+                            <!-- Tier2 나라별 (동적) -->
+                            <div id="outfit-tier2-wrap" style="display:none;margin-bottom:10px;">
+                                <div class="sec-sub" id="outfit-tier2-label">선택</div>
+                                <div id="outfit-tier2-chips" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+                            </div>
+                            <!-- Tier3 세부 (동적) -->
+                            <div id="outfit-tier3-wrap" style="display:none;margin-bottom:10px;">
+                                <div class="sec-sub" id="outfit-tier3-label">세부 선택</div>
+                                <div id="outfit-tier3-chips" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+                            </div>
+                        </div>
+                        <!-- 2. 신발 -->
+                        <div>
+                            <div class="sec-title">신발</div>
+                            <div id="outfit-shoes-chips" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+                        </div>
+                        <!-- 3. 악세서리 카테고리별 -->
+                        <div>
+                            <div class="sec-title">악세서리</div>
+                            <div id="outfit-acc-wrap" style="display:flex;flex-direction:column;gap:10px;"></div>
+                        </div>
+                        <!-- 4. 추가 입력창 -->
+                        <div>
+                            <div class="sec-title">추가 입력</div>
+                            <textarea id="outfit-extra" class="tz-textarea" rows="2"
+                                placeholder="이외의 상의/하의/신발/악세서리를 텍스트로 추가하세요"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-stage" class="main-view" style="display:none!important;">
+                <div style="max-width:740px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:24px;">
+                    <div style="border-bottom:1px solid var(--border);padding-bottom:14px;display:flex;flex-direction:column;gap:12px;">
+                        <div>
+                            <div
+                                style="font-size:22px;font-weight:900;letter-spacing:-0.02em;text-transform:uppercase;color:var(--text);">
+                                스테이지 제너레이터</div>
+                            <div style="font-size:12px;color:var(--text-dim);line-height:1.75;margin-top:10px;">
+                                로케이션과 세트, 대기감과 소품을 조합해 AI가 공간의 질감과 분위기를 정확히 읽도록 만드는 배경 설계 카테고리입니다.
+                            </div>
+                        </div>
+                        <div class="mode-switch" style="width:260px;align-self:flex-end;">
+                            <button id="mode-loc" class="mode-btn active">로케이션 (LOCATION)</button>
+                            <button id="mode-set" class="mode-btn">세트장 (SET DESIGN)</button>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="sec-title">🖼️ 화면 사이즈</div>
+                        <div style="font-size:12px;color:var(--text-dim);margin-bottom:10px;">화면 비율에 따라 인물 배치와 연출 문법이 달라집니다.</div>
+                        <div class="general-frame-chips" style="display:flex;flex-wrap:wrap;gap:6px;">
+                            <button class="chip general-frame-chip active" data-frame="16:9">16:9 · 영화 / 유튜브</button>
+                            <button class="chip general-frame-chip" data-frame="9:16">9:16 · 쇼츠 / 릴스</button>
+                            <button class="chip general-frame-chip" data-frame="1:1">1:1 · 피드 / 제품</button>
+                            <button class="chip general-frame-chip" data-frame="4:5">4:5 · 인물 / 화보</button>
+                            <button class="chip general-frame-chip" data-frame="3:4">3:4 · 포스터 / 클래식</button>
+                            <button class="chip general-frame-chip" data-frame="7:5">7:5 · 인스타 세로 최적</button>
+                            <button class="chip general-frame-chip" data-frame="2.39:1">2.39:1 · 와이드 시네마</button>
+                        </div>
+                        <div class="general-frame-guide" style="font-size:11px;line-height:1.7;color:var(--text-sub);padding:8px 10px;background:var(--bg);border-left:2px solid var(--acc);margin-top:10px;">
+                            <strong style="color:var(--acc-hi);">16:9</strong> — 영화, 유튜브, 일반 영상의 기본 화면. 좌우 공간을 활용하는 시네마 구도에 강합니다.
+                        </div>
+                    </div>
+
+
+                    <div id="stage-params-container" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+                    </div>
+
+                    <div class="card">
+                        <div class="sec-sub">오브젝트 &amp; 소품 (PROPS)</div>
+                        <div id="prop-chips" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+                        <textarea id="prop-extra" class="tz-textarea" style="margin-top:12px;" rows="2"
+                            placeholder="공간을 채울 디테일한 소품들을 묘사하세요..."></textarea>
+                    </div>
+
+                    <div class="card">
+                        <div class="sec-title">🌫️ Atmosphere 확장</div>
+                        <div style="font-size:12px;color:var(--text-dim);margin-bottom:12px;">조명과 입자도 실제 기능이 아니라 프롬프트 토큰으로 컴파일됩니다.</div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                            <div>
+                                <div class="sec-sub">Cinematic Lighting</div>
+                                <div style="display:flex;flex-wrap:wrap;gap:5px;" id="lighting-chips">
+                                    <button class="chip" data-lighting="tungsten">Tungsten</button>
+                                    <button class="chip" data-lighting="volumetric">Volumetric</button>
+                                    <button class="chip" data-lighting="memory_warmth">Memory Warmth</button>
+                                    <button class="chip" data-lighting="moonlit">Moonlit Blue</button>
+                                    <button class="chip" data-lighting="golden_hour">Golden Hour</button>
+                                    <button class="chip" data-lighting="rim_light">Rim Light</button>
+                                    <button class="chip" data-lighting="soft_key_45">Soft Key 45°</button>
+                                    <button class="chip" data-lighting="backlit_sunset">Backlit Sunset</button>
+                                    <button class="chip" data-lighting="volumetric_fog">Volumetric Fog</button>
+                                    <button class="chip" data-lighting="chiaroscuro">Chiaroscuro</button>
+                                    <button class="chip" data-lighting="none">없음</button>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="sec-sub">Particle Physics</div>
+                                <div style="display:flex;flex-wrap:wrap;gap:5px;" id="particle-chips">
+                                    <button class="chip" data-particle="rain">Rain</button>
+                                    <button class="chip" data-particle="dust">Dust</button>
+                                    <button class="chip" data-particle="embers">Embers</button>
+                                    <button class="chip" data-particle="smoke">Smoke</button>
+                                    <button class="chip" data-particle="none">없음</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div
+                        style="aspect-ratio:16/9;background:var(--bg-lo);border:2px dashed var(--border-m);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;cursor:pointer;transition:border-color 0.2s;">
+                        <span class="material-symbols-outlined"
+                            style="font-size:36px;color:var(--border-m);">add_photo_alternate</span>
+                        <div style="text-align:center;">
+                            <div
+                                style="font-size:11px;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--text-sub);">
+                                STAGE REFERENCE SHEET UPLOAD</div>
+                            <div
+                                style="font-size:9px;font-family:'JetBrains Mono',monospace;color:var(--text-dim);margin-top:4px;">
+                                DRAG & DROP REFERENCE BACKGROUND</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="view-image" class="main-view">
+                <div style="max-width:760px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:22px;">
+                    <div style="border-bottom:1px solid var(--border);padding-bottom:14px;">
+                        <div style="font-size:22px;font-weight:900;letter-spacing:-0.02em;text-transform:uppercase;color:var(--text);">이미지 디렉터</div>
+                        <div style="font-size:12px;color:var(--text-dim);line-height:1.75;margin-top:10px;">
+                            순수 이미지용 프롬프트 엔진입니다. 선택한 항목만 프롬프트에 반영됩니다.
+                        </div>
+                    </div>
+
+                    <!-- 캐릭터 연동 토글 -->
+                    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--bg-lo);border:1px solid var(--border);">
+                        <div>
+                            <div style="font-size:11px;font-weight:700;color:var(--text-hi);letter-spacing:0.05em;">CHARACTER 연동</div>
+                            <div style="font-size:10px;color:var(--text-dim);margin-top:2px;">OFF 시 캐릭터 없이 순수 배경/오브젝트 이미지로 생성됩니다.</div>
+                        </div>
+                        <button id="image-char-toggle" style="padding:6px 16px;font-size:11px;font-family:'JetBrains Mono',monospace;font-weight:700;border:1px solid var(--acc);background:var(--acc);color:#00363d;cursor:pointer;letter-spacing:0.05em;">ON</button>
+                    </div>
+
+                    <!-- 화면 사이즈 -->
+                    <div class="card">
+                        <div class="sec-title">🖼️ 화면 사이즈</div>
+                        <div style="font-size:12px;color:var(--text-dim);margin-bottom:10px;">화면 비율에 따라 인물 배치와 연출 문법이 달라집니다.</div>
+                        <div class="general-frame-chips" style="display:flex;flex-wrap:wrap;gap:6px;">
+                            <button class="chip general-frame-chip active" data-frame="16:9">16:9 · 영화 / 유튜브</button>
+                            <button class="chip general-frame-chip" data-frame="9:16">9:16 · 쇼츠 / 릴스</button>
+                            <button class="chip general-frame-chip" data-frame="1:1">1:1 · 피드 / 제품</button>
+                            <button class="chip general-frame-chip" data-frame="4:5">4:5 · 인물 / 화보</button>
+                            <button class="chip general-frame-chip" data-frame="3:4">3:4 · 포스터 / 클래식</button>
+                            <button class="chip general-frame-chip" data-frame="7:5">7:5 · 인스타 세로 최적</button>
+                            <button class="chip general-frame-chip" data-frame="2.39:1">2.39:1 · 와이드 시네마</button>
+                        </div>
+                        <div class="general-frame-guide" style="font-size:11px;line-height:1.7;color:var(--text-sub);padding:8px 10px;background:var(--bg);border-left:2px solid var(--acc);margin-top:10px;">
+                            <strong style="color:var(--acc-hi);">16:9</strong> — 영화, 유튜브, 일반 영상의 기본 화면.
+                        </div>
+                    </div>
+
+                    <!-- 이미지 프리셋 -->
+                    <div class="card">
+                        <div class="sec-title">🖼️ 이미지 프리셋</div>
+                        <div style="font-size:12px;color:var(--text-dim);margin-bottom:12px;">프리셋을 고르면 구도·무드·스타일·조명 조합이 함께 바뀝니다.</div>
+                        <div id="image-preset-grid" class="preset-grid">
+                            <button class="preset-card" data-image-preset="cinematic_portrait"><div><div class="preset-title">시네마틱 인물</div><div class="preset-desc">영화 스틸처럼 인물 중심, 절제된 긴장감.</div></div></button>
+                            <button class="preset-card" data-image-preset="editorial_fashion"><div><div class="preset-title">패션 화보</div><div class="preset-desc">화보 느낌, 세련된 포즈와 매거진 무드.</div></div></button>
+                            <button class="preset-card" data-image-preset="product_hero"><div><div class="preset-title">제품 히어로컷</div><div class="preset-desc">제품/오브젝트를 또렷하게 중심에.</div></div></button>
+                            <button class="preset-card" data-image-preset="noir_scene"><div><div class="preset-title">누아르 씬</div><div class="preset-desc">어둡고 강한 대비, 고독한 긴장감.</div></div></button>
+                            <button class="preset-card" data-image-preset="golden_memory"><div><div class="preset-title">골든아워 감성</div><div class="preset-desc">따뜻한 빛, 추억 같은 부드러운 분위기.</div></div></button>
+                            <button class="preset-card" data-image-preset="neon_cyber"><div><div class="preset-title">네온 사이버</div><div class="preset-desc">네온 반사광, 미래 도시의 차가운 에너지.</div></div></button>
+                            <button class="preset-card" data-image-preset="poster_hero"><div><div class="preset-title">포스터 히어로</div><div class="preset-desc">한 장으로 캐릭터 임팩트를 꽂는 포스터형.</div></div></button>
+                            <button class="preset-card" data-image-preset="dreamy_art"><div><div class="preset-title">몽환 아트</div><div class="preset-desc">부드러운 광택과 꿈결 같은 공기감.</div></div></button>
+                        </div>
+                        <div id="image-preset-guide" class="mini-help"></div>
+                    </div>
+
+                    <!-- SUBJECT -->
+                    <div class="card">
+                        <div class="sec-title">👤 SUBJECT (피사체)</div>
+                        <textarea id="image-subject" class="tz-textarea" rows="3" placeholder="예: 빗속 골목에서 우산 없이 서 있는 젊은 여성, 손에 오래된 필름카메라"></textarea>
+                        <div id="image-subject-guide" style="font-size:10px;color:var(--text-dim);margin-top:8px;display:none;">CHARACTER 탭의 인물 정보는 자동으로 반영됩니다. 이 컷에서 추가로 표현하고 싶은 내용이 있다면 여기에 입력하세요. (예: 눈물을 흘리고 있는, 뒷모습으로, 손만 클로즈업)</div>
+                    </div>
+
+                    <!-- COMPOSITION -->
+                    <div class="card">
+                        <div class="sec-title">🎯 COMPOSITION (구도)</div>
+                        <div class="mini-help">버튼을 누르면 어떤 방식으로 프레임을 짜야 하는지 함께 바뀝니다.</div>
+                        <div id="image-composition-chips" style="display:flex;flex-wrap:wrap;gap:6px;">
+                            <button class="chip image-comp-chip" data-image-composition="cinematic_portrait">시네마틱 인물</button>
+                            <button class="chip image-comp-chip" data-image-composition="centered_product">센터 제품컷</button>
+                            <button class="chip image-comp-chip" data-image-composition="editorial_fullbody">에디토리얼 전신</button>
+                            <button class="chip image-comp-chip" data-image-composition="wide_establishing">와이드 공간샷</button>
+                            <button class="chip image-comp-chip" data-image-composition="poster_hero">포스터 히어로</button>
+                        </div>
+                        <div id="image-composition-guide" style="font-size:11px;line-height:1.7;color:var(--text-sub);margin-top:10px;padding:8px 10px;background:var(--bg);border-left:2px solid var(--acc);display:none;"></div>
+                    </div>
+
+                    <!-- LOCATION (신규 3단계) -->
+                    <div class="card">
+                        <div class="sec-title">📍 LOCATION (장소)</div>
+                        <div style="margin-bottom:10px;">
+                            <div class="sec-sub">대분류</div>
+                            <div id="image-loc-tier1" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+                        </div>
+                        <div id="image-loc-tier2-wrap" style="display:none;margin-bottom:10px;">
+                            <div class="sec-sub" id="image-loc-tier2-label">지역 선택</div>
+                            <div id="image-loc-tier2" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+                        </div>
+                        <div id="image-loc-tier3-wrap" style="display:none;">
+                            <div class="sec-sub" id="image-loc-tier3-label">세부 선택</div>
+                            <div id="image-loc-tier3" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+                        </div>
+                    </div>
+
+                    <!-- ATMOSPHERE (복수선택 확장) -->
+                    <div class="card">
+                        <div class="sec-title">🌫️ ATMOSPHERE (대기 및 날씨) <span style="font-size:10px;color:var(--text-dim);font-weight:400;">최대 3개 · 상반된 날씨는 자동 비활성화</span></div>
+                        <div id="image-atmosphere-chips" style="display:flex;flex-wrap:wrap;gap:5px;"></div>
+                    </div>
+
+                    <!-- MOOD / STYLE -->
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                        <div class="card">
+                            <div class="sec-title">💭 MOOD (분위기)</div>
+                            <div class="mini-help">장면의 감정 온도와 정서를 정합니다.</div>
+                            <div id="image-mood-chips" style="display:flex;flex-wrap:wrap;gap:6px;">
+                                <button class="chip image-mood-chip" data-image-mood="quiet_tension">고요한 긴장</button>
+                                <button class="chip image-mood-chip" data-image-mood="nostalgic_warmth">따뜻한 향수</button>
+                                <button class="chip image-mood-chip" data-image-mood="lonely_isolation">고독 / 거리감</button>
+                                <button class="chip image-mood-chip" data-image-mood="heroic_impact">히어로 임팩트</button>
+                                <button class="chip image-mood-chip" data-image-mood="fashion_editorial">패션 에디토리얼</button>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="sec-title">🎨 STYLE (스타일)</div>
+                            <div class="mini-help">실사, 화보, 컨셉아트 같은 결과 질감을 정합니다.</div>
+                            <div id="image-style-chips" style="display:flex;flex-wrap:wrap;gap:6px;">
+                                <button class="chip image-style-chip" data-image-style="ultra_photoreal">초실사</button>
+                                <button class="chip image-style-chip" data-image-style="cinematic_film">시네마틱 필름</button>
+                                <button class="chip image-style-chip" data-image-style="luxury_editorial">럭셔리 화보</button>
+                                <button class="chip image-style-chip" data-image-style="anime_realblend">애니 실사 블렌드</button>
+                                <button class="chip image-style-chip" data-image-style="concept_art">컨셉 아트</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LIGHTING -->
+                    <div class="card">
+                        <div class="sec-title">💡 LIGHTING (조명)</div>
+                        <div class="mini-help">빛의 방향과 강도를 결정해 분위기를 만듭니다.</div>
+                        <div id="image-lighting-chips" style="display:flex;flex-wrap:wrap;gap:6px;">
+                            <button class="chip image-lighting-chip" data-image-lighting="soft_studio">소프트 스튜디오</button>
+                            <button class="chip image-lighting-chip" data-image-lighting="golden_hour">골든아워</button>
+                            <button class="chip image-lighting-chip" data-image-lighting="hard_noir">하드 누아르</button>
+                            <button class="chip image-lighting-chip" data-image-lighting="neon_night">네온 나이트</button>
+                            <button class="chip image-lighting-chip" data-image-lighting="volumetric_window">볼류메트릭 윈도우</button>
+                        </div>
+                    </div>
+
+                    <!-- 색감/톤 -->
+                    <div class="card">
+                        <div class="sec-title">🎨 COLOR TONE (색감/톤)</div>
+                        <div class="mini-help">이미지 전체 컬러 방향성을 정합니다. 미선택 시 자연스러운 색감으로 생성됩니다.</div>
+                        <div id="image-colortone-chips" style="display:flex;flex-wrap:wrap;gap:6px;"></div>
+                    </div>
+
+                    <!-- 카메라 설정 -->
+                    <div class="card">
+                        <div class="sec-title">📷 전문가용 카메라 설정</div>
+                        <div class="mini-help">렌즈·조리개·카메라 위치를 잡아서 이미지 심도와 시점을 더 정밀하게 컨트롤합니다.</div>
+                        <div class="option-grid-3" style="margin-top:10px;">
+                            <div><div class="sec-sub">렌즈</div><select id="image-lens" class="seq-select"><option value="">미선택</option><option value="24mm wide lens">24mm · 광각</option><option value="35mm documentary lens">35mm · 자연스러운 광각</option><option value="50mm standard lens">50mm · 표준</option><option value="85mm portrait lens">85mm · 인물용</option><option value="135mm telephoto lens">135mm · 망원</option></select></div>
+                            <div><div class="sec-sub">조리개값</div><select id="image-aperture" class="seq-select"><option value="">미선택</option><option value="f/1.4 ultra shallow depth of field">f/1.4 · 극얕은 심도</option><option value="f/2 shallow depth of field">f/2 · 얕은 심도</option><option value="f/2.8 controlled shallow depth of field">f/2.8 · 인물용</option><option value="f/4 balanced depth of field">f/4 · 균형형</option><option value="f/8 deep depth of field">f/8 · 깊은 심도</option></select></div>
+                            <div><div class="sec-sub">렌즈 왜곡</div><select id="image-lens-distortion" class="seq-select"><option value="none">없음</option><option value="fisheye lens distortion">어안 왜곡</option><option value="wide-edge distortion">광각 가장자리 왜곡</option></select></div>
+                        </div>
+                        <div class="option-grid-3" style="margin-top:14px;">
+                            <div><div class="sec-sub">좌우 위치</div><select id="image-camera-side" class="seq-select"><option value="">미선택</option><option value="front view">정면</option><option value="left profile view">왼쪽</option><option value="right profile view">오른쪽</option><option value="rear view">뒤</option><option value="front-left 45 degree view">좌측 45도</option><option value="front-right 45 degree view">우측 45도</option></select></div>
+                            <div><div class="sec-sub">높이</div><select id="image-camera-height" class="seq-select"><option value="">미선택</option><option value="slightly above eye level">살짝 위</option><option value="eye-level camera">눈높이</option><option value="slightly below eye level">살짝 아래</option><option value="high-angle top-down">위에서 내려다봄</option><option value="low-angle hero shot">아래에서 올려봄</option></select></div>
+                            <div><div class="sec-sub">카메라 각도</div><select id="image-camera-tilt" class="seq-select"><option value="">미선택</option><option value="level horizon">수평</option><option value="slight dutch tilt">살짝 더치앵글</option><option value="strong dutch tilt">강한 더치앵글</option></select></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEQUENCE TAB -->
+            <div id="view-sequence" class="main-view" style="display:none!important;">
+                <div style="max-width:760px;width:100%;margin:0 auto;display:flex;flex-direction:column;gap:20px;">
+
+                    <!-- 헤더 -->
+                    <div
+                        style="border-bottom:1px solid var(--border);padding-bottom:14px;display:flex;justify-content:space-between;align-items:flex-end;">
+                        <div>
+                            <div
+                                style="font-size:22px;font-weight:900;letter-spacing:-0.02em;text-transform:uppercase;color:var(--text);">
+                                시퀀스 디렉터</div>
+                            <div style="font-size:12px;color:var(--text-dim);line-height:1.75;margin-top:10px;">
+                                여러 샷의 흐름과 톤을 설계해 씨댄스·클링·힉스필드 같은 영상 AI가 컷 연결과 움직임을 정확히 이해하도록 만드는 시퀀스 프롬프트 카테고리입니다.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="sec-title">🖼️ 화면 사이즈</div>
+                        <div style="font-size:12px;color:var(--text-dim);margin-bottom:10px;">화면 비율에 따라 인물 배치와 연출 문법이 달라집니다.</div>
+                        <div class="general-frame-chips" style="display:flex;flex-wrap:wrap;gap:6px;">
+                            <button class="chip general-frame-chip active" data-frame="16:9" data-aspect="16:9" title="영화, 유튜브, 일반 영상">16:9 · 영화 / 유튜브</button>
+                            <button class="chip general-frame-chip" data-frame="9:16" data-aspect="9:16" title="쇼츠, 릴스, 틱톡">9:16 · 쇼츠 / 릴스</button>
+                            <button class="chip general-frame-chip" data-frame="1:1" data-aspect="1:1" title="피드 이미지, 제품 중심">1:1 · 피드 / 제품</button>
+                            <button class="chip general-frame-chip" data-frame="4:5" data-aspect="4:5" title="인물 사진, 화보">4:5 · 인물 / 화보</button>
+                            <button class="chip general-frame-chip" data-frame="3:4" data-aspect="3:4" title="포스터, 클래식 사진">3:4 · 포스터 / 클래식</button>
+                            <button class="chip general-frame-chip" data-frame="7:5" data-aspect="7:5" title="인스타 세로 최적">7:5 · 인스타 세로 최적</button>
+                            <button class="chip general-frame-chip" data-frame="2.39:1" data-aspect="2.39:1" title="와이드 영화 화면">2.39:1 · 와이드 시네마</button>
+                        </div>
+                        <div class="general-frame-guide" style="font-size:11px;line-height:1.7;color:var(--text-sub);padding:8px 10px;background:var(--bg);border-left:2px solid var(--acc);margin-top:10px;">
+                            <strong style="color:var(--acc-hi);">16:9</strong> — 영화, 유튜브, 일반 영상의 기본 화면. 좌우 공간을 활용하는 시네마 구도에 강합니다.
+                        </div>
+                    </div>
+
+                    <!-- ① 플랫폼 선택 -->
+                    <div class="card">
+                        <div class="sec-title">🎯 영상 생성 플랫폼</div>
+                        <div style="font-size:12px;color:var(--text-dim);margin-bottom:10px;">어디서 영상을 만들 건가요? 선택하면 프롬프트
+                            형식이 자동으로 맞춰집니다.</div>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;" id="platform-chips">
+                            <button class="platform-badge active" data-platform="seedance">씨댄스 2.0</button>
+                            <button class="platform-badge" data-platform="kling">클링 3.0</button>
+                            <button class="platform-badge" data-platform="higgsfield">힉스필드</button>
+                            <button class="platform-badge" data-platform="veo">베오 3.1</button>
+                        </div>
+                        <div id="platform-hint"
+                            style="font-size:9px;font-family:'JetBrains Mono',monospace;color:var(--acc);padding:6px 10px;background:var(--bg);border-left:2px solid var(--acc);line-height:1.6;margin-top:10px;">
+                            씨댄스 2.0 — 멀티모달 레퍼런스(@태그) · 15초 멀티샷 · 네이티브 오디오 생성</div>
+                    </div>
+
+                    <!-- Reference roles -->
+                    <div class="card">
+                        <div class="sec-title">📎 Reference Roles</div>
+                        <div class="mini-help">파일 처리는 하지 않고, 씨댄스가 이해할 참조 의미만 프롬프트에 정리합니다.</div>
+                        <div id="reference-panel" style="display:flex;flex-direction:column;gap:12px;margin-top:12px;"></div>
+                    </div>
+
+                    <!-- ② 장르 프리셋 -->
+                    <div class="card">
+                        <div class="sec-title">🎬 장르 프리셋</div>
+                        <div style="font-size:12px;color:var(--text-dim);margin-bottom:10px;">장르를 고르면 분위기·색감·스타일이 자동으로
+                            채워집니다.</div>
+                        <div style="display:flex;flex-wrap:wrap;gap:5px;" id="genre-chips">
+                            <button class="chip" data-genre="cinematic">🎥 시네마틱</button>
+                            <button class="chip" data-genre="noir">🕵️ 누아르</button>
+                            <button class="chip" data-genre="cyberpunk">🤖 사이버펑크</button>
+                            <button class="chip" data-genre="golden">🌅 골든아워</button>
+                            <button class="chip" data-genre="horror">👻 호러</button>
+                            <button class="chip" data-genre="romance">💕 로맨스</button>
+                            <button class="chip" data-genre="action">💥 액션</button>
+                            <button class="chip" data-genre="documentary">📷 다큐</button>
+                            <button class="chip" data-genre="commercial">📱 광고/릴스</button>
+                            <button class="chip" data-genre="anime">✨ 애니메이션</button>
+                        </div>
+                    </div>
+
+                    <!-- ③ 시퀀스 기본 설정 -->
+                    <div class="card">
+                        <div class="sec-title">⚙️ 시퀀스 기본 설정</div>
+                        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin:10px 0 16px;padding:9px 10px;background:var(--bg);border:1px solid var(--border);">
+                            <div>
+                                <div class="sec-sub" style="margin-bottom:2px;">Compiler Mode</div>
+                                <div class="mini-help" style="margin-top:0;">Basic은 핵심 연출만, Pro는 렌즈·샷타입·왜곡·시간 흐름까지 엽니다.</div>
+                            </div>
+                            <div style="display:flex;gap:6px;flex-shrink:0;">
+                                <button id="mode-basic-btn" class="chip active" onclick="setSequenceMode('basic')">BASIC</button>
+                                <button id="mode-pro-btn" class="chip" onclick="setSequenceMode('pro')">PRO</button>
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom:16px;">
+                            <div
+                                style="display:flex;justify-content:space-between;font-size:12px;font-family:'Inter','Apple SD Gothic Neo','Noto Sans KR',sans-serif;font-weight:600;color:var(--text-sub);margin-bottom:6px;">
+                                <span>영상 길이 <span style="color:var(--text-dim);font-weight:400;">— 총 몇 초짜리
+                                        영상인가요?</span></span>
+                                <span id="val-duration" style="color:var(--acc);font-weight:700;">15초</span>
+                            </div>
+                            <input type="range" id="seq-duration-slider" min="0" max="30" value="15" step="1" />
+                            <div
+                                style="display:flex;justify-content:space-between;font-size:10px;font-family:'Inter',sans-serif;color:var(--text-dim);margin-top:4px;">
+                                <span>Still (스틸)</span><span>15초 (표준)</span><span>30초 (긴 영상)</span>
+                            </div>
+                            <div
+                                style="font-size:11px;color:var(--text-dim);margin-top:8px;padding:7px 10px;background:var(--bg);border-left:2px solid var(--border-m);line-height:1.7;">
+                                💡 샷 카드에서 개별 길이를 설정하지 않거나 합산 시간이 짧으면, 나머지는 AI가 임의로 채웁니다.<br>
+                                샷 길이 합산이 목표 시간을 초과하면 목표 시간이 자동으로 따라갑니다.
+                            </div>
+                        </div>
+
+                        <div style="margin-bottom:16px;">
+                            <div
+                                style="display:flex;justify-content:space-between;font-size:12px;font-family:'Inter','Apple SD Gothic Neo','Noto Sans KR',sans-serif;font-weight:600;color:var(--text-sub);margin-bottom:6px;">
+                                <span>음악 BPM <span style="color:var(--text-dim);font-weight:400;">— 빠를수록 컷이 자주
+                                        바뀝니다</span></span>
+                                <span id="val-bpm" style="color:var(--acc);font-weight:700;">120 BPM</span>
+                            </div>
+                            <input type="range" id="seq-bpm-slider" min="60" max="200" value="120" step="5" />
+                            <div
+                                style="display:flex;justify-content:space-between;font-size:10px;font-family:'Inter',sans-serif;color:var(--text-dim);margin-top:4px;">
+                                <span>60 (느린 발라드)</span><span>120 (팝)</span><span>200 (빠른 EDM)</span>
+                            </div>
+                        </div>
+
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                            <div>
+                                <div class="sec-sub">컷 리듬 — 어떻게 장면을 이을까요?</div>
+                                <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:7px;">
+                                    <button class="chip" data-rhythm="free">FREE</button>
+                                    <button class="chip active" data-rhythm="rhythmic">RHYTHMIC</button>
+                                    <button class="chip" data-rhythm="beat">BEAT</button>
+                                    <button class="chip" data-rhythm="slow">SLOW</button>
+                                </div>
+                                <div id="rhythmDescription" class="seq-help">리듬감 있는 규칙적인 컷 전환</div>
+                            </div>
+                            <div>
+                                <div class="sec-sub">렌더 스타일 — 어떤 느낌의 영상인가요?</div>
+                                <select class="seq-select" id="seq-style">
+                                    <option value="Ultra-Realistic">초실사 (Ultra-Realistic)</option>
+                                    <option value="Cinematic Film">시네마틱 필름</option>
+                                    <option value="Hyper-Cinematic 4K">하이퍼 시네마틱 4K</option>
+                                    <option value="Documentary Handheld">다큐 핸드헬드</option>
+                                    <option value="Anime Stylized">애니메이션 스타일</option>
+                                    <option value="3D CGI Render">3D CGI 렌더</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    <!-- ④ 영상 내용 설정 -->
+                    <div class="card">
+                        <div class="sec-title">👤 영상 내용 설정</div>
+                        <div style="margin-bottom:14px;">
+                            <div class="sec-sub">피사체 — 영상의 주인공이 누구인가요?</div>
+                            <select class="seq-select" id="seq-subject-mode" style="margin-bottom:6px;">
+                                <option value="image_ref">📎 이미지 첨부 (@Image1 태그 자동 생성)</option>
+                                <option value="char_tab">🧑 CHARACTER 탭에서 만든 인물 사용</option>
+                                <option value="custom">✏️ 직접 설명 입력</option>
+                            </select>
+                            <div id="seq-subject-custom" style="display:none;">
+                                <textarea class="tz-textarea" id="seq-subject-text" rows="2"
+                                    placeholder="예: 20대 한국 여성, 긴 생머리, 캐주얼한 차림..."></textarea>
+                            </div>
+                        </div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+                            <div>
+                                <div class="sec-sub">의상 — 무엇을 입고 있나요?</div>
+                                <textarea class="tz-textarea" id="seq-wardrobe" rows="3"
+                                    placeholder="예: 집에서는 흰 티셔츠와 반바지. 밖에서는 테일러드 재킷과 트라우저."></textarea>
+                            </div>
+                            <div>
+                                <div class="sec-sub">공간/배경 — 어디서 찍히나요?</div>
+                                <textarea class="tz-textarea" id="seq-environment" rows="3"
+                                    placeholder="예: 작은 원룸, 냉장고 불빛, 빗속 복도, 지하철 안, 사무실."></textarea>
+                            </div>
+                        </div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                            <div>
+                                <div class="sec-sub">감정/분위기 — 어떤 느낌인가요?</div>
+                                <div class="mood-presets" style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:7px;">
+                                    <button class="chip" data-mood="">선택없음</button>
+                                    <button class="chip active" data-mood="tension">긴장</button>
+                                    <button class="chip" data-mood="anxiety">불안</button>
+                                    <button class="chip" data-mood="lonely">고독</button>
+                                    <button class="chip" data-mood="romantic">로맨틱</button>
+                                    <button class="chip" data-mood="epic">장엄함</button>
+                                    <button class="chip" data-mood="poetic">서정적</button>
+                                    <button class="chip" data-mood="hopeful">희망적</button>
+                                    <button class="chip" data-mood="threat">위협적</button>
+                                    <button class="chip" data-mood="cold">차가운</button>
+                                    <button class="chip" data-mood="dreamy">몽환적</button>
+                                    <button class="chip" data-mood="fun">유쾌한</button>
+                                    <button class="chip" data-mood="madness">광기</button>
+                                </div>
+                                <textarea class="tz-textarea" id="moodDetail" rows="2"
+                                    placeholder="예: 지각 직전의 초조함, 비 내리는 새벽 같은 고독, 숨 막히는 위협감"></textarea>
+                                <textarea class="tz-textarea" id="seq-mood" rows="2" style="display:none;"
+                                    placeholder="예: 지각할 것 같은 패닉, 숨가쁜 긴박함, 마지막에 지친 안도감."></textarea>
+                                <div class="mood-help seq-help">프리셋 외에 더 구체적인 감정이 필요하면 직접 입력하세요.</div>
+                            </div>
+                            <div>
+                                <div class="sec-sub">색감 — 어떤 색 톤인가요?</div>
+                                <select class="seq-select" id="seq-color">
+                                    <option value="Hyperreal Pop Look">하이퍼리얼 팝 (선명하고 쨍한)</option>
+                                    <option value="Cinematic Teal & Orange">시네마틱 청동 (영화 같은)</option>
+                                    <option value="Noir High Contrast">누아르 고대비 (어둡고 강렬한)</option>
+                                    <option value="Neon Cyberpunk Glow">네온 사이버펑크 (빛나는 미래)</option>
+                                    <option value="Golden Hour Warm">골든아워 (따뜻한 노을빛)</option>
+                                    <option value="Desaturated Film">필름 탈채도 (빛바랜 느낌)</option>
+                                    <option value="Pastel Dreamy">파스텔 몽환 (꿈결 같은)</option>
+                                    <option value="Custom">직접 입력</option>
+                                </select>
+                                <input type="text" class="tz-input" id="seq-color-custom"
+                                    style="display:none;margin-top:5px;" placeholder="색감을 직접 설명하세요..." />
+                                <input id="colorCustom" class="tz-input" style="margin-top:5px;"
+                                    placeholder="예: 차가운 새벽 블루톤, 따뜻한 노을 필름톤, 고대비 흑백 느낌" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ⑤ 사운드 스테이지 -->
+                    <div class="card">
+                        <div class="sec-title">🎵 사운드 스테이지</div>
+                        <div style="font-size:12px;color:var(--text-dim);margin-bottom:12px;">음악과 공간 소리를 설정하면 AI가 영상에
+                            자동으로 맞춥니다.</div>
+                        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                            <div>
+                                <div class="sec-sub">BGM — 배경 음악 방향</div>
+                                <select class="seq-select" id="seq-bgm">
+                                    <option value="">없음</option>
+                                    <option value="Fast percussive electro-pop">빠른 일렉트로팝</option>
+                                    <option value="Slow emotional piano ballad">감성 피아노 발라드</option>
+                                    <option value="Cinematic orchestral swell">시네마틱 오케스트라</option>
+                                    <option value="Dark ambient electronic">다크 앰비언트</option>
+                                    <option value="Upbeat hip-hop beat">업비트 힙합</option>
+                                    <option value="Acoustic folk guitar">어쿠스틱 포크</option>
+                                    <option value="Tense thriller strings">긴장감 스릴러</option>
+                                    <option value="Romantic jazz">로맨틱 재즈</option>
+                                    <option value="Custom">직접 입력</option>
+                                </select>
+                                <input type="text" class="tz-input" id="seq-bgm-custom"
+                                    style="display:none;margin-top:5px;" placeholder="음악 방향을 설명하세요..." />
+                            </div>
+                            <div>
+                                <div class="sec-sub">공간음 — 배경에서 들리는 소리</div>
+                                <select class="seq-select" id="seq-ambient">
+                                    <option value="">없음</option>
+                                    <option value="quiet apartment room tone">조용한 방 (집 내부)</option>
+                                    <option value="rain on windows, distant thunder">비 오는 창밖 소리</option>
+                                    <option value="busy city street ambience">번화한 거리 소음</option>
+                                    <option value="metro subway carriage noise">지하철 소음</option>
+                                    <option value="office keyboard and AC hum">사무실 환경음</option>
+                                    <option value="café background chatter">카페 배경 소리</option>
+                                    <option value="nature forest birds wind">자연 숲 소리</option>
+                                    <option value="crowd cheering stadium">군중 함성</option>
+                                    <option value="Custom">직접 입력</option>
+                                </select>
+                                <input type="text" class="tz-input" id="seq-ambient-custom"
+                                    style="display:none;margin-top:5px;" placeholder="공간 소리를 설명하세요..." />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ⑥ 연속성 잠금 -->
+                    <div class="card">
+                        <div class="sec-sub" style="margin-bottom:8px;">연속성 잠금 — 의상·소품·장소가 샷마다 일관되게 유지됩니다</div>
+                        <div class="logic-toggle on" id="logic-rule-toggle" onclick="toggleLogicRule()">
+                            <div class="toggle-dot"></div>
+                            <div style="font-size:9px;font-family:'JetBrains Mono',monospace;color:var(--text-sub);">ON
+                                — 의상·소품·장소·행동이 모든 샷에서 일관성 있게 유지됩니다</div>
+                        </div>
+                    </div>
+
+                    <!-- ⑦ 샷 스택 -->
+                    <div>
+                        <!-- 총합 카운터 -->
+                        <div id="total-duration-display"
+                            style="font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--text-dim);padding:8px 12px;background:var(--bg-mid);border:1px solid var(--border);margin-bottom:10px;line-height:1.6;">
+                            총합: <span style="color:var(--acc);font-weight:700;">0.0초</span> / 목표: 15초
+                        </div>
+
+                        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                            <div class="sec-title" style="margin-bottom:0;">🎬 샷 스택 <span id="shot-count-badge"
+                                    style="color:var(--acc);font-size:10px;">( 1 샷 )</span></div>
+                            <div style="display:flex;gap:6px;">
+                                <button class="btn-secondary" style="padding:6px 12px;font-size:9px;"
+                                    onclick="addShot()">
+                                    <span class="material-symbols-outlined" style="font-size:13px;">add</span> 샷 추가
+                                </button>
+                                <button class="btn-secondary" style="padding:6px 16px;font-size:9px;min-width:106px;white-space:nowrap;"
+                                    onclick="collapseAllShots()">
+                                    <span class="material-symbols-outlined" style="font-size:13px;">compress</span> 전체접기
+                                </button>
+                            </div>
+                        </div>
+                        <div id="shot-stack"></div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- END SEQUENCE -->
+
+        </section>
+
+        <aside id="terminal-pane"
+            style="width:300px;flex-shrink:0;display:flex;flex-direction:column;border-left:1px solid #2a2a2a;">
+            <div id="terminal-header"
+                style="padding:0 16px;height:44px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #2a2a2a;">
+                <span id="terminal-title"
+                    style="font-size:10px;font-family:'JetBrains Mono',monospace;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#3b494c;">PROMPT
+                    ENGINE V<span id="appVersion"></span></span>
+                <span id="terminal-mode-badge"
+                    style="font-size:8px;font-family:'JetBrains Mono',monospace;padding:2px 6px;background:rgba(0,218,243,0.12);border:1px solid var(--border-m);color:var(--text-dim);letter-spacing:0.08em;">CH/ST</span>
+            </div>
+
+            <div style="flex-grow:1;padding:14px;overflow-y:hidden;display:flex;flex-direction:column;gap:0;">
+
+                <!-- CHARACTER / STAGE 뷰 -->
+                <div id="term-chst-view"
+                    style="display:flex;flex-direction:column;gap:12px;height:100%;overflow-y:auto;">
+                    <div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#3b494c;opacity:0.7;">#
+                        AUTOMATICALLY GENERATED OUTPUT</div>
+                    <div id="prompt-vars"
+                        style="display:flex;flex-direction:column;gap:2px;font-size:10px;font-family:'JetBrains Mono',monospace;line-height:1.6;">
+                    </div>
+                    <div id="prompt-text"
+                        style="padding:10px;background:#0a0a0a;border:1px solid #1e2e30;font-size:10px;font-family:'JetBrains Mono',monospace;color:rgba(186,201,204,0.8);font-style:italic;line-height:1.65;white-space:pre-wrap;word-break:break-word;"
+                        class="fade-up"></div>
+                </div>
+
+                <!-- SEQUENCE 뷰 -->
+                <div id="term-seq-view" style="display:none;flex-direction:column;gap:8px;height:100%;">
+                    <div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#849396;">
+                        &gt; 플랫폼: <span id="term-engine" style="color:var(--acc);font-weight:700;">씨댄스 2.0</span>
+                    </div>
+                    <div style="font-size:10px;font-family:'JetBrains Mono',monospace;color:#849396;margin-bottom:4px;">
+                        &gt; 컴파일 중: <span id="term-shots" style="color:var(--yellow);">0</span>개 샷...
+                    </div>
+                    <div id="compiler-output" style="flex-grow:1;width:100%;background:#0a0a0a;border:1px solid var(--border-m);color:var(--acc-hi);font-family:'JetBrains Mono',monospace;font-size:10px;outline:none;padding:10px;line-height:1.5;white-space:pre-wrap;word-break:break-word;overflow-y:auto;"></div>
+                </div>
+            </div>
+
+            <div id="terminal-footer"
+                style="padding:12px;border-top:1px solid #2a2a2a;display:flex;flex-direction:column;gap:8px;">
+                <!-- CH/ST 복사 버튼 -->
+                <button id="btn-copy"
+                    style="width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:#00daf3;color:#00363d;padding:10px;font-family:'Inter',sans-serif;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;border:none;cursor:pointer;">
+                    <span class="material-symbols-outlined"
+                        style="font-size:16px;color:#00363d;">content_copy</span>COPY PROMPT
+                </button>
+                <!-- SEQUENCE 버튼 (기본 숨김) -->
+                <div id="seq-footer-btns" style="display:none;flex-direction:column;gap:6px;">
+                    <button id="btn-copy-seq"
+                        style="width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:#00daf3;color:#00363d;padding:10px;font-family:'Inter',sans-serif;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:0.12em;border:none;cursor:pointer;">
+                        <span class="material-symbols-outlined"
+                            style="font-size:16px;color:#00363d;">content_copy</span>COPY PROMPT
+                    </button>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                        <button id="btn-save" class="btn-secondary"><span class="material-symbols-outlined"
+                                style="font-size:14px;">save</span>저장</button>
+                        <button id="btn-export" class="btn-secondary"><span class="material-symbols-outlined"
+                                style="font-size:14px;">share</span>JSON</button>
+                    </div>
+                </div>
+                <!-- CH/ST 저장/JSON (기본 노출) -->
+                <div id="chst-footer-btns" style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                    <button id="btn-save-chst" class="btn-secondary"><span class="material-symbols-outlined"
+                            style="font-size:14px;">save</span>저장</button>
+                    <button id="btn-export-chst" class="btn-secondary"><span class="material-symbols-outlined"
+                            style="font-size:14px;">share</span>JSON</button>
+                </div>
+            </div>
+        </aside>
+
+    </main>
+
+    <script src="js/core/constants.js"></script>
+    <script src="js/character/character-logic.js"></script>
+    <script src="js/core/theme.js"></script>
+    <script src="js/core/terminal.js"></script>
+    <script src="js/character/character-ui.js"></script>
+    <script src="js/stage/stage-ui.js"></script>
+    <script src="js/stage/stage-logic.js"></script>
+    <script src="js/compiler/character-stage-compiler.js"></script>
+    <script src="js/compiler/image-compiler.js"></script>
+    <script src="js/image/image-ui.js"></script>
+    <script src="js/image/image-logic.js"></script>
+    <script src="js/sequence/sequence-state.js"></script>
+    <script src="js/sequence/sequence-compiler.js"></script>
+    <script src="js/sequence/sequence-autopro.js"></script>
+    <script src="js/sequence/sequence-ui.js"></script>
+    <script src="js/sequence/sequence-logic.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
