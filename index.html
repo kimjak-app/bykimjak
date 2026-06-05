@@ -385,6 +385,7 @@
   .tile{
     position:relative;overflow:hidden;background:var(--dark-2);
     aspect-ratio:4/5;cursor:pointer;
+    isolation:isolate;
   }
   .tile .ph{position:absolute;inset:0}
   .tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
@@ -434,7 +435,7 @@
   .tile.t-half{grid-column:span 6;aspect-ratio:16/11}
   .tile.t-third{grid-column:span 4;aspect-ratio:4/5}
   .tile.t-strip{grid-column:span 12;aspect-ratio:16/4}
-  .tile.t-game-full{grid-column:span 12;aspect-ratio:16/9}
+  .tile.t-game-full{grid-column:span 12;aspect-ratio:16/9;z-index:1}
 
   /* music card */
   .tile.t-music{background:#16120E;color:var(--dark-ink)}
