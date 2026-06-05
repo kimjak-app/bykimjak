@@ -93,6 +93,12 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 .log-nav__label{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
 .log-nav__title{font-family:var(--f-display);font-size:clamp(14px,1.8vw,20px);font-weight:500;letter-spacing:-.01em;color:var(--ink);transition:color .2s}
 .log-nav a:hover .log-nav__title{color:var(--accent)}
+/* ── Lang Tab ── */
+.lang-switch{display:inline-flex;align-items:center;margin:28px 0}
+.lang-sep{font-family:var(--f-mono);font-size:14px;color:var(--ink-3);opacity:.35;user-select:none;line-height:1}
+.lang-tab{font-family:var(--f-display);font-size:14px;font-weight:400;color:var(--ink-3);padding:10px 20px;background:none;border:none;cursor:pointer;letter-spacing:.01em;transition:color .2s}
+.lang-tab:hover{color:var(--ink)}
+.lang-tab--active{font-weight:700;color:var(--ink);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px;cursor:default}
 </style>
 </head>
 <body>
@@ -172,8 +178,17 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     <div class="devlog__body rev">
       <span class="log-num">Dev Log · #003</span>
       <h1>EASTWAR 개발일지 #003</h1>
-      <h2>웹이냐 Godot이냐, 엔진을 고르는 밤</h2>
+      <h2 id="devlog-subtitle">웹이냐 Godot이냐, 엔진을 고르는 밤</h2>
       <span class="log-date">2026년 4월 30일 ~ 5월 1일</span>
+
+      <div class="lang-switch">
+        <button class="lang-tab lang-tab--active" data-lang="ko">🇰🇷 한국어</button>
+        <span class="lang-sep">|</span>
+        <button class="lang-tab" data-lang="en">🇺🇸 English</button>
+      </div>
+
+      <!-- ── KO ── -->
+      <div id="panel-ko">
 
       <p>솔직히 말하면, 나는 "Phaser"가 뭔지 몰랐다.</p>
       <p>채코치가 처음 그 단어를 꺼냈을 때 나는 그냥 끄덕였다. 스타워즈에 나오는 광선총 이름인가 싶었다. 하지만 중요한 건 그게 아니었다. 채코치가 던진 질문의 본질은 이거였다.</p>
@@ -242,7 +257,10 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
       <p>삼국워(EASTWAR)는 그렇게 시작됐다.</p>
 
-      <hr />
+      </div><!-- /panel-ko -->
+
+      <!-- ── EN ── -->
+      <div id="panel-en" style="display:none">
 
       <h3>Web or Godot? — The Night We Chose an Engine</h3>
       <p class="section-date">April 30 – May 1, 2026</p>
@@ -311,6 +329,9 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <blockquote><p>"Find out if it's fun first. Make it beautiful later."</p></blockquote>
 
       <p>That's how SamWar(EASTWAR) began.</p>
+
+      </div><!-- /panel-en -->
+
     </div>
 
     <div class="log-nav">
@@ -340,6 +361,28 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+
+// Lang tab switching
+const tabs = document.querySelectorAll('.lang-tab');
+const panelKo = document.getElementById('panel-ko');
+const panelEn = document.getElementById('panel-en');
+const subtitle = document.getElementById('devlog-subtitle');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const lang = tab.dataset.lang;
+    tabs.forEach(t => t.classList.remove('lang-tab--active'));
+    tab.classList.add('lang-tab--active');
+    if (lang === 'ko') {
+      panelKo.style.display = '';
+      panelEn.style.display = 'none';
+      subtitle.textContent = '웹이냐 Godot이냐, 엔진을 고르는 밤';
+    } else {
+      panelKo.style.display = 'none';
+      panelEn.style.display = '';
+      subtitle.textContent = 'Web or Godot? — The Night We Chose an Engine';
+    }
+  });
+});
 </script>
 </body>
 </html>
