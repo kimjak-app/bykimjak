@@ -126,7 +126,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <a href="../think/"><span class="idx">03</span>THINK</a>
       <div class="drop">
         <a href="../think/ai-coach.html"><span class="sub-idx">03–A</span>AI 코치들과의 수다</a>
-        <a href="../think/morning-word.html"><span class="sub-idx">03–B</span>아침 말씀 with 채코치</a>
+        <a href="../think/architect-notes.html"><span class="sub-idx">03–B</span>아키텍트 노트</a>
         <a href="../think/personal-essay.html"><span class="sub-idx">03–C</span>개인 에세이</a>
       </div>
     </div>
@@ -182,9 +182,9 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
   <article class="devlog" id="log-003">
     <div class="devlog__body rev">
       <span class="log-num">Dev Log · #003</span>
-      <h1>EASTWAR 개발일지 #003</h1>
-      <h2 id="devlog-subtitle">웹이냐 Godot이냐, 엔진을 고르는 밤</h2>
-      <span class="log-date">2026년 4월 30일 ~ 5월 1일</span>
+      <h1 id="devlog-h1">EASTWAR 개발일지 #003</h1>
+      <h2 id="devlog-subtitle">웹이냐 Godot이냐 — 엔진을 고르는 밤</h2>
+      <span class="log-date" id="devlog-date">2026년 4월 30일 ~ 5월 1일</span>
 
       <!-- ── KO ── -->
       <div id="panel-ko">
@@ -261,9 +261,6 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <!-- ── EN ── -->
       <div id="panel-en" style="display:none">
 
-      <h3>Web or Godot? — The Night We Chose an Engine</h3>
-      <p class="section-date">April 30 – May 1, 2026</p>
-
       <p>Honestly, I had no idea what "Phaser" was.</p>
       <p>When my AI coach first mentioned it, I just nodded along. I thought it might be some kind of Star Wars weapon. But that wasn't the point. The real question my AI was asking me was this:</p>
       <p><strong>"Where are you going to build SamWar(EASTWAR)?"</strong></p>
@@ -334,9 +331,9 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-002.html" class="log-nav__prev">
-        <span class="log-nav__label">← 이전 일지</span>
-        <span class="log-nav__title">#002 — 엔진을 선택하다</span>
+      <a href="eastwar-devlog-002.html" class="log-nav__prev" id="nav-prev-link">
+        <span class="log-nav__label" id="nav-label-prev">← 이전 일지</span>
+        <span class="log-nav__title" id="nav-title-prev">#002 — 엔진을 선택하다</span>
       </a>
       <div></div>
     </div>
@@ -365,7 +362,12 @@ document.querySelectorAll('.rev').forEach(el=>io.observe(el));
 const tabs = document.querySelectorAll('.lang-tab');
 const panelKo = document.getElementById('panel-ko');
 const panelEn = document.getElementById('panel-en');
+const h1El = document.getElementById('devlog-h1');
 const subtitle = document.getElementById('devlog-subtitle');
+const dateEl = document.getElementById('devlog-date');
+const navPrevLink = document.getElementById('nav-prev-link');
+const navLabelPrev = document.getElementById('nav-label-prev');
+const navTitlePrev = document.getElementById('nav-title-prev');
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
     const lang = tab.dataset.lang;
@@ -374,11 +376,21 @@ tabs.forEach(tab => {
     if (lang === 'ko') {
       panelKo.style.display = '';
       panelEn.style.display = 'none';
-      subtitle.textContent = '웹이냐 Godot이냐, 엔진을 고르는 밤';
+      h1El.textContent = 'EASTWAR 개발일지 #003';
+      subtitle.textContent = '웹이냐 Godot이냐 — 엔진을 고르는 밤';
+      dateEl.textContent = '2026년 4월 30일 ~ 5월 1일';
+      navPrevLink.href = 'eastwar-devlog-002.html';
+      navLabelPrev.textContent = '← 이전 일지';
+      navTitlePrev.textContent = '#002 — 엔진을 선택하다';
     } else {
       panelKo.style.display = 'none';
       panelEn.style.display = '';
+      h1El.textContent = 'EASTWAR Dev Log #003';
       subtitle.textContent = 'Web or Godot? — The Night We Chose an Engine';
+      dateEl.textContent = 'April 30 ~ May 1, 2026';
+      navPrevLink.href = 'eastwar-devlog-002-en.html';
+      navLabelPrev.textContent = '← Prev Log';
+      navTitlePrev.textContent = '#002 — Choosing the Engine';
     }
   });
 });
