@@ -155,25 +155,25 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
   </div>
 
   <section class="log-index rev">
-    <p class="log-index__hd">전체 개발일지 · All Dev Logs</p>
-    <a href="eastwar.html" class="log-index__item">
+    <p class="log-index__hd" id="log-index-hd">전체 개발일지 · All Dev Logs</p>
+    <a href="eastwar.html" class="log-index__item" id="log-link-001">
       <span class="log-index__num">#001</span>
-      <span class="log-index__t">무모한 도전의 시작
-        <span class="ko">1인 작가, 게임을 만들다</span>
+      <span class="log-index__t"><span id="log-title-001">무모한 도전의 시작</span>
+        <span class="ko" id="log-sub-001">1인 작가, 게임을 만들다</span>
       </span>
       <span class="log-index__date">2026 · 04 · 22</span>
     </a>
-    <a href="eastwar-devlog-002.html" class="log-index__item">
+    <a href="eastwar-devlog-002.html" class="log-index__item" id="log-link-002">
       <span class="log-index__num">#002</span>
-      <span class="log-index__t">엔진을 선택하다
-        <span class="ko">동경이와 함께 시작된 고도 입문기</span>
+      <span class="log-index__t"><span id="log-title-002">엔진을 선택하다</span>
+        <span class="ko" id="log-sub-002">동경이와 함께 시작된 고도 입문기</span>
       </span>
       <span class="log-index__date">2026 · 04 · 23</span>
     </a>
     <a href="eastwar-devlog-003.html" class="log-index__item log-index__item--current">
       <span class="log-index__num">#003</span>
-      <span class="log-index__t">웹이냐 Godot이냐 — 엔진을 고르는 밤
-        <span class="ko">Web or Godot? — The Night We Chose an Engine</span>
+      <span class="log-index__t"><span id="log-title-003">웹이냐 Godot이냐 — 엔진을 고르는 밤</span>
+        <span class="ko" id="log-sub-003">코드 한 줄 없이 게임 구조를 설계한 이야기</span>
       </span>
       <span class="log-index__date">2026 · 04 · 30</span>
     </a>
@@ -368,6 +368,15 @@ const dateEl = document.getElementById('devlog-date');
 const navPrevLink = document.getElementById('nav-prev-link');
 const navLabelPrev = document.getElementById('nav-label-prev');
 const navTitlePrev = document.getElementById('nav-title-prev');
+const logIndexHd = document.getElementById('log-index-hd');
+const logLink001 = document.getElementById('log-link-001');
+const logLink002 = document.getElementById('log-link-002');
+const logTitle001 = document.getElementById('log-title-001');
+const logTitle002 = document.getElementById('log-title-002');
+const logTitle003 = document.getElementById('log-title-003');
+const logSub001 = document.getElementById('log-sub-001');
+const logSub002 = document.getElementById('log-sub-002');
+const logSub003 = document.getElementById('log-sub-003');
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
     const lang = tab.dataset.lang;
@@ -382,6 +391,15 @@ tabs.forEach(tab => {
       navPrevLink.href = 'eastwar-devlog-002.html';
       navLabelPrev.textContent = '← 이전 일지';
       navTitlePrev.textContent = '#002 — 엔진을 선택하다';
+      logIndexHd.textContent = '전체 개발일지 · All Dev Logs';
+      logLink001.href = 'eastwar.html';
+      logLink002.href = 'eastwar-devlog-002.html';
+      logTitle001.textContent = '무모한 도전의 시작';
+      logTitle002.textContent = '엔진을 선택하다';
+      logTitle003.textContent = '웹이냐 Godot이냐 — 엔진을 고르는 밤';
+      logSub001.textContent = '1인 작가, 게임을 만들다';
+      logSub002.textContent = '동경이와 함께 시작된 고도 입문기';
+      logSub003.textContent = '코드 한 줄 없이 게임 구조를 설계한 이야기';
     } else {
       panelKo.style.display = 'none';
       panelEn.style.display = '';
@@ -391,6 +409,15 @@ tabs.forEach(tab => {
       navPrevLink.href = 'eastwar-devlog-002-en.html';
       navLabelPrev.textContent = '← Prev Log';
       navTitlePrev.textContent = '#002 — Choosing the Engine';
+      logIndexHd.textContent = 'All Dev Logs · 전체 개발일지';
+      logLink001.href = 'eastwar-en.html';
+      logLink002.href = 'eastwar-devlog-002-en.html';
+      logTitle001.textContent = 'The Reckless Beginning';
+      logTitle002.textContent = 'Choosing the Engine';
+      logTitle003.textContent = 'Web or Godot? — The Night We Chose an Engine';
+      logSub001.textContent = 'A Solo Writer Makes a Game';
+      logSub002.textContent = 'How a Dog Named Donggyeong Led Me to Godot';
+      logSub003.textContent = 'Designing a Game Structure Without Writing a Single Line of Code';
     }
   });
 });
