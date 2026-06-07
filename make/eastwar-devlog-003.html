@@ -84,8 +84,13 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 .log-index__t{font-family:var(--f-display);font-size:clamp(14px,1.6vw,18px);font-weight:500;letter-spacing:-.01em;line-height:1.2;color:var(--ink)}
 .log-index__t .ko{display:block;font-family:var(--f-kr);font-size:12px;color:var(--ink-3);font-weight:400;margin-top:3px}
 .log-index__date{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);white-space:nowrap}
-.log-index__item--current{pointer-events:none}
+.log-index__item--current{pointer-events:none;background:var(--accent-soft);display:grid}
 .log-index__item--current .log-index__num{color:var(--accent)}
+/* ── Log Pager ── */
+.log-pager{display:flex;gap:8px;padding:12px 0 0;margin-bottom:48px;justify-content:center;border-top:1px solid var(--rule)}
+.log-pager__btn{font-family:var(--f-mono);font-size:11px;width:32px;height:32px;border:1px solid var(--rule);background:none;cursor:pointer;color:var(--ink-3);transition:background .2s,color .2s;border-radius:2px}
+.log-pager__btn:hover{background:var(--bg-2);color:var(--ink)}
+.log-pager__btn--active{background:var(--ink);color:var(--bg);border-color:var(--ink);cursor:default}
 /* ── Log Nav ── */
 .log-nav{display:flex;justify-content:space-between;padding:52px clamp(20px,4vw,48px) 0;margin-top:64px;border-top:1px solid var(--rule)}
 .log-nav__prev,.log-nav__next{display:flex;flex-direction:column;gap:6px}
@@ -154,30 +159,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     <p class="listing-desc">웹이냐 Godot이냐 — 엔진을 고르는 밤. 코드 한 줄 없이 게임 구조를 설계한 이야기.</p>
   </div>
 
-  <section class="log-index rev">
-    <p class="log-index__hd" id="log-index-hd">전체 개발일지 · All Dev Logs</p>
-    <a href="eastwar.html" class="log-index__item" id="log-link-001">
-      <span class="log-index__num">#001</span>
-      <span class="log-index__t"><span id="log-title-001">무모한 도전의 시작</span>
-        <span class="ko" id="log-sub-001">1인 작가, 게임을 만들다</span>
-      </span>
-      <span class="log-index__date">2026 · 04 · 22</span>
-    </a>
-    <a href="eastwar-devlog-002.html" class="log-index__item" id="log-link-002">
-      <span class="log-index__num">#002</span>
-      <span class="log-index__t"><span id="log-title-002">엔진을 선택하다</span>
-        <span class="ko" id="log-sub-002">동경이와 함께 시작된 고도 입문기</span>
-      </span>
-      <span class="log-index__date">2026 · 04 · 23</span>
-    </a>
-    <a href="eastwar-devlog-003.html" class="log-index__item log-index__item--current">
-      <span class="log-index__num">#003</span>
-      <span class="log-index__t"><span id="log-title-003">웹이냐 Godot이냐 — 엔진을 고르는 밤</span>
-        <span class="ko" id="log-sub-003">코드 한 줄 없이 게임 구조를 설계한 이야기</span>
-      </span>
-      <span class="log-index__date">2026 · 04 · 30</span>
-    </a>
-  </section>
+  <section class="log-index rev" id="log-index-sect"></section>
 
   <article class="devlog" id="log-003">
     <div class="devlog__body rev">
@@ -352,6 +334,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
   <div class="bottom"><span>byKimjak © 2026  ／  All rights, all worlds, reserved.</span><span>Built solo · with AI · in Seoul</span><span>v.04 / 2026.05</span></div>
 </footer>
 
+<script src="eastwar-log-index.js"></script>
 <script>
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
@@ -368,15 +351,8 @@ const dateEl = document.getElementById('devlog-date');
 const navPrevLink = document.getElementById('nav-prev-link');
 const navLabelPrev = document.getElementById('nav-label-prev');
 const navTitlePrev = document.getElementById('nav-title-prev');
-const logIndexHd = document.getElementById('log-index-hd');
-const logLink001 = document.getElementById('log-link-001');
-const logLink002 = document.getElementById('log-link-002');
-const logTitle001 = document.getElementById('log-title-001');
-const logTitle002 = document.getElementById('log-title-002');
-const logTitle003 = document.getElementById('log-title-003');
-const logSub001 = document.getElementById('log-sub-001');
-const logSub002 = document.getElementById('log-sub-002');
-const logSub003 = document.getElementById('log-sub-003');
+const logSect = document.getElementById('log-index-sect');
+EASTWAR_LI.render(logSect, 'ko', '003');
 tabs.forEach(tab => {
   tab.addEventListener('click', () => {
     const lang = tab.dataset.lang;
@@ -391,15 +367,7 @@ tabs.forEach(tab => {
       navPrevLink.href = 'eastwar-devlog-002.html';
       navLabelPrev.textContent = '← 이전 일지';
       navTitlePrev.textContent = '#002 — 엔진을 선택하다';
-      logIndexHd.textContent = '전체 개발일지 · All Dev Logs';
-      logLink001.href = 'eastwar.html';
-      logLink002.href = 'eastwar-devlog-002.html';
-      logTitle001.textContent = '무모한 도전의 시작';
-      logTitle002.textContent = '엔진을 선택하다';
-      logTitle003.textContent = '웹이냐 Godot이냐 — 엔진을 고르는 밤';
-      logSub001.textContent = '1인 작가, 게임을 만들다';
-      logSub002.textContent = '동경이와 함께 시작된 고도 입문기';
-      logSub003.textContent = '코드 한 줄 없이 게임 구조를 설계한 이야기';
+      EASTWAR_LI.render(logSect, 'ko', '003');
     } else {
       panelKo.style.display = 'none';
       panelEn.style.display = '';
@@ -409,15 +377,7 @@ tabs.forEach(tab => {
       navPrevLink.href = 'eastwar-devlog-002-en.html';
       navLabelPrev.textContent = '← Prev Log';
       navTitlePrev.textContent = '#002 — Choosing the Engine';
-      logIndexHd.textContent = 'All Dev Logs · 전체 개발일지';
-      logLink001.href = 'eastwar-en.html';
-      logLink002.href = 'eastwar-devlog-002-en.html';
-      logTitle001.textContent = 'The Reckless Beginning';
-      logTitle002.textContent = 'Choosing the Engine';
-      logTitle003.textContent = 'Web or Godot? — The Night We Chose an Engine';
-      logSub001.textContent = 'A Solo Writer Makes a Game';
-      logSub002.textContent = 'How a Dog Named Donggyeong Led Me to Godot';
-      logSub003.textContent = 'Designing a Game Structure Without Writing a Single Line of Code';
+      EASTWAR_LI.render(logSect, 'en', '003');
     }
   });
 });
