@@ -81,6 +81,13 @@
       date: '2026-05-25', dl: '2026 · 05 · 25'
     },
     {
+      url: 'make/eastwar-devlog-005.html',
+      catKey: 'eastwar', cat: 'Architect Notes',
+      title: '전투를 만들다 — 코드보다 먼저 전장이 섰다',
+      sub: '전투 엔진 구현의 첫 번째 기록',
+      date: '2026-05-01', dl: '2026 · 05 · 01'
+    },
+    {
       url: 'make/eastwar-devlog-004.html',
       catKey: 'eastwar', cat: 'Architect Notes',
       title: 'Phaser를 어떻게 쓸 것인가 — 설계의 원칙',
