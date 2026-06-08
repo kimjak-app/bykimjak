@@ -23,6 +23,11 @@
       num: '004', date: '2026 · 05 · 01',
       ko: { href: 'eastwar-devlog-004.html',    title: 'Phaser를 어떻게 쓸 것인가 — 설계의 원칙', sub: '코드 한 줄 없이 게임 구조를 설계한 이야기 2' },
       en: { href: 'eastwar-devlog-004-en.html', title: 'How to Use Phaser — The Principles of Design', sub: 'Defining Roles Before Writing a Single Line of Code' }
+    },
+    {
+      num: '005', date: '2026 · 05 · 01',
+      ko: { href: 'eastwar-devlog-005.html',    title: '전투를 만들다 — 코드보다 먼저 전장이 섰다', sub: '전투 엔진 구현의 첫 번째 기록' },
+      en: { href: 'eastwar-devlog-005-en.html', title: 'Building the Battle — The Battlefield Came First', sub: 'The First Record of Implementing the Battle Engine' }
     }
   ];
 
