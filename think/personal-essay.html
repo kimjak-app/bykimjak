@@ -74,6 +74,10 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 @media(max-width:780px){footer .c1,footer .c2,footer .c3,footer .c4{grid-column:1/span 12}}
 .rev{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}.rev.in{opacity:1;transform:none}
 .rev.d1{transition-delay:.08s}
+.pager{display:flex;gap:8px;padding:32px 0 0;justify-content:center;border-top:1px solid var(--rule)}
+.pager__btn{font-family:var(--f-mono);font-size:11px;width:32px;height:32px;border:1px solid var(--rule);background:none;cursor:pointer;color:var(--ink-3);transition:background .2s,color .2s;border-radius:2px}
+.pager__btn:hover{background:var(--bg-2);color:var(--ink)}
+.pager__btn--active{background:var(--ink);color:var(--bg);border-color:var(--ink);cursor:default}
 </style>
 </head>
 <body>
@@ -157,11 +161,13 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
   <div class="bottom"><span>byKimjak © 2026  ／  All rights, all worlds, reserved.</span><span>Built solo · with AI · in Seoul</span><span>v.04 / 2026.05</span></div>
 </footer>
 
+<script src="../assets/js/paginate.js"></script>
 <script>
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+PAGINATE('.post-list', 'a.post-row', 5);
 </script>
 </body>
 </html>
