@@ -4,6 +4,13 @@
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
     {
+      url: 'posts/think/ai-coach-005.html',
+      catKey: 'ai-coach', cat: 'AI Conversations',
+      title: '나만의 생산성 유지법',
+      sub: '빈스윙과 간헐적 단식, 그리고 산책과 사진',
+      date: '2026-06-08', dl: '2026 · 06 · 08'
+    },
+    {
       url: 'posts/think/morning-word-003.html',
       catKey: 'morning-word', cat: 'Morning Word',
       title: '5월은 만들었고, 6월은 쌓는다',
@@ -30,13 +37,6 @@
       title: '대본을 안 썼다와 일을 안 했다는 다르다',
       sub: '6월은 만든 것을 세상과 연결하는 달',
       date: '2026-06-05', dl: '2026 · 06 · 05'
-    },
-    {
-      url: 'posts/think/ai-coach-005.html',
-      catKey: 'ai-coach', cat: 'AI Conversations',
-      title: '나만의 생산성 유지법',
-      sub: '빈스윙과 간헐적 단식, 그리고 산책과 사진',
-      date: '2026-06-08', dl: '2026 · 06 · 08'
     },
     {
       url: 'posts/think/morning-word-001.html',
