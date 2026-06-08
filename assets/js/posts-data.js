@@ -4,7 +4,7 @@
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
     {
-      url: 'posts/think/ai-coach-005.html',
+      url: 'posts/think/ai-coach-007.html',
       catKey: 'ai-coach', cat: 'AI Conversations',
       title: '나만의 생산성 유지법',
       sub: '빈스윙과 간헐적 단식, 그리고 산책과 사진',
