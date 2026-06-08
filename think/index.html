@@ -194,7 +194,7 @@ document.querySelectorAll('.rev').forEach(el=>io.observe(el));
   var cont=document.getElementById('latest-posts');
   THINK_POSTS.slice(0,5).forEach(function(p,i){
     var a=document.createElement('a');
-    a.href=p.url;
+    a.href='../'+p.url;
     a.className='post-row rev'+(i>0?' d'+i:'');
     a.innerHTML='<div class="p-num">0'+(i+1)+'</div>'+
       '<div class="p-cat">'+p.cat+'</div>'+

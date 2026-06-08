@@ -973,68 +973,7 @@
     <a href="#" class="mono" style="color:var(--ink-3)">View all entries ↗</a>
   </div>
 
-  <a href="posts/think/think-001.html" class="notes__row rev">
-    <div class="notes__num">N° 015</div>
-    <div class="notes__cat">AI Conversations</div>
-    <div class="notes__t">손가락 딸깍으로 AI가 다 해준다는 착각에 대하여
-      <span class="ko">AI 시대 인간의 역할</span>
-    </div>
-    <div class="notes__date">2026 · 05 · 25</div>
-  </a>
-
-  <a href="make/eastwar.html" class="notes__row rev">
-    <div class="notes__num">N° 014</div>
-    <div class="notes__cat">Architect Notes</div>
-    <div class="notes__t">EASTWAR 개발일지 #001 — 무모한 도전의 시작
-      <span class="ko">The Reckless Beginning — A Solo Writer Makes a Game</span>
-    </div>
-    <div class="notes__date">2026 · 05 · 18</div>
-  </a>
-
-  <a href="make/eastwar-devlog-002.html" class="notes__row rev">
-    <div class="notes__num">N° 013</div>
-    <div class="notes__cat">Architect Notes</div>
-    <div class="notes__t">EASTWAR 개발일지 #002 — 엔진을 선택하다
-      <span class="ko">Choosing the Engine — How a Dog Named Donggyeong Led Me to Godot</span>
-    </div>
-    <div class="notes__date">2026 · 04 · 23</div>
-  </a>
-
-  <a href="make/grandslam-devlog-001.html" class="notes__row rev">
-    <div class="notes__num">N° 012</div>
-    <div class="notes__cat">Grand Slam</div>
-    <div class="notes__t">그랜드슬램 개발일지 #001 — 바이브 코딩과의 첫 만남
-      <span class="ko">First Encounter with Vibe Coding — How a Weather App Started Everything</span>
-    </div>
-    <div class="notes__date">2026 · 01</div>
-  </a>
-
-  <a href="posts/think/ai-coach-001.html" class="notes__row rev" style="border-bottom:1px solid var(--rule)">
-    <div class="notes__num">N° 011</div>
-    <div class="notes__cat">AI Conversations</div>
-    <div class="notes__t">AI 코치들과의 수다 — 프롤로그
-      <span class="ko">채코치, 잼코치, 클코치와 함께 생각하는 법의 기록</span>
-    </div>
-    <div class="notes__date">2026 · 06 · 04</div>
-  </a>
-
-  <a href="think/morning-word.html" class="notes__row rev" style="border-bottom:1px solid var(--rule)">
-    <div class="notes__num">N° 010-A</div>
-    <div class="notes__cat">Morning Word</div>
-    <div class="notes__t">아침 말씀 with 채코치 — 2026.06.04
-      <span class="ko">어제는 쉬는 날. 오늘은 다시 쌓는 날.</span>
-    </div>
-    <div class="notes__date">2026 · 06 · 04</div>
-  </a>
-
-  <a href="make/takezero.html" class="notes__row notes__row--dark rev">
-    <div class="notes__num">N° 010</div>
-    <div class="notes__cat">Make · 02–C</div>
-    <div class="notes__t">TakeZero — AI 캐릭터 프롬프트 엔진
-      <span class="ko">선택만으로 디테일한 나만의 캐릭터 프롬프트를 완성하는 AI 엔진. 지금 사용 가능.</span>
-    </div>
-    <div class="notes__date">2026 · 05</div>
-  </a>
+  <div id="studio-posts"></div>
 </section>
 
 <!-- ─────────── ABOUT ─────────── -->
@@ -1146,6 +1085,7 @@
   </div>
 </footer>
 
+<script src="assets/js/posts-data.js"></script>
 <script>
   // Nav scrolled state
   const nav = document.getElementById('nav');
@@ -1166,6 +1106,32 @@
     });
   }, {threshold:0.12, rootMargin:'0px 0px -40px 0px'});
   document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+
+  // FROM THE STUDIO — render category-latest posts
+  (function(){
+    var cont = document.getElementById('studio-posts');
+    if (!cont) return;
+    STUDIO_CATS.forEach(function(cat, i) {
+      var post = null;
+      for (var j = 0; j < ALL_POSTS.length; j++) {
+        if (ALL_POSTS[j].catKey === cat.key) { post = ALL_POSTS[j]; break; }
+      }
+      if (!post) return;
+      var nextCat = STUDIO_CATS[i + 1];
+      var needsBorderBottom = !cat.dark && nextCat && nextCat.dark;
+      var a = document.createElement('a');
+      a.href = post.url;
+      a.className = 'notes__row rev' + (cat.dark ? ' notes__row--dark' : '');
+      if (needsBorderBottom) a.style.borderBottom = '1px solid var(--rule)';
+      var num = 'N° 0' + (i + 1);
+      a.innerHTML = '<div class="notes__num">' + num + '</div>' +
+        '<div class="notes__cat">' + cat.label + '</div>' +
+        '<div class="notes__t">' + post.title + '<span class="ko">' + post.sub + '</span></div>' +
+        '<div class="notes__date">' + post.dl + '</div>';
+      cont.appendChild(a);
+      io.observe(a);
+    });
+  })();
 
   // Hero: video → logo fade transition
   const heroVideo = document.getElementById('hero-video');
