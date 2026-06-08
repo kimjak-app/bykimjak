@@ -87,7 +87,7 @@ footer .c1{grid-column:1/span 5}footer .c2{grid-column:6/span 2}footer .c3{grid-
 footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-family:var(--f-mono);font-size:11px;color:var(--dark-ink-2);text-transform:uppercase;letter-spacing:.06em}
 @media(max-width:780px){footer .c1,footer .c2,footer .c3,footer .c4{grid-column:1/span 12}}
 .rev{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}.rev.in{opacity:1;transform:none}
-.rev.d1{transition-delay:.08s}.rev.d2{transition-delay:.16s}
+.rev.d1{transition-delay:.08s}.rev.d2{transition-delay:.16s}.rev.d3{transition-delay:.24s}.rev.d4{transition-delay:.32s}
 </style>
 </head>
 <body>
@@ -169,15 +169,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="label">최신 글 · Latest</span>
       <a href="personal-essay.html">전체 보기 ↗</a>
     </div>
-    <a href="../posts/think/think-001.html" class="post-row rev">
-      <div class="p-num">N° 001</div>
-      <div class="p-cat">개인에세이</div>
-      <div class="p-title">
-        손가락 딸깍으로 AI가 다 해준다는 착각에 대하여
-        <span class="ko">AI 시대 인간의 역할</span>
-      </div>
-      <div class="p-date">2026 · 05 · 25</div>
-    </a>
+    <div id="latest-posts"></div>
   </div>
 </main>
 
@@ -192,11 +184,26 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
   <div class="bottom"><span>byKimjak © 2026  ／  All rights, all worlds, reserved.</span><span>Built solo · with AI · in Seoul</span><span>v.04 / 2026.05</span></div>
 </footer>
 
+<script src="../assets/js/posts-data.js"></script>
 <script>
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+(function(){
+  var cont=document.getElementById('latest-posts');
+  THINK_POSTS.slice(0,5).forEach(function(p,i){
+    var a=document.createElement('a');
+    a.href=p.url;
+    a.className='post-row rev'+(i>0?' d'+i:'');
+    a.innerHTML='<div class="p-num">0'+(i+1)+'</div>'+
+      '<div class="p-cat">'+p.cat+'</div>'+
+      '<div class="p-title">'+p.title+'<span class="ko">'+p.sub+'</span></div>'+
+      '<div class="p-date">'+p.dl+'</div>';
+    cont.appendChild(a);
+    io.observe(a);
+  });
+})();
 </script>
 </body>
 </html>
