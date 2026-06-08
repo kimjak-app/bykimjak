@@ -34,9 +34,9 @@
     {
       url: 'posts/think/ai-coach-005.html',
       catKey: 'ai-coach', cat: 'AI Conversations',
-      title: '"삼촌 그러다 죽어!"',
-      sub: '3개월 12kg 다이어트 성공기',
-      date: '2026-06-04', dl: '2026 · 06 · 04'
+      title: '나만의 생산성 유지법',
+      sub: '빈스윙과 간헐적 단식, 그리고 산책과 사진',
+      date: '2026-06-08', dl: '2026 · 06 · 08'
     },
     {
       url: 'posts/think/morning-word-001.html',
