@@ -28,6 +28,11 @@
       num: '005', date: '2026 · 05 · 01',
       ko: { href: 'eastwar-devlog-005.html',    title: '전투를 만들다 — 코드보다 먼저 전장이 섰다', sub: '전투 엔진 구현의 첫 번째 기록' },
       en: { href: 'eastwar-devlog-005-en.html', title: 'Building the Battle — The Battlefield Came First', sub: 'The First Record of Implementing the Battle Engine' }
+    },
+    {
+      num: '006', date: '2026 · 05 · 02',
+      ko: { href: 'eastwar-devlog-006.html',    title: '전투가 살아났다 — UI를 다듬고, 영웅이 뛰쳐나왔다', sub: '전투 UI 정돈과 영웅 고유특기 컷인 완성' },
+      en: { href: 'eastwar-devlog-006-en.html', title: 'The Battle Came Alive — UI Polish and Hero Cut-ins', sub: 'Polishing the Battle UI and Completing the Hero Cut-in System' }
     }
   ];
 
