@@ -4,6 +4,13 @@
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
     {
+      url: 'posts/think/ai-coach-008.html',
+      catKey: 'ai-coach', cat: 'AI Conversations',
+      title: '무(無)는 존재하지 않는다',
+      sub: '우주는 단 1mm의 틈도 없이 유(有)로 가득 차 있다',
+      date: '2026-06-10', dl: '2026 · 06 · 10'
+    },
+    {
       url: 'posts/think/ai-coach-007.html',
       catKey: 'ai-coach', cat: 'AI Conversations',
       title: '나만의 생산성 유지법',
