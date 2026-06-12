@@ -11,6 +11,13 @@
       date: '2026-05-02', dl: '2026 · 05 · 02'
     },
     {
+      url: 'posts/think/morning-word-004.html',
+      catKey: 'morning-word', cat: 'Morning Word',
+      title: '열심히 부지런히, 자만하지 않고 묵묵히',
+      sub: '사람이 마음으로 자기의 길을 계획할지라도',
+      date: '2026-06-12', dl: '2026 · 06 · 12'
+    },
+    {
       url: 'posts/think/ai-coach-008.html',
       catKey: 'ai-coach', cat: 'AI Conversations',
       title: '무(無)는 존재하지 않는다',
