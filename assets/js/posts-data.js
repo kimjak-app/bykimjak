@@ -4,6 +4,13 @@
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
     {
+      url: 'make/eastwar-devlog-009.html',
+      catKey: 'eastwar', cat: 'Architect Notes',
+      title: '왕이 된다는 것 — 재상, 성주, 자원, 그리고 전쟁을 준비하는 나라',
+      sub: '플레이어는 왕이다. 재상·성주 배치, 자원 설계, 병종 상성',
+      date: '2026-05-08', dl: '2026 · 05 · 08'
+    },
+    {
       url: 'make/eastwar-devlog-008.html',
       catKey: 'eastwar', cat: 'Architect Notes',
       title: '전장이 살아있다 — 고구려가 일어서고, 전투가 숨을 쉬다',

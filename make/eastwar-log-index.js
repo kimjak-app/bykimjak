@@ -43,6 +43,11 @@
       num: '008', date: '2026.05.07',
       ko: { href: 'eastwar-devlog-008.html',    title: '전장이 살아있다 — 고구려가 일어서고, 전투가 숨을 쉬다', sub: '고구려 세력 추가, AI 개선, 영웅 포섭 시스템' },
       en: { href: 'eastwar-devlog-008-en.html', title: 'The Battlefield Lives — Goguryeo Rises, and the Battle Breathes', sub: 'Goguryeo faction, AI fix, hero recruitment system' }
+    },
+    {
+      num: '009', date: '2026.05.08',
+      ko: { href: 'eastwar-devlog-009.html',    title: '왕이 된다는 것 — 재상, 성주, 자원, 그리고 전쟁을 준비하는 나라', sub: '플레이어는 왕이다. 재상·성주 배치, 자원 설계, 병종 상성' },
+      en: { href: 'eastwar-devlog-009-en.html', title: 'What It Means to Be King — Chancellors, Governors, Resources, and a Nation That Prepares for War', sub: 'The player is the King. Chancellor·Governor placement, resource design, unit counters' }
     }
   ];
 
