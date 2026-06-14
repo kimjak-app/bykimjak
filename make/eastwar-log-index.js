@@ -38,6 +38,11 @@
       num: '007', date: '2026.05.03',
       ko: { href: 'eastwar-devlog-007.html',    title: '전투가 깊어졌다 — 이펙트, 템포, 그리고 새로운 영웅들', sub: '컷인 시스템 확장, 수동전투, 중국 세력 추가' },
       en: { href: 'eastwar-devlog-007-en.html', title: 'The Battle Grew Deeper — Effects, Tempo, and New Heroes', sub: 'Cut-in expansion, manual combat, and the Han faction' }
+    },
+    {
+      num: '008', date: '2026.05.07',
+      ko: { href: 'eastwar-devlog-008.html',    title: '전장이 살아있다 — 고구려가 일어서고, 전투가 숨을 쉬다', sub: '고구려 세력 추가, AI 개선, 영웅 포섭 시스템' },
+      en: { href: 'eastwar-devlog-008-en.html', title: 'The Battlefield Lives — Goguryeo Rises, and the Battle Breathes', sub: 'Goguryeo faction, AI fix, hero recruitment system' }
     }
   ];
 
