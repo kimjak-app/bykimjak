@@ -33,6 +33,11 @@
       num: '006', date: '2026 · 05 · 02',
       ko: { href: 'eastwar-devlog-006.html',    title: '전투가 살아났다 — UI를 다듬고, 영웅이 뛰쳐나왔다', sub: '전투 UI 정돈과 영웅 고유특기 컷인 완성' },
       en: { href: 'eastwar-devlog-006-en.html', title: 'The Battle Came Alive — UI Polish and Hero Cut-ins', sub: 'Polishing the Battle UI and Completing the Hero Cut-in System' }
+    },
+    {
+      num: '007', date: '2026.05.03',
+      ko: { href: 'eastwar-devlog-007.html',    title: '전투가 깊어졌다 — 이펙트, 템포, 그리고 새로운 영웅들', sub: '컷인 시스템 확장, 수동전투, 중국 세력 추가' },
+      en: { href: 'eastwar-devlog-007-en.html', title: 'The Battle Grew Deeper — Effects, Tempo, and New Heroes', sub: 'Cut-in expansion, manual combat, and the Han faction' }
     }
   ];
 

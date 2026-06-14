@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>EASTWAR 개발일지 #007 — MAKE · byKimjak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<style>
+:root{--bg:#FFFFFF;--bg-2:#F2F2F2;--ink:#0A0A0A;--ink-2:#2A2A2A;--ink-3:#6B6B6B;--rule:#0A0A0A1A;--dark:#0D0B09;--dark-ink:#FAF7F2;--dark-ink-2:#9C948A;--dark-rule:#FAF7F21A;--accent:oklch(68% 0.08 70);--accent-soft:oklch(68% 0.08 70 / 0.12);--f-display:"Space Grotesk","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-body:"Inter","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-mono:"JetBrains Mono",ui-monospace,monospace;--f-kr:"Pretendard Variable","Inter",ui-sans-serif,system-ui,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:var(--f-body);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.nav{position:fixed;inset:0 0 auto 0;z-index:100;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:18px clamp(20px,4vw,48px);transition:background .35s ease,backdrop-filter .35s ease,border-color .35s ease;border-bottom:1px solid transparent}
+.nav.scrolled{background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:saturate(1.2) blur(14px);-webkit-backdrop-filter:saturate(1.2) blur(14px);border-bottom-color:var(--rule)}
+.nav__logo{font-family:var(--f-display);font-weight:600;font-size:18px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.nav__logo .dot{width:8px;height:8px;border-radius:999px;background:var(--ink);display:inline-block;transform:translateY(-1px)}
+.nav__menu{display:flex;gap:36px;justify-content:center;align-items:center}
+.nav__menu > a,.nav__menu .has-drop > a{font-family:var(--f-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;position:relative;padding:6px 2px;color:var(--ink)}
+.nav__menu > a::after,.nav__menu .has-drop > a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.6,0,.2,1)}
+.nav__menu > a:hover::after,.nav__menu .has-drop:hover > a::after{transform:scaleX(1)}
+.nav__menu .idx{font-family:var(--f-mono);font-size:9px;vertical-align:super;margin-right:4px;color:var(--ink-3)}
+.nav__cta{justify-self:end;display:flex;align-items:center;gap:14px}
+.nav__cta .status{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+.nav__cta .pulse{width:6px;height:6px;border-radius:999px;background:#3CB371;animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px transparent}}
+.nav__cta a.contact{border:1px solid var(--ink);padding:10px 16px;border-radius:999px;font-family:var(--f-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .25s,color .25s}
+.nav__cta a.contact:hover{background:var(--ink);color:var(--bg)}
+.nav__menu .has-drop{position:relative}
+.nav__menu .drop{position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%) translateY(-10px);min-width:210px;background:var(--bg);border:1px solid var(--rule);padding:4px;opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s cubic-bezier(.2,.8,.2,1);z-index:200}
+.nav__menu .has-drop:hover .drop{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.nav__menu .drop a{display:block;padding:10px 14px;border-radius:2px;font-family:var(--f-kr);font-size:13px;font-weight:400;letter-spacing:-.01em;text-transform:none;color:var(--ink-2);transition:background .15s,color .15s}
+.nav__menu .drop a::after{content:none!important}
+.nav__menu .drop a:hover{background:var(--bg-2);color:var(--ink)}
+.sub-idx{display:block;font-family:var(--f-mono);font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin-bottom:2px}
+@media(max-width:780px){.nav{grid-template-columns:1fr auto;padding:14px 20px}.nav__menu{display:none}.nav__cta .status{display:none}}
+.listing-head{padding:120px clamp(20px,4vw,48px) 64px;border-bottom:1px solid var(--rule)}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:28px}
+.breadcrumb a{transition:color .2s}.breadcrumb a:hover{color:var(--ink)}
+.breadcrumb .sep{opacity:.4}
+.listing-head h1{font-family:var(--f-display);font-weight:500;font-size:clamp(44px,9vw,120px);letter-spacing:-.04em;line-height:.92;margin:0 0 8px}
+.listing-head .sub-ko{font-family:var(--f-kr);font-size:clamp(16px,2vw,22px);color:var(--ink-3);margin:0 0 20px;font-weight:400}
+.listing-head .listing-desc{font-family:var(--f-kr);font-size:15px;line-height:1.65;color:var(--ink-3);max-width:48ch}
+.lang-switch{display:inline-flex;align-items:center;margin-bottom:28px}
+.lang-current{font-family:var(--f-display);font-size:14px;font-weight:700;color:var(--ink);padding:10px 20px;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px;cursor:default;letter-spacing:.01em}
+.lang-sep{font-family:var(--f-mono);font-size:14px;color:var(--ink-3);opacity:.35;user-select:none;line-height:1}
+.lang-other{font-family:var(--f-display);font-size:14px;font-weight:400;color:var(--ink-3);padding:10px 20px;transition:color .2s;letter-spacing:.01em}
+.lang-other:hover{color:var(--ink)}
+footer{background:var(--dark);color:var(--dark-ink);padding:90px clamp(20px,4vw,48px) 36px;overflow:hidden}
+footer .big{font-family:var(--f-display);font-weight:400;font-size:clamp(44px,7vw,108px);letter-spacing:-.04em;line-height:.95;color:var(--dark-ink);margin:0 0 48px;text-wrap:balance}
+footer .big em{font-style:italic;font-family:"Times New Roman",serif;color:#A99A85}
+footer .grid-ft{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding-top:36px;border-top:1px solid var(--dark-rule)}
+footer .col{display:flex;flex-direction:column;gap:10px}
+footer .col h6{margin:0 0 6px;font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--dark-ink-2);font-weight:400}
+footer .col a{font-family:var(--f-display);font-size:15px;color:var(--dark-ink);transition:color .3s;display:inline-flex;align-items:center;gap:6px}
+footer .col a:hover{color:#A99A85}
+footer .col a .ext{font-family:var(--f-mono);font-size:9px;opacity:.5}
+footer .c1{grid-column:1/span 5}footer .c2{grid-column:6/span 2}footer .c3{grid-column:8/span 2}footer .c4{grid-column:10/span 3}
+footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-family:var(--f-mono);font-size:11px;color:var(--dark-ink-2);text-transform:uppercase;letter-spacing:.06em}
+@media(max-width:780px){footer .c1,footer .c2,footer .c3,footer .c4{grid-column:1/span 12}}
+.rev{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}.rev.in{opacity:1;transform:none}
+
+/* ── Dev Log Article ── */
+.devlog{padding:0 0 140px}
+.devlog__body{padding:64px clamp(20px,4vw,48px) 0;max-width:760px}
+.devlog__body .log-num{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:12px}
+.devlog__body h1{font-family:var(--f-display);font-weight:500;font-size:clamp(26px,4vw,48px);letter-spacing:-.03em;line-height:1.1;margin:0 0 10px}
+.devlog__body h2{font-family:var(--f-kr);font-size:clamp(15px,1.8vw,20px);font-weight:400;color:var(--ink-3);margin:0;line-height:1.5}
+.devlog__body .log-date{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);display:block;margin:24px 0 40px;padding-top:20px;border-top:1px solid var(--rule)}
+.devlog__body h3{font-family:var(--f-display);font-weight:500;font-size:clamp(16px,2vw,22px);letter-spacing:-.02em;margin:56px 0 10px;padding-top:48px;border-top:1px solid var(--rule)}
+.devlog__body .section-date{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 28px}
+.devlog__body p{font-family:var(--f-kr);font-size:16px;line-height:1.95;color:var(--ink-2);margin:0 0 22px}
+.devlog__body strong{font-weight:700;color:var(--ink)}
+.devlog__body em{font-style:italic;color:var(--ink)}
+.devlog__body hr{border:none;border-top:1px solid var(--rule);margin:52px 0}
+.devlog__body ul{padding-left:20px;margin:0 0 24px}
+.devlog__body li{font-family:var(--f-kr);font-size:16px;line-height:1.85;color:var(--ink-2);margin-bottom:10px}
+.devlog__body blockquote{margin:28px 0;padding:20px 24px;border-left:3px solid var(--ink);background:var(--bg-2);font-family:var(--f-kr);font-size:16px;line-height:1.8;color:var(--ink)}
+.devlog__body blockquote p{margin:0;color:var(--ink)}
+.devlog__body pre{background:var(--bg-2);border:1px solid var(--rule);padding:20px 24px;margin:0 0 28px;overflow-x:auto;border-radius:2px}
+.devlog__body code{font-family:var(--f-mono);font-size:13px;line-height:1.7;color:var(--ink-2)}
+/* ── Log Index ── */
+.log-index{padding:0 clamp(20px,4vw,48px)}
+.log-index__hd{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0;padding:32px 0 0}
+.log-index__item{display:grid;grid-template-columns:52px 1fr auto;gap:20px;align-items:baseline;padding:20px 0;border-top:1px solid var(--rule);transition:background .25s;text-decoration:none}
+.log-index__item:last-child{border-bottom:1px solid var(--rule);margin-bottom:48px}
+.log-index__item:hover{background:linear-gradient(90deg,transparent,var(--accent-soft) 20%,var(--accent-soft) 80%,transparent)}
+.log-index__num{font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
+.log-index__t{font-family:var(--f-display);font-size:clamp(14px,1.6vw,18px);font-weight:500;letter-spacing:-.01em;line-height:1.2;color:var(--ink)}
+.log-index__t .ko{display:block;font-family:var(--f-kr);font-size:12px;color:var(--ink-3);font-weight:400;margin-top:3px}
+.log-index__date{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);white-space:nowrap}
+.log-index__item--current{pointer-events:none;background:var(--accent-soft);display:grid}
+.log-index__item--current .log-index__num{color:var(--accent)}
+/* ── Log Pager ── */
+.log-pager{display:flex;gap:8px;padding:12px 0 0;margin-bottom:48px;justify-content:center;border-top:1px solid var(--rule)}
+.log-pager__btn{font-family:var(--f-mono);font-size:11px;width:32px;height:32px;border:1px solid var(--rule);background:none;cursor:pointer;color:var(--ink-3);transition:background .2s,color .2s;border-radius:2px}
+.log-pager__btn:hover{background:var(--bg-2);color:var(--ink)}
+.log-pager__btn--active{background:var(--ink);color:var(--bg);border-color:var(--ink);cursor:default}
+/* ── Log Nav ── */
+.log-nav{display:flex;justify-content:space-between;padding:52px clamp(20px,4vw,48px) 0;margin-top:64px;border-top:1px solid var(--rule)}
+.log-nav__prev,.log-nav__next{display:flex;flex-direction:column;gap:6px}
+.log-nav__next{align-items:flex-end;text-align:right}
+.log-nav__label{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.log-nav__title{font-family:var(--f-display);font-size:clamp(14px,1.8vw,20px);font-weight:500;letter-spacing:-.01em;color:var(--ink);transition:color .2s}
+.log-nav a:hover .log-nav__title{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav__logo"><span class="dot" aria-hidden="true"></span>byKimjak</a>
+  <div class="nav__menu" role="navigation">
+    <div class="has-drop">
+      <a href="../watch/"><span class="idx">01</span>WATCH</a>
+      <div class="drop">
+        <a href="../watch/ai-film.html"><span class="sub-idx">01–A</span>AI 영상 · 티저</a>
+        <a href="../watch/ost.html"><span class="sub-idx">01–B</span>OST · 음악</a>
+        <a href="../watch/still.html"><span class="sub-idx">01–C</span>스틸 이미지</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../make/"><span class="idx">02</span>MAKE</a>
+      <div class="drop">
+        <a href="../make/eastwar.html"><span class="sub-idx">02–A</span>EASTWAR 개발일지</a>
+        <a href="../make/grandslam.html"><span class="sub-idx">02–B</span>GrandSlam 개발일지</a>
+        <a href="../make/takezero.html"><span class="sub-idx">02–C</span>TakeZero · 프롬프트 엔진</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../think/"><span class="idx">03</span>THINK</a>
+      <div class="drop">
+        <a href="../think/ai-coach.html"><span class="sub-idx">03–A</span>AI 코치들과의 수다</a>
+        <a href="../think/morning-word.html"><span class="sub-idx">03–B</span>아침 말씀 with 채코치</a>
+        <a href="../think/personal-essay.html"><span class="sub-idx">03–C</span>개인 에세이</a>
+      </div>
+    </div>
+    <a href="../index.html#about"><span class="idx">04</span>ABOUT</a>
+  </div>
+  <div class="nav__cta">
+    <span class="status"><span class="pulse"></span>Available · Seoul</span>
+    <a href="../index.html#contact" class="contact">Contact ↗</a>
+  </div>
+</nav>
+
+<main>
+  <div class="listing-head">
+    <div class="breadcrumb rev">
+      <a href="../index.html">bykimjak</a>
+      <span class="sep">›</span>
+      <a href="eastwar.html">EASTWAR</a>
+      <span class="sep">›</span>
+      <span>Dev Log #007</span>
+    </div>
+    <div class="lang-switch rev">
+      <span class="lang-current">🇰🇷 한국어</span>
+      <span class="lang-sep">|</span>
+      <a href="eastwar-devlog-007-en.html" class="lang-other">🇺🇸 English</a>
+    </div>
+    <h1 class="rev">EASTWAR</h1>
+    <p class="sub-ko rev">이스트워 개발일지</p>
+    <p class="listing-desc rev">전략 가상역사 시뮬레이션 — 1인 개발 기록</p>
+  </div>
+
+  <section class="log-index rev" id="log-index-sect"></section>
+
+  <article class="devlog" id="log-007">
+    <div class="devlog__body rev">
+      <span class="log-num">Dev Log · #007</span>
+      <h1>전투가 깊어졌다</h1>
+      <h2>이펙트, 템포, 그리고 새로운 영웅들</h2>
+      <span class="log-date">2026년 5월 3일 — 5월 6일</span>
+
+      <hr />
+
+      <h3>전투의 리듬을 찾아서</h3>
+      <span class="section-date">v0.2-7o — 2026.05.03</span>
+
+      <p>게임을 만들다 보면 어느 순간 이런 질문이 생긴다. "이 전투, 왜 이렇게 심심하지?" 유닛이 움직이고, 숫자가 깎이고, 전투가 끝난다. 기능은 다 있는데 뭔가 허전하다. 그 허전함의 정체는 바로 <strong>리듬</strong>이었다.</p>
+
+      <p>v0.2-7o에서는 전투의 템포감을 본격적으로 손봤다. 반격 딜레이, 적 행동 간격, 자동전투 속도 — 이 세 가지 숫자를 조금씩 조정했을 뿐인데, 전투가 훨씬 살아있는 느낌이 됐다. 코드 한 줄 바꾼 게 아니라 타이밍 세 개를 조율한 것인데, 게임의 분위기가 확 달라진다는 걸 다시 한번 실감했다.</p>
+
+      <blockquote>전투를 재미있게 만드는 건 공식이 아니라 리듬이다.</blockquote>
+
+      <hr />
+
+      <h3>컷인이 번쩍이다 — 그리고 처음엔 실패했다</h3>
+      <span class="section-date">v0.2-8 ~ v0.2-8e — 2026.05.03</span>
+
+      <p>006 일지에서 이순신의 고유특기 컷인 이미지가 전투판에 등장하는 걸 구현했다고 했다. 근데 솔직히 말하면, 그때 완성된 건 아니었다. 이미지가 전투판 밖으로 삐져나오고, 크기는 화면을 다 뒤덮고, CSS 배경 효과는 엉뚱한 데까지 번졌다.</p>
+
+      <p>v0.2-8에서 처음 시도했을 때는 그냥 실패였다. 이미지가 브라우저 전체를 덮어버렸다. v0.2-8a에서 먼저 컷인이 갇혀야 할 영역, 즉 전투판 내부를 정확히 잡는 것부터 시작했다. 어디에 표시할지도 모르는데 크기부터 조정하는 건 순서가 틀린 거니까.</p>
+
+      <p>영역을 잡고 나서 v0.2-8b에서 이미지 크기를 절반으로 줄였고, v0.2-8c/d에서 CSS 사선 배경 효과까지 전투판 안으로 가뒀다. 마침내 이순신의 컷인이 전투판 안에서 제대로 번쩍이기 시작했다.</p>
+
+      <p>그리고 v0.2-8e — 이순신 혼자만 쓰던 컷인 시스템을 노부나가, 겐신, 정도전에게까지 확대했다. 이제 적 유닛도 행동할 때마다 컷인이 터진다. 유닛이 움직이고 → 컷인이 번쩍이고 → 효과가 발동하고 → 다음 유닛으로 넘어간다. 이 흐름 덕분에 전투 템포도 자연스럽게 정리됐다.</p>
+
+      <figure style="margin:32px 0;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px">
+        <div>
+          <img src="../assets/eastwar/portrait-sunsin-01.png" alt="이순신 초상" style="width:100%;border-radius:2px" />
+          <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Yi Sun-sin · Joseon</figcaption>
+        </div>
+        <div>
+          <img src="../assets/eastwar/portrait-kenshin-01.png" alt="우에스기 겐신 초상" style="width:100%;border-radius:2px" />
+          <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Kenshin Uesugi · Japan</figcaption>
+        </div>
+        <div>
+          <img src="../assets/eastwar/portrait-jeong-01.png" alt="정도전 초상" style="width:100%;border-radius:2px" />
+          <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Jeong Do-jeon · Joseon</figcaption>
+        </div>
+        <div>
+          <img src="../assets/eastwar/portrait-nobunaga-01.png" alt="오다 노부나가 초상" style="width:100%;border-radius:2px" />
+          <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Nobunaga Oda · Japan</figcaption>
+        </div>
+      </figure>
+
+      <hr />
+
+      <h3>전장을 넓혀라 — 14×8 전장과 부대 정비</h3>
+      <span class="section-date">v0.2-9a ~ v0.2-9c — 2026.05.03</span>
+
+      <p>컷인 시스템이 자리를 잡자, 이번엔 전장 자체를 손볼 차례였다. v0.2-9a에서 전장 크기를 14×8로 확장했다. 유닛들이 더 넓은 공간에서 움직이니까, 전략적인 배치가 훨씬 의미 있어졌다.</p>
+
+      <p>v0.2-9b에서는 부대 토큰의 비주얼을 다듬었다. 너무 쨍한 파랑/빨강 깃발을 수묵 채색풍으로 바꾸고, 테두리는 낮추고 바닥 그림자를 강화했다. 전략 게임 특유의 진중한 분위기를 살리고 싶었다.</p>
+
+      <p>v0.2-9c에서는 무장 선택 UI도 개선했다. 오른쪽 HUD의 버튼으로도 무장을 선택할 수 있게 했고, 고유특기 이름도 손봤다. 노부나가의 "화승총 사격"은 <strong>삼단격</strong>으로, 겐신의 "돌격"은 <strong>차륜전</strong>으로 — 역사적인 느낌을 더 살린 이름으로 바꿨다.</p>
+
+      <hr />
+
+      <h3>수동 전투와 적의 침공</h3>
+      <span class="section-date">v0.2-9d ~ v0.2-10 — 2026.05.05</span>
+
+      <p>5월 4일은 쉬었다. 코드에서 잠깐 떨어져 있으니까, 오히려 다음에 뭘 해야 할지 더 선명하게 보였다.</p>
+
+      <p>5일에 돌아와서 v0.2-9d를 작업했다. 전투에서 자동과 수동 중 선택하는 모드를 적용했다. 공격할 때도, 방어할 때도 플레이어가 직접 고를 수 있다. 그런데 수동 전투를 구현하다 보니 버그가 하나 나왔다. 상대가 혼란 상태에 걸렸을 때 아무것도 못 하고 그냥 멈춰버리는 것이었다.</p>
+
+      <p>이 버그, 사실 쉽지 않았다. 채코치가 계속 부분적으로 수정을 시도했는데 해결이 안 됐다. 그래서 클코치(Claude Opus 4.7)를 투입해서 전체 코드 흐름을 거시적으로 다시 분석했다. 부분만 보면 놓치는 게 있다. 전체 루트에서 보니까 원인이 보였고, 채코치와 함께 바로 해결할 수 있었다. 혼란 상태도 정상적으로 턴을 소비하도록 수정 완료.</p>
+
+      <p>v0.2-10에서는 월드맵에 턴 시스템을 붙였다. 아군 턴이 끝나면 적군 턴이 오고, 적이 확률적으로 침공해온다. 침공이 발생하면 다시 자동/수동 전투 선택 화면이 뜨고, 적이 이기면 아군 수도가 밀려난다. 월드맵이 단순한 배경에서 진짜 전략판이 되는 순간이었다.</p>
+
+      <hr />
+
+      <h3>전투 결과를 드라마틱하게 — 컷인과 BGM</h3>
+      <span class="section-date">v0.3-3a ~ v0.3-3b — 2026.05.05</span>
+
+      <p>전투가 끝날 때 그냥 결과 텍스트만 뜨면 밋밋하다. v0.3-3a에서 전투 종료 시 승리/패배 결과 이미지를 컷인처럼 전투판 중앙에 2초간 표시하도록 만들었다. 영웅의 고유특기 컷인과 같은 방식이다.</p>
+
+      <p>나중에 BGM이 붙으면 이 2초 타이머를 음악 길이에 맞게 교체하면 된다. 구조를 미리 열어두는 것, 이게 나중에 얼마나 편한지는 직접 써봐야 안다. v0.3-3b에서는 바로 승리/패배 음악도 삽입했다. 전투 결과가 단순한 팝업이 아니라 하나의 연출이 됐다.</p>
+
+      <hr />
+
+      <h3>모바일에서도 EASTWAR를 — 아이콘과 쇼컷</h3>
+      <span class="section-date">v0.3-3c — 2026.05.06</span>
+
+      <p>게임을 만드는 사람으로서, 내가 만든 걸 폰으로 바로 꺼내서 볼 수 있다는 건 생각보다 꽤 설레는 일이다. v0.3-3c에서 모바일 홈 화면 쇼컷을 지원하는 작업을 했다. 아직 모바일 최적화가 다 된 건 아니지만, 일단 폰 홈 화면에서 아이콘을 누르면 게임으로 바로 들어갈 수 있다.</p>
+
+      <p>아이콘은 채코치의 이미지 생성 기능으로 만들었다. 거북선과 용, 그리고 "EASTWAR" 로고가 박힌 이 이미지 — 폰 홈 화면에서 처음 봤을 때 꽤 그럴싸했다.</p>
+
+      <figure style="margin:32px 0;max-width:200px">
+        <img src="../assets/eastwar/icon-eastwar-01.png" alt="EASTWAR 모바일 아이콘" style="width:100%;border-radius:16px" />
+        <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">EASTWAR · Mobile Shortcut Icon</figcaption>
+      </figure>
+
+      <hr />
+
+      <h3>관우와 장비, 전장에 서다</h3>
+      <span class="section-date">v0.3-4a ~ v0.3-4d — 2026.05.06</span>
+
+      <p>EASTWAR는 한국·중국·일본 영웅이 동아시아 전체를 무대로 싸우는 게임이다. 그런데 지금까지는 한국(이순신, 정도전)과 일본(노부나가, 겐신)만 있었다. 드디어 중국 세력이 등장할 차례였다.</p>
+
+      <p>v0.3-4a에서 관우와 장비의 데이터를 설계했다. 영웅 데이터는 <code>data/heroes.js</code>, 고유특기는 <code>data/skills.js</code>에서 관리한다. 무장 한 명을 추가한다는 건 그냥 이미지 하나 넣는 게 아니다. 이름, 세력, 능력치, 고유특기 로직까지 설계해야 한다.</p>
+
+      <p>관우의 고유특기는 <strong>언월참</strong>. 적 한 부대에 1.6배 피해를 주고, 자신은 1턴간 방어력이 25% 오른다. 공격과 방어를 동시에 챙기는, 관우다운 기술이다. 장비의 고유특기는 <strong>장판파열</strong>. 적 한 부대에 1.5배 피해를 주고, 주변 상하좌우 한 칸까지 40% 확률로 동요 상태를 건다. 전형적인 돌격형 장수다.</p>
+
+      <figure style="margin:32px 0;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div>
+          <img src="../assets/eastwar/portrait-guan-01.png" alt="관우 초상" style="width:100%;border-radius:2px" />
+          <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Guan Yu · Han · 언월참</figcaption>
+        </div>
+        <div>
+          <img src="../assets/eastwar/portrait-zhangfei-01.png" alt="장비 초상" style="width:100%;border-radius:2px" />
+          <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Zhang Fei · Han · 장판파열</figcaption>
+        </div>
+      </figure>
+
+      <p>v0.3-4b에서 관우와 장비의 초상과 고유특기 이미지를 삽입했다. v0.3-4c에서는 도시별 배치도 완료했다. 이순신·정도전은 한양, 노부나가·겐신은 교토, 관우·장비는 낙양. 세 세력이 각자의 거점을 가지고 동아시아 지도 위에 섰다.</p>
+
+      <p>v0.3-4d에서는 육지로 연결된 평양과 낙양을 월드맵에서 이어줬다. 이제 한국 세력과 중국 세력이 직접 맞붙을 수 있는 경로가 생긴 것이다. 지도 한 줄 연결했을 뿐인데, 게임이 한층 더 넓어진 느낌이었다.</p>
+
+      <blockquote>코드 몇 줄로 대륙이 이어졌다. 이게 게임 만드는 맛이지.</blockquote>
+
+    </div>
+
+    <div class="log-nav">
+      <a href="eastwar-devlog-006.html" class="log-nav__prev">← Dev Log #006</a>
+      <a href="eastwar.html" class="log-nav__list">목록</a>
+      <span class="log-nav__next disabled"></span>
+    </div>
+
+  </article>
+</main>
+
+<footer id="contact">
+  <p class="big">Let's build a <em>world</em> →</p>
+  <div class="grid-ft">
+    <div class="col c1"><h6>byKimjak Studio</h6><p style="font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0">IP Architect · Seoul, Korea. 시나리오·드라마 기획부터 AI 영상, 게임, 앱까지 — 한 사람이 하나의 세계관을 끝까지 설계합니다.</p></div>
+    <div class="col c2"><h6>Sections</h6><a href="../watch/">Watch <span class="ext">/01</span></a><a href="../make/">Make <span class="ext">/02</span></a><a href="../think/">Think <span class="ext">/03</span></a></div>
+    <div class="col c3"><h6>Social</h6><a href="#">Instagram <span class="ext">↗</span></a><a href="#">YouTube <span class="ext">↗</span></a><a href="#">Vimeo <span class="ext">↗</span></a><a href="#">Threads <span class="ext">↗</span></a></div>
+    <div class="col c4"><h6>Contact</h6><a href="mailto:oropa@kakao.com">oropa@kakao.com</a><a href="#">Press kit <span class="ext">PDF</span></a><a href="#">For PDs &amp; Investors <span class="ext">↗</span></a></div>
+  </div>
+  <div class="bottom"><span>byKimjak © 2026  ／  All rights, all worlds, reserved.</span><span>Built solo · with AI · in Seoul</span><span>v.04 / 2026.05</span></div>
+</footer>
+
+<script src="eastwar-log-index.js"></script>
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '007');
+</script>
+</body>
+</html>
