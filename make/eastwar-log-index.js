@@ -48,6 +48,11 @@
       num: '009', date: '2026.05.08',
       ko: { href: 'eastwar-devlog-009.html',    title: '왕이 된다는 것 — 재상, 성주, 자원, 그리고 전쟁을 준비하는 나라', sub: '플레이어는 왕이다. 재상·성주 배치, 자원 설계, 병종 상성' },
       en: { href: 'eastwar-devlog-009-en.html', title: 'What It Means to Be King — Chancellors, Governors, Resources, and a Nation That Prepares for War', sub: 'The player is the King. Chancellor·Governor placement, resource design, unit counters' }
+    },
+    {
+      num: '010', date: '2026.05.09',
+      ko: { href: 'eastwar-devlog-010.html',    title: '보이지 않는 곳을 다졌다 — 프로토타입에서 확장 가능한 구조로', sub: '구조 리팩토링, 자원 8종, 계절 턴, 내정 충성도 시스템' },
+      en: { href: 'eastwar-devlog-010-en.html', title: "Reinforcing What You Can't See — From Working Prototype to a Structure Built to Scale", sub: 'Structural refactoring, 8 resources, seasonal turns, city loyalty system' }
     }
   ];
 
