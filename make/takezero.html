@@ -68,16 +68,16 @@ a{color:inherit;text-decoration:none}
 .lang-notice{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);padding:12px 16px;border:1px solid var(--rule);margin-bottom:0}
 .lang-notice .dot-notice{width:5px;height:5px;border-radius:999px;background:var(--ink-3);flex-shrink:0}
 
-/* ── Character Notes List ── */
-.notes-section{padding:0 clamp(20px,4vw,48px) 80px;border-top:1px solid var(--rule);margin-top:80px}
-.notes-section__hd{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding:32px 0 0;margin:0 0 0}
-.notes__row{display:grid;grid-template-columns:52px 1fr auto;gap:20px;align-items:baseline;padding:24px 0;border-top:1px solid var(--rule);cursor:pointer;transition:background .25s;text-decoration:none;color:inherit}
-.notes__row:last-child{border-bottom:1px solid var(--rule)}
-.notes__row:hover{background:linear-gradient(90deg,transparent,var(--accent-soft) 20%,var(--accent-soft) 80%,transparent)}
-.notes__num{font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
-.notes__t{font-family:var(--f-display);font-weight:500;font-size:clamp(16px,1.8vw,22px);letter-spacing:-.015em;line-height:1.2;color:var(--ink)}
-.notes__t .ko{display:block;font-family:var(--f-kr);font-size:12px;color:var(--ink-3);font-weight:400;margin-top:4px}
-.notes__date{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);white-space:nowrap}
+/* ── Log Index ── */
+.log-index{padding:0 clamp(20px,4vw,48px)}
+.log-index__hd{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0;padding:32px 0 0}
+.log-index__item{display:grid;grid-template-columns:52px 1fr auto;gap:20px;align-items:baseline;padding:20px 0;border-top:1px solid var(--rule);transition:background .25s;text-decoration:none}
+.log-index__item:last-child{border-bottom:1px solid var(--rule);margin-bottom:48px}
+.log-index__item:hover{background:linear-gradient(90deg,transparent,var(--accent-soft) 20%,var(--accent-soft) 80%,transparent)}
+.log-index__num{font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
+.log-index__t{font-family:var(--f-display);font-size:clamp(14px,1.6vw,18px);font-weight:500;letter-spacing:-.01em;line-height:1.2;color:var(--ink)}
+.log-index__t .ko{display:block;font-family:var(--f-kr);font-size:12px;color:var(--ink-3);font-weight:400;margin-top:3px}
+.log-index__date{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);white-space:nowrap}
 
 /* ── Coming Soon Badge ── */
 .coming-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);padding:10px 16px;border:1px solid var(--rule);margin:16px 0 32px}
@@ -146,6 +146,17 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     <p class="listing-desc">선택만으로 디테일한 나만의 캐릭터 프롬프트를 완성해주는 AI 엔진. Take1, Take2… 그 이전, 캐릭터를 설계하는 단계.</p>
   </div>
 
+  <section class="log-index rev">
+    <p class="log-index__hd">캐릭터 샘플 노트 · Character Notes</p>
+    <a href="takezero-devlog-001.html" class="log-index__item">
+      <span class="log-index__num">#001</span>
+      <span class="log-index__t">지민 — 테니스 플레이어
+        <span class="ko">단발형 · 스포티 · 아이돌 느낌의 20대 초반</span>
+      </span>
+      <span class="log-index__date">2026 · 06</span>
+    </a>
+  </section>
+
   <article class="devlog">
     <div class="devlog__body rev">
 
@@ -172,16 +183,6 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <img class="body-img" src="../assets/takezero/takezero-ui-character.png" alt="TakeZero 캐릭터 생성 UI 스크린샷" loading="lazy" />
       <img class="body-img" src="../assets/takezero/takezero-sample-01.png" alt="TakeZero 캐릭터 시트 결과물" loading="lazy" />
 
-      <h3>캐릭터 샘플 노트</h3>
-      <p>TakeZero로 실제 생성한 캐릭터 결과물을 아래에서 확인하세요.</p>
-      <a href="takezero-devlog-001.html" class="notes__row">
-        <span class="notes__num">#001</span>
-        <span class="notes__t">지민 — 테니스 플레이어
-          <span class="ko">단발형 · 스포티 · 아이돌 느낌의 20대 초반</span>
-        </span>
-        <span class="notes__date">2026 · 06</span>
-      </a>
-
       <h3>STEP 2. 장면 생성</h3>
       <p>만들어진 캐릭터를 그대로 가져와 원하는 장면으로 확장한다.</p>
       <ul>
@@ -199,16 +200,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     </div>
   </article>
 
-  <section class="notes-section rev">
-    <p class="notes-section__hd">캐릭터 노트 · Character Notes</p>
-    <a href="takezero-devlog-001.html" class="notes__row">
-      <span class="notes__num">#001</span>
-      <span class="notes__t">지민 — 테니스 플레이어
-        <span class="ko">단발형 · 스포티 · 아이돌 느낌의 20대 초반</span>
-      </span>
-      <span class="notes__date">2026 · 06</span>
-    </a>
-  </section>
+
 </main>
 
 <footer id="contact">
