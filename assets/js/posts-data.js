@@ -4,6 +4,13 @@
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
     {
+      url: 'make/takezero-devlog-001.html',
+      catKey: 'takezero', cat: 'TakeZero',
+      title: '지민 — 테니스 플레이어',
+      sub: '단발형, 테니스 스타일, 아이돌 느낌의 20대 초반 한국 여성',
+      date: '2026-06-22', dl: '2026 · 06 · 22'
+    },
+    {
       url: 'posts/think/morning-word-007.html',
       catKey: 'morning-word', cat: 'Morning Word',
       title: '12회 구성을 짜는 날',
