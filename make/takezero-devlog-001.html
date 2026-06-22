@@ -73,6 +73,14 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 .devlog__body li{font-family:var(--f-kr);font-size:16px;line-height:1.85;color:var(--ink-2);margin-bottom:10px}
 .body-img{display:block;width:100%;margin:32px 0;border:1px solid var(--rule)}
 .img-caption{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;color:var(--ink-3);margin-top:-20px;margin-bottom:36px;padding-bottom:16px;border-bottom:1px solid var(--rule)}
+/* ── Product Actions ── */
+.product-actions{display:flex;flex-wrap:wrap;gap:12px;margin:40px 0 32px}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:var(--ink);color:var(--bg);padding:14px 24px;transition:background .25s,color .25s}
+.btn-primary:hover{background:var(--ink-2)}
+.btn-secondary{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--ink);color:var(--ink);padding:14px 24px;transition:background .25s,color .25s}
+.btn-secondary:hover{background:var(--ink);color:var(--bg)}
+.lang-notice{display:inline-flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);padding:12px 16px;border:1px solid var(--rule);margin-bottom:0}
+.lang-notice .dot-notice{width:5px;height:5px;border-radius:999px;background:var(--ink-3);flex-shrink:0}
 /* ── Log Index ── */
 .log-index{padding:0 clamp(20px,4vw,48px)}
 .log-index__hd{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0;padding:32px 0 0}
@@ -152,6 +160,22 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <h1>지민 — 테니스 플레이어</h1>
       <h2>단발형, 테니스 스타일, 아이돌 느낌의 20대 초반 한국 여성</h2>
       <span class="log-date">2026년 6월</span>
+
+      <p>AI로 캐릭터를 만들 때 뭐부터 어떻게 시작해야 할지 막막했던 경험, 누구나 있다.</p>
+      <p>TakeZero는 <strong>선택만으로 디테일한 나만의 캐릭터 프롬프트를 완성해주는 AI 캐릭터 프롬프트 엔진</strong>이다.</p>
+      <p>Take1, Take2… 그 이전. 캐릭터를 설계하는 단계. 그것이 TakeZero다.</p>
+
+      <div class="lang-notice">
+        <span class="dot-notice"></span>
+        현재 버전: 한국어 전용 · English version coming soon
+      </div>
+
+      <div class="product-actions">
+        <a href="../apps/takezero/index.html" class="btn-primary" target="_blank" rel="noopener">웹에서 바로 사용하기 →</a>
+        <a href="../assets/takezero/TakeZero.zip" class="btn-secondary" download>다운로드 (.zip) ↓</a>
+      </div>
+
+      <hr />
 
       <p>TakeZero로 만든 첫 번째 캐릭터 샘플이다.</p>
       <p>컨셉 키워드는 단순했다. <strong>단발. 테니스. 아이돌.</strong> 거기에 나이를 22살로 설정하고, 성격을 자신감 있고 친근하며 안정적인 인물로 지정했다. 롤은 테니스 선수, 컨셉은 스포티 / 캐주얼.</p>
