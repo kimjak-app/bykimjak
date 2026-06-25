@@ -53,6 +53,11 @@
       num: '010', date: '2026.05.09',
       ko: { href: 'eastwar-devlog-010.html',    title: '보이지 않는 곳을 다졌다 — 프로토타입에서 확장 가능한 구조로', sub: '구조 리팩토링, 자원 8종, 계절 턴, 내정 충성도 시스템' },
       en: { href: 'eastwar-devlog-010-en.html', title: "Reinforcing What You Can't See — From Working Prototype to a Structure Built to Scale", sub: 'Structural refactoring, 8 resources, seasonal turns, city loyalty system' }
+    },
+    {
+      num: '011', date: '2026.05.13',
+      ko: { href: 'eastwar-devlog-011.html',    title: '세계가 살아났다 — 군대, 무역, 외교가 한 게임에 들어오다', sub: '병력 3분류, 세력 명명, 내부 보급망, 대외무역, 13개 도시' },
+      en: { href: 'eastwar-devlog-011-en.html', title: 'The World Came Alive — Armies, Trade, and Diplomacy Enter the Game', sub: 'Three-tier armies, named factions, supply lines, inter-faction trade, 13 cities' }
     }
   ];
 
