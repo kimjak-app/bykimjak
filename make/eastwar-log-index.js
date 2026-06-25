@@ -58,6 +58,11 @@
       num: '011', date: '2026.05.13',
       ko: { href: 'eastwar-devlog-011.html',    title: '세계가 살아났다 — 군대, 무역, 외교가 한 게임에 들어오다', sub: '병력 3분류, 세력 명명, 내부 보급망, 대외무역, 13개 도시' },
       en: { href: 'eastwar-devlog-011-en.html', title: 'The World Came Alive — Armies, Trade, and Diplomacy Enter the Game', sub: 'Three-tier armies, named factions, supply lines, inter-faction trade, 13 cities' }
+    },
+    {
+      num: '012', date: '2026.05.17',
+      ko: { href: 'eastwar-devlog-012.html',    title: '고도로 건너가다 — 웹에서 만든 전투를 Godot 위에 다시 세우다', sub: 'Godot 이식, 자산 마이그레이션, 전투 루프, 18×10 격자 기준' },
+      en: { href: 'eastwar-devlog-012-en.html', title: 'Crossing Over to Godot — Rebuilding the Battle Engine on a Real Game Engine', sub: 'Godot port, asset migration, battle loop, 18×10 grid standard' }
     }
   ];
 
