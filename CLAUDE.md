@@ -25,5 +25,5 @@
 
 ## 배포
 - 사이트: `kimjak-app.github.io/bykimjak/`
-- 로컬 수정 후 반드시 `git commit` → `git pull origin main --rebase` → `git push`
+- **파일 작업이 끝나면 확인 없이 항상 `git commit` → `git pull origin main --rebase` → `git push`까지 자동으로 수행할 것**
 - GitHub Pages CDN 캐시로 인해 반영까지 수 분 소요될 수 있음
