@@ -4,6 +4,13 @@
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
     {
+      url: 'make/grandslam-devlog-002.html',
+      catKey: 'grandslam', cat: 'Grand Slam',
+      title: '회비 인상, 과거까지 소급되던 버그를 잡았다',
+      sub: '6월까지는 8만원, 7월부터는 9만원 — 이게 당연한 거잖아 — v7.75',
+      date: '2026-06-26', dl: '2026 · 06 · 26'
+    },
+    {
       url: 'make/eastwar-devlog-012.html',
       catKey: 'eastwar', cat: 'Architect Notes',
       title: '고도로 건너가다 — 웹에서 만든 전투를 Godot 위에 다시 세우다',

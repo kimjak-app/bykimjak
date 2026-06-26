@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>GrandSlam 개발일지 — MAKE · byKimjak</title>
+<title>그랜드슬램 개발일지 #002 — 회비 인상, 과거까지 소급되던 버그를 잡았다 · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -43,10 +43,11 @@ a{color:inherit;text-decoration:none}
 .listing-head h1{font-family:var(--f-display);font-weight:500;font-size:clamp(44px,9vw,120px);letter-spacing:-.04em;line-height:.92;margin:0 0 8px}
 .listing-head .sub-ko{font-family:var(--f-kr);font-size:clamp(16px,2vw,22px);color:var(--ink-3);margin:0 0 20px;font-weight:400}
 .listing-head .listing-desc{font-family:var(--f-kr);font-size:15px;line-height:1.65;color:var(--ink-3);max-width:48ch}
-.post-list{padding:0 clamp(20px,4vw,48px) 140px}
-.empty{padding:100px 0 120px;text-align:center;border-top:1px solid var(--rule)}
-.empty .num{font-family:var(--f-display);font-weight:500;font-size:clamp(80px,15vw,200px);letter-spacing:-.04em;color:var(--bg-2);line-height:1;display:block}
-.empty p{font-family:var(--f-kr);font-size:14px;color:var(--ink-3);margin-top:12px}
+.lang-switch{display:inline-flex;align-items:center;margin-bottom:28px}
+.lang-current{font-family:var(--f-display);font-size:14px;font-weight:700;color:var(--ink);padding:10px 20px;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px;cursor:default;letter-spacing:.01em}
+.lang-sep{font-family:var(--f-mono);font-size:14px;color:var(--ink-3);opacity:.35;user-select:none;line-height:1}
+.lang-other{font-family:var(--f-display);font-size:14px;font-weight:400;color:var(--ink-3);padding:10px 20px;transition:color .2s;letter-spacing:.01em}
+.lang-other:hover{color:var(--ink)}
 footer{background:var(--dark);color:var(--dark-ink);padding:90px clamp(20px,4vw,48px) 36px;overflow:hidden}
 footer .big{font-family:var(--f-display);font-weight:400;font-size:clamp(44px,7vw,108px);letter-spacing:-.04em;line-height:.95;color:var(--dark-ink);margin:0 0 48px;text-wrap:balance}
 footer .big em{font-style:italic;font-family:"Times New Roman",serif;color:#A99A85}
@@ -60,19 +61,40 @@ footer .c1{grid-column:1/span 5}footer .c2{grid-column:6/span 2}footer .c3{grid-
 footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-family:var(--f-mono);font-size:11px;color:var(--dark-ink-2);text-transform:uppercase;letter-spacing:.06em}
 @media(max-width:780px){footer .c1,footer .c2,footer .c3,footer .c4{grid-column:1/span 12}}
 .rev{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}.rev.in{opacity:1;transform:none}
-.notes__row{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;border-top:1px solid var(--rule);padding:36px 0;align-items:baseline;cursor:pointer;transition:background .25s}
-.notes__row:last-child{border-bottom:1px solid var(--rule)}
-.notes__row:hover{background:linear-gradient(90deg,transparent,var(--accent-soft) 20%,var(--accent-soft) 80%,transparent)}
-.notes__num{grid-column:1 / span 1;font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
-.notes__cat{grid-column:2 / span 2;font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3)}
-.notes__t{grid-column:4 / span 7;font-family:var(--f-display);font-weight:500;font-size:clamp(20px,2vw,30px);letter-spacing:-.015em;line-height:1.2}
-.notes__t .ko{display:block;font-family:var(--f-kr);font-size:13px;color:var(--ink-3);font-weight:400;margin-top:4px}
-.notes__date{grid-column:11 / span 2;justify-self:end;font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
-@media(max-width:780px){.notes__num{grid-column:1 / span 2}.notes__cat{grid-column:3 / span 4}.notes__t{grid-column:1 / span 12;order:3;margin-top:8px}.notes__date{grid-column:7 / span 6;order:2;justify-self:end}}
-.pager{display:flex;gap:8px;padding:32px 0 0;justify-content:center;border-top:1px solid var(--rule)}
-.pager__btn{font-family:var(--f-mono);font-size:11px;width:32px;height:32px;border:1px solid var(--rule);background:none;cursor:pointer;color:var(--ink-3);transition:background .2s,color .2s;border-radius:2px}
-.pager__btn:hover{background:var(--bg-2);color:var(--ink)}
-.pager__btn--active{background:var(--ink);color:var(--bg);border-color:var(--ink);cursor:default}
+
+/* ── Dev Log Article ── */
+.devlog{padding:0 0 140px}
+.devlog__body{padding:64px clamp(20px,4vw,48px) 0;max-width:760px}
+.devlog__body .log-num{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:12px}
+.devlog__body h1{font-family:var(--f-display);font-weight:500;font-size:clamp(26px,4vw,48px);letter-spacing:-.03em;line-height:1.1;margin:0 0 10px}
+.devlog__body h2{font-family:var(--f-kr);font-size:clamp(15px,1.8vw,20px);font-weight:400;color:var(--ink-3);margin:0;line-height:1.5}
+.devlog__body .log-date{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);display:block;margin:24px 0 40px;padding-top:20px;border-top:1px solid var(--rule)}
+.devlog__body h3{font-family:var(--f-display);font-weight:500;font-size:clamp(16px,2vw,22px);letter-spacing:-.02em;margin:56px 0 18px;padding-top:48px;border-top:1px solid var(--rule)}
+.devlog__body p{font-family:var(--f-kr);font-size:16px;line-height:1.95;color:var(--ink-2);margin:0 0 22px}
+.devlog__body strong{font-weight:700;color:var(--ink)}
+.devlog__body em{font-style:italic;color:var(--ink)}
+.devlog__body hr{border:none;border-top:1px solid var(--rule);margin:52px 0}
+.devlog__body ul{padding-left:20px;margin:0 0 24px}
+.devlog__body li{font-family:var(--f-kr);font-size:16px;line-height:1.85;color:var(--ink-2);margin-bottom:10px}
+.devlog__body blockquote{border-left:3px solid var(--accent);margin:0 0 24px;padding:16px 20px;background:var(--bg-2);font-family:var(--f-mono);font-size:14px;line-height:1.8;color:var(--ink-2)}
+.devlog__body code{font-family:var(--f-mono);font-size:13px;background:var(--bg-2);padding:2px 6px;border-radius:3px;color:var(--ink)}
+/* ── Log Index ── */
+.log-index{padding:0 clamp(20px,4vw,48px)}
+.log-index__hd{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0;padding:32px 0 0}
+.log-index__item{display:grid;grid-template-columns:52px 1fr auto;gap:20px;align-items:baseline;padding:20px 0;border-top:1px solid var(--rule);transition:background .25s;text-decoration:none}
+.log-index__item:last-child{border-bottom:1px solid var(--rule);margin-bottom:48px}
+.log-index__item:hover{background:linear-gradient(90deg,transparent,var(--accent-soft) 20%,var(--accent-soft) 80%,transparent)}
+.log-index__num{font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
+.log-index__t{font-family:var(--f-display);font-size:clamp(14px,1.6vw,18px);font-weight:500;letter-spacing:-.01em;line-height:1.2;color:var(--ink)}
+.log-index__t .ko{display:block;font-family:var(--f-kr);font-size:12px;color:var(--ink-3);font-weight:400;margin-top:3px}
+.log-index__date{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);white-space:nowrap}
+.log-index__item--current{pointer-events:none}
+.log-index__item--current .log-index__num{color:var(--accent)}
+/* ── Log Nav ── */
+.log-nav{display:flex;justify-content:space-between;align-items:center;margin-top:80px;padding-top:32px;border-top:1px solid var(--rule)}
+.log-nav__prev,.log-nav__next{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);transition:color .2s}
+.log-nav__prev:hover,.log-nav__next:hover{color:var(--ink)}
+.log-nav__next--disabled{opacity:.35;cursor:default;pointer-events:none}
 </style>
 </head>
 <body>
@@ -115,14 +137,85 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 <main>
   <div class="listing-head rev">
     <div class="breadcrumb">
-      <a href="../make/">MAKE</a><span class="sep">›</span><span>GrandSlam 개발일지</span>
+      <a href="../make/">MAKE</a><span class="sep">›</span>
+      <a href="grandslam.html">← GrandSlam 개발일지 목록</a>
     </div>
-    <h1>GrandSlam</h1>
-    <p class="sub-ko">개발일지 — Dev Log</p>
-    <p class="listing-desc">테니스 클럽에서 두 달째 실전 테스트 중인 앱. 웹 MVP부터 현재까지의 바이브 코딩 개발 로그와 사용자 피드백 기록.</p>
+    <div class="lang-switch">
+      <span class="lang-current">🇰🇷 한국어</span>
+      <span class="lang-sep">|</span>
+      <a href="grandslam-devlog-002-en.html" class="lang-other">🇺🇸 English</a>
+    </div>
+    <h1>Grand Slam</h1>
+    <p class="sub-ko">개발일지 #002 — Dev Log</p>
   </div>
 
-  <div class="post-list" id="post-list"></div>
+  <section class="log-index rev">
+    <p class="log-index__hd">전체 개발일지 · All Dev Logs</p>
+    <a href="grandslam-devlog-001.html" class="log-index__item">
+      <span class="log-index__num">#001</span>
+      <span class="log-index__t">바이브 코딩과의 첫 만남
+        <span class="ko">수요일 날씨 앱에서 시작된 이야기</span>
+      </span>
+      <span class="log-index__date">2026 · 01</span>
+    </a>
+    <a href="grandslam-devlog-002.html" class="log-index__item log-index__item--current">
+      <span class="log-index__num">#002</span>
+      <span class="log-index__t">회비 인상, 과거까지 소급되던 버그를 잡았다
+        <span class="ko">6월까지는 8만원, 7월부터는 9만원 — 이게 당연한 거잖아</span>
+      </span>
+      <span class="log-index__date">2026 · 06 · 26</span>
+    </a>
+  </section>
+
+  <article class="devlog" id="log-002">
+    <div class="devlog__body rev">
+      <span class="log-num">Dev Log · #002</span>
+      <h1>회비 인상, 과거까지 소급되던 버그를 잡았다</h1>
+      <h2>6월까지는 8만원, 7월부터는 9만원 — 이게 당연한 거잖아 — v7.75</h2>
+      <span class="log-date">2026년 6월 26일</span>
+
+      <hr />
+
+      <h3>문제는 단순했다</h3>
+      <p>클럽 운영에서 회비 인상은 피할 수 없다. 임대료가 오르고, 코트 사용료가 오르고, 어느 시점이 되면 회원들한테 "다음 달부터 조금 올라요"라고 말해야 한다. 당연한 일이다.</p>
+      <p>그런데 그랜드슬램 앱에서 월회비를 8만원에서 9만원으로 수정하는 순간, 이상한 일이 벌어졌다. 1월부터 6월까지 이미 걷은 회비가 전부 9만원 기준으로 재계산돼버린 거다. 과거 장부가 통째로 뒤집혔다. 실제 통장 잔액이랑 앱 상의 총액이 맞지 않는 상황.</p>
+      <p>회계 앱에서 이건 치명적인 버그다. 신뢰가 무너지면 아무도 안 쓴다.</p>
+
+      <hr />
+
+      <h3>두 가지 문제, 한 번에</h3>
+      <p>사실 이번에 잡아야 할 문제가 하나 더 있었다. 7월 회비는 7월 1일에 내는 게 아니라는 거다. 현실에서 총무들은 6월 말부터 회비를 걷는다. 근데 앱은 7월 1일 기준으로 돼 있으니까, 6월 말에 받아도 처리할 방법이 없었다. 7월 1일 되기를 기다렸다가 다시 체크해야 했다. 총무 입장에서 이건 꽤 불편한 일이다.</p>
+      <p>정리하면 두 가지였다.</p>
+      <ul>
+        <li>회비 인상 시 과거 회계에 소급 적용되는 문제</li>
+        <li>다음 달 회비를 이번 달 말에 미리 처리할 수 없는 문제</li>
+      </ul>
+
+      <hr />
+
+      <h3>해결: 회비 이력 + 선납 처리월</h3>
+      <p>이번 v7.75 패치의 핵심은 두 가지 구조 변경이다.</p>
+      <p>첫째, 월회비를 단일값이 아니라 <strong>이력(history)</strong>으로 저장하도록 바꿨다. 내부적으로 <code>feeRateHistory</code>라는 구조가 생겼고, 회비를 바꿀 때는 금액과 함께 <strong>적용 시작월</strong>을 함께 저장한다. 그래서 이제 이런 식으로 쌓인다.</p>
+      <blockquote>
+        2026년 1월 ~ 6월 → 80,000원<br />
+        2026년 7월부터 → 90,000원
+      </blockquote>
+      <p>7월부터 9만원으로 올려도, 1월~6월 회계는 8만원 그대로 유지된다. 나중에 10월에 또 올려도 마찬가지다. 각 구간이 독립적으로 기록되니까, 아무리 많이 올려도 과거 장부는 흔들리지 않는다.</p>
+      <p>둘째, 회비 납부 화면에 <strong>납부 처리월</strong> 선택 기능을 추가했다. 6월 말에 앱을 열어도 "납부 처리월: 7월"을 선택한 다음 회원을 체크하면, 7월 회비로 정확히 기록된다. 7월 1일까지 기다릴 필요가 없어졌다.</p>
+
+      <hr />
+
+      <h3>앱 신뢰도의 심장</h3>
+      <p>회계는 앱에서 가장 건드리기 무서운 영역이다. 한 번 틀리면 과거 데이터까지 연쇄적으로 오염될 수 있어서, 수정할 때마다 긴장된다. 이번 패치도 단순히 숫자 하나를 고친 게 아니라, 회비를 저장하는 구조 자체를 바꾼 거라서 꽤 신중하게 접근했다.</p>
+      <p>베이글 클럽에서 실제로 테스트를 돌려봤다. 6월까지 8만원, 7월부터 9만원 — 두 구간이 정확히 분리됐고, 6월 말에 7월 회비 선납도 문제없이 처리됐다.</p>
+      <p>작은 패치처럼 보이지만, 이번 v7.75가 그랜드슬램의 회계 신뢰도를 한 단계 올린 업데이트라고 생각한다. 회비를 얼마든지 올려도, 과거 장부는 그대로다.</p>
+
+      <div class="log-nav">
+        <a href="grandslam-devlog-001.html" class="log-nav__prev">← Dev Log #001</a>
+        <span class="log-nav__next log-nav__next--disabled">Dev Log #003 →</span>
+      </div>
+    </div>
+  </article>
 </main>
 
 <footer id="contact">
@@ -136,37 +229,11 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
   <div class="bottom"><span>byKimjak © 2026  ／  All rights, all worlds, reserved.</span><span>Built solo · with AI · in Seoul</span><span>v.04 / 2026.05</span></div>
 </footer>
 
-<script src="../assets/js/posts-data.js"></script>
-<script src="../assets/js/paginate.js"></script>
 <script>
 const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-// posts-data.js의 ALL_POSTS에서 grandslam 항목만 뽑아 렌더링
-(function () {
-  var list = document.getElementById('post-list');
-  var posts = (window.ALL_POSTS || []).filter(function (p) { return p.catKey === 'grandslam'; });
-  if (!posts.length) {
-    list.innerHTML = '<p style="padding:60px 0;font-family:var(--f-kr);color:var(--ink-3);">아직 게시물이 없습니다.</p>';
-    return;
-  }
-  var num = posts.length;
-  posts.forEach(function (p) {
-    var a = document.createElement('a');
-    a.href = p.url.replace(/^make\//, '');
-    a.className = 'notes__row rev';
-    a.innerHTML =
-      '<div class="notes__num">#' + String(num).padStart(3, '0') + '</div>' +
-      '<div class="notes__cat">Dev Log</div>' +
-      '<div class="notes__t">' + p.title.replace(/^그랜드슬램 개발일지 #\d+ — /, '') +
-        (p.sub ? '<span class="ko">' + p.sub + '</span>' : '') + '</div>' +
-      '<div class="notes__date">' + p.dl + '</div>';
-    list.appendChild(a);
-    num--;
-  });
-  PAGINATE('#post-list', 'a.notes__row', 5);
-})();
 </script>
 </body>
 </html>
