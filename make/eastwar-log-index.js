@@ -63,6 +63,11 @@
       num: '012', date: '2026.05.17',
       ko: { href: 'eastwar-devlog-012.html',    title: '고도로 건너가다 — 웹에서 만든 전투를 Godot 위에 다시 세우다', sub: 'Godot 이식, 자산 마이그레이션, 전투 루프, 18×10 격자 기준' },
       en: { href: 'eastwar-devlog-012-en.html', title: 'Crossing Over to Godot — Rebuilding the Battle Engine on a Real Game Engine', sub: 'Godot port, asset migration, battle loop, 18×10 grid standard' }
+    },
+    {
+      num: '013', date: '2026 · 05 · 18',
+      ko: { href: 'eastwar-devlog-013.html',    title: '데모가 게임이 된 3일', sub: '이동하고, 바라보고, 싸우고, 설계하다 — v0.64k ~ v0.65h' },
+      en: { href: 'eastwar-devlog-013-en.html', title: 'Three Days That Turned a Demo Into a Game', sub: 'Move, face, fight, and architect — v0.64k ~ v0.65h' }
     }
   ];
 
