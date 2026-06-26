@@ -15,7 +15,7 @@
 - `think/morning-word.html` → 아침 말씀 글 추가 시
 - `think/personal-essay.html` → 개인 에세이 글 추가 시
 - 새 `<a class="post-row">` 항목을 번호 순서에 맞게 삽입
-- **목록 순서는 모두 오름차순(01이 맨 위, 최신 번호가 맨 아래)**. `morning-word`, `ai-coach`, `personal-essay` 모두 동일.
+- **목록 순서는 모두 오름차순(01이 맨 위, 최신 번호가 맨 아래)**. `morning-word`, `ai-coach`, `personal-essay`, `grandslam` 모두 동일.
 
 ### 3. EASTWAR 개발일지 추가 시 추가로:
 - `make/eastwar-log-index.js` → `LOGS` 배열에 새 항목 추가
