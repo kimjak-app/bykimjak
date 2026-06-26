@@ -151,19 +151,17 @@ document.querySelectorAll('.rev').forEach(el=>io.observe(el));
     list.innerHTML = '<p style="padding:60px 0;font-family:var(--f-kr);color:var(--ink-3);">아직 게시물이 없습니다.</p>';
     return;
   }
-  var num = posts.length;
-  posts.forEach(function (p) {
+  posts.slice().reverse().forEach(function (p, i) {
     var a = document.createElement('a');
     a.href = p.url.replace(/^make\//, '');
     a.className = 'notes__row rev';
     a.innerHTML =
-      '<div class="notes__num">#' + String(num).padStart(3, '0') + '</div>' +
+      '<div class="notes__num">#' + String(i + 1).padStart(3, '0') + '</div>' +
       '<div class="notes__cat">Dev Log</div>' +
       '<div class="notes__t">' + p.title.replace(/^그랜드슬램 개발일지 #\d+ — /, '') +
         (p.sub ? '<span class="ko">' + p.sub + '</span>' : '') + '</div>' +
       '<div class="notes__date">' + p.dl + '</div>';
     list.appendChild(a);
-    num--;
   });
   PAGINATE('#post-list', 'a.notes__row', 5);
 })();
