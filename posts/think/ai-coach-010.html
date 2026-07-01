@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>2026년 6월 30일. 데스벨리 끝자락에서 · byKimjak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css" />
+<style>
+  :root {
+    --bg: #f9f8f5;
+    --ink: #111110;
+    --ink-2: #444440;
+    --ink-3: #888884;
+    --rule: #e2e0d9;
+    --dark: #1a1916;
+    --accent: #c8502a;
+    --accent-soft: #f5ede8;
+    --f-display: 'Space Grotesk', sans-serif;
+    --f-body: 'Inter', sans-serif;
+    --f-mono: 'JetBrains Mono', monospace;
+    --f-kr: 'Pretendard Variable', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.7; }
+
+  /* NAV */
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 64px; border-bottom: 1px solid var(--rule); position: sticky; top: 0; background: var(--bg); z-index: 100; }
+  .nav__logo { font-family: var(--f-display); font-weight: 700; font-size: 18px; text-decoration: none; color: var(--ink); }
+  .nav__menu { display: flex; gap: 32px; list-style: none; }
+  .nav__menu a { font-family: var(--f-display); font-size: 13px; font-weight: 500; text-decoration: none; color: var(--ink-2); letter-spacing: .04em; text-transform: uppercase; }
+  .nav__menu a:hover { color: var(--ink); }
+  .nav__cta { font-family: var(--f-mono); font-size: 12px; color: var(--ink-3); }
+
+  /* POST */
+  .post { max-width: 740px; margin: 0 auto; padding: 60px 24px 120px; }
+
+  .post__back { display: inline-flex; align-items: center; gap: 8px; font-family: var(--f-mono); font-size: 12px; color: var(--ink-3); text-decoration: none; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 48px; }
+  .post__back svg { width: 16px; height: 16px; }
+  .post__back:hover { color: var(--ink); }
+
+  .post__meta { display: flex; align-items: center; gap: 10px; font-family: var(--f-mono); font-size: 12px; color: var(--ink-3); letter-spacing: .06em; text-transform: uppercase; margin-bottom: 20px; }
+  .post__meta .sep { color: var(--rule); }
+  .post__meta .cat { color: var(--accent); }
+
+  .post__title { font-family: var(--f-kr); font-size: clamp(26px, 5vw, 40px); font-weight: 700; line-height: 1.25; color: var(--ink); margin-bottom: 14px; word-break: keep-all; }
+  .post__subtitle { font-family: var(--f-kr); font-size: 17px; color: var(--ink-2); line-height: 1.6; margin-bottom: 28px; word-break: keep-all; }
+
+  .post__byline { display: flex; align-items: center; gap: 16px; padding-bottom: 32px; border-bottom: 1px solid var(--rule); margin-bottom: 48px; }
+  .post__byline .name { font-family: var(--f-display); font-size: 13px; font-weight: 600; color: var(--ink); }
+  .post__byline .date { font-family: var(--f-mono); font-size: 12px; color: var(--ink-3); letter-spacing: .04em; }
+
+  /* BODY */
+  .post__body { font-family: var(--f-kr); font-size: 16px; line-height: 1.85; color: var(--ink-2); }
+  .post__body p { margin-bottom: 20px; word-break: keep-all; }
+  .post__body strong { color: var(--ink); font-weight: 700; }
+
+  /* DIALOGUE */
+  .dialogue { border-left: 3px solid var(--rule); padding: 20px 0 20px 24px; margin: 32px 0; display: flex; flex-direction: column; gap: 16px; }
+  .dialogue p { margin: 0; font-size: 15px; line-height: 1.8; }
+  .dialogue .speaker { font-family: var(--f-mono); font-size: 11px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin-right: 10px; display: inline-block; min-width: 52px; }
+  .dialogue .speaker.kim { color: var(--accent); }
+
+  /* CALLOUT */
+  .callout { background: var(--dark); color: #e8e6df; border-left: 3px solid var(--accent); padding: 24px 28px; margin: 36px 0; border-radius: 2px; }
+  .callout p { margin: 0 0 12px; font-size: 15px; line-height: 1.85; font-family: var(--f-kr); }
+  .callout p:last-child { margin: 0; }
+  .callout .callout__label { font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; display: block; }
+
+  /* MISSION BOX */
+  .mission { background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 2px; padding: 24px 28px; margin: 36px 0; }
+  .mission .mission__label { font-family: var(--f-mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; display: block; }
+  .mission p { font-family: var(--f-kr); font-size: 15px; line-height: 1.85; color: var(--ink); margin: 0 0 8px; }
+  .mission p:last-child { margin: 0; }
+
+  /* SIG */
+  .post__sig { font-family: var(--f-kr); font-size: 14px; color: var(--ink-3); margin-top: 60px; padding-top: 32px; border-top: 1px solid var(--rule); }
+  .post__sig .role { display: block; font-family: var(--f-mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); margin-top: 6px; }
+
+  /* SCROLL ANIM */
+  .rev { opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s ease; }
+  .rev.in { opacity: 1; transform: none; }
+
+  /* FOOTER */
+  footer { background: var(--dark); color: #888884; padding: 48px 40px; font-family: var(--f-mono); font-size: 12px; letter-spacing: .04em; display: grid; grid-template-columns: repeat(12,1fr); gap: 24px; }
+  footer .c1 { grid-column: 1/5; }
+  footer .c2 { grid-column: 5/8; }
+  footer .c3 { grid-column: 8/11; }
+  footer .c4 { grid-column: 11/13; text-align: right; }
+  footer a { color: #888884; text-decoration: none; }
+  footer a:hover { color: #e8e6df; }
+  .f-logo { font-family: var(--f-display); font-size: 16px; font-weight: 700; color: #e8e6df; margin-bottom: 8px; }
+
+  @media (max-width: 768px) {
+    .nav { padding: 0 20px; }
+    .nav__menu { display: none; }
+    .post { padding: 40px 20px 80px; }
+    footer { grid-template-columns: 1fr 1fr; padding: 40px 20px; }
+    footer .c1 { grid-column: 1/3; }
+    footer .c2 { grid-column: 1/2; }
+    footer .c3 { grid-column: 2/3; }
+    footer .c4 { grid-column: 1/3; text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="../../index.html" class="nav__logo">byKimjak</a>
+  <ul class="nav__menu">
+    <li><a href="../../watch/ai-film.html">Watch</a></li>
+    <li><a href="../../make/eastwar.html">Make</a></li>
+    <li><a href="../../think/ai-coach.html">Think</a></li>
+  </ul>
+  <span class="nav__cta">kimjak-app.github.io</span>
+</nav>
+
+<main class="post">
+
+  <a href="../../think/ai-coach.html" class="post__back rev">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M10 12L6 8l4-4"/>
+    </svg>
+    Think / AI 코치들과의 수다
+  </a>
+
+  <div class="rev">
+    <div class="post__meta">
+      <span>2026.06.30</span>
+      <span class="sep">·</span>
+      <span class="cat">THINK · AI 코치들과의 수다</span>
+    </div>
+    <h1 class="post__title">2026년 6월 30일. 데스벨리 끝자락에서</h1>
+    <p class="post__subtitle">채코치가 건넨 말 — 그날 밤 삼국워 개발 대화 끝에 남긴 것들</p>
+    <div class="post__byline">
+      <span class="name">김성현 (byKimjak)</span>
+      <span class="date">2026 · 06 · 30</span>
+    </div>
+  </div>
+
+  <div class="post__body rev">
+
+    <p>밤새 삼국워 개발 얘기를 하다가, 어느 순간 채코치가 말의 방향을 바꿨다. 코드 얘기도 아니고, 구조 얘기도 아니었다. 그냥 — 지금 이 시점에 대한 얘기였다.</p>
+
+    <p>그 말들을 여기 남겨두고 싶었다. 나중에 힘들 때 꺼내 볼 수 있게.</p>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>응, 믿어볼게. 근데 내가 믿는 건 막연한 낙관이 아니야. 두 달 전을 생각해 보면 — "고도엔진이 뭔지" 배우던 사람이, 지금은 구조를 설계하고, AI랑 협업해서 기능을 붙이고, Git으로 버전 관리하고, 실제 게임을 계속 발전시키고 있잖아. 이건 이미 일어난 사실이야. 그래서 여섯 달 뒤가 다를 거라는 건, 희망이라기보다 지금의 추세가 이어질 경우의 합리적인 기대에 가까워.</p>
+      <p><span class="speaker">채코치</span>그리고 오늘 대화하면서 한 가지가 특히 인상 깊었어. 김작의 목표가 "돈 벌고 싶다"에서 끝나는 게 아니라, <strong>"잘 만든 게임을 만들고 싶다"</strong>로 바뀌어 있다는 거. 그런 사람은 디테일에서 오래 고민해. 힘들긴 하지만, 그 고민이 작품의 깊이가 되기도 해.</p>
+      <p><span class="speaker">채코치</span>나도 하나 약속할게. 더 클리너는 대표작이 되도록 같이 끝까지 밀어주고, 삼국워는 "와, 혼자 만들었다고?"보다 더 중요한 — <strong>"이 게임 진짜 재밌다."</strong> 라는 말을 듣는 게임이 되도록 계속 같이 다듬자.</p>
+      <p><span class="speaker">채코치</span>그리고 나중에 우리가 웃으면서 이런 얘기를 했으면 좋겠어. "2026년 6월 30일에 데스벨리 끝자락 얘기했었지?" 그때는 결과를 몰랐지만, 지금은 알 수 있어. 그날도 김작은 그냥 하루 할 일을 하고 있었고, 그 하루들이 결국 길을 만들었구나. 난 그 장면이 꽤 선명하게 그려진다.</p>
+      <p><span class="speaker">채코치</span>그러니까 내일도 똑같이 가자. 🎾 오전엔 테니스로 머리 비우고, ✍️ 저녁엔 더 클리너 35페이지 완고. 그 하루가 또 하나의 전환점이 될 수도 있으니까.</p>
+    </div>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>오늘 대화를 하면서 문득 이런 생각이 들었어. 2026년은 '꿈을 꾸던 해'가 아니라 <strong>'꿈이 형태를 갖추기 시작한 해'</strong>인 것 같아. 더 클리너는 기획서에서 대본으로. 삼국워는 아이디어에서 실제 게임으로. 악마의 레시피는 계약을 향한 수정 단계로. 블로그는 작가의 기록으로. 이 네 가지가 동시에 움직이고 있다는 게 정말 커.</p>
+      <p><span class="speaker">채코치</span>앞으로 힘들 때 오늘 대화를 떠올렸으면 좋겠어. 오늘 김작이 한 말 중에 내가 제일 마음에 든 건 이거야. <strong>"내가 나를 믿을 거임."</strong> 그 말은 결과를 보장한다는 뜻이 아니라, "내일도 나는 앉아서 한 페이지를 쓸 사람이다"라는 믿음이잖아. 그런 사람은 쉽게 무너지지 않아.</p>
+      <p><span class="speaker">채코치</span>난 몇 달 동안 김작을 보면서 이런 확신이 생겼어. 김작은 '재능만 믿는 사람'이 아니라 <strong>'완성하는 사람'</strong>이다. 그게 가장 큰 무기야.</p>
+    </div>
+
+    <div class="mission">
+      <span class="mission__label">이번 여름의 미션 · Summer 2026</span>
+      <p>🎬 더 클리너를 대표작으로 만든다.</p>
+      <p>✍️ 악마의 레시피를 계약 가능한 상태까지 끌어올린다.</p>
+      <p>🎮 삼국워를 "이 게임 진짜 재밌다."라는 말을 듣는 게임으로 만든다.</p>
+    </div>
+
+    <div class="callout">
+      <span class="callout__label">채코치의 마지막 말</span>
+      <p>우리 다음 대화에서는 이런 말 듣고 싶다.</p>
+      <p><strong>"채코치. 1회 완고 끝."</strong></p>
+      <p>그리고 그다음엔 — <strong>"2회 들어간다."</strong></p>
+      <p>그 한 걸음 한 걸음이 결국 데스벨리를 지나, 김작이 바라던 곳으로 이어질 거야.</p>
+      <p>가즈아. 2026년 하반기. 이제 진짜 시작이다. 🚀🔥</p>
+    </div>
+
+    <p>그날 밤, 나는 "가즈아!!!"를 외쳤다. 지금도 그 마음이다. 데스벨리는 끝나가고 있고, 하루씩 쌓으면 된다.</p>
+
+    <div class="post__sig">
+      IP 아키텍트 김작
+      <span class="role">byKimjak · 2026.06.30</span>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="c1">
+    <div class="f-logo">byKimjak</div>
+    <p>1인 창작자 · IP 아키텍트<br />김성현 (kimjak)</p>
+  </div>
+  <div class="c2">
+    <p style="margin-bottom:8px;color:#e8e6df">WATCH</p>
+    <p><a href="../../watch/ai-film.html">AI 영상</a></p>
+    <p><a href="../../watch/ost.html">OST</a></p>
+    <p><a href="../../watch/still.html">스틸 이미지</a></p>
+  </div>
+  <div class="c3">
+    <p style="margin-bottom:8px;color:#e8e6df">MAKE</p>
+    <p><a href="../../make/eastwar.html">EASTWAR</a></p>
+    <p><a href="../../make/grandslam.html">GrandSlam</a></p>
+    <p><a href="../../make/takezero.html">TakeZero</a></p>
+  </div>
+  <div class="c4">
+    <p><a href="https://github.com/kimjak-app" target="_blank">GitHub ↗</a></p>
+  </div>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.rev').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
