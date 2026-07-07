@@ -73,6 +73,11 @@
       num: '014', date: '2026 · 05 · 23',
       ko: { href: 'eastwar-devlog-014.html',    title: '화면은 그대로, 안은 완전히 갈아엎은 3일', sub: '슬롯 이관, 지원군 도착, AI 포위 — v0.65i~v0.67p' },
       en: { href: 'eastwar-devlog-014-en.html', title: 'Same Screen, A Completely Different Game Underneath', sub: 'Slot migration, reinforcement arrival, AI encirclement — v0.65i~v0.67p' }
+    },
+    {
+      num: '015', date: '2026 · 05 · 25',
+      ko: { href: 'eastwar-devlog-015.html',    title: '고유특기, 책략, 방어 도입 - 화려해진 전투', sub: '고유특기 MVP, 책략·방어 포팅, 유닛 슬롯 통합 — v0.67r~v0.68-pre' },
+      en: { href: 'eastwar-devlog-015-en.html', title: 'Unique Skills, Strategy, and Defense — Battle Gets Spectacular', sub: 'Unique skill MVP, strategy/defend porting, unit slot unification — v0.67r~v0.68-pre' }
     }
   ];
 
