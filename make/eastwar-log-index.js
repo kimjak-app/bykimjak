@@ -68,6 +68,11 @@
       num: '013', date: '2026 · 05 · 18',
       ko: { href: 'eastwar-devlog-013.html',    title: '데모가 게임이 된 3일', sub: '이동하고, 바라보고, 싸우고, 설계하다 — v0.64k ~ v0.65h' },
       en: { href: 'eastwar-devlog-013-en.html', title: 'Three Days That Turned a Demo Into a Game', sub: 'Move, face, fight, and architect — v0.64k ~ v0.65h' }
+    },
+    {
+      num: '014', date: '2026 · 05 · 23',
+      ko: { href: 'eastwar-devlog-014.html',    title: '화면은 그대로, 안은 완전히 갈아엎은 3일', sub: '슬롯 이관, 지원군 도착, AI 포위 — v0.65i~v0.67p' },
+      en: { href: 'eastwar-devlog-014-en.html', title: 'Same Screen, A Completely Different Game Underneath', sub: 'Slot migration, reinforcement arrival, AI encirclement — v0.65i~v0.67p' }
     }
   ];
 

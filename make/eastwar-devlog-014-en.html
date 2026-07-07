@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR Dev Log #013 — Three Days That Turned a Demo Into a Game · byKimjak</title>
+<title>EASTWAR Dev Log #014 — Same Screen, A Completely Different Game Underneath · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -150,10 +150,10 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #013</span>
+      <span>Dev Log #014</span>
     </div>
     <div class="lang-switch rev">
-      <a href="eastwar-devlog-013.html" class="lang-other">🇰🇷 한국어</a>
+      <a href="eastwar-devlog-014.html" class="lang-other">🇰🇷 한국어</a>
       <span class="lang-sep">|</span>
       <span class="lang-current">🇺🇸 English</span>
     </div>
@@ -164,101 +164,74 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-013">
+  <article class="devlog" id="log-014">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #013</span>
-      <h1>Three Days That Turned a Demo Into a Game</h1>
-      <h2>Move, face, fight, and architect — v0.64k ~ v0.65h</h2>
-      <span class="log-date">May 18 – May 20, 2026</span>
+      <span class="log-num">Dev Log · #014</span>
+      <h1>EASTWAR Devlog #014</h1>
+      <h2>Same Screen, A Completely Different Game Underneath</h2>
+      <span class="log-date">May 23, 2026</span>
 
       <hr />
-
-      <h3>DAY 1 · May 18 — The Game Loop Was Born</h3>
-
-      <p>The first of the three days was the most dramatic. Until the day before, movement and combat were running as a rough demo — disconnected, incomplete. Then we expanded to fullscreen and re-aligned the 2D coordinates, and everything snapped into place at once. Unit movement, attack, defense, attack range — all fixed in one go.</p>
-
-      <p>And for the first time, this flow existed:</p>
-
-      <blockquote>
-        Select Yi Sun-sin → Move → Attack or Wait → Enemy turn → Guan Yu attacks → Return to ally turn → Move again
-      </blockquote>
-
-      <p>The day before, it was a movement and attack demo. From this day, it was the basic skeleton of a turn-based battle engine. The game loop was born.</p>
-
-      <figure>
-        <img src="../assets/eastwar/screenshot-battle-fullscreen-01.png" alt="EASTWAR battle fullscreen — 4 units deployed" />
-        <figcaption>Battle 3 · Hanseong forces attempt to take Luoyang — ally panel, movement grid, and enemy panel all live</figcaption>
-      </figure>
-
-      <p>Unit facing was also solved the same day. If the enemy is to the right, the troop body faces right. If left, left. Hero portraits, banners, and HP bars never flip — only the troop token image gets the flip_h treatment. The first moment two armies genuinely faced each other.</p>
-
-      <p>Then came the post-move facing selection UI. Move → facing panel appears → choose left/right/up/down → facing saved → attack or wait. It started as text buttons, then quickly upgraded to directional arrows embedded in the adjacent grid cells around the unit.</p>
-
-      <figure>
-        <img src="../assets/eastwar/screenshot-facing-arrow-01.png" alt="Post-move 4-direction facing arrow UI" />
-        <figcaption>After moving, directional arrows appear on adjacent grid cells — the chosen facing holds until the next move</figcaption>
-      </figure>
-
-      <p>Enemy AI also got a major upgrade. Guan Yu stopped blindly chasing Yi Sun-sin and started running a Smart Move + Attack AI — BFS scanning all reachable cells, prioritizing positions where he can attack after moving. The feeling of an enemy that thinks, "if I cut this way, I can reach him," completely changed the feel of combat. That's what makes a tactical game.</p>
-
-      <p>One day. Cell blocking, rear attack, enemy AI movement, attack target selection mode, action lock after acting, right-click cancel and rollback. In terms of scope, it was practically an entire battle engine in a single session.</p>
+      <h3>What Actually Changed These Three Days</h3>
+      <p>These three days looked uneventful from the outside — still the same 2v2 battles, same arrows flying from the same spots. But underneath, the entire skeleton got swapped out.</p>
 
       <hr />
+      <h3>One Slot at a Time</h3>
+      <p>Until now, ally main, ally support, enemy main, and enemy support were each managed as separate fixed variables. That worked fine for 2v2, but it was never going to scale to 5 or 7 units.</p>
+      <p>So I migrated each slot into the new structure one at a time — ally main first, watch for two days, then ally support, and so on. Moving slowly turned out to be the safest way to avoid breaking anything.</p>
+      <ul>
+        <li>Migrated in order: ally main → ally support → enemy main → enemy support</li>
+        <li>The only rule: battle outcomes had to stay identical before and after</li>
+        <li>Click areas and facing indicators stayed linked by reference, not physically moved</li>
+      </ul>
 
-      <h3>DAY 2 · May 19 — Units Got Real Faces</h3>
+      <hr />
+      <h3>How Reinforcements Arrive</h3>
+      <p>The real goal this round: instead of all 5 units starting the fight together, reinforcements now arrive mid-battle — and with a structure that can later carry "dispatched from a neighboring city" as an actual story, once the world map exists.</p>
+      <p>Each reinforcement now carries metadata about which city it came from and why. It also triggers a short "Reinforcements Arrived!" toast the moment it enters. Getting that toast to not collide with the existing round-transition toast took a bit of a queueing fix.</p>
 
-      <p>Day two was about visuals. The placeholder units finally started wearing actual Korean, Chinese, and Japanese troop images.</p>
+      <figure style="margin:32px 0">
+        <img src="../assets/eastwar/reinforcement-arrival-toast-01.png" alt="Reinforcement arrival toast" style="width:100%;border-radius:2px" />
+        <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">In-Game · Reinforcement Arrival Toast</figcaption>
+      </figure>
 
-      <p>The infantry visual group was split into FootmanVisual.tscn. Unit body in the scene template, combat behavior in code, placement position in the Godot 2D editor — this role separation began here. Chinese cavalry art was connected to Guan Yu, and 2 ally / 2 enemy units were deployed together for the first time: Yi Sun-sin and Jeong Do-jeon vs. Guan Yu and Zhang Fei.</p>
+      <hr />
+      <h3>Making Sure Yi Sun-sin and Gwon Yul Never Get Mixed Up</h3>
+      <p>As the roster grew, hero portraits and unit identities started swapping — Yi Sun-sin's slot showing Gwon Yul's face, Guan Yu and Xiahou Dun crossing wires. With only 2 heroes it never showed; with 5, it broke immediately.</p>
+      <p>So I built a single source of truth: one rule deciding which hero belongs to which slot, referenced by name, portrait, click handling, and the info panel alike.</p>
 
-      <figure style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <figure style="margin:32px 0;display:grid;grid-template-columns:1fr 1fr;gap:16px">
         <div>
-          <img src="../assets/eastwar/screenshot-unit-panel-01.png" alt="Ally unit panel — Yi Sun-sin, Jeong Do-jeon, Gwon Yul" style="width:100%;border-radius:2px" />
-          <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Unit closeup panel — hero portrait, unit type, troop HP, and ability displayed</figcaption>
+          <img src="../assets/eastwar/screenshot-army-formation-ally-01.png" alt="Ally formation UI" style="width:100%;border-radius:2px" />
+          <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Ally Formation</figcaption>
         </div>
         <div>
-          <img src="../assets/eastwar/screenshot-action-menu-01.png" alt="Action menu — Attack, Reform, Strategy, Defend, Wait" style="width:100%;border-radius:2px" />
-          <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Action menu — Basic Attack, Reform, Strategy, Defend, and Wait in one screen</figcaption>
+          <img src="../assets/eastwar/screenshot-army-formation-enemy-01.png" alt="Enemy formation UI" style="width:100%;border-radius:2px" />
+          <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Enemy Formation</figcaption>
         </div>
       </figure>
 
-      <p>The attack UX also changed fundamentally. Auto-targeting was replaced by: press Attack → attack range highlights → click the enemy you want. The real value of this structure comes later. Hero abilities with area ranges, AoE attacks, terrain effects, buff/debuff targeting for strategic heroes like Jeong Do-jeon — all of it becomes possible on top of this foundation.</p>
-
-      <p>Multi-enemy AI was completed on day two as well. Zhang Fei started acting as an AI actor alongside Guan Yu. A golden Ready Frame now pulses on units that can still act, and spent units are visually distinguished automatically.</p>
+      <hr />
+      <h3>Closing In On the Last Surviving Unit</h3>
+      <p>Running auto-battle repeatedly turned up something odd: with only one ally unit left, five enemy units would surround it — and just stand there. Overwhelming numbers, and nobody threw the final blow.</p>
+      <p>The enemy AI turned out to be too conservative about "not needing to rush." So the logic changed: enemies now always seek an engageable position, closing in harder as the ally count shrinks, flanking around if the front is blocked.</p>
+      <p>It's not perfect yet — a unit or two still hangs back sometimes. That's next on the list.</p>
 
       <hr />
-
-      <h3>DAY 3 · May 20 — This Code Needs to Handle a Turtle Ship</h3>
-
-      <p>The third day looked quieter on the surface. A round transition toast with an ink-spread shader reveal was added. Basic battle FX — movement dust, attack slash, hit spark, floating damage numbers — were bundled into a single FX pack.</p>
-
-      <p>But the real work was something else: the UnitVisualRoot refactor.</p>
-
-      <p>The v0.65g series moved the visual nodes of all four units — Yi Sun-sin, Jeong Do-jeon, Guan Yu, Zhang Fei — into their own VisualRoot containers, step by step. And partway through, an important principle was established:</p>
-
-      <blockquote>
-        AllyUnitVisualRoot is not Yi Sun-sin's slot.<br />
-        The four Roots are test slots, nothing more.<br />
-        In the final structure, any unit should be assignable to any slot via slot_id.
-      </blockquote>
-
-      <p>The structure being built now has to be able to receive Mongol cavalry, Turtle Ships, and Panokseon warships later. Infantry occupy a 1×1 cell. A Turtle Ship might be 2×2. Movement FX for land units is dust; for naval units, it should be a water wake. Miss this now, and the whole thing breaks later.</p>
-
-      <p>So in the v0.65h series, BattleUnitState received new meta fields: slot_id, nation, domain, footprint, visual_key, portrait_key, attack_fx_profile, move_fx_profile. These aren't fields that do anything yet. They're the plumbing laid now so that when naval combat and siege units arrive, the engine doesn't have to be rebuilt from scratch.</p>
-
-      <p>At the end of three days, the battle screen looked like this: four units deployed, each with a facing direction, turns exchanging, AI calculating positions, attacks triggering effects, hero panels alive and reading. And the structure underneath was designed to receive dozens more units down the line. The demo became a game.</p>
+      <h3>What's Next</h3>
+      <p>These three days built the skeleton for true 5v5 battles. Next up: the command panel that appears on unit click, and tightening the one-click move interaction.</p>
 
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-012-en.html" class="log-nav__prev">
+      <a href="eastwar-devlog-013-en.html" class="log-nav__prev">
         <span class="log-nav__label">Previous</span>
-        <span class="log-nav__title">← Dev Log #012</span>
+        <span class="log-nav__title">← Dev Log #013</span>
       </a>
-      <a href="eastwar-devlog-014-en.html" class="log-nav__next">
+      <span class="log-nav__next">
         <span class="log-nav__label">Next</span>
-        <span class="log-nav__title">Dev Log #014 →</span>
-      </a>
+        <span class="log-nav__title" style="opacity:.35">Dev Log #015 →</span>
+      </span>
     </div>
 
   </article>
@@ -281,7 +254,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '013');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '014');
 </script>
 </body>
 </html>
