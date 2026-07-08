@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR Dev Log #016 — From Coding Requests to a Dev Studio — Splitting Roles into MD Files · byKimjak</title>
+<title>EASTWAR Dev Log #017 — World Map Ported In & the Camera Follows the Battlefield · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -150,10 +150,10 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #016</span>
+      <span>Dev Log #017</span>
     </div>
     <div class="lang-switch rev">
-      <a href="eastwar-devlog-016.html" class="lang-other">🇰🇷 한국어</a>
+      <a href="eastwar-devlog-017.html" class="lang-other">🇰🇷 한국어</a>
       <span class="lang-sep">|</span>
       <span class="lang-current">🇺🇸 English</span>
     </div>
@@ -164,67 +164,60 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-016">
+  <article class="devlog" id="log-017">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #016</span>
-      <h1>EASTWAR Devlog #016</h1>
-      <h2>From Coding Requests to a Dev Studio — Splitting Roles into MD Files</h2>
-      <span class="log-date">May 26, 2026</span>
+      <span class="log-num">Dev Log · #017</span>
+      <h1>EASTWAR Devlog #017</h1>
+      <h2>World Map Ported In & the Camera Follows the Battlefield</h2>
+      <span class="log-date">May 27, 2026</span>
 
       <hr />
-      <h3>A Day I Barely Touched the Code</h3>
-      <p>Today I barely touched the game itself. Instead, I spent the day sorting out who decides what, and when. Less like game development, more like redrawing the org chart for the AI team I work with.</p>
+      <h3>Battle Gets More Intense, and the World Starts Taking Shape</h3>
+      <p>These two days split into two directions: making the current battle feel more intense, and starting to draw the actual world this battle takes place in — the world map. They look like completely different tasks, but they're aimed at the same goal: moving from "battle demo" to "strategy game."</p>
 
       <hr />
-      <h3>Splitting One Role Into Six Documents</h3>
-      <p>Until now, I'd hand everything to the coding AI (Codex) at once — figure out the structure, implement it, and verify it, all in one request. It was convenient, but it left Codex occasionally unsure whether the current moment called for architectural judgment or just typing out code as instructed.</p>
-      <p>So today I split the roles into six md documents. Each one isn't just a description — it's a working manual: "when you're in this role, follow only this document's standard."</p>
-      <ul>
-        <li><strong>ARCHITECT_AGENT.md</strong> — Judges structure. Decides where and how a feature should connect, without writing actual code.</li>
-        <li><strong>IMPLEMENTATION_AGENT.md</strong> — Writes the actual code following the architect's structure, without re-litigating the structure itself.</li>
-        <li><strong>QA_AGENT.md</strong> — Checks the written code for warnings, errors, and regressions at the code level.</li>
-        <li><strong>RUNTIME_QA_AGENT.md</strong> — Actually runs the game to confirm the code behaves as intended.</li>
-        <li><strong>VISUAL_QA_AGENT.md</strong> — Looks at the screen directly to check whether it feels right and matches the intended visual. This one ultimately comes down to my own eyes.</li>
-        <li><strong>WORKFLOW_MANAGER.md</strong> — Tracks which stage the overall task is in — design, implementation, or verification.</li>
-      </ul>
-      <p>Think of it like how a company keeps planners, developers, QA, and a PM as separate roles. With this split, it's now clear the moment a request needs fresh architectural judgment versus just execution.</p>
+      <h3>The Camera Starts Following the Battle</h3>
+      <p>Until now, the battle camera stayed fixed no matter where units were on screen. This time, I gave it life: selecting a unit, moving, attacking, using a unique skill, or a reinforcement arriving now all pull the camera smoothly toward the action.</p>
+      <p>But moving the camera brought an unexpected side effect. As the world scrolled under the camera, things like facing arrows and post-move direction buttons would briefly appear detached from the unit's actual position. The camera moves the world, while UI elements are supposed to stay fixed on screen — and the two were using different position calculations. Syncing their timing took a few more passes.</p>
 
       <hr />
-      <h3>Why Now — Ahead of the World Map</h3>
-      <p>So far, the game has only been tested through single battles (2v2, 3v3, 5v5). But now a real world map is coming, along with a system for placing generals across it.</p>
-      <p>The problem: as the number of generals and systems grows, if the "world map code" and the "battle engine code" start knowing too much about each other's internals, fixing one thing later breaks both.</p>
-      <p>So I set one firm principle. <strong>The world map and legion system only decide who is placed where. The battle engine doesn't need to know any of that — it just receives the roster for this battle and fights.</strong></p>
-      <p>Think of it this way: command (the world map) hands over a roster — "send Yi Sun-sin, Jeong Do-jeon, and Gwon Yul to this battle" — and the battlefield (the battle engine) just takes that roster and fights. It doesn't need to know which city they belong to or why they were sent.</p>
-      <p>To keep this principle from slipping later, I set up six contract documents.</p>
-      <ul>
-        <li><strong>WORLDMAP_RULES.md</strong> — The core rules the world map runs on: cities, movement, territory.</li>
-        <li><strong>HERO_DATA_CONTRACT.md</strong> — The agreed format for a hero's data: name, stats, affiliation, and so on.</li>
-        <li><strong>ARMY_DEPLOYMENT_RULES.md</strong> — The rules for which city or legion a hero can be assigned to.</li>
-        <li><strong>BATTLE_CONTEXT_CONTRACT.md</strong> — The exact information the world map hands the battle engine when a fight starts — the "handover paperwork" between command and the battlefield.</li>
-        <li><strong>BATTLE_ENGINE_RULES.md</strong> — The internal rules for how the battle engine actually fights, once it has a roster.</li>
-        <li><strong>SKILL_SYSTEM_RULES.md</strong> — The rules unique skills and tactics have to follow.</li>
-      </ul>
-      <p>Nothing new was actually built today. But having these documents means that when the world map gets ported in for real, it can expand just by handing over a different roster — without touching a single line of battle engine code.</p>
+      <h3>Unique Skills Now Actually Land With a Punch</h3>
+      <p>When I first added the unique skill system, activating one felt like just a big popup appearing. This time I gave it real impact — a brief screen shake, an ink-burst impact effect, and timing tightened to match the short rhythm of a turn-change toast. The goal was to make it feel less like "a notice pops up and fades," and more like "a hit lands and it's gone."</p>
 
       <hr />
-      <h3>From Coding Requests to a Small Studio</h3>
-      <p>Today's work doesn't produce a single screenshot. But personally, it feels like a real turning point. Until now, it was "do this for me" thrown at a coding AI one request at a time. Starting today, it runs more like a small dev team with clearly split roles. Codex will spend a lot less time figuring out "what am I supposed to do right now" — and that time goes straight back into actually building the game.</p>
+      <h3>Finally, a Map Exists</h3>
+      <p>And the real highlight of these two days: for the first time, an actual world map image entered the project. It's split into four tiles stitched together — a setup that will make it much easier to refine or swap out individual regions later.</p>
+
+      <figure style="margin:32px 0;display:grid;grid-template-columns:1fr 1fr;gap:8px">
+        <img src="../assets/worldmap/tiles/worldmap_tile_A1_top_left.png" alt="World map top-left tile" style="width:100%;border-radius:2px" />
+        <img src="../assets/worldmap/tiles/worldmap_tile_A2_top_right.png" alt="World map top-right tile" style="width:100%;border-radius:2px" />
+        <img src="../assets/worldmap/tiles/worldmap_tile_B1_bottom_left.png" alt="World map bottom-left tile" style="width:100%;border-radius:2px" />
+        <img src="../assets/worldmap/tiles/worldmap_tile_B2_bottom_right.png" alt="World map bottom-right tile" style="width:100%;border-radius:2px" />
+        <figcaption style="grid-column:1/3;font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">World Map · 4-Tile Foundation</figcaption>
+      </figure>
+
+      <p>Placing four images on screen wasn't the whole job — the scene structure had to be set up properly from the start too: a layer for map tiles, one reserved for future roads, one for cities, one for moving armies, one for atmospheric effects like clouds and flags. Splitting things into layers by role now means anything added later won't tangle with what's already there.</p>
+
+      <hr />
+      <h3>Cities Take Their Place on the Map</h3>
+      <p>With the map in place, it was time to put cities on it. Luoyang, Pyeongyang, Hanseong, Gyeongju, Sabi, Yecheng, Chengdu, Jianye, Kyoto, Osaka, Kyushu, Edo — I placed markers one by one, based on city data already defined in the web version.</p>
+      <p>I locked in one principle here: the web version's coordinates are just a rough starting draft — "put it around here" — while the final position is whatever I drag it to in the editor by hand. At first, the map tiles and city markers were using different coordinate systems, leading to the slightly comic situation of cities floating in the gray area outside the map. I unified that. The same principle now applies to the four map tiles themselves — code no longer auto-calculates their position; whatever I set by hand in the editor is respected as-is. I also fixed city name labels not moving together with their icons.</p>
 
       <hr />
       <h3>What's Next</h3>
-      <p>With this org chart and these contracts in place, the real work of porting the world map into the engine begins.</p>
+      <p>With the map and cities in place, next comes getting armies to actually move between those cities, and connecting this world map to the battle screen the moment a fight breaks out.</p>
 
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-015-en.html" class="log-nav__prev">
+      <a href="eastwar-devlog-016-en.html" class="log-nav__prev">
         <span class="log-nav__label">Previous</span>
-        <span class="log-nav__title">← Dev Log #015</span>
+        <span class="log-nav__title">← Dev Log #016</span>
       </a>
-      <a href="eastwar-devlog-017-en.html" class="log-nav__next">
+      <span class="log-nav__next">
         <span class="log-nav__label">Next</span>
-        <span class="log-nav__title">Dev Log #017 →</span>
-      </a>
+        <span class="log-nav__title" style="opacity:.35">Dev Log #018 →</span>
+      </span>
     </div>
 
   </article>
@@ -247,7 +240,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '016');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '017');
 </script>
 </body>
 </html>
