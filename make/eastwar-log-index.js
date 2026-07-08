@@ -88,6 +88,11 @@
       num: '017', date: '2026 · 05 · 27',
       ko: { href: 'eastwar-devlog-017.html',    title: '월드맵 이식 & 카메라가 전장을 따라 다닌다', sub: 'Camera2D 포커스 팔로우, 고유특기 임팩트 연출, 월드맵 4타일·도시 마커 — v0.68~v0.68b' },
       en: { href: 'eastwar-devlog-017-en.html', title: 'World Map Ported In & the Camera Follows the Battlefield', sub: 'Camera2D focus-follow, unique skill impact FX, world map 4-tile & city markers — v0.68~v0.68b' }
+    },
+    {
+      num: '018', date: '2026 · 05 · 29',
+      ko: { href: 'eastwar-devlog-018.html',    title: '월드맵에서 전투까지, 이어졌다', sub: '도시 HUD, 턴 사이클, 침공-전투 연동, 병력 회계 — v0.68b, 이식률 88%' },
+      en: { href: 'eastwar-devlog-018-en.html', title: 'From World Map to Battle, Fully Connected', sub: 'City HUD, turn cycle, invasion-battle handoff, troop accounting — v0.68b, 88% parity' }
     }
   ];
 
