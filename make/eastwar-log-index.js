@@ -83,6 +83,11 @@
       num: '016', date: '2026 · 05 · 26',
       ko: { href: 'eastwar-devlog-016.html',    title: '코딩요청에서 개발 스튜디오로 - MD 파일 세분화 계획과 실행', sub: '서브에이전트 역할 분리, 월드맵 구조 계약서 — v0.68 진입 준비' },
       en: { href: 'eastwar-devlog-016-en.html', title: 'From Coding Requests to a Dev Studio — Splitting Roles into MD Files', sub: 'Sub-agent role split, world map structure contracts — preparing for v0.68' }
+    },
+    {
+      num: '017', date: '2026 · 05 · 27',
+      ko: { href: 'eastwar-devlog-017.html',    title: '월드맵 이식 & 카메라가 전장을 따라 다닌다', sub: 'Camera2D 포커스 팔로우, 고유특기 임팩트 연출, 월드맵 4타일·도시 마커 — v0.68~v0.68b' },
+      en: { href: 'eastwar-devlog-017-en.html', title: 'World Map Ported In & the Camera Follows the Battlefield', sub: 'Camera2D focus-follow, unique skill impact FX, world map 4-tile & city markers — v0.68~v0.68b' }
     }
   ];
 
