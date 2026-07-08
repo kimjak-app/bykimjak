@@ -176,16 +176,16 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <p>Today I barely touched the game itself. Instead, I spent the day sorting out who decides what, and when. Less like game development, more like redrawing the org chart for the AI team I work with.</p>
 
       <hr />
-      <h3>Splitting One Role Into Many</h3>
+      <h3>Splitting One Role Into Six Documents</h3>
       <p>Until now, I'd hand everything to the coding AI (Codex) at once — figure out the structure, implement it, and verify it, all in one request. It was convenient, but it left Codex occasionally unsure whether the current moment called for architectural judgment or just typing out code as instructed.</p>
-      <p>So today I split the roles into separate documents:</p>
+      <p>So today I split the roles into six md documents. Each one isn't just a description — it's a working manual: "when you're in this role, follow only this document's standard."</p>
       <ul>
-        <li>The one who judges structure (Architect)</li>
-        <li>The one who actually writes code (Implementation)</li>
-        <li>The one who checks the code is sound (QA)</li>
-        <li>The one who checks the game actually runs (Runtime QA)</li>
-        <li>The one who checks it looks right on screen (Visual QA)</li>
-        <li>The one who tracks which stage the whole task is in (Workflow Manager)</li>
+        <li><strong>ARCHITECT_AGENT.md</strong> — Judges structure. Decides where and how a feature should connect, without writing actual code.</li>
+        <li><strong>IMPLEMENTATION_AGENT.md</strong> — Writes the actual code following the architect's structure, without re-litigating the structure itself.</li>
+        <li><strong>QA_AGENT.md</strong> — Checks the written code for warnings, errors, and regressions at the code level.</li>
+        <li><strong>RUNTIME_QA_AGENT.md</strong> — Actually runs the game to confirm the code behaves as intended.</li>
+        <li><strong>VISUAL_QA_AGENT.md</strong> — Looks at the screen directly to check whether it feels right and matches the intended visual. This one ultimately comes down to my own eyes.</li>
+        <li><strong>WORKFLOW_MANAGER.md</strong> — Tracks which stage the overall task is in — design, implementation, or verification.</li>
       </ul>
       <p>Think of it like how a company keeps planners, developers, QA, and a PM as separate roles. With this split, it's now clear the moment a request needs fresh architectural judgment versus just execution.</p>
 
@@ -195,7 +195,16 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <p>The problem: as the number of generals and systems grows, if the "world map code" and the "battle engine code" start knowing too much about each other's internals, fixing one thing later breaks both.</p>
       <p>So I set one firm principle. <strong>The world map and legion system only decide who is placed where. The battle engine doesn't need to know any of that — it just receives the roster for this battle and fights.</strong></p>
       <p>Think of it this way: command (the world map) hands over a roster — "send Yi Sun-sin, Jeong Do-jeon, and Gwon Yul to this battle" — and the battlefield (the battle engine) just takes that roster and fights. It doesn't need to know which city they belong to or why they were sent.</p>
-      <p>To hold this principle, I'm setting up a handful of contract documents — world map rules, hero data format, army deployment rules, the info format handed off when battle starts, battle engine rules, and skill system rules. Nothing new was actually built today. But having these documents means that when the world map gets ported in for real, it can expand just by handing over a different roster — without touching a single line of battle engine code.</p>
+      <p>To keep this principle from slipping later, I set up six contract documents.</p>
+      <ul>
+        <li><strong>WORLDMAP_RULES.md</strong> — The core rules the world map runs on: cities, movement, territory.</li>
+        <li><strong>HERO_DATA_CONTRACT.md</strong> — The agreed format for a hero's data: name, stats, affiliation, and so on.</li>
+        <li><strong>ARMY_DEPLOYMENT_RULES.md</strong> — The rules for which city or legion a hero can be assigned to.</li>
+        <li><strong>BATTLE_CONTEXT_CONTRACT.md</strong> — The exact information the world map hands the battle engine when a fight starts — the "handover paperwork" between command and the battlefield.</li>
+        <li><strong>BATTLE_ENGINE_RULES.md</strong> — The internal rules for how the battle engine actually fights, once it has a roster.</li>
+        <li><strong>SKILL_SYSTEM_RULES.md</strong> — The rules unique skills and tactics have to follow.</li>
+      </ul>
+      <p>Nothing new was actually built today. But having these documents means that when the world map gets ported in for real, it can expand just by handing over a different roster — without touching a single line of battle engine code.</p>
 
       <hr />
       <h3>From Coding Requests to a Small Studio</h3>
