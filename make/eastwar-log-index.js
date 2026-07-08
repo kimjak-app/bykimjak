@@ -78,6 +78,11 @@
       num: '015', date: '2026 · 05 · 25',
       ko: { href: 'eastwar-devlog-015.html',    title: '고유특기, 책략, 방어 도입 - 화려해진 전투', sub: '고유특기 MVP, 책략·방어 포팅, 유닛 슬롯 통합 — v0.67r~v0.68-pre' },
       en: { href: 'eastwar-devlog-015-en.html', title: 'Unique Skills, Strategy, and Defense — Battle Gets Spectacular', sub: 'Unique skill MVP, strategy/defend porting, unit slot unification — v0.67r~v0.68-pre' }
+    },
+    {
+      num: '016', date: '2026 · 05 · 26',
+      ko: { href: 'eastwar-devlog-016.html',    title: '코딩요청에서 개발 스튜디오로 - MD 파일 세분화 계획과 실행', sub: '서브에이전트 역할 분리, 월드맵 구조 계약서 — v0.68 진입 준비' },
+      en: { href: 'eastwar-devlog-016-en.html', title: 'From Coding Requests to a Dev Studio — Splitting Roles into MD Files', sub: 'Sub-agent role split, world map structure contracts — preparing for v0.68' }
     }
   ];
 

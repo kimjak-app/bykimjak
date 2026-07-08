@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR Dev Log #015 — Unique Skills, Strategy, and Defense — Battle Gets Spectacular · byKimjak</title>
+<title>EASTWAR Dev Log #016 — From Coding Requests to a Dev Studio — Splitting Roles into MD Files · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -150,10 +150,10 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #015</span>
+      <span>Dev Log #016</span>
     </div>
     <div class="lang-switch rev">
-      <a href="eastwar-devlog-015.html" class="lang-other">🇰🇷 한국어</a>
+      <a href="eastwar-devlog-016.html" class="lang-other">🇰🇷 한국어</a>
       <span class="lang-sep">|</span>
       <span class="lang-current">🇺🇸 English</span>
     </div>
@@ -164,78 +164,58 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-015">
+  <article class="devlog" id="log-016">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #015</span>
-      <h1>EASTWAR Devlog #015</h1>
-      <h2>Unique Skills, Strategy, and Defense — Battle Gets Spectacular</h2>
-      <span class="log-date">May 25, 2026</span>
+      <span class="log-num">Dev Log · #016</span>
+      <h1>EASTWAR Devlog #016</h1>
+      <h2>From Coding Requests to a Dev Studio — Splitting Roles into MD Files</h2>
+      <span class="log-date">May 26, 2026</span>
 
       <hr />
-      <h3>Two Days Where Battle Gained Both Style and Substance</h3>
-      <p>If the previous three days were about invisible plumbing — slot structure, reinforcements, AI surrounding — these two days were the opposite. The bottom command bar got real art, heroes finally started using their own unique skills, and defending became an actual option. Both the look and the depth of battle leveled up at the same time.</p>
+      <h3>A Day I Barely Touched the Code</h3>
+      <p>Today I barely touched the game itself. Instead, I spent the day sorting out who decides what, and when. Less like game development, more like redrawing the org chart for the AI team I work with.</p>
 
       <hr />
-      <h3>Dressing Up the Bottom Command Bar</h3>
-      <p>The three bottom command buttons had been using default styling until now. I first built a structure that could hold real art assets — designed so the project wouldn't break even if some PNGs weren't ready yet, gracefully falling back to the old button style. Then I wired in the actual PNGs and replaced the temporary black background panel with a real one. Alongside that, the Formation Guide card got a more compact, polished strategy-game layout.</p>
+      <h3>Splitting One Role Into Many</h3>
+      <p>Until now, I'd hand everything to the coding AI (Codex) at once — figure out the structure, implement it, and verify it, all in one request. It was convenient, but it left Codex occasionally unsure whether the current moment called for architectural judgment or just typing out code as instructed.</p>
+      <p>So today I split the roles into separate documents:</p>
+      <ul>
+        <li>The one who judges structure (Architect)</li>
+        <li>The one who actually writes code (Implementation)</li>
+        <li>The one who checks the code is sound (QA)</li>
+        <li>The one who checks the game actually runs (Runtime QA)</li>
+        <li>The one who checks it looks right on screen (Visual QA)</li>
+        <li>The one who tracks which stage the whole task is in (Workflow Manager)</li>
+      </ul>
+      <p>Think of it like how a company keeps planners, developers, QA, and a PM as separate roles. With this split, it's now clear the moment a request needs fresh architectural judgment versus just execution.</p>
 
       <hr />
-      <h3>Heroes Finally Use Their Own Skills</h3>
-      <p>The real centerpiece of these two days was the Unique Skill system. All 10 heroes currently in battle now have their own signature move. When Yi Sun-sin unleashes his Crane Wing Formation, "Crane Wing Barrage!" appears on screen, a big red damage number 1.5x stronger than a normal attack pops up, and the screen shakes briefly. I also refined how it triggers — instead of firing instantly on button press, it now shows the range and target first, requiring a click to confirm, so it feels like you're actually aiming it yourself.</p>
-      <p>I then extended this to auto-battle and enemy AI. That surfaced an unexpected problem: enemies started favoring skills so heavily they'd spam them from a distance instead of closing in to fight. So I reset the priority — skills should only be used when they're actually worth it, keeping basic attacks and movement pressure alive.</p>
-
-      <figure style="margin:32px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:12px">
-        <div>
-          <img src="../assets/eastwar/cutin-liubei-01.png" alt="Liu Bei unique skill cutin" style="width:100%;border-radius:2px" />
-          <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Liu Bei</figcaption>
-        </div>
-        <div>
-          <img src="../assets/eastwar/cutin-sunsin-02.png" alt="Yi Sun-sin unique skill cutin" style="width:100%;border-radius:2px" />
-          <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Yi Sun-sin</figcaption>
-        </div>
-        <div>
-          <img src="../assets/eastwar/cutin-zhangfei-01.png" alt="Zhang Fei unique skill cutin" style="width:100%;border-radius:2px" />
-          <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Zhang Fei</figcaption>
-        </div>
-        <div>
-          <img src="../assets/eastwar/cutin-jeong-02.png" alt="Jeong Do-jeon unique skill cutin" style="width:100%;border-radius:2px" />
-          <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Jeong Do-jeon</figcaption>
-        </div>
-        <div>
-          <img src="../assets/eastwar/cutin-guanyu-01.png" alt="Guan Yu unique skill cutin" style="width:100%;border-radius:2px" />
-          <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Guan Yu</figcaption>
-        </div>
-      </figure>
+      <h3>Why Now — Ahead of the World Map</h3>
+      <p>So far, the game has only been tested through single battles (2v2, 3v3, 5v5). But now a real world map is coming, along with a system for placing generals across it.</p>
+      <p>The problem: as the number of generals and systems grows, if the "world map code" and the "battle engine code" start knowing too much about each other's internals, fixing one thing later breaks both.</p>
+      <p>So I set one firm principle. <strong>The world map and legion system only decide who is placed where. The battle engine doesn't need to know any of that — it just receives the roster for this battle and fights.</strong></p>
+      <p>Think of it this way: command (the world map) hands over a roster — "send Yi Sun-sin, Jeong Do-jeon, and Gwon Yul to this battle" — and the battlefield (the battle engine) just takes that roster and fights. It doesn't need to know which city they belong to or why they were sent.</p>
+      <p>To hold this principle, I'm setting up a handful of contract documents — world map rules, hero data format, army deployment rules, the info format handed off when battle starts, battle engine rules, and skill system rules. Nothing new was actually built today. But having these documents means that when the world map gets ported in for real, it can expand just by handing over a different roster — without touching a single line of battle engine code.</p>
 
       <hr />
-      <h3>Even Death Got an Expression</h3>
-      <p>Units used to just vanish when knocked out of battle. Now, when an enemy falls, their portrait, name, and a short retreat line appear on screen; allies get a matching "down" toast when incapacitated. At first it seemed like the feature wasn't showing up at all — turned out the logic already existed, it just wasn't wired to the display. Tracking down the actual cause meant I could fix it cleanly instead of building a duplicate system.</p>
-
-      <hr />
-      <h3>Porting Strategy and Defend from the Web Version</h3>
-      <p>I ported the strategy (Tactics) system that already existed in the web version (SamWar_web) directly into the Godot battle engine, without inventing any new menu — just following the web structure as-is. Alongside it, I added a Defend command: choosing it reduces damage and heals a portion of wounded troops, slotted into the spot where the move button used to be.</p>
-      <p>Status displays got a real cleanup too — Defend now shows as ◆, Attack Up as ▲, with a unified icon system and a toned-down color palette that no longer looks harsh. I also fixed the formation card layout so troop-type icons and status text no longer overflow the card, collapsing extra statuses into "+N more" when there are too many to show.</p>
-
-      <hr />
-      <h3>Toward Scene-Editable Unit Layout</h3>
-      <p>The last piece was invisible but the most important for what's ahead. Until now, a unit's portrait, HP bar, troop count, click area, and facing indicator were each managed separately across the code. I started grouping all of these under a single slot, so that eventually, dragging a slot's position in the editor will move everything tied to it together.</p>
-      <p>It's not fully done yet — after moving and saving a slot, some units still spawn at their old position on run. The cause: the actual spawn point still lives on an older marker node rather than the slot itself. That's next on the list.</p>
+      <h3>From Coding Requests to a Small Studio</h3>
+      <p>Today's work doesn't produce a single screenshot. But personally, it feels like a real turning point. Until now, it was "do this for me" thrown at a coding AI one request at a time. Starting today, it runs more like a small dev team with clearly split roles. Codex will spend a lot less time figuring out "what am I supposed to do right now" — and that time goes straight back into actually building the game.</p>
 
       <hr />
       <h3>What's Next</h3>
-      <p>The next big piece is expanding the battlefield to its final size and adding walkable/blocked terrain. Once that's locked in, it'll be time to revisit how enemy units move together as a group.</p>
+      <p>With this org chart and these contracts in place, the real work of porting the world map into the engine begins.</p>
 
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-014-en.html" class="log-nav__prev">
+      <a href="eastwar-devlog-015-en.html" class="log-nav__prev">
         <span class="log-nav__label">Previous</span>
-        <span class="log-nav__title">← Dev Log #014</span>
+        <span class="log-nav__title">← Dev Log #015</span>
       </a>
-      <a href="eastwar-devlog-016-en.html" class="log-nav__next">
+      <span class="log-nav__next">
         <span class="log-nav__label">Next</span>
-        <span class="log-nav__title">Dev Log #016 →</span>
-      </a>
+        <span class="log-nav__title" style="opacity:.35">Dev Log #017 →</span>
+      </span>
     </div>
 
   </article>
@@ -258,7 +238,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '015');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '016');
 </script>
 </body>
 </html>
