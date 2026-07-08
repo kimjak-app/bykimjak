@@ -93,6 +93,11 @@
       num: '018', date: '2026 · 05 · 29',
       ko: { href: 'eastwar-devlog-018.html',    title: '월드맵에서 전투까지, 이어졌다', sub: '도시 HUD, 턴 사이클, 침공-전투 연동, 병력 회계 — v0.68b, 이식률 88%' },
       en: { href: 'eastwar-devlog-018-en.html', title: 'From World Map to Battle, Fully Connected', sub: 'City HUD, turn cycle, invasion-battle handoff, troop accounting — v0.68b, 88% parity' }
+    },
+    {
+      num: '019', date: '2026 · 05 · 30',
+      ko: { href: 'eastwar-devlog-019.html',    title: '민심에서 첩보까지, 국가 시뮬레이션의 완성', sub: '민심·충성도, 징병·반란경고, 국가/도시 테크트리, 무역·외교·첩보 — v0.69 시리즈' },
+      en: { href: 'eastwar-devlog-019-en.html', title: 'From Public Support to Espionage — A Nation Simulation Complete', sub: 'Public support & loyalty, conscription & revolt warnings, national/city tech trees, trade, diplomacy, espionage — v0.69 series' }
     }
   ];
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR 개발일지 #018 — 월드맵에서 전투까지, 이어졌다 · byKimjak</title>
+<title>EASTWAR 개발일지 #019 — 민심에서 첩보까지, 국가 시뮬레이션의 완성 · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -153,12 +153,12 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #018</span>
+      <span>Dev Log #019</span>
     </div>
     <div class="lang-switch rev">
       <span class="lang-current">🇰🇷 한국어</span>
       <span class="lang-sep">|</span>
-      <a href="eastwar-devlog-018-en.html" class="lang-other">🇺🇸 English</a>
+      <a href="eastwar-devlog-019-en.html" class="lang-other">🇺🇸 English</a>
     </div>
     <h1 class="rev">EASTWAR</h1>
     <p class="sub-ko rev">이스트워 개발일지</p>
@@ -167,84 +167,82 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-018">
+  <article class="devlog" id="log-019">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #018</span>
-      <h1>EASTWAR 개발일지 #018</h1>
-      <h2>월드맵에서 전투까지, 이어졌다</h2>
-      <span class="log-date">2026년 5월 29일</span>
+      <span class="log-num">Dev Log · #019</span>
+      <h1>EASTWAR 개발일지 #019</h1>
+      <h2>민심에서 첩보까지, 국가 시뮬레이션의 완성</h2>
+      <span class="log-date">2026년 5월 30일</span>
 
       <figure style="margin:0 0 32px">
-        <img src="../assets/eastwar/cover-devlog-018-01.png" alt="장비 장판파 전투 일러스트" style="width:100%;border-radius:2px" />
+        <img src="../assets/eastwar/cover-devlog-019-01.png" alt="관우 전투 일러스트" style="width:100%;border-radius:2px" />
       </figure>
 
       <hr />
-      <h3>지도 위 도시가 살아 움직이기 시작했다</h3>
-      <p>지난번엔 지도가 생기고 도시가 그 위에 자리를 잡았다. 이번 이틀은 그 도시들이 실제로 뭔가를 하게 만드는 시간이었다. 클릭하면 정보가 뜨고, 턴이 돌아가고, 적이 쳐들어오고, 전투가 벌어지고, 그 결과가 다시 지도로 돌아온다 — 이 한 바퀴를 처음으로 완성한 이틀이다.</p>
+      <h3>이제 지도 위에 진짜 나라를 얹는다</h3>
+      <p>저번 편에서 월드맵과 전투가 하나의 루프로 이어졌다. 이번엔 그 위에 "살아있는 나라"를 얹는 작업이었다. 전쟁만 하는 게 아니라, 백성을 먹여 살리고, 세금을 걷고, 기술을 연구하고, 다른 나라와 대화하고, 몰래 정보를 캐는 — 진짜 전략 게임의 속살이 이번에 대부분 생겼다.</p>
 
       <hr />
-      <h3>도시를 클릭하면 뭔가 뜬다</h3>
-      <p>도시 마커를 눌렀을 때 정보 패널이 뜨게 만들었다. 이번에도 원칙은 새로 만들지 않는 것 — 이미 웹 버전에 있던 도시 정보창, 재상·태수 얼굴, 정책 UI 구조를 그대로 가져와 고도 엔진에 맞게 줄여서 이식했다. 국가 창고 표시도 손봤다. 원래는 "쌀 300 / 소금 120 / 금전 500" 같은 텍스트가 줄줄이 나열되던 걸, 자원별 카드 하나하나에 현재값·최대값·상태(안정/부족)가 딱 정리되어 보이는 형태로 바꿨다.</p>
+      <h3>민심과 충성도, 서로 다른 두 개의 축</h3>
+      <p>지금까지는 충성도 하나만 있었다. 이번엔 여기에 민심이라는 축을 하나 더 만들었다. 둘을 확실히 구분한 게 중요했다. 민심은 백성이 지금 얼마나 잘 먹고 잘사는지를 보여주고, 충성도는 그 나라에 얼마나 순응하는지를 보여준다. 그리고 이 둘은 매 턴 바로바로 흔들리지 않는다. 계절이 바뀔 때마다 — 민심이 높으면 충성도가 조금씩 오르고, 낮으면 조금씩 떨어진다. 즉 민심이 원인이고, 충성도는 그 결과로 천천히 따라오는 구조다.</p>
+
+      <hr />
+      <h3>병력 이동에도 대가가 있다</h3>
+      <p>예전엔 병력 100명을 다른 도시로 옮기면 그냥 100명이 그대로 도착했다. 이제는 다르다. 출발 도시의 충성도가 낮으면 이동 중에 일부가 이탈하거나 낙오한다. 충성도 100이면 100명이 그대로 도착하지만, 충성도 50이면 절반만 도착하고 나머지는 길에서 사라진다. 충성도가 단순한 숫자가 아니라 실제로 군사 운영에 영향을 주는 요소가 된 거다.</p>
+
+      <hr />
+      <h3>징병과 모병, 그리고 자라나는 군사력</h3>
+      <p>충성도가 높은 도시일수록 더 많은 병사를 새로 모을 수 있게 만들었다. 충성도가 낮으면 모병률이 5%에 그치지만, 충성도가 가득 차면 절반까지 올라간다. 여기에 식량도 관여한다. 쌀부터 먼저 쓰고, 떨어지면 보리, 그것도 떨어지면 수산물 순서로 소모되는데, 겨울철에 쌀·보리를 다 써버렸다면 수산물로라도 병사를 모을 수 있는 나름의 전략적 선택지가 생긴 셈이다.</p>
 
       <figure style="margin:32px 0">
-        <img src="../assets/eastwar/screenshot-city-info-panel-01.png" alt="한성 도시 정보 패널" style="width:100%;border-radius:2px" />
-        <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">City Info Panel · Hanseong</figcaption>
+        <img src="../assets/eastwar/scene-caocao-rally-01.png" alt="조조의 함성, 군세를 이끄는 장면" style="width:100%;border-radius:2px" />
       </figure>
 
       <hr />
-      <h3>턴이 돌아가기 시작했다</h3>
-      <p>내 턴을 마치면 적 턴으로 넘어가고, 다시 내 턴이 온다 — 당연해 보이지만 이게 처음 생긴 순간이다. 턴 숫자, 월, 계절이 갱신되고 화면이 새로고침 된다. 아직 이 시점엔 적이 실제로 쳐들어오는 건 넣지 않았다. 순서만 먼저 확실히 닫아두는 게 우선이었다.</p>
+      <h3>반란은 갑자기 오지 않는다</h3>
+      <p>민심과 충성도가 둘 다 바닥을 치면 그 도시는 위험 신호를 보낸다. 안정 / 경고 / 위험 세 단계로 나눠서 표시하고, 아직 실제로 반란이 일어나거나 도시가 넘어가는 것까지는 만들지 않았다. 대신 미리 경고만 보여주기로 했다. 예고 없이 갑자기 도시를 잃는 것보다, "이 도시가 위험하다"는 신호를 먼저 주고 대응할 기회를 주는 쪽이 훨씬 납득 가는 경험이라고 생각했다.</p>
 
       <hr />
-      <h3>적이 진짜로 쳐들어온다</h3>
-      <p>턴 사이클이 닫히고 나서, 진짜 침공을 넣었다. 내 턴이 끝나면 일정 확률로 적이 침공을 굴린다. 적 도시 중 내 도시와 맞닿아 있는 곳이 있으면 그곳을 노린다. 이때 곧바로 전투로 넘어가지 않고, "적군이 한성을 침공하려 합니다" 같은 카드가 먼저 뜨고, 내가 직접 방어할지 자동으로 방어할지 고르게 만들었다. 예고 없이 갑자기 전투가 시작되는 것보다, 위기를 미리 보여주고 선택하게 하는 쪽이 훨씬 게임답다고 생각했다.</p>
+      <h3>기술이 나라를 키운다</h3>
+      <p>국가 전체가 연구하는 기술과, 도시마다 따로 연구하는 기술을 나눠서 데이터부터 잡았다. 화폐를 통일해야 조폐소가 열리고, 군사 개혁을 마쳐야 철갑보병과 거북선 같은 상위 유닛이 열리는 식으로 기술들이 서로 물려있다. 특히 거북선은 조건에 "이순신이 있어야 한다"는 항목을 못박아 뒀다. 이순신 없이는 만들 수 없는 배 — 이건 절대 예외를 두지 않기로 했다.</p>
 
       <hr />
-      <h3>월드맵에서 전투로, 그리고 다시 월드맵으로</h3>
-      <p>이제 진짜 어려운 부분. 침공 선택이 끝나면 그 정보를 전투 엔진이 이해할 수 있는 형태로 포장해서 넘겨야 한다. 누가 공격하고 누가 방어하는지, 어떤 장수가 몇 명을 데리고 가는지 — 이 모든 정보가 전투 화면까지 그대로 살아서 넘어가게 만들었다. 전투가 끝나면 그 결과(승패, 병력 손실)가 다시 월드맵으로 돌아와서 도시 소유권과 병력에 반영된다. 월드맵과 전투 엔진, 완전히 따로 만들었던 두 세계가 처음으로 서로 대화하기 시작한 거다.</p>
+      <h3>시세판이 생겼다</h3>
+      <p>지금까지 무역은 그냥 정해진 루트 수입이었는데, 이번엔 자원마다 기준 가격을 만들고 계절이나 상황에 따라 시세가 움직이게 만들었다. 아직 직접 사고파는 무역 UI까지는 없지만, 나중에 특산물 거래나 외교 협정이 붙을 자리를 미리 깔아둔 셈이다.</p>
 
-      <figure style="margin:32px 0;display:grid;grid-template-columns:1fr 1fr;gap:16px">
-        <div>
-          <img src="../assets/eastwar/battle-result-victory-01.png" alt="전투 승리 결과 연출" style="width:100%;border-radius:2px" />
-          <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Victory</figcaption>
-        </div>
-        <div>
-          <img src="../assets/eastwar/battle-result-defeat-01.png" alt="전투 패배 결과 연출" style="width:100%;border-radius:2px" />
-          <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Defeat</figcaption>
-        </div>
+      <hr />
+      <h3>외교, 전쟁 말고 다른 방법</h3>
+      <p>다른 세력과의 관계를 점수(0~100)와 상태(동맹/중립/적대/단절)로 만들었다. 그리고 첫 외교 행동으로 조공을 넣었다. 금전과 비단을 써서 관계 점수를 올리는 건데, 아직 동맹 제안이나 선전포고 같은 건 다음 단계로 미뤘다.</p>
+
+      <figure style="margin:32px 0">
+        <img src="../assets/eastwar/screenshot-diplomacy-panel-01.png" alt="외교 패널 UI" style="width:100%;border-radius:2px" />
+        <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Diplomacy Panel · Goguryeo</figcaption>
       </figure>
 
       <hr />
-      <h3>사라졌던 장수가 전장에 나타난 사건</h3>
-      <p>이 과정에서 좀 웃긴 버그를 하나 잡았다. 백제가 침공했는데, 전혀 상관없는 성도 소속 유비랑 제갈량이 지원군으로 전장에 나타난 거다. 처음엔 월드맵의 지원군 후보를 고르는 로직이 잘못된 줄 알았는데, 파고들어 보니 원인은 완전히 다른 곳에 있었다. 전투 슬롯이 비어있을 때 예전에 테스트용으로 넣어둔 "샘플 장수 명단"이 자동으로 그 자리를 채우고 있었던 거다. 원인을 제대로 찾은 덕분에, "월드맵에서 온 전투는 진짜 명단만 쓰고, 자리가 비면 그냥 비워둔다"는 규칙으로 깔끔하게 정리했다.</p>
+      <h3>첩보 — 보이지 않는 전장</h3>
+      <p>정치 능력이 높은 재상이 있어야 첩보가 가능하게 만들었다. 처음엔 적 도시의 정보를 몰래 알아내는 것부터 시작했고, 그 다음엔 민심을 흔드는 공작도 넣었다. 정치 적성이 높을수록 더 크게 흔들 수 있지만, 발각되면 오히려 관계가 크게 나빠지고 효과도 없다. 전쟁을 하지 않고도 판을 흔들 수 있는 수단이 생긴 거다.</p>
 
-      <hr />
-      <h3>다치고, 포로가 되고, 회복되고</h3>
-      <p>전투에 나갔다가 진 장수가 그냥 아무 일 없다는 듯 돌아오는 것도 이상해서, 상태라는 개념을 넣었다. 부상당하면 몇 턴 동안 전투력이 떨어지고, 시간이 지나면 회복된다. 포로로 잡히면 그 장수는 회복 전까지 전투에 나갈 수 없다. 아직 포로를 구출한다거나 하는 깊은 시스템까지는 아니고, "다치면 약해지고, 잡히면 못 싸운다"는 최소한의 규칙만 살아있다.</p>
-
-      <hr />
-      <h3>이제 내가 먼저 치는 것도 된다</h3>
-      <p>지금까지는 적이 쳐들어오는 것만 가능했는데, 이번엔 반대로 내가 적 도시를 먼저 공격하는 흐름도 만들었다. 바로 전투로 들어가지 않고, 어떤 장수를 보낼지 고르고 병력을 얼마나 배정할지 정하고 식량·금·소금 같은 출정 비용을 확인하는 "출정 준비" 단계를 거치게 했다.</p>
-
-      <hr />
-      <h3>웹버전 따라잡기, 88%</h3>
-      <p>이 모든 걸 만들면서 계속 웹 버전과 하나하나 대조했다. 병력이 실제로 줄고, 살아남고, 부상당하는 계산 방식부터 전투 결과가 도시에 반영되는 방식까지 — 지금 기준으로 원래 웹 버전 대비 약 88%까지 따라잡았다. 처음엔 84%로 봤는데, 최근 커밋을 다시 확인하니 더 올라와 있었다.</p>
+      <figure style="margin:32px 0">
+        <img src="../assets/eastwar/screenshot-espionage-panel-01.png" alt="첩보 패널 UI" style="width:100%;border-radius:2px" />
+        <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Espionage Panel · Goguryeo</figcaption>
+      </figure>
 
       <hr />
       <h3>다음 이야기</h3>
-      <p>이제 지도, 도시, 턴, 침공, 전투가 한 바퀴로 이어졌다. 다음 편은 이 위에 진짜 "살아있는 나라"를 얹는 이야기다. 민심과 충성도, 징병과 반란, 테크트리와 외교, 첩보까지 — 전쟁 말고도 판을 뒤집을 수 있는 부분들이 그 다음이다.</p>
+      <p>민심 → 충성도 → 징병 → 반란, 기술 → 무역, 외교 → 첩보. 이번에 전쟁 말고도 나라를 굴리고 판을 흔드는 축들이 대부분 생겼다. 다음 편은 이 로직들 위에 진짜 손으로 만지는 느낌의 UI를 입히는 마무리 단계다.</p>
 
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-017.html" class="log-nav__prev">
+      <a href="eastwar-devlog-018.html" class="log-nav__prev">
         <span class="log-nav__label">이전</span>
-        <span class="log-nav__title">← Dev Log #017</span>
+        <span class="log-nav__title">← Dev Log #018</span>
       </a>
-      <a href="eastwar-devlog-019.html" class="log-nav__next">
+      <span class="log-nav__next">
         <span class="log-nav__label">다음</span>
-        <span class="log-nav__title">Dev Log #019 →</span>
-      </a>
+        <span class="log-nav__title" style="opacity:.35">Dev Log #020 →</span>
+      </span>
     </div>
 
   </article>
@@ -267,7 +265,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '018');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '019');
 </script>
 </body>
 </html>
