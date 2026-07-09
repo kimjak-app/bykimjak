@@ -11,6 +11,13 @@
       date: '2026-07-09', dl: '2026 · 07 · 09'
     },
     {
+      url: 'make/eastwar-devlog-022.html',
+      catKey: 'eastwar', cat: 'Architect Notes',
+      title: '성격, 목표, 그리고 압박 — 적 AI를 설계하다',
+      sub: '적 세력 성향·목표 시스템, 외교·첩보 배경 활동, 턴 충돌 방지 안전장치',
+      date: '2026-06-25', dl: '2026 · 06 · 25'
+    },
+    {
       url: 'make/eastwar-devlog-021.html',
       catKey: 'eastwar', cat: 'Architect Notes',
       title: '보이지 않는 절반 — 월드맵 국정 시스템이 살아나기까지',
