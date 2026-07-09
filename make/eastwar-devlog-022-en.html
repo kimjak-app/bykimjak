@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR 개발일지 #021 — 보이지 않는 절반 · byKimjak</title>
+<title>EASTWAR Dev Log #022 — Personality, Goals, and Pressure · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -153,69 +153,71 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #021</span>
+      <span>Dev Log #022</span>
     </div>
     <div class="lang-switch rev">
-      <span class="lang-current">🇰🇷 한국어</span>
+      <a href="eastwar-devlog-022.html" class="lang-other">🇰🇷 한국어</a>
       <span class="lang-sep">|</span>
-      <a href="eastwar-devlog-021-en.html" class="lang-other">🇺🇸 English</a>
+      <span class="lang-current">🇺🇸 English</span>
     </div>
     <h1 class="rev">EASTWAR</h1>
     <p class="sub-ko rev">이스트워 개발일지</p>
-    <p class="listing-desc rev">전략 가상역사 시뮬레이션 — 1인 개발 기록</p>
+    <p class="listing-desc rev">Strategy alt-history simulation — solo dev log</p>
   </div>
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-021">
+  <article class="devlog" id="log-022">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #021</span>
-      <h1>EASTWAR 개발일지 #021</h1>
-      <h2>보이지 않는 절반 — 월드맵 국정 시스템이 살아나기까지</h2>
-      <span class="log-date">2026년 6월 18일</span>
+      <span class="log-num">Dev Log · #022</span>
+      <h1>EASTWAR Dev Log #022</h1>
+      <h2>Personality, Goals, and Pressure — Designing the Enemy AI</h2>
+      <span class="log-date">June 25, 2026</span>
 
-      <p>컷인 영상 문제를 풀고 나서, 다음 작업은 완전히 다른 방향이었다. 전투 화면이 아니라 월드맵. 그동안 뼈대만 있던 국정 시스템에 실제로 만질 수 있는 살을 붙이는 작업이었다.</p>
+      <p>With the world map's domestic system finally standing on its own, the opponent moving on top of it looked way too simple. Until now, enemy factions' turns were basically placeholders — top up some troops, occasionally roll for an invasion. This round of work was about attaching real behavior to those enemy turns. I didn't try to build a full AI in one go. Instead, I wanted to build up the feeling that "the enemy is actually doing something," conservatively, one layer at a time.</p>
 
       <hr />
-      <h3>패널부터 정리했다</h3>
-      <p>시작은 좌측 국정 패널이었다. 턴 정보와 세금 구역이 불필요하게 중복 표시되고 있었다. 정보를 슬림하게 정리하고, 재상 카드도 손봤다. 재상 이름이 두 번 뜨는 걸 없애고, 초상 영역을 키웠다.</p>
+      <h3>First, Make It Believable</h3>
+      <p>Step one was getting enemy factions to perform at least some minimal turn actions — reinforcing troops, deciding whether to invade, and logging the result. I attached a safeguard right away: to stop the absurd scene of a city with only 80 troops suddenly launching an invasion, I set a minimum troop threshold required to invade. Invasion frequency stayed the same; only the "quality" of invasions went up.</p>
+
+      <p>Next, I let things creep slightly into diplomacy and espionage. Factions that had nothing to do with the player — Wei and Shu, Oda and Toyotomi — started having their relationships shift by tiny amounts, ±2 or 3 points, nothing like a full alliance or a switch to hostility. Logs also started showing things like Goguryeo scouting near Hanseong — though this didn't actually touch sentiment or troop counts, it was purely there to create the feeling of "someone is watching you." The enemy turn summary got richer along with it. Where it used to just say "reinforced troops, occasionally invaded," it now started including lines like "1 diplomatic contact, 1 trace of espionage pressure."</p>
+
+      <hr />
+      <h3>Giving Each Faction a Personality</h3>
+      <p>The next step was planting something like temperament into each enemy faction. Instead of every faction acting with the same random weighting, some leaned aggressive while others leaned toward diplomacy or espionage. Right after adding this, the next move wasn't "make it smarter" — it was QA to check that this personality layer wasn't breaking the game. Making sure no faction stood out too much, and none was too invisible to notice.</p>
 
       <figure>
-        <img src="../assets/eastwar/screenshot-worldmap-panels-01.png" alt="월드맵 국정 패널 — 외교·첩보·도시상세 UI" />
-        <figcaption>월드맵 국정 패널 — 외교·첩보·도시상세 UI</figcaption>
+        <img src="../assets/eastwar/screenshot-enemy-ai-01.png" alt="Enemy faction lineup display at battle entry" />
+        <figcaption>Enemy faction lineup display at battle entry</figcaption>
       </figure>
 
-      <p>우측 선택도시 패널도 같은 방식으로 다듬었다. 태수 임명, 태수 정책, 주둔 무장, 무장 이동까지 순서대로 붙였다. 특히 주둔 무장은 그냥 텍스트 목록이던 걸 초상 이미지와 이름이 카드로 뜨는 형태로 바꿨다. 도시 하나를 클릭했을 때 "이 도시가 지금 어떤 상태인지"가 한눈에 들어오게 만드는 게 목표였다.</p>
+      <hr />
+      <h3>From Personality to Goals, From Goals to Pressure</h3>
+      <p>Personality alone wasn't enough. Saying a faction was "aggressive" felt too vague, so next I gave each nation a concrete goal: Goguryeo sets its sights on Hanseong, the Mongols push south, Oda and Toyotomi expand toward Kyoto and Osaka, and so on. In human terms, it's the difference between "that person seems greedy" and "that person has their eye on my seat."</p>
+
+      <p>The enemy's turn now flows like this: check personality → set a goal → decide where to reinforce → decide whether to act diplomatically or through espionage → pick an invasion target → fight it out → display the result.</p>
+
+      <p>One real turning point happened here. Before, personality and goals just gave a vague sense that "this nation is a bit more aggressive." Now, the enemy started forming a concrete intent — "this turn, I'm going to press here." That intent still doesn't directly attack or damage the player, though. The enemy only plans, and the player can only pick up on it through hints shown on screen. Showing everything would kill the fun, so I kept the sense of "they're up to something" while hiding the exact details.</p>
 
       <hr />
-      <h3>무역, 표시에서 행동으로</h3>
-      <p>도시 상세창의 자원 탭도 정리가 필요했다. 도시가 한성 하나뿐일 때는 국가 창고와 성 창고가 같아 보였지만, 도시가 늘어나면 이야기가 달라진다. 각 성이 실제로 뭘 얼마나 갖고 있는지 보여주는 성 창고 개념을 따로 만들었다.</p>
+      <h3>Locking Down a Safety Pin</h3>
+      <p>With so many features stacking on top of each other, there was exactly one genuinely risky moment. If a battle was already about to start and the end-turn button somehow got pressed again, the enemy turn already in progress could run a second time, the invasion roll could fire again, and the whole sequence could get tangled. Think of it like the game trying to tell two stories at once and losing track of which one it's in.</p>
 
-      <p>자국무역과 타국무역도 갈라 정리했다. 자국무역은 내 성끼리의 자원 흐름만, 타국무역은 외부 세력과의 교역만 다루도록. 그리고 여기에 실제로 누를 수 있는 버튼을 붙였다. 재상에게 일임하거나, 직접 수동으로 조정하거나. 재상에게 일임을 선택하면 재상이 턴마다 알아서 부족한 자원을 채우고 남는 자원을 파는 식으로 움직였다. 여기에 시장 가격 변동까지 붙으면서, "재상에게 일임" 버튼이 그제서야 이름값을 하기 시작했다.</p>
+      <p>So I locked in one rule: if a battle transition is already pending, block end-turn, and skip the enemy invasion roll entirely. That single rule made the whole enemy turn chain noticeably more stable.</p>
 
-      <hr />
-      <h3>외교와 첩보, 정보에서 행동으로</h3>
-      <p>외교 탭과 첩보 탭도 같은 흐름을 탔다. 원래는 관계 상태를 보여주는 것에 그쳤는데, 여기에 실제로 실행 가능한 행동을 붙였다. 외교에서는 사절 파견, 조공, 교역 협정, 관계 회복, 그리고 동맹 제안까지. 첩보에서는 정탐, 민심 교란, 성 충성도 교란, 반란 조장, 이간질까지.</p>
-
-      <p>그리고 이 구간에서 가장 마음에 드는 변화가 하나 있었다. 적 도시 정보 공개 방식이다. 이전에는 적 도시를 클릭하면 병력이든 민심이든 다 보였다. 이제는 다르다. 정탐을 하지 않으면 "정탐 필요"라는 문구만 뜬다. 기초 정탐을 하면 병력 추정치 정도만, 상세 정탐까지 하면 충성도와 민심까지, 그 이상 파야 태수 이름까지 보인다. 정보가 단계적으로 열리는 구조. 첩보를 왜 해야 하는지가 이제 화면만 봐도 이해가 된다.</p>
-
-      <hr />
-      <h3>국정 시스템의 뼈대를 잠그다</h3>
-      <p>이렇게 무역, 외교, 첩보, 정탐이 한 번에 붙으면서 회귀 위험도 같이 커졌다. 그래서 v0.70-39부터 v0.70-42까지 붙은 흐름을 한 번에 점검하는 QA 패스를 거쳤다. 그리고 마지막으로 턴 종료와 내정 처리, 저장/불러오기가 서로 꼬이지 않는지도 확인했다. 같은 턴에 내정 처리가 두 번 실행되거나, 저장 파일을 불러왔을 때 이미 지나간 효과가 다시 재생되는 일이 없도록.</p>
-
-      <p>전투 화면 뒤에 가려져 있던, 하지만 실제로 게임을 굴리는 절반이 이렇게 자리를 잡았다. 이제 남은 건 이 국정 시스템 위에서 움직이는 적, 그러니까 적 세력의 턴 행동이었다.</p>
+      <p>Finally, I just tuned the intensity — making sure the enemy's pressure, invasions, and espionage activity weren't too frequent or too rare. With that, this stretch of work wrapped up. Now that the enemy had started acting with real intent, the player needed a way to build up strength domestically in response. That was the next project: the tech tree.</p>
 
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-020.html" class="log-nav__prev">
-        <span class="log-nav__label">이전</span>
-        <span class="log-nav__title">← Dev Log #020</span>
+      <a href="eastwar-devlog-021-en.html" class="log-nav__prev">
+        <span class="log-nav__label">Previous</span>
+        <span class="log-nav__title">← Dev Log #021</span>
       </a>
-      <a href="eastwar-devlog-022.html" class="log-nav__next">
-        <span class="log-nav__label">다음</span>
-        <span class="log-nav__title">Dev Log #022 →</span>
-      </a>
+      <span class="log-nav__next">
+        <span class="log-nav__label">Next</span>
+        <span class="log-nav__title" style="opacity:.35">Dev Log #023 →</span>
+      </span>
     </div>
 
   </article>
@@ -238,7 +240,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '021');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '022');
 </script>
 </body>
 </html>

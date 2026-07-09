@@ -108,6 +108,11 @@
       num: '021', date: '2026 · 06 · 18',
       ko: { href: 'eastwar-devlog-021.html',    title: '보이지 않는 절반 — 월드맵 국정 시스템이 살아나기까지', sub: '국정 패널 정리, 성 창고·무역 자동화, 외교·첩보 행동화, 정보 단계적 공개 — v0.70-39~42' },
       en: { href: 'eastwar-devlog-021-en.html', title: "The Invisible Half — Bringing the WorldMap's Domestic System to Life", sub: 'Panel cleanup, city storage & trade automation, actionable diplomacy/espionage, staged intel reveal — v0.70-39~42' }
+    },
+    {
+      num: '022', date: '2026 · 06 · 25',
+      ko: { href: 'eastwar-devlog-022.html',    title: '성격, 목표, 그리고 압박 — 적 AI를 설계하다', sub: '적 세력 성향·목표 시스템, 외교·첩보 배경 활동, 턴 충돌 방지 안전장치' },
+      en: { href: 'eastwar-devlog-022-en.html', title: 'Personality, Goals, and Pressure — Designing the Enemy AI', sub: 'Faction temperament & goal system, background diplomacy/espionage, turn-collision safeguards' }
     }
   ];
 
