@@ -11,6 +11,13 @@
       date: '2026-07-09', dl: '2026 · 07 · 09'
     },
     {
+      url: 'make/eastwar-devlog-023.html',
+      catKey: 'eastwar', cat: 'Architect Notes',
+      title: '연구가 진짜로 게임을 바꾸기까지 — 테크트리, 한 달의 기록',
+      sub: '국가/도시 테크트리 UI, 5개 카테고리 효과 연결, 연구 비용·완료 연출',
+      date: '2026-07-08', dl: '2026 · 07 · 08'
+    },
+    {
       url: 'make/eastwar-devlog-022.html',
       catKey: 'eastwar', cat: 'Architect Notes',
       title: '성격, 목표, 그리고 압박 — 적 AI를 설계하다',

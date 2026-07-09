@@ -113,6 +113,11 @@
       num: '022', date: '2026 · 06 · 25',
       ko: { href: 'eastwar-devlog-022.html',    title: '성격, 목표, 그리고 압박 — 적 AI를 설계하다', sub: '적 세력 성향·목표 시스템, 외교·첩보 배경 활동, 턴 충돌 방지 안전장치' },
       en: { href: 'eastwar-devlog-022-en.html', title: 'Personality, Goals, and Pressure — Designing the Enemy AI', sub: 'Faction temperament & goal system, background diplomacy/espionage, turn-collision safeguards' }
+    },
+    {
+      num: '023', date: '2026 · 07 · 08',
+      ko: { href: 'eastwar-devlog-023.html',    title: '연구가 진짜로 게임을 바꾸기까지 — 테크트리, 한 달의 기록', sub: '국가/도시 테크트리 UI, 5개 카테고리 효과 연결, 연구 비용·완료 연출' },
+      en: { href: 'eastwar-devlog-023-en.html', title: 'Making Research Actually Change the Game — The Tech Tree, One Month in the Making', sub: 'National/city tech tree UI, five effect categories, research cost & completion presentation' }
     }
   ];
 

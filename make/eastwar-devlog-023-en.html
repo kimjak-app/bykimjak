@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR Dev Log #022 — Personality, Goals, and Pressure · byKimjak</title>
+<title>EASTWAR Dev Log #023 — Making Research Actually Change the Game · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -153,10 +153,10 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #022</span>
+      <span>Dev Log #023</span>
     </div>
     <div class="lang-switch rev">
-      <a href="eastwar-devlog-022.html" class="lang-other">🇰🇷 한국어</a>
+      <a href="eastwar-devlog-023.html" class="lang-other">🇰🇷 한국어</a>
       <span class="lang-sep">|</span>
       <span class="lang-current">🇺🇸 English</span>
     </div>
@@ -167,56 +167,104 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-022">
+  <article class="devlog" id="log-023">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #022</span>
-      <h1>EASTWAR Dev Log #022</h1>
-      <h2>Personality, Goals, and Pressure — Designing the Enemy AI</h2>
-      <span class="log-date">June 25, 2026</span>
+      <span class="log-num">Dev Log · #023</span>
+      <h1>EASTWAR Dev Log #023</h1>
+      <h2>Making Research Actually Change the Game — The Tech Tree, One Month in the Making</h2>
+      <span class="log-date">July 8, 2026</span>
 
-      <p>With the world map's domestic system finally standing on its own, the opponent moving on top of it looked way too simple. Until now, enemy factions' turns were basically placeholders — top up some troops, occasionally roll for an invasion. This round of work was about attaching real behavior to those enemy turns. I didn't try to build a full AI in one go. Instead, I wanted to build up the feeling that "the enemy is actually doing something," conservatively, one layer at a time.</p>
-
-      <hr />
-      <h3>First, Make It Believable</h3>
-      <p>Step one was getting enemy factions to perform at least some minimal turn actions — reinforcing troops, deciding whether to invade, and logging the result. I attached a safeguard right away: to stop the absurd scene of a city with only 80 troops suddenly launching an invasion, I set a minimum troop threshold required to invade. Invasion frequency stayed the same; only the "quality" of invasions went up.</p>
-
-      <p>Next, I let things creep slightly into diplomacy and espionage. Factions that had nothing to do with the player — Wei and Shu, Oda and Toyotomi — started having their relationships shift by tiny amounts, ±2 or 3 points, nothing like a full alliance or a switch to hostility. Logs also started showing things like Goguryeo scouting near Hanseong — though this didn't actually touch sentiment or troop counts, it was purely there to create the feeling of "someone is watching you." The enemy turn summary got richer along with it. Where it used to just say "reinforced troops, occasionally invaded," it now started including lines like "1 diplomatic contact, 1 trace of espionage pressure."</p>
+      <p>Now that the enemy had started acting with real intent, the player needed a growth axis to respond with. That was the tech tree. And this project ran far longer than I expected — nearly a month, with almost 40 version tags attached to it.</p>
 
       <hr />
-      <h3>Giving Each Faction a Personality</h3>
-      <p>The next step was planting something like temperament into each enemy faction. Instead of every faction acting with the same random weighting, some leaned aggressive while others leaned toward diplomacy or espionage. Right after adding this, the next move wasn't "make it smarter" — it was QA to check that this personality layer wasn't breaking the game. Making sure no faction stood out too much, and none was too invisible to notice.</p>
+      <h3>Laying Down the Skeleton</h3>
+      <p>The first step was moving the techs that only existed on a design document into actual data. City techs were sorted into agriculture, fishing, commerce, and military (infantry, archery, cavalry, navy, defense, siege); national techs into administration, economy, military, and diplomacy. At this point, none of it was visible yet — just a skeleton filled into a registry.</p>
+
+      <hr />
+      <h3>Making It Visible — and Clickable</h3>
+      <p>Next was putting that skeleton on screen. The left side became the national tech tree, the right side the city tech tree — carrying over the world map's existing logic, where the left represents the whole nation and the right represents whichever city is currently selected. At first it was read-only. Clicking a node did nothing; only completed, available, and locked states were distinguished by color.</p>
 
       <figure>
-        <img src="../assets/eastwar/screenshot-enemy-ai-01.png" alt="Enemy faction lineup display at battle entry" />
-        <figcaption>Enemy faction lineup display at battle entry</figcaption>
+        <img src="../assets/eastwar/screenshot-techtree-graph-01.png" alt="EASTWAR Tech Tree — national and city tech tree graph UI" />
+        <figcaption>EASTWAR Tech Tree — national/city tech tree graph UI</figcaption>
+      </figure>
+
+      <figure style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <div>
+          <img src="../assets/eastwar/tech-naval-turtleship-01.png" alt="Navy — Turtle Ship" />
+          <figcaption>Navy — Turtle Ship</figcaption>
+        </div>
+        <div>
+          <img src="../assets/eastwar/tech-nation-diplomacy-01.png" alt="Nation — Diplomacy" />
+          <figcaption>Nation — Diplomacy</figcaption>
+        </div>
+        <div>
+          <img src="../assets/eastwar/tech-nation-bureaucracy-01.png" alt="Nation — Bureaucracy" />
+          <figcaption>Nation — Bureaucracy</figcaption>
+        </div>
+        <div>
+          <img src="../assets/eastwar/tech-nation-centralization-01.png" alt="Nation — Centralization" />
+          <figcaption>Nation — Centralization</figcaption>
+        </div>
+        <div>
+          <img src="../assets/eastwar/tech-agri-toolupgrade-01.png" alt="Agriculture — Tool Upgrade" />
+          <figcaption>Agriculture — Tool Upgrade</figcaption>
+        </div>
+        <div>
+          <img src="../assets/eastwar/tech-mil-heavycavalry-01.png" alt="Military — Heavy Cavalry" />
+          <figcaption>Military — Heavy Cavalry</figcaption>
+        </div>
+      </figure>
+
+      <p>This is where the detail work began in earnest. I turned the big card-style graph into something more compact, and made it so clicking an icon only refreshed the detail panel. It sounds trivial, but at first, clicking a single node was rebuilding the entire graph — meaning the screen briefly stuttered on every click. Fixing that made click response noticeably snappier, and I bumped icon size from 56px up to 64px. That, in turn, brought back node overlap issues, especially in the city tech tree's military category. Instead of manually nudging each category, I fixed the spacing calculation globally.</p>
+
+      <hr />
+      <h3>Research Starts to Actually Move</h3>
+      <p>Only once the UI had settled did I get into the real substance: making the "start research" button actually do something. First, I let research be started at all. Then I made remaining turns count down as turns passed. Finally, completion processing. Only after these three pieces were in place did the tech tree have its minimum viable skeleton — start research, progress through turns, complete.</p>
+
+      <figure style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div>
+          <img src="../assets/eastwar/tech-mood-national-research-01.png" alt="National research — scholars laying the foundations of the nation" />
+          <figcaption>National research — scholars at work</figcaption>
+        </div>
+        <div>
+          <img src="../assets/eastwar/tech-mood-city-research-01.png" alt="City research — craftsmen planning a fortress" />
+          <figcaption>City research — craftsmen planning a city</figcaption>
+        </div>
       </figure>
 
       <hr />
-      <h3>From Personality to Goals, From Goals to Pressure</h3>
-      <p>Personality alone wasn't enough. Saying a faction was "aggressive" felt too vague, so next I gave each nation a concrete goal: Goguryeo sets its sights on Hanseong, the Mongols push south, Oda and Toyotomi expand toward Kyoto and Osaka, and so on. In human terms, it's the difference between "that person seems greedy" and "that person has their eye on my seat."</p>
-
-      <p>The enemy's turn now flows like this: check personality → set a goal → decide where to reinforce → decide whether to act diplomatically or through espionage → pick an invasion target → fight it out → display the result.</p>
-
-      <p>One real turning point happened here. Before, personality and goals just gave a vague sense that "this nation is a bit more aggressive." Now, the enemy started forming a concrete intent — "this turn, I'm going to press here." That intent still doesn't directly attack or damage the player, though. The enemy only plans, and the player can only pick up on it through hints shown on screen. Showing everything would kill the fun, so I kept the sense of "they're up to something" while hiding the exact details.</p>
+      <h3>Connecting the Five Categories, One at a Time</h3>
+      <p>From here I moved carefully. Instead of wiring everything up at once, I attached categories one by one: economic effects first (agriculture, fishing, and commerce granting food/gold bonuses on completion), then military/defense effects (barracks, walls, training), national policy effects (taxation, bureaucracy, centralization), naval/siege display effects (turtle ships, cannons, siege weapons), and finally diplomacy/espionage display effects. At every step I asked the same questions: does this bonus apply to exactly that city, does it leak to other cities or the enemy, is there no bonus while research is still in progress. Once all five categories were connected, that was genuinely the finish line for the tech tree's first-pass implementation.</p>
 
       <hr />
-      <h3>Locking Down a Safety Pin</h3>
-      <p>With so many features stacking on top of each other, there was exactly one genuinely risky moment. If a battle was already about to start and the end-turn button somehow got pressed again, the enemy turn already in progress could run a second time, the invasion roll could fire again, and the whole sequence could get tangled. Think of it like the game trying to tell two stories at once and losing track of which one it's in.</p>
+      <h3>Actually Collecting the Cost</h3>
+      <p>Once effects were wired in, cost came next. At first it was display-only — showing an estimated cost without actually deducting any resources. Then I made it so starting a research would deduct gold and food exactly once, with no per-turn drain and nothing extra taken on completion. Labor and policy — two more resource types — were designed but not implemented; I locked down the storage structure this round and left the actual implementation for later. The direction — accumulate over time, then spend it all on one big research push — was decided, but that part stays on the roadmap.</p>
 
-      <p>So I locked in one rule: if a battle transition is already pending, block end-turn, and skip the enemy invasion roll entirely. That single rule made the whole enemy turn chain noticeably more stable.</p>
+      <hr />
+      <h3>Checking It Myself in F6</h3>
+      <p>Once all the numbers and logic were wired in, someone had to actually click through it. I added a grace period blocking invasions entirely for the first 10 turns, then ran through full scenarios starting and completing both national and city research from scratch. Does the early game have that light "let's pick one" feel? Does the mid-game make you weigh economy against military? Does the late game feel like it's building toward something? That kind of feel can't be verified by code — it took actually playing it and marking it PASS by hand.</p>
 
-      <p>Finally, I just tuned the intensity — making sure the enemy's pressure, invasions, and espionage activity weren't too frequent or too rare. With that, this stretch of work wrapped up. Now that the enemy had started acting with real intent, the player needed a way to build up strength domestically in response. That was the next project: the tech tree.</p>
+      <hr />
+      <h3>Domestic Tech Complete Lock</h3>
+      <p>After all of that, on July 7th, I declared the tech tree's first-pass implementation complete. I wrapped up everything done so far and drew a line so the tech tree work wouldn't keep expanding indefinitely. Future expansion — like labor and policy resources — would become its own separate project.</p>
+
+      <hr />
+      <h3>One Last Layer: Completion Presentation</h3>
+      <p>The day after the completion lock, I added one more thing. Instead of research completion just quietly flashing a done indicator, national and city research each got their own short video that plays first, followed by a completion card. Nothing — no icon, no text — appears until the video finishes. Only then does the research icon, name, and a specific effect like "Administrative efficiency +5%" show up on the card. At first, this video played far too large, covering nearly the whole screen, so I had to resize it to match the same dimensions and ratio as the battle result video.</p>
+
+      <p>At the end of nearly a month of work, the tech tree stopped being just "a screen you can click" and became a system that actually changes a city's income, a nation's taxes, and what becomes available to unlock.</p>
 
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-021-en.html" class="log-nav__prev">
+      <a href="eastwar-devlog-022-en.html" class="log-nav__prev">
         <span class="log-nav__label">Previous</span>
-        <span class="log-nav__title">← Dev Log #021</span>
+        <span class="log-nav__title">← Dev Log #022</span>
       </a>
-      <a href="eastwar-devlog-023-en.html" class="log-nav__next">
-        <span class="log-nav__label">Next</span>
-        <span class="log-nav__title">Dev Log #023 →</span>
+      <a href="eastwar.html" class="log-nav__next">
+        <span class="log-nav__label">Index</span>
+        <span class="log-nav__title">Back to index →</span>
       </a>
     </div>
 
@@ -240,7 +288,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '022');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '023');
 </script>
 </body>
 </html>
