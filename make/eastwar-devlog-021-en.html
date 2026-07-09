@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR 개발일지 #020 — 색이 깨진다, 그래서 다시 구웠다 · byKimjak</title>
+<title>EASTWAR Dev Log #021 — The Invisible Half · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -153,91 +153,69 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #020</span>
+      <span>Dev Log #021</span>
     </div>
     <div class="lang-switch rev">
-      <span class="lang-current">🇰🇷 한국어</span>
+      <a href="eastwar-devlog-021.html" class="lang-other">🇰🇷 한국어</a>
       <span class="lang-sep">|</span>
-      <a href="eastwar-devlog-020-en.html" class="lang-other">🇺🇸 English</a>
+      <span class="lang-current">🇺🇸 English</span>
     </div>
     <h1 class="rev">EASTWAR</h1>
     <p class="sub-ko rev">이스트워 개발일지</p>
-    <p class="listing-desc rev">전략 가상역사 시뮬레이션 — 1인 개발 기록</p>
+    <p class="listing-desc rev">Strategy alt-history simulation — solo dev log</p>
   </div>
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-020">
+  <article class="devlog" id="log-021">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #020</span>
-      <h1>EASTWAR 개발일지 #020</h1>
-      <h2>색이 깨진다, 그래서 다시 구웠다 — 컷인 영상과의 열흘</h2>
-      <span class="log-date">2026년 6월 4일</span>
+      <span class="log-num">Dev Log · #021</span>
+      <h1>EASTWAR Dev Log #021</h1>
+      <h2>The Invisible Half — Bringing the WorldMap's Domestic System to Life</h2>
+      <span class="log-date">June 18, 2026</span>
 
-      <p>전투 화면을 다듬는 작업부터 시작했다. 그리드 선을 지우고, 카메라를 살짝 빼서 배경이 더 넓어 보이게 했다. 이동 범위, 공격 범위를 표시하는 오버레이도 손봤다. 육각형이었던 걸 팔각형으로 바꾸고, 색을 몇 번이나 다시 골랐다. 쨍한 하늘색과 형광 보라를 걷어내고 톤다운된 색으로. 유닛이 등장할 때 물결처럼 퍼지는 연출도 넣었다.</p>
-
-      <p>여기까지는 순조로웠다.</p>
+      <p>Once the cutscene problem was solved, the next task went in a completely different direction. Not the battle screen — the world map. The domestic governance system, which until now had only a skeleton, needed real, workable flesh on its bones.</p>
 
       <hr />
-      <h3>고유특기, 토스트에서 컷인으로</h3>
-      <p>문제는 그다음이었다. 지금까지 장수가 고유특기를 쓰면 화면 구석에 토스트 메시지 하나가 떴다 사라지는 게 전부였다. 이걸 3초짜리 영상 배경 위에 장수 초상과 스킬명이 얹히는 컷인 연출로 바꾸기로 했다. 첫 대상은 이순신, 첫 스킬은 학익진이었다.</p>
+      <h3>Starting With the Panels</h3>
+      <p>It began with the left-side national panel. Turn information and the tax section were showing redundant, duplicate data. I trimmed it down and cleaned up the chancellor card too — removed the repeated chancellor name and enlarged the portrait area.</p>
 
-      <p>그런데 영상이 안 떴다.</p>
-
-      <hr />
-      <h3>포맷과의 사투</h3>
-      <p>mp4로 넣었더니 Godot에서 재생이 안 됐다. webm으로 바꿔봤다. 역시 안 됐다. 알고 보니 Godot 4에서 코어가 기본 지원하는 영상 포맷은 사실상 OGV(Ogg Theora) 하나뿐이었다. webm은 Godot 3 때만 지원됐고, 4부터는 빠졌다는 걸 뒤늦게 알았다.</p>
-
-      <p>그래서 OGV로 바꿨다. 이번엔 로드 자체는 됐다. 그런데 색이 깨졌다. 검은 화면은 아니었지만 RGB가 꼬이고 색이 이상하게 나왔다. "파일을 못 읽는다"에서 "읽긴 읽는데 색이 이상하다"로 문제가 한 단계 넘어간 셈이었다.</p>
-
-      <p>원인을 좁혀나갔다. 해상도를 낮추고, 픽셀 포맷을 <code>yuv420p</code>로 고정하고, 프레임레이트를 30으로 못박고, 인코딩 옵션을 하나씩 정리했다. 그렇게 며칠을 보낸 끝에 안전 인코딩 프리셋을 찾아냈다.</p>
-
-      <blockquote>fps=30, scale 고정, format=yuv420p, libtheora q7~q8</blockquote>
-
-      <p>이 프리셋으로 뽑은 영상은 Godot에서 정상적으로 재생됐다. 검은 화면도, 색 꼬임도, 채널 스왑도 없었다. 열흘 가까이 걸렸던 문제가 그제서야 풀렸다.</p>
-
-      <hr />
-      <h3>진짜 컷인을 만들다</h3>
-      <p>포맷 문제가 풀리고 나니 그다음은 오히려 즐거운 작업이었다. 통짜 이미지 한 장으로 때우는 대신 레이어를 쌓았다. 배경 딤, 배경 영상, 장수 포트레이트, 이펙트, 텍스트, 이렇게 층을 나누고 각 층이 등장하는 타이밍을 0.05초 단위로 맞췄다. 이순신이 슬라이드로 들어오고, "학익진!"이라는 글자가 팝업처럼 터지듯 나왔다가 사라지는 식으로.</p>
-
-      <p>이 파이프라인이 잡히고 나니 권율, 정도전, 김유신, 을지문덕까지 순서대로 붙일 수 있었다. 아군 장수는 왼쪽에서 등장, 오른쪽에 스킬명이 뜨는 걸 기본으로 하되, 이순신처럼 반대가 더 멋진 경우는 예외로 뒤집었다.</p>
-
-      <figure style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-        <div>
-          <img src="../assets/eastwar/cutin-sunsin-03.png" alt="이순신 학익진 컷인 배경 연출" />
-          <figcaption>이순신 학익진 컷인 배경 연출</figcaption>
-        </div>
-        <div>
-          <img src="../assets/eastwar/cutin-kwonyul-01.png" alt="권율 행주대첩 컷인 배경 연출" />
-          <figcaption>권율 행주대첩 컷인 배경 연출</figcaption>
-        </div>
-        <div>
-          <img src="../assets/eastwar/cutin-jeong-03.png" alt="정도전 개혁령 컷인 배경 연출" />
-          <figcaption>정도전 개혁령 컷인 배경 연출</figcaption>
-        </div>
-        <div>
-          <img src="../assets/eastwar/cutin-eulji-01.png" alt="을지문덕 살수대첩 컷인 배경 연출" />
-          <figcaption>을지문덕 살수대첩 컷인 배경 연출</figcaption>
-        </div>
+      <figure>
+        <img src="../assets/eastwar/screenshot-worldmap-panels-01.png" alt="WorldMap national panels — diplomacy, intel, and city detail UI" />
+        <figcaption>WorldMap national panels — diplomacy, intel, and city detail UI</figcaption>
       </figure>
 
-      <hr />
-      <h3>남은 디테일</h3>
-      <p>컷인이 자리를 잡은 뒤에는 전투 자체의 체감도 같이 다듬었다. 궁병은 화살 여러 발이 시간차로 날아가 꽂히게, 총병은 총구 섬광과 짧은 탄도 잔광으로 확실히 다른 느낌을 주게 했다. 전투 결과가 나오기 전에는 결과 영상이 먼저 재생되도록 했고, 전투 시작 시에는 와이드샷에서 부드럽게 줌인하는 카메라 연출도 넣었다.</p>
+      <p>The right-side selected-city panel got the same treatment. Governor assignment, governor policy, garrisoned heroes, and hero transfer were all wired in, in order. The garrisoned heroes section in particular went from a plain text list to portrait-and-name cards. The goal was simple: click a city, and instantly understand its current state.</p>
 
-      <p>열흘 동안 붙잡고 있었던 건 결국 "영상 하나를 재생하는 법"이었다. 그런데 그 안에서 배운 건 포맷 이야기만이 아니었다. 문제가 안 풀릴 때는 우회로를 같이 준비해두는 게 낫다는 것, 그리고 원인을 한 단계씩 좁혀나가면 결국 막다른 골목은 없다는 것.</p>
+      <hr />
+      <h3>Trade, From Display to Action</h3>
+      <p>The resource tab in the city detail window needed cleanup too. With only Hanseong as a city, the national storage and the city's own storage looked identical — but that stops being true once you have more cities. So I built a separate concept of city-level storage, showing exactly what each city actually holds.</p>
+
+      <p>Internal trade and external trade got split apart as well. Internal trade now only covers resource flow between my own cities; external trade only covers trading with outside factions. And I attached real, clickable buttons to both — delegate to the chancellor, or adjust manually. Delegating to the chancellor means they now handle it automatically each turn, topping up scarce resources and selling off surplus. With market price fluctuation layered on top of that, the "delegate to chancellor" button finally started living up to its name.</p>
+
+      <hr />
+      <h3>Diplomacy and Espionage, From Information to Action</h3>
+      <p>The diplomacy and espionage tabs followed the same arc. They used to just display relationship status — now they have real, executable actions attached. Diplomacy got envoy dispatch, tribute, trade agreements, relationship recovery, and alliance proposals. Espionage got reconnaissance, public sentiment disruption, city loyalty disruption, inciting rebellion, and sowing discord.</p>
+
+      <p>And there's one change from this stretch I'm especially happy with: how enemy city information gets revealed. Before, clicking an enemy city showed you everything — troops, sentiment, all of it. Now it doesn't. Without reconnaissance, all you see is "reconnaissance required." Basic recon gets you a rough troop estimate; detailed recon adds loyalty and sentiment; dig deeper still and you learn the governor's name. Information unlocks in stages. Now you can look at the screen and immediately understand why espionage matters.</p>
+
+      <hr />
+      <h3>Locking Down the Domestic System's Skeleton</h3>
+      <p>With trade, diplomacy, espionage, and reconnaissance all landing at once, the regression risk grew right along with it. So I ran a QA pass covering everything from v0.70-39 through v0.70-42 in one sweep. And finally, I checked that turn-ending, domestic processing, and save/load didn't tangle with each other — making sure domestic processing couldn't run twice in the same turn, and that loading a save file wouldn't replay effects that had already happened.</p>
+
+      <p>The half of the game hidden behind the battle screen — but the half that actually runs it — had finally found its footing. What was left was the thing moving on top of this domestic system: the enemy faction's own turn behavior.</p>
 
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-019.html" class="log-nav__prev">
-        <span class="log-nav__label">이전</span>
-        <span class="log-nav__title">← Dev Log #019</span>
+      <a href="eastwar-devlog-020-en.html" class="log-nav__prev">
+        <span class="log-nav__label">Previous</span>
+        <span class="log-nav__title">← Dev Log #020</span>
       </a>
-      <a href="eastwar-devlog-021.html" class="log-nav__next">
-        <span class="log-nav__label">다음</span>
-        <span class="log-nav__title">Dev Log #021 →</span>
-      </a>
+      <span class="log-nav__next">
+        <span class="log-nav__label">Next</span>
+        <span class="log-nav__title" style="opacity:.35">Dev Log #022 →</span>
+      </span>
     </div>
 
   </article>
@@ -260,7 +238,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '020');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '021');
 </script>
 </body>
 </html>

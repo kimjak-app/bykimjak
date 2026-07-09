@@ -11,6 +11,13 @@
       date: '2026-07-09', dl: '2026 · 07 · 09'
     },
     {
+      url: 'make/eastwar-devlog-021.html',
+      catKey: 'eastwar', cat: 'Architect Notes',
+      title: '보이지 않는 절반 — 월드맵 국정 시스템이 살아나기까지',
+      sub: '국정 패널 정리, 성 창고·무역 자동화, 외교·첩보 행동화, 정보 단계적 공개 — v0.70-39~42',
+      date: '2026-06-18', dl: '2026 · 06 · 18'
+    },
+    {
       url: 'make/eastwar-devlog-020.html',
       catKey: 'eastwar', cat: 'Architect Notes',
       title: '색이 깨진다, 그래서 다시 구웠다 — 컷인 영상과의 열흘',
