@@ -11,6 +11,13 @@
       date: '2026-07-09', dl: '2026 · 07 · 09'
     },
     {
+      url: 'make/eastwar-devlog-020.html',
+      catKey: 'eastwar', cat: 'Architect Notes',
+      title: '색이 깨진다, 그래서 다시 구웠다 — 컷인 영상과의 열흘',
+      sub: '고유특기 컷인 영상 도입, Godot 영상 포맷 문제 해결, 레이어드 컷인 파이프라인',
+      date: '2026-06-04', dl: '2026 · 06 · 04'
+    },
+    {
       url: 'make/eastwar-devlog-019.html',
       catKey: 'eastwar', cat: 'Architect Notes',
       title: '민심에서 첩보까지, 국가 시뮬레이션의 완성',

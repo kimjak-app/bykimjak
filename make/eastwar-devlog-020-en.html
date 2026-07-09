@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR Dev Log #019 — From Public Support to Espionage — A Nation Simulation Complete · byKimjak</title>
+<title>EASTWAR Dev Log #020 — The Colors Broke, So I Re-encoded · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -42,7 +42,7 @@ a{color:inherit;text-decoration:none}
 .breadcrumb .sep{opacity:.4}
 .listing-head h1{font-family:var(--f-display);font-weight:500;font-size:clamp(44px,9vw,120px);letter-spacing:-.04em;line-height:.92;margin:0 0 8px}
 .listing-head .sub-ko{font-family:var(--f-kr);font-size:clamp(16px,2vw,22px);color:var(--ink-3);margin:0 0 20px;font-weight:400}
-.listing-head .listing-desc{font-family:var(--f-body);font-size:15px;line-height:1.65;color:var(--ink-3);max-width:52ch}
+.listing-head .listing-desc{font-family:var(--f-kr);font-size:15px;line-height:1.65;color:var(--ink-3);max-width:48ch}
 .lang-switch{display:inline-flex;align-items:center;margin-bottom:28px}
 .lang-current{font-family:var(--f-display);font-size:14px;font-weight:700;color:var(--ink);padding:10px 20px;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px;cursor:default;letter-spacing:.01em}
 .lang-sep{font-family:var(--f-mono);font-size:14px;color:var(--ink-3);opacity:.35;user-select:none;line-height:1}
@@ -66,17 +66,20 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 .devlog__body{padding:64px clamp(20px,4vw,48px) 0;max-width:760px}
 .devlog__body .log-num{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:12px}
 .devlog__body h1{font-family:var(--f-display);font-weight:500;font-size:clamp(26px,4vw,48px);letter-spacing:-.03em;line-height:1.1;margin:0 0 10px}
-.devlog__body h2{font-family:var(--f-display);font-size:clamp(15px,1.8vw,20px);font-weight:400;color:var(--ink-3);margin:0;line-height:1.5;letter-spacing:-.01em}
+.devlog__body h2{font-family:var(--f-kr);font-size:clamp(15px,1.8vw,20px);font-weight:400;color:var(--ink-3);margin:0;line-height:1.5}
 .devlog__body .log-date{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);display:block;margin:24px 0 40px;padding-top:20px;border-top:1px solid var(--rule)}
 .devlog__body h3{font-family:var(--f-display);font-weight:500;font-size:clamp(16px,2vw,22px);letter-spacing:-.02em;margin:56px 0 10px;padding-top:48px;border-top:1px solid var(--rule)}
-.devlog__body p{font-family:var(--f-body);font-size:16px;line-height:1.9;color:var(--ink-2);margin:0 0 22px}
+.devlog__body .section-date{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 28px;display:block}
+.devlog__body p{font-family:var(--f-kr);font-size:16px;line-height:1.95;color:var(--ink-2);margin:0 0 22px}
 .devlog__body strong{font-weight:700;color:var(--ink)}
 .devlog__body em{font-style:italic;color:var(--ink)}
 .devlog__body hr{border:none;border-top:1px solid var(--rule);margin:52px 0}
 .devlog__body ul{padding-left:20px;margin:0 0 24px}
-.devlog__body li{font-family:var(--f-body);font-size:16px;line-height:1.85;color:var(--ink-2);margin-bottom:10px}
-.devlog__body blockquote{margin:28px 0;padding:20px 24px;border-left:3px solid var(--ink);background:var(--bg-2);font-family:var(--f-body);font-size:16px;line-height:1.8;color:var(--ink)}
+.devlog__body li{font-family:var(--f-kr);font-size:16px;line-height:1.85;color:var(--ink-2);margin-bottom:10px}
+.devlog__body blockquote{margin:28px 0;padding:20px 24px;border-left:3px solid var(--ink);background:var(--bg-2);font-family:var(--f-kr);font-size:16px;line-height:1.8;color:var(--ink)}
 .devlog__body blockquote p{margin:0;color:var(--ink)}
+.devlog__body pre{background:var(--bg-2);border:1px solid var(--rule);padding:20px 24px;margin:0 0 28px;overflow-x:auto;border-radius:2px}
+.devlog__body code{font-family:var(--f-mono);font-size:13px;line-height:1.7;color:var(--ink-2)}
 .devlog__body figure{margin:32px 0}
 .devlog__body figure img{width:100%;border-radius:2px}
 .devlog__body figure figcaption{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
@@ -150,10 +153,10 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #019</span>
+      <span>Dev Log #020</span>
     </div>
     <div class="lang-switch rev">
-      <a href="eastwar-devlog-019.html" class="lang-other">🇰🇷 한국어</a>
+      <a href="eastwar-devlog-020.html" class="lang-other">🇰🇷 한국어</a>
       <span class="lang-sep">|</span>
       <span class="lang-current">🇺🇸 English</span>
     </div>
@@ -164,82 +167,77 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-019">
+  <article class="devlog" id="log-020">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #019</span>
-      <h1>EASTWAR Devlog #019</h1>
-      <h2>From Public Support to Espionage — A Nation Simulation Complete</h2>
-      <span class="log-date">May 30, 2026</span>
+      <span class="log-num">Dev Log · #020</span>
+      <h1>EASTWAR Dev Log #020</h1>
+      <h2>The Colors Broke, So I Re-encoded — Ten Days With a Cutscene</h2>
+      <span class="log-date">June 4, 2026</span>
 
-      <figure style="margin:0 0 32px">
-        <img src="../assets/eastwar/cover-devlog-019-01.png" alt="Guan Yu battle illustration" style="width:100%;border-radius:2px" />
+      <p>I started by polishing the battle screen. Hid the grid lines, pulled the camera back slightly so the background felt wider. Reworked the overlays that show movement and attack range — switched them from hexagons to octagons, and rechose the colors more than once, trading harsh sky-blue and neon purple for something more toned down. I also added a ripple effect for when units appear.</p>
+
+      <p>So far, so smooth.</p>
+
+      <hr />
+      <h3>From Toast to Cutscene</h3>
+      <p>The trouble started next. Until now, when a general used their special skill, all that happened was a toast message flashing in the corner. I wanted to turn that into a proper cutscene: a 3-second video background with the general's portrait and skill name layered on top. The first target was Yi Sun-sin, the first skill was the crane wing formation.</p>
+
+      <p>The video wouldn't play.</p>
+
+      <hr />
+      <h3>The Fight With Formats</h3>
+      <p>MP4 didn't play in Godot. I tried WebM — same result. It turned out that Godot 4's core only really supports one video format out of the box: OGV (Ogg Theora). WebM was supported back in Godot 3, but dropped from core support starting in 4. I learned this the hard way.</p>
+
+      <p>So I switched to OGV. This time it loaded — but the colors were broken. Not a black screen, but the RGB channels were twisted and the colors looked wrong. The problem had moved from "the file won't load" to "it loads, but the colors are off."</p>
+
+      <p>I narrowed it down step by step: lowered the resolution, locked the pixel format to <code>yuv420p</code>, fixed the framerate at 30, and cleaned up the encoding options one at a time. After a few days of this, I landed on a safe encoding preset.</p>
+
+      <blockquote>fps=30, fixed scale, format=yuv420p, libtheora q7–q8</blockquote>
+
+      <p>Videos exported with this preset played correctly in Godot. No black screen, no color corruption, no channel swapping. The problem that had eaten almost ten days was finally solved.</p>
+
+      <hr />
+      <h3>Building the Real Cutscene</h3>
+      <p>Once the format issue was resolved, the rest was actually fun. Instead of one flat image, I built it in layers — background dim, background video, hero portrait, effects, text — each with its own entry timing down to 0.05-second increments. Yi Sun-sin slides in, and "Crane Wing Formation!" bursts onto the screen like a pop, then fades out.</p>
+
+      <p>Once this pipeline was in place, I could hook up Kwon Yul, Jeong Do-jeon, Kim Yu-sin, and Eulji Mundeok in turn. The default rule is allied generals enter from the left with the skill name on the right — except for cases like Yi Sun-sin, where flipping it looks better, so I made that an explicit exception.</p>
+
+      <figure style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div>
+          <img src="../assets/eastwar/cutin-sunsin-03.png" alt="Yi Sun-sin crane wing formation cutscene background" />
+          <figcaption>Yi Sun-sin — Crane Wing Formation cutscene</figcaption>
+        </div>
+        <div>
+          <img src="../assets/eastwar/cutin-kwonyul-01.png" alt="Kwon Yul Battle of Haengju cutscene background" />
+          <figcaption>Kwon Yul — Battle of Haengju cutscene</figcaption>
+        </div>
+        <div>
+          <img src="../assets/eastwar/cutin-jeong-03.png" alt="Jeong Do-jeon reform edict cutscene background" />
+          <figcaption>Jeong Do-jeon — Reform Edict cutscene</figcaption>
+        </div>
+        <div>
+          <img src="../assets/eastwar/cutin-eulji-01.png" alt="Eulji Mundeok Battle of Salsu cutscene background" />
+          <figcaption>Eulji Mundeok — Battle of Salsu cutscene</figcaption>
+        </div>
       </figure>
 
       <hr />
-      <h3>Putting a Real Nation on Top of the Map</h3>
-      <p>Last time, the world map and battle became one closed loop. This time was about putting a "living nation" on top of it. Not just war — feeding the people, collecting taxes, researching technology, talking to other nations, gathering secret intelligence. Most of what makes a real strategy game tick showed up this round.</p>
+      <h3>The Remaining Details</h3>
+      <p>Once the cutscenes were in place, I also tuned how battle itself felt. Archers now fire several arrows in a staggered volley; gunners get a sharp muzzle flash and a short tracer streak, so the two clearly feel different. Battle results now play a short video before the victory/defeat toast, and battles now open with a wide establishing shot that smoothly zooms into the camera's play position.</p>
 
-      <hr />
-      <h3>Public Support and Loyalty — Two Separate Axes</h3>
-      <p>Until now, there was only loyalty. This time I added a second axis: public support. Keeping the two clearly separate mattered. Public support reflects how well the people are actually living; loyalty reflects how much they submit to the state. Neither shifts turn by turn — instead, every season, high public support nudges loyalty up a little, and low support nudges it down. Public support is the cause; loyalty slowly follows as the effect.</p>
-
-      <hr />
-      <h3>Moving Troops Now Has a Cost</h3>
-      <p>Previously, moving 100 troops to another city meant 100 troops simply arrived. Not anymore. If the origin city's loyalty is low, some troops desert or fall behind along the way. At loyalty 100, all 100 arrive; at loyalty 50, only half arrive and the rest vanish en route. Loyalty is no longer just a number — it now actually shapes military logistics.</p>
-
-      <hr />
-      <h3>Conscription, Recruitment, and a Growing Military</h3>
-      <p>Cities with higher loyalty can now recruit more new soldiers. Low loyalty caps recruitment at 5%, while maxed-out loyalty pushes it up to 50%. Food factors in too — rice is consumed first, then barley, then seafood once those run out, meaning a city that's burned through its rice and barley in winter can still recruit using seafood, a real strategic fallback.</p>
-
-      <figure style="margin:32px 0">
-        <img src="../assets/eastwar/scene-caocao-rally-01.png" alt="Cao Cao rallying his troops" style="width:100%;border-radius:2px" />
-      </figure>
-
-      <hr />
-      <h3>Revolt Doesn't Come Out of Nowhere</h3>
-      <p>When public support and loyalty both bottom out, a city now sends up a warning sign — classified as stable, warning, or danger. Actual revolts and cities flipping hands aren't built yet; for now it's just the early warning. Losing a city without any notice felt far less fair than seeing "this city is at risk" and getting a chance to respond.</p>
-
-      <hr />
-      <h3>Technology Grows a Nation</h3>
-      <p>I split the data for national-level technology and city-level technology. Techs now lock into each other — unifying currency unlocks the mint, and completing military reform unlocks upper-tier units like heavy infantry and the turtle ship. The turtle ship in particular has a hard-coded requirement: "must have Yi Sun-sin." A ship that can't exist without him — no exceptions there, period.</p>
-
-      <hr />
-      <h3>A Market Price Board Now Exists</h3>
-      <p>Trade used to be just fixed route income. Now each resource has a base price that shifts with the season and circumstances. There's no buy/sell trade UI yet, but this lays the groundwork for special-goods trading and diplomatic trade agreements later.</p>
-
-      <hr />
-      <h3>Diplomacy — A Way Forward Besides War</h3>
-      <p>Relations with other factions are now a score (0–100) plus a status: allied, neutral, hostile, or suspended. The first diplomatic action to go in was tribute — spending gold and silk to raise the relation score. Alliance proposals and declarations of war are still pushed to a later stage.</p>
-
-      <figure style="margin:32px 0">
-        <img src="../assets/eastwar/screenshot-diplomacy-panel-01.png" alt="Diplomacy panel UI" style="width:100%;border-radius:2px" />
-        <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Diplomacy Panel · Goguryeo</figcaption>
-      </figure>
-
-      <hr />
-      <h3>Espionage — The Invisible Battlefield</h3>
-      <p>Espionage now requires a chancellor with high political skill. It started with quietly gathering intel on enemy cities, then extended to actively disrupting public support. Higher political aptitude means a bigger effect, but if discovered, relations take a serious hit and the action fails outright. There's now a way to shake up the board without ever declaring war.</p>
-
-      <figure style="margin:32px 0">
-        <img src="../assets/eastwar/screenshot-espionage-panel-01.png" alt="Espionage panel UI" style="width:100%;border-radius:2px" />
-        <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Espionage Panel · Goguryeo</figcaption>
-      </figure>
-
-      <hr />
-      <h3>What's Next</h3>
-      <p>Public support → loyalty → conscription → revolt. Tech → trade. Diplomacy → espionage. Most of the axes that run a nation and shift the board — beyond just war — now exist. Next up is putting a real, hands-on UI on top of all this logic.</p>
+      <p>What I spent ten days wrestling with was, in the end, just "how to play one video." But what I took from it wasn't only about formats — it was that when something won't budge, it helps to prepare a fallback route alongside it, and that narrowing down a cause step by step eventually runs out of dead ends.</p>
 
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-018-en.html" class="log-nav__prev">
+      <a href="eastwar-devlog-019-en.html" class="log-nav__prev">
         <span class="log-nav__label">Previous</span>
-        <span class="log-nav__title">← Dev Log #018</span>
+        <span class="log-nav__title">← Dev Log #019</span>
       </a>
-      <a href="eastwar-devlog-020-en.html" class="log-nav__next">
+      <span class="log-nav__next">
         <span class="log-nav__label">Next</span>
-        <span class="log-nav__title">Dev Log #020 →</span>
-      </a>
+        <span class="log-nav__title" style="opacity:.35">Dev Log #021 →</span>
+      </span>
     </div>
 
   </article>
@@ -262,7 +260,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '019');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '020');
 </script>
 </body>
 </html>
