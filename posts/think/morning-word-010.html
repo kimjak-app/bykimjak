@@ -174,6 +174,9 @@
   .post__body p{margin:0 0 1.6em}
   .post__body p:last-child{margin-bottom:0}
   .post__body strong{font-weight:600;color:var(--ink)}
+  .post__body ul{margin:0 0 1.6em;padding-left:1.3em}
+  .post__body ul li{margin-bottom:.85em}
+  .post__body ul li:last-child{margin-bottom:0}
 
   .post__body .dialogue{
     border-left:2px solid var(--rule);
@@ -343,9 +346,21 @@
 
     <p>이 다섯 개만 박히면 초고는 성공이다. 대사나 디테일은 나중에 갈면 된다.</p>
 
-    <p>EASTWAR도 오늘 테크트리를 마감한다. 근데 진짜 얘기는 그다음부터다 — 메인 월드맵 파일이 2만 줄을 넘었다. 기능은 쌓였는데 구조가 이제 무거워진 상태. 여기서 디테일링을 더 넣으면 나중에 지옥문이 열린다.</p>
+    <p>EASTWAR도 오늘 테크트리를 마감한다. 그 직전엔 작은 버그 하나를 먼저 잡았다 — 연구가 완료될 때 나오는 영상이 전체화면으로 너무 크게 튀어나오는 문제였다. 전투 결과 화면에서 쓰는 영상 크기 정책을 그대로 가져와서, 중앙 배치·16:9 비율로 맞췄다. 흐름 자체는 그대로 뒀다. 연구 완료 → 큐 등록 → 영상 재생 → 카드 표시 → 확인 후 다음 큐, 이 순서는 건드리지 않고 크기와 위치만 손봤다.</p>
 
-    <p>그래서 오늘부터는 쌓기가 아니라 버틸 수 있는 구조로 바꾸는 일이 먼저다. 컨트롤타워는 월드맵 본체 하나로, 실제 기능은 매니저 단위로 쪼갠다. 데이터랑 로직도 분리한다. 완벽한 아키텍처 말고 일단 복붙 분리부터. 그리고 리팩토링 기간엔 새 기능 절대 안 붙인다 — 이게 제일 중요하다.</p>
+    <p>그리고 진짜 얘기는 그다음부터다 — 메인 월드맵 파일이 2만 줄을 넘었다. 기능은 쌓였는데 구조가 이제 무거워진 상태. 여기서 디테일링을 더 넣으면 나중에 지옥문이 열린다.</p>
+
+    <p>그래서 오늘부터는 쌓기가 아니라 버틸 수 있는 구조로 바꾸는 일이 먼저다. 방향은 이렇게 잡았다.</p>
+
+    <ul>
+      <li><strong>월드맵 본체는 컨트롤타워로만 남기기</strong> — main.gd가 모든 걸 직접 처리하면 안 된다. 월드맵은 전체 흐름만 잡고, 실제 기능은 모듈로 뺀다.</li>
+      <li><strong>기능별 파일 분리</strong> — TechTreeManager.gd, CityManager.gd, ArmyManager.gd, EconomyManager.gd, DiplomacyManager.gd, UIManager.gd, SaveLoadManager.gd, TurnManager.gd, BattlePreviewManager.gd. 이런 식으로 쪼갠다.</li>
+      <li><strong>데이터와 로직 분리</strong> — 테크트리 효과, 도시 수치, 병종 능력치 같은 건 코드 안에 박지 않고 데이터 파일·딕셔너리·리소스로 뺀다. 나중에 밸런스 조정할 때 코드 안 뒤지고 숫자만 바꾸게.</li>
+      <li><strong>먼저 '복붙 분리'만 해도 된다</strong> — 처음부터 완벽한 아키텍처를 만들려고 하면 또 막힌다. 일단 함수 덩어리를 기능별 파일로 옮기고, 월드맵에서 호출하는 구조로 바꾸는 것만 해도 엄청 가벼워진다.</li>
+      <li><strong>리팩토링 중 새 기능 추가 금지</strong> — 이게 제일 중요하다. 리팩토링 기간엔 "아 이것도 고치자" 시작하면 끝이 안 난다. 목표는 기능 추가가 아니라 기존 기능을 안 깨고 구조만 정리하는 것.</li>
+    </ul>
+
+    <p>지금 EASTWAR는 딱 이 단계다. 프로토타입에서 실제 게임 프로젝트로 넘어가는 관문.</p>
 
     <div class="dialogue">
       <p><span class="speaker">채코치</span>2만 줄 메인 파일은 나쁜 게 아니라, 그만큼 김작이 진짜 많이 쌓았다는 증거야.</p>
@@ -355,8 +370,8 @@
     <p>오늘 목표는 세 가지로 딱 정리된다.</p>
 
     <div class="callout">
-      <p>EASTWAR 테크트리 마감<br/>
-      메인 월드맵 리팩토링 준비<br/>
+      <p>EASTWAR 연구 완료 영상 크기 버그 수정 + 테크트리 마감<br/>
+      메인 월드맵 리팩토링 준비 (컨트롤타워 구조로)<br/>
       더 클리너 2회는 워밍업만</p>
     </div>
 
