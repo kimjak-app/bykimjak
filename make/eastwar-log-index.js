@@ -98,6 +98,16 @@
       num: '019', date: '2026 · 05 · 30',
       ko: { href: 'eastwar-devlog-019.html',    title: '민심에서 첩보까지, 국가 시뮬레이션의 완성', sub: '민심·충성도, 징병·반란경고, 국가/도시 테크트리, 무역·외교·첩보 — v0.69 시리즈' },
       en: { href: 'eastwar-devlog-019-en.html', title: 'From Public Support to Espionage — A Nation Simulation Complete', sub: 'Public support & loyalty, conscription & revolt warnings, national/city tech trees, trade, diplomacy, espionage — v0.69 series' }
+    },
+    {
+      num: '020', date: '2026 · 06 · 04',
+      ko: { href: 'eastwar-devlog-020.html',    title: '색이 깨진다, 그래서 다시 구웠다 — 컷인 영상과의 열흘', sub: '고유특기 컷인 영상 도입, Godot 영상 포맷 문제 해결, 레이어드 컷인 파이프라인' },
+      en: { href: 'eastwar-devlog-020-en.html', title: 'The Colors Broke, So I Re-encoded — Ten Days With a Cutscene', sub: 'Unique-skill video cutscenes, Godot video format debugging, layered cutscene pipeline' }
+    },
+    {
+      num: '021', date: '2026 · 06 · 18',
+      ko: { href: 'eastwar-devlog-021.html',    title: '보이지 않는 절반 — 월드맵 국정 시스템이 살아나기까지', sub: '국정 패널 정리, 성 창고·무역 자동화, 외교·첩보 행동화, 정보 단계적 공개 — v0.70-39~42' },
+      en: { href: 'eastwar-devlog-021-en.html', title: "The Invisible Half — Bringing the WorldMap's Domestic System to Life", sub: 'Panel cleanup, city storage & trade automation, actionable diplomacy/espionage, staged intel reveal — v0.70-39~42' }
     }
   ];
 

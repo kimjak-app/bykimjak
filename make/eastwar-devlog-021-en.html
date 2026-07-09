@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR Dev Log #019 — From Public Support to Espionage — A Nation Simulation Complete · byKimjak</title>
+<title>EASTWAR Dev Log #021 — The Invisible Half · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -42,7 +42,7 @@ a{color:inherit;text-decoration:none}
 .breadcrumb .sep{opacity:.4}
 .listing-head h1{font-family:var(--f-display);font-weight:500;font-size:clamp(44px,9vw,120px);letter-spacing:-.04em;line-height:.92;margin:0 0 8px}
 .listing-head .sub-ko{font-family:var(--f-kr);font-size:clamp(16px,2vw,22px);color:var(--ink-3);margin:0 0 20px;font-weight:400}
-.listing-head .listing-desc{font-family:var(--f-body);font-size:15px;line-height:1.65;color:var(--ink-3);max-width:52ch}
+.listing-head .listing-desc{font-family:var(--f-kr);font-size:15px;line-height:1.65;color:var(--ink-3);max-width:48ch}
 .lang-switch{display:inline-flex;align-items:center;margin-bottom:28px}
 .lang-current{font-family:var(--f-display);font-size:14px;font-weight:700;color:var(--ink);padding:10px 20px;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px;cursor:default;letter-spacing:.01em}
 .lang-sep{font-family:var(--f-mono);font-size:14px;color:var(--ink-3);opacity:.35;user-select:none;line-height:1}
@@ -66,17 +66,20 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 .devlog__body{padding:64px clamp(20px,4vw,48px) 0;max-width:760px}
 .devlog__body .log-num{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:12px}
 .devlog__body h1{font-family:var(--f-display);font-weight:500;font-size:clamp(26px,4vw,48px);letter-spacing:-.03em;line-height:1.1;margin:0 0 10px}
-.devlog__body h2{font-family:var(--f-display);font-size:clamp(15px,1.8vw,20px);font-weight:400;color:var(--ink-3);margin:0;line-height:1.5;letter-spacing:-.01em}
+.devlog__body h2{font-family:var(--f-kr);font-size:clamp(15px,1.8vw,20px);font-weight:400;color:var(--ink-3);margin:0;line-height:1.5}
 .devlog__body .log-date{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);display:block;margin:24px 0 40px;padding-top:20px;border-top:1px solid var(--rule)}
 .devlog__body h3{font-family:var(--f-display);font-weight:500;font-size:clamp(16px,2vw,22px);letter-spacing:-.02em;margin:56px 0 10px;padding-top:48px;border-top:1px solid var(--rule)}
-.devlog__body p{font-family:var(--f-body);font-size:16px;line-height:1.9;color:var(--ink-2);margin:0 0 22px}
+.devlog__body .section-date{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 28px;display:block}
+.devlog__body p{font-family:var(--f-kr);font-size:16px;line-height:1.95;color:var(--ink-2);margin:0 0 22px}
 .devlog__body strong{font-weight:700;color:var(--ink)}
 .devlog__body em{font-style:italic;color:var(--ink)}
 .devlog__body hr{border:none;border-top:1px solid var(--rule);margin:52px 0}
 .devlog__body ul{padding-left:20px;margin:0 0 24px}
-.devlog__body li{font-family:var(--f-body);font-size:16px;line-height:1.85;color:var(--ink-2);margin-bottom:10px}
-.devlog__body blockquote{margin:28px 0;padding:20px 24px;border-left:3px solid var(--ink);background:var(--bg-2);font-family:var(--f-body);font-size:16px;line-height:1.8;color:var(--ink)}
+.devlog__body li{font-family:var(--f-kr);font-size:16px;line-height:1.85;color:var(--ink-2);margin-bottom:10px}
+.devlog__body blockquote{margin:28px 0;padding:20px 24px;border-left:3px solid var(--ink);background:var(--bg-2);font-family:var(--f-kr);font-size:16px;line-height:1.8;color:var(--ink)}
 .devlog__body blockquote p{margin:0;color:var(--ink)}
+.devlog__body pre{background:var(--bg-2);border:1px solid var(--rule);padding:20px 24px;margin:0 0 28px;overflow-x:auto;border-radius:2px}
+.devlog__body code{font-family:var(--f-mono);font-size:13px;line-height:1.7;color:var(--ink-2)}
 .devlog__body figure{margin:32px 0}
 .devlog__body figure img{width:100%;border-radius:2px}
 .devlog__body figure figcaption{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
@@ -150,10 +153,10 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #019</span>
+      <span>Dev Log #021</span>
     </div>
     <div class="lang-switch rev">
-      <a href="eastwar-devlog-019.html" class="lang-other">🇰🇷 한국어</a>
+      <a href="eastwar-devlog-021.html" class="lang-other">🇰🇷 한국어</a>
       <span class="lang-sep">|</span>
       <span class="lang-current">🇺🇸 English</span>
     </div>
@@ -164,82 +167,55 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-019">
+  <article class="devlog" id="log-021">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #019</span>
-      <h1>EASTWAR Devlog #019</h1>
-      <h2>From Public Support to Espionage — A Nation Simulation Complete</h2>
-      <span class="log-date">May 30, 2026</span>
+      <span class="log-num">Dev Log · #021</span>
+      <h1>EASTWAR Dev Log #021</h1>
+      <h2>The Invisible Half — Bringing the WorldMap's Domestic System to Life</h2>
+      <span class="log-date">June 18, 2026</span>
 
-      <figure style="margin:0 0 32px">
-        <img src="../assets/eastwar/cover-devlog-019-01.png" alt="Guan Yu battle illustration" style="width:100%;border-radius:2px" />
+      <p>Once the cutscene problem was solved, the next task went in a completely different direction. Not the battle screen — the world map. The domestic governance system, which until now had only a skeleton, needed real, workable flesh on its bones.</p>
+
+      <hr />
+      <h3>Starting With the Panels</h3>
+      <p>It began with the left-side national panel. Turn information and the tax section were showing redundant, duplicate data. I trimmed it down and cleaned up the chancellor card too — removed the repeated chancellor name and enlarged the portrait area.</p>
+
+      <figure>
+        <img src="../assets/eastwar/screenshot-worldmap-panels-01.png" alt="WorldMap national panels — diplomacy, intel, and city detail UI" />
+        <figcaption>WorldMap national panels — diplomacy, intel, and city detail UI</figcaption>
       </figure>
 
-      <hr />
-      <h3>Putting a Real Nation on Top of the Map</h3>
-      <p>Last time, the world map and battle became one closed loop. This time was about putting a "living nation" on top of it. Not just war — feeding the people, collecting taxes, researching technology, talking to other nations, gathering secret intelligence. Most of what makes a real strategy game tick showed up this round.</p>
+      <p>The right-side selected-city panel got the same treatment. Governor assignment, governor policy, garrisoned heroes, and hero transfer were all wired in, in order. The garrisoned heroes section in particular went from a plain text list to portrait-and-name cards. The goal was simple: click a city, and instantly understand its current state.</p>
 
       <hr />
-      <h3>Public Support and Loyalty — Two Separate Axes</h3>
-      <p>Until now, there was only loyalty. This time I added a second axis: public support. Keeping the two clearly separate mattered. Public support reflects how well the people are actually living; loyalty reflects how much they submit to the state. Neither shifts turn by turn — instead, every season, high public support nudges loyalty up a little, and low support nudges it down. Public support is the cause; loyalty slowly follows as the effect.</p>
+      <h3>Trade, From Display to Action</h3>
+      <p>The resource tab in the city detail window needed cleanup too. With only Hanseong as a city, the national storage and the city's own storage looked identical — but that stops being true once you have more cities. So I built a separate concept of city-level storage, showing exactly what each city actually holds.</p>
+
+      <p>Internal trade and external trade got split apart as well. Internal trade now only covers resource flow between my own cities; external trade only covers trading with outside factions. And I attached real, clickable buttons to both — delegate to the chancellor, or adjust manually. Delegating to the chancellor means they now handle it automatically each turn, topping up scarce resources and selling off surplus. With market price fluctuation layered on top of that, the "delegate to chancellor" button finally started living up to its name.</p>
 
       <hr />
-      <h3>Moving Troops Now Has a Cost</h3>
-      <p>Previously, moving 100 troops to another city meant 100 troops simply arrived. Not anymore. If the origin city's loyalty is low, some troops desert or fall behind along the way. At loyalty 100, all 100 arrive; at loyalty 50, only half arrive and the rest vanish en route. Loyalty is no longer just a number — it now actually shapes military logistics.</p>
+      <h3>Diplomacy and Espionage, From Information to Action</h3>
+      <p>The diplomacy and espionage tabs followed the same arc. They used to just display relationship status — now they have real, executable actions attached. Diplomacy got envoy dispatch, tribute, trade agreements, relationship recovery, and alliance proposals. Espionage got reconnaissance, public sentiment disruption, city loyalty disruption, inciting rebellion, and sowing discord.</p>
+
+      <p>And there's one change from this stretch I'm especially happy with: how enemy city information gets revealed. Before, clicking an enemy city showed you everything — troops, sentiment, all of it. Now it doesn't. Without reconnaissance, all you see is "reconnaissance required." Basic recon gets you a rough troop estimate; detailed recon adds loyalty and sentiment; dig deeper still and you learn the governor's name. Information unlocks in stages. Now you can look at the screen and immediately understand why espionage matters.</p>
 
       <hr />
-      <h3>Conscription, Recruitment, and a Growing Military</h3>
-      <p>Cities with higher loyalty can now recruit more new soldiers. Low loyalty caps recruitment at 5%, while maxed-out loyalty pushes it up to 50%. Food factors in too — rice is consumed first, then barley, then seafood once those run out, meaning a city that's burned through its rice and barley in winter can still recruit using seafood, a real strategic fallback.</p>
+      <h3>Locking Down the Domestic System's Skeleton</h3>
+      <p>With trade, diplomacy, espionage, and reconnaissance all landing at once, the regression risk grew right along with it. So I ran a QA pass covering everything from v0.70-39 through v0.70-42 in one sweep. And finally, I checked that turn-ending, domestic processing, and save/load didn't tangle with each other — making sure domestic processing couldn't run twice in the same turn, and that loading a save file wouldn't replay effects that had already happened.</p>
 
-      <figure style="margin:32px 0">
-        <img src="../assets/eastwar/scene-caocao-rally-01.png" alt="Cao Cao rallying his troops" style="width:100%;border-radius:2px" />
-      </figure>
-
-      <hr />
-      <h3>Revolt Doesn't Come Out of Nowhere</h3>
-      <p>When public support and loyalty both bottom out, a city now sends up a warning sign — classified as stable, warning, or danger. Actual revolts and cities flipping hands aren't built yet; for now it's just the early warning. Losing a city without any notice felt far less fair than seeing "this city is at risk" and getting a chance to respond.</p>
-
-      <hr />
-      <h3>Technology Grows a Nation</h3>
-      <p>I split the data for national-level technology and city-level technology. Techs now lock into each other — unifying currency unlocks the mint, and completing military reform unlocks upper-tier units like heavy infantry and the turtle ship. The turtle ship in particular has a hard-coded requirement: "must have Yi Sun-sin." A ship that can't exist without him — no exceptions there, period.</p>
-
-      <hr />
-      <h3>A Market Price Board Now Exists</h3>
-      <p>Trade used to be just fixed route income. Now each resource has a base price that shifts with the season and circumstances. There's no buy/sell trade UI yet, but this lays the groundwork for special-goods trading and diplomatic trade agreements later.</p>
-
-      <hr />
-      <h3>Diplomacy — A Way Forward Besides War</h3>
-      <p>Relations with other factions are now a score (0–100) plus a status: allied, neutral, hostile, or suspended. The first diplomatic action to go in was tribute — spending gold and silk to raise the relation score. Alliance proposals and declarations of war are still pushed to a later stage.</p>
-
-      <figure style="margin:32px 0">
-        <img src="../assets/eastwar/screenshot-diplomacy-panel-01.png" alt="Diplomacy panel UI" style="width:100%;border-radius:2px" />
-        <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Diplomacy Panel · Goguryeo</figcaption>
-      </figure>
-
-      <hr />
-      <h3>Espionage — The Invisible Battlefield</h3>
-      <p>Espionage now requires a chancellor with high political skill. It started with quietly gathering intel on enemy cities, then extended to actively disrupting public support. Higher political aptitude means a bigger effect, but if discovered, relations take a serious hit and the action fails outright. There's now a way to shake up the board without ever declaring war.</p>
-
-      <figure style="margin:32px 0">
-        <img src="../assets/eastwar/screenshot-espionage-panel-01.png" alt="Espionage panel UI" style="width:100%;border-radius:2px" />
-        <figcaption style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase">Espionage Panel · Goguryeo</figcaption>
-      </figure>
-
-      <hr />
-      <h3>What's Next</h3>
-      <p>Public support → loyalty → conscription → revolt. Tech → trade. Diplomacy → espionage. Most of the axes that run a nation and shift the board — beyond just war — now exist. Next up is putting a real, hands-on UI on top of all this logic.</p>
+      <p>The half of the game hidden behind the battle screen — but the half that actually runs it — had finally found its footing. What was left was the thing moving on top of this domestic system: the enemy faction's own turn behavior.</p>
 
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-018-en.html" class="log-nav__prev">
+      <a href="eastwar-devlog-020-en.html" class="log-nav__prev">
         <span class="log-nav__label">Previous</span>
-        <span class="log-nav__title">← Dev Log #018</span>
+        <span class="log-nav__title">← Dev Log #020</span>
       </a>
-      <a href="eastwar-devlog-020-en.html" class="log-nav__next">
+      <span class="log-nav__next">
         <span class="log-nav__label">Next</span>
-        <span class="log-nav__title">Dev Log #020 →</span>
-      </a>
+        <span class="log-nav__title" style="opacity:.35">Dev Log #022 →</span>
+      </span>
     </div>
 
   </article>
@@ -262,7 +238,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '019');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '021');
 </script>
 </body>
 </html>
