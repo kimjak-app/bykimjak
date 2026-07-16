@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR Dev Log #023 — Making Research Actually Change the Game · byKimjak</title>
+<title>EASTWAR Dev Log #024 — A Breath Before the Detail Work · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -153,10 +153,10 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #023</span>
+      <span>Dev Log #024</span>
     </div>
     <div class="lang-switch rev">
-      <a href="eastwar-devlog-023.html" class="lang-other">🇰🇷 한국어</a>
+      <a href="eastwar-devlog-024.html" class="lang-other">🇰🇷 한국어</a>
       <span class="lang-sep">|</span>
       <span class="lang-current">🇺🇸 English</span>
     </div>
@@ -167,104 +167,108 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-023">
+  <article class="devlog" id="log-024">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #023</span>
-      <h1>EASTWAR Dev Log #023</h1>
-      <h2>Making Research Actually Change the Game — The Tech Tree, One Month in the Making</h2>
-      <span class="log-date">July 8, 2026</span>
+      <span class="log-num">Dev Log · #024</span>
+      <h1>EASTWAR Dev Log #024</h1>
+      <h2>A Breath Before the Detail Work — Two Branches of Refactoring — World Map and Battle</h2>
+      <span class="log-date">July 11, 2026</span>
 
-      <p>Now that the enemy had started acting with real intent, the player needed a growth axis to respond with. That was the tech tree. And this project ran far longer than I expected — nearly a month, with almost 40 version tags attached to it.</p>
-
-      <hr />
-      <h3>Laying Down the Skeleton</h3>
-      <p>The first step was moving the techs that only existed on a design document into actual data. City techs were sorted into agriculture, fishing, commerce, and military (infantry, archery, cavalry, navy, defense, siege); national techs into administration, economy, military, and diplomacy. At this point, none of it was visible yet — just a skeleton filled into a registry.</p>
-
-      <hr />
-      <h3>Making It Visible — and Clickable</h3>
-      <p>Next was putting that skeleton on screen. The left side became the national tech tree, the right side the city tech tree — carrying over the world map's existing logic, where the left represents the whole nation and the right represents whichever city is currently selected. At first it was read-only. Clicking a node did nothing; only completed, available, and locked states were distinguished by color.</p>
-
-      <figure>
-        <img src="../assets/eastwar/screenshot-techtree-graph-01.png" alt="EASTWAR Tech Tree — national and city tech tree graph UI" />
-        <figcaption>EASTWAR Tech Tree — national/city tech tree graph UI</figcaption>
-      </figure>
-
-      <figure style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
-        <div>
-          <img src="../assets/eastwar/tech-naval-turtleship-01.png" alt="Navy — Turtle Ship" />
-          <figcaption>Navy — Turtle Ship</figcaption>
-        </div>
-        <div>
-          <img src="../assets/eastwar/tech-nation-diplomacy-01.png" alt="Nation — Diplomacy" />
-          <figcaption>Nation — Diplomacy</figcaption>
-        </div>
-        <div>
-          <img src="../assets/eastwar/tech-nation-bureaucracy-01.png" alt="Nation — Bureaucracy" />
-          <figcaption>Nation — Bureaucracy</figcaption>
-        </div>
-        <div>
-          <img src="../assets/eastwar/tech-nation-centralization-01.png" alt="Nation — Centralization" />
-          <figcaption>Nation — Centralization</figcaption>
-        </div>
-        <div>
-          <img src="../assets/eastwar/tech-agri-toolupgrade-01.png" alt="Agriculture — Tool Upgrade" />
-          <figcaption>Agriculture — Tool Upgrade</figcaption>
-        </div>
-        <div>
-          <img src="../assets/eastwar/tech-mil-heavycavalry-01.png" alt="Military — Heavy Cavalry" />
-          <figcaption>Military — Heavy Cavalry</figcaption>
-        </div>
-      </figure>
-
-      <p>This is where the detail work began in earnest. I turned the big card-style graph into something more compact, and made it so clicking an icon only refreshed the detail panel. It sounds trivial, but at first, clicking a single node was rebuilding the entire graph — meaning the screen briefly stuttered on every click. Fixing that made click response noticeably snappier, and I bumped icon size from 56px up to 64px. That, in turn, brought back node overlap issues, especially in the city tech tree's military category. Instead of manually nudging each category, I fixed the spacing calculation globally.</p>
+      <h3>Document Diet, First</h3>
+      <p>Before the refactoring itself, one thing changed underneath it. Until now, every single line of code changed meant updating 7-8 agent docs alongside it. That held through v0.70-98, when Domestic Tech phase 1 closed — but past that point, it was clearly inefficient.</p>
+      <p>So starting v0.71, the role of each doc got compressed. The default became just three: CURRENT_STATE.md, NEXT_TASKS.md, HANDOFF_TO_CODEX.md. CHANGELOG, SESSION_LOG, and domain rule docs only get touched when actually relevant. Not fewer docs — less for each doc to do.</p>
+      <p>Only after setting that baseline could the real refactoring begin.</p>
 
       <hr />
-      <h3>Research Starts to Actually Move</h3>
-      <p>Only once the UI had settled did I get into the real substance: making the "start research" button actually do something. First, I let research be started at all. Then I made remaining turns count down as turns passed. Finally, completion processing. Only after these three pieces were in place did the tech tree have its minimum viable skeleton — start research, progress through turns, complete.</p>
+      <h3>Branch One — World Map (v0.71)</h3>
+      <p>worldmap_test.gd was a 23,114-line God File. Instead of cutting straight into it, v0.71-00 started by drawing the map. All 1,109 functions were mapped and sorted by risk:</p>
 
-      <figure style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-        <div>
-          <img src="../assets/eastwar/tech-mood-national-research-01.png" alt="National research — scholars laying the foundations of the nation" />
-          <figcaption>National research — scholars at work</figcaption>
-        </div>
-        <div>
-          <img src="../assets/eastwar/tech-mood-city-research-01.png" alt="City research — craftsmen planning a fortress" />
-          <figcaption>City research — craftsmen planning a city</figcaption>
-        </div>
-      </figure>
+      <ul>
+        <li>224 low-risk extraction candidates</li>
+        <li>229 high-risk</li>
+        <li>21 functions marked do-not-move-yet</li>
+      </ul>
+
+      <p>Only after the map was done did v0.71-01 switch the runtime entry point from the battle test scene to the world map. Scene renaming and file moves were deferred — the scope was narrowed to a single line in project.godot's main scene setting.</p>
+
+      <p>From there (v0.71-05 through 10), extraction went domain by domain, in small pieces: Domestic Tech → Economy/City → Defense/Battle → Diplomacy/Spy → Naval/Siege → UI Formatter, one at a time. Each pass moved only pure helper functions, and only the safest ones — and every commit required a Godot headless load to pass with zero errors first.</p>
+
+      <p>What stayed untouched throughout:</p>
+      <ul>
+        <li>active research mutation, actual resource charge / completion queues</li>
+        <li>save/load</li>
+        <li>BattleContext, pending invasion</li>
+        <li>turn orchestration</li>
+        <li>city state mutation, turn income mutation</li>
+        <li>diplomacy/spy formulas and state mutation</li>
+      </ul>
+
+      <p>Midway through, a gap surfaced. 223 functions (20% of the total) sat in the function map without being assigned to any stage — Selection Panel, Scene/Runtime Orchestration, Debug/QA, Save/Load, Enemy Baseline, and a Mixed/Unsafe bucket. Left alone, that gap could have blown up right at Complete Lock time. So v0.71-07a was inserted to document a disposition plan for it first.</p>
+
+      <p>v0.71-11 wasn't another extraction pass — it was a consolidation pass: reviewing what had already been pulled out, finalizing the high-risk lock list. v0.71-12 ran a full F6 regression QA, v0.71-13 renamed the file to worldmap_main.gd, and v0.71-14 sealed it with Complete Lock.</p>
+
+      <p>Final result: 23,114 → 22,842 lines (1.2% reduction), 42 functions moved, eight consecutive stages with zero rollbacks. The line count looks minor, but the real payoff is a complete risk map of all 1,109 functions — one that turns the next phase from "brute-force tearing" into "surgery on the safest functions first."</p>
+
+      <p>Scene naming got cleaned up right after (v0.72-00 through 03): WorldMap_Test.tscn → WorldMap.tscn, Battle_Fullscreen_Test.tscn → Battle_Land.tscn. Battle_Singijeon_Test.tscn, Battle_WebImport_Test.tscn, and the dev-only test scenes stayed as-is. Hardcoded paths were already narrowed down to exactly three files (project.godot, worldmap_main.gd, battle_web_import_test.gd), so the rename itself — through the F6 roundtrip QA — went off without a single hitch.</p>
 
       <hr />
-      <h3>Connecting the Five Categories, One at a Time</h3>
-      <p>From here I moved carefully. Instead of wiring everything up at once, I attached categories one by one: economic effects first (agriculture, fishing, and commerce granting food/gold bonuses on completion), then military/defense effects (barracks, walls, training), national policy effects (taxation, bureaucracy, centralization), naval/siege display effects (turtle ships, cannons, siege weapons), and finally diplomacy/espionage display effects. At every step I asked the same questions: does this bonus apply to exactly that city, does it leak to other cities or the enemy, is there no bonus while research is still in progress. Once all five categories were connected, that was genuinely the finish line for the tech tree's first-pass implementation.</p>
+      <h3>Branch Two — Battle Engine (v0.72)</h3>
+      <p>The battle side told a completely different story. battle_web_import_test.gd is a 14,810-line God File, and v0.72-04's full classification of its 791 functions came back like this:</p>
+
+      <ul>
+        <li>Stage A (pure, low-risk): 0</li>
+        <li>Stage B (needs wrapper, under review): 145</li>
+        <li>Stage C (core, stays as-is): 575</li>
+        <li>Stage D (contract-locked): 71</li>
+      </ul>
+
+      <p>The world map at least had 224 low-risk functions (20%). The battle file had zero functions that could be pulled out with full safety. The reason is straightforward — battle presentation (tweens, HP bars, unit visuals) is logic that simply doesn't hold together without node references.</p>
+
+      <p>Broken down by domain:</p>
+      <ul>
+        <li>Unit Visual/Animation: 153</li>
+        <li>Enemy AI: 130</li>
+        <li>Unique/Specialty Skill: 98 (partial review candidate)</li>
+        <li>Formation/Facing: 96 (naval battle reuse candidate)</li>
+        <li>Damage/Stat/Formula: 83 (review candidate)</li>
+        <li>WorldMap Bridge/Handoff: 71 (entirely Stage D, locked)</li>
+        <li>Reinforcement: 44 (reuse candidate)</li>
+        <li>UI/HUD Formatter: 48 (reuse candidate)</li>
+      </ul>
+
+      <p>The 71 WorldMap Bridge/Handoff functions were locked down outright — off-limits for this refactor. Instead, the data contract between world map and battle got documented: a meta dictionary hands data off at scene transition, and the contract doc maps out, field by field, which function produces and which consumes each piece.</p>
+
+      <p>The battle side is still pre-extraction. The plan going forward:</p>
+      <ul>
+        <li>1. Extract Battle Debug/Logging helpers</li>
+        <li>2. Battle UI Text/Formatter — pure formatters only</li>
+        <li>3. Battle Skill Metadata/Description — description text only, not execution logic</li>
+        <li>4. Review Formation/Facing pure calculations (naval reuse candidate)</li>
+      </ul>
 
       <hr />
-      <h3>Actually Collecting the Cost</h3>
-      <p>Once effects were wired in, cost came next. At first it was display-only — showing an estimated cost without actually deducting any resources. Then I made it so starting a research would deduct gold and food exactly once, with no per-turn drain and nothing extra taken on completion. Labor and policy — two more resource types — were designed but not implemented; I locked down the storage structure this round and left the actual implementation for later. The direction — accumulate over time, then spend it all on one big research push — was decided, but that part stays on the roadmap.</p>
+      <h3>New Rollback Criteria</h3>
+      <p>v0.71-05 also introduced explicit rollback criteria. Three things matter most:</p>
+      <ul>
+        <li>PASS is judged by numbers only: zero headless errors, no touches to the excluded list, function signatures 100% unchanged. No room for "feels okay" judgment calls.</li>
+        <li>On failure: revert immediately, don't patch. Stacking code on top of a failure is exactly how the old hotfix pileups happened.</li>
+        <li>Failures get logged too, and risk ratings get bumped up accordingly — so the function map itself gets more accurate with every stage.</li>
+      </ul>
 
       <hr />
-      <h3>Checking It Myself in F6</h3>
-      <p>Once all the numbers and logic were wired in, someone had to actually click through it. I added a grace period blocking invasions entirely for the first 10 turns, then ran through full scenarios starting and completing both national and city research from scratch. Does the early game have that light "let's pick one" feel? Does the mid-game make you weigh economy against military? Does the late game feel like it's building toward something? That kind of feel can't be verified by code — it took actually playing it and marking it PASS by hand.</p>
-
-      <hr />
-      <h3>Domestic Tech Complete Lock</h3>
-      <p>After all of that, on July 7th, I declared the tech tree's first-pass implementation complete. I wrapped up everything done so far and drew a line so the tech tree work wouldn't keep expanding indefinitely. Future expansion — like labor and policy resources — would become its own separate project.</p>
-
-      <hr />
-      <h3>One Last Layer: Completion Presentation</h3>
-      <p>The day after the completion lock, I added one more thing. Instead of research completion just quietly flashing a done indicator, national and city research each got their own short video that plays first, followed by a completion card. Nothing — no icon, no text — appears until the video finishes. Only then does the research icon, name, and a specific effect like "Administrative efficiency +5%" show up on the card. At first, this video played far too large, covering nearly the whole screen, so I had to resize it to match the same dimensions and ratio as the battle result video.</p>
-
-      <p>At the end of nearly a month of work, the tech tree stopped being just "a screen you can click" and became a system that actually changes a city's income, a nation's taxes, and what becomes available to unlock.</p>
+      <h3>What's Next</h3>
+      <p>The world map is locked now. Battle has its map drawn and is about to break ground. The next devlog will likely come after the battle side's first safe extraction (v0.72-05).</p>
 
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-022-en.html" class="log-nav__prev">
+      <a href="eastwar-devlog-023-en.html" class="log-nav__prev">
         <span class="log-nav__label">Previous</span>
-        <span class="log-nav__title">← Dev Log #022</span>
+        <span class="log-nav__title">← Dev Log #023</span>
       </a>
-      <a href="eastwar-devlog-024-en.html" class="log-nav__next">
-        <span class="log-nav__label">Next</span>
-        <span class="log-nav__title">Dev Log #024 →</span>
+      <a href="eastwar.html" class="log-nav__next">
+        <span class="log-nav__label">Index</span>
+        <span class="log-nav__title">Back to index →</span>
       </a>
     </div>
 
@@ -288,7 +292,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '023');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '024');
 </script>
 </body>
 </html>

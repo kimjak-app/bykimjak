@@ -18,6 +18,13 @@
       date: '2026-07-13', dl: '2026 · 07 · 13'
     },
     {
+      url: 'make/eastwar-devlog-024.html',
+      catKey: 'eastwar', cat: 'Architect Notes',
+      title: '디테일 작업 전 숨고르기',
+      sub: '월드맵과 전투, 두 갈래의 리팩토링',
+      date: '2026-07-11', dl: '2026 · 07 · 11'
+    },
+    {
       url: 'posts/think/morning-word-011.html',
       catKey: 'morning-word', cat: 'Morning Word',
       title: '콘텐츠 원석 채굴 중',

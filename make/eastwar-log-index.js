@@ -118,6 +118,11 @@
       num: '023', date: '2026 · 07 · 08',
       ko: { href: 'eastwar-devlog-023.html',    title: '연구가 진짜로 게임을 바꾸기까지 — 테크트리, 한 달의 기록', sub: '국가/도시 테크트리 UI, 5개 카테고리 효과 연결, 연구 비용·완료 연출' },
       en: { href: 'eastwar-devlog-023-en.html', title: 'Making Research Actually Change the Game — The Tech Tree, One Month in the Making', sub: 'National/city tech tree UI, five effect categories, research cost & completion presentation' }
+    },
+    {
+      num: '024', date: '2026 · 07 · 11',
+      ko: { href: 'eastwar-devlog-024.html',    title: '디테일 작업 전 숨고르기', sub: '월드맵과 전투, 두 갈래의 리팩토링' },
+      en: { href: 'eastwar-devlog-024-en.html', title: 'A Breath Before the Detail Work', sub: 'Two Branches of Refactoring — World Map and Battle' }
     }
   ];
 
