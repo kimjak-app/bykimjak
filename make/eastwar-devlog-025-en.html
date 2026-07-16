@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR 개발일지 #024 — 디테일 작업 전 숨고르기 · byKimjak</title>
+<title>EASTWAR Dev Log #025 — When the Docs Got Heavier Than the Code · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -153,122 +153,101 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #024</span>
+      <span>Dev Log #025</span>
     </div>
     <div class="lang-switch rev">
-      <span class="lang-current">🇰🇷 한국어</span>
+      <a href="eastwar-devlog-025.html" class="lang-other">🇰🇷 한국어</a>
       <span class="lang-sep">|</span>
-      <a href="eastwar-devlog-024-en.html" class="lang-other">🇺🇸 English</a>
+      <span class="lang-current">🇺🇸 English</span>
     </div>
     <h1 class="rev">EASTWAR</h1>
     <p class="sub-ko rev">이스트워 개발일지</p>
-    <p class="listing-desc rev">전략 가상역사 시뮬레이션 — 1인 개발 기록</p>
+    <p class="listing-desc rev">Strategy alt-history simulation — solo dev log</p>
   </div>
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-024">
+  <article class="devlog" id="log-025">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #024</span>
-      <h1>EASTWAR 개발일지 #024</h1>
-      <h2>디테일 작업 전 숨고르기 — 월드맵과 전투, 두 갈래의 리팩토링</h2>
-      <span class="log-date">2026년 7월 11일</span>
+      <span class="log-num">Dev Log · #025</span>
+      <h1>EASTWAR Dev Log #025</h1>
+      <h2>When the Docs Got Heavier Than the Code — Cleaning Up the MD Structure Before MVP Detail Work</h2>
+      <span class="log-date">July 16, 2026</span>
 
-      <h3>문서부터 다이어트했다</h3>
-      <p>리팩토링 얘기를 하기 전에, 그 전에 바꾼 게 하나 있다. 그동안은 코드 한 줄 고칠 때마다 agent 문서 7~8개를 같이 갱신했다. Domestic Tech 1차를 닫는 v0.70-98까지는 그 방식을 유지했지만, 그 이후로는 확실히 비효율이라고 판단했다.</p>
-      <p>그래서 v0.71부터는 문서 역할을 압축했다. 기본은 CURRENT_STATE.md, NEXT_TASKS.md, HANDOFF_TO_CODEX.md 세 개만 건드리고, CHANGELOG나 SESSION_LOG, 도메인 규칙 문서는 실제로 관련 있을 때만 갱신하기로 했다. 문서를 줄이는 게 아니라, 문서가 하는 일을 줄이는 것.</p>
-      <p>이 기준을 세워두고 나서야, 진짜 리팩토링에 들어갈 수 있었다.</p>
-
-      <hr />
-      <h3>첫 번째 갈래 — 월드맵 (v0.71)</h3>
-      <p>worldmap_test.gd는 23,114줄짜리 God File이었다. 여기서 바로 코드를 뜯지 않고, v0.71-00에서 먼저 한 일은 지도를 그리는 것이었다. 함수 1109개를 전부 맵핑하고, 위험도별로 나눴다.</p>
-
-      <ul>
-        <li>Low-risk 추출 후보 224개</li>
-        <li>High-risk 229개</li>
-        <li>아직 손대면 안 되는 함수 21개</li>
-      </ul>
-
-      <p>지도가 완성된 다음에야 v0.71-01에서 실행 진입점을 전투 테스트 씬에서 월드맵으로 바꿨다. 이때도 씬 이름 정리나 파일 이동은 다음으로 미루고, project.godot의 main scene 한 줄만 바꾸는 걸로 범위를 최대한 좁혔다.</p>
-
-      <p>그다음부터(v0.71-05~10)는 도메인별로 아주 조금씩만 뺐다. Domestic Tech → Economy/City → Defense/Battle → Diplomacy/Spy → Naval/Siege → UI Formatter, 이 순서로 한 번에 하나씩. 매번 순수 헬퍼 함수만, 그것도 가장 안전한 것만 옮기고, 옮긴 후엔 반드시 Godot headless load가 에러 0건으로 통과해야 커밋했다.</p>
-
-      <p>이 단계에서 절대 건드리지 않은 것들:</p>
-      <ul>
-        <li>액티브 리서치 변경, 실제 자원 소모/완료 큐</li>
-        <li>세이브/로드</li>
-        <li>BattleContext, 진행 중인 침공(pending invasion)</li>
-        <li>턴 진행 로직</li>
-        <li>도시 상태 변경, 턴 수입 변경</li>
-        <li>외교/첩보 공식과 상태 변경</li>
-      </ul>
-
-      <p>중간에 하나 빵꾸가 보였다. 함수맵에 있는데 어느 단계에도 배정 안 된 도메인이 223개(전체 20%)나 있었다 — 선택 패널, 씬/런타임 오케스트레이션, 디버그/QA, 세이브/로드, 적 AI 기본값, 그리고 분류 애매한 것들. 이대로 가면 마지막 락(Lock)을 찍을 때 "어? 이거 안 옮겼네" 하고 막판에 터질 수 있다고 판단해서, v0.71-07a로 처리 계획을 먼저 문서화하게 했다.</p>
-
-      <p>v0.71-11은 오히려 함수를 더 옮기는 단계가 아니라, 지금까지 뺀 걸 정리하고 고위험 목록을 확정하는 "정리" 단계였다. v0.71-12에서 F6 기준으로 전체 흐름을 QA하고, v0.71-13에서 파일명을 worldmap_main.gd로 정리한 다음, v0.71-14에서 Complete Lock을 찍었다.</p>
-
-      <p>최종 결과: 23,114줄 → 22,842줄(1.2% 감소), 42개 함수 이동, 8단계 연속 무사고(롤백 0번). 줄 수만 보면 미미해 보이지만, 진짜 성과는 1109개 함수 전체의 위험도 지도가 완성됐다는 것과, 그 지도 덕분에 다음 단계부터는 무식하게 뜯는 대신 안전한 함수부터 외과수술이 가능해졌다는 것이다.</p>
-
-      <p>이어서 씬 이름도 정리했다(v0.72-00~03). WorldMap_Test.tscn → WorldMap.tscn, Battle_Fullscreen_Test.tscn → Battle_Land.tscn. 반면 Battle_Singijeon_Test.tscn, Battle_WebImport_Test.tscn, 개발용 테스트 씬들은 그대로 뒀다. 하드코딩된 경로도 딱 3곳(project.godot, worldmap_main.gd, battle_web_import_test.gd)만 갱신하면 되는 상태로 미리 좁혀놨기 때문에, rename 자체는 F6 왕복 QA까지 무사고로 끝났다.</p>
+      <h3>The Docs Were Repeating Themselves</h3>
+      <p>Before diving into MVP detail work, something needed addressing first. A closer look at the agent docs turned up something worse than expected.</p>
+      <p>CURRENT_STATE.md, NEXT_TASKS.md, and HANDOFF_TO_CODEX.md were all accumulating past versions endlessly. The full v0.72-04, v0.72-03, v0.72-02, v0.72-01, and v0.71 history sat inside CURRENT_STATE.md untouched, with the same work records split and repeated across all three documents.</p>
+      <p>NEXT_TASKS.md was the worst offender. Despite the name, already-finished v0.72 work kept sitting there marked "Current" — it had effectively become a second CHANGELOG. HANDOFF_TO_CODEX.md had the same problem: it kept carrying handoff notes from v0.71 and v0.72 long after they were done, so finding the latest instruction meant wading through everything that came before it.</p>
+      <p>The prior approach — a separate plan, audit, QA, and Complete Lock doc for every single task — worked well for safety-critical work like the world map and battle refactors. But for what comes next, transaction-based MVP detail work, that same structure becomes the thing driving up context cost.</p>
 
       <hr />
-      <h3>두 번째 갈래 — 전투 엔진 (v0.72)</h3>
-      <p>전투 쪽은 완전히 다른 결과가 나왔다. battle_web_import_test.gd는 14,810줄짜리 God File인데, v0.72-04에서 791개 함수를 전수 분류했더니:</p>
+      <h3>The Call: Compress, Don't Delete</h3>
+      <p>The first principle set was this: don't delete documents, reduce what each one has to do. Past records already live in Git history, so instead of deleting anything, it all moves to archive and simply drops out of the current context.</p>
 
+      <hr />
+      <h3>What Stays, What Gets Restructured, What's New</h3>
+      <p><strong>Stays as-is</strong>: WORKFLOW_MANAGER.md (the top-level safety contract), GODOT_RULES.md (scene/UID/resource rules, skippable for doc-only work), BATTLE_WORLDMAP_HANDOFF_CONTRACT.md (the world map–battle boundary contract, now expanded to include shared attack/defense input contracts and duplicate-application prevention tokens)</p>
+      <p><strong>Stays but narrows scope</strong>: CODEX_WORKFLOW_RULES.md — authorization headers and commit policy that overlap with WORKFLOW_MANAGER.md get merged, and the task classification shifts from SIMPLE/MEDIUM/COMPLEX PATCH to PATCH/TRANSACTION/ARCHITECTURE MIGRATION</p>
+      <p><strong>Gets fully restructured</strong>:</p>
       <ul>
-        <li>Stage A (순수, 저위험): 0개</li>
-        <li>Stage B (래퍼 필요, 검토): 145개</li>
-        <li>Stage C (본체 유지): 575개</li>
-        <li>Stage D (계약 잠금): 71개</li>
+        <li>CURRENT_STATE.md → over 90% moves to archive, compressed to roughly 100 lines (Baseline / Active Phase / Working Runtime / Implemented / Known Gaps / Active Transaction / Next Transaction / Protected Contracts only)</li>
+        <li>NEXT_TASKS.md → retired, replaced by TRANSACTION_ROADMAP.md (Active / Next / Later / Blocked, with completed items removed immediately)</li>
+        <li>HANDOFF_TO_CODEX.md → instead of accumulating as a standalone file, folded into an Execution Brief section inside each transaction doc. If a separate file is still needed, it gets overwritten every time, not appended to</li>
       </ul>
+      <p><strong>Gets consolidated</strong>: ARCHITECT_AGENT.md, IMPLEMENTATION_AGENT.md, QA_AGENT.md, RUNTIME_QA_AGENT.md, VISUAL_QA_AGENT.md — all five merge into one DEVELOPMENT_ROLES_AND_QA.md, dropped from the default reading list and read only when relevant</p>
+      <p><strong>Newly created</strong>: MVP_MASTER_PLAN.md (the top-level doc defining the full four-castle Korea MVP), TRANSACTION_DEVELOPMENT_RULES.md (defines the transaction-based work model), TECH_TREE_GAMEPLAY_CONTRACT.md (the contract connecting the tech tree to actual gameplay), KOREA_MVP_SCENARIO.md (active castles, factions, generals, win/lose conditions), SYSTEM_SOURCE_OF_TRUTH.md (spells out which system owns which data)</p>
+      <p><strong>Moves to archive</strong>: version-specific refactor plans, past QA docs, Complete Lock docs, audit material already folded into higher-level docs — all into <code>agent/archive/v0_70/</code>, <code>v0_71_refactor/</code>, <code>v0_72_battle_refactor/</code>, <code>qa/</code>, <code>superseded_designs/</code></p>
 
-      <p>월드맵은 그래도 저위험 224개(20%)가 있었는데, 전투 쪽은 완전히 안전하게 뺄 수 있는 함수가 하나도 없었다. 이유는 명확하다 — 전투 연출(트윈, HP바, 유닛 비주얼)이 노드 참조 없이는 애초에 성립이 안 되는 로직 덩어리라서다.</p>
-
-      <p>도메인별로 나눠보면:</p>
+      <hr />
+      <h3>Rules Going Forward</h3>
       <ul>
-        <li>Unit Visual/Animation 153개</li>
-        <li>Enemy AI 130개</li>
-        <li>Unique/Specialty Skill 98개 (부분 검토 대상)</li>
-        <li>Formation/Facing 96개 (해상전투 재사용 후보)</li>
-        <li>Damage/Stat/Formula 83개 (검토 대상)</li>
-        <li>WorldMap Bridge/Handoff 71개 (전량 Stage D, 잠금)</li>
-        <li>Reinforcement 44개 (재사용 후보)</li>
-        <li>UI/HUD Formatter 48개 (재사용 후보)</li>
-      </ul>
-
-      <p>WorldMap Bridge/Handoff 71개는 이번 리팩토링에서 절대 안 건드리는 영역으로 아예 못 박아뒀다. 대신 월드맵-전투 간 데이터가 어떻게 오가는지 계약 문서로 정리했는데, 메타 딕셔너리를 통해 씬 전환 시점에 데이터를 넘기고 받는 구조라는 게 확인됐다. 어느 함수가 만들고 어느 함수가 소비하는지까지 필드 단위로 표로 정리해뒀다.</p>
-
-      <p>전투 쪽은 아직 실제 추출 전 단계다. 다음은 이 순서로 진행할 계획:</p>
-      <ul>
-        <li>1. Battle Debug/Logging 헬퍼 추출</li>
-        <li>2. Battle UI Text/Formatter — 순수 formatter만</li>
-        <li>3. Battle Skill Metadata/Description — 실행 로직 말고 설명 텍스트 계열만</li>
-        <li>4. Formation/Facing 순수 계산 검토 (해상전 재사용 후보)</li>
+        <li>1. Keep current docs short — CURRENT_STATE.md under 100 lines, TRANSACTION_ROADMAP.md under 50</li>
+        <li>2. Never copy the same fact into multiple docs — the latest commit lives only in CURRENT_STATE.md; everything else just references it</li>
+        <li>3. Archive completed transactions immediately — remove from CURRENT_STATE and the roadmap, fold only the key decisions into the contract docs</li>
+        <li>4. Let Git logs replace the CHANGELOG — if a separate file is still wanted, log only user-meaningful releases (internal changes like helper extraction don't count)</li>
+        <li>5. Don't create standalone QA docs — record results in each transaction's Acceptance Tests / Completion Result. Exceptions only for things with genuinely independent value, like full regression passes or release candidates</li>
+        <li>6. Don't spin up a new Complete Lock doc for every task — boundaries that need locking go into a "Protected Contract" section inside the relevant contract doc</li>
+        <li>7. Don't read every document every session — read the core five (WORKFLOW_MANAGER, DEVELOPMENT_RULES, MVP_MASTER_PLAN, CURRENT_STATE, ACTIVE_TRANSACTION) by default, and pull in anything else only when the task calls for it</li>
       </ul>
 
       <hr />
-      <h3>롤백 기준도 새로 세웠다</h3>
-      <p>v0.71-05 단계에서 롤백 기준을 명시적으로 만들어뒀다. 핵심은 세 가지다.</p>
-      <ul>
-        <li>PASS 판정은 숫자로만: headless 에러 0건, 제외 리스트 미터치, 함수 시그니처 100% 동일. "느낌상 괜찮은 것 같다"는 판단 자체를 못 하게 막아둔 것.</li>
-        <li>실패하면 패치 말고 즉시 revert. 실패 위에 코드를 더 얹는 순간, 예전 hotfix 폭탄이 재현되는 길이라서.</li>
-        <li>실패도 기록해서 위험도 등급을 올린다. 이러면 다음 단계로 갈수록 함수맵 자체가 점점 더 정확해진다.</li>
-      </ul>
+      <h3>Final Document Structure</h3>
+      <pre><code>agent/
+├─ WORKFLOW_MANAGER.md
+├─ DEVELOPMENT_RULES.md
+├─ GODOT_RULES.md
+├─ MVP_MASTER_PLAN.md
+├─ CURRENT_STATE.md
+├─ TRANSACTION_ROADMAP.md
+├─ contracts/
+│  ├─ SYSTEM_SOURCE_OF_TRUTH.md
+│  ├─ WORLDMAP_RULES.md
+│  ├─ BATTLE_WORLDMAP_HANDOFF_CONTRACT.md
+│  └─ TECH_TREE_GAMEPLAY_CONTRACT.md
+├─ scenarios/
+│  └─ KOREA_MVP_SCENARIO.md
+├─ transactions/
+│  ├─ T01_NEW_GAME_FACTION_SELECTION.md
+│  └─ ...
+└─ archive/
+   ├─ v0_70/
+   ├─ v0_71/
+   ├─ v0_72/
+   ├─ old_qa/
+   └─ superseded/</code></pre>
 
-      <hr />
-      <h3>앞으로</h3>
-      <p>월드맵은 이제 락 상태고, 전투는 지도만 그려놓고 이제 첫 삽을 뜨는 단계다. 다음 devlog는 아마 전투 쪽 첫 안전 추출(v0.72-05) 이후가 될 것 같다.</p>
+      <p>The goal is to bring what gets read at the start of each new session down to roughly 20-30% of what it was — keeping every safety contract intact while clearing out everything that never needed re-reading in the first place. Getting this done is what makes the next step possible: transaction-based work on the four-castle Korea MVP.</p>
 
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-023.html" class="log-nav__prev">
-        <span class="log-nav__label">이전</span>
-        <span class="log-nav__title">← Dev Log #023</span>
+      <a href="eastwar-devlog-024-en.html" class="log-nav__prev">
+        <span class="log-nav__label">Previous</span>
+        <span class="log-nav__title">← Dev Log #024</span>
       </a>
-      <a href="eastwar-devlog-025.html" class="log-nav__next">
-        <span class="log-nav__label">다음</span>
-        <span class="log-nav__title">Dev Log #025 →</span>
+      <a href="eastwar.html" class="log-nav__next">
+        <span class="log-nav__label">Index</span>
+        <span class="log-nav__title">Back to index →</span>
       </a>
     </div>
 
@@ -292,7 +271,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '024');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '025');
 </script>
 </body>
 </html>

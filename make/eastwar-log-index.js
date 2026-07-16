@@ -123,6 +123,11 @@
       num: '024', date: '2026 · 07 · 11',
       ko: { href: 'eastwar-devlog-024.html',    title: '디테일 작업 전 숨고르기', sub: '월드맵과 전투, 두 갈래의 리팩토링' },
       en: { href: 'eastwar-devlog-024-en.html', title: 'A Breath Before the Detail Work', sub: 'Two Branches of Refactoring — World Map and Battle' }
+    },
+    {
+      num: '025', date: '2026 · 07 · 16',
+      ko: { href: 'eastwar-devlog-025.html',    title: '문서가 코드보다 무거워졌을 때', sub: 'MVP 디테일 작업 전, MD 구조부터 정리하다' },
+      en: { href: 'eastwar-devlog-025-en.html', title: 'When the Docs Got Heavier Than the Code', sub: 'Cleaning Up the MD Structure Before MVP Detail Work' }
     }
   ];
 
