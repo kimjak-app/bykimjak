@@ -4,6 +4,13 @@
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
     {
+      url: 'make/eastwar-devlog-026.html',
+      catKey: 'eastwar', cat: 'Architect Notes',
+      title: '작업파이프라인 대변화',
+      sub: 'ChatGPT(채코치) v5.6, 코덱스 작업 통합 — 새 루프의 첫 실전 테스트',
+      date: '2026-07-20', dl: '2026 · 07 · 20'
+    },
+    {
       url: 'posts/think/think-004.html',
       catKey: 'personal-essay', cat: 'Essay',
       title: '챗GPT, 코덱스 개발 복붙 사라지다 - v5.6에서의 혁명적 변화',

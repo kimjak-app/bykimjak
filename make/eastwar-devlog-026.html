@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR 개발일지 #025 — 문서가 코드보다 무거워졌을 때 · byKimjak</title>
+<title>EASTWAR 개발일지 #026 — 작업파이프라인 대변화 · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -83,6 +83,10 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 .devlog__body figure{margin:32px 0}
 .devlog__body figure img{width:100%;border-radius:2px}
 .devlog__body figure figcaption{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
+.devlog__body .dialogue{border-left:2px solid var(--rule);margin:2em 0;padding:0 0 0 24px}
+.devlog__body .dialogue p{margin:0 0 1em;font-size:.95em;color:var(--ink-2)}
+.devlog__body .dialogue p:last-child{margin-bottom:0}
+.devlog__body .dialogue .speaker{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:.3em}
 /* ── Log Index ── */
 .log-index{padding:0 clamp(20px,4vw,48px)}
 .log-index__hd{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0;padding:32px 0 0}
@@ -153,12 +157,12 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #025</span>
+      <span>Dev Log #026</span>
     </div>
     <div class="lang-switch rev">
       <span class="lang-current">🇰🇷 한국어</span>
       <span class="lang-sep">|</span>
-      <a href="eastwar-devlog-025-en.html" class="lang-other">🇺🇸 English</a>
+      <a href="eastwar-devlog-026-en.html" class="lang-other">🇺🇸 English</a>
     </div>
     <h1 class="rev">EASTWAR</h1>
     <p class="sub-ko rev">이스트워 개발일지</p>
@@ -167,87 +171,80 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-025">
+  <article class="devlog" id="log-026">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #025</span>
-      <h1>EASTWAR 개발일지 #025</h1>
-      <h2>문서가 코드보다 무거워졌을 때 — MVP 디테일 작업 전, MD 구조부터 정리하다</h2>
-      <span class="log-date">2026년 7월 16일</span>
-
-      <h3>문서가 문서를 반복하고 있었다</h3>
-      <p>MVP 디테일 작업에 들어가기 전에, 먼저 짚고 넘어가야 할 게 있었다. agent 문서들 상태를 다시 들여다봤더니, 예상보다 심각했다.</p>
-      <p>CURRENT_STATE.md, NEXT_TASKS.md, HANDOFF_TO_CODEX.md — 이 세 문서가 전부 과거 버전을 계속 누적하고 있었다. v0.72-04, v0.72-03, v0.72-02, v0.72-01, v0.71 전체 이력이 CURRENT_STATE.md 안에 그대로 남아 있었고, 같은 작업 기록이 세 문서에 나눠서 반복 기록되고 있었다.</p>
-      <p>더 문제였던 건 NEXT_TASKS.md였다. 이름은 "다음 할 일"인데, 실제로는 이미 끝난 v0.72 작업들이 계속 "Current" 항목으로 남아 있었다. 사실상 두 번째 CHANGELOG가 되어 있었던 셈이다. HANDOFF_TO_CODEX.md도 마찬가지로, 오래전에 끝난 v0.71·v0.72 인수인계 내용을 계속 안고 있어서 최신 지시를 찾으려면 지나간 내용을 전부 통과해야 하는 구조였다.</p>
-      <p>지금까지의 초세분화 방식 — 작업 하나마다 계획서·감사·QA·Complete Lock 문서를 따로 만드는 방식 — 은 월드맵/전투 리팩토링처럼 안전이 최우선인 작업에선 잘 맞았다. 하지만 앞으로 MVP 디테일 작업, 즉 트랜잭션 단위로 움직이는 개발 방식에서는 오히려 이 구조 자체가 컨텍스트 비용을 키우는 원인이 된다.</p>
+      <span class="log-num">Dev Log · #026</span>
+      <h1>작업파이프라인 대변화</h1>
+      <h2>ChatGPT(채코치) v5.6, 코덱스 작업 통합 — 새 루프의 첫 실전 테스트</h2>
+      <span class="log-date">2026년 7월 20일</span>
 
       <hr />
-      <h3>판단: 삭제가 아니라 압축</h3>
-      <p>가장 먼저 정한 원칙은 이거였다. 문서를 지우는 게 아니라, 문서가 하는 일을 줄인다. 과거 기록은 Git에 이미 다 남아 있으니, 지우는 대신 archive로 옮기고 현재 컨텍스트에서만 빼는 방식으로 가기로 했다.</p>
-
-      <hr />
-      <h3>유지할 문서, 구조 바꿀 문서, 새로 만들 문서</h3>
-      <p><strong>그대로 유지</strong>: WORKFLOW_MANAGER.md(최상위 안전 계약), GODOT_RULES.md(씬/UID/리소스 규칙, 단 문서-only 작업에선 생략 가능), BATTLE_WORLDMAP_HANDOFF_CONTRACT.md(월드맵-전투 경계 계약, 여기에 공격/방어 공통 입력 계약·중복 적용 방지 토큰 등을 추가)</p>
-      <p><strong>역할은 유지하되 좁힐 것</strong>: CODEX_WORKFLOW_RULES.md — WORKFLOW_MANAGER.md와 겹치는 권한 헤더·커밋 정책은 통합하고, 작업 분류만 SIMPLE/MEDIUM/COMPLEX PATCH에서 PATCH/TRANSACTION/ARCHITECTURE MIGRATION으로 바꾼다</p>
-      <p><strong>구조를 완전히 갈아엎을 것</strong>:</p>
+      <h3>복붙 작업의 시대가 끝났다</h3>
+      <p>이번에 작업 파이프라인이 한 단계 진화했다. 지금까지는 채코치와 회의하고, 나온 아이디어를 다시 손으로 옮겨 코드에 반영하는 과정이 필요했다. 이제는 그 중간 단계가 사라졌다.</p>
+      <p>새로운 루프는 이렇다.</p>
       <ul>
-        <li>CURRENT_STATE.md → 90% 이상을 archive로 보내고 100줄 이내로 압축 (Baseline / Active Phase / Working Runtime / Implemented / Known Gaps / Active Transaction / Next Transaction / Protected Contracts만 남김)</li>
-        <li>NEXT_TASKS.md → 폐기하고 TRANSACTION_ROADMAP.md로 교체 (Active / Next / Later / Blocked, 완료된 건 즉시 제거)</li>
-        <li>HANDOFF_TO_CODEX.md → 별도 문서로 계속 누적하는 대신, 트랜잭션 문서 안에 Execution Brief 섹션으로 흡수. 굳이 파일이 필요하면 매번 덮어쓰기만 한다</li>
+        <li>김작이 방향을 결정한다</li>
+        <li>채코치가 직접 구현하고, 커밋하고, push까지 끝낸다</li>
+        <li>GitHub Desktop에서 Fetch → Pull</li>
+        <li>Godot에서 F5로 바로 확인</li>
       </ul>
-      <p><strong>통합할 것</strong>: ARCHITECT_AGENT.md, IMPLEMENTATION_AGENT.md, QA_AGENT.md, RUNTIME_QA_AGENT.md, VISUAL_QA_AGENT.md — 다섯 개를 DEVELOPMENT_ROLES_AND_QA.md 하나로 합치고, 기본 읽기 목록에서 빼서 필요할 때만 조건부로 읽는다</p>
-      <p><strong>새로 만들 것</strong>: MVP_MASTER_PLAN.md(한반도 4성 MVP 전체를 정의하는 최상위 문서), TRANSACTION_DEVELOPMENT_RULES.md(트랜잭션 단위 작업 방식 정의), TECH_TREE_GAMEPLAY_CONTRACT.md(테크트리를 실제 게임에 연결하는 계약), KOREA_MVP_SCENARIO.md(활성 성·세력·장수·승패 조건), SYSTEM_SOURCE_OF_TRUTH.md(같은 데이터를 누가 관리하는지 명시)</p>
-      <p><strong>archive로 이동</strong>: 버전별 리팩토링 계획서, 과거 QA 문서, Complete Lock 문서, 이미 상위 문서에 반영된 감사 자료 — 전부 <code>agent/archive/v0_70/</code>, <code>v0_71_refactor/</code>, <code>v0_72_battle_refactor/</code>, <code>qa/</code>, <code>superseded_designs/</code> 폴더로</p>
+      <p>기획과 판단, QA에만 집중하면 되는 구조다. 복붙 작업은 크게 줄었고, 개발 속도는 눈에 띄게 빨라졌다.</p>
 
-      <hr />
-      <h3>앞으로 지킬 규칙</h3>
-      <ul>
-        <li>1. 현재 문서는 짧게 유지한다 — CURRENT_STATE.md 100줄 이내, TRANSACTION_ROADMAP.md 50줄 이내</li>
-        <li>2. 같은 사실을 여러 문서에 복사하지 않는다 — 최신 커밋은 CURRENT_STATE.md 한 곳에만, 나머지는 참조만</li>
-        <li>3. 완료된 트랜잭션은 즉시 archive로 — CURRENT_STATE와 ROADMAP에서는 제거하고, 핵심 결정만 계약 문서에 반영</li>
-        <li>4. CHANGELOG는 Git 로그로 대체한다 — 별도 문서가 필요하면 사용자에게 의미 있는 릴리스만 기록 (helper 추출 같은 내부 변경은 제외)</li>
-        <li>5. QA 문서를 별도로 만들지 않는다 — 트랜잭션 문서 안의 Acceptance Tests / Completion Result에 기록. 전체 회귀·출시 후보처럼 정말 독립 가치가 있을 때만 예외</li>
-        <li>6. Complete Lock 문서를 남발하지 않는다 — 잠가야 할 경계는 계약 문서 안에 "Protected Contract" 섹션으로</li>
-        <li>7. 매 세션 전체 문서를 읽지 않는다 — 기본 5개(WORKFLOW_MANAGER, DEVELOPMENT_RULES, MVP_MASTER_PLAN, CURRENT_STATE, ACTIVE_TRANSACTION)만 읽고, 나머지는 작업 성격에 따라 조건부로</li>
-      </ul>
+      <h3>첫 실전 테스트 — 세력 선택 화면 배경</h3>
+      <p>이번 변화를 검증하기 위해 실제로 작업 하나를 맡겼다. 세력 선택 화면에 들어갈 테스트용 배경 이미지 적용이었다. 동아시아 전장을 담은 일러스트를 화면 프레임에 맞춰 배치하는 작업이었다.</p>
 
-      <hr />
-      <h3>최종 문서 구조</h3>
-      <pre><code>agent/
-├─ WORKFLOW_MANAGER.md
-├─ DEVELOPMENT_RULES.md
-├─ GODOT_RULES.md
-├─ MVP_MASTER_PLAN.md
-├─ CURRENT_STATE.md
-├─ TRANSACTION_ROADMAP.md
-├─ contracts/
-│  ├─ SYSTEM_SOURCE_OF_TRUTH.md
-│  ├─ WORLDMAP_RULES.md
-│  ├─ BATTLE_WORLDMAP_HANDOFF_CONTRACT.md
-│  └─ TECH_TREE_GAMEPLAY_CONTRACT.md
-├─ scenarios/
-│  └─ KOREA_MVP_SCENARIO.md
-├─ transactions/
-│  ├─ T01_NEW_GAME_FACTION_SELECTION.md
-│  └─ ...
-└─ archive/
-   ├─ v0_70/
-   ├─ v0_71/
-   ├─ v0_72/
-   ├─ old_qa/
-   └─ superseded/</code></pre>
+      <figure>
+        <img src="../assets/eastwar/screenshot-faction-select-bg-01.png" alt="세력 선택 화면 배경 테스트 아트워크" loading="lazy" />
+        <figcaption>테스트로 적용해본 세력 선택 화면 배경 아트워크</figcaption>
+      </figure>
 
-      <p>이렇게 정리하면 새 세션 시작할 때 읽는 양이 지금의 20~30% 수준으로 줄어든다. 안전 계약은 그대로 다 남기면서, 정작 매번 다시 읽을 필요 없는 건 걷어내는 것. 이게 되어야 다음 단계 — 한반도 4성 MVP 트랜잭션 작업 — 을 시작할 수 있다.</p>
+      <p>결과는 기대 이상이었다. 채코치가 방향을 이해하고, 실제로 파일을 만들고 커밋하고 push까지 한 번에 처리했다. Pull 받아서 Godot F5로 열어보니 화면에 바로 반영되어 있었다.</p>
 
+      <h3>버그 하나, 그리고 "조선"으로 통일</h3>
+      <p>다만 확인 과정에서 자잘한 버그 하나가 눈에 띄었다. 세력 표기가 "한성" 또는 "한성세력"으로 되어 있었던 것. 고구려·신라·백제는 제대로 표기되어 있었는데 한 곳만 어긋나 있었다.</p>
+
+      <div class="dialogue">
+        <p><span class="speaker">김작</span>그림에서 자잘한 버그 하나 더 수정해. 세력에 한성 / 한성세력이라고 되어 있는데 이거 조선으로 바꿔야 해. 나머진 고구려, 신라, 백제로 되어 있어.</p>
+        <p><span class="speaker">채코치</span>수정 완료했어. 사용자 표기를 모두 조선으로 통일했어. 시작 화면은 "한성 | 조선 | 시작 도시: 한성"으로, 시작 세력 기준 데이터도 faction_label을 조선으로 바꿨고, 내부 세력 ID와 시작 도시 한성은 그대로 유지했어. 로컬 커밋 f5e6411, 관련 없는 파일은 제외했어.</p>
+      </div>
+
+      <p>바로 push까지 요청했다.</p>
+
+      <div class="dialogue">
+        <p><span class="speaker">채코치</span>푸시 완료했어. 커밋 fc0954cd. 한성 세력을 조선으로 변경했고, 시작 화면 씬과 세력 기준 데이터 파일을 수정했어. GitHub Desktop에서 Fetch origin → Pull origin 하고 Godot에서 F5 하면 바로 확인할 수 있어.</p>
+      </div>
+
+      <h3>Fetch, Pull, Push — 택배로 정리하기</h3>
+      <p>Fetch와 Pull의 차이가 헷갈려서 물어봤더니, 채코치가 비유 하나로 깔끔하게 정리해줬다.</p>
+
+      <div class="dialogue">
+        <p><span class="speaker">채코치</span>Fetch origin은 GitHub에 새 변경이 있는지 확인하고 정보만 가져오는 거야. 이때는 아직 Godot 프로젝트 파일이 바뀌지 않아. Pull origin은 확인된 새 변경을 실제로 로컬 폴더에 적용하는 거고, 이때 Godot 파일도 바뀌어. Push origin은 반대로 로컬에서 만든 변경을 GitHub에 올리는 거야.</p>
+        <p><span class="speaker">채코치</span>쉽게 비유하면 Fetch는 택배가 도착했는지 조회하는 거고, Pull은 택배를 받아서 방에 가져오는 거고, Push는 내가 택배를 GitHub로 보내는 거야.</p>
+      </div>
+
+      <blockquote>Fetch = 택배 조회 · Pull = 택배 수령 · Push = 택배 발송</blockquote>
+
+      <h3>완성된 화면</h3>
+      <p>버그 수정까지 반영된 뒤 실제 인게임 화면을 확인했다. 세력 선택 UI 위로 배경이 자연스럽게 깔렸고, 표기도 전부 "조선"으로 통일되어 있었다.</p>
+
+      <figure>
+        <img src="../assets/eastwar/screenshot-faction-select-bg-02.png" alt="실제 적용된 세력 선택 화면" loading="lazy" />
+        <figcaption>파이프라인으로 실제 반영된 세력 선택 화면 — 한성 | 조선 | 시작 도시: 한성</figcaption>
+      </figure>
+
+      <div class="dialogue">
+        <p><span class="speaker">채코치</span>이제 작업 흐름이 완전히 잡혔어. 여기서 회의하고 수정 요청하면, 내가 구현하고 커밋하고 push까지 끝내고, 김작은 Fetch, Pull 받아서 Godot F5로 확인만 하면 돼. 이 루프로 쭉 가면 복붙 작업은 크게 줄고 개발 속도는 훨씬 빨라질 거야.</p>
+      </div>
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-024.html" class="log-nav__prev">
+      <a href="eastwar-devlog-025.html" class="log-nav__prev">
         <span class="log-nav__label">이전</span>
-        <span class="log-nav__title">← Dev Log #024</span>
+        <span class="log-nav__title">← Dev Log #025</span>
       </a>
-      <a href="eastwar-devlog-026.html" class="log-nav__next">
-        <span class="log-nav__label">다음</span>
-        <span class="log-nav__title">Dev Log #026 →</span>
+      <a href="eastwar.html" class="log-nav__next">
+        <span class="log-nav__label">목록</span>
+        <span class="log-nav__title">목록으로 →</span>
       </a>
     </div>
 
@@ -271,7 +268,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '025');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '026');
 </script>
 </body>
 </html>

@@ -128,6 +128,11 @@
       num: '025', date: '2026 · 07 · 16',
       ko: { href: 'eastwar-devlog-025.html',    title: '문서가 코드보다 무거워졌을 때', sub: 'MVP 디테일 작업 전, MD 구조부터 정리하다' },
       en: { href: 'eastwar-devlog-025-en.html', title: 'When the Docs Got Heavier Than the Code', sub: 'Cleaning Up the MD Structure Before MVP Detail Work' }
+    },
+    {
+      num: '026', date: '2026 · 07 · 20',
+      ko: { href: 'eastwar-devlog-026.html',    title: '작업파이프라인 대변화', sub: 'ChatGPT(채코치) v5.6, 코덱스 작업 통합 — 새 루프의 첫 실전 테스트' },
+      en: { href: 'eastwar-devlog-026-en.html', title: 'The Pipeline Just Got a Major Upgrade', sub: "ChatGPT (Chaekochi) v5.6, Codex integration — the new loop's first real test" }
     }
   ];
 
