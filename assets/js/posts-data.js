@@ -4,6 +4,13 @@
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
     {
+      url: 'posts/think/think-004.html',
+      catKey: 'personal-essay', cat: 'Essay',
+      title: '챗GPT, 코덱스 개발 복붙 사라지다 - v5.6에서의 혁명적 변화',
+      sub: '왕복 노동자에서 총괄 디렉터로',
+      date: '2026-07-20', dl: '2026 · 07 · 20'
+    },
+    {
       url: 'posts/think/morning-word-015.html',
       catKey: 'morning-word', cat: 'Morning Word',
       title: '대본은 덜어내고, 게임은 연결하고',
