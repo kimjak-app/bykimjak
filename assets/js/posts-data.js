@@ -4,6 +4,13 @@
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
     {
+      url: 'posts/think/morning-word-016.html',
+      catKey: 'morning-word', cat: 'Morning Word',
+      title: '판이 열렸다 — 더 클리너에서 악마의 레시피로',
+      sub: '기획서 마무리, 악마의 레시피 2차 회의 소식',
+      date: '2026-07-22', dl: '2026 · 07 · 22'
+    },
+    {
       url: 'posts/think/think-005.html',
       catKey: 'personal-essay', cat: 'Essay',
       title: '코더에서 PM으로, AI의 다음 단계',
