@@ -133,6 +133,11 @@
       num: '026', date: '2026 · 07 · 20',
       ko: { href: 'eastwar-devlog-026.html',    title: '작업파이프라인 대변화', sub: 'ChatGPT(채코치) v5.6, 코덱스 작업 통합 — 새 루프의 첫 실전 테스트' },
       en: { href: 'eastwar-devlog-026-en.html', title: 'The Pipeline Just Got a Major Upgrade', sub: "ChatGPT (Chaekochi) v5.6, Codex integration — the new loop's first real test" }
+    },
+    {
+      num: '027', date: '2026 · 07 · 20',
+      ko: { href: 'eastwar-devlog-027.html',    title: '최종 MVP버전을 위한 디테일 작업 시작', sub: '한반도 4세력, 첫 플레이 가능한 완결을 향해' },
+      en: { href: 'eastwar-devlog-027-en.html', title: 'Starting Detail Work for the Final MVP Build', sub: 'Four Factions of Korea — Toward the First Playable Full Loop' }
     }
   ];
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR Dev Log #026 — The Pipeline Just Got a Major Upgrade · byKimjak</title>
+<title>EASTWAR Dev Log #027 — Starting Detail Work for the Final MVP Build · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -157,10 +157,10 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #026</span>
+      <span>Dev Log #027</span>
     </div>
     <div class="lang-switch rev">
-      <a href="eastwar-devlog-026.html" class="lang-other">🇰🇷 한국어</a>
+      <a href="eastwar-devlog-027.html" class="lang-other">🇰🇷 한국어</a>
       <span class="lang-sep">|</span>
       <span class="lang-current">🇺🇸 English</span>
     </div>
@@ -171,80 +171,71 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-026">
+  <article class="devlog" id="log-027">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #026</span>
-      <h1>The Pipeline Just Got a Major Upgrade</h1>
-      <h2>ChatGPT (Chaekochi) v5.6, Codex integration — the new loop's first real test</h2>
+      <span class="log-num">Dev Log · #027</span>
+      <h1>Starting Detail Work for the Final MVP Build</h1>
+      <h2>Four Factions of Korea — Toward the First Playable Full Loop</h2>
       <span class="log-date">July 20, 2026</span>
 
       <hr />
-      <h3>The era of copy-paste is over</h3>
-      <p>The work pipeline took a big leap forward this time. Until now, every idea from a session with Chaekochi still had to be manually carried over into the code. That middle step is gone now.</p>
-      <p>The new loop looks like this:</p>
+      <h3>From Refactoring to Completion</h3>
+      <p>Through v0.71 and v0.72, both the world map and the battle engine got their function maps drawn, then had safe pieces extracted a little at a time. At this point, though, one call needed revisiting. The next task on the schedule was v0.72-18 Battle Stage C Boundary Review — more structural digging into the battle side. Continuing down that road risked pushing back the point where the game actually becomes playable.</p>
+      <p>So v0.72-18 got shelved. From here on, refactoring itself isn't the goal — the goal is bringing each system up to an actually playable MVP state.</p>
+      <p>EASTWAR now splits into four MVP tracks:</p>
       <ul>
-        <li>Kimjak decides the direction</li>
-        <li>Chaekochi implements it directly — commits and pushes it too</li>
-        <li>Fetch → Pull in GitHub Desktop</li>
-        <li>Check it instantly with F5 in Godot</li>
+        <li><strong>Land Battle MVP</strong> — a single battle that plays through, start to finish, with real polish</li>
+        <li><strong>World Map MVP</strong> — being able to view and select cities, run a nation, and start a war</li>
+        <li><strong>Domestic MVP</strong> — the player actually feeling like their cities and nation are growing</li>
+        <li><strong>Tech Tree MVP</strong> — research choices that genuinely affect national growth, battle, and domestic systems</li>
       </ul>
-      <p>That leaves room to focus purely on planning, judgment, and QA. Copy-paste work has dropped sharply, and development speed has visibly picked up.</p>
+      <p>Battle already had the most implementation and QA behind it, so it goes first. The approach changed too. "Pure helper extraction" is no longer the default. Each feature now goes: check current behavior → define expected MVP behavior → identify the gap → minimal implementation → automated verification → hands-on playtest QA → Complete Lock. Refactoring only happens when a feature is genuinely too tangled to implement otherwise.</p>
+      <p>The judgment standard got simplified to one line: not whether a feature exists, but <strong>whether a player can use it start to finish without getting stuck, understand the result, and move on to the next choice.</strong></p>
 
-      <h3>First real test — the faction select background</h3>
-      <p>To put the change to the test, one real task was handed off: applying a test background image to the faction select screen — fitting an illustration of an East Asian battlefield to the screen frame.</p>
+      <h3>v0.73-01 — Land Battle MVP Audit, and a First Correction</h3>
+      <p>The first task wasn't code — it was listing everything missing from land battle. The entry screen, HUD, command UX, cut-ins, unique skills, per-general balance, combo attacks, AI, reinforcements, result screen, and the return to the world map all got audited and sorted into P0 (blocks progress), P1 (MVP-required), P2 (polish/convenience), P3 (advanced detail), and Post-MVP.</p>
+      <p>One documentation error surfaced along the way. The original plan doc had mistakenly described the TEST_BATTLE_ROSTER's 5 Korean and 5 Chinese generals as the entire Land Battle MVP roster. Those 10 were only a test/sample roster — the actual MVP roster is every general stationed across Korea, China, and Japan on the world map. That got corrected in a hotfix.</p>
+      <p>The scope of Land Battle MVP also widened beyond a UI pass — it's now the content itself getting its first real finish. General selection → stat and unit-type differences → unique skills → cut-ins → attack style → combo attack conditions → contribution to the outcome — that chain needs to feel different for every general for battle to be actual content, not just moving pieces around.</p>
 
-      <figure>
-        <img src="../assets/eastwar/screenshot-faction-select-bg-01.png" alt="Faction select screen background test artwork" loading="lazy" />
-        <figcaption>Background artwork applied as a test on the faction select screen</figcaption>
-      </figure>
+      <h3>v0.74-00 — Documentation Structure First</h3>
+      <p>Before diving into battle MVP detail work, the documentation overhaul from the last post (#025) actually got applied. Development shifted away from stacking fine-grained patches, helpers, and version-numbered docs, toward transaction-based development — completing one user-facing action start to finish per transaction. This pass was a Documentation Transaction: structure only, no runtime code touched.</p>
 
-      <p>The result exceeded expectations. Chaekochi understood the direction, built the file, and committed and pushed it in one pass. After a Pull and an F5 in Godot, it was already live on screen.</p>
-
-      <h3>One small bug, and unifying it to "Joseon"</h3>
-      <p>During the check, one small bug stood out — the faction label read "Hanseong" or "Hanseong Faction," while Goguryeo, Silla, and Baekje were all correctly labeled. Only one was off.</p>
-
-      <div class="dialogue">
-        <p><span class="speaker">Kimjak</span>There's one more small bug in the image to fix — the faction shows "Hanseong" or "Hanseong Faction," but that should be "Joseon." The others show as Goguryeo, Silla, and Baekje.</p>
-        <p><span class="speaker">Chaekochi</span>Fixed it — unified the display label to Joseon everywhere. The start screen now reads "Hanseong | Joseon | Starting city: Hanseong," and the starting faction reference data's faction_label was updated to Joseon too. Internal faction IDs and the starting city Hanseong stayed unchanged. Local commit f5e6411, unrelated files excluded.</p>
-      </div>
-
-      <p>Then a push was requested right away.</p>
-
-      <div class="dialogue">
-        <p><span class="speaker">Chaekochi</span>Pushed. Commit fc0954cd. Changed "Hanseong Faction" to "Joseon," and updated the start screen scene and the faction reference data file. Fetch origin → Pull origin in GitHub Desktop, then F5 in Godot, and it's ready to check.</p>
-      </div>
-
-      <h3>Fetch, Pull, Push — explained with a package delivery</h3>
-      <p>The difference between Fetch and Pull was confusing, so it came up — and Chaekochi cleared it up with one simple comparison.</p>
-
-      <div class="dialogue">
-        <p><span class="speaker">Chaekochi</span>Fetch origin just checks whether GitHub has new changes and pulls in that information — the Godot project files don't change yet. Pull origin actually applies those confirmed changes to the local folder, and that's when the Godot files change. Push origin is the reverse — sending local changes up to GitHub.</p>
-        <p><span class="speaker">Chaekochi</span>Think of it like a package delivery: Fetch is checking if the package has arrived, Pull is bringing it into your room, and Push is sending a package out to GitHub.</p>
-      </div>
-
-      <blockquote>Fetch = check the delivery · Pull = bring it in · Push = send it out</blockquote>
-
-      <h3>The finished screen</h3>
-      <p>Once the bug fix was reflected, the actual in-game screen was checked. The background sat naturally behind the faction select UI, and every label now read "Joseon."</p>
+      <h3>T01 — Four Factions of Korea, a Real New Game</h3>
+      <p>Until now, play was locked to Hanseong. T01 unlocks that — completing the full flow of starting as one of four factions: Hanseong, Pyongyang, Gyeongju, or Sabi.</p>
 
       <figure>
-        <img src="../assets/eastwar/screenshot-faction-select-bg-02.png" alt="Faction select screen as applied in-game" loading="lazy" />
-        <figcaption>Faction select screen reflected live through the new pipeline — Hanseong | Joseon | Starting city: Hanseong</figcaption>
+        <img src="../assets/eastwar/worldmap-faction-select-01.png" alt="T01 starting faction selection screen — choose one of Hanseong/Pyongyang/Gyeongju/Sabi" loading="lazy" />
+        <figcaption>T01 · Starting faction selection screen — choose one of Hanseong/Pyongyang/Gyeongju/Sabi</figcaption>
       </figure>
 
-      <div class="dialogue">
-        <p><span class="speaker">Chaekochi</span>The workflow is fully locked in now. From here, meet and request a change — I'll implement, commit, and push it, and Kimjak just needs to Fetch, Pull, and check it with F5 in Godot. Keep running this loop and copy-paste work shrinks a lot while development speed goes way up.</p>
-      </div>
+      <p>The completion bar was short but strict: launch game → faction select screen → pick one → chosen faction becomes the player, the other three become AI → that nation's capital, cities, generals, resources, and research all initialize → enter the world map → left/right panels show the selected nation/city → only the chosen faction's generals respond to player commands → the first turn starts cleanly → save → reload restores the identical state. Having Hanseong work while the other three factions partially break didn't count as done.</p>
+
+      <h3>T02 — From Campaign to Occupation</h3>
+      <p>T02 comes next: pick generals, set troop numbers, load gold/food/salt onto the expedition force, fight up to 30 turns in Battle_Land, settle generals/troops/resources based on the outcome, and have all of it survive a save/reload — as one complete flow.</p>
+      <p>Six hotfixes landed along the way.</p>
+      <ul>
+        <li><strong>hotfix1</strong>: the battle supply panel was too large and blocked the screen — relocated into a dedicated panel above the auto-battle/end-turn/retreat buttons in the bottom right</li>
+        <li><strong>hotfix2</strong>: shrank the supply panel, made enemy supply numbers reliably reflect the actual target city's persisted stock, and replaced leftover hardcoded strings like "Battle Test," "Hanseong Army," and "Luoyang" in the header with dynamic, situation-accurate text</li>
+        <li><strong>hotfix3</strong>: cleaned up GDScript warnings</li>
+        <li><strong>hotfix4</strong>: made victory occupation settlement one atomic operation — attacking generals and surviving troops stay at the captured city, wounded troops wait for treatment, defeated enemy generals either return home or flee to an adjacent city, the captured city fully converts to player rule, resource/production/troop totals update, and faction elimination gets checked</li>
+        <li><strong>hotfix5</strong>: a case where hotfix4 passed automated tests but behaved differently in actual F5 play. Right after starting a new game, the national treasury showed all zeros — yet national research could still be started, the expedition prep screen showed resources, resources suddenly appeared in the treasury after one turn passed, and even after a win, generals didn't stay at the captured city. The root cause was an unclear single source of truth for resources — fixed by unifying the national treasury as a real-time sum of resource_stock across all player-owned cities, having national research draw from all cities with the capital prioritized, and having city research and invasions each pull only from their own city or departure city</li>
+        <li><strong>hotfix6</strong>: final cleanup of remaining GDScript warnings</li>
+      </ul>
+      <p><strong>T02 completion criteria</strong>: gold/food/salt loading and per-turn consumption, desertion on food depletion, increased food consumption on salt depletion, a 30-turn battle cap, separation of healthy/wounded/dead/deserted troops, 3-month standard recovery vs. 1-month intensive recovery, troops staying on victory vs. total supply loss on defeat, a no-delete rule for enemy generals (return or flee instead), full conversion of captured cities with production reflected from the next turn, faction elimination checks, save/restore, a cleaned-up supply HUD, warning removal, and a passing manual F5 QA — all confirmed.</p>
+      <p>What got deferred was made explicit too. General management, recruitment, and loyalty systems went into a separate doc, <code>FUTURE_GENERAL_MANAGEMENT_RECRUITMENT_LOYALTY.md</code>, and stayed out of this scope — individual loyalty scores, initial loyalty for defected generals, rewards/office/betrayal/desertion/persuasion/recruitment, and prison/POW/hermit-general integration are all work for a later transaction.</p>
+
+      <h3>What's Next</h3>
+      <p>The shift from refactoring to MVP completion is now firmly underway. With T01 and T02 done, next comes the remaining Land Battle detail work (v0.73-02 onward — final entry screen layout, HUD completion, command UX, cut-ins, result screen) alongside the T03-and-beyond transactions (enemy invasion and defense).</p>
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-025-en.html" class="log-nav__prev">
+      <a href="eastwar-devlog-026-en.html" class="log-nav__prev">
         <span class="log-nav__label">Previous</span>
-        <span class="log-nav__title">← Dev Log #025</span>
+        <span class="log-nav__title">← Dev Log #026</span>
       </a>
-      <a href="eastwar-devlog-027-en.html" class="log-nav__next">
-        <span class="log-nav__label">Next</span>
-        <span class="log-nav__title">Dev Log #027 →</span>
+      <a href="eastwar-en.html" class="log-nav__next">
+        <span class="log-nav__label">Index</span>
+        <span class="log-nav__title">Back to index →</span>
       </a>
     </div>
 
@@ -268,7 +259,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '026');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '027');
 </script>
 </body>
 </html>

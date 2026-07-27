@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR Dev Log #026 — The Pipeline Just Got a Major Upgrade · byKimjak</title>
+<title>EASTWAR 개발일지 #027 — 최종 MVP버전을 위한 디테일 작업 시작 · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -157,94 +157,85 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #026</span>
+      <span>Dev Log #027</span>
     </div>
     <div class="lang-switch rev">
-      <a href="eastwar-devlog-026.html" class="lang-other">🇰🇷 한국어</a>
+      <span class="lang-current">🇰🇷 한국어</span>
       <span class="lang-sep">|</span>
-      <span class="lang-current">🇺🇸 English</span>
+      <a href="eastwar-devlog-027-en.html" class="lang-other">🇺🇸 English</a>
     </div>
     <h1 class="rev">EASTWAR</h1>
     <p class="sub-ko rev">이스트워 개발일지</p>
-    <p class="listing-desc rev">Strategy alt-history simulation — solo dev log</p>
+    <p class="listing-desc rev">전략 가상역사 시뮬레이션 — 1인 개발 기록</p>
   </div>
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-026">
+  <article class="devlog" id="log-027">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #026</span>
-      <h1>The Pipeline Just Got a Major Upgrade</h1>
-      <h2>ChatGPT (Chaekochi) v5.6, Codex integration — the new loop's first real test</h2>
-      <span class="log-date">July 20, 2026</span>
+      <span class="log-num">Dev Log · #027</span>
+      <h1>최종 MVP버전을 위한 디테일 작업 시작</h1>
+      <h2>한반도 4세력, 첫 플레이 가능한 완결을 향해</h2>
+      <span class="log-date">2026년 07월 20일</span>
 
       <hr />
-      <h3>The era of copy-paste is over</h3>
-      <p>The work pipeline took a big leap forward this time. Until now, every idea from a session with Chaekochi still had to be manually carried over into the code. That middle step is gone now.</p>
-      <p>The new loop looks like this:</p>
+      <h3>리팩토링에서 완성으로</h3>
+      <p>v0.71, v0.72를 거치며 월드맵과 전투엔진 양쪽 다 함수맵을 그리고, 안전한 것부터 조금씩 빼내는 작업을 해왔다. 그런데 이 시점에서 한 가지를 다시 판단해야 했다. 다음 예정된 작업은 v0.72-18 Battle Stage C Boundary Review — 전투 쪽 구조를 더 파고드는 작업이었는데, 여기서 계속 구조만 다듬다 보면 정작 "플레이 가능한 게임"이 되는 시점이 계속 늦어질 수 있었다.</p>
+      <p>그래서 v0.72-18은 보류하기로 했다. 지금부터는 리팩토링 자체가 목적이 아니라, 각 시스템을 실제 플레이 가능한 MVP 완성 상태로 끌어올리는 단계로 전환한다.</p>
+      <p>앞으로 EASTWAR는 네 개의 MVP 트랙으로 나눠서 간다.</p>
       <ul>
-        <li>Kimjak decides the direction</li>
-        <li>Chaekochi implements it directly — commits and pushes it too</li>
-        <li>Fetch → Pull in GitHub Desktop</li>
-        <li>Check it instantly with F5 in Godot</li>
+        <li><strong>육상전투 MVP</strong> — 전투 진입부터 종료까지 한 판이 완성도 있게 진행되는 상태</li>
+        <li><strong>월드맵 MVP</strong> — 도시를 보고 선택하고, 국가를 운영하며, 전쟁을 시작할 수 있는 상태</li>
+        <li><strong>내정 MVP</strong> — 플레이어가 도시와 국가를 성장시켰다는 체감을 얻는 상태</li>
+        <li><strong>테크트리 MVP</strong> — 연구 선택이 국가 성장과 전투·내정에 실제 영향을 주는 상태</li>
       </ul>
-      <p>That leaves room to focus purely on planning, judgment, and QA. Copy-paste work has dropped sharply, and development speed has visibly picked up.</p>
+      <p>이 중 전투가 이미 구현과 QA가 가장 많이 되어 있으니, 육상전투부터 먼저 완성하기로 했다. 방식도 바꿨다. 기존의 "순수 헬퍼 추출"이 이제 기본 작업이 아니다. 앞으로는 기능마다 현재 동작 확인 → MVP 기대 동작 정의 → 차이점 확인 → 최소 구현 → 자동 검증 → 직접 플레이 QA → Complete Lock, 이 순서로 간다. 리팩토링은 기능 구현이 정말 불가능할 정도로 얽혀 있을 때만 예외적으로 한다.</p>
+      <p>판단 기준도 하나로 정리했다. 기능이 존재하는가가 아니라, <strong>플레이어가 처음부터 끝까지 사용해도 막히지 않고, 결과를 이해할 수 있으며, 다음 선택으로 이어지는가</strong>.</p>
 
-      <h3>First real test — the faction select background</h3>
-      <p>To put the change to the test, one real task was handed off: applying a test background image to the faction select screen — fitting an illustration of an East Asian battlefield to the screen frame.</p>
+      <h3>v0.73-01 — 육상전투 MVP 감사, 그리고 첫 정정</h3>
+      <p>첫 작업은 코드를 고치는 게 아니라 육상전투에 뭐가 빠져 있는지 전부 목록화하는 것이었다. 전투 진입 화면, HUD, 명령 UX, 컷인, 고유 스킬, 장수별 밸런스, 협동 공격, AI, 증원, 결과 화면, 월드맵 복귀까지 전 범위를 감사하고 P0(진행 불가)/P1(MVP 필수)/P2(연출·편의)/P3(고급 디테일)/Post-MVP로 나눴다.</p>
+      <p>이 과정에서 문서 자체의 오류도 하나 잡았다. 원래 계획 문서에 TEST_BATTLE_ROSTER 한국 5명·중국 5명을 육상전투 MVP 전체 장수로 잘못 서술한 부분이 있었는데, 이 10명은 어디까지나 테스트용 sample roster였고 실제 육상전투 MVP 장수 범위는 월드맵 한·중·일 전 지역에 배치된 전체 장수라는 걸 확인해서 hotfix로 정정했다.</p>
+      <p>육상전투 MVP도 단순 UI 마감이 아니라 전투 콘텐츠 자체의 1차 완성판으로 범위를 넓혔다. 장수 선택 → 능력치·병종 차이 → 고유 스킬 → 컷인 → 공격 방식 → 협동 공격 조건 → 전투 기여도, 이 흐름이 장수마다 다르게 느껴져야 진짜 콘텐츠가 된다는 게 핵심 기준이다.</p>
 
-      <figure>
-        <img src="../assets/eastwar/screenshot-faction-select-bg-01.png" alt="Faction select screen background test artwork" loading="lazy" />
-        <figcaption>Background artwork applied as a test on the faction select screen</figcaption>
-      </figure>
+      <h3>v0.74-00 — 문서 구조 먼저 정리</h3>
+      <p>전투 MVP 디테일 작업에 들어가기 전에, 지난 글(#025)에서 정리한 문서 체계 전환을 실제로 적용했다. 세밀한 패치·헬퍼·버전별 문서를 계속 쌓는 방식에서, 사용자 행동 하나를 처음부터 끝까지 완결하는 트랜잭션 중심 개발로 전환했다. 이번 작업은 런타임 코드는 건드리지 않고 문서 구조만 먼저 확립하는 Documentation Transaction이었다.</p>
 
-      <p>The result exceeded expectations. Chaekochi understood the direction, built the file, and committed and pushed it in one pass. After a Pull and an F5 in Godot, it was already live on screen.</p>
-
-      <h3>One small bug, and unifying it to "Joseon"</h3>
-      <p>During the check, one small bug stood out — the faction label read "Hanseong" or "Hanseong Faction," while Goguryeo, Silla, and Baekje were all correctly labeled. Only one was off.</p>
-
-      <div class="dialogue">
-        <p><span class="speaker">Kimjak</span>There's one more small bug in the image to fix — the faction shows "Hanseong" or "Hanseong Faction," but that should be "Joseon." The others show as Goguryeo, Silla, and Baekje.</p>
-        <p><span class="speaker">Chaekochi</span>Fixed it — unified the display label to Joseon everywhere. The start screen now reads "Hanseong | Joseon | Starting city: Hanseong," and the starting faction reference data's faction_label was updated to Joseon too. Internal faction IDs and the starting city Hanseong stayed unchanged. Local commit f5e6411, unrelated files excluded.</p>
-      </div>
-
-      <p>Then a push was requested right away.</p>
-
-      <div class="dialogue">
-        <p><span class="speaker">Chaekochi</span>Pushed. Commit fc0954cd. Changed "Hanseong Faction" to "Joseon," and updated the start screen scene and the faction reference data file. Fetch origin → Pull origin in GitHub Desktop, then F5 in Godot, and it's ready to check.</p>
-      </div>
-
-      <h3>Fetch, Pull, Push — explained with a package delivery</h3>
-      <p>The difference between Fetch and Pull was confusing, so it came up — and Chaekochi cleared it up with one simple comparison.</p>
-
-      <div class="dialogue">
-        <p><span class="speaker">Chaekochi</span>Fetch origin just checks whether GitHub has new changes and pulls in that information — the Godot project files don't change yet. Pull origin actually applies those confirmed changes to the local folder, and that's when the Godot files change. Push origin is the reverse — sending local changes up to GitHub.</p>
-        <p><span class="speaker">Chaekochi</span>Think of it like a package delivery: Fetch is checking if the package has arrived, Pull is bringing it into your room, and Push is sending a package out to GitHub.</p>
-      </div>
-
-      <blockquote>Fetch = check the delivery · Pull = bring it in · Push = send it out</blockquote>
-
-      <h3>The finished screen</h3>
-      <p>Once the bug fix was reflected, the actual in-game screen was checked. The background sat naturally behind the faction select UI, and every label now read "Joseon."</p>
+      <h3>T01 — 한반도 4세력, 진짜 새 게임을 만들다</h3>
+      <p>지금까지는 한성 고정으로만 플레이할 수 있었다. T01은 이걸 풀어서 한성·평양·경주·사비 네 세력 중 하나를 골라 시작하는 전체 흐름을 완결하는 트랜잭션이다.</p>
 
       <figure>
-        <img src="../assets/eastwar/screenshot-faction-select-bg-02.png" alt="Faction select screen as applied in-game" loading="lazy" />
-        <figcaption>Faction select screen reflected live through the new pipeline — Hanseong | Joseon | Starting city: Hanseong</figcaption>
+        <img src="../assets/eastwar/worldmap-faction-select-01.png" alt="한반도 MVP 시작 세력 선택 화면" loading="lazy" />
+        <figcaption>T01 · 시작 세력 선택 화면 — 한성/평양/경주/사비 중 택1</figcaption>
       </figure>
 
-      <div class="dialogue">
-        <p><span class="speaker">Chaekochi</span>The workflow is fully locked in now. From here, meet and request a change — I'll implement, commit, and push it, and Kimjak just needs to Fetch, Pull, and check it with F5 in Godot. Keep running this loop and copy-paste work shrinks a lot while development speed goes way up.</p>
-      </div>
+      <p>완료 기준은 짧지만 까다로웠다. 게임 실행 → 시작 세력 선택 화면 → 하나 선택 → 선택 세력은 플레이어, 나머지 셋은 AI로 확정 → 해당 국가의 수도·도시·장수·자원·연구 상태 초기화 → 월드맵 진입 → 좌우 패널에 선택 국가/도시 정보 표시 → 선택 국가 장수만 명령 가능 → 첫 턴 정상 시작 → 저장 → 재실행 시 동일 상태 복원. 한성만 정상이고 나머지 세 세력이 부분적으로 깨지는 상태는 완료로 치지 않기로 했다.</p>
+
+      <h3>T02 — 원정을 떠나 점령까지</h3>
+      <p>T02는 그다음 단계다. 장수를 뽑고, 병력을 정하고, 금·식량·소금을 원정군에 실어서, Battle_Land에서 최대 30턴 동안 싸우고, 승패에 따라 장수·병력·자원을 정산하고, 저장 후 복원까지 되는 전체 흐름을 한 번에 완결하는 트랜잭션이다.</p>
+      <p>이 과정에서 hotfix가 여섯 번 붙었다.</p>
+      <ul>
+        <li><strong>hotfix1</strong>: 전장 보급 패널이 너무 커서 화면을 가리는 문제 — 우측 하단 자동전투/턴종료/후퇴 버튼 위 여백에 전용 패널로 재배치</li>
+        <li><strong>hotfix2</strong>: 보급 패널 크기 축소 + 적군 보급 수치의 데이터 신뢰성 확보 + 상단 제목에 남아있던 "전투 테스트", "한성 군", "낙양" 같은 하드코딩 문자열을 실제 상황에 맞게 동적으로 바꿈</li>
+        <li><strong>hotfix3</strong>: GDScript 경고 메시지 정리</li>
+        <li><strong>hotfix4</strong>: 승리 시 점령 정산을 하나의 원자적 처리로 완결 — 공격 장수·생존병 점령지 잔류, 부상병 치료 대기, 패배한 적 장수 귀속 또는 인접 도시 피신, 점령 도시의 완전한 통치 편입, 자원·생산·병력 집계 갱신, 세력 멸망 판정까지</li>
+        <li><strong>hotfix5</strong>: hotfix4가 자동 테스트는 통과했는데 실제 F5 플레이에서 다른 결과가 나온 걸 잡아낸 케이스. 새 게임 시작 직후 국가 창고가 전부 0으로 보이는데 연구는 시작할 수 있고, 출정 화면엔 자원이 있고, 한 턴 지나면 갑자기 창고에 자원이 생기고, 승리해도 점령지에 장수가 안 남는 문제였다. 원인은 자원의 단일 원본(source of truth)이 명확하지 않았던 것 — 국가 창고를 플레이어 소유 도시들의 resource_stock 실시간 합산으로 통일하고, 국가 연구는 수도 우선으로 전체 도시에서 분산 차감, 도시 연구와 침공은 각각 해당 도시/출발 도시 자원만 쓰는 걸로 정리했다</li>
+        <li><strong>hotfix6</strong>: 남은 GDScript 경고 마지막 정리</li>
+      </ul>
+      <p><strong>T02 완료 시점 기준</strong>: 금·식량·소금 적재와 턴별 소비, 식량 고갈 시 이탈, 소금 고갈 시 식량 소비 증가, 최대 전투 30턴, 정상병/부상병/사망병/이탈병 분리, 일반 치료 3개월·집중 치료 1개월, 승리 시 잔류·패배 시 물자 전량 상실, 적 장수 삭제 금지(귀속 또는 피신), 점령 도시 완전 편입과 다음 턴부터 생산 반영, 세력 멸망 판정, 저장·복원, 보급 HUD 정리, 경고 제거, F5 수동 QA까지 전부 PASS.</p>
+      <p>후속으로 넘긴 것도 명확히 해뒀다. 장수 관리·등용·충성도 시스템은 <code>FUTURE_GENERAL_MANAGEMENT_RECRUITMENT_LOYALTY.md</code>에 별도 문서화하고 이번 범위에선 빼뒀다 — 개인 충성도, 귀속 장수 초기 충성도, 포상·관직·배신·도주·회유·등용, 감옥·포로·재야 연동까지 나중 트랜잭션 몫이다.</p>
+
+      <h3>앞으로</h3>
+      <p>리팩토링 축에서 MVP 완성 축으로 확실히 넘어왔다. T01, T02가 끝났으니 다음은 육상전투 쪽 남은 디테일(v0.73-02 이후 — 전투 진입 화면 최종 레이아웃, HUD 완성, 명령 UX, 컷인, 결과 화면 등)과 T03 이후 트랜잭션(적 침공·방어)이 이어질 차례다.</p>
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-025-en.html" class="log-nav__prev">
-        <span class="log-nav__label">Previous</span>
-        <span class="log-nav__title">← Dev Log #025</span>
+      <a href="eastwar-devlog-026.html" class="log-nav__prev">
+        <span class="log-nav__label">이전</span>
+        <span class="log-nav__title">← Dev Log #026</span>
       </a>
-      <a href="eastwar-devlog-027-en.html" class="log-nav__next">
-        <span class="log-nav__label">Next</span>
-        <span class="log-nav__title">Dev Log #027 →</span>
+      <a href="eastwar.html" class="log-nav__next">
+        <span class="log-nav__label">목록</span>
+        <span class="log-nav__title">목록으로 →</span>
       </a>
     </div>
 
@@ -268,7 +259,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '026');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '027');
 </script>
 </body>
 </html>

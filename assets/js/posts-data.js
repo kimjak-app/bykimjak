@@ -32,6 +32,13 @@
       date: '2026-07-21', dl: '2026 · 07 · 21'
     },
     {
+      url: 'make/eastwar-devlog-027.html',
+      catKey: 'eastwar', cat: 'Architect Notes',
+      title: '최종 MVP버전을 위한 디테일 작업 시작',
+      sub: '한반도 4세력, 첫 플레이 가능한 완결을 향해',
+      date: '2026-07-20', dl: '2026 · 07 · 20'
+    },
+    {
       url: 'make/eastwar-devlog-026.html',
       catKey: 'eastwar', cat: 'Architect Notes',
       title: '작업파이프라인 대변화',
