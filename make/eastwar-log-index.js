@@ -138,6 +138,11 @@
       num: '027', date: '2026 · 07 · 20',
       ko: { href: 'eastwar-devlog-027.html',    title: '최종 MVP버전을 위한 디테일 작업 시작', sub: '한반도 4세력, 첫 플레이 가능한 완결을 향해' },
       en: { href: 'eastwar-devlog-027-en.html', title: 'Starting Detail Work for the Final MVP Build', sub: 'Four Factions of Korea — Toward the First Playable Full Loop' }
+    },
+    {
+      num: '028', date: '2026 · 07 · 30',
+      ko: { href: 'eastwar-devlog-028.html',    title: '삼국워 Export 준비',                        sub: '프로토타입 마무리를 위한 정리 로드맵과 export 하는 법' },
+      en: { href: 'eastwar-devlog-028-en.html', title: 'Getting EASTWAR Ready for Export',          sub: 'A Cleanup Roadmap Before the Prototype Wraps, and How Export Actually Works' }
     }
   ];
 
