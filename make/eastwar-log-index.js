@@ -143,6 +143,11 @@
       num: '028', date: '2026 · 07 · 30',
       ko: { href: 'eastwar-devlog-028.html',    title: '삼국워 Export 준비',                        sub: '프로토타입 마무리를 위한 정리 로드맵과 export 하는 법' },
       en: { href: 'eastwar-devlog-028-en.html', title: 'Getting EASTWAR Ready for Export',          sub: 'A Cleanup Roadmap Before the Prototype Wraps, and How Export Actually Works' }
+    },
+    {
+      num: '029', date: '2026 · 07 · 28',
+      ko: { href: 'eastwar-devlog-029.html',    title: '장수가 살아 움직이기 시작한다',              sub: '39명의 장수 데이터, 역할, 병종, 고유기, 기세 시스템 재설계' },
+      en: { href: 'eastwar-devlog-029-en.html', title: 'The Generals Start to Come Alive',          sub: "Redesigning 39 Generals' Data, Roles, Unit Types, Unique Skills, and the Momentum System" }
     }
   ];
 
