@@ -148,6 +148,11 @@
       num: '029', date: '2026 · 07 · 28',
       ko: { href: 'eastwar-devlog-029.html',    title: '장수가 살아 움직이기 시작한다',              sub: '39명의 장수 데이터, 역할, 병종, 고유기, 기세 시스템 재설계' },
       en: { href: 'eastwar-devlog-029-en.html', title: 'The Generals Start to Come Alive',          sub: "Redesigning 39 Generals' Data, Roles, Unit Types, Unique Skills, and the Momentum System" }
+    },
+    {
+      num: '030', date: '2026 · 07 · 31',
+      ko: { href: 'eastwar-devlog-030.html',    title: '화면 속 전투가 진짜로 살아났다',            sub: '컷인 표준화부터 다부대 AI까지, 시스템이 된 연출' },
+      en: { href: 'eastwar-devlog-030-en.html', title: 'Battle On Screen Finally Came Alive',       sub: 'From Cutin Standardization to Multi-Enemy AI — Presentation Becomes a System' }
     }
   ];
 

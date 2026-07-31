@@ -4,6 +4,13 @@
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
     {
+      url: 'make/eastwar-devlog-030.html',
+      catKey: 'eastwar', cat: 'Architect Notes',
+      title: '화면 속 전투가 진짜로 살아났다',
+      sub: '컷인 표준화부터 다부대 AI까지, 시스템이 된 연출',
+      date: '2026-07-31', dl: '2026 · 07 · 31'
+    },
+    {
       url: 'make/eastwar-devlog-029.html',
       catKey: 'eastwar', cat: 'Architect Notes',
       title: '장수가 살아 움직이기 시작한다',
