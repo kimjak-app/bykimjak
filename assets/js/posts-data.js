@@ -18,6 +18,13 @@
       date: '2026-07-30', dl: '2026 · 07 · 30'
     },
     {
+      url: 'make/grandslam-devlog-003.html',
+      catKey: 'grandslam', cat: 'Grand Slam',
+      title: '휴면 회원을 리포트에 담다',
+      sub: '월간 운영 리포트에서 이번 달 휴면 회원을 바로 확인 — v7.78',
+      date: '2026-07-30', dl: '2026 · 07 · 30'
+    },
+    {
       url: 'posts/think/morning-word-018.html',
       catKey: 'morning-word', cat: 'Morning Word',
       title: '새로운 캐릭터! 더 꿀잼을 위하여',

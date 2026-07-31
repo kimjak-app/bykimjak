@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>그랜드슬램 개발일지 #002 — 회비 인상, 과거까지 소급되던 버그를 잡았다 · byKimjak</title>
+<title>그랜드슬램 개발일지 #003 — 휴면 회원을 리포트에 담다 · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -43,11 +43,6 @@ a{color:inherit;text-decoration:none}
 .listing-head h1{font-family:var(--f-display);font-weight:500;font-size:clamp(44px,9vw,120px);letter-spacing:-.04em;line-height:.92;margin:0 0 8px}
 .listing-head .sub-ko{font-family:var(--f-kr);font-size:clamp(16px,2vw,22px);color:var(--ink-3);margin:0 0 20px;font-weight:400}
 .listing-head .listing-desc{font-family:var(--f-kr);font-size:15px;line-height:1.65;color:var(--ink-3);max-width:48ch}
-.lang-switch{display:inline-flex;align-items:center;margin-bottom:28px}
-.lang-current{font-family:var(--f-display);font-size:14px;font-weight:700;color:var(--ink);padding:10px 20px;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px;cursor:default;letter-spacing:.01em}
-.lang-sep{font-family:var(--f-mono);font-size:14px;color:var(--ink-3);opacity:.35;user-select:none;line-height:1}
-.lang-other{font-family:var(--f-display);font-size:14px;font-weight:400;color:var(--ink-3);padding:10px 20px;transition:color .2s;letter-spacing:.01em}
-.lang-other:hover{color:var(--ink)}
 footer{background:var(--dark);color:var(--dark-ink);padding:90px clamp(20px,4vw,48px) 36px;overflow:hidden}
 footer .big{font-family:var(--f-display);font-weight:400;font-size:clamp(44px,7vw,108px);letter-spacing:-.04em;line-height:.95;color:var(--dark-ink);margin:0 0 48px;text-wrap:balance}
 footer .big em{font-style:italic;font-family:"Times New Roman",serif;color:#A99A85}
@@ -140,13 +135,8 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <a href="../make/">MAKE</a><span class="sep">›</span>
       <a href="grandslam.html">← GrandSlam 개발일지 목록</a>
     </div>
-    <div class="lang-switch">
-      <span class="lang-current">🇰🇷 한국어</span>
-      <span class="lang-sep">|</span>
-      <a href="grandslam-devlog-002-en.html" class="lang-other">🇺🇸 English</a>
-    </div>
     <h1>Grand Slam</h1>
-    <p class="sub-ko">개발일지 #002 — Dev Log</p>
+    <p class="sub-ko">개발일지 #003 — Dev Log</p>
   </div>
 
   <section class="log-index rev">
@@ -158,66 +148,60 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       </span>
       <span class="log-index__date">2026 · 01</span>
     </a>
-    <a href="grandslam-devlog-002.html" class="log-index__item log-index__item--current">
+    <a href="grandslam-devlog-002.html" class="log-index__item">
       <span class="log-index__num">#002</span>
       <span class="log-index__t">회비 인상, 과거까지 소급되던 버그를 잡았다
         <span class="ko">6월까지는 8만원, 7월부터는 9만원 — 이게 당연한 거잖아</span>
       </span>
       <span class="log-index__date">2026 · 06 · 26</span>
     </a>
-    <a href="grandslam-devlog-003.html" class="log-index__item">
+    <a href="grandslam-devlog-003.html" class="log-index__item log-index__item--current">
       <span class="log-index__num">#003</span>
       <span class="log-index__t ko">휴면 회원을 리포트에 담다 — v7.78</span>
       <span class="log-index__date">2026.07.30</span>
     </a>
   </section>
 
-  <article class="devlog" id="log-002">
+  <article class="devlog" id="log-003">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #002</span>
-      <h1>회비 인상, 과거까지 소급되던 버그를 잡았다</h1>
-      <h2>6월까지는 8만원, 7월부터는 9만원 — 이게 당연한 거잖아 — v7.75</h2>
-      <span class="log-date">2026년 6월 26일</span>
+      <span class="log-num">Dev Log · #003</span>
+      <h1>그랜드슬램 개발일지 #003</h1>
+      <h2>휴면 회원을 리포트에 담다 — v7.78</h2>
+      <span class="log-date">2026년 7월 30일</span>
 
       <hr />
+      <h3>이번엔 딱 하나만 건드렸다</h3>
+      <p>v7.78은 욕심을 안 부린 버전이다. 회비 계산 로직도, 납부 대상 산출 방식도 손대지 않았다. 건드린 건 딱 하나, <strong>월간 운영 리포트에 휴면 회원 이름을 보여주는 것</strong>뿐이다.</p>
+      <p>운영 리포트를 보면서 "이번 달에 누가 안 나왔더라"를 매번 회원 명단이랑 대조해봐야 했던 게 번거로웠다. 이제는 리포트 안에서 바로 확인된다.</p>
 
-      <h3>문제는 단순했다</h3>
-      <p>클럽 운영에서 회비 인상은 피할 수 없다. 임대료가 오르고, 코트 사용료가 오르고, 어느 시점이 되면 회원들한테 "다음 달부터 조금 올라요"라고 말해야 한다. 당연한 일이다.</p>
-      <p>그런데 그랜드슬램 앱에서 월회비를 8만원에서 9만원으로 수정하는 순간, 이상한 일이 벌어졌다. 1월부터 6월까지 이미 걷은 회비가 전부 9만원 기준으로 재계산돼버린 거다. 과거 장부가 통째로 뒤집혔다. 실제 통장 잔액이랑 앱 상의 총액이 맞지 않는 상황.</p>
-      <p>회계 앱에서 이건 치명적인 버그다. 신뢰가 무너지면 아무도 안 쓴다.</p>
-
-      <hr />
-
-      <h3>두 가지 문제, 한 번에</h3>
-      <p>사실 이번에 잡아야 할 문제가 하나 더 있었다. 7월 회비는 7월 1일에 내는 게 아니라는 거다. 현실에서 총무들은 6월 말부터 회비를 걷는다. 근데 앱은 7월 1일 기준으로 돼 있으니까, 6월 말에 받아도 처리할 방법이 없었다. 7월 1일 되기를 기다렸다가 다시 체크해야 했다. 총무 입장에서 이건 꽤 불편한 일이다.</p>
-      <p>정리하면 두 가지였다.</p>
       <ul>
-        <li>회비 인상 시 과거 회계에 소급 적용되는 문제</li>
-        <li>다음 달 회비를 이번 달 말에 미리 처리할 수 없는 문제</li>
+        <li>랜딩/타이틀 버전 <code>v7.78</code> 반영</li>
+        <li><code>APP_VERSION = 'v7.78'</code> 반영</li>
+        <li>운영 &gt; 데이터 백업 / 복원 &gt; 주요 업데이트 브리핑에 v7.78 내용 추가</li>
+        <li>월간 운영 리포트 &gt; 회비 납부 현황에 휴면 회원 표시 줄 추가</li>
       </ul>
 
-      <hr />
-
-      <h3>해결: 회비 이력 + 선납 처리월</h3>
-      <p>이번 v7.75 패치의 핵심은 두 가지 구조 변경이다.</p>
-      <p>첫째, 월회비를 단일값이 아니라 <strong>이력(history)</strong>으로 저장하도록 바꿨다. 내부적으로 <code>feeRateHistory</code>라는 구조가 생겼고, 회비를 바꿀 때는 금액과 함께 <strong>적용 시작월</strong>을 함께 저장한다. 그래서 이제 이런 식으로 쌓인다.</p>
-      <blockquote>
-        2026년 1월 ~ 6월 → 80,000원<br />
-        2026년 7월부터 → 90,000원
-      </blockquote>
-      <p>7월부터 9만원으로 올려도, 1월~6월 회계는 8만원 그대로 유지된다. 나중에 10월에 또 올려도 마찬가지다. 각 구간이 독립적으로 기록되니까, 아무리 많이 올려도 과거 장부는 흔들리지 않는다.</p>
-      <p>둘째, 회비 납부 화면에 <strong>납부 처리월</strong> 선택 기능을 추가했다. 6월 말에 앱을 열어도 "납부 처리월: 7월"을 선택한 다음 회원을 체크하면, 7월 회비로 정확히 기록된다. 7월 1일까지 기다릴 필요가 없어졌다.</p>
+      <blockquote>🟡 휴면 회원 (n명): 이름1, 이름2</blockquote>
 
       <hr />
+      <h3>"오늘" 기준이 아니라 "선택월" 기준인 이유</h3>
+      <p>여기서 헷갈리기 쉬운 부분이 있다. 이 휴면 회원 표시는 리포트를 보는 시점, 즉 오늘 날짜 기준이 아니다. <strong>리포트가 선택한 그 달을 기준으로</strong> 계산된다.</p>
+      <p>예를 들어 8월 리포트를 열면, 8월 시점에서 휴면 상태였던 회원이 표시되는 식이다. 나중에 과거 리포트를 다시 열어봐도 그 시점의 기록이 그대로 보여야 하기 때문에, 이 기준을 명확히 해두는 게 중요했다.</p>
 
-      <h3>앱 신뢰도의 심장</h3>
-      <p>회계는 앱에서 가장 건드리기 무서운 영역이다. 한 번 틀리면 과거 데이터까지 연쇄적으로 오염될 수 있어서, 수정할 때마다 긴장된다. 이번 패치도 단순히 숫자 하나를 고친 게 아니라, 회비를 저장하는 구조 자체를 바꾼 거라서 꽤 신중하게 접근했다.</p>
-      <p>베이글 클럽에서 실제로 테스트를 돌려봤다. 6월까지 8만원, 7월부터 9만원 — 두 구간이 정확히 분리됐고, 6월 말에 7월 회비 선납도 문제없이 처리됐다.</p>
-      <p>작은 패치처럼 보이지만, 이번 v7.75가 그랜드슬램의 회계 신뢰도를 한 단계 올린 업데이트라고 생각한다. 회비를 얼마든지 올려도, 과거 장부는 그대로다.</p>
+      <hr />
+      <h3>검증, 그리고 안심</h3>
+      <p>범위가 작은 만큼 검증도 확실히 하고 넘어갔다.</p>
+      <ul>
+        <li>ZIP 압축 테스트 정상</li>
+        <li>JS 문법 체크 정상</li>
+        <li>리포트 테스트 정상 — 8월 휴면 회원 2명 표시 확인</li>
+        <li>회비 납부 대상 계산은 기존 로직 그대로 유지 확인</li>
+      </ul>
+      <p>v7.78은 그렇게, 안전하게 리포트 표시만 보강한 버전으로 마무리됐다.</p>
 
       <div class="log-nav">
-        <a href="grandslam-devlog-001.html" class="log-nav__prev">← Dev Log #001</a>
-        <a href="grandslam-devlog-003.html" class="log-nav__next">Dev Log #003 →</a>
+        <a href="grandslam-devlog-002.html" class="log-nav__prev">← Dev Log #002</a>
+        <span class="log-nav__next log-nav__next--disabled">Dev Log #004 →</span>
       </div>
     </div>
   </article>
