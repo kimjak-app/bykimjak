@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR 개발일지 #030 — 화면 속 전투가 진짜로 살아났다 · byKimjak</title>
+<title>EASTWAR Dev Log #031 — Why Couldn't a Single Image Just Work? · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -83,6 +83,9 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 .devlog__body figure{margin:32px 0}
 .devlog__body figure img{width:100%;border-radius:2px}
 .devlog__body figure figcaption{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
+.devlog__body .fig-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0}
+.devlog__body .fig-2col figure{margin:0}
+@media(max-width:640px){.devlog__body .fig-2col{grid-template-columns:1fr}}
 .devlog__body .dialogue{border-left:2px solid var(--rule);margin:2em 0;padding:0 0 0 24px}
 .devlog__body .dialogue p{margin:0 0 1em;font-size:.95em;color:var(--ink-2)}
 .devlog__body .dialogue p:last-child{margin-bottom:0}
@@ -159,125 +162,138 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     <div class="breadcrumb rev">
       <a href="../index.html">bykimjak</a>
       <span class="sep">›</span>
-      <a href="eastwar.html">EASTWAR</a>
+      <a href="eastwar-en.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #030</span>
+      <span>Dev Log #031</span>
     </div>
     <div class="lang-switch rev">
-      <span class="lang-current">🇰🇷 한국어</span>
+      <a href="eastwar-devlog-031.html" class="lang-other">🇰🇷 한국어</a>
       <span class="lang-sep">|</span>
-      <a href="eastwar-devlog-030-en.html" class="lang-other">🇺🇸 English</a>
+      <span class="lang-current">🇺🇸 English</span>
     </div>
     <h1 class="rev">EASTWAR</h1>
     <p class="sub-ko rev">이스트워 개발일지</p>
-    <p class="listing-desc rev">전략 가상역사 시뮬레이션 — 1인 개발 기록</p>
+    <p class="listing-desc rev">Strategy alt-history simulation — solo dev log</p>
   </div>
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-030">
+  <article class="devlog" id="log-031">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #030</span>
-      <h1>화면 속 전투가 진짜로 살아났다</h1>
-      <h2>컷인 표준화부터 다부대 AI까지, 시스템이 된 연출</h2>
-      <span class="log-date">2026년 07월 31일</span>
+      <span class="log-num">Dev Log · #031</span>
+      <h1>Why Couldn't a Single Image Just Work?</h1>
+      <h2>Two Days on EASTWAR's Battle UI</h2>
+      <span class="log-date">August 2, 2026</span>
 
       <hr />
-      <h3>컷인, 얼마나 선명해야 하나</h3>
-      <p>장수 컷인 작업을 시작하면서 가장 먼저 부딪힌 건 기술적인 문제였다. 척준경을 기준 샘플로 여러 화질을 테스트했는데, 1280×720·30fps 조건에서는 화면 깨짐 없이 갑옷·얼굴·칼·배경 디테일이 다 유지되고 색 번짐이나 컬러 블록 붕괴도 없었다. 반면 1080p는 재생 부담이 컸다 — 정확히는 1080p Theora 재생 자체의 부담인지, 그 변환본과 Godot 디코더 궁합 문제인지까지는 알 수 없었지만, 결과적으로 화면상 이득보다 재생 불안정 위험이 훨씬 컸다.</p>
-      <p>그래서 720p를 표준으로 확정했다. 최종 판정 기준은 하나였다 — 원본 대비 육안 화질이 유지되는가. 척준경의 "검왕돌파" 장면이 뜨는 순간을 확인했을 때, 방향이 맞다는 확신이 들었다. 여기서 장수명·고유기명·대사 한 줄·빠른 등장과 퇴장만 다듬으면 EASTWAR의 대표 연출이 될 수 있겠다는 게 이날의 결론이었다.</p>
-
-      <h3>13명, 마지막 대사를 확정하다</h3>
-      <p>한반도 MVP 출전 장수 13명의 타이틀 컷인과 4초짜리 영상을 전부 완성했다. 대사도 이렇게 확정했다.</p>
-
-      <table>
-        <thead>
-          <tr><th>장수</th><th>고유특기</th><th>대사</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>광개토대왕</td><td>영락대제</td><td>"천하가 고구려의 말발굽 아래 놓이리라!"</td></tr>
-          <tr><td>을지문덕</td><td>살수대첩</td><td>"한 놈도 살아 돌아갈 길은 없다!"</td></tr>
-          <tr><td>도림</td><td>흑백책략</td><td>"의심은 칼보다 깊이 스미는 법."</td></tr>
-          <tr><td>척준경</td><td>검왕돌파</td><td>"내 앞을 막는 자, 목을 내놔라!"</td></tr>
-          <tr><td>이순신</td><td>학익진</td><td>"전 함대, 학익진을 펼쳐라!"</td></tr>
-          <tr><td>정도전</td><td>개혁령</td><td>"낡은 세상은 오늘로 끝이다!"</td></tr>
-          <tr><td>권율</td><td>행주대첩</td><td>"죽음으로 지켜내겠다!"</td></tr>
-          <tr><td>계백</td><td>황산벌</td><td>"이곳이 백제의 마지막 방패다!"</td></tr>
-          <tr><td>흑치상지</td><td>백제부흥</td><td>"일어서라, 백제여!"</td></tr>
-          <tr><td>의자왕</td><td>삼천궁녀</td><td>"춤춰라! 나의 백제, 하하하!"</td></tr>
-          <tr><td>김춘추</td><td>나당연합</td><td>"천하의 힘! 신라의 것이다!"</td></tr>
-          <tr><td>김유신</td><td>삼한통일</td><td>"삼한을 하나로 묶겠다!"</td></tr>
-          <tr><td>장보고</td><td>청해진</td><td>"이 바다의 길은 내가 지배한다!"</td></tr>
-        </tbody>
-      </table>
-
-      <p>대사는 코드에 하드코딩하지 않고 장수별 데이터로 관리하기로 했다. <code>{"cheok_jun_gyeong": {"skill_id": "geomwang_dolpa", "quote": "내 앞을 막는 자, 목을 내놔라!"}}</code> 같은 구조로 13명을 등록하면, 이후 장수를 추가하거나 대사를 수정하는 게 훨씬 쉬워진다.</p>
-
-      <h3>하나를 완벽하게, 그다음 열셋으로</h3>
-      <p>컷인을 완성하는 과정은 순서가 있었다. 먼저 액션 베이스 이미지가 있었고,</p>
+      <h3>It Started as Just One Screen That Had to Be Right</h3>
+      <p>The point had come where EASTWAR's battle screen needed to look like an actual commercial game. A mockup request went to 채코치, and the result was exactly right — blue/red momentum gauges, a turn indicator in the center, general cards lined up on both sides. It was precisely the image in mind.</p>
 
       <figure>
-        <img src="../assets/eastwar/cutin-template-action-01.png" alt="컷인 액션 베이스 — 텍스트 삽입 전 원본" />
-        <figcaption>컷인 액션 베이스 — 텍스트 삽입 전 원본</figcaption>
+        <img src="../assets/eastwar/hud-concept-design-mockup-01.png" alt="The original concept mockup — 채코치's proposed battle UI design" />
+        <figcaption>The original concept mockup — 채코치's proposed battle UI design</figcaption>
       </figure>
 
-      <p>여기에 타이틀 폰트와 레이아웃을 테스트했다.</p>
+      <p>The trouble started right after. "Let's build this as-is" turned into actual implementation, and the more it got built, the stranger it looked. It kept drifting further from the mockup. Trying again and again didn't change anything.</p>
+      <p>One thing wouldn't work: precise UI design.</p>
+
+      <h3>What the Fear Actually Was</h3>
+      <p>The first assumption was "채코치 just isn't good at this." Digging deeper showed that wasn't it at all. <strong>The request itself — "draw one complete, finished screen in one shot" — was something an image-generation AI fundamentally couldn't do.</strong></p>
+      <p>In hindsight, it made sense. The exact momentum gauge value, troop numbers, grid alignment — this kind of "information" isn't something you can draw as a picture and reproduce identically every time. What AI is good at is "pictures" — backgrounds, characters. Not "information" — numbers, alignment.</p>
+      <p>Knowing this didn't make the fear go away, though. If anything, it got worse. "If this is impossible in principle, does that mean commercial-grade UI is permanently out of reach?" With a Steam Early Access goal already set for EASTWAR, staring at the fact that even one screen couldn't get made properly was destabilizing for days.</p>
+
+      <h3>Asking "Is It Even Possible" Again</h3>
+      <p>Instead of staying stuck in frustration, the question changed — from "why didn't this work" to "is this actually possible at all."</p>
+      <p>The answer turned out to be clear: <strong>yes, it was possible.</strong> The order was just wrong.</p>
+      <p>Break the screen apart and it's actually two different kinds of elements mixed together:</p>
+      <ul>
+        <li><strong>Picture elements</strong> — backgrounds, character portraits, frame decoration — the job of an image-generation AI</li>
+        <li><strong>Information elements</strong> — gauges, numbers, text, grids — things code needs to assemble</li>
+      </ul>
+      <p>Bundling both together into a single "finished screen" request was the root of the failure. The fix was simply to approach them separately.</p>
+
+      <h3>Measuring It Showed Half the Work Was Already Done</h3>
+      <p>From here, it moved from intuition to data. Opening the actual Godot project files turned up something surprising: <strong>the HUD structure already existed in full.</strong> Ten momentum slots, the general roster, the info panel, the log panel — all there. Even the code wiring momentum data was already written.</p>
 
       <figure>
-        <img src="../assets/eastwar/cutin-title-font-sample-hakikjin-01.png" alt="타이틀 폰트 테스트 — 학익진 · 이순신 장군의 위대한 전략" />
-        <figcaption>타이틀 폰트 테스트 — 학익진 · 이순신 장군의 위대한 전략</figcaption>
+        <img src="../assets/eastwar/hud-turn-panel-placeholder-01.png" alt="HUD before any style pass — text overlapping with no frame at all" />
+        <figcaption>HUD before any style pass — text overlapping with no frame at all</figcaption>
       </figure>
 
-      <p>이 둘을 합쳐서 완성한 게 계백의 최종 컷인이다.</p>
+      <p>So why did the screen look so flat? The cause was simple: none of it had any style applied. With no unified design theme file, most panels defaulted to plain gray, and even a font that already existed in the project just wasn't connected.</p>
+      <p>In other words, there was almost nothing left to build from scratch. It was just "something that already existed, with no clothes on."</p>
+
+      <h3>Small, One Piece at a Time</h3>
+      <p>From this point, ambition got dialed back. Instead of trying to finish all six components at once (top HUD, left/right rosters, bottom info panel, buttons, log panel), the plan narrowed to just one — <strong>the top HUD's font and color, and nothing else.</strong></p>
+
+      <div class="fig-2col">
+        <figure>
+          <img src="../assets/eastwar/hud-fullscreen-before-style-01.png" alt="Battle screen before the style pass" />
+          <figcaption>Battle screen before the style pass</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/hud-fullscreen-after-style-01.png" alt="Battle screen after the style pass — unified font and color" />
+          <figcaption>Battle screen after the style pass — unified font and color</figcaption>
+        </figure>
+      </div>
+
+      <p>Seeing the result was the first real moment of confidence. Without drawing a single new image, pure font-linking and color unification produced a completely different screen. For the first time, "this is good enough to move to the next stage" was a judgment grounded in data, not a guess.</p>
+
+      <h3>Still Scared, Though</h3>
+      <p>Even at this point, the fear didn't fully go away. The reason was simple: the stage of adding "actual pictures" — placing real frame and decoration images onto the screen — was something that had never been done before, not once.</p>
+      <p>The breakthrough came from acknowledging what was actually available. Illustration wasn't a skill, but Photoshop was. Realizing there was a safety net — that even if the AI couldn't produce a perfect result, it could still be finished by hand — made the weight lighter. And one more thing: this placement work turned out to be <strong>faster done directly, by eye, in the Godot editor than by writing code to instruct it.</strong> As it turns out, game studios handle this exact stage the same way — a person adjusting things by hand inside the engine. The unfamiliar, intimidating task turned out to be standard industry practice.</p>
+
+      <h3>Starting With the Smallest Piece</h3>
+      <p>Of the six components, the smallest and most self-contained one got picked first — just the center turn-indicator panel. The mindset was: "if this one piece works, everything else will too."</p>
+      <p>The design 채코치 produced got taken into Photoshop to build three frame images — left, center, right. How precisely symmetrical they were got measured numerically: 95.3% match, well past the point of being noticeable to the eye.</p>
+      <p>Only after that check did the images actually go into Godot. Spacing between panels got tightened by eye. Text placement got checked to make sure nothing was hidden behind the decoration. Then: save, commit, push.</p>
+
+      <h3>The Screen Was Alive</h3>
+      <p>Seeing the resulting screenshot made it clear this wasn't a frozen mockup — it was <strong>an actual battle in progress.</strong> Turn 8/30, real-time troop movement, HP gauges all live on screen, with the new frame sitting naturally in place among all of it.</p>
+      <p>Adjusting the three-piece HUD directly inside Godot's 2D view led to a judgment call: it made sense to just merge it into one piece. That way, symmetry and alignment stopped being a concern — information could sit directly on top of the image background, with 채코치 asked to align the numbers and text to match the artwork.</p>
+      <p>It didn't stop there. The momentum slots also got tried in diamond form instead of squares. The first attempt came out rounder than intended — and that wasn't bad either.</p>
 
       <figure>
-        <img src="../assets/eastwar/cutin-gyebaek-hwangsanbeol-01.png" alt="완성형 컷인 — 계백 · 황산벌 · &quot;죽음으로 수호하겠다&quot;" />
-        <figcaption>완성형 컷인 — 계백 · 황산벌 · "죽음으로 수호하겠다"</figcaption>
+        <img src="../assets/eastwar/hud-turn-panel-diamond-round-01.png" alt="Momentum gauge — the rounded diamond version" />
+        <figcaption>Momentum gauge — the rounded diamond version</figcaption>
       </figure>
 
-      <p>척준경 하나를 놓고 화질·폰트·위치·타이밍을 전부 잠근 다음, 나머지 12명으로 확장하는 순서로 갔다. 폰트는 장수명에 명조체(NotoSerifKR-Bold), 대사에는 고딕체를 쓰기로 했다. 대사 폰트 크기 29, 위치와 크기는 씬에 직접 지정된 transform을 기준으로 삼았다. 이 승인값들 — CutinStage 위치, 장수명 위치, 고유기 PNG 위치, 대사 위치, 등장·체류·퇴장 타이밍 — 은 이후 공통화 과정에서 시각적으로 절대 바뀌면 안 되는 기준선으로 커밋에 못박아뒀다.</p>
-      <p>이 기준이 잠긴 다음에야 척준경 전용 디버그 프리뷰를 공통 컷인 컴포넌트로 승격했다. 영상·장수명·고유특기 PNG·대사·위치·크기·타이밍을 하나의 재사용 씬으로 만들고, 장수별 데이터만 갈아 끼우면 되는 구조로 바꾼 것이다. 이 단계에서 척준경의 마스터 화면과 동작은 완전히 동일하게 유지하는 게 조건이었다.</p>
-      <p>이어서 잘못된 고유기 PNG 파일명 두 개(김유신 samguk→samhan, 계백 baekje_buheung→hwangsan_beol)를 바로잡고, 13명의 MP4를 승인된 720p Theora OGV로 변환하고, 13명 데이터를 단일 registry에 등록한 다음, 공통 컴포넌트로 13명이 순환하는 F6 프리뷰를 만들었다. 이 단계는 채코치·Work/Codex·김작 세 역할이 나뉘어 진행됐다 — 설계 확정과 결과 감사는 채코치, FFmpeg 변환·Godot 검증·커밋 같은 로컬 작업은 Work/Codex, 실제 F6 시각 QA와 최종 승인은 김작.</p>
-      <p>순환 프리뷰에서 광개토대왕 한 명만 따로 확인이 필요했다. 대사 폭이 504px로 공통 authored 폭 396px보다 길어서, Godot가 최소 폭을 자동 확장해 한 줄은 유지했지만 다른 장수보다 유난히 커 보이거나 타이틀·인물과 충돌하지 않는지 육안으로 봐야 했다. 나머지 12명은 수치상 공통 범위 안에 들어왔다.</p>
+      <p>A second attempt produced a genuinely sharp diamond, and the two got placed side by side for the final decision.</p>
 
-      <h3>폰트도 라이선스를 확인해야 한다</h3>
-      <p>컷인에 쓴 Noto Serif KR은 상업용 게임에 써도 되는 폰트인지 미리 확인했다. 공식 배포본은 SIL Open Font License 1.1(OFL)이고, 이 라이선스는 게임에 폰트를 번들·임베드해서 상업적으로 배포하는 걸 허용한다. 다만 두 가지 조건이 있다 — 폰트 파일만 따로 판매하면 안 되고, 게임에 포함해 배포할 때는 저작권 고지와 OFL 라이선스 사본을 함께 넣어야 한다.</p>
-      <p>공식 GitHub 배포 페이지(notofonts/noto-cjk)에서 한국어 서브셋인 Noto Serif KR을 받아서 <code>assets/fonts/noto_serif_kr/</code>에 Bold·SemiBold 두 폰트와 OFL.txt를 함께 저장소에 넣었고, 프로젝트 루트에 THIRD_PARTY_NOTICES.md로 저작권 고지도 별도 문서화했다. Godot가 이 폰트를 게임 리소스로 가져와서 빌드 시 실행 파일/PCK 안에 함께 패키징하기 때문에, 유저가 폰트를 따로 설치할 필요는 없다.</p>
+      <figure>
+        <img src="../assets/eastwar/hud-turn-panel-diamond-final-01.png" alt="Momentum gauge — the sharp diamond version that got chosen" />
+        <figcaption>Momentum gauge — the sharp diamond version that got chosen</figcaption>
+      </figure>
 
-      <h3>예쁜 화면에서, 진짜 게임 시스템으로</h3>
-      <p>컷인 자산과 공통 구조가 완성된 다음이 진짜 핵심이었다. 여기까지는 "보여주기용 프리뷰"였고, 이제는 실제 전투 흐름 안에 끼워 넣어야 했다. 잘못 연결하면 이런 문제가 생길 수 있다는 걸 미리 정리해뒀다 — 고유기 효과가 컷인보다 먼저 터지는 것, 컷인 재생 중에 플레이어가 다른 행동을 누르는 것, AI 턴이 멈추거나 두 번 진행되는 것, 기세가 중복 차감되는 것, 검증 실패인데 컷인이 재생되는 것, 컷인이 끝나도 전투가 재개되지 않는 것, 연속 발동 때 컷인이 겹치는 것.</p>
-      <p>그래서 원칙을 하나로 고정했다.</p>
+      <p>Not deciding the "correct answer" in advance, and instead judging based on what actually came out — that too was just a natural part of the process.</p>
 
-      <blockquote>
-        <p>고유기 실행 조건 검증 완료 → 실행 커밋 → 기세 1회 차감 → 전투 흐름 잠금 → 컷인 재생 → 컷인 종료 신호 → 기존 고유기 효과 처리 계속 → 전투 흐름 잠금 해제</p>
-      </blockquote>
+      <h3>What Actually Got Gained</h3>
+      <p>Looking back, what these two days produced wasn't just one nice-looking HUD. It was <strong>a reusable production formula.</strong></p>
 
-      <p>컷인은 고유기 계산의 원인이 아니라, 확정된 실행을 잠시 연출하는 비동기 단계여야 한다는 게 핵심이다. 그리고 취소나 대상 오류, 검증 실패 상황에서는 컷인이 절대 나오면 안 된다 — 유효 실행이 확정된 순간에만 재생해야 한다. 플레이어용과 AI용 컷인 코드를 따로 만들지 않고, 둘 다 <code>play_unique_skill_cutin(hero_id, skill_id)</code>라는 같은 함수를 타도록 설계했다. 연결 이후엔 자기강화형·단일대상형·광역형·회피/면역/일부 효과 실패·연속 고유기까지 플레이어와 AI 양쪽에서 QA하기로 계획을 세웠다.</p>
+      <pre><code>Design decision (AI coach)
+↓
+Fine-tuning images in Photoshop and adjusting placement feel directly in Godot's 2D view (human)
+↓
+Implementation, execution, verification, capture (coding AI)
+↓
+Preserving a Git checkpoint</code></pre>
 
-      <h3>그 사이 잡은 두 가지 버그</h3>
-      <p>컷인 작업과 나란히, 다른 두 가지 문제도 잡았다.</p>
+      <p>Skip any one of these four steps, and the old failure comes back — that much is clear now. AI trying to draw a complete screen alone fails. Handing off the decisions that need human judgment — spacing, shape choice, tone — to AI causes drift. Changing code without actually checking the real screen leads straight into the "it should probably work" trap. It only ran smoothly once each of the four got placed exactly where it was strongest.</p>
 
-      <p><strong>주둔 무장 초상화</strong>: 사비에 주둔한 장수 목록에서 의자왕·계백·흑치상지·김춘추·장보고 다섯 명의 초상화가 정상 이미지 대신 물음표(?) placeholder로 표시되는 문제가 있었다. 김유신만 정상이었다. 목록·이름·능력치는 다 정상 표시되는데 초상화 조회만 실패하는 상황이라, 이미지 파일을 새로 만드는 게 아니라 전투 결과에서 월드맵 주둔 무장으로 복귀하는 과정의 hero ID·payload·portrait lookup 일치성을 복구하는 방향으로 고쳤다.</p>
-      <p><strong>고유기 효과 한글화</strong>: 39명 고유기의 화면 표시 문구를 전수검사했다. 실전에서 확인된 영어 노출은 장보고·광개토대왕·의자왕 세 명이었지만, 이 세 명만 고치는 게 아니라 고유기 보유 장수 39명 전원을 검사 대상으로 잡았다. 발동 알림, 효과 이름, 버프·디버프 이름, 상태이상 이름, 피해·회복·방어 효과 문구, 턴 지속 문구, 전투 로그, 머리 위 효과 표시, 툴팁까지 전부 확인했고, 내부 ID와 사용자 표시 문자열을 분리하는 방식으로 해결해서 플레이어와 AI가 같은 formatter를 쓰게 만들었다. 결과적으로 영문 UI 노출 0건, 전투 로그까지 한글화 확인, 스크린샷에서 잡힌 GDScript 경고 5건도 함께 제거했다.</p>
-
-      <h3>적 한 명만 반복 행동하던 진짜 큰 버그</h3>
-      <p>가장 체감이 컸던 건 따로 있었다. 아군 1 대 적 4 상황에서, 적이 한 명 행동하고 나면 무조건 아군 턴으로 돌아가버리는 버그가 있었다. 나머지 세 명은 아예 행동 기회를 못 받는 상황이었던 것.</p>
-      <p>이걸 두 단계로 나눠서 고쳤다. 먼저 모든 적 행동 종료 지점을 공통 helper로 통일하고, 미행동 적이 남아 있으면 같은 적 턴을 계속 진행하도록 만들었다 — 살아 있는 적 전원이 행동을 마친 뒤에만 아군 턴으로 복귀하고, 양 진영 전원이 행동한 뒤에만 새 라운드가 시작되게 했다. 이 단계(T06-11A)가 F5 QA로 확실히 PASS된 다음에야, 기존에 있던 접근·포위 시스템(destination/engagement reservation)이 다부대 상황에서 실제로 작동하는지 검증하는 두 번째 단계(T06-11B)로 넘어갔다.</p>
-      <p>여기서 중요한 발견이 하나 있었다. 새로운 포위 AI를 만든 게 아니라, 원래 있던 시스템을 막고 있던 턴 오케스트레이션 버그를 뚫었을 뿐이라는 것. 그러자 예상대로 기존 접근 로직만으로도 적 셋이 동시에 달려드는 장면이 나왔다. 동일 표적을 복수의 적이 공유할 수 있게 하고, 목적지·교전 셀 중복은 방지하고, 측면 1.15배·후방 1.30배 배율은 기존 수치를 그대로 유지한 채로 검증까지 마쳤다.</p>
-      <p>두 단계 모두 F5 최종 PASS로 잠겼다. 이제 전투에서 숫자 우위가 실제로 체감된다 — 적이 정면에만 몰리지 않고 여러 방향에서 접근한다.</p>
-
-      <h3>앞으로</h3>
-      <p>컷인 시스템은 시각 QA까지 끝났고, 다음은 실제 전투 발동 연결과 플레이어·AI 통합 QA가 남았다. 여기까지 끝나면 컷인은 정말로 예쁜 프리뷰 화면이 아니라, EASTWAR 전투의 실제 일부가 된다.</p>
+      <h3>What Comes After the Fear</h3>
+      <p>Two days ago, the thought "if this doesn't work, does the whole commercial dream fall apart?" was deeply destabilizing. Looking back now, that fear wasn't a sign of insufficient ability — it was just the ordinary feeling anyone has in front of something they're doing for the first time.</p>
+      <p>The same thing happened learning Godot for the first time, and facing a 20,000+ line file for the first time. And the method was always the same: don't stop, dig into the cause, break it into small pieces, and move forward verifying one piece at a time.</p>
+      <p>Moments like this will keep coming while building EASTWAR. Whenever they do, these two days are worth remembering. Even the things that seemed impossible turned out, in the end, to be possible.</p>
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-029.html" class="log-nav__prev">
-        <span class="log-nav__label">이전</span>
-        <span class="log-nav__title">← Dev Log #029</span>
+      <a href="eastwar-devlog-030-en.html" class="log-nav__prev">
+        <span class="log-nav__label">Previous</span>
+        <span class="log-nav__title">← Dev Log #030</span>
       </a>
-      <a href="eastwar-devlog-031.html" class="log-nav__next">
-        <span class="log-nav__label">다음</span>
-        <span class="log-nav__title">Dev Log #031 →</span>
+      <a href="eastwar-en.html" class="log-nav__next">
+        <span class="log-nav__label">Index</span>
+        <span class="log-nav__title">Back to index →</span>
       </a>
     </div>
 
@@ -301,7 +317,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '030');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '031');
 </script>
 </body>
 </html>

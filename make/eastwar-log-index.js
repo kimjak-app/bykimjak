@@ -153,6 +153,11 @@
       num: '030', date: '2026 · 07 · 31',
       ko: { href: 'eastwar-devlog-030.html',    title: '화면 속 전투가 진짜로 살아났다',            sub: '컷인 표준화부터 다부대 AI까지, 시스템이 된 연출' },
       en: { href: 'eastwar-devlog-030-en.html', title: 'Battle On Screen Finally Came Alive',       sub: 'From Cutin Standardization to Multi-Enemy AI — Presentation Becomes a System' }
+    },
+    {
+      num: '031', date: '2026 · 08 · 02',
+      ko: { href: 'eastwar-devlog-031.html',    title: '그림 한 장이 왜 안 됐을까',                 sub: '삼국WAR 전투 UI, 이틀의 기록' },
+      en: { href: 'eastwar-devlog-031-en.html', title: "Why Couldn't a Single Image Just Work?",    sub: "Two Days on EASTWAR's Battle UI" }
     }
   ];
 
