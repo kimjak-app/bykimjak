@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR 개발일지 #031 — 그림 한 장이 왜 안 됐을까 · byKimjak</title>
+<title>EASTWAR 개발일지 #032 — 로스터에 깃발이 꽂혔다 · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -164,12 +164,12 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #031</span>
+      <span>Dev Log #032</span>
     </div>
     <div class="lang-switch rev">
       <span class="lang-current">🇰🇷 한국어</span>
       <span class="lang-sep">|</span>
-      <a href="eastwar-devlog-031-en.html" class="lang-other">🇺🇸 English</a>
+      <a href="eastwar-devlog-032-en.html" class="lang-other">🇺🇸 English</a>
     </div>
     <h1 class="rev">EASTWAR</h1>
     <p class="sub-ko rev">이스트워 개발일지</p>
@@ -178,122 +178,72 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-031">
+  <article class="devlog" id="log-032">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #031</span>
-      <h1>그림 한 장이 왜 안 됐을까</h1>
-      <h2>삼국WAR 전투 UI, 이틀의 기록</h2>
-      <span class="log-date">2026년 08월 02일</span>
+      <span class="log-num">Dev Log · #032</span>
+      <h1>로스터에 깃발이 꽂혔다</h1>
+      <h2>프레임·군기·전투기록, 전투 UI 완성도가 쌓이는 중</h2>
+      <span class="log-date">2026년 08월 08일</span>
 
       <hr />
-      <h3>시작은 그냥 예쁜 화면 하나였다</h3>
-      <p>삼국WAR 전투 화면을 실제 상업용 게임 수준으로 만들어야 하는 단계가 왔다. 채코치한테 목업 하나를 부탁했고, 결과물이 마음에 들었다. 파랑/빨강 기세 게이지, 중앙의 턴 표시, 좌우로 늘어선 장수 카드. 딱 원하던 그림이었다.</p>
+      <h3>로스터 헤더부터 다시 짰다</h3>
+      <p>지난 글에서 중앙 HUD와 로스터창 디자인을 처음 입혔다면, 이번엔 그 위에 실제 데이터가 붙는 로스터(AllyRosterHud, EnemyRosterHud) 자체의 구조를 다듬는 단계였다. 먼저 로스터 상단에 헤더 구조를 새로 추가하고, 기존 장수 카드 5개를 그 아래로 재배치했다.</p>
+
+      <h3>통짜 프레임 하나로 정리</h3>
+      <p>로스터 패널 전체를 감싸는 프레임 스펙을 확정했다. 270×524px, 투명 PNG.</p>
 
       <figure>
-        <img src="../assets/eastwar/hud-concept-design-mockup-01.png" alt="최초 컨셉 목업 — 채코치가 제안한 전투 UI 디자인 안" />
-        <figcaption>최초 컨셉 목업 — 채코치가 제안한 전투 UI 디자인 안</figcaption>
+        <img src="../assets/eastwar/roster-panel-frame-01.png" alt="로스터 통짜 프레임 — 270×524px 투명 PNG" />
+        <figcaption>로스터 통짜 프레임 — 270×524px 투명 PNG</figcaption>
       </figure>
 
-      <p>문제는 그 다음부터였다. "이대로 만들자"고 하고 실제 구현에 들어갔는데, 만들면 만들수록 그림이 이상해졌다. 목업이랑 점점 멀어졌다. 몇 번을 다시 시도해도 마찬가지였다.</p>
-      <p>정밀한 UI 디자인, 이거 하나가 안 됐다.</p>
+      <p>이 실전용 프레임을 아군·적군 로스터의 최하단 배경으로 시험 배치하고, 기존에 있던 파란색/적갈색 헤더 배경판은 걷어냈다. 대신 HeaderIcon과 HeaderLabel은 독립된 UI 노드로 그대로 남겨뒀다 — 프레임이 시각적 배경을 맡고, 헤더 요소는 별도로 움직일 수 있게 구조를 나눈 것이다.</p>
+      <p>프레임을 새로 깔고 나니 예상 못 한 문제가 하나 나왔다. 현재 행동 중인 장수를 강조해주던 카드 테두리가 안 보이게 된 것. 원인을 먼저 짚어야 했다 — 새 프레임 때문에 테두리 대비가 묻힌 건지, 아니면 원래 있던 선택 스타일 연결 자체가 끊긴 건지. 새 효과를 임의로 만드는 대신, 원래 존재했던 "행동 장수 강조" 계약을 찾아서 복원하는 방향으로 고쳤다.</p>
 
-      <h3>두려움의 정체</h3>
-      <p>처음엔 "채코치가 잘 못 만드는구나" 싶었다. 근데 파고들어보니 그게 아니었다. <strong>애초에 "완성된 화면 한 장을 통째로 그려달라"는 요청 자체가 이미지 생성 AI한테는 불가능한 요청</strong>이었다.</p>
-      <p>생각해보면 당연했다. 기세 게이지의 정확한 수치, 병력 숫자, 그리드 정렬 — 이런 "정보"는 그림으로 그려서 매번 똑같이 재현할 수 있는 게 아니다. AI가 잘하는 건 배경이나 캐릭터 같은 "그림"이지, 숫자나 정렬 같은 "정보"가 아니었다.</p>
-      <p>근데 이 사실을 알았다고 두려움이 바로 사라지진 않았다. 오히려 더 무서워졌다. "이게 원리적으로 안 되는 거면, 상용 게임 수준의 UI는 영영 못 만드는 거 아닌가?" 삼국WAR로 스팀 얼리액세스까지 가겠다는 목표를 세워놓고, 화면 하나 제대로 못 만든다는 사실 앞에서 며칠간 계속 흔들렸다.</p>
-
-      <h3>"가능한가"부터 다시 물었다</h3>
-      <p>좌절한 채로 멈추는 대신, 질문을 바꿨다. "왜 안 됐는가"에서 "그럼 정말 가능하기는 한가"로.</p>
-      <p>답은 의외로 명확했다. <strong>가능했다.</strong> 다만 순서가 틀렸을 뿐이었다.</p>
-      <p>화면을 뜯어보면 사실 두 종류의 요소가 섞여 있다.</p>
-      <ul>
-        <li>배경, 캐릭터 초상화, 프레임 장식 같은 <strong>그림 요소</strong> — 이미지 생성 AI가 맡아야 하는 것</li>
-        <li>게이지, 숫자, 텍스트, 그리드 같은 <strong>정보 요소</strong> — 코드가 조립해야 하는 것</li>
-      </ul>
-      <p>이 둘을 나누지 않고 "완성 화면"으로 뭉쳐서 요청한 게 실패의 원인이었다. 나눠서 접근하면 될 일이었다.</p>
-
-      <h3>실측해보니 이미 절반은 와 있었다</h3>
-      <p>여기서부터는 감이 아니라 데이터로 갔다. 실제 Godot 프로젝트 파일을 열어서 확인해봤더니, 놀랍게도 <strong>HUD 구조물이 이미 다 존재하고 있었다.</strong> 기세 슬롯 10칸, 장수 로스터, 정보창, 로그창 — 다 있었다. 심지어 기세 데이터 연동 코드도 이미 짜여 있었다.</p>
-
-      <figure>
-        <img src="../assets/eastwar/hud-turn-panel-placeholder-01.png" alt="스타일 입히기 전 HUD — 프레임 없이 텍스트만 겹쳐진 상태" />
-        <figcaption>스타일 입히기 전 HUD — 프레임 없이 텍스트만 겹쳐진 상태</figcaption>
-      </figure>
-
-      <p>그럼 왜 화면이 밋밋해 보였을까. 원인은 단순했다. 스타일이 하나도 안 입혀져 있었다. 통일된 디자인 테마 파일이 없어서 대부분 패널이 기본 회색이었고, 심지어 폰트조차 이미 프로젝트에 있는데 연결이 안 되어 있었다.</p>
-      <p>즉 "새로 만들어야 할 것"은 거의 없었다. "이미 있는 것에 옷을 안 입힌 것"뿐이었다.</p>
-
-      <h3>작게, 하나씩</h3>
-      <p>여기서부터는 욕심을 버렸다. 여섯 개 부품(상단 HUD, 좌우 로스터, 하단 정보창, 버튼, 로그창)을 한꺼번에 완성하려 하지 않고, <strong>딱 하나, 상단 HUD의 폰트와 색깔부터</strong> 입혀보기로 했다.</p>
+      <h3>로스터 옆에 군기를 세우다</h3>
+      <p>아군·적군 로스터의 전장 중앙 쪽 측면에 동양식 세로 군기를 각각 독립된 이미지로 시험 배치했다.</p>
 
       <div class="fig-2col">
         <figure>
-          <img src="../assets/eastwar/hud-fullscreen-before-style-01.png" alt="전투 화면 스타일 적용 전" />
-          <figcaption>전투 화면 스타일 적용 전</figcaption>
+          <img src="../assets/eastwar/roster-banner-ally-01.png" alt="아군 군기 · 我軍" />
+          <figcaption>아군 군기 · 我軍</figcaption>
         </figure>
         <figure>
-          <img src="../assets/eastwar/hud-fullscreen-after-style-01.png" alt="전투 화면 스타일 적용 후 — 폰트와 색상 통일" />
-          <figcaption>전투 화면 스타일 적용 후 — 폰트와 색상 통일</figcaption>
+          <img src="../assets/eastwar/roster-banner-enemy-01.png" alt="적군 군기 · 敵軍" />
+          <figcaption>적군 군기 · 敵軍</figcaption>
         </figure>
       </div>
 
-      <p>결과가 나왔을 때 처음으로 확신이 들었다. 이미지 한 장 새로 안 그리고, 순수하게 폰트 연결과 색상 통일만으로도 완전히 다른 화면이 나왔다. "이 정도면 다음 단계로 가도 된다"는 판단이 처음으로 데이터에 근거해서 섰다.</p>
+      <p>기존 HeaderIcon에 있던 노란 사각형 표시는 없앴고, "아군 편성"·"적군 편성"이라는 실제 텍스트는 그대로 유지했다. 작은 변화지만, 로스터 자체가 단순한 정보창이 아니라 전장의 일부처럼 느껴지기 시작한 지점이었다.</p>
 
-      <h3>그래도 두려웠다</h3>
-      <p>여기까지 왔는데도 두려움은 완전히 가시지 않았다. 이유는 단순했다. "진짜 그림"을 넣는 단계, 즉 프레임과 장식 이미지를 실제로 화면에 앉히는 작업은 아직 한 번도 해본 적 없는 일이었다.</p>
-      <p>돌파구는 오히려 내가 가진 걸 인정하는 데서 왔다. 나는 일러스트는 못 그려도 포토샵은 다룰 줄 안다. AI가 100점을 못 뽑아줘도 내가 마무리할 수 있다는 안전망이 있다는 걸 깨닫고 나니 부담이 좀 가벼워졌다. 그리고 하나 더 — 이 배치 작업, 코드로 짜서 시키는 것보다 <strong>내가 직접 Godot 에디터에서 눈으로 보면서 하는 게 오히려 빠르다</strong>는 걸 알게 됐다. 실제로 게임 회사들도 이 단계는 사람이 엔진 안에서 직접 만진다고 한다. 낯설어서 무서웠던 그 작업이, 사실 업계 표준 방식이었다.</p>
+      <h3>초상만 남기고 접어보기</h3>
+      <p>로스터를 두 가지 모드로 쓸 수 있게 만드는 실험도 같이 했다. 상세 정보 모드와 전장 집중 모드를 아군·적군 깃발 각각에 독립 버튼으로 연결해서, 펼치면 지금처럼 프레임·텍스트·병력·병종이 다 보이고, 접으면 그것들이 전부 사라지고 장수 초상만 남는 방식이다. 접었을 때는 초상을 15~20% 정도 키워서 존재감을 유지하고, 선택된 장수는 노란 테두리를 그대로 유지하며, 사망·퇴장한 장수만 어둡게 표시한다. 이때 아군은 화면 왼쪽 끝, 적군은 오른쪽 끝으로 더 바짝 밀착시키고 군기도 초상 모드 위치에 맞춰 함께 이동시켰다. 접고 펼치는 전환은 0.3초 Tween으로 짧게. 이 실험은 어디까지나 표시 방식에 관한 것이라, 실제 전투 로직이나 Battle_Land.tscn 본체는 건드리지 않았다.</p>
 
-      <h3>가장 작은 조각부터</h3>
-      <p>여섯 부품 중에서도 제일 작고 독립적인 것 하나 — 중앙의 턴 표시 패널 하나만 먼저 해보기로 했다. "이거 하나 되면 나머지는 다 된다"는 마음으로.</p>
-      <p>채코치가 만들어준 안을 내가 포토샵으로 작업해서 좌/중/우 세 장의 프레임 이미지를 만들었다. 얼마나 정확히 대칭인지 수치로 뽑아봤다. 95.3% 일치. 눈으로 봐도 티가 안 날 수준이었다.</p>
-      <p>확인이 끝나고 나서야 실제로 Godot에 넣었다. 패널 사이 간격을 눈으로 보면서 좁혔다. 텍스트가 장식에 가려지지 않는지 확인했다. 그리고 저장, 커밋, 푸시.</p>
-
-      <h3>화면이 살아있었다</h3>
-      <p>결과 스크린샷을 받았을 때, 이게 정지된 목업이 아니라 <strong>실제로 진행 중인 전투 화면</strong>이라는 걸 알았다. 8/30턴, 실시간 병력 이동, HP 게이지까지 다 떠 있는 상태에서 새 프레임이 자연스럽게 자리 잡고 있었다.</p>
-      <p>고도엔진에서 내가 직접 2D 화면에서 조정하면서 셋으로 쪼개진 허드화면을 만지다가 이걸 하나로 그냥 넣어도 되겠다는 판단이 섰다. 그럼 대칭이나 일치여부 같은 것들을 신경 안 써도 되고, 이미지 배경 위에 정보들을 올려놓고 채코치에게 그림에 맞게 정보와 글자들(숫자와 글자들)을 정렬해달라고 했다.</p>
-      <p>여기서 멈추지 않고 기세 슬롯도 정사각형에서 다이아몬드 모양으로 바꿔봤다. 처음엔 의도와 다르게 둥글게 나왔는데, 그것도 나쁘지 않았다.</p>
+      <h3>하단부, 자리부터 다시 잡기</h3>
+      <p>로스터 다음은 화면 하단이었다. 전투 기록창을 실제로 기능하게 만들기 전에, 먼저 새로 만든 정사각형 배경 프레임을 테스트 씬에 배치하는 것부터 시작했다. 이번 단계에서 만든 건 딱 "프레임 추가 + 위치를 조정할 수 있는 구조"까지였다.</p>
+      <p>그 결과로 나온 게 전투기록창의 완성된 모습이다.</p>
 
       <figure>
-        <img src="../assets/eastwar/hud-turn-panel-diamond-round-01.png" alt="기세 게이지 — 둥근 다이아몬드 형태" />
-        <figcaption>기세 게이지 — 둥근 다이아몬드 형태</figcaption>
+        <img src="../assets/eastwar/battle-log-panel-01.png" alt="전투 기록창 완성 — 적군 턴 · 장비 접근 · 장비 대기 · 아군 턴 복귀" />
+        <figcaption>전투 기록창 완성 — 적군 턴 · 장비 접근 · 장비 대기 · 아군 턴 복귀</figcaption>
       </figure>
 
-      <p>다시 시도해서 진짜 날카로운 다이아몬드가 나왔을 때, 둘을 놓고 비교해서 최종 선택을 했다.</p>
+      <h3>화면 아래를 정리하고, 턴 전환을 가볍게</h3>
+      <p>하단부에는 원래 InteractionGuideHud라는 긴 안내바가 있었는데, 턴이 바뀔 때 "아군 턴 / 적군 턴" 문구가 커졌다 작아지는 알림 연출로 바꾸면서 이 안내바 자체를 없앴다. 처음엔 중앙에 군기와 함께 "아군 턴 / 적군 턴" 텍스트를 크게 띄우는 연출을 시도했는데, 화면이 조잡해 보여서 방향을 바꿨다.</p>
+      <p>최종적으로는 이미 로스터 옆에 세워둔 아군·적군 군기를 그대로 활용하기로 했다. 해당 진영의 턴이 시작될 때, 그 자리에 있는 군기가 약 1.5배로 커졌다가 원래 크기로 돌아오는 짧은 pulse 연출 하나만 남겼다. 새로운 UI 요소를 추가하는 대신, 이미 화면에 있는 요소를 활용해서 정보를 전달하는 쪽을 택한 것이다.</p>
 
-      <figure>
-        <img src="../assets/eastwar/hud-turn-panel-diamond-final-01.png" alt="기세 게이지 — 최종 채택된 날카로운 다이아몬드 형태" />
-        <figcaption>기세 게이지 — 최종 채택된 날카로운 다이아몬드 형태</figcaption>
-      </figure>
-
-      <p>정답을 미리 정해두지 않고, 나온 결과를 보면서 판단하는 것 — 이것도 자연스러운 과정의 일부였다.</p>
-
-      <h3>진짜로 얻은 것</h3>
-      <p>돌아보면 이 이틀 동안 얻은 건 예쁜 HUD 하나가 아니었다. <strong>재사용 가능한 제작 공식</strong>을 찾은 거였다.</p>
-
-      <pre><code>디자인 결정 (AI 코치)
-↓
-포토샵을 가지고 이미지 미세조정 및 고도엔진 2D 화면에서 배치 감각 조정 (사람)
-↓
-구현·실행·검증·캡처 (코딩 AI)
-↓
-Git 기준점 보존</code></pre>
-
-      <p>이 네 단계는 하나라도 빠지면 반드시 예전 실패가 재발한다는 걸 이제는 안다. AI 혼자 완성 화면을 그리려 하면 실패하고, 사람이 감각으로 판단해야 할 지점(여백, 형태 선택, 톤)을 AI에게 맡기면 어긋나고, 코드만 고치고 실제 화면을 확인 안 하면 "아마 될 겁니다"의 함정에 빠진다. 넷을 각자 잘하는 자리에 놓았을 때만 제대로 굴러갔다.</p>
-
-      <h3>두려움 다음에 오는 것</h3>
-      <p>이틀 전엔 "이게 안 되면 상용화의 꿈이 물거품 되는 거 아닐까" 하는 생각에 크게 흔들렸다. 지금 돌아보면, 그 두려움은 능력이 부족하다는 신호가 아니라 그냥 처음 겪는 일 앞에서 누구나 느끼는 감정이었다.</p>
-      <p>고도엔진을 처음 배울 때도, 2만 줄 넘는 파일을 마주했을 때도 똑같았다. 그때마다 방법은 같았다. 멈추지 않고, 원인을 파고들고, 작게 쪼개서, 하나씩 검증하면서 나아가는 것.</p>
-      <p>삼국WAR을 만들면서 이런 순간은 앞으로도 또 올 것이다. 그때마다 이 이틀을 기억하려 한다. 안 될 것 같았던 것도, 결국 됐다.</p>
+      <h3>앞으로</h3>
+      <p>로스터 프레임과 군기, 전투기록창까지 하단부의 뼈대가 갖춰졌다. 다음은 로스터 접기/펼치기 모드를 실제로 완성하는 것과, 턴 전환 pulse 연출을 실전 전투에 붙이는 작업이 남았다.</p>
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-030.html" class="log-nav__prev">
+      <a href="eastwar-devlog-031.html" class="log-nav__prev">
         <span class="log-nav__label">이전</span>
-        <span class="log-nav__title">← Dev Log #030</span>
+        <span class="log-nav__title">← Dev Log #031</span>
       </a>
-      <a href="eastwar-devlog-032.html" class="log-nav__next">
-        <span class="log-nav__label">다음</span>
-        <span class="log-nav__title">Dev Log #032 →</span>
+      <a href="eastwar.html" class="log-nav__next">
+        <span class="log-nav__label">목록</span>
+        <span class="log-nav__title">목록으로 →</span>
       </a>
     </div>
 
@@ -317,7 +267,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '031');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '032');
 </script>
 </body>
 </html>

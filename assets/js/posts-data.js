@@ -11,6 +11,13 @@
       date: '2026-08-09', dl: '2026 · 08 · 09'
     },
     {
+      url: 'make/eastwar-devlog-032.html',
+      catKey: 'eastwar', cat: 'Architect Notes',
+      title: '로스터에 깃발이 꽂혔다',
+      sub: '프레임·군기·전투기록, 전투 UI 완성도가 쌓이는 중',
+      date: '2026-08-08', dl: '2026 · 08 · 08'
+    },
+    {
       url: 'posts/think/morning-word-021.html',
       catKey: 'morning-word', cat: 'Morning Word',
       title: '씨를 뿌린 계절에서 열매를 거두는 계절로',
