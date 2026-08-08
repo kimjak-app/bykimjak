@@ -1,2 +1,3 @@
 User-agent: *
 Disallow: /posts/think/morning-word-022.html
+Disallow: /posts/think/morning-word-023.html
