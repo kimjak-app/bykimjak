@@ -158,6 +158,11 @@
       num: '031', date: '2026 · 08 · 02',
       ko: { href: 'eastwar-devlog-031.html',    title: '그림 한 장이 왜 안 됐을까',                 sub: '삼국WAR 전투 UI, 이틀의 기록' },
       en: { href: 'eastwar-devlog-031-en.html', title: "Why Couldn't a Single Image Just Work?",    sub: "Two Days on EASTWAR's Battle UI" }
+    },
+    {
+      num: '032', date: '2026 · 08 · 08',
+      ko: { href: 'eastwar-devlog-032.html',    title: '로스터에 깃발이 꽂혔다',                    sub: '프레임·군기·전투기록, 전투 UI 완성도가 쌓이는 중' },
+      en: { href: 'eastwar-devlog-032-en.html', title: 'Banners Now Fly Over the Roster',           sub: 'Frames, Banners, and Battle Logs — Battle UI Polish Keeps Building' }
     }
   ];
 
