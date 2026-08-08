@@ -201,6 +201,12 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <p>Laying down the new frame surfaced an unexpected issue: the border highlight that used to mark the currently acting general disappeared. The cause needed identifying first — was the new frame just burying the border contrast, or had the original selection-style binding actually broken? Rather than inventing a new effect, the fix restored the original "highlight the acting general" contract that had existed before.</p>
 
       <h3>Raising Banners Beside the Roster</h3>
+
+      <figure>
+        <img src="../assets/eastwar/roster-full-final-01.png" alt="Finished ally roster" />
+        <figcaption>Finished ally roster — frame, banner, and general cards fully applied</figcaption>
+      </figure>
+
       <p>East Asian-style vertical war banners got test-placed as independent images on the battlefield-facing side of both the ally and enemy rosters.</p>
 
       <div class="fig-2col">
@@ -218,6 +224,11 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
       <h3>Folding Down to Just the Portrait</h3>
       <p>An experiment ran alongside this to let the roster switch between two modes. Detailed-info mode and battlefield-focus mode each got wired to an independent button on the ally and enemy banners: expanded, everything shows exactly as it does now — frame, text, troops, unit type; collapsed, all of that disappears and only the general's portrait remains. In collapsed mode, portraits scale up roughly 15-20% to preserve presence, the selected general keeps its yellow border, and only dead or withdrawn generals dim. Ally portraits pull in tighter to the screen's left edge and enemy portraits to the right, with the banners moving along to match the collapsed-mode position. The collapse/expand transition runs on a short 0.3-second tween. This experiment was purely about presentation — actual battle logic and Battle_Land.tscn itself stayed untouched.</p>
+
+      <figure>
+        <img src="../assets/eastwar/roster-collapsed-portrait-01.png" alt="Collapsed roster — battlefield-focus mode" />
+        <figcaption>Collapsed roster — battlefield-focus mode showing only the banner and general portrait</figcaption>
+      </figure>
 
       <h3>Resetting the Bottom of the Screen</h3>
       <p>After the roster came the bottom of the screen. Before making the battle log panel actually functional, the first step was simply placing a newly made square background frame into the test scene. This stage only built the "add the frame + make its position adjustable" structure — nothing more.</p>
