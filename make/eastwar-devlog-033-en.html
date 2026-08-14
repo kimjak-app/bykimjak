@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR Dev Log #032 — Banners Now Fly Over the Roster · byKimjak</title>
+<title>EASTWAR Dev Log #033 — The Last Pieces of the Battle HUD · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -85,7 +85,9 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 .devlog__body figure figcaption{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
 .devlog__body .fig-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0}
 .devlog__body .fig-2col figure{margin:0}
-@media(max-width:640px){.devlog__body .fig-2col{grid-template-columns:1fr}}
+.devlog__body .fig-4col{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:32px 0}
+.devlog__body .fig-4col figure{margin:0}
+@media(max-width:640px){.devlog__body .fig-2col{grid-template-columns:1fr}.devlog__body .fig-4col{grid-template-columns:repeat(2,1fr)}}
 .devlog__body .dialogue{border-left:2px solid var(--rule);margin:2em 0;padding:0 0 0 24px}
 .devlog__body .dialogue p{margin:0 0 1em;font-size:.95em;color:var(--ink-2)}
 .devlog__body .dialogue p:last-child{margin-bottom:0}
@@ -164,10 +166,10 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar-en.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #032</span>
+      <span>Dev Log #033</span>
     </div>
     <div class="lang-switch rev">
-      <a href="eastwar-devlog-032.html" class="lang-other">🇰🇷 한국어</a>
+      <a href="eastwar-devlog-033.html" class="lang-other">🇰🇷 한국어</a>
       <span class="lang-sep">|</span>
       <span class="lang-current">🇺🇸 English</span>
     </div>
@@ -178,83 +180,107 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-032">
+  <article class="devlog" id="log-033">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #032</span>
-      <h1>Banners Now Fly Over the Roster</h1>
-      <h2>Frames, Banners, and Battle Logs — Battle UI Polish Keeps Building</h2>
-      <span class="log-date">August 8, 2026</span>
+      <span class="log-num">Dev Log · #033</span>
+      <h1>The Last Pieces of the Battle HUD</h1>
+      <h2>The Supply Panel, Center Info HUD, and a First Complete Layout</h2>
+      <span class="log-date">August 14, 2026</span>
 
       <hr />
-      <h3>Rebuilding the Roster Header First</h3>
-      <p>The last post covered the first styling pass on the central HUD and roster window. This time, the work moved into the actual data-driven roster components — AllyRosterHud and EnemyRosterHud — restructuring them from the inside. A new header structure got added to the top of the roster, and the existing 5 general cards got repositioned below it.</p>
-
-      <h3>One Solid Frame to Wrap It All</h3>
-      <p>The spec for the full roster panel frame got locked: 270×524px, transparent PNG.</p>
-
-      <figure>
-        <img src="../assets/eastwar/roster-panel-frame-01.png" alt="Roster full-panel frame — 270×524px transparent PNG" />
-        <figcaption>Roster full-panel frame — 270×524px transparent PNG</figcaption>
-      </figure>
-
-      <p>This production-ready frame got test-placed as the bottom-most background for both the ally and enemy rosters, and the old blue/maroon header background plates got removed. The HeaderIcon and HeaderLabel, though, stayed as independent UI nodes — splitting the structure so the frame handles the visual background while header elements can still move independently.</p>
-      <p>Laying down the new frame surfaced an unexpected issue: the border highlight that used to mark the currently acting general disappeared. The cause needed identifying first — was the new frame just burying the border contrast, or had the original selection-style binding actually broken? Rather than inventing a new effect, the fix restored the original "highlight the acting general" contract that had existed before.</p>
-
-      <h3>Raising Banners Beside the Roster</h3>
+      <h3>Measuring the Width Before the Numbers Break</h3>
+      <p>With the roster, momentum bar, and battle log panel all in place, next up was the battlefield supply panel. This stage wasn't about wiring in real functionality — it was purely "layout practice for design." The actual world-map-to-battle runtime supply data handler, T02BattleSupplyPanel, stayed untouched; a fully separate, test-only mock HUD got built instead.</p>
+      <p>Labels came first. Each row follows an [icon] + item name + number format, kept to short fixed labels — Food, Salt, Consumption, Duration — instead of longer phrasing like "consumption per turn" or "turns sustainable."</p>
+      <p>The real substance came next: designing the layout width around the <strong>maximum possible digit count</strong>, not the numbers currently on screen. The standard set: Food and Salt up to 99999 (5 digits), Consumption up to 9999 (4 digits), Duration up to 999 turns (3 digits + "turns") — all without breaking the layout. If the width were sized to match today's 3-digit numbers, the layout would collapse the moment the game grows and those numbers get bigger. So the structure was built to let QA actually plug in these maximum values and verify against them.</p>
 
       <figure>
-        <img src="../assets/eastwar/roster-full-final-01.png" alt="Finished ally roster" />
-        <figcaption>Finished ally roster — frame, banner, and general cards fully applied</figcaption>
+        <img src="../assets/eastwar/battle-supply-panel-01.png" alt="Battlefield supply panel — ally/enemy Food, Salt, Consumption, Duration" />
+        <figcaption>Battlefield supply panel — ally/enemy Food, Salt, Consumption, Duration</figcaption>
       </figure>
 
-      <p>East Asian-style vertical war banners got test-placed as independent images on the battlefield-facing side of both the ally and enemy rosters.</p>
+      <h3>The Same Rule for the Enemy Side</h3>
+      <p>The "highlight the currently acting general" rule that already existed on the ally roster got applied identically to the enemy side. Only the card of the currently acting enemy general gets highlighted, with a roughly 2px gold border and a soft tan/gold-brown background tint, while text, portrait, and unit-type info stay unchanged. A strong pure-red glow got ruled out — trying to make it look threatening risked making the screen look messy instead.</p>
 
-      <div class="fig-2col">
+      <h3>The Skeleton of the Center-Bottom Info Panel</h3>
+      <p>Next came the "currently acting general" info panel meant for the bottom center of the screen. Layout came first:</p>
+      <ul>
+        <li><strong>Portrait</strong> — a large square</li>
+        <li><strong>General info</strong> — name, unit-type square + label, troops/wounded, Leadership/Martial/Intelligence icons + numbers, unique skill square + name + short effect description</li>
+        <li><strong>Status info</strong> — icon + effect name + remaining turns shown fully across multiple lines, with hover for a detailed description</li>
+        <li><strong>Terrain</strong> — a square for terrain art, terrain name, terrain effects to come later</li>
+      </ul>
+      <p>The "portrait" here is a different spec from the small face crops used in the roster. Roster portraits are small squares sitting inside a card, but the center panel's portrait takes up a large vertical space at the bottom of the screen — it needed a separate art asset with real expression and armor detail visible.</p>
+
+      <div class="fig-4col">
         <figure>
-          <img src="../assets/eastwar/roster-banner-ally-01.png" alt="Ally banner · 我軍" />
-          <figcaption>Ally banner · 我軍</figcaption>
+          <img src="../assets/eastwar/portrait-kimyusin-centerpanel-01.png" alt="Kim Yu-sin vertical portrait" />
+          <figcaption>Kim Yu-sin</figcaption>
         </figure>
         <figure>
-          <img src="../assets/eastwar/roster-banner-enemy-01.png" alt="Enemy banner · 敵軍" />
-          <figcaption>Enemy banner · 敵軍</figcaption>
+          <img src="../assets/eastwar/portrait-guanyu-centerpanel-01.png" alt="Guan Yu vertical portrait" />
+          <figcaption>Guan Yu</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/portrait-xiahoudun-centerpanel-01.png" alt="Xiahou Dun vertical portrait" />
+          <figcaption>Xiahou Dun</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/portrait-zhangfei-centerpanel-01.png" alt="Zhang Fei vertical portrait" />
+          <figcaption>Zhang Fei</figcaption>
+        </figure>
+      </div>
+      <p style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase;margin:-12px 0 32px">Vertical portraits for the center info panel — Kim Yu-sin, Guan Yu, Xiahou Dun, Zhang Fei</p>
+
+      <p>Icons for each stat got built alongside this. Martial got a sword, Intelligence got a book, Unique Skill got a scroll etched with a dragon, and Terrain (Plain) got a circular emblem depicting mountains and fields.</p>
+
+      <div class="fig-4col">
+        <figure>
+          <img src="../assets/eastwar/hud-icon-martial-01.png" alt="Martial stat icon — sword" />
+          <figcaption>Martial</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/hud-icon-intellect-01.png" alt="Intelligence stat icon — book" />
+          <figcaption>Intelligence</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/hud-icon-uniqueskill-01.png" alt="Unique Skill icon — scroll etched with a dragon" />
+          <figcaption>Unique Skill</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/hud-icon-terrain-plain-01.png" alt="Terrain (Plain) icon — circular emblem of mountains and fields" />
+          <figcaption>Terrain (Plain)</figcaption>
         </figure>
       </div>
 
-      <p>The yellow square that used to sit in the HeaderIcon got removed, while the actual text — "Ally Formation" / "Enemy Formation" — stayed as-is. A small change, but this was the point where the roster stopped feeling like a plain info panel and started feeling like part of the battlefield.</p>
+      <p>Once the layout was set, real data got wired in. Name, portrait, unit type, troops (current/max), Leadership, Martial, Intelligence, unique skill, status, and terrain each got connected to their actual data source — nothing got faked in for missing values. Wounded troop counts stayed hidden for now, with troops shown as current/max only.</p>
 
-      <h3>Folding Down to Just the Portrait</h3>
-      <p>An experiment ran alongside this to let the roster switch between two modes. Detailed-info mode and battlefield-focus mode each got wired to an independent button on the ally and enemy banners: expanded, everything shows exactly as it does now — frame, text, troops, unit type; collapsed, all of that disappears and only the general's portrait remains. In collapsed mode, portraits scale up roughly 15-20% to preserve presence, the selected general keeps its yellow border, and only dead or withdrawn generals dim. Ally portraits pull in tighter to the screen's left edge and enemy portraits to the right, with the banners moving along to match the collapsed-mode position. The collapse/expand transition runs on a short 0.3-second tween. This experiment was purely about presentation — actual battle logic and Battle_Land.tscn itself stayed untouched.</p>
+      <h3>Final Polish</h3>
+      <p>The vertical portrait got connected to the info panel, with a "Ready" flag added to the bottom-right corner of the portrait to indicate whether the unique skill is available. The center info panel got enlarged relative to the status panel, and the unique skill description got stabilized to consistently render across 2 lines. Status icon slots got fixed in place so the layout wouldn't shift when there's no value to show.</p>
+      <p>A few small cleanups happened along the way. A local variable named <code>ready</code> had been shadowing the Node's own <code>ready</code> signal, triggering a warning — renamed to <code>skill_ready</code> to clear it. <code>stretch_mode</code> got explicitly cast to <code>TextureRect.StretchMode</code> to clear an enum-related warning (confirmed via Godot's official docs that stretch_mode is indeed a StretchMode enum property). Visually, only the icon in front of the status section's title got kept, while the square icons in front of individual status rows (attack/defense boost, damage reduction, counter enhancement, etc.) got hidden below it. Ally cards that had finished acting no longer looked fully dead and blacked out — the existing Ready frame got reused as a thin blue-gray "completed" frame instead, with that treatment blocked from triggering while an attack animation is playing.</p>
 
-      <figure>
-        <img src="../assets/eastwar/roster-collapsed-portrait-01.png" alt="Collapsed roster — battlefield-focus mode" />
-        <figcaption>Collapsed roster — battlefield-focus mode showing only the banner and general portrait</figcaption>
-      </figure>
-
-      <h3>Resetting the Bottom of the Screen</h3>
-      <p>After the roster came the bottom of the screen. Before making the battle log panel actually functional, the first step was simply placing a newly made square background frame into the test scene. This stage only built the "add the frame + make its position adjustable" structure — nothing more.</p>
-      <p>That work led to the finished form of the battle log panel.</p>
+      <h3>The Finished Screen</h3>
+      <p>At this point, all the pieces making up the battle screen — roster, momentum bar, battlefield supply, battle log, and center info panel — finally sat together on one screen.</p>
 
       <figure>
-        <img src="../assets/eastwar/battle-log-panel-01.png" alt="Finished battle log panel — Enemy turn · Equipment approach · Equipment standby · Ally turn returns" />
-        <figcaption>Finished battle log panel — Enemy turn · Equipment approach · Equipment standby · Ally turn returns</figcaption>
+        <img src="../assets/eastwar/battle-hud-full-final-01.png" alt="Center-bottom HUD complete — roster, momentum bar, battlefield supply, battle log, and center info panel all integrated" />
+        <figcaption>Center-bottom HUD complete — roster, momentum bar, battlefield supply, battle log, and center info panel all integrated</figcaption>
       </figure>
 
-      <h3>Clearing the Bottom, Lightening the Turn Transition</h3>
-      <p>The bottom of the screen used to have a long InteractionGuideHud guide bar. That bar got removed entirely in favor of a notification effect where "Ally Turn / Enemy Turn" text grows and shrinks when the turn switches. The first attempt paired that text with a large central banner display, but it made the screen look cluttered, so the direction changed.</p>
-      <p>The final approach reused the ally/enemy banners already standing beside the roster. When a faction's turn begins, that banner — right where it already sits — scales up to about 1.5x and eases back down in a short pulse. Rather than adding a new UI element, the choice was to convey the information through something already on screen.</p>
+      <p>The ally roster shows Yi Sun-sin, Jeong Do-jeon, Gwon Yul, Kim Yu-sin, and Eulji Mundeok; the enemy roster shows Guan Yu, Zhang Fei, Xiahou Dun, Liu Bei, and Zhuge Liang. The center info panel is locked onto Yi Sun-sin, the currently acting general, with the Crane Wing Formation skill description and the "Plain" terrain indicator both visible in the same frame.</p>
+      <p>From "not even one HUD is working" on a Saturday night to now — roster frame, banners, battle log, battlefield supply, and the center info panel — nearly every piece that makes up the battle screen has fallen into place.</p>
 
       <h3>What's Next</h3>
-      <p>With the roster frame, banners, and battle log panel in place, the skeleton of the bottom UI is largely set. What's left is finishing the roster's collapse/expand mode for real, and wiring the turn-transition pulse effect into actual battle play.</p>
+      <p>What's left is wiring this finished layout into actual battle events — skills, status effects, combo attacks — and filling in the pieces still marked "later," like terrain effects.</p>
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-031-en.html" class="log-nav__prev">
+      <a href="eastwar-devlog-032-en.html" class="log-nav__prev">
         <span class="log-nav__label">Previous</span>
-        <span class="log-nav__title">← Dev Log #031</span>
+        <span class="log-nav__title">← Dev Log #032</span>
       </a>
-      <a href="eastwar-devlog-033-en.html" class="log-nav__next">
-        <span class="log-nav__label">Next</span>
-        <span class="log-nav__title">Dev Log #033 →</span>
+      <a href="eastwar-en.html" class="log-nav__next">
+        <span class="log-nav__label">Index</span>
+        <span class="log-nav__title">Back to index →</span>
       </a>
     </div>
 
@@ -278,7 +304,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '032');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '033');
 </script>
 </body>
 </html>

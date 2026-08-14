@@ -163,6 +163,11 @@
       num: '032', date: '2026 · 08 · 08',
       ko: { href: 'eastwar-devlog-032.html',    title: '로스터에 깃발이 꽂혔다',                    sub: '프레임·군기·전투기록, 전투 UI 완성도가 쌓이는 중' },
       en: { href: 'eastwar-devlog-032-en.html', title: 'Banners Now Fly Over the Roster',           sub: 'Frames, Banners, and Battle Logs — Battle UI Polish Keeps Building' }
+    },
+    {
+      num: '033', date: '2026 · 08 · 14',
+      ko: { href: 'eastwar-devlog-033.html',    title: '전투 HUD의 마지막 조각들',                  sub: '전장 보급창, 중앙 정보 HUD, 조판의 1차 완성' },
+      en: { href: 'eastwar-devlog-033-en.html', title: 'The Last Pieces of the Battle HUD',         sub: 'The Supply Panel, Center Info HUD, and a First Complete Layout' }
     }
   ];
 

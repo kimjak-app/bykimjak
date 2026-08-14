@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR Dev Log #032 — Banners Now Fly Over the Roster · byKimjak</title>
+<title>EASTWAR 개발일지 #033 — 전투 HUD의 마지막 조각들 · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -85,7 +85,9 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 .devlog__body figure figcaption{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
 .devlog__body .fig-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0}
 .devlog__body .fig-2col figure{margin:0}
-@media(max-width:640px){.devlog__body .fig-2col{grid-template-columns:1fr}}
+.devlog__body .fig-4col{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:32px 0}
+.devlog__body .fig-4col figure{margin:0}
+@media(max-width:640px){.devlog__body .fig-2col{grid-template-columns:1fr}.devlog__body .fig-4col{grid-template-columns:repeat(2,1fr)}}
 .devlog__body .dialogue{border-left:2px solid var(--rule);margin:2em 0;padding:0 0 0 24px}
 .devlog__body .dialogue p{margin:0 0 1em;font-size:.95em;color:var(--ink-2)}
 .devlog__body .dialogue p:last-child{margin-bottom:0}
@@ -162,99 +164,123 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     <div class="breadcrumb rev">
       <a href="../index.html">bykimjak</a>
       <span class="sep">›</span>
-      <a href="eastwar-en.html">EASTWAR</a>
+      <a href="eastwar.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #032</span>
+      <span>Dev Log #033</span>
     </div>
     <div class="lang-switch rev">
-      <a href="eastwar-devlog-032.html" class="lang-other">🇰🇷 한국어</a>
+      <span class="lang-current">🇰🇷 한국어</span>
       <span class="lang-sep">|</span>
-      <span class="lang-current">🇺🇸 English</span>
+      <a href="eastwar-devlog-033-en.html" class="lang-other">🇺🇸 English</a>
     </div>
     <h1 class="rev">EASTWAR</h1>
     <p class="sub-ko rev">이스트워 개발일지</p>
-    <p class="listing-desc rev">Strategy alt-history simulation — solo dev log</p>
+    <p class="listing-desc rev">전략 가상역사 시뮬레이션 — 1인 개발 기록</p>
   </div>
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-032">
+  <article class="devlog" id="log-033">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #032</span>
-      <h1>Banners Now Fly Over the Roster</h1>
-      <h2>Frames, Banners, and Battle Logs — Battle UI Polish Keeps Building</h2>
-      <span class="log-date">August 8, 2026</span>
+      <span class="log-num">Dev Log · #033</span>
+      <h1>전투 HUD의 마지막 조각들</h1>
+      <h2>전장 보급창, 중앙 정보 HUD, 조판의 1차 완성</h2>
+      <span class="log-date">2026년 08월 14일</span>
 
       <hr />
-      <h3>Rebuilding the Roster Header First</h3>
-      <p>The last post covered the first styling pass on the central HUD and roster window. This time, the work moved into the actual data-driven roster components — AllyRosterHud and EnemyRosterHud — restructuring them from the inside. A new header structure got added to the top of the roster, and the existing 5 general cards got repositioned below it.</p>
-
-      <h3>One Solid Frame to Wrap It All</h3>
-      <p>The spec for the full roster panel frame got locked: 270×524px, transparent PNG.</p>
-
-      <figure>
-        <img src="../assets/eastwar/roster-panel-frame-01.png" alt="Roster full-panel frame — 270×524px transparent PNG" />
-        <figcaption>Roster full-panel frame — 270×524px transparent PNG</figcaption>
-      </figure>
-
-      <p>This production-ready frame got test-placed as the bottom-most background for both the ally and enemy rosters, and the old blue/maroon header background plates got removed. The HeaderIcon and HeaderLabel, though, stayed as independent UI nodes — splitting the structure so the frame handles the visual background while header elements can still move independently.</p>
-      <p>Laying down the new frame surfaced an unexpected issue: the border highlight that used to mark the currently acting general disappeared. The cause needed identifying first — was the new frame just burying the border contrast, or had the original selection-style binding actually broken? Rather than inventing a new effect, the fix restored the original "highlight the acting general" contract that had existed before.</p>
-
-      <h3>Raising Banners Beside the Roster</h3>
+      <h3>숫자가 깨지지 않는 폭부터 잰다</h3>
+      <p>로스터와 기세바, 전투기록창까지 자리를 잡은 다음은 전장 보급창 차례였다. 이번 단계는 실제 기능을 붙이는 게 아니라 "디자인용 조판 연습"이었다 — 실제 월드맵→전투 런타임 보급 데이터를 다루는 T02BattleSupplyPanel은 건드리지 않고, 완전히 분리된 테스트 전용 mock HUD를 새로 만들었다.</p>
+      <p>먼저 라벨부터 정리했다. 각 행은 [아이콘] + 항목명 + 숫자 형식으로, "턴당 소비"나 "유지 가능 턴"처럼 길게 풀어 쓰지 않고 식량·소금·소비·유지, 이렇게 축약형으로 고정했다.</p>
+      <p>그다음이 진짜 핵심이었다. 조판 폭을 지금 보이는 숫자가 아니라 <strong>가능한 최대 자릿수</strong>를 기준으로 설계한 것. 식량과 소금은 최대 99999(5자리), 소비는 9999(4자리), 유지는 999턴(3자리+"턴")까지 들어가도 화면이 깨지지 않아야 한다는 기준을 세웠다. 지금 보이는 숫자가 세 자리라고 그 폭에 맞춰버리면, 나중에 게임이 커져서 숫자가 늘어나는 순간 레이아웃이 무너진다. 그래서 QA 단계에서 이 최대값들을 실제로 넣어보며 검증할 수 있는 구조로 짰다.</p>
 
       <figure>
-        <img src="../assets/eastwar/roster-full-final-01.png" alt="Finished ally roster" />
-        <figcaption>Finished ally roster — frame, banner, and general cards fully applied</figcaption>
+        <img src="../assets/eastwar/battle-supply-panel-01.png" alt="전장 보급 패널 — 아군/적군 식량·소금·소비·유지 표시" />
+        <figcaption>전장 보급 패널 — 아군/적군 식량·소금·소비·유지 표시</figcaption>
       </figure>
 
-      <p>East Asian-style vertical war banners got test-placed as independent images on the battlefield-facing side of both the ally and enemy rosters.</p>
+      <h3>적군도 같은 규칙으로</h3>
+      <p>아군 로스터에 있던 "현재 행동 장수 강조" 규칙을 적군 쪽에도 똑같이 적용했다. 현재 행동 중인 적장 카드 딱 하나만 약 2px 금색 테두리와 옅은 황갈색 배경으로 강조하고, 텍스트·초상·병종 정보는 그대로 유지했다. 너무 강한 순적색 glow는 쓰지 않기로 했다 — 위협적으로 보이게 하려다 화면이 조잡해지는 걸 피한 것.</p>
 
-      <div class="fig-2col">
+      <h3>중앙 하단, 정보창의 뼈대</h3>
+      <p>다음은 화면 중앙 하단에 들어갈 "현재 행동 장수" 정보창이었다. 먼저 자리부터 잡았다.</p>
+      <ul>
+        <li><strong>초상화</strong> — 큰 네모</li>
+        <li><strong>장수 정보</strong> — 이름, 병종 네모+병종명, 병력/부상, 지휘·무력·지력 아이콘+숫자, 고유특기 네모+이름+짧은 효과</li>
+        <li><strong>상태 정보</strong> — 아이콘+효과명+남은 턴을 여러 줄로 전부 표시, hover 시 상세 설명</li>
+        <li><strong>지형</strong> — 지형 이미지용 네모, 지형명, 추후 지형 효과</li>
+      </ul>
+      <p>여기서 쓰는 "초상화"는 로스터의 작은 얼굴 크롭과는 다른 규격이다. 로스터는 카드 안에 들어가는 작은 정사각형이지만, 중앙 정보창의 초상은 화면 하단을 크게 차지하는 세로형 인물 이미지라서 표정과 갑옷 디테일까지 살아있는 별도 컷을 써야 했다.</p>
+
+      <div class="fig-4col">
         <figure>
-          <img src="../assets/eastwar/roster-banner-ally-01.png" alt="Ally banner · 我軍" />
-          <figcaption>Ally banner · 我軍</figcaption>
+          <img src="../assets/eastwar/portrait-kimyusin-centerpanel-01.png" alt="김유신 세로 초상" />
+          <figcaption>김유신</figcaption>
         </figure>
         <figure>
-          <img src="../assets/eastwar/roster-banner-enemy-01.png" alt="Enemy banner · 敵軍" />
-          <figcaption>Enemy banner · 敵軍</figcaption>
+          <img src="../assets/eastwar/portrait-guanyu-centerpanel-01.png" alt="관우 세로 초상" />
+          <figcaption>관우</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/portrait-xiahoudun-centerpanel-01.png" alt="하후돈 세로 초상" />
+          <figcaption>하후돈</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/portrait-zhangfei-centerpanel-01.png" alt="장비 세로 초상" />
+          <figcaption>장비</figcaption>
+        </figure>
+      </div>
+      <p style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase;margin:-12px 0 32px">중앙 정보창용 세로 초상 예시 — 김유신·관우·하후돈·장비</p>
+
+      <p>이때 각 스탯에 쓸 아이콘도 함께 만들었다. 무력은 검, 지력은 책, 고유특기는 용이 새겨진 두루마리, 지형(평지)은 산과 들을 담은 원형 문양으로.</p>
+
+      <div class="fig-4col">
+        <figure>
+          <img src="../assets/eastwar/hud-icon-martial-01.png" alt="무력 아이콘 — 검" />
+          <figcaption>무력</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/hud-icon-intellect-01.png" alt="지력 아이콘 — 책" />
+          <figcaption>지력</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/hud-icon-uniqueskill-01.png" alt="고유특기 아이콘 — 용이 새겨진 두루마리" />
+          <figcaption>고유특기</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/hud-icon-terrain-plain-01.png" alt="지형(평지) 아이콘 — 산과 들을 담은 원형 문양" />
+          <figcaption>지형(평지)</figcaption>
         </figure>
       </div>
 
-      <p>The yellow square that used to sit in the HeaderIcon got removed, while the actual text — "Ally Formation" / "Enemy Formation" — stayed as-is. A small change, but this was the point where the roster stopped feeling like a plain info panel and started feeling like part of the battlefield.</p>
+      <p>자리를 다 잡은 다음엔 실제 데이터를 연결했다. 이름·초상·병종·병력(현재/최대)·지휘·무력·지력·고유특기·상태·지형까지 각각의 실제 소스를 정확히 찾아 연결했고, 없는 값을 억지로 채워 넣지는 않았다 — 부상 수치는 당분간 숨기고, 병력은 현재/최대만 유지하기로 했다.</p>
 
-      <h3>Folding Down to Just the Portrait</h3>
-      <p>An experiment ran alongside this to let the roster switch between two modes. Detailed-info mode and battlefield-focus mode each got wired to an independent button on the ally and enemy banners: expanded, everything shows exactly as it does now — frame, text, troops, unit type; collapsed, all of that disappears and only the general's portrait remains. In collapsed mode, portraits scale up roughly 15-20% to preserve presence, the selected general keeps its yellow border, and only dead or withdrawn generals dim. Ally portraits pull in tighter to the screen's left edge and enemy portraits to the right, with the banners moving along to match the collapsed-mode position. The collapse/expand transition runs on a short 0.3-second tween. This experiment was purely about presentation — actual battle logic and Battle_Land.tscn itself stayed untouched.</p>
+      <h3>마무리 다듬기</h3>
+      <p>세로 초상을 정보창에 연결하고, 초상 우하단에 고유특기 사용 가능 여부를 알리는 Ready 깃발을 넣었다. 중앙 정보창은 좀 더 키우고 상태창은 줄이는 비율 조정도 했고, 고유특기 설명이 2줄로 안정적으로 보이게 다듬었다. 상태 아이콘 자리도 값이 없을 때 레이아웃이 흔들리지 않도록 고정해뒀다.</p>
+      <p>이 과정에서 자잘한 정리도 같이 처리했다. <code>ready</code>라는 지역변수명이 Node의 <code>ready</code> 시그널과 겹쳐서 나던 shadowing 경고를 <code>skill_ready</code>로 이름을 바꿔 없앴고, <code>stretch_mode</code>를 <code>TextureRect.StretchMode</code>로 명시적으로 캐스팅해서 enum 관련 경고도 정리했다(Godot 공식 문서로 stretch_mode가 StretchMode enum 프로퍼티라는 것도 확인했다). 시각적으로는 상태 제목 앞 아이콘만 남기고 그 아래 개별 상태 행(공격·방어 상승, 피해 감소, 반격 강화 등) 앞의 네모 아이콘은 숨겼다. 행동을 마친 아군 카드는 완전히 꺼진 것처럼 검게 보이지 않도록, 기존 Ready 프레임을 얇은 청회색 완료 프레임으로 재활용해서 표시했다 — 이 처리는 공격 애니메이션이 재생되는 동안에는 건드리지 않게 막아뒀다.</p>
 
-      <figure>
-        <img src="../assets/eastwar/roster-collapsed-portrait-01.png" alt="Collapsed roster — battlefield-focus mode" />
-        <figcaption>Collapsed roster — battlefield-focus mode showing only the banner and general portrait</figcaption>
-      </figure>
-
-      <h3>Resetting the Bottom of the Screen</h3>
-      <p>After the roster came the bottom of the screen. Before making the battle log panel actually functional, the first step was simply placing a newly made square background frame into the test scene. This stage only built the "add the frame + make its position adjustable" structure — nothing more.</p>
-      <p>That work led to the finished form of the battle log panel.</p>
+      <h3>완성된 화면</h3>
+      <p>여기까지 오니 로스터, 기세바, 전장 보급, 전투기록, 중앙 정보창까지 전투 화면을 이루는 조각들이 전부 한 화면에 모였다.</p>
 
       <figure>
-        <img src="../assets/eastwar/battle-log-panel-01.png" alt="Finished battle log panel — Enemy turn · Equipment approach · Equipment standby · Ally turn returns" />
-        <figcaption>Finished battle log panel — Enemy turn · Equipment approach · Equipment standby · Ally turn returns</figcaption>
+        <img src="../assets/eastwar/battle-hud-full-final-01.png" alt="중앙 하단 HUD 완성 — 로스터·기세바·전장 보급·전투기록·중앙 정보창 통합 화면" />
+        <figcaption>중앙 하단 HUD 완성 — 로스터·기세바·전장 보급·전투기록·중앙 정보창 통합 화면</figcaption>
       </figure>
 
-      <h3>Clearing the Bottom, Lightening the Turn Transition</h3>
-      <p>The bottom of the screen used to have a long InteractionGuideHud guide bar. That bar got removed entirely in favor of a notification effect where "Ally Turn / Enemy Turn" text grows and shrinks when the turn switches. The first attempt paired that text with a large central banner display, but it made the screen look cluttered, so the direction changed.</p>
-      <p>The final approach reused the ally/enemy banners already standing beside the roster. When a faction's turn begins, that banner — right where it already sits — scales up to about 1.5x and eases back down in a short pulse. Rather than adding a new UI element, the choice was to convey the information through something already on screen.</p>
+      <p>아군 로스터엔 이순신·정도전·권율·김유신·을지문덕이, 적군 로스터엔 관우·장비·하후돈·유비·제갈량이 서 있다. 현재 행동 중인 이순신을 중앙 정보창이 잡아내고 있고, 옆으로는 학익진 고유특기 설명과 "평지" 지형 표시까지 한 화면 안에서 전부 확인된다.</p>
+      <p>토요일 밤 "HUD 하나도 안 되네"에서 시작해서, 로스터 프레임 → 군기 → 전투기록 → 전장 보급 → 중앙 정보창까지, 전투 화면을 이루던 조각들이 이제 거의 다 맞춰졌다.</p>
 
-      <h3>What's Next</h3>
-      <p>With the roster frame, banners, and battle log panel in place, the skeleton of the bottom UI is largely set. What's left is finishing the roster's collapse/expand mode for real, and wiring the turn-transition pulse effect into actual battle play.</p>
+      <h3>앞으로</h3>
+      <p>남은 건 이 완성된 조판에 나머지 스킬·상태이상·협동 공격 같은 실제 전투 이벤트를 연결하는 것과, 지형 효과처럼 아직 "추후"로 미뤄둔 항목들을 채우는 일이다.</p>
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-031-en.html" class="log-nav__prev">
-        <span class="log-nav__label">Previous</span>
-        <span class="log-nav__title">← Dev Log #031</span>
+      <a href="eastwar-devlog-032.html" class="log-nav__prev">
+        <span class="log-nav__label">이전</span>
+        <span class="log-nav__title">← Dev Log #032</span>
       </a>
-      <a href="eastwar-devlog-033-en.html" class="log-nav__next">
-        <span class="log-nav__label">Next</span>
-        <span class="log-nav__title">Dev Log #033 →</span>
+      <a href="eastwar.html" class="log-nav__next">
+        <span class="log-nav__label">목록</span>
+        <span class="log-nav__title">목록으로 →</span>
       </a>
     </div>
 
@@ -278,7 +304,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '032');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '033');
 </script>
 </body>
 </html>
