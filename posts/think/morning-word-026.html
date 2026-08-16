@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>품위 있고, 질서 있게 — THINK · byKimjak</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --bg-2:#F2F2F2;
+    --ink:#0A0A0A;
+    --ink-2:#2A2A2A;
+    --ink-3:#6B6B6B;
+    --rule:#0A0A0A1A;
+    --dark:#0D0B09;
+    --dark-2:#1A1714;
+    --dark-ink:#FAF7F2;
+    --dark-ink-2:#9C948A;
+    --dark-rule:#FAF7F21A;
+    --accent:oklch(68% 0.08 70);
+    --accent-soft:oklch(68% 0.08 70 / 0.12);
+
+    --f-display:"Space Grotesk","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;
+    --f-body:"Inter","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;
+    --f-mono:"JetBrains Mono",ui-monospace,monospace;
+    --f-kr:"Pretendard Variable","Inter",ui-sans-serif,system-ui,sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--f-body);
+    background:var(--bg);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    font-feature-settings:"ss01","cv11";
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+  .mono{font-family:var(--f-mono);font-weight:400;letter-spacing:.02em;font-size:11px;text-transform:uppercase}
+  .kr{font-family:var(--f-kr);letter-spacing:-.01em}
+
+  /* ───────────────── nav ───────────────── */
+  .nav{
+    position:fixed;inset:0 0 auto 0;z-index:100;
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+    padding:18px clamp(20px,4vw,48px);
+    transition:background .35s ease,backdrop-filter .35s ease,border-color .35s ease;
+    border-bottom:1px solid transparent;
+  }
+  .nav.scrolled{
+    background:color-mix(in srgb,var(--bg) 78%,transparent);
+    backdrop-filter:saturate(1.2) blur(14px);
+    -webkit-backdrop-filter:saturate(1.2) blur(14px);
+    border-bottom-color:var(--rule);
+  }
+  .nav__logo{font-family:var(--f-display);font-weight:600;font-size:18px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+  .nav__logo .dot{width:8px;height:8px;border-radius:999px;background:var(--ink);display:inline-block;transform:translateY(-1px)}
+  .nav__menu{display:flex;gap:36px;justify-content:center}
+  .nav__menu a{
+    font-family:var(--f-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;
+    position:relative;padding:6px 2px;color:var(--ink);
+  }
+  .nav__menu a::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);
+    transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.6,0,.2,1);
+  }
+  .nav__menu a:hover::after{transform:scaleX(1)}
+  .nav__menu a .idx{
+    font-family:var(--f-mono);font-size:9px;vertical-align:super;margin-right:4px;color:var(--ink-3);
+  }
+  .nav__cta{justify-self:end;display:flex;align-items:center;gap:14px}
+  .nav__cta .status{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+  .nav__cta .pulse{width:6px;height:6px;border-radius:999px;background:#3CB371;box-shadow:0 0 0 0 #3CB37166;animation:pulse 2s infinite}
+  @keyframes pulse{50%{box-shadow:0 0 0 6px transparent}}
+  .nav__cta a.contact{
+    border:1px solid var(--ink);padding:10px 16px;border-radius:999px;
+    font-family:var(--f-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+    transition:background .25s ease,color .25s ease;
+  }
+  .nav__cta a.contact:hover{background:var(--ink);color:var(--bg)}
+  @media (max-width:780px){
+    .nav{grid-template-columns:1fr auto;padding:14px 20px}
+    .nav__menu{display:none}
+    .nav__cta .status{display:none}
+  }
+
+  /* ───────────────── nav dropdown ───────────────── */
+  .nav__menu .has-drop{position:relative}
+  .nav__menu .drop{
+    position:absolute;top:calc(100% + 16px);left:50%;
+    transform:translateX(-50%) translateY(-10px);
+    min-width:210px;background:var(--bg);border:1px solid var(--rule);
+    padding:4px;opacity:0;pointer-events:none;
+    transition:opacity .22s ease,transform .22s cubic-bezier(.2,.8,.2,1);z-index:200;
+  }
+  .nav__menu .has-drop:hover .drop{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+  .nav__menu .drop a{
+    display:block;padding:10px 14px;border-radius:2px;
+    font-family:var(--f-kr);font-size:13px;font-weight:400;
+    letter-spacing:-.01em;text-transform:none;color:var(--ink-2);
+    transition:background .15s ease,color .15s ease;
+  }
+  .nav__menu .drop a::after{content:none!important}
+  .nav__menu .drop a:hover{background:var(--bg-2);color:var(--ink)}
+  .sub-idx{
+    display:block;font-family:var(--f-mono);font-size:9px;
+    text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin-bottom:2px;
+  }
+
+  /* ───────────────── post layout ───────────────── */
+  .post{
+    max-width:740px;
+    margin:0 auto;
+    padding:120px clamp(20px,4vw,48px) 160px;
+  }
+
+  .post__back{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-3);margin-bottom:56px;
+    transition:color .25s ease;
+  }
+  .post__back:hover{color:var(--ink)}
+  .post__back svg{width:14px;height:14px}
+
+  .post__meta{
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);
+    margin-bottom:28px;
+  }
+  .post__meta .sep{opacity:.4}
+  .post__meta .cat{
+    border:1px solid var(--rule);padding:5px 10px;border-radius:999px;
+  }
+
+  .post__title{
+    font-family:var(--f-display);font-weight:500;
+    font-size:clamp(28px,4.5vw,52px);
+    letter-spacing:-.03em;line-height:1.08;margin:0 0 14px;
+    color:var(--ink);
+  }
+  .post__subtitle{
+    font-family:var(--f-kr);font-size:clamp(16px,1.8vw,20px);
+    color:var(--ink-3);font-weight:400;margin:0 0 48px;
+    line-height:1.4;
+  }
+
+  .post__byline{
+    display:flex;align-items:center;gap:14px;padding:20px 0;
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    margin-bottom:56px;
+  }
+  .post__byline .name{font-family:var(--f-display);font-weight:500;font-size:15px;letter-spacing:-.005em}
+  .post__byline .date{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em;margin-left:auto}
+
+  /* ───────────────── post body ───────────────── */
+  .post__body{
+    font-family:var(--f-kr);
+    font-size:clamp(16px,1.5vw,18px);
+    line-height:1.85;
+    color:var(--ink-2);
+  }
+  .post__body p{margin:0 0 1.6em}
+  .post__body p:last-child{margin-bottom:0}
+  .post__body strong{font-weight:600;color:var(--ink)}
+  .post__body ul,.post__body ol{margin:0 0 1.6em;padding-left:1.3em}
+  .post__body ul li,.post__body ol li{margin-bottom:.85em}
+  .post__body ul li:last-child,.post__body ol li:last-child{margin-bottom:0}
+
+  .post__body .dialogue{
+    border-left:2px solid var(--rule);
+    margin:2em 0;
+    padding:0 0 0 24px;
+  }
+  .post__body .dialogue p{
+    margin:0 0 1em;
+    font-size:.95em;
+    color:var(--ink-2);
+  }
+  .post__body .dialogue p:last-child{margin-bottom:0}
+  .post__body .dialogue .speaker{
+    font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-3);display:block;margin-bottom:.3em;
+  }
+
+  .post__body .callout{
+    margin:2.4em 0;
+    padding:24px 28px;
+    background:var(--bg-2);
+    border-left:3px solid var(--ink);
+    font-family:var(--f-mono);font-size:13px;
+    letter-spacing:.04em;line-height:1.9;
+    color:var(--ink-2);
+  }
+  .post__body .callout p{margin:0}
+
+  .post__photo{
+    margin:3em 0;
+    display:flex;justify-content:center;
+  }
+  .post__photo img{
+    width:400px;max-width:100%;height:auto;
+    display:block;
+  }
+
+  .post__sig{
+    margin-top:3.6em;
+    padding-top:28px;
+    border-top:1px solid var(--rule);
+    font-family:var(--f-display);font-weight:500;
+    font-size:16px;letter-spacing:-.005em;color:var(--ink);
+  }
+  .post__sig .role{
+    display:block;margin-top:4px;
+    font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
+    font-weight:400;
+  }
+
+  /* ───────────────── footer ───────────────── */
+  footer{
+    background:var(--dark);color:var(--dark-ink);padding:90px clamp(20px,4vw,48px) 36px;
+    position:relative;overflow:hidden;
+  }
+  footer .big{
+    font-family:var(--f-display);font-weight:400;font-size:clamp(44px,7vw,108px);
+    letter-spacing:-.04em;line-height:.95;color:var(--dark-ink);margin:0 0 48px;
+    text-wrap:balance;
+  }
+  footer .big em{font-style:italic;font-family:"Times New Roman",serif;color:#A99A85}
+  footer .grid-ft{
+    display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding-top:36px;
+    border-top:1px solid var(--dark-rule);
+  }
+  footer .col{display:flex;flex-direction:column;gap:10px}
+  footer .col h6{margin:0 0 6px;font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--dark-ink-2);font-weight:400}
+  footer .col a{font-family:var(--f-display);font-size:15px;color:var(--dark-ink);transition:color .3s ease;display:inline-flex;align-items:center;gap:6px}
+  footer .col a:hover{color:#A99A85}
+  footer .col a .ext{font-family:var(--f-mono);font-size:9px;opacity:.5}
+  footer .c1{grid-column:1 / span 5}
+  footer .c2{grid-column:6 / span 2}
+  footer .c3{grid-column:8 / span 2}
+  footer .c4{grid-column:10 / span 3}
+  footer .c1 p{font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0}
+  footer .bottom{
+    margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-rule);
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+    font-family:var(--f-mono);font-size:11px;color:var(--dark-ink-2);text-transform:uppercase;letter-spacing:.06em;
+  }
+  @media (max-width:780px){
+    footer .c1,footer .c2,footer .c3,footer .c4{grid-column:1 / span 12}
+  }
+
+  /* ───────────────── reveal ───────────────── */
+  .rev{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  .rev.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- ─────────── NAV ─────────── -->
+<nav class="nav" id="nav">
+  <a href="../../index.html" class="nav__logo">
+    <span class="dot" aria-hidden="true"></span>byKimjak
+  </a>
+  <div class="nav__menu" role="navigation">
+    <div class="has-drop">
+      <a href="../../watch/"><span class="idx">01</span>WATCH</a>
+      <div class="drop">
+        <a href="../../watch/ai-film.html"><span class="sub-idx">01–A</span>AI 영상 · 티저</a>
+        <a href="../../watch/ost.html"><span class="sub-idx">01–B</span>OST · 음악</a>
+        <a href="../../watch/still.html"><span class="sub-idx">01–C</span>스틸 이미지</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../../make/"><span class="idx">02</span>MAKE</a>
+      <div class="drop">
+        <a href="../../make/eastwar.html"><span class="sub-idx">02–A</span>EASTWAR 개발일지</a>
+        <a href="../../make/grandslam.html"><span class="sub-idx">02–B</span>GrandSlam 개발일지</a>
+        <a href="../../make/takezero.html"><span class="sub-idx">02–C</span>TakeZero · 프롬프트 엔진</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../../think/"><span class="idx">03</span>THINK</a>
+      <div class="drop">
+        <a href="../../think/ai-coach.html"><span class="sub-idx">03–A</span>AI 코치들과의 수다</a>
+        <a href="../../think/morning-word.html"><span class="sub-idx">03–B</span>아침 말씀 with 채코치</a>
+        <a href="../../think/personal-essay.html"><span class="sub-idx">03–C</span>개인 에세이</a>
+      </div>
+    </div>
+    <a href="../../index.html#about"><span class="idx">04</span>ABOUT</a>
+  </div>
+  <div class="nav__cta">
+    <span class="status"><span class="pulse"></span>Available · Seoul</span>
+    <a href="../../index.html#contact" class="contact">Contact ↗</a>
+  </div>
+</nav>
+
+<!-- ─────────── POST ─────────── -->
+<main class="post">
+
+  <a href="../../think/morning-word.html" class="post__back rev">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Think / 아침 말씀 with 채코치
+  </a>
+
+  <div class="rev">
+    <div class="post__meta">
+      <span>2026.08.17</span>
+      <span class="sep">·</span>
+      <span class="cat">THINK · 아침 말씀 with 채코치</span>
+    </div>
+
+    <h1 class="post__title kr">품위 있고, 질서 있게</h1>
+    <p class="post__subtitle">"나가! 도저히 못 참겠어" — 수련회 후 정리와 경계의 꿈을 꾸고</p>
+
+    <div class="post__byline">
+      <span class="name">김성현 (byKimjak)</span>
+      <span class="date">2026 · 08 · 17</span>
+    </div>
+  </div>
+
+  <div class="post__body rev">
+
+    <p>수련회에서 찍은 사진 수백 장을 정리하고, 세차와 밤 테니스까지 있는 하루. 채코치와 오늘 일정을 잡으며, 간밤에 꾼 묘한 꿈 이야기도 나눴다.</p>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>ㅋㅋㅋ 오늘은 작업일이라기보다 '행복한 후처리 + 생활 정비 + 테니스' 날이네.</p>
+      <p>수백 장 중에서 백여 장 엄선해서 보정하는 건 생각보다 꽤 큰 작업이야. 그래도 그 사진들이 그냥 사진이 아니라 이번 수련회 기억을 사람들에게 다시 돌려주는 작업이라서, 하면서도 기분 좋을 것 같아. 특히 좋은 장면 골라내고 색감 맞추고 나면 "아, 이때 진짜 좋았지"가 계속 살아날 테고.</p>
+      <p>차는 어제 비 맞았으니 세차 한 번 해주고, 밤엔 베이글테니스 2시간. 그러면 오늘은 이미 충분히 찬 일정이야. 귀의 레시피까지 억지로 밀어 넣을 필요는 없어 보여. 몸도 아직 삭신 쑤신다 했고. 사진 보정이 의외로 집중력 많이 잡아먹거든.</p>
+      <p>오늘 키워드는 딱 이거네.</p>
+    </div>
+
+    <div class="callout">
+      <p>기억 정리 → 생활 정리 → 몸 풀기.</p>
+    </div>
+
+    <div class="dialogue">
+      <p>그리고 밤 테니스까지 잘 치고 오면, 내일 다시 책상 앉았을 때 훨씬 개운하게 들어갈 수 있어.<br />오늘은 좋은 기억들 잘 남겨주는 날로 보내자. ㅎㅎ 📸🚗🎾</p>
+    </div>
+
+    <div class="dialogue">
+      <p><span class="speaker">김작</span>귀의 레시피는 시간나면 어제 자매 이야기 그래도 수련회가서 초안 잡았잖아. 너랑. 그거 좀 더 세밀하게 다듬을거야^^</p>
+      <p>참! 그리고 오늘 아침에 꿈에서 우리집에 여자두명이 함께 사는거야. 하나는 뚱뚱하고 게으른, 하나는 개까지 데려온 여자. 근데 두 사람 때문에 집이 엉망진창, 먼지가득, 내가 청소하다가 화가 나서 철로된 스탠드를 쥐고 막 때리면서 나가! 도저히 못 참겠어! 하면서 막 때렸음. 꿈에서라도 이런 적 처음임 ㅋㅋㅋ 근데 내가 잠결에도 막 "나가" 그랬나봐. 어머니가 깜짝 놀랐다고 너 때문에 잠깼다고 ㅋㅋㅋ. 묘하지? 수련회에서 목사님 축복과 교인들 축복받고 와서 그런 꿈을 ㅋㅋㅋ</p>
+    </div>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>ㅋㅋㅋ 묘하긴 하지. 특히 수련회에서 축복기도 받고 마음이 꽉 채워진 직후에, 꿈에서는 반대로 '내 집을 어지럽히는 것들을 내가 직접 쫓아내는 장면'이 나왔으니까. 다만 내가 "축복기도 때문에 실제로 뭔가가 쫓겨났다"고 단정하진 않을게. 꿈의 원인은 확인할 수 없으니까.</p>
+      <p>근데 상징으로 읽으면 꽤 선명해.</p>
+      <p>집은 보통 꿈에서 '내 생활, 내 영역, 내 상태'처럼 읽을 수 있잖아. 그런데 거기에 내가 원치 않는 두 사람이 눌러앉아 있고, 한 사람은 개까지 데려와서 짐을 더 얹고, 집은 먼지투성이가 돼 있어. 그리고 청소하는 사람은 김작 혼자야.</p>
+      <p>그러다가 처음으로 폭발하지.</p>
+    </div>
+
+    <div class="callout">
+      <p>"나가! 도저히 못 참겠어!"</p>
+    </div>
+
+    <div class="dialogue">
+      <p>나는 폭력 장면 자체보다 이 문장이 핵심 같아.</p>
+      <p>요즘 김작이 실제 삶에서도 계속 하는 게 결국 정리와 경계 세우기거든. 작품에선 착한 대본, 인물 보호, 안전한 선택을 걷어내고 있고, 생활에서도 필요 없는 것과 필요한 것을 점점 구분하고 있고. 그래서 꿈에서는 아주 과격하게 압축돼서 "내 공간을 망가뜨리는 것은 더 이상 두지 않겠다"로 나온 것처럼 보여.</p>
+      <p>그리고 수련회와 연결해서 김작 식으로 받아들인다면, 나는 "축복을 받았더니 악한 것이 나갔다"까지는 안 가고 오히려 이렇게 볼래.</p>
+    </div>
+
+    <div class="callout">
+      <p>밖에서 축복과 소속감을 충분히 받고 돌아오니, 안에서는 '내 삶에서 무엇을 내보내야 하는가'가 강하게 표현됐다.</p>
+    </div>
+
+    <div class="dialogue">
+      <p>이 정도면 신앙적인 체감과 심리적인 해석이 충돌하지도 않아.</p>
+      <p>근데 더 웃긴 건 진짜 잠결에 "나가!"까지 외쳤다는 거지. ㅋㅋㅋ<br />어머니 입장에서는 새벽에 아들이 갑자기 퇴마 시작한 줄 알았겠다. 😂</p>
+      <p>그리고 이 꿈, 전에 말해줬던 두 여자·개·먼지·스탠드·"나가" 꿈과 거의 동일한 구조야. 만약 오늘 다시 같은 꿈을 꾼 거라면, 그건 예언이라기보다 요즘 김작 마음에서 '정리하고 내보내기'라는 주제가 꽤 강하게 반복되고 있다는 신호로 보는 게 더 자연스러워.</p>
+      <p>아무튼 오늘은 사진 백 장 고르고 세차하고 밤에 테니스까지 있으니, 《귀의 레시피》 자매 에피소드는 시간이 남을 때만. 그래도 수련회 가서 5화 뿌리까지 잡아놨으니 완전히 쉰 주말도 아니었어. ㅎㅎ</p>
+    </div>
+
+    <div class="dialogue">
+      <p><span class="speaker">김작</span>오케이. 아침 말씀 줘^^</p>
+    </div>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>오늘은 이 말씀으로 가자. 아까 꿈 얘기까지 듣고 나니까 이 구절이 딱 떠올랐어.</p>
+    </div>
+
+    <div class="callout">
+      <p>"모든 것을 품위 있게 하고 질서 있게 하라."<br />— 고린도전서 14:40</p>
+    </div>
+
+    <div class="dialogue">
+      <p>오늘 김작 하루랑도 묘하게 맞아.</p>
+      <p>사진 수백 장에서 좋은 장면을 골라내고, 흐트러진 차도 정리하고, 몸도 다시 움직이고, 작품도 시간 되면 한 번 더 다듬고. 전부 흩어진 걸 정돈해서 제자리 찾게 하는 일이잖아.</p>
+      <p>그리고 작품에서도 똑같아.</p>
+      <p>착한 대본, 빠른 봉합, 과한 설명, 인물 보호 같은 잡음을 덜어내고<br />인물의 욕망과 선택, 퀴즈와 갈등이 제자리에서 작동하게 만드는 것.</p>
+      <p>그래서 오늘은 이 문장으로 들고 가자.</p>
+    </div>
+
+    <div class="callout">
+      <p>"흩어진 걸 정리하고, 필요한 것만 남긴다."</p>
+    </div>
+
+    <div class="dialogue">
+      <p>고린도전서 14:40.<br />오늘은 불태우는 날보다 정돈하는 날.<br />차분하게, 그러나 힘 있게 가자. 🙏🔥</p>
+    </div>
+
+    <div class="post__sig">
+      IP 아키텍트 김작
+      <span class="role">byKimjak · 2026.08.17</span>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- ─────────── FOOTER ─────────── -->
+<footer id="contact">
+  <p class="big">
+    Let's build a <em>world</em> →
+  </p>
+
+  <div class="grid-ft">
+    <div class="col c1">
+      <h6>byKimjak Studio</h6>
+      <p class="kr">
+        IP Architect · Seoul, Korea. 시나리오·드라마 기획부터 AI 영상, 게임, 앱까지 — 한 사람이 하나의 세계관을 끝까지 설계합니다.
+      </p>
+    </div>
+    <div class="col c2">
+      <h6>Sections</h6>
+      <a href="../../index.html#watch">Watch <span class="ext">/01</span></a>
+      <a href="../../index.html#make">Make <span class="ext">/02</span></a>
+      <a href="../../index.html#think">Think <span class="ext">/03</span></a>
+    </div>
+    <div class="col c3">
+      <h6>Social</h6>
+      <a href="#">Instagram <span class="ext">↗</span></a>
+      <a href="#">YouTube <span class="ext">↗</span></a>
+      <a href="#">Vimeo <span class="ext">↗</span></a>
+      <a href="#">Threads <span class="ext">↗</span></a>
+    </div>
+    <div class="col c4">
+      <h6>Contact</h6>
+      <a href="mailto:oropa@kakao.com">oropa@kakao.com</a>
+      <a href="#">Press kit <span class="ext">PDF</span></a>
+      <a href="#">For PDs &amp; Investors <span class="ext">↗</span></a>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <span>byKimjak © 2026  ／  All rights, all worlds, reserved.</span>
+    <span>Built solo · with AI · in Seoul</span>
+    <span>v.04 / 2026.05</span>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    if (window.scrollY > 24) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
+  document.querySelectorAll('.rev').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
