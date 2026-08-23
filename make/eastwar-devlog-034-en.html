@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR Dev Log #033 — The Last Pieces of the Battle HUD · byKimjak</title>
+<title>EASTWAR Dev Log #034 — A Side Track for the Korea MVP, the Imjin War Project · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -166,10 +166,10 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar-en.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #033</span>
+      <span>Dev Log #034</span>
     </div>
     <div class="lang-switch rev">
-      <a href="eastwar-devlog-033.html" class="lang-other">🇰🇷 한국어</a>
+      <a href="eastwar-devlog-034.html" class="lang-other">🇰🇷 한국어</a>
       <span class="lang-sep">|</span>
       <span class="lang-current">🇺🇸 English</span>
     </div>
@@ -180,107 +180,90 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-033">
+  <article class="devlog" id="log-034">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #033</span>
-      <h1>The Last Pieces of the Battle HUD</h1>
-      <h2>The Supply Panel, Center Info HUD, and a First Complete Layout</h2>
-      <span class="log-date">August 14, 2026</span>
+      <span class="log-num">Dev Log · #034</span>
+      <h1>A Side Track for the Korea MVP — The Imjin War Project</h1>
+      <h2>From 44 Generals to the Foundation of Naval Combat</h2>
+      <span class="log-date">August 23, 2026</span>
 
       <hr />
-      <h3>Measuring the Width Before the Numbers Break</h3>
-      <p>With the roster, momentum bar, and battle log panel all in place, next up was the battlefield supply panel. This stage wasn't about wiring in real functionality — it was purely "layout practice for design." The actual world-map-to-battle runtime supply data handler, T02BattleSupplyPanel, stayed untouched; a fully separate, test-only mock HUD got built instead.</p>
-      <p>Labels came first. Each row follows an [icon] + item name + number format, kept to short fixed labels — Food, Salt, Consumption, Duration — instead of longer phrasing like "consumption per turn" or "turns sustainable."</p>
-      <p>The real substance came next: designing the layout width around the <strong>maximum possible digit count</strong>, not the numbers currently on screen. The standard set: Food and Salt up to 99999 (5 digits), Consumption up to 9999 (4 digits), Duration up to 999 turns (3 digits + "turns") — all without breaking the layout. If the width were sized to match today's 3-digit numbers, the layout would collapse the moment the game grows and those numbers get bigger. So the structure was built to let QA actually plug in these maximum values and verify against them.</p>
+      <h3>Ten New Generals</h3>
+      <p>Separate from the main Korea MVP work, 10 new generals came in for the Imjin War battle screen. On the Korean side, Yi Sun-sin and Gwon Yul were joined by Gwak Jae-u, Go Gyeong-myeong, and Kim Deok-ryeong. On the Japanese side, Konishi and Shimazu were joined by Hideyoshi, Kato, and Kuroda. The new 5 (3 Korean, 2 Japanese) already had their original PNGs and Godot import files confirmed — image assets and engine registration cleared before this stretch of work even started.</p>
 
-      <figure>
-        <img src="../assets/eastwar/battle-supply-panel-01.png" alt="Battlefield supply panel — ally/enemy Food, Salt, Consumption, Duration" />
-        <figcaption>Battlefield supply panel — ally/enemy Food, Salt, Consumption, Duration</figcaption>
-      </figure>
+      <div class="dialogue">
+        <p><span class="speaker">김작</span>Gwak Jae-u: Red-Robed General — "If you see the red flag, it's already too late!"<br />
+        Go Gyeong-myeong: Honam Righteous Army — "How could I not rise when the nation is in danger!"<br />
+        Kim Deok-ryeong: Loyal-Brave General — "The Loyal-Brave Army marches! Open the way!"</p>
+        <p><span class="speaker">김작</span>Kato Kiyomasa: Seven Spears — "In the name of the Seven Spears, I break through the front!"<br />
+        Kuroda Nagamasa: Sekigahara Stratagem — "Divide the enemy before crossing blades"<br />
+        Toyotomi Hideyoshi: The Regent's Command — "I have the realm — now, beyond the sea!"<br />
+        Konishi Yukinaga: Sea Supply Line — "As long as the sea stays open, our army does not stop!"<br />
+        Shimazu Yoshihiro: Shimazu's Withdrawal — "You thought it was a retreat? Now the counterattack begins!"</p>
+      </div>
 
-      <h3>The Same Rule for the Enemy Side</h3>
-      <p>The "highlight the currently acting general" rule that already existed on the ally roster got applied identically to the enemy side. Only the card of the currently acting enemy general gets highlighted, with a roughly 2px gold border and a soft tan/gold-brown background tint, while text, portrait, and unit-type info stay unchanged. A strong pure-red glow got ruled out — trying to make it look threatening risked making the screen look messy instead.</p>
+      <p>The cutin image spec got locked this round too: 1280×720 PNG, the character's face and upper body centered vertically, top and bottom edges allowed to crop into background art, and no name, skill name, or dialogue baked into the image itself — the same principle set during the previous 13-general work, where text always sits on a separate layer.</p>
 
-      <h3>The Skeleton of the Center-Bottom Info Panel</h3>
-      <p>Next came the "currently acting general" info panel meant for the bottom center of the screen. Layout came first:</p>
+      <h3>44 Generals, and Two Remaining Problems</h3>
+      <p>The existing 39-general baseline got promoted to 44. The new 5 got registered into actual Godot runtime data, and unique-skill verification ran across all of them. Result: 3 fully passed, 2 had their core effects working correctly but with design text that didn't quite match the actual behavior.</p>
+      <p>Go Gyeong-myeong's "Honam Righteous Army," Kato's "Seven Spears," and Kuroda's "Sekigahara Stratagem" all worked exactly as designed. The problems were Gwak Jae-u and Kim Deok-ryeong. Gwak Jae-u's "Red-Robed General" had its surround-disruption effect working fine, but the description's "repositions 1 tile after use" wasn't actually implemented — the current movement command system only fires through the retreat category, a different function from "reposition to a chosen adjacent tile." Kim Deok-ryeong's "Loyal-Brave General" had its high-power charge damage and formation break working correctly, but the description's "combines with the vanguard first-strike bonus" was the issue — Kim's primary role is Assault with Vanguard as a secondary role, and the current structure only connects the primary role to the actual combat contract, leaving the secondary role stored as text only, so the vanguard bonus wasn't actually applying.</p>
+      <p>The principle here was not to make arbitrary fixes on the spot. The call: for Kim Deok-ryeong, rather than forcing extra functionality, simply drop the "vanguard combination" line from the description and describe honestly what the skill does. For Gwak Jae-u, going the other way — since the character concept was already locked, settle for a real "choose an adjacent tile to reposition to" feature instead of compromising with a plain retreat.</p>
+
+      <h3>This Isn't the Main Korea MVP — It's a Side Story</h3>
+      <p>An important call got made here. Continuing to fill in new hero data day by day risked turning into "what are we even trying to finish here?" Looking at the structure again made this clear: the new 5's combat design data had already scaled to the 44-general system, but world-map hero generation was still only creating the previously registered generals, and initial loyalty data was still stuck at 39 generals, missing the new 5. In other words, only "combat design data expansion" was done — the "actual integration into the game" stage hadn't even started.</p>
+      <p>So the entire effort got clearly split into a separate side track: <strong>IMJIN DEMO EXTENSION</strong>. On the premise that the existing Korea MVP stays completely untouched, the goal got nailed down to one thing — seeing and selecting the new generals on the actual F5 world map through to entering Battle_Land, and separately, a dedicated F6 test that demonstrates a finished Korea-5-vs-Japan-5 battle directly.</p>
+
+      <p>The work order got set as follows:</p>
       <ul>
-        <li><strong>Portrait</strong> — a large square</li>
-        <li><strong>General info</strong> — name, unit-type square + label, troops/wounded, Leadership/Martial/Intelligence icons + numbers, unique skill square + name + short effect description</li>
-        <li><strong>Status info</strong> — icon + effect name + remaining turns shown fully across multiple lines, with hover for a detailed description</li>
-        <li><strong>Terrain</strong> — a square for terrain art, terrain name, terrain effects to come later</li>
+        <li><strong>D0 — Normalizing the 44-general data contract</strong>: changed HeroDesignDataRegistry to expect 44 generals instead of 39, and rather than inventing new balance numbers, explicitly locked the new 5's initial_loyalty to the existing runtime fallback value of 80.</li>
+        <li><strong>D1 — Registering the new 5 on the world map</strong>: Gwak Jae-u, Go Gyeong-myeong, and Kim Deok-ryeong went to Hanseong; Kato and Kuroda went to Osaka. The existing Shimazu and Konishi stayed put in the Kyushu region — the principle was not to disturb existing world-map settings. The new 5 only got their identity registered; stats, unit type, and unique skills stayed driven by the already-generated 44-general data, which overwrites through as designed.</li>
+        <li><strong>D2 — From clicking a general to entering Battle_Land</strong>: a welcome result showed up here. The battle side wasn't a structure that hardcoded specific hero names to pass through — it already worked generically off hero_id. That meant zero new handoff code was needed for the new 5; the audit passed through with no modification required.</li>
+        <li><strong>D3 — Preserve Test1, build Test2 fresh</strong>: the existing Korea-vs-China test scene stayed untouched, and a new scene, <code>Battle_UI_Production_Imjin_Test.tscn</code>, got built by inheriting from it and laying the Korea-5-vs-Japan-5 scenario on top. One principle got upheld here — Test2 was never built by cloning Test1 and evolving it separately. Design and combat logic stayed shared; only the scenario data underneath split into Korea-China (Test1) and Korea-Japan (Test2). This way, any future HUD redesign or changes to the currently-acting-general panel apply to both automatically.</li>
+        <li><strong>D4 — QA and locking the presentation</strong>: got Test2 to demonstrate everything in one pass — the 5v5 start, roster, currently-acting-general HUD, movement, attacks, unique skills, momentum changes, AI turns, battlefield supply, and battle log.</li>
       </ul>
-      <p>The "portrait" here is a different spec from the small face crops used in the roster. Roster portraits are small squares sitting inside a card, but the center panel's portrait takes up a large vertical space at the bottom of the screen — it needed a separate art asset with real expression and armor detail visible.</p>
 
-      <div class="fig-4col">
-        <figure>
-          <img src="../assets/eastwar/portrait-kimyusin-centerpanel-01.png" alt="Kim Yu-sin vertical portrait" />
-          <figcaption>Kim Yu-sin</figcaption>
-        </figure>
-        <figure>
-          <img src="../assets/eastwar/portrait-guanyu-centerpanel-01.png" alt="Guan Yu vertical portrait" />
-          <figcaption>Guan Yu</figcaption>
-        </figure>
-        <figure>
-          <img src="../assets/eastwar/portrait-xiahoudun-centerpanel-01.png" alt="Xiahou Dun vertical portrait" />
-          <figcaption>Xiahou Dun</figcaption>
-        </figure>
-        <figure>
-          <img src="../assets/eastwar/portrait-zhangfei-centerpanel-01.png" alt="Zhang Fei vertical portrait" />
-          <figcaption>Zhang Fei</figcaption>
-        </figure>
-      </div>
-      <p style="font-family:var(--f-mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase;margin:-12px 0 32px">Vertical portraits for the center info panel — Kim Yu-sin, Guan Yu, Xiahou Dun, Zhang Fei</p>
+      <p>The Test2 5v5 lineup got finalized like this:</p>
 
-      <p>Icons for each stat got built alongside this. Martial got a sword, Intelligence got a book, Unique Skill got a scroll etched with a dragon, and Terrain (Plain) got a circular emblem depicting mountains and fields.</p>
+      <table>
+        <thead>
+          <tr><th>Faction</th><th>Main 1</th><th>Main 2</th><th>Main 3</th><th>Support 1</th><th>Support 2</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>🇰🇷 Korea</td><td>Yi Sun-sin</td><td>Gwak Jae-u</td><td>Kim Deok-ryeong</td><td>Gwon Yul</td><td>Go Gyeong-myeong</td></tr>
+          <tr><td>🇯🇵 Japan</td><td>Toyotomi Hideyoshi</td><td>Shimazu Yoshihiro</td><td>Kato Kiyomasa</td><td>Konishi Yukinaga</td><td>Kuroda Nagamasa</td></tr>
+        </tbody>
+      </table>
 
-      <div class="fig-4col">
-        <figure>
-          <img src="../assets/eastwar/hud-icon-martial-01.png" alt="Martial stat icon — sword" />
-          <figcaption>Martial</figcaption>
-        </figure>
-        <figure>
-          <img src="../assets/eastwar/hud-icon-intellect-01.png" alt="Intelligence stat icon — book" />
-          <figcaption>Intelligence</figcaption>
-        </figure>
-        <figure>
-          <img src="../assets/eastwar/hud-icon-uniqueskill-01.png" alt="Unique Skill icon — scroll etched with a dragon" />
-          <figcaption>Unique Skill</figcaption>
-        </figure>
-        <figure>
-          <img src="../assets/eastwar/hud-icon-terrain-plain-01.png" alt="Terrain (Plain) icon — circular emblem of mountains and fields" />
-          <figcaption>Terrain (Plain)</figcaption>
-        </figure>
-      </div>
+      <p>Korea mixes Archer, Infantry, and Cavalry; Japan mixes Infantry, Gunner, and Cavalry — the screen ends up visually varied on both sides, and with Japanese gunners in the mix, the scene reads distinctly different from the existing Korea-China test.</p>
+      <p>The most important structural principle was keeping F5 (the actual game) and F6 (demo/QA) completely separate. WorldMap's real HERO_DATA → hero selection → battle roster payload → Battle_Land is the production path; Test2's scenario data → Battle_UI_Production_Imjin_Test is the demo/QA path. Keeping these from ever mixing was the core of it.</p>
 
-      <p>Once the layout was set, real data got wired in. Name, portrait, unit type, troops (current/max), Leadership, Martial, Intelligence, unique skill, status, and terrain each got connected to their actual data source — nothing got faked in for missing values. Wounded troop counts stayed hidden for now, with troops shown as current/max only.</p>
+      <h3>The Foundation of Naval Combat</h3>
+      <p>There's a reason this work wasn't just a demo-only expansion. The Imjin War battle screen got deliberately set up to become the cornerstone of future naval combat design.</p>
+      <p>If land battle's attack expressions are sword, arrow, cavalry charge, and gun, naval combat got mapped to five equivalents: bombardment, fire attack, gun, arrow, and ramming charge. The important part is that gun and arrow stay alive at sea too — bombardment and fire attacks before ships close in, gun and arrow at medium range, and ramming-style charges once ships fully engage. Setting it up this way means land battle's attack visual types (melee/arrow/cavalry/gun) can later swap directly for naval equivalents (cannon/fire/gun/arrow/ram).</p>
+      <p>There's one more layer on top of this: once two ships close and grapple, combat shifts into what's essentially "land combat on a ship's deck." Naval combat ends up with three layers within a single fight — long-range naval combat (bombardment, fire attack), approach/collision combat (ramming, hull collision, movement disruption, grapple checks), and post-grapple deck combat (sword, spear, arrow, gun, unique skills — a variant of land combat using the same rules). Rather than building deck combat as an entirely new engine, it got planned to reuse Battle_Land as much as possible — the differences being the map is a ship's deck instead of a castle or plain, the space is tight, obstacles are things like railings, masts, and cabins, and losing can mean the ship gets captured.</p>
+      <p>Designed this way, scenes like this become possible down the line: Yi Sun-sin's fleet closing with a Japanese fleet, arrows and gunfire exchanged, a Japanese ship grappling in, the screen transitioning, and Kim Deok-ryeong facing off against Kato Kiyomasa in hand-to-hand combat on the deck. The core advantage of this design is that the roster, turn order, currently-acting-general HUD, momentum, unique skills, and battle log systems being built right now can carry over almost entirely into deck combat. Splitting Test2 into a separate Korea-vs-Japan scenario also exists for this reason — it's set up to expand naturally later into Land Test → Naval Test → Deck Test.</p>
 
-      <h3>Final Polish</h3>
-      <p>The vertical portrait got connected to the info panel, with a "Ready" flag added to the bottom-right corner of the portrait to indicate whether the unique skill is available. The center info panel got enlarged relative to the status panel, and the unique skill description got stabilized to consistently render across 2 lines. Status icon slots got fixed in place so the layout wouldn't shift when there's no value to show.</p>
-      <p>A few small cleanups happened along the way. A local variable named <code>ready</code> had been shadowing the Node's own <code>ready</code> signal, triggering a warning — renamed to <code>skill_ready</code> to clear it. <code>stretch_mode</code> got explicitly cast to <code>TextureRect.StretchMode</code> to clear an enum-related warning (confirmed via Godot's official docs that stretch_mode is indeed a StretchMode enum property). Visually, only the icon in front of the status section's title got kept, while the square icons in front of individual status rows (attack/defense boost, damage reduction, counter enhancement, etc.) got hidden below it. Ally cards that had finished acting no longer looked fully dead and blacked out — the existing Ready frame got reused as a thin blue-gray "completed" frame instead, with that treatment blocked from triggering while an attack animation is playing.</p>
+      <h3>8 Cutins, Verified Automatically</h3>
+      <p>Cutin video work also went ahead for the new 8 (3 Korean + 5 Japanese). The process matched the earlier work on the 13: hand over the 4.01-second MP4 originals, and the pipeline handles Theora OGV optimization, filename standardization, registry linking, and playback QA end to end. All 8 passed both source and converted-file validation.</p>
+      <p>A cycling auto-QA scene (<code>Imjin_Cutin_Visual_QA.tscn</code>) got built too, so nobody has to trigger all 8 generals in battle one by one to check them. Reusing the existing cutin presentation structure, the scene auto-plays all 8 in sequence — a single F6 press runs through all of them in about 35 seconds. All that's left to check: video correctness, name correctness, skill-title text correctness, and no screen breakage.</p>
 
-      <h3>The Finished Screen</h3>
-      <p>At this point, all the pieces making up the battle screen — roster, momentum bar, battlefield supply, battle log, and center info panel — finally sat together on one screen.</p>
+      <h3>At the Merge Gate</h3>
+      <p>The entire side track ran on a separate branch (feature/imjin-d0-d1-worldmap-heroes) and a Draft PR — the principle being that main stays untouched until verification is complete. Three conditions remained: a regression playthrough confirming the existing Test1 (Korea-China) wasn't broken by this work, all three validators (world-map hero integration, Imjin Test2, cutins) passing, and a clean git diff. The diff against main confirmed 0 behind / 14 ahead, with exactly the 12 agreed-upon files changed — Test1 wasn't overwritten; Test2 was purely and cleanly added alongside it.</p>
 
-      <figure>
-        <img src="../assets/eastwar/battle-hud-full-final-01.png" alt="Center-bottom HUD complete — roster, momentum bar, battlefield supply, battle log, and center info panel all integrated" />
-        <figcaption>Center-bottom HUD complete — roster, momentum bar, battlefield supply, battle log, and center info panel all integrated</figcaption>
-      </figure>
-
-      <p>The ally roster shows Yi Sun-sin, Jeong Do-jeon, Gwon Yul, Kim Yu-sin, and Eulji Mundeok; the enemy roster shows Guan Yu, Zhang Fei, Xiahou Dun, Liu Bei, and Zhuge Liang. The center info panel is locked onto Yi Sun-sin, the currently acting general, with the Crane Wing Formation skill description and the "Plain" terrain indicator both visible in the same frame.</p>
-      <p>From "not even one HUD is working" on a Saturday night to now — roster frame, banners, battle log, battlefield supply, and the center info panel — nearly every piece that makes up the battle screen has fallen into place.</p>
-
-      <h3>What's Next</h3>
-      <p>What's left is wiring this finished layout into actual battle events — skills, status effects, combo attacks — and filling in the pieces still marked "later," like terrain effects.</p>
+      <h3>The Next Screen</h3>
+      <p>While the Imjin War side track waits on its merge, Korea MVP main-story battle UI work also started prepping its next stage on a fresh branch (feature/battle-ui-next-pass). Instead of leaving the status panel completely dead when nothing's active, it now shows a "status icon legend" when there's nothing to display, and swaps to the real status display the moment any buff or debuff actually appears.</p>
+      <p>The symbols got locked too: ▲▼ for attack, ◆ for defense, ↑↓ for movement, ◎ for confusion, ⚠ for disturbance, ※ for burn, ⊘ for action-locked. Within a 220px width, laid out 2 columns × 4 rows — attack/defense/movement/action-locked on the left, confusion/disturbance/burn on the right.</p>
+      <p>The Korea MVP main story and the Imjin War side story — sharing the same combat engine and data, growing side by side without stepping on each other.</p>
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-032-en.html" class="log-nav__prev">
+      <a href="eastwar-devlog-033-en.html" class="log-nav__prev">
         <span class="log-nav__label">Previous</span>
-        <span class="log-nav__title">← Dev Log #032</span>
+        <span class="log-nav__title">← Dev Log #033</span>
       </a>
-      <a href="eastwar-devlog-034-en.html" class="log-nav__next">
-        <span class="log-nav__label">Next</span>
-        <span class="log-nav__title">Dev Log #034 →</span>
+      <a href="eastwar-en.html" class="log-nav__next">
+        <span class="log-nav__label">Index</span>
+        <span class="log-nav__title">Back to index →</span>
       </a>
     </div>
 
@@ -304,7 +287,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '033');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '034');
 </script>
 </body>
 </html>
