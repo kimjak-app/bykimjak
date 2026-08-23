@@ -202,6 +202,20 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
         Shimazu Yoshihiro: Shimazu's Withdrawal — "You thought it was a retreat? Now the counterattack begins!"</p>
       </div>
 
+      <p>Here's the character art assembled for the 3 new Korean generals, the 2 new Japanese generals, plus the existing Shimazu.</p>
+
+      <figure style="margin:32px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <div><img src="../assets/eastwar/cutin-gwakjaeu-portrait-01.png" alt="Gwak Jae-u" style="width:100%;border-radius:2px" /><figcaption>Gwak Jae-u · Red-Robed General</figcaption></div>
+        <div><img src="../assets/eastwar/cutin-gogyeongmyeong-01.png" alt="Go Gyeong-myeong" style="width:100%;border-radius:2px" /><figcaption>Go Gyeong-myeong · Honam Righteous Army</figcaption></div>
+        <div><img src="../assets/eastwar/cutin-kimdeokryeong-01.png" alt="Kim Deok-ryeong" style="width:100%;border-radius:2px" /><figcaption>Kim Deok-ryeong · Loyal-Brave General</figcaption></div>
+      </figure>
+
+      <figure style="margin:32px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <div><img src="../assets/eastwar/cutin-toyotomi-01.png" alt="Toyotomi Hideyoshi" style="width:100%;border-radius:2px" /><figcaption>Toyotomi Hideyoshi · The Regent's Command</figcaption></div>
+        <div><img src="../assets/eastwar/cutin-shimazu-portrait-01.png" alt="Shimazu Yoshihiro" style="width:100%;border-radius:2px" /><figcaption>Shimazu Yoshihiro · Shimazu's Withdrawal</figcaption></div>
+        <div><img src="../assets/eastwar/cutin-kurodanagamasa-01.png" alt="Kuroda Nagamasa" style="width:100%;border-radius:2px" /><figcaption>Kuroda Nagamasa · Sekigahara Stratagem</figcaption></div>
+      </figure>
+
       <p>The cutin image spec got locked this round too: 1280×720 PNG, the character's face and upper body centered vertically, top and bottom edges allowed to crop into background art, and no name, skill name, or dialogue baked into the image itself — the same principle set during the previous 13-general work, where text always sits on a separate layer.</p>
 
       <h3>44 Generals, and Two Remaining Problems</h3>
@@ -245,6 +259,12 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
       <h3>8 Cutins, Verified Automatically</h3>
       <p>Cutin video work also went ahead for the new 8 (3 Korean + 5 Japanese). The process matched the earlier work on the 13: hand over the 4.01-second MP4 originals, and the pipeline handles Theora OGV optimization, filename standardization, registry linking, and playback QA end to end. All 8 passed both source and converted-file validation.</p>
+
+      <figure style="margin:32px 0;display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:520px">
+        <div><img src="../assets/eastwar/cutin-gwakjaeu-action-01.png" alt="Gwak Jae-u action cutin" style="width:100%;border-radius:2px" /></div>
+        <div><img src="../assets/eastwar/cutin-shimazu-action-01.png" alt="Shimazu action cutin" style="width:100%;border-radius:2px" /></div>
+      </figure>
+
       <p>A cycling auto-QA scene (<code>Imjin_Cutin_Visual_QA.tscn</code>) got built too, so nobody has to trigger all 8 generals in battle one by one to check them. Reusing the existing cutin presentation structure, the scene auto-plays all 8 in sequence — a single F6 press runs through all of them in about 35 seconds. All that's left to check: video correctness, name correctness, skill-title text correctness, and no screen breakage.</p>
 
       <h3>At the Merge Gate</h3>

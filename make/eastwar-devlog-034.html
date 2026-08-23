@@ -202,6 +202,20 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
         시마즈 요시히로 : 시마즈의 퇴구, "퇴각이라 생각했나? 지금부터가 반격이다!"</p>
       </div>
 
+      <p>한국 신규 3명과 일본 신규 2명, 여기에 기존 시마즈까지 캐릭터 아트가 이렇게 모였다.</p>
+
+      <figure style="margin:32px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <div><img src="../assets/eastwar/cutin-gwakjaeu-portrait-01.png" alt="곽재우" style="width:100%;border-radius:2px" /><figcaption>곽재우 · 홍의장군</figcaption></div>
+        <div><img src="../assets/eastwar/cutin-gogyeongmyeong-01.png" alt="고경명" style="width:100%;border-radius:2px" /><figcaption>고경명 · 호남의병</figcaption></div>
+        <div><img src="../assets/eastwar/cutin-kimdeokryeong-01.png" alt="김덕령" style="width:100%;border-radius:2px" /><figcaption>김덕령 · 충용장</figcaption></div>
+      </figure>
+
+      <figure style="margin:32px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <div><img src="../assets/eastwar/cutin-toyotomi-01.png" alt="도요토미 히데요시" style="width:100%;border-radius:2px" /><figcaption>도요토미 히데요시 · 태합호령</figcaption></div>
+        <div><img src="../assets/eastwar/cutin-shimazu-portrait-01.png" alt="시마즈 요시히로" style="width:100%;border-radius:2px" /><figcaption>시마즈 요시히로 · 시마즈의 퇴구</figcaption></div>
+        <div><img src="../assets/eastwar/cutin-kurodanagamasa-01.png" alt="구로다 나가마사" style="width:100%;border-radius:2px" /><figcaption>구로다 나가마사 · 세키가하라 조략</figcaption></div>
+      </figure>
+
       <p>컷인 이미지 규격도 이번에 확정했다. 1280×720 PNG, 인물의 얼굴·상반신은 세로 중앙부에 배치하고 상하단은 약간 잘려도 되는 배경으로 구성한다. 이름·고유기명·대사는 이미지 자체에 넣지 않는다 — 이건 이전 13명 작업 때 확정한 원칙 그대로, 텍스트는 항상 별도 레이어로 얹는다.</p>
 
       <h3>44명, 그리고 두 개의 남은 문제</h3>
@@ -245,6 +259,12 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
       <h3>8명의 컷인, 자동으로 확인하기</h3>
       <p>신규 8명(한국 3 + 일본 5)의 컷인 영상 작업도 진행했다. 방식은 기존 13명 때와 동일했다 — 4.01초짜리 MP4 원본만 넘기면, Theora OGV 최적화 변환부터 파일명 규격 통일, 레지스트리 연결, 재생 QA까지 전부 처리하는 파이프라인. 8명 전부 원본과 변환본 검증까지 PASS됐다.</p>
+
+      <figure style="margin:32px 0;display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:520px">
+        <div><img src="../assets/eastwar/cutin-gwakjaeu-action-01.png" alt="곽재우 액션 컷인" style="width:100%;border-radius:2px" /></div>
+        <div><img src="../assets/eastwar/cutin-shimazu-action-01.png" alt="시마즈 액션 컷인" style="width:100%;border-radius:2px" /></div>
+      </figure>
+
       <p>여기에 8명을 일일이 전투시켜 보지 않아도 되도록 자동 연속 QA 씬(<code>Imjin_Cutin_Visual_QA.tscn</code>)까지 만들었다. 기존 컷인 프리젠테이션 구조를 그대로 사용해서 8명을 순서대로 자동 재생하는 씬이라, F6 한 번 누르면 8명이 약 35초 동안 쭉 나온다. 영상·장수명·고유기 글씨·화면 깨짐만 확인하면 끝이었다.</p>
 
       <h3>병합 문 앞에서</h3>
