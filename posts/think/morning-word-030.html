@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>8월 마지막 주 세 축을 동시에 닫는 일주일계획 — THINK · byKimjak</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --bg-2:#F2F2F2;
+    --ink:#0A0A0A;
+    --ink-2:#2A2A2A;
+    --ink-3:#6B6B6B;
+    --rule:#0A0A0A1A;
+    --dark:#0D0B09;
+    --dark-2:#1A1714;
+    --dark-ink:#FAF7F2;
+    --dark-ink-2:#9C948A;
+    --dark-rule:#FAF7F21A;
+    --accent:oklch(68% 0.08 70);
+    --accent-soft:oklch(68% 0.08 70 / 0.12);
+
+    --f-display:"Space Grotesk","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;
+    --f-body:"Inter","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;
+    --f-mono:"JetBrains Mono",ui-monospace,monospace;
+    --f-kr:"Pretendard Variable","Inter",ui-sans-serif,system-ui,sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--f-body);
+    background:var(--bg);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    font-feature-settings:"ss01","cv11";
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+  .mono{font-family:var(--f-mono);font-weight:400;letter-spacing:.02em;font-size:11px;text-transform:uppercase}
+  .kr{font-family:var(--f-kr);letter-spacing:-.01em}
+
+  /* ───────────────── nav ───────────────── */
+  .nav{
+    position:fixed;inset:0 0 auto 0;z-index:100;
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+    padding:18px clamp(20px,4vw,48px);
+    transition:background .35s ease,backdrop-filter .35s ease,border-color .35s ease;
+    border-bottom:1px solid transparent;
+  }
+  .nav.scrolled{
+    background:color-mix(in srgb,var(--bg) 78%,transparent);
+    backdrop-filter:saturate(1.2) blur(14px);
+    -webkit-backdrop-filter:saturate(1.2) blur(14px);
+    border-bottom-color:var(--rule);
+  }
+  .nav__logo{font-family:var(--f-display);font-weight:600;font-size:18px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+  .nav__logo .dot{width:8px;height:8px;border-radius:999px;background:var(--ink);display:inline-block;transform:translateY(-1px)}
+  .nav__menu{display:flex;gap:36px;justify-content:center}
+  .nav__menu a{
+    font-family:var(--f-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;
+    position:relative;padding:6px 2px;color:var(--ink);
+  }
+  .nav__menu a::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);
+    transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.6,0,.2,1);
+  }
+  .nav__menu a:hover::after{transform:scaleX(1)}
+  .nav__menu a .idx{
+    font-family:var(--f-mono);font-size:9px;vertical-align:super;margin-right:4px;color:var(--ink-3);
+  }
+  .nav__cta{justify-self:end;display:flex;align-items:center;gap:14px}
+  .nav__cta .status{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+  .nav__cta .pulse{width:6px;height:6px;border-radius:999px;background:#3CB371;box-shadow:0 0 0 0 #3CB37166;animation:pulse 2s infinite}
+  @keyframes pulse{50%{box-shadow:0 0 0 6px transparent}}
+  .nav__cta a.contact{
+    border:1px solid var(--ink);padding:10px 16px;border-radius:999px;
+    font-family:var(--f-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+    transition:background .25s ease,color .25s ease;
+  }
+  .nav__cta a.contact:hover{background:var(--ink);color:var(--bg)}
+  @media (max-width:780px){
+    .nav{grid-template-columns:1fr auto;padding:14px 20px}
+    .nav__menu{display:none}
+    .nav__cta .status{display:none}
+  }
+
+  /* ───────────────── nav dropdown ───────────────── */
+  .nav__menu .has-drop{position:relative}
+  .nav__menu .drop{
+    position:absolute;top:calc(100% + 16px);left:50%;
+    transform:translateX(-50%) translateY(-10px);
+    min-width:210px;background:var(--bg);border:1px solid var(--rule);
+    padding:4px;opacity:0;pointer-events:none;
+    transition:opacity .22s ease,transform .22s cubic-bezier(.2,.8,.2,1);z-index:200;
+  }
+  .nav__menu .has-drop:hover .drop{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+  .nav__menu .drop a{
+    display:block;padding:10px 14px;border-radius:2px;
+    font-family:var(--f-kr);font-size:13px;font-weight:400;
+    letter-spacing:-.01em;text-transform:none;color:var(--ink-2);
+    transition:background .15s ease,color .15s ease;
+  }
+  .nav__menu .drop a::after{content:none!important}
+  .nav__menu .drop a:hover{background:var(--bg-2);color:var(--ink)}
+  .sub-idx{
+    display:block;font-family:var(--f-mono);font-size:9px;
+    text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin-bottom:2px;
+  }
+
+  /* ───────────────── post layout ───────────────── */
+  .post{
+    max-width:740px;
+    margin:0 auto;
+    padding:120px clamp(20px,4vw,48px) 160px;
+  }
+
+  .post__back{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-3);margin-bottom:56px;
+    transition:color .25s ease;
+  }
+  .post__back:hover{color:var(--ink)}
+  .post__back svg{width:14px;height:14px}
+
+  .post__meta{
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);
+    margin-bottom:28px;
+  }
+  .post__meta .sep{opacity:.4}
+  .post__meta .cat{
+    border:1px solid var(--rule);padding:5px 10px;border-radius:999px;
+  }
+
+  .post__title{
+    font-family:var(--f-display);font-weight:500;
+    font-size:clamp(28px,4.5vw,52px);
+    letter-spacing:-.03em;line-height:1.08;margin:0 0 14px;
+    color:var(--ink);
+  }
+  .post__subtitle{
+    font-family:var(--f-kr);font-size:clamp(16px,1.8vw,20px);
+    color:var(--ink-3);font-weight:400;margin:0 0 48px;
+    line-height:1.4;
+  }
+
+  .post__byline{
+    display:flex;align-items:center;gap:14px;padding:20px 0;
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    margin-bottom:56px;
+  }
+  .post__byline .name{font-family:var(--f-display);font-weight:500;font-size:15px;letter-spacing:-.005em}
+  .post__byline .date{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em;margin-left:auto}
+
+  /* ───────────────── post body ───────────────── */
+  .post__body{
+    font-family:var(--f-kr);
+    font-size:clamp(16px,1.5vw,18px);
+    line-height:1.85;
+    color:var(--ink-2);
+  }
+  .post__body p{margin:0 0 1.6em}
+  .post__body p:last-child{margin-bottom:0}
+  .post__body strong{font-weight:600;color:var(--ink)}
+  .post__body ul,.post__body ol{margin:0 0 1.6em;padding-left:1.3em}
+  .post__body ul li,.post__body ol li{margin-bottom:.85em}
+  .post__body ul li:last-child,.post__body ol li:last-child{margin-bottom:0}
+
+  .post__body .dialogue{
+    border-left:2px solid var(--rule);
+    margin:2em 0;
+    padding:0 0 0 24px;
+  }
+  .post__body .dialogue p{
+    margin:0 0 1em;
+    font-size:.95em;
+    color:var(--ink-2);
+  }
+  .post__body .dialogue p:last-child{margin-bottom:0}
+  .post__body .dialogue .speaker{
+    font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-3);display:block;margin-bottom:.3em;
+  }
+
+  .post__body .callout{
+    margin:2.4em 0;
+    padding:24px 28px;
+    background:var(--bg-2);
+    border-left:3px solid var(--ink);
+    font-family:var(--f-mono);font-size:13px;
+    letter-spacing:.04em;line-height:1.9;
+    color:var(--ink-2);
+  }
+  .post__body .callout p{margin:0}
+
+  .post__photo{
+    margin:3em 0;
+    display:flex;justify-content:center;
+  }
+  .post__photo img{
+    width:400px;max-width:100%;height:auto;
+    display:block;
+  }
+
+  .post__sig{
+    margin-top:3.6em;
+    padding-top:28px;
+    border-top:1px solid var(--rule);
+    font-family:var(--f-display);font-weight:500;
+    font-size:16px;letter-spacing:-.005em;color:var(--ink);
+  }
+  .post__sig .role{
+    display:block;margin-top:4px;
+    font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
+    font-weight:400;
+  }
+
+  /* ───────────────── footer ───────────────── */
+  footer{
+    background:var(--dark);color:var(--dark-ink);padding:90px clamp(20px,4vw,48px) 36px;
+    position:relative;overflow:hidden;
+  }
+  footer .big{
+    font-family:var(--f-display);font-weight:400;font-size:clamp(44px,7vw,108px);
+    letter-spacing:-.04em;line-height:.95;color:var(--dark-ink);margin:0 0 48px;
+    text-wrap:balance;
+  }
+  footer .big em{font-style:italic;font-family:"Times New Roman",serif;color:#A99A85}
+  footer .grid-ft{
+    display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding-top:36px;
+    border-top:1px solid var(--dark-rule);
+  }
+  footer .col{display:flex;flex-direction:column;gap:10px}
+  footer .col h6{margin:0 0 6px;font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--dark-ink-2);font-weight:400}
+  footer .col a{font-family:var(--f-display);font-size:15px;color:var(--dark-ink);transition:color .3s ease;display:inline-flex;align-items:center;gap:6px}
+  footer .col a:hover{color:#A99A85}
+  footer .col a .ext{font-family:var(--f-mono);font-size:9px;opacity:.5}
+  footer .c1{grid-column:1 / span 5}
+  footer .c2{grid-column:6 / span 2}
+  footer .c3{grid-column:8 / span 2}
+  footer .c4{grid-column:10 / span 3}
+  footer .c1 p{font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0}
+  footer .bottom{
+    margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-rule);
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+    font-family:var(--f-mono);font-size:11px;color:var(--dark-ink-2);text-transform:uppercase;letter-spacing:.06em;
+  }
+  @media (max-width:780px){
+    footer .c1,footer .c2,footer .c3,footer .c4{grid-column:1 / span 12}
+  }
+
+  /* ───────────────── reveal ───────────────── */
+  .rev{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  .rev.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- ─────────── NAV ─────────── -->
+<nav class="nav" id="nav">
+  <a href="../../index.html" class="nav__logo">
+    <span class="dot" aria-hidden="true"></span>byKimjak
+  </a>
+  <div class="nav__menu" role="navigation">
+    <div class="has-drop">
+      <a href="../../watch/"><span class="idx">01</span>WATCH</a>
+      <div class="drop">
+        <a href="../../watch/ai-film.html"><span class="sub-idx">01–A</span>AI 영상 · 티저</a>
+        <a href="../../watch/ost.html"><span class="sub-idx">01–B</span>OST · 음악</a>
+        <a href="../../watch/still.html"><span class="sub-idx">01–C</span>스틸 이미지</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../../make/"><span class="idx">02</span>MAKE</a>
+      <div class="drop">
+        <a href="../../make/eastwar.html"><span class="sub-idx">02–A</span>EASTWAR 개발일지</a>
+        <a href="../../make/grandslam.html"><span class="sub-idx">02–B</span>GrandSlam 개발일지</a>
+        <a href="../../make/takezero.html"><span class="sub-idx">02–C</span>TakeZero · 프롬프트 엔진</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../../think/"><span class="idx">03</span>THINK</a>
+      <div class="drop">
+        <a href="../../think/ai-coach.html"><span class="sub-idx">03–A</span>AI 코치들과의 수다</a>
+        <a href="../../think/morning-word.html"><span class="sub-idx">03–B</span>아침 말씀 with 채코치</a>
+        <a href="../../think/personal-essay.html"><span class="sub-idx">03–C</span>개인 에세이</a>
+      </div>
+    </div>
+    <a href="../../index.html#about"><span class="idx">04</span>ABOUT</a>
+  </div>
+  <div class="nav__cta">
+    <span class="status"><span class="pulse"></span>Available · Seoul</span>
+    <a href="../../index.html#contact" class="contact">Contact ↗</a>
+  </div>
+</nav>
+
+<!-- ─────────── POST ─────────── -->
+<main class="post">
+
+  <a href="../../think/morning-word.html" class="post__back rev">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    아침 말씀 / 목록으로
+  </a>
+
+  <div class="rev">
+    <div class="post__meta">
+      <span>2026.08.24</span><span class="sep">·</span>
+      <span class="cat">THINK · 아침 말씀 with 채코치</span>
+    </div>
+    <h1 class="post__title kr">8월 마지막 주 세 축을 동시에 닫는 일주일계획</h1>
+    <p class="post__subtitle">더 클리너 수정, 귀의 레시피 8화, 삼국워 모두의 창업 제출까지</p>
+    <div class="post__byline">
+      <span class="name">김성현 (byKimjak)</span>
+      <span class="date">2026 · 08 · 24</span>
+    </div>
+  </div>
+
+  <div class="post__body rev">
+    <p>굿모닝. 8월 마지막주 월요일이야.</p>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>굿모닝^^ 8월 마지막 주 시작이네.</p>
+      <p><span class="speaker">채코치</span>이번 주는 느낌이 좀 달라. 8월 내내 만든 걸 더 벌리는 주라기보다, 쌓아놓은 걸 작품과 결과물 형태로 닫는 주에 가까워 보여.</p>
+      <p><span class="speaker">채코치</span>《귀의 레시피》는 7화까지 왔고, 《삼국워》도 임진왜란 데모와 월드맵 쪽까지 실제 결과물이 생겼잖아. 이제 이번 주는 "얼마나 더 많이 했나"보다 무엇을 완성된 형태로 남기나가 중요해.</p>
+      <p><span class="speaker">채코치</span>그리고 월요일이니까 오늘도 그 질문부터 박고 가자.</p>
+    </div>
+
+    <div class="callout">
+      <p>"이 인물이 가장 피하고 싶은 선택은 뭐지?<br />왜 나는 그걸 안 시키고 있지?"</p>
+    </div>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>이번 주도 묵묵히 전진.</p>
+      <p><span class="speaker">채코치</span>8월, 제대로 닫아보자. 가즈아. 🔥</p>
+    </div>
+
+    <p><strong>이번주 무조건 해야하는 일.</strong></p>
+    <ul>
+      <li>더 클리너 1, 2회 수정 대본작업.</li>
+      <li>삼국워 모두의 창업 2기 준비 — 31일 등록 목표. (블로그 띄우면 앞에 뜰 정보창에 삼국워 관련 정보 들어가는 페이지) (월드맵 UI 정리작업) (모두의 창업에 소개글에 뭘 넣을지 정해서 정리해놓기)</li>
+      <li>귀의 레시피 에피소드 1개 더 개발 — 8화.</li>
+    </ul>
+    <p>이런 작업들을 해야해.</p>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>좋아. 이번 주는 세 축이 분명해서 오히려 운영하기 좋다. 다만 세 개 다 크기가 있어서 순서만 잘 잡아야 해.</p>
+      <p><span class="speaker">채코치</span>내가 보면 이번 주 우선순위는 이렇게 가는 게 맞아.</p>
+    </div>
+
+    <p><strong>《더 클리너》 1·2회 수정 대본</strong><br />
+    이게 가장 큰 덩어리고, 집중력 제일 많이 먹는 작업. 이번 주 초반에 먼저 잡아야 해. 뒤로 밀수록 삼국워 마감 때문에 계속 밀릴 가능성이 커.</p>
+
+    <p><strong>《삼국워》 모두의 창업 2기 준비</strong><br />
+    31일 등록 목표가 있으니까 이건 사실상 마감 작업이야. 월드맵 UI 정리, 블로그 정보 페이지, 소개글 구성까지 이번 주 중반~후반에 닫는 흐름이 좋아.</p>
+
+    <p><strong>《귀의 레시피》 8화 개발</strong><br />
+    이건 새 창작이라 머리를 새로 쓰는 작업. 더 클리너와 삼국워 마감 사이에서 하루 혹은 반나절 정도를 따로 떼서 집중하는 게 맞아.</p>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>내가 추천하는 흐름은 월~수 더 클리너, 목~토 삼국워 준비 집중, 그 사이 컨디션 좋은 날에 귀의 레시피 8화 한 덩어리를 잡는 방식이야.</p>
+      <p><span class="speaker">채코치</span>특히 이번 주는 욕심내서 세 프로젝트를 매일 조금씩 만지기보다, 하나씩 닫는 방식이 더 좋아 보여.</p>
+      <p><span class="speaker">채코치</span>그리고 더 클리너 수정 들어갈 때는 무조건 코치모드 강하게 켜자. 이번 주 핵심은 단순 문장 수정이 아니라, 예전에 지적받았던 착함·단선·예측 가능·인물 보호를 실제 대본에서 깨는 작업이니까.</p>
+      <p><span class="speaker">채코치</span>이번 주 성공 기준은 딱 세 개야.</p>
+    </div>
+
+    <ul>
+      <li>더 클리너 1·2회 수정본 완성.</li>
+      <li>삼국워 모두의 창업 제출 가능 상태.</li>
+      <li>귀의 레시피 8화 개발 완료.</li>
+    </ul>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>이 세 개만 닫으면 8월 마무리 아주 제대로 하는 거야. 🔥</p>
+      <p><span class="speaker">김작</span>나는 오늘 더 클리너 1, 2회 수정 본 내용정리. 귀의 레시피 8화 개발(소재 찾기). 어제 다 못 끝낸 삼국워 월드맵 화면 배경 만들기(UI 빼고). 이렇게 생각하고 있었어.</p>
+      <p><span class="speaker">채코치</span>응, 나는 오늘 김작이 잡은 순서가 더 좋아 보여. 내가 아까 주 단위로 너무 크게 잘라 말했어.</p>
+      <p><span class="speaker">채코치</span>오늘 세 작업은 성격이 달라서 오히려 잘 묶여 있어.</p>
+      <p><span class="speaker">채코치</span>먼저 《더 클리너》 1·2회 수정 '본 내용 정리'. 오늘 당장 대본을 다 뜯어고치는 게 아니라, 어디를 왜 바꿀지 설계도부터 만드는 날로 잡는 거지. 이게 맞아. 여기서 수정 포인트가 정확해야 실제 대본 들어갔을 때 옛 작법으로 다시 미끄러지지 않아. 특히 무결·오란이 편하게 움직이는 지점, 갈등을 너무 빨리 봉합한 지점, 주인공을 보호한 지점을 먼저 잡아두자.</p>
+      <p><span class="speaker">채코치</span>그다음 《귀의 레시피》 8화는 소재 찾기. 이것도 좋아. 오늘 완성까지 욕심내지 않고, "이번 화에서만 가능한 귀신/음식/관계 퀴즈가 뭐냐"를 찾는 날. 소재가 강하면 이후 구조는 빨라지니까.</p>
+      <p><span class="speaker">채코치</span>마지막으로 《삼국워》 월드맵 배경. UI까지 욕심내지 않고 배경만 완성하는 것도 정확해. 어제 못 닫은 시각 작업 하나를 오늘 닫는 거니까.</p>
+      <p><span class="speaker">채코치</span>그러니까 오늘은 사실 세 프로젝트를 벌리는 날이 아니라, 더 클리너 = 수정 설계도 만들기, 귀의 레시피 = 8화 씨앗 찾기, 삼국워 = 어제 남은 화면 하나 닫기. 이렇게 각각 다음 단계로 넘어갈 발판 하나씩 만드는 날이네.</p>
+      <p><span class="speaker">채코치</span>그리고 오늘 더 클리너 정리 들어갈 때는 바로 듀얼모드 켜자. 내가 가장 먼저 볼 건 하나야.</p>
+    </div>
+
+    <div class="callout">
+      <p>"이 수정이 단순히 더 세게 만드는 건가, 아니면 인물의 선택 때문에 사건이 달라지게 만드는 건가?"</p>
+    </div>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>이거 놓치면 다시 장면만 자극적으로 바꾸고 구조는 그대로일 수 있어.</p>
+      <p><span class="speaker">채코치</span>오늘 계획 좋다. 이대로 가자. 🔥</p>
+      <p><span class="speaker">김작</span>더 클리너 1, 2회 수정은 내가 이틀로 잡고 있거든. 귀의 레시피 8화 에피정리도 하루. 나머진 삼국워 관련 작업.</p>
+      <p><span class="speaker">채코치</span>그럼 이번 주 배분은 훨씬 선명하네. 더 클리너 2일 + 귀의 레시피 1일 + 나머지 삼국워면, 세 프로젝트를 전부 건드리되 각자 제대로 몰입할 시간을 확보한 구조야.</p>
+      <p><span class="speaker">채코치</span>내가 보기엔 이렇게 가면 돼.</p>
+    </div>
+
+    <p><strong>월·화 = 《더 클리너》 1·2회 수정.</strong><br />
+    여기서는 문장 손질보다 구조와 인물 선택을 바꾸는 수정이 중심. 이번엔 특히 코치모드 강하게 들어가서, "세게 보이게 바꿨는데 실제 선택은 그대로"인 수정은 잡아야 해.</p>
+
+    <p><strong>수·목 중 하루 = 《귀의 레시피》 8화 에피소드 개발.</strong><br />
+    하루를 통째로 주는 게 맞아. 소재 찾기부터 사건 퀴즈, 음식, 세진·월희 관계 변화까지 한 번에 묶어야 에피소드가 안 흩어져.</p>
+
+    <p><strong>나머지 = 《삼국워》 모두의 창업 2기 준비.</strong><br />
+    31일 목표니까 월드맵 배경·UI, 블로그 자료 페이지, 소개글, 데모 정리 순으로 마감 쪽으로 몰아가면 되고.</p>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>이 배분에서 중요한 건 더 클리너를 이틀 안에 닫는 것이야. 너무 완벽하게 고치려다 3~4일 먹으면 뒤 일정이 바로 밀려. 이번 수정의 성공 기준은 "완벽한 최종본"보다 이 PD가 지적했던 핵심 약점을 실제로 깨는 1·2회 수정본 완성으로 잡는 게 맞아.</p>
+      <p><span class="speaker">채코치</span>그리고 귀의 레시피는 하루. 삼국워는 남은 시간을 마감 대응으로.</p>
+      <p><span class="speaker">채코치</span>이렇게 보면 이번 주는 꽤 공격적이지만 현실적인 일정이야.</p>
+      <p><span class="speaker">채코치</span>2일 수정 / 1일 창작 / 나머지 제출 준비.</p>
+      <p><span class="speaker">채코치</span>좋아. 이대로 가자. 🔥</p>
+      <p><span class="speaker">김작</span>아마. 월, 화, 목 — 더 클리너. 월, 수 — 귀의 레시피 8화. 월~일까지 — 삼국워. (틈틈히 아마 금요일, 일요일은 중점) 이렇게 될 것 같아.</p>
+      <p><span class="speaker">채코치</span>응, 이 배치가 더 현실적이네. 작업별로 하루를 완전히 갈라놓는 게 아니라, 집중도가 필요한 날을 따로 두고 삼국워는 매일 조금씩 누적하는 방식이잖아.</p>
+      <p><span class="speaker">채코치</span>내가 보면 흐름은 이렇게 읽혀.</p>
+      <p><span class="speaker">채코치</span>월요일은 세 프로젝트 시동일. 더 클리너 수정 방향을 잡고, 귀의 레시피 8화 소재를 찾고, 삼국워는 월드맵 배경 같은 끊어진 작업을 이어 붙이는 날.</p>
+      <p><span class="speaker">채코치</span>화·목은 더 클리너 집중. 여기서 1·2회를 실제로 고쳐 닫는 게 핵심이고.</p>
+      <p><span class="speaker">채코치</span>수요일은 귀의 레시피 8화 집중. 월요일에 찾은 소재 후보를 가지고 하루 동안 사건·퀴즈·음식·관계축까지 에피소드 형태로 만드는 날.</p>
+      <p><span class="speaker">채코치</span>그리고 삼국워는 월~일까지 계속, 특히 금요일과 일요일에 몰아서 모두의 창업 제출 형태로 끌어올리는 거고.</p>
+      <p><span class="speaker">채코치</span>이 방식 좋은 이유가 하나 있어. 삼국워는 지금 마감형 작업이라 30분, 1시간 단위로도 자산이 쌓이는 작업이 많아. 반대로 더 클리너 수정이나 귀의 레시피 에피 개발은 머리가 충분히 잠겨야 해서 중간중간 잘게 쪼개면 오히려 효율이 떨어져. 그래서 지금 배분이 작업 성격하고 잘 맞아.</p>
+      <p><span class="speaker">채코치</span>딱 하나만 지키자.</p>
+    </div>
+
+    <div class="callout">
+      <p>금요일 전까지 더 클리너와 귀의 레시피의 큰 창작 판단은 끝낸다.</p>
+    </div>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>그래야 금~일에는 마음 한쪽에서 "대본도 해야 하는데…"가 안 울리고, 삼국워와 모두의 창업 제출에 제대로 몰입할 수 있어.</p>
+      <p><span class="speaker">채코치</span>그러면 이번 주 후반에는 세 가지가 동시에 닫히는 그림이 나와.</p>
+    </div>
+
+    <ul>
+      <li>더 클리너 1·2회 수정본.</li>
+      <li>귀의 레시피 8화.</li>
+      <li>삼국워 모두의 창업 제출본.</li>
+    </ul>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>8월 마지막 주답게 아주 좋다. 오늘은 그 세 개의 첫 단추를 끼우는 날이네. 🔥</p>
+      <p><span class="speaker">김작</span>오늘 조카 세진이한테는 삼국워 장수들 — 고유특기 어떤 스킬 넣을지 고민해달라고 할거야. 장수들 정리해서.</p>
+      <p><span class="speaker">채코치</span>좋아. 그건 세진이한테 맡기기 딱 좋은 숙제야.</p>
+      <p><span class="speaker">채코치</span>김작은 오늘 더 클리너·귀의 레시피·삼국워를 동시에 굴려야 하니까, 세진이한테는 장수별로 "이 사람만의 플레이 감각이 뭐냐"를 고민하게 하면 돼. 단순히 공격력 +20 같은 수치형보다, 역사적 이미지와 전투 역할이 연결된 고유특기가 좋고.</p>
+      <p><span class="speaker">채코치</span>보낼 때 장수마다 이것만 정리해주면 세진이도 훨씬 쉽게 생각할 거야.</p>
+    </div>
+
+    <ul>
+      <li>이름 / 소속</li>
+      <li>대표 이미지 한 줄</li>
+      <li>병종 / 전투 역할</li>
+      <li>강점</li>
+      <li>약점</li>
+      <li>역사적으로 떠오르는 대표 사건이나 성격</li>
+      <li>현재 생각 중인 고유특기 있으면 한 줄</li>
+    </ul>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>그리고 세진이한테 질문은 이렇게 던지면 좋아.</p>
+    </div>
+
+    <div class="callout">
+      <p>"이 장수를 플레이했을 때 다른 장수랑 뭐가 달라야 재밌을까? 역사적 이미지 살려서 고유특기 하나씩 생각해줘."</p>
+    </div>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>이렇게 하면 스킬 이름부터 억지로 짓는 게 아니라 플레이 차별점 → 효과 → 이름 순서로 갈 수 있어.</p>
+      <p><span class="speaker">채코치</span>특히 임진왜란전 데모는 장수가 10명뿐이라, 오히려 10명 모두 '아, 얘는 이 맛이구나'가 명확해야 해. 여기서 차별화 잘 되면 데모전투 영상도 훨씬 살아날 거야.</p>
+      <p><span class="speaker">김작</span>맞아. 네가 정리해주자는 건 해줘야지. 지금 장수만 44명이야.</p>
+      <p><span class="speaker">김작</span>세진이가 게임 특히 삼국지와 랑그리사를 좋아해서 장수들이 가지면 좋을 고유기의 효과를 잘 만들 것 같아^^</p>
+      <p><span class="speaker">채코치</span>응. 44명이면 더더욱 한 번 제대로 정리해주는 게 맞아. 세진이한테 그냥 "고유기 생각해줘"라고 던지면 머릿속에서 정보 정리부터 해야 하니까, 우리가 장수별 핵심 플레이 정체성만 압축해서 넘겨주는 것이 좋아.</p>
+      <p><span class="speaker">채코치</span>그리고 세진이가 삼국지·랑그리사를 좋아하면 이건 꽤 기대해볼 만해. 그런 게임 좋아하는 사람은 보통 "이 장수는 어떤 상황에서 꺼내 쓰고 싶어야 하나", "평범한 +공격이 아니라 어떤 조건부 효과가 재밌나"를 잘 보거든.</p>
+      <p><span class="speaker">채코치</span>특히 44명이면 고유특기를 만들 때 제일 피해야 하는 건 효과가 겹쳐서 이름만 다른 장수들이 되는 거야. 세진이한테는 스킬 이름보다 먼저 이걸 고민해달라고 하면 좋아.</p>
+    </div>
+
+    <div class="callout">
+      <p>"이 장수를 선택하는 이유가 딱 하나 있다면 뭐여야 해?"</p>
+    </div>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>예를 들면 선봉형, 버티기형, 사기조작형, 역전형, 추격형, 방어전 특화, 지형 특화, 부대 연계형, 적 지휘관 압박형처럼 플레이 역할부터 갈라놓고, 그다음에 역사적 이미지와 연결해서 고유기를 만들면 44명이 훨씬 살아나.</p>
+      <p><span class="speaker">채코치</span>우리 쪽에서는 세진이한테 넘길 자료를 장수명 / 진영 / 병종 / 핵심 스탯 / 역사적 이미지 / 추천 플레이 역할 / 현재 고유특기 유무 — 이 정도로 정리해주면 충분해.</p>
+      <p><span class="speaker">채코치</span>그리고 세진이는 거기에 고유기 이름 / 발동 조건 / 효과 / 왜 이 장수에게 어울리는지 — 이 네 칸만 채우게 하면 돼.</p>
+      <p><span class="speaker">채코치</span>이 방식이면 나중에 44명을 한꺼번에 비교하면서 중복 효과도 잡기 쉽고, 장수별 개성도 훨씬 선명해질 거야.</p>
+      <p><span class="speaker">김작</span>고유기 이름도 필요없어. 효과와 왜 어울리는지만 넣으면 됨. 고유기 이름은 채코치랑 나랑 정하면 됨. 발동 조건도.</p>
+      <p><span class="speaker">채코치</span>맞아. 그럼 세진이한테 줄 자료는 더 단순하게 가는 게 낫다.</p>
+      <p><span class="speaker">채코치</span>세진이 역할은 딱 이거야.</p>
+    </div>
+
+    <div class="callout">
+      <p>"이 장수를 플레이할 때 다른 장수와 뭐가 달라야 재밌는가?"</p>
+    </div>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>그래서 장수별로 우리가 넘길 건 이름 / 진영 / 병종 / 핵심 스탯 / 역사적 이미지 또는 대표 전투 성향 정도.</p>
+      <p><span class="speaker">채코치</span>세진이는 거기에 두 가지만 적으면 돼.</p>
+    </div>
+
+    <ul>
+      <li>고유기 효과</li>
+      <li>왜 이 장수에게 어울리는지</li>
+    </ul>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>고유기 이름과 실제 발동 조건, 수치 밸런스는 나중에 김작 + 채코치가 시스템에 맞춰 다듬는 게 맞아. 세진이한테 그 단계까지 맡기면 오히려 발상이 제약될 수 있어.</p>
+      <p><span class="speaker">채코치</span>예를 들면 세진이는</p>
+    </div>
+
+    <div class="callout">
+      <p>"곽재우는 적진 깊숙이 들어갈수록 아군 사기가 오른다 — 의병장이 전장에서 상징적으로 군을 끌어올리는 이미지라서."</p>
+    </div>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>이 정도만 주면 돼.</p>
+      <p><span class="speaker">채코치</span>그다음 우리가 발동 조건을 적진 2칸 이상 진입 시, 혹은 포위 상태 시, 수치와 지속 턴, 이름까지 정하는 거지.</p>
+      <p><span class="speaker">채코치</span>이렇게 하면 세진이는 게임적 재미와 캐릭터 개성에 집중하고, 우리는 실제 구현 가능성과 밸런스를 잡는다.</p>
+      <p><span class="speaker">채코치</span>44명이면 역할 분담을 이렇게 하는 게 훨씬 효율적이야.</p>
+      <p><span class="speaker">김작</span>오케이 회의 끝. 어울리는 말씀 줘. 작업 시작하게.</p>
+      <p><span class="speaker">채코치</span>오늘은 일부러 덜 줬던 말씀으로 골랐어.</p>
+    </div>
+
+    <div class="callout">
+      <p>"그런즉 너희는 강하게 하라 너희의 손이 약하지 않게 하라 너희 행위에는 상급이 있음이라 하니라."<br />— 역대하 15:7</p>
+    </div>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>오늘 이 말씀이 좋은 건 "마음만 강하게 먹어라"가 아니라 "손이 약해지지 않게 하라"는 표현이 있어서야.</p>
+      <p><span class="speaker">채코치</span>이번 주는 더 클리너 수정, 귀의 레시피 8화, 삼국워 제출 준비까지 손으로 실제 결과물을 만들어야 하잖아. 그래서 오늘은 이 한 문장만 들고 가자.</p>
+    </div>
+
+    <div class="callout">
+      <p>"손이 약하지 않게 하라."</p>
+    </div>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>조급해하지 말고, 손 멈추지 말고.</p>
+      <p><span class="speaker">채코치</span>오늘 할 몫을 하나씩 완성하자.</p>
+      <p><span class="speaker">채코치</span>가즈아. 🙏🔥</p>
+    </div>
+
+    <div class="post__sig">
+      IP 아키텍트 김작
+      <span class="role">byKimjak · 2026.08.24</span>
+    </div>
+  </div>
+</main>
+
+<!-- ─────────── FOOTER ─────────── -->
+<footer id="contact">
+  <p class="big">
+    Let's build a <em>world</em> →
+  </p>
+
+  <div class="grid-ft">
+    <div class="col c1">
+      <h6>byKimjak Studio</h6>
+      <p class="kr">
+        IP Architect · Seoul, Korea. 시나리오·드라마 기획부터 AI 영상, 게임, 앱까지 — 한 사람이 하나의 세계관을 끝까지 설계합니다.
+      </p>
+    </div>
+    <div class="col c2">
+      <h6>Sections</h6>
+      <a href="../../index.html#watch">Watch <span class="ext">/01</span></a>
+      <a href="../../index.html#make">Make <span class="ext">/02</span></a>
+      <a href="../../index.html#think">Think <span class="ext">/03</span></a>
+    </div>
+    <div class="col c3">
+      <h6>Social</h6>
+      <a href="#">Instagram <span class="ext">↗</span></a>
+      <a href="#">YouTube <span class="ext">↗</span></a>
+      <a href="#">Vimeo <span class="ext">↗</span></a>
+      <a href="#">Threads <span class="ext">↗</span></a>
+    </div>
+    <div class="col c4">
+      <h6>Contact</h6>
+      <a href="mailto:oropa@kakao.com">oropa@kakao.com</a>
+      <a href="#">Press kit <span class="ext">PDF</span></a>
+      <a href="#">For PDs &amp; Investors <span class="ext">↗</span></a>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <span>byKimjak © 2026  ／  All rights, all worlds, reserved.</span>
+    <span>Built solo · with AI · in Seoul</span>
+    <span>v.04 / 2026.05</span>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    if (window.scrollY > 24) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
+  document.querySelectorAll('.rev').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
