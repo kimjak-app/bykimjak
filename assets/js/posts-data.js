@@ -4,6 +4,13 @@
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
     {
+      url: 'posts/think/morning-word-031.html',
+      catKey: 'morning-word', cat: 'Morning Word',
+      title: '2026년 8월, 작가 터닝포인트를 만든 달',
+      sub: '사람들의 소중함',
+      date: '2026-08-25', dl: '2026 · 08 · 25'
+    },
+    {
       url: 'posts/think/morning-word-030.html',
       catKey: 'morning-word', cat: 'Morning Word',
       title: '8월 마지막 주 세 축을 동시에 닫는 일주일계획',
