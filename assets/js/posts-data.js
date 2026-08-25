@@ -6,8 +6,8 @@
     {
       url: 'posts/think/morning-word-031.html',
       catKey: 'morning-word', cat: 'Morning Word',
-      title: '2026년 8월, 작가 터닝포인트를 만든 달',
-      sub: '사람들의 소중함',
+      title: '8월! 작가 2.5 가 되는 달',
+      sub: '2026년 8월 작가 터닝포인트가 만들어진 달 & 사람의 소중함',
       date: '2026-08-25', dl: '2026 · 08 · 25'
     },
     {
