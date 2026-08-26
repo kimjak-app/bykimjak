@@ -4,6 +4,13 @@
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
     {
+      url: 'posts/think/morning-word-032.html',
+      catKey: 'morning-word', cat: 'Morning Word',
+      title: '9월은 방향, 10월은 결과, 11월은 드디어 도전! 그 출발일',
+      sub: '대본 대장정과 삼국워 모두의 창업 도전 시작',
+      date: '2026-08-26', dl: '2026 · 08 · 26'
+    },
+    {
       url: 'posts/think/morning-word-031.html',
       catKey: 'morning-word', cat: 'Morning Word',
       title: '8월! 작가 2.5 가 되는 달',
@@ -36,7 +43,7 @@
       catKey: 'morning-word', cat: 'Morning Word',
       title: '네 손이 일을 얻는 대로',
       sub: '7화 완성과 임진왜란전 데모, 모두의 창업 2기 방향, 그리고 전도서의 말씀',
-      date: '2026-09-22', dl: '2026 · 09 · 22'
+      date: '2026-08-22', dl: '2026 · 08 · 22'
     },
     {
       url: 'posts/think/think-006.html',
