@@ -11,6 +11,13 @@
       date: '2026-08-26', dl: '2026 · 08 · 26'
     },
     {
+      url: 'make/eastwar-devlog-035.html',
+      catKey: 'eastwar', cat: 'Architect Notes',
+      title: '9번 튀던 화면이 멈췄다',
+      sub: '월드맵 UI 1차 디자인 마감 기록',
+      date: '2026-08-25', dl: '2026 · 08 · 25'
+    },
+    {
       url: 'posts/think/morning-word-031.html',
       catKey: 'morning-word', cat: 'Morning Word',
       title: '8월! 작가 2.5 가 되는 달',

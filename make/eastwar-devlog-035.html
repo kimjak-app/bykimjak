@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR 개발일지 #034 — 한반도 MVP 번외 작업, 임진왜란전 작업 · byKimjak</title>
+<title>EASTWAR 개발일지 #035 — 9번 튀던 화면이 멈췄다 · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
 <style>
-:root{--bg:#FFFFFF;--bg-2:#F2F2F2;--ink:#0A0A0A;--ink-2:#2A2A2A;--ink-3:#6B6B6B;--rule:#0A0A0A1A;--dark:#0D0B09;--dark-ink:#FAF7F2;--dark-ink-2:#9C948A;--dark-rule:#FAF7F21A;--accent:oklch(68% 0.08 70);--accent-soft:oklch(68% 0.08 70 / 0.12);--f-display:"Space Grotesk","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-body:"Inter","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-mono:"JetBrains Mono",ui-monospace,monospace;--f-kr:"Pretendard Variable","Inter",ui-sans-serif,system-ui,sans-serif}
+:root{--bg:#FFFFFF;--bg-2:#F2F2F2;--ink:#0A0A0A;--ink-2:#2A2A2A;--ink-3:#6B6B6B;--rule:#0A0A0A1A;--dark:#0D0B09;--dark-2:#1A1714;--dark-ink:#FAF7F2;--dark-ink-2:#9C948A;--dark-rule:#FAF7F21A;--accent:oklch(68% 0.08 70);--accent-soft:oklch(68% 0.08 70 / 0.12);--f-display:"Space Grotesk","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-body:"Inter","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-mono:"JetBrains Mono",ui-monospace,monospace;--f-kr:"Pretendard Variable","Inter",ui-sans-serif,system-ui,sans-serif}
 *{box-sizing:border-box}html,body{margin:0;padding:0}html{scroll-behavior:smooth}
 body{font-family:var(--f-body);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-decoration:none}
@@ -166,12 +166,12 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #034</span>
+      <span>Dev Log #035</span>
     </div>
     <div class="lang-switch rev">
       <span class="lang-current">🇰🇷 한국어</span>
       <span class="lang-sep">|</span>
-      <a href="eastwar-devlog-034-en.html" class="lang-other">🇺🇸 English</a>
+      <a href="eastwar-devlog-035-en.html" class="lang-other">🇺🇸 English</a>
     </div>
     <h1 class="rev">EASTWAR</h1>
     <p class="sub-ko rev">이스트워 개발일지</p>
@@ -180,110 +180,96 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-034">
+  <article class="devlog" id="log-035">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #034</span>
-      <h1>한반도 MVP 번외 작업 — 임진왜란전 작업</h1>
-      <h2>44명에서 시작해 갑판전의 밑돌까지</h2>
-      <span class="log-date">2026년 08월 23일</span>
+      <span class="log-num">Dev Log · #035</span>
+      <h1>9번 튀던 화면이 멈췄다</h1>
+      <h2>월드맵 UI 1차 디자인 마감 기록</h2>
+      <span class="log-date">2026년 08월 25일</span>
 
       <hr />
-      <h3>열 명이 늘었다</h3>
-      <p>한반도 MVP 본편 작업과는 별개로, 임진란 전투화면을 위한 신규 장수 10명이 들어왔다. 조선 쪽은 이순신·권율에 곽재우·고경명·김덕령이 더해졌고, 일본 쪽은 고니시·시마즈에 히데요시·가토·구로다가 더해졌다. 신규 5명(조선 3, 일본 2)은 원본 PNG와 Godot import 파일까지 전부 확인돼서, 이미지 자산과 엔진 반영 단계까지는 이미 PASS된 상태로 시작했다.</p>
+      <h3>동방천하도, 1차 완성</h3>
+      <p>월드맵 UI 1차 디자인 작업이 끝났다. 좌측엔 국가 정보(국가 충성도, 세금, 재상, 국가 창고, 국가 테크트리), 우측엔 선택 도시 정보(민심·치안·상업·농업, 성 안정도, 태수, 주둔 무장, 성 테크트리)가 자리 잡았고, 중앙엔 한중일 지도 위로 도시 간 항로와 육로가 이어져 있다. 우하단엔 나침반 형태의 턴 종료 버튼이 놓였다.</p>
 
-      <div class="dialogue">
-        <p><span class="speaker">김작</span>곽재우 : 홍의장군, "붉은 깃발이 보이거든 이미 늦었다!"<br />
-        고경명 : 호남의병, "나라가 위급한데 어찌 나서지 않겠는가!"<br />
-        김덕령 : 충용장, "충용군이 간다! 길을 열어라!"</p>
-        <p><span class="speaker">김작</span>가토 기요마사 : 칠본창, "칠본창의 이름을 걸고 정면을 뚫는다!"<br />
-        구로다 나가마사 : 세키가하라 조략, "칼을 맞대기 전에 적부터 갈라놓는다"<br />
-        도요토미 히데요시 : 태합호령, "천하를 얻었으니 이제 바다 너머다!"<br />
-        고니시 유키나가 : 해상보급로, "바다가 열려 있는 한, 우리 군은 멈추지 않는다!"<br />
-        시마즈 요시히로 : 시마즈의 퇴구, "퇴각이라 생각했나? 지금부터가 반격이다!"</p>
-      </div>
-
-      <p>한국 신규 3명과 일본 신규 2명, 여기에 기존 시마즈까지 캐릭터 아트가 이렇게 모였다.</p>
-
-      <figure style="margin:32px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
-        <div><img src="../assets/eastwar/cutin-gwakjaeu-portrait-01.png" alt="곽재우" style="width:100%;border-radius:2px" /><figcaption>곽재우 · 홍의장군</figcaption></div>
-        <div><img src="../assets/eastwar/cutin-gogyeongmyeong-01.png" alt="고경명" style="width:100%;border-radius:2px" /><figcaption>고경명 · 호남의병</figcaption></div>
-        <div><img src="../assets/eastwar/cutin-kimdeokryeong-01.png" alt="김덕령" style="width:100%;border-radius:2px" /><figcaption>김덕령 · 충용장</figcaption></div>
+      <figure>
+        <img src="../assets/eastwar/worldmap-design1-full-01.png" alt="월드맵 1차 디자인 완성 — 동방천하도, 좌우 정보 패널, 우하단 나침반" />
+        <figcaption>월드맵 1차 디자인 완성 — 동방천하도, 좌우 정보 패널, 우하단 나침반</figcaption>
       </figure>
 
-      <figure style="margin:32px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
-        <div><img src="../assets/eastwar/cutin-toyotomi-01.png" alt="도요토미 히데요시" style="width:100%;border-radius:2px" /><figcaption>도요토미 히데요시 · 태합호령</figcaption></div>
-        <div><img src="../assets/eastwar/cutin-shimazu-portrait-01.png" alt="시마즈 요시히로" style="width:100%;border-radius:2px" /><figcaption>시마즈 요시히로 · 시마즈의 퇴구</figcaption></div>
-        <div><img src="../assets/eastwar/cutin-kurodanagamasa-01.png" alt="구로다 나가마사" style="width:100%;border-radius:2px" /><figcaption>구로다 나가마사 · 세키가하라 조략</figcaption></div>
-      </figure>
+      <p>여기까지 오는 과정은 크게 세 갈래였다 — 나침반을 정밀하게 다듬는 것, 16:9 마스터 지도로 전체를 재구축하는 것, 그리고 화면이 이유 없이 튀는 문제를 구조적으로 잡는 것.</p>
 
-      <p>컷인 이미지 규격도 이번에 확정했다. 1280×720 PNG, 인물의 얼굴·상반신은 세로 중앙부에 배치하고 상하단은 약간 잘려도 되는 배경으로 구성한다. 이름·고유기명·대사는 이미지 자체에 넣지 않는다 — 이건 이전 13명 작업 때 확정한 원칙 그대로, 텍스트는 항상 별도 레이어로 얹는다.</p>
+      <h3>나침반, 세 겹으로 나누다</h3>
+      <p>턴 종료 컴퍹스는 이미 1차 구현이 되어 있었다 — 유효한 아군 턴이 끝나면 나침반이 2~3바퀴 돌다가 감속하며 정북(北) 방향에서 정확히 멈추는 연출이었다. 문제는 회전 로직이 아니라 시각적 정밀도였다. 나침반 전체를 하나의 이미지로 돌리다 보니 회전 중심이 살짝 어긋나면 눈에 다 보였다.</p>
 
-      <h3>44명, 그리고 두 개의 남은 문제</h3>
-      <p>기존 39명 기준을 44명으로 승격하는 작업이 이어졌다. 신규 5명을 실제 Godot 런타임 데이터에 등록하고, 고유기 검증까지 돌렸다. 결과는 3명 완전 PASS, 2명은 핵심 효과는 정상이지만 설계 문구가 실제 동작과 어긋나는 지점이 있었다.</p>
-      <p>고경명의 〈호남의병〉, 가토의 〈칠본창〉, 구로다의 〈세키가하라 조략〉은 전부 설계대로 작동했다. 문제는 곽재우와 김덕령이었다. 곽재우 〈홍의장군〉은 포위 교란 효과 자체는 정상인데, 설명에 있던 "사용 후 1칸 재배치"가 실제로는 구현돼 있지 않았다 — 현재 시스템의 이동 명령은 후퇴 계열로만 발생해서, "원하는 인접 1칸으로 재배치"와는 다른 기능이었다. 김덕령 〈충용장〉은 초고위력 돌격 피해와 진형 붕괴는 정상 작동했지만, "선봉 첫 공격 보정과 결합"이라는 설명이 문제였다. 김덕령은 돌격이 주 역할, 선봉은 보조 역할인데, 지금 구조는 주 역할만 실제 전투 계약에 연결되고 보조 역할은 문자열로만 남아있어서 선봉 보정이 실제로는 적용되지 않았다.</p>
-      <p>이럴 때 임의로 손대지 않는 게 원칙이었다. 판단은 이렇게 났다 — 김덕령은 기능을 억지로 늘리는 대신 설명에서 "선봉 결합" 문구만 빼고 정직하게 정리하고, 곽재우는 반대로 이미 확정한 캐릭터성을 살리기 위해 단순 후퇴로 타협하지 않고 "1칸 선택 재배치" 기능을 정식으로 구현하기로 했다.</p>
+      <p>그래서 구조를 3레이어로 나눴다.</p>
 
-      <h3>이건 한반도 MVP 본편이 아니라 번외편이다</h3>
-      <p>여기서 중요한 판단이 하나 있었다. 신규 장수 데이터를 하루하루 채워 넣는 방식으로 계속 가면, 결국 "우리가 대체 뭘 완성하려는 거지?"가 될 위험이 있었다. 실제로 구조를 다시 보니 신규 5명의 전투 설계 데이터는 44명 체계로 늘어났는데, 월드맵 장수 생성은 여전히 기존 등록 장수만 만들고 있었고, 초기 충성도 데이터도 신규 5명이 빠진 39명 상태였다. 즉 여기까지는 "전투 설계 데이터 확장"만 끝난 것이고, "게임에 실제 등장시키는 통합 단계"는 아직 시작도 안 한 것이었다.</p>
-      <p>그래서 이 작업 전체를 <strong>IMJIN DEMO EXTENSION</strong>이라는 별도의 번외편으로 명확히 분리했다. 기존 한반도 MVP는 절대 건드리지 않는다는 전제 위에, 목표를 하나로 못박았다 — F5 월드맵에서 신규 장수를 실제로 보고 선택해서 Battle_Land까지 진입시키는 것, 그리고 별도의 F6 테스트에서는 한국 5 vs 일본 5의 완성된 전투를 바로 시연하는 것.</p>
-
-      <p>작업 순서는 이렇게 잡았다.</p>
       <ul>
-        <li><strong>D0 — 44명 데이터 계약 정상화</strong>: HeroDesignDataRegistry가 39명이 아니라 44명을 기대하도록 바꾸고, 신규 5명의 initial_loyalty는 새로 창작하지 않고 기존 runtime fallback 값(80)을 그대로 명시적으로 고정했다.</li>
-        <li><strong>D1 — 신규 5명 월드맵 등록</strong>: 곽재우·고경명·김덕령은 한성, 가토·구로다는 오사카로 배치했다. 기존 시마즈·고니시는 규슈 지역에 그대로 뒀다 — 이미 있는 월드맵 설정은 훼손하지 않는 게 원칙이었다. 신규 5명은 identity만 등록하고, 능력치·병종·고유기는 이미 만들어둔 generated 44명 데이터가 그대로 덮어쓰도록 했다.</li>
-        <li><strong>D2 — 장수 클릭부터 Battle_Land 진입까지</strong>: 여기서 반가운 결과가 나왔다. 현재 전투 쪽은 특정 장수 이름을 하드코딩해서 통과시키는 구조가 아니라, hero_id 기반으로 generic하게 동작하는 구조였다. 그래서 신규 5명을 위한 별도 handoff 코드를 만들 필요가 전혀 없었다 — 감사 결과 수정 없이 그대로 통과.</li>
-        <li><strong>D3 — Test1은 보존, Test2를 새로 만든다</strong>: 기존 한국 vs 중국 테스트 씬을 그대로 두고, 그 씬을 상속하는 새 씬 <code>Battle_UI_Production_Imjin_Test.tscn</code>을 만들어 한국 5 vs 일본 5 시나리오를 얹었다. 여기서 지킨 원칙이 하나 있다 — Test2를 만들기 위해 Test1을 복제해서 따로 발전시키지 않는다는 것. 디자인과 전투 로직은 공통으로 두고, 그 아래 시나리오 데이터만 한국-중국(Test1)과 한국-일본(Test2)으로 나눴다. 이렇게 하면 나중에 HUD 디자인을 바꾸거나 현재 행동자 창을 수정해도 양쪽이 같이 따라온다.</li>
-        <li><strong>D4 — QA와 연출 잠금</strong>: Test2에서 5:5 시작부터 로스터, 현재 행동자 HUD, 이동·공격·고유기·기세 변화, AI 턴, 전장보급, 전투기록까지 한 번에 시연 가능하게 만들었다.</li>
+        <li><strong>Layer 1 — 외곽 나침반 원판</strong>: 완전 고정. 방위문자, 테두리, 장식까지 전부 포함.</li>
+        <li><strong>Layer 2 — 중앙 바늘</strong>: 이것만 360° 회전. 좌우·상하가 정확히 대칭인 별도 투명 PNG.</li>
+        <li><strong>Layer 3 — 중앙 문양/캡</strong>: 고정. 바늘의 회전축을 위에서 덮어서, 중심이 1~2픽셀 어긋나도 그 접합부 자체가 안 보이게 만드는 역할.</li>
       </ul>
 
-      <p>Test2의 5:5 구성은 이렇게 확정됐다.</p>
-
-      <table>
-        <thead>
-          <tr><th>진영</th><th>주전1</th><th>주전2</th><th>주전3</th><th>지원1</th><th>지원2</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>🇰🇷 한국</td><td>이순신</td><td>곽재우</td><td>김덕령</td><td>권율</td><td>고경명</td></tr>
-          <tr><td>🇯🇵 일본</td><td>도요토미 히데요시</td><td>시마즈 요시히로</td><td>가토 기요마사</td><td>고니시 유키나가</td><td>구로다 나가마사</td></tr>
-        </tbody>
-      </table>
-
-      <p>한국은 궁병·보병·기병, 일본은 보병·총병·기병이 섞여서 화면 자체가 다양하다. 특히 일본 총병이 들어가면서 기존 한국-중국 테스트와도 시각적으로 확실히 구분됐다.</p>
-      <p>구조적으로 가장 중요한 원칙은 F5(실제 게임)와 F6(데모/QA)를 완전히 분리한 것이었다. WorldMap 실제 HERO_DATA → 장수 선택 → 전투 편성 payload → Battle_Land로 이어지는 게 production 경로고, Test2 시나리오 데이터 → Battle_UI_Production_Imjin_Test로 이어지는 게 데모/QA 경로다. 이 둘을 섞지 않는 것이 핵심이었다.</p>
-
-      <h3>해상전의 밑돌</h3>
-      <p>이번 작업이 단순히 데모용 확장으로 끝나지 않는 이유가 하나 있었다. 임진란 전투화면이 향후 해상전투 설계의 초석이 되도록 미리 잡아둔 것이다.</p>
-      <p>육상전의 공격 표현이 검·화살·기마돌격·총이라면, 해상전은 포격·화공·총·활·돌격박치기의 5계열로 잡기로 했다. 중요한 건 총과 활이 해전에서도 그대로 살아있다는 점이다 — 배끼리 붙기 전에는 포격·화공, 중거리에서는 총·활, 완전히 접근하면 충각 같은 돌격박치기가 들어가는 구조다. 이렇게 잡아두면 나중에 육상전의 attack visual type(melee/arrow/cavalry/gun)을 해상 표현(cannon/fire/gun/arrow/ram)으로 그대로 갈아끼울 수 있다.</p>
-      <p>여기에 한 층이 더 있다. 두 배가 붙으면(접현) 전투가 "해상 갑판 위의 육상전"으로 전환된다는 개념이다. 해상전은 결국 한 전투 안에 세 층이 생긴다 — 원거리 해상전(포격·화공), 접근/충돌전(돌격박치기·선체 충돌·이동 방해·접현 판정), 그리고 접현 후 갑판전(검·창·활·총·고유기를 그대로 쓰는 육상전의 변형). 갑판전을 완전히 새로운 전투엔진으로 만드는 대신, 기존 Battle_Land를 최대한 재사용하는 구조로 미리 잡아뒀다 — 맵이 성·평야 대신 배 갑판이고, 좁고, 난간·돛대·선실 같은 장애물이 있고, 패배 시 배가 나포될 수 있다는 게 차이다.</p>
-      <p>이렇게 설계해두면 나중엔 이런 장면도 가능해진다. 이순신 함선과 일본 함선이 접근해서 화살·총격을 주고받고, 일본 함선이 접현하면 화면이 전환되면서 갑판 위에서 김덕령과 가토 기요마사가 육박전을 벌이는 것. 지금 만들고 있는 로스터, 행동 순서, 현재 행동 장수 HUD, 기세, 고유기, 전투기록 시스템을 갑판전에서도 거의 그대로 쓸 수 있다는 게 이 설계의 핵심 장점이다. Test2를 한국 vs 일본으로 별도 시나리오 분리해둔 것도, 나중엔 Land Test → Naval Test → Deck Test로 그대로 확장될 수 있는 구조이기 때문이다.</p>
-
-      <h3>8명의 컷인, 자동으로 확인하기</h3>
-      <p>신규 8명(한국 3 + 일본 5)의 컷인 영상 작업도 진행했다. 방식은 기존 13명 때와 동일했다 — 4.01초짜리 MP4 원본만 넘기면, Theora OGV 최적화 변환부터 파일명 규격 통일, 레지스트리 연결, 재생 QA까지 전부 처리하는 파이프라인. 8명 전부 원본과 변환본 검증까지 PASS됐다.</p>
-
-      <figure style="margin:32px 0;display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:520px">
-        <div><img src="../assets/eastwar/cutin-gwakjaeu-action-01.png" alt="곽재우 액션 컷인" style="width:100%;border-radius:2px" /></div>
-        <div><img src="../assets/eastwar/cutin-shimazu-action-01.png" alt="시마즈 액션 컷인" style="width:100%;border-radius:2px" /></div>
+      <figure style="margin:32px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <div><img src="../assets/eastwar/worldmap-compass-base-01.png" alt="나침반 외곽 원판" style="width:100%;border-radius:2px" /><figcaption>나침반 외곽 원판 · Layer 1</figcaption></div>
+        <div><img src="../assets/eastwar/worldmap-compass-needle-01.png" alt="나침반 중앙 바늘" style="width:100%;border-radius:2px" /><figcaption>나침반 중앙 바늘 · Layer 2</figcaption></div>
+        <div><img src="../assets/eastwar/worldmap-compass-cap-01.png" alt="나침반 중앙 캡" style="width:100%;border-radius:2px" /><figcaption>나침반 중앙 캡 · Layer 3</figcaption></div>
       </figure>
 
-      <p>여기에 8명을 일일이 전투시켜 보지 않아도 되도록 자동 연속 QA 씬(<code>Imjin_Cutin_Visual_QA.tscn</code>)까지 만들었다. 기존 컷인 프리젠테이션 구조를 그대로 사용해서 8명을 순서대로 자동 재생하는 씬이라, F6 한 번 누르면 8명이 약 35초 동안 쭉 나온다. 영상·장수명·고유기 글씨·화면 깨짐만 확인하면 끝이었다.</p>
+      <p>세 PNG의 캔버스 크기를 동일하게(190×190) 맞추고, 회전축을 정확히 중앙(50%, 50%)에 고정했다. 이렇게 하니 다음 작업은 회전 로직을 새로 만드는 게 아니라, 이미 성공한 회전 대상을 "나침반 전체"에서 "바늘 레이어 하나"로 갈아 끼우는 것으로 끝났다. 기존에 검증된 "나침반 1바퀴 완료 → 실제 턴 진행" 구조는 그대로 보존됐다.</p>
 
-      <h3>병합 문 앞에서</h3>
-      <p>이 번외편 전체는 별도 브랜치(feature/imjin-d0-d1-worldmap-heroes)와 Draft PR에서 진행됐다 — main은 검증이 끝나기 전까지 건드리지 않는다는 원칙이었다. 남은 조건은 세 가지였다. 기존 Test1(한국-중국)이 이번 작업으로 깨지지 않았는지 회귀 플레이 확인, 월드맵 영웅 통합·Imjin Test2·컷인 세 개의 validator가 전부 PASS, 그리고 git diff가 깨끗한지. main 기준 diff는 behind 0 / ahead 14, 합의한 범위의 12개 파일만 변경된 상태로 확인됐다 — 기존 Test1을 갈아엎은 게 아니라 Test2가 온전히 별도로 추가된 구조였다.</p>
+      <p>이후 나침반은 한 단계 더 나아가서, 단순 장식이 아니라 실제 턴 종료 컨트롤로 승격됐다. 반투명 상태로 "턴 종료" 표시가 얹혀 있다가, hover하면 강조되고, 클릭하면 사라지고, 회전이 완료되면 다시 나타나는 흐름으로 다듬었다.</p>
 
-      <h3>다음 화면</h3>
-      <p>임진왜란 번외편이 병합을 기다리는 사이, 한반도 MVP 본편 쪽 전투 UI 작업도 새 브랜치(feature/battle-ui-next-pass)로 다음 단계를 준비했다. 현재 상태창이 비어있을 때 완전히 죽은 공간으로 남는 대신, 아무 상태도 없을 땐 "상태 아이콘 범례"를 보여주고 실제 버프·디버프가 하나라도 생기면 범례를 숨기고 실제 상태 표시로 전환하는 작업이다.</p>
-      <p>기호도 확정했다 — ▲▼ 공격, ◆ 방어, ↑↓ 이동, ◎ 혼란, ⚠ 동요, ※ 화상, ⊘ 행동불가. 220px 폭 안에서 2열×4행으로, 왼쪽엔 공격·방어·이동·행동불가, 오른쪽엔 혼란·동요·화상을 배치하기로 했다.</p>
-      <p>한반도 MVP 본편과 임진왜란 번외편이 같은 전투 엔진과 데이터를 공유하면서도 서로를 건드리지 않고 나란히 자라고 있다.</p>
+      <figure style="max-width:360px;margin:32px auto">
+        <img src="../assets/eastwar/worldmap-turn-end-plaque-01.png" alt="턴 종료 명패 — 나침반 위에 얹히는 리본형 라벨" style="width:100%;border-radius:2px" />
+        <figcaption>턴 종료 명패 — 나침반 위에 얹히는 리본형 라벨</figcaption>
+      </figure>
+
+      <p>크기와 위치도 재조정했다. 190px에서 240px로 키우고, 오른쪽 패널 폭을 가로 방향으로 무조건 예약해서 나침반을 밀어내던 로직을 제거했다. 1920×1080 기준으로 오른쪽 여백 약 120px, 하단 여백 약 115~120px — 중심이 대략 (1680, 840) 근처에 오도록 자리를 잡았다.</p>
+
+      <h3>16:9 마스터로 지도를 다시 짰다</h3>
+      <p>새 지도 마스터를 4096×2304 PNG 단일 파일로 받아서, 씬을 새로 만들고 4분할 배치·카메라 경계 재설정·한중일 성 재배치·항로 재연결까지 순서대로 진행한 다음 실플레이 QA를 거쳐 Production으로 이식했다.</p>
+
+      <p>정보창도 이 과정에서 여러 차례 다듬었다. 좌/우 패널 상단 높이를 통일하고, <code>?</code> 아이콘 대신 hover 도움말로 바꾸고, 민심·치안·상업·농업을 한 줄로 압축했다. 성 충성도라는 표현은 성 안정도로 정리하고 상태와 바 색상을 연결했다. 주둔 무장은 3열 얼굴+이름만 남겼다. 정책 선택이나 인물 임명 시에는 장황한 효과 설명 대신 인물과 대사가 뜨는 중앙 팝업으로 바꿨다.</p>
+
+      <p>가독성 조정도 있었다 — 큰 제목과 본문·수치 폰트를 +2pt씩 키우고, 턴 표시는 "154년 봄 1턴"처럼 간결하게, 재상·태수 카드의 중복 이름을 제거하고 재상 초상을 태수보다 한 단계 크게 배치했다. 국가 창고는 자금·식량 탭과 특산물 탭으로 나누고, 기본 탭은 자금·식량으로 시작하게 했다. 자원 앞 아이콘은 아직 준비가 안 돼서 당분간 색 사각형 placeholder로 대체했다.</p>
+
+      <p>좌우 HUD 최종 배치도 확정했다. 좌측 아군 턴 종료 버튼은 삭제하고(나침반이 그 역할을 흡수했으므로), 좌우 패널 하단에는 5×3 완성 기술 배지 슬롯을 만들어 15개 초과 시 세로 스크롤되게 했다. 이번 단계에서는 좌우 각각 샘플 3개만 채워뒀고, 실제 테크 데이터 연결은 다음 작업으로 넘겼다.</p>
+
+      <h3>화면이 튀는 진짜 이유</h3>
+      <p>디자인이 거의 자리를 잡았는데도 화면이 자꾸 튀는 문제가 남아 있었다. 나침반이 돌다가 멈칫하고, 그 순간 정보창에 과거 정보가 잠깐 나타났다 사라지고, 국가 창고의 자금·식량/특산물 탭을 누를 때마다 패널이 튀는 증상이었다.</p>
+
+      <p>처음엔 각 증상을 개별로 땜질하려 했지만, 영상을 프레임 단위로 뜯어보니 원인이 두 개가 겹쳐 있었다.</p>
+
+      <ul>
+        <li><strong>턴 종료 튐</strong>: Production이 턴 전환 중간 상태를 먼저 화면에 그리고, 그다음 순간 테스트 controller가 다시 정리하면서 한 프레임이 번쩍였다.</li>
+        <li><strong>탭 전환 튐</strong>: 창고 탭을 자금·식량(4행)에서 특산물(5행)로 바꿀 때마다 내용 높이가 달라지고, 그때마다 패널 높이를 다시 계산하는 함수가 호출되면서 패널 전체가 재배치됐다.</li>
+      </ul>
+
+      <p>즉 여러 개의 controller가 매 프레임 Production UI를 후처리하면서, 레이아웃 재계산과 텍스트 재작성 순서가 서로 충돌하고 있었던 것. 이건 가드를 하나 더 얹는다고 없어질 문제가 아니었다.</p>
+
+      <p>그래서 방향을 근본적으로 바꿨다 — <strong>W2-A14 Stable HUD Presentation Refactor</strong>.</p>
+
+      <ul>
+        <li>좌/우 패널 높이를 런타임에 계속 재계산하지 않고, 고정 레이아웃 계약으로 잠갔다.</li>
+        <li>창고 탭은 두 탭 모두 같은 고정 높이를 쓰게 만들어서, 클릭해도 패널 크기 자체가 바뀌지 않게 했다.</li>
+        <li>턴 중간 상태를 숨겼다가 나중에 덮어쓰는 방식 대신, UI 표시값을 stable snapshot으로 유지하다가 새 턴 데이터가 완성된 순간 딱 한 번만 교체하는 방식으로 바꿨다.</li>
+        <li>매 프레임 반복되던 텍스트·레이아웃 재작성을 걷어내고, 남기는 건 visibility guard 정도로 최소화했다.</li>
+      </ul>
+
+      <p>코드를 더 들여다보니 원인이 더 명확해졌다 — 창고 탭은 클릭할 때마다 자원 행 전체를 지우고 다시 만든 다음 곧바로 패널 크기 재계산 함수를 호출하고 있었고, 이 함수가 호출될 때마다 좌우 패널의 최소 크기·크기·위치가 전부 다시 계산되는 구조였다. 이런 구조라면 튀는 게 당연했다. 그래서 가드를 더 붙이는 대신 이 레이아웃 재생성 자체를 없앴다. 턴 전환 플래시도 지연 처리 방식이 아니라, 화면에 그려지기 직전 한 번만 실행되는 단일 표현 패스로 바꿨다 — Production이 그 프레임에 뭘 써놨든, 그려지기 직전에 딱 한 번 최종 상태로 정리하는 구조다.</p>
+
+      <h3>앞으로</h3>
+      <p>3레이어 나침반, 16:9 마스터 지도, 정리된 정보창, 그리고 튀지 않는 안정적인 HUD까지 — 월드맵 UI의 1차 디자인이 여기서 일단락됐다. 다음은 좌우 패널 하단의 기술 배지에 실제 테크트리 데이터를 연결하는 작업이 남아 있다.</p>
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-033.html" class="log-nav__prev">
+      <a href="eastwar-devlog-034.html" class="log-nav__prev">
         <span class="log-nav__label">이전</span>
-        <span class="log-nav__title">← Dev Log #033</span>
+        <span class="log-nav__title">← Dev Log #034</span>
       </a>
-      <a href="eastwar-devlog-035.html" class="log-nav__next">
-        <span class="log-nav__label">다음</span>
-        <span class="log-nav__title">Dev Log #035 →</span>
+      <a href="eastwar.html" class="log-nav__next">
+        <span class="log-nav__label">목록</span>
+        <span class="log-nav__title">목록으로 →</span>
       </a>
     </div>
 
@@ -307,7 +293,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '034');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '035');
 </script>
 </body>
 </html>

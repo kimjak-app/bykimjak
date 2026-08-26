@@ -173,6 +173,11 @@
       num: '034', date: '2026 · 08 · 23',
       ko: { href: 'eastwar-devlog-034.html',    title: '한반도 MVP 번외 작업 — 임진왜란전 작업',    sub: '44명에서 시작해 갑판전의 밑돌까지' },
       en: { href: 'eastwar-devlog-034-en.html', title: 'A Side Track for the Korea MVP — The Imjin War Project', sub: 'From 44 Generals to the Foundation of Naval Combat' }
+    },
+    {
+      num: '035', date: '2026 · 08 · 25',
+      ko: { href: 'eastwar-devlog-035.html',    title: '9번 튀던 화면이 멈췄다',                    sub: '월드맵 UI 1차 디자인 마감 기록' },
+      en: { href: 'eastwar-devlog-035-en.html', title: 'The Screen Stopped Jumping',                sub: 'Wrapping Up the First World Map UI Design Pass' }
     }
   ];
 
