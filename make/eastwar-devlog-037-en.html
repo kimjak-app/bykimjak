@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR 개발일지 #036 — 얼굴을 두 번째로 바꾸다 · byKimjak</title>
+<title>EASTWAR Dev Log #037 — Making the Battle Engine One Step More Three-Dimensional · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -164,106 +164,71 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     <div class="breadcrumb rev">
       <a href="../index.html">bykimjak</a>
       <span class="sep">›</span>
-      <a href="eastwar.html">EASTWAR</a>
+      <a href="eastwar-en.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #036</span>
+      <span>Dev Log #037</span>
     </div>
     <div class="lang-switch rev">
-      <span class="lang-current">🇰🇷 한국어</span>
+      <a href="eastwar-devlog-037.html" class="lang-other">🇰🇷 한국어</a>
       <span class="lang-sep">|</span>
-      <a href="eastwar-devlog-036-en.html" class="lang-other">🇺🇸 English</a>
+      <span class="lang-current">🇺🇸 English</span>
     </div>
     <h1 class="rev">EASTWAR</h1>
     <p class="sub-ko rev">이스트워 개발일지</p>
-    <p class="listing-desc rev">전략 가상역사 시뮬레이션 — 1인 개발 기록</p>
+    <p class="listing-desc rev">Strategy alt-history simulation — solo dev log</p>
   </div>
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-036">
+  <article class="devlog" id="log-037">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #036</span>
-      <h1>얼굴을 두 번째로 바꾸다</h1>
-      <h2>월드맵 2번째 디자인 교체 작업과 영역 표시 넣기</h2>
-      <span class="log-date">2026년 08월 27일</span>
+      <span class="log-num">Dev Log · #037</span>
+      <h1>Making the Battle Engine One Step More Three-Dimensional</h1>
+      <h2>An Isometric Movement Cell A/B Test</h2>
+      <span class="log-date">August 28, 2026</span>
 
       <hr />
-      <h3>배경부터 바꿨다</h3>
-      <p>1차 디자인이 자리를 잡은 다음, 월드맵의 배경 지도 자체를 새로 교체하는 작업이 이어졌다. 이번 단계의 목표는 딱 하나였다 — 새 전체 배경 이미지를 4096×2304 기준으로 확정하고, 이걸 4분할해서 WorldMap_UI_Test에서만 기존 배경 텍스처를 교체해보는 것. 기존 UI 오버레이는 손대지 않고, 클릭·마커·정보창 가독성이 새 배경 위에서도 그대로 유지되는지만 먼저 확인하는, 순수 "월드맵 아트 퀄 검증 테스트"였다.</p>
+      <h3>The Original Stays Untouched — Only the Clone Gets Modified</h3>
+      <p>The battle screen's movement display was working fine functionally. The issue was how movement paths and directions rendered over the diamond cells — they read as ↑↓←→, a grid-axis feel, even though the screen itself is isometric. Movement was the one thing still behaving like a straight grid in an otherwise angled view.</p>
 
-      <p>새 이미지가 도착한 뒤엔 기존 1차안 방식을 그대로 유지했다. 4096×2304 이미지를 런타임에서 좌상·우상·좌하·우하 4개의 2048×1152 영역으로 잘라 0.5배로 배치하는 테스트 전용 컨트롤러를 새로 붙였다. 이 컨트롤러는 새 배경 파일만 사용하고, 기존 배경 시스템이나 Production 코드는 전혀 건드리지 않았다 — 테스트 씬에는 새 컨트롤러 하나만 추가됐을 뿐, 기존 Production 월드맵, 좌우 정보창, 창고·테크·가독성 컨트롤러, Stable HUD, 턴 전환 가드는 전부 그대로 유지됐다.</p>
+      <p>The goal of this experiment wasn't adding new functionality — it was making the existing battle look one step more three-dimensional. So the approach got handled carefully: the original Imjin War battle test scene got duplicated as-is into <code>Battle_Imjin_IsoMovement_Test.tscn</code>, and only the clone received the following changes:</p>
 
-      <figure>
-        <img src="../assets/eastwar/worldmap-bg-v2-replaced-01.png" alt="새 배경 지도 교체 직후 — 영토 표시 전" />
-        <figcaption>새 배경 지도 교체 직후 — 영토 표시 전</figcaption>
-      </figure>
+      <ul>
+        <li>Movable tiles switched to isometric diamond cells</li>
+        <li>Click/selection position aligned to the center of those cells</li>
+        <li>Unit movement switched from an ↑↓←→ feel to an ↖↗↙↘ diagonal axis</li>
+        <li>Movement path display switched to the same diagonal axis</li>
+        <li>The post-move direction-selection arrows switched to diagonal directions too</li>
+        <li>Final unit facing matched to that same direction</li>
+      </ul>
 
-      <h3>땅에 색이 스미다</h3>
-      <p>배경이 자리 잡은 다음은 영토 표시였다. 개념은 단순했다 — 2048×1152 월드 위에 반투명 영토 레이어를 하나 깔고, 각 픽셀마다 "13개 도시 중에 나랑 제일 가까운 도시가 어디지"를 계산해서 그 도시의 현재 세력색으로 칠하는 방식(최근접점 방식)이다.</p>
+      <p>Just as importantly, what absolutely wasn't touched got locked down clearly too: combat logic, movement range, attack resolution, turn order, AI, unique skills, momentum, hero data, the left/right rosters, the bottom HUD, background art, terrain, and unit graphics — all of it stayed exactly as it was in the original.</p>
 
-      <p>하지만 이대로만 하면 문제가 생긴다. 중국처럼 도시 4개가 대륙 하나를 통째로 나눠 먹는 것처럼 보이는 이상한 그림이 나온다. 그래서 규칙을 하나 더 얹었다 — 도시 반경 80px 안쪽만 색칠하고 그 바깥은 원래 지형색 그대로 두는 것(30px 페이드로 경계는 부드럽게). 이러면 도시가 촘촘한 한반도·일본은 자연스럽게 이어진 영토처럼 보이고, 도시가 뜨문뜨문한 중국은 도시별로 동그란 세력권처럼 보인다.</p>
-
-      <p>바다는 무조건 제외했다. 육지/바다 흑백 마스크를 따로 만들어서 흰 부분(육지)에만 색이 입혀지고, 검은 부분(바다)은 절대 칠해지지 않게 막았다. 색의 농도도 신경 썼다 — 계산된 세력색을 100% 진하게 칠하면 산맥·강 텍스처가 다 가려져서 스티커를 붙인 것처럼 보이기 때문에, 35%만 반영해서 지형 위에 얇게 "물든" 느낌만 나게 했다.</p>
-
-      <p>핵심은 이 네 가지 규칙(최근접 도시·반경 제한·바다 차단·35% 투명도)을 전부 그림으로 미리 그려서 저장하는 게 아니라, 게임이 매 프레임 실시간으로 계산하게 만들었다는 것이다. 그래서 나중에 도시가 4개에서 50개로 늘어나도 폴리곤을 다시 그릴 필요 없이, 반경 숫자 하나만 조정하면 자동으로 다 맞춰진다.</p>
-
-      <p>구현 쪽에서도 원래 지시했던 것보다 한 단계 더 깔끔한 방식으로 갔다. 처음엔 "CITY_POSITIONS 상수를 그대로 재사용하라"고 지시했는데, 실제로는 CityLayer의 실제 마커 노드에서 position과 owner_faction_id를 런타임에 직접 읽어오는 방식으로 구현됐다. 좌표 리스트를 셰이더 쪽에 또 하나 하드코딩하는 대신, 데이터 원본을 하나로 유지한 것이다. 이러면 나중에 마커 위치가 조정되거나 소유권이 바뀌어도 영토 셰이더가 자동으로 따라간다. 도시 배열도 13개 고정이 아니라 MAX_CITIES 64 + city_count 구조로 만들어서, 도시가 늘어나도 코드를 갈아엎을 필요가 없게 미리 여지를 남겨뒀다.</p>
-
-      <p>이번 작업에 쓰인 지형 원본들은 지역별로 따로 준비된 투명 배경 에셋이었다. 한반도, 일본 열도, 만주, 중국 4분할(화북·산둥, 강남·대만, 서남·하이난, 서북)까지, 각 지역이 개별 조각으로 존재하다가 하나의 대륙 지도로 합쳐진다.</p>
-
-      <div class="fig-4col">
+      <div class="fig-2col">
         <figure>
-          <img src="../assets/eastwar/terrain-korea-jeju-ulleungdo-dokdo-01.png" alt="한반도" />
-          <figcaption>한반도</figcaption>
+          <img src="../assets/eastwar/battle-iso-movement-before-01.png" alt="Before — grid-axis (↑↓←→) movement" />
+          <figcaption>Before — grid-axis (↑↓←→) movement</figcaption>
         </figure>
         <figure>
-          <img src="../assets/eastwar/terrain-japan-tsushima-01.png" alt="일본 열도" />
-          <figcaption>일본 열도</figcaption>
-        </figure>
-        <figure>
-          <img src="../assets/eastwar/terrain-manchuria-primorsky-01.png" alt="만주" />
-          <figcaption>만주</figcaption>
-        </figure>
-        <figure>
-          <img src="../assets/eastwar/terrain-china-huabei-shandong-01.png" alt="화북·산둥" />
-          <figcaption>화북·산둥</figcaption>
-        </figure>
-        <figure>
-          <img src="../assets/eastwar/terrain-china-jiangnan-taiwan-01.png" alt="강남·대만" />
-          <figcaption>강남·대만</figcaption>
-        </figure>
-        <figure>
-          <img src="../assets/eastwar/terrain-china-southwest-hainan-01.png" alt="서남·하이난" />
-          <figcaption>서남·하이난</figcaption>
-        </figure>
-        <figure>
-          <img src="../assets/eastwar/terrain-china-northwest-01.png" alt="서북" />
-          <figcaption>서북</figcaption>
+          <img src="../assets/eastwar/battle-iso-movement-after-01.png" alt="After — diagonal-axis (↖↗↙↘) movement" />
+          <figcaption>After — diagonal-axis (↖↗↙↘) movement</figcaption>
         </figure>
       </div>
 
-      <h3>완성된 두 번째 얼굴</h3>
-      <p>배경 교체와 영토 셰이더가 모두 자리 잡은 결과가 이것이다.</p>
+      <p>The advantage of this approach was that the comparison didn't rely on gut feeling — it was visible directly. Pulling up the original and the clone alternately via F6 made "did this actually get better?" an immediate side-by-side judgment, not a guess. Once confirmed this way, the next step is porting it into Production.</p>
 
-      <figure style="max-width:900px;margin:32px auto">
-        <img src="../assets/eastwar/worldmap-design2-territory-final-01.png" alt="월드맵 2차 디자인 — 영토 표시까지 완성된 최종본" />
-        <figcaption>월드맵 2차 디자인 — 영토 표시까지 완성된 최종본</figcaption>
-      </figure>
-
-      <p>한성 주변으로 은은한 파란색 영향권이 원형으로 번지고, 평양·경주·사비도 각자의 색으로 물들어 있다. 오사카와 교토 쪽 일본 지역도 마찬가지로, 도시가 촘촘한 지역은 영역이 자연스럽게 이어지고 먼 지역은 원래 지형색이 그대로 남는다. 정상이면 각 성 주변 육지만 세력색으로 은은하게 칠해지고, 도시 사이 먼 지역은 무채색 지형이 남고, 바다는 전혀 색칠되지 않아야 한다는 목표 그대로 나왔다.</p>
-
-      <h3>앞으로</h3>
-      <p>배경 지도와 영토 표시가 자리 잡으면서 월드맵이 두 번째 얼굴을 갖게 됐다. 다음은 이 영토 시스템을 실제 소유권 변경(침공·점령)과 연동해서, 전쟁 결과가 곧바로 지도 위 색깔 변화로 보이게 만드는 작업이 남아 있다.</p>
+      <h3>What's Next</h3>
+      <p>If this experiment holds up, the next step is porting this diagonal movement axis into the actual battle scene. It's a small change, but it's the last piece needed to make the whole screen move like real isometric terrain instead of a grid.</p>
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-035.html" class="log-nav__prev">
-        <span class="log-nav__label">이전</span>
-        <span class="log-nav__title">← Dev Log #035</span>
+      <a href="eastwar-devlog-036-en.html" class="log-nav__prev">
+        <span class="log-nav__label">Previous</span>
+        <span class="log-nav__title">← Dev Log #036</span>
       </a>
-      <a href="eastwar-devlog-037.html" class="log-nav__next">
-        <span class="log-nav__label">다음</span>
-        <span class="log-nav__title">Dev Log #037 →</span>
+      <a href="eastwar-en.html" class="log-nav__next">
+        <span class="log-nav__label">Index</span>
+        <span class="log-nav__title">Back to index →</span>
       </a>
     </div>
 
@@ -287,7 +252,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '036');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '037');
 </script>
 </body>
 </html>

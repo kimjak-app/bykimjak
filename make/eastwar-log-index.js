@@ -183,6 +183,11 @@
       num: '036', date: '2026 · 08 · 27',
       ko: { href: 'eastwar-devlog-036.html',    title: '얼굴을 두 번째로 바꾸다',                  sub: '월드맵 2번째 디자인 교체 작업과 영역 표시 넣기' },
       en: { href: 'eastwar-devlog-036-en.html', title: 'Getting a Second Face',                    sub: "Swapping the World Map's Design for a Second Time, and Adding Territory Display" }
+    },
+    {
+      num: '037', date: '2026 · 08 · 28',
+      ko: { href: 'eastwar-devlog-037.html',    title: '전투엔진 한 단계 더 입체적으로',           sub: '아이소메트릭 이동 셀 A/B 테스트' },
+      en: { href: 'eastwar-devlog-037-en.html', title: 'Making the Battle Engine One Step More Three-Dimensional', sub: 'An Isometric Movement Cell A/B Test' }
     }
   ];
 
