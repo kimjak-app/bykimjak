@@ -178,6 +178,11 @@
       num: '035', date: '2026 · 08 · 25',
       ko: { href: 'eastwar-devlog-035.html',    title: '9번 튀던 화면이 멈췄다',                    sub: '월드맵 UI 1차 디자인 마감 기록' },
       en: { href: 'eastwar-devlog-035-en.html', title: 'The Screen Stopped Jumping',                sub: 'Wrapping Up the First World Map UI Design Pass' }
+    },
+    {
+      num: '036', date: '2026 · 08 · 27',
+      ko: { href: 'eastwar-devlog-036.html',    title: '얼굴을 두 번째로 바꾸다',                  sub: '월드맵 2번째 디자인 교체 작업과 영역 표시 넣기' },
+      en: { href: 'eastwar-devlog-036-en.html', title: 'Getting a Second Face',                    sub: "Swapping the World Map's Design for a Second Time, and Adding Territory Display" }
     }
   ];
 

@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR Dev Log #035 — The Screen Stopped Jumping · byKimjak</title>
+<title>EASTWAR 개발일지 #036 — 얼굴을 두 번째로 바꾸다 · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -164,112 +164,106 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     <div class="breadcrumb rev">
       <a href="../index.html">bykimjak</a>
       <span class="sep">›</span>
-      <a href="eastwar-en.html">EASTWAR</a>
+      <a href="eastwar.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #035</span>
+      <span>Dev Log #036</span>
     </div>
     <div class="lang-switch rev">
-      <a href="eastwar-devlog-035.html" class="lang-other">🇰🇷 한국어</a>
+      <span class="lang-current">🇰🇷 한국어</span>
       <span class="lang-sep">|</span>
-      <span class="lang-current">🇺🇸 English</span>
+      <a href="eastwar-devlog-036-en.html" class="lang-other">🇺🇸 English</a>
     </div>
     <h1 class="rev">EASTWAR</h1>
     <p class="sub-ko rev">이스트워 개발일지</p>
-    <p class="listing-desc rev">Strategy alt-history simulation — solo dev log</p>
+    <p class="listing-desc rev">전략 가상역사 시뮬레이션 — 1인 개발 기록</p>
   </div>
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-035">
+  <article class="devlog" id="log-036">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #035</span>
-      <h1>The Screen Stopped Jumping</h1>
-      <h2>Wrapping Up the First World Map UI Design Pass</h2>
-      <span class="log-date">August 25, 2026</span>
+      <span class="log-num">Dev Log · #036</span>
+      <h1>얼굴을 두 번째로 바꾸다</h1>
+      <h2>월드맵 2번째 디자인 교체 작업과 영역 표시 넣기</h2>
+      <span class="log-date">2026년 08월 27일</span>
 
       <hr />
-      <h3>The Eastern World Map, First Pass Complete</h3>
-      <p>The first design pass on the world map UI is done. The left side holds national info — national loyalty, tax level, prime minister, national treasury, national tech tree — while the right side holds info for the selected city — public sentiment, security, commerce, agriculture, castle stability, governor, garrisoned generals, castle tech tree. In the center, land and sea routes connect cities across the Korea-China-Japan map. In the bottom right sits a compass-shaped end-turn button.</p>
+      <h3>배경부터 바꿨다</h3>
+      <p>1차 디자인이 자리를 잡은 다음, 월드맵의 배경 지도 자체를 새로 교체하는 작업이 이어졌다. 이번 단계의 목표는 딱 하나였다 — 새 전체 배경 이미지를 4096×2304 기준으로 확정하고, 이걸 4분할해서 WorldMap_UI_Test에서만 기존 배경 텍스처를 교체해보는 것. 기존 UI 오버레이는 손대지 않고, 클릭·마커·정보창 가독성이 새 배경 위에서도 그대로 유지되는지만 먼저 확인하는, 순수 "월드맵 아트 퀄 검증 테스트"였다.</p>
+
+      <p>새 이미지가 도착한 뒤엔 기존 1차안 방식을 그대로 유지했다. 4096×2304 이미지를 런타임에서 좌상·우상·좌하·우하 4개의 2048×1152 영역으로 잘라 0.5배로 배치하는 테스트 전용 컨트롤러를 새로 붙였다. 이 컨트롤러는 새 배경 파일만 사용하고, 기존 배경 시스템이나 Production 코드는 전혀 건드리지 않았다 — 테스트 씬에는 새 컨트롤러 하나만 추가됐을 뿐, 기존 Production 월드맵, 좌우 정보창, 창고·테크·가독성 컨트롤러, Stable HUD, 턴 전환 가드는 전부 그대로 유지됐다.</p>
 
       <figure>
-        <img src="../assets/eastwar/worldmap-design1-full-01.png" alt="First world map design pass complete — the Eastern World Map, left/right info panels, bottom-right compass" />
-        <figcaption>First world map design pass complete — the Eastern World Map, left/right info panels, bottom-right compass</figcaption>
+        <img src="../assets/eastwar/worldmap-bg-v2-replaced-01.png" alt="새 배경 지도 교체 직후 — 영토 표시 전" />
+        <figcaption>새 배경 지도 교체 직후 — 영토 표시 전</figcaption>
       </figure>
 
-      <p>Getting here ran along three tracks: refining the compass down to pixel-level precision, rebuilding the whole map around a 16:9 master, and structurally fixing a screen-jump problem that had no single obvious cause.</p>
+      <h3>땅에 색이 스미다</h3>
+      <p>배경이 자리 잡은 다음은 영토 표시였다. 개념은 단순했다 — 2048×1152 월드 위에 반투명 영토 레이어를 하나 깔고, 각 픽셀마다 "13개 도시 중에 나랑 제일 가까운 도시가 어디지"를 계산해서 그 도시의 현재 세력색으로 칠하는 방식(최근접점 방식)이다.</p>
 
-      <h3>Splitting the Compass Into Three Layers</h3>
-      <p>A first version of the end-turn compass already existed — when a valid ally turn ended, the compass spun 2-3 times, decelerated, and stopped precisely pointing north. The problem wasn't the rotation logic; it was visual precision. Rotating the entire compass as a single image meant any tiny offset in the rotation center became visible immediately.</p>
+      <p>하지만 이대로만 하면 문제가 생긴다. 중국처럼 도시 4개가 대륙 하나를 통째로 나눠 먹는 것처럼 보이는 이상한 그림이 나온다. 그래서 규칙을 하나 더 얹었다 — 도시 반경 80px 안쪽만 색칠하고 그 바깥은 원래 지형색 그대로 두는 것(30px 페이드로 경계는 부드럽게). 이러면 도시가 촘촘한 한반도·일본은 자연스럽게 이어진 영토처럼 보이고, 도시가 뜨문뜨문한 중국은 도시별로 동그란 세력권처럼 보인다.</p>
 
-      <p>So the structure split into three layers.</p>
+      <p>바다는 무조건 제외했다. 육지/바다 흑백 마스크를 따로 만들어서 흰 부분(육지)에만 색이 입혀지고, 검은 부분(바다)은 절대 칠해지지 않게 막았다. 색의 농도도 신경 썼다 — 계산된 세력색을 100% 진하게 칠하면 산맥·강 텍스처가 다 가려져서 스티커를 붙인 것처럼 보이기 때문에, 35%만 반영해서 지형 위에 얇게 "물든" 느낌만 나게 했다.</p>
 
-      <ul>
-        <li><strong>Layer 1 — Outer compass ring</strong>: fully fixed. Includes the cardinal-direction characters, border, and all decoration.</li>
-        <li><strong>Layer 2 — Center needle</strong>: the only layer that rotates 360°. A separate transparent PNG, precisely symmetrical left-right and top-bottom.</li>
-        <li><strong>Layer 3 — Center emblem/cap</strong>: fixed. Sits over the needle's rotation axis, so even a 1-2 pixel offset at the center becomes invisible under the cap.</li>
-      </ul>
+      <p>핵심은 이 네 가지 규칙(최근접 도시·반경 제한·바다 차단·35% 투명도)을 전부 그림으로 미리 그려서 저장하는 게 아니라, 게임이 매 프레임 실시간으로 계산하게 만들었다는 것이다. 그래서 나중에 도시가 4개에서 50개로 늘어나도 폴리곤을 다시 그릴 필요 없이, 반경 숫자 하나만 조정하면 자동으로 다 맞춰진다.</p>
 
-      <figure style="margin:32px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
-        <div><img src="../assets/eastwar/worldmap-compass-base-01.png" alt="Compass outer ring" style="width:100%;border-radius:2px" /><figcaption>Compass outer ring · Layer 1</figcaption></div>
-        <div><img src="../assets/eastwar/worldmap-compass-needle-01.png" alt="Compass center needle" style="width:100%;border-radius:2px" /><figcaption>Compass center needle · Layer 2</figcaption></div>
-        <div><img src="../assets/eastwar/worldmap-compass-cap-01.png" alt="Compass center cap" style="width:100%;border-radius:2px" /><figcaption>Compass center cap · Layer 3</figcaption></div>
+      <p>구현 쪽에서도 원래 지시했던 것보다 한 단계 더 깔끔한 방식으로 갔다. 처음엔 "CITY_POSITIONS 상수를 그대로 재사용하라"고 지시했는데, 실제로는 CityLayer의 실제 마커 노드에서 position과 owner_faction_id를 런타임에 직접 읽어오는 방식으로 구현됐다. 좌표 리스트를 셰이더 쪽에 또 하나 하드코딩하는 대신, 데이터 원본을 하나로 유지한 것이다. 이러면 나중에 마커 위치가 조정되거나 소유권이 바뀌어도 영토 셰이더가 자동으로 따라간다. 도시 배열도 13개 고정이 아니라 MAX_CITIES 64 + city_count 구조로 만들어서, 도시가 늘어나도 코드를 갈아엎을 필요가 없게 미리 여지를 남겨뒀다.</p>
+
+      <p>이번 작업에 쓰인 지형 원본들은 지역별로 따로 준비된 투명 배경 에셋이었다. 한반도, 일본 열도, 만주, 중국 4분할(화북·산둥, 강남·대만, 서남·하이난, 서북)까지, 각 지역이 개별 조각으로 존재하다가 하나의 대륙 지도로 합쳐진다.</p>
+
+      <div class="fig-4col">
+        <figure>
+          <img src="../assets/eastwar/terrain-korea-jeju-ulleungdo-dokdo-01.png" alt="한반도" />
+          <figcaption>한반도</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/terrain-japan-tsushima-01.png" alt="일본 열도" />
+          <figcaption>일본 열도</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/terrain-manchuria-primorsky-01.png" alt="만주" />
+          <figcaption>만주</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/terrain-china-huabei-shandong-01.png" alt="화북·산둥" />
+          <figcaption>화북·산둥</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/terrain-china-jiangnan-taiwan-01.png" alt="강남·대만" />
+          <figcaption>강남·대만</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/terrain-china-southwest-hainan-01.png" alt="서남·하이난" />
+          <figcaption>서남·하이난</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/terrain-china-northwest-01.png" alt="서북" />
+          <figcaption>서북</figcaption>
+        </figure>
+      </div>
+
+      <h3>완성된 두 번째 얼굴</h3>
+      <p>배경 교체와 영토 셰이더가 모두 자리 잡은 결과가 이것이다.</p>
+
+      <figure style="max-width:900px;margin:32px auto">
+        <img src="../assets/eastwar/worldmap-design2-territory-final-01.png" alt="월드맵 2차 디자인 — 영토 표시까지 완성된 최종본" />
+        <figcaption>월드맵 2차 디자인 — 영토 표시까지 완성된 최종본</figcaption>
       </figure>
 
-      <p>All three PNGs got matched to the same canvas size (190×190) with the rotation axis locked precisely at center (50%, 50%). With that in place, the next step wasn't building new rotation logic — it was simply swapping the already-working rotation target from "the entire compass" to "just the needle layer." The already-verified "compass completes one spin → actual turn proceeds" structure stayed exactly as it was.</p>
+      <p>한성 주변으로 은은한 파란색 영향권이 원형으로 번지고, 평양·경주·사비도 각자의 색으로 물들어 있다. 오사카와 교토 쪽 일본 지역도 마찬가지로, 도시가 촘촘한 지역은 영역이 자연스럽게 이어지고 먼 지역은 원래 지형색이 그대로 남는다. 정상이면 각 성 주변 육지만 세력색으로 은은하게 칠해지고, 도시 사이 먼 지역은 무채색 지형이 남고, 바다는 전혀 색칠되지 않아야 한다는 목표 그대로 나왔다.</p>
 
-      <p>The compass got promoted one step further after that — from a decoration into an actual end-turn control. A semi-transparent "End Turn" label sits on it, highlights on hover, disappears on click, and reappears once the spin completes.</p>
-
-      <figure style="max-width:360px;margin:32px auto">
-        <img src="../assets/eastwar/worldmap-turn-end-plaque-01.png" alt="End-turn plaque — the ribbon-style label sitting on top of the compass" style="width:100%;border-radius:2px" />
-        <figcaption>End-turn plaque — the ribbon-style label sitting on top of the compass</figcaption>
-      </figure>
-
-      <p>Size and position got adjusted too. It grew from 190px to 240px, and the logic that always reserved horizontal space for the right panel — which had been shoving the compass leftward — got removed. At 1920×1080, it now sits with roughly 120px of right margin and 115-120px of bottom margin, centering around approximately (1680, 840).</p>
-
-      <h3>Rebuilding the Map Around a 16:9 Master</h3>
-      <p>A new map master arrived as a single 4096×2304 PNG. A new scene got built around it, and work proceeded in order — a 4-way split layout, camera bounds reset, repositioning the Korea/China/Japan castles, reconnecting the routes — followed by live-play QA before porting it into Production.</p>
-
-      <p>The info panels went through several refinement passes along the way. Left and right panel header heights got unified, the <code>?</code> icon got replaced with hover tooltips, and public sentiment/security/commerce/agriculture got compressed onto a single line. "Castle loyalty" got renamed to "castle stability" and tied to status and bar coloring. Garrisoned generals got trimmed down to just face + name across 3 columns. Selecting a policy or appointing an official switched from a wall of effect text to a center popup showing the character and a line of dialogue instead.</p>
-
-      <p>Readability got a pass too — major titles and body/number text both grew by 2pt, turn display got simplified to something like "Year 154, Spring, Turn 1," duplicate names on the prime minister and governor cards got removed, and the prime minister's portrait got sized a step larger than the governor's. The national treasury split into a Gold/Food tab and a Specialty Goods tab, defaulting to Gold/Food. Resource icons weren't ready yet, so colored square placeholders stood in for now.</p>
-
-      <p>The final left/right HUD layout got locked too. The left-side end-turn button got removed (the compass now owns that role), and a 5×3 grid of completed tech badges got added to the bottom of both panels, with vertical scrolling kicking in past 15 entries. This stage only filled in 3 sample badges on each side — wiring in the real tech data got pushed to a later task.</p>
-
-      <h3>The Real Reason the Screen Was Jumping</h3>
-      <p>Even with the design mostly settled, the screen kept jumping. The compass would spin and hitch, stale info would briefly flash in the info panel right at that moment, and clicking between the treasury's Gold/Food and Specialty Goods tabs made the panel jump every time.</p>
-
-      <p>The first instinct was to patch each symptom individually, but breaking the footage down frame by frame revealed two overlapping causes.</p>
-
-      <ul>
-        <li><strong>End-turn jump</strong>: Production drew an intermediate turn-transition state first, and the test controller cleaned it up a moment later — producing a one-frame flash.</li>
-        <li><strong>Tab-switch jump</strong>: switching the treasury tab between Gold/Food (4 rows) and Specialty Goods (5 rows) changed the content height each time, which triggered a panel-height recalculation function, re-laying out the entire panel every time.</li>
-      </ul>
-
-      <p>In other words, multiple controllers were post-processing the Production UI every single frame, and layout recalculation kept colliding with text rewriting in unpredictable order. This wasn't something one more guard clause would fix.</p>
-
-      <p>So the approach changed at the root — <strong>W2-A14 Stable HUD Presentation Refactor</strong>.</p>
-
-      <ul>
-        <li>Left/right panel heights stopped being recalculated at runtime and got locked into a fixed layout contract.</li>
-        <li>Both treasury tabs got set to use the same fixed height, so clicking between them no longer changes the panel size at all.</li>
-        <li>Instead of hiding a mid-turn state and overwriting it later, the UI's displayed values now hold a stable snapshot, swapped exactly once the moment new turn data is fully ready.</li>
-        <li>The per-frame text/layout rewriting that had been running constantly got stripped out, leaving only a minimal visibility guard.</li>
-      </ul>
-
-      <p>Digging further into the code made the cause even clearer — every click on the treasury tab was deleting the entire resource row list and rebuilding it from scratch, then immediately calling the panel-resize function, which recalculated the left and right panels' minimum size, size, and position every single time it ran. A structure like that was bound to jump. So rather than adding yet another guard, the layout regeneration itself got removed entirely. The turn-transition flash also moved away from a deferred approach to a single presentation pass that runs right before rendering — whatever Production had written that frame gets tidied into its final form exactly once, right before it hits the screen.</p>
-
-      <h3>What's Next</h3>
-      <p>The three-layer compass, the 16:9 master map, the cleaned-up info panels, and a HUD that no longer jumps — the first design pass on the world map UI wraps up here. What's left is wiring real tech tree data into the badge slots at the bottom of the left and right panels.</p>
+      <h3>앞으로</h3>
+      <p>배경 지도와 영토 표시가 자리 잡으면서 월드맵이 두 번째 얼굴을 갖게 됐다. 다음은 이 영토 시스템을 실제 소유권 변경(침공·점령)과 연동해서, 전쟁 결과가 곧바로 지도 위 색깔 변화로 보이게 만드는 작업이 남아 있다.</p>
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-034-en.html" class="log-nav__prev">
-        <span class="log-nav__label">Previous</span>
-        <span class="log-nav__title">← Dev Log #034</span>
+      <a href="eastwar-devlog-035.html" class="log-nav__prev">
+        <span class="log-nav__label">이전</span>
+        <span class="log-nav__title">← Dev Log #035</span>
       </a>
-      <a href="eastwar-devlog-036-en.html" class="log-nav__next">
-        <span class="log-nav__label">Next</span>
-        <span class="log-nav__title">Dev Log #036 →</span>
+      <a href="eastwar.html" class="log-nav__next">
+        <span class="log-nav__label">목록</span>
+        <span class="log-nav__title">목록으로 →</span>
       </a>
     </div>
 
@@ -293,7 +287,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '035');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '036');
 </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR Dev Log #035 — The Screen Stopped Jumping · byKimjak</title>
+<title>EASTWAR Dev Log #036 — Getting a Second Face · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -166,10 +166,10 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar-en.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #035</span>
+      <span>Dev Log #036</span>
     </div>
     <div class="lang-switch rev">
-      <a href="eastwar-devlog-035.html" class="lang-other">🇰🇷 한국어</a>
+      <a href="eastwar-devlog-036.html" class="lang-other">🇰🇷 한국어</a>
       <span class="lang-sep">|</span>
       <span class="lang-current">🇺🇸 English</span>
     </div>
@@ -180,96 +180,90 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-035">
+  <article class="devlog" id="log-036">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #035</span>
-      <h1>The Screen Stopped Jumping</h1>
-      <h2>Wrapping Up the First World Map UI Design Pass</h2>
-      <span class="log-date">August 25, 2026</span>
+      <span class="log-num">Dev Log · #036</span>
+      <h1>Getting a Second Face</h1>
+      <h2>Swapping the World Map's Design for a Second Time, and Adding Territory Display</h2>
+      <span class="log-date">August 27, 2026</span>
 
       <hr />
-      <h3>The Eastern World Map, First Pass Complete</h3>
-      <p>The first design pass on the world map UI is done. The left side holds national info — national loyalty, tax level, prime minister, national treasury, national tech tree — while the right side holds info for the selected city — public sentiment, security, commerce, agriculture, castle stability, governor, garrisoned generals, castle tech tree. In the center, land and sea routes connect cities across the Korea-China-Japan map. In the bottom right sits a compass-shaped end-turn button.</p>
+      <h3>Starting With the Background</h3>
+      <p>With the first design pass settled, the next stretch of work replaced the world map's background art itself. The goal for this stage was singular: lock a new full background image to a 4096×2304 baseline, split it into four, and swap the existing background texture in WorldMap_UI_Test only. The existing UI overlay stayed untouched — this was purely an "art quality verification test" to confirm clicks, markers, and info-panel readability still held up against the new background.</p>
+
+      <p>Once the new image arrived, the same approach from the first pass carried over. A test-only controller got added to slice the 4096×2304 image at runtime into four 2048×1152 regions — top-left, top-right, bottom-left, bottom-right — and place each at 0.5x scale. This controller only touches the new background file; it doesn't modify the existing background system or Production code at all. Only that one new controller got added to the test scene — the existing Production world map, left/right info panels, treasury/tech/readability controllers, the Stable HUD, and the turn-transition guard all stayed exactly as they were.</p>
 
       <figure>
-        <img src="../assets/eastwar/worldmap-design1-full-01.png" alt="First world map design pass complete — the Eastern World Map, left/right info panels, bottom-right compass" />
-        <figcaption>First world map design pass complete — the Eastern World Map, left/right info panels, bottom-right compass</figcaption>
+        <img src="../assets/eastwar/worldmap-bg-v2-replaced-01.png" alt="New background map right after the swap — before territory display" />
+        <figcaption>New background map right after the swap — before territory display</figcaption>
       </figure>
 
-      <p>Getting here ran along three tracks: refining the compass down to pixel-level precision, rebuilding the whole map around a 16:9 master, and structurally fixing a screen-jump problem that had no single obvious cause.</p>
+      <h3>Color Seeps Into the Land</h3>
+      <p>With the background in place, territory display came next. The concept was simple: lay a semi-transparent territory layer over the 2048×1152 world, and for every pixel, calculate "which of the 13 cities is nearest to me" and tint it with that city's current faction color — a nearest-point approach.</p>
 
-      <h3>Splitting the Compass Into Three Layers</h3>
-      <p>A first version of the end-turn compass already existed — when a valid ally turn ended, the compass spun 2-3 times, decelerated, and stopped precisely pointing north. The problem wasn't the rotation logic; it was visual precision. Rotating the entire compass as a single image meant any tiny offset in the rotation center became visible immediately.</p>
+      <p>Doing only this creates a problem, though — a region like China, with only 4 cities, ends up looking like the entire continent got carved up between them in a strange way. So one more rule got added: only color within an 80px radius of a city, leaving everything beyond that as the original terrain color (with a 30px fade for a smooth boundary). This makes densely-packed regions like Korea and Japan look like naturally connected territory, while sparse China reads as distinct circular spheres of influence around each city.</p>
 
-      <p>So the structure split into three layers.</p>
+      <p>The ocean got excluded entirely. A separate black-and-white land/sea mask ensures color only applies to white areas (land), never to black areas (sea). Color intensity mattered too — painting the calculated faction color at full 100% strength would completely bury the mountain and river textures underneath, making it look like a sticker slapped on top. Dialing it down to 35% gives the terrain a thin "tinted" look instead.</p>
 
-      <ul>
-        <li><strong>Layer 1 — Outer compass ring</strong>: fully fixed. Includes the cardinal-direction characters, border, and all decoration.</li>
-        <li><strong>Layer 2 — Center needle</strong>: the only layer that rotates 360°. A separate transparent PNG, precisely symmetrical left-right and top-bottom.</li>
-        <li><strong>Layer 3 — Center emblem/cap</strong>: fixed. Sits over the needle's rotation axis, so even a 1-2 pixel offset at the center becomes invisible under the cap.</li>
-      </ul>
+      <p>The core idea: none of these four rules — nearest city, radius limit, sea exclusion, 35% opacity — got pre-rendered into a static image. The game calculates all of it in real time, every frame. That means when the city count grows from 4 to 50 later, there's no need to redraw any polygons — adjusting a single radius number automatically rebalances everything.</p>
 
-      <figure style="margin:32px 0;display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
-        <div><img src="../assets/eastwar/worldmap-compass-base-01.png" alt="Compass outer ring" style="width:100%;border-radius:2px" /><figcaption>Compass outer ring · Layer 1</figcaption></div>
-        <div><img src="../assets/eastwar/worldmap-compass-needle-01.png" alt="Compass center needle" style="width:100%;border-radius:2px" /><figcaption>Compass center needle · Layer 2</figcaption></div>
-        <div><img src="../assets/eastwar/worldmap-compass-cap-01.png" alt="Compass center cap" style="width:100%;border-radius:2px" /><figcaption>Compass center cap · Layer 3</figcaption></div>
+      <p>The implementation ended up cleaner than what was originally specified, too. The instruction had been "reuse the CITY_POSITIONS constant as-is," but the actual implementation went one step further — reading position and owner_faction_id directly from the CityLayer's actual marker nodes at runtime, instead of hardcoding a second coordinate list on the shader side. This keeps a single source of truth: if a marker's position shifts or ownership changes later, the territory shader follows automatically. The city array also moved from a fixed size of 13 to a MAX_CITIES 64 + city_count structure, leaving room to grow without needing to rewrite the code later.</p>
+
+      <p>The terrain source assets used for this work were prepared as separate transparent-background pieces by region — Korea, the Japanese archipelago, Manchuria, and China split into four (Huabei/Shandong, Jiangnan/Taiwan, Southwest/Hainan, Northwest) — each existing as an individual fragment before combining into one unified continental map.</p>
+
+      <div class="fig-4col">
+        <figure>
+          <img src="../assets/eastwar/terrain-korea-jeju-ulleungdo-dokdo-01.png" alt="Korea" />
+          <figcaption>Korea</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/terrain-japan-tsushima-01.png" alt="Japanese archipelago" />
+          <figcaption>Japanese archipelago</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/terrain-manchuria-primorsky-01.png" alt="Manchuria" />
+          <figcaption>Manchuria</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/terrain-china-huabei-shandong-01.png" alt="Huabei/Shandong" />
+          <figcaption>Huabei/Shandong</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/terrain-china-jiangnan-taiwan-01.png" alt="Jiangnan/Taiwan" />
+          <figcaption>Jiangnan/Taiwan</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/terrain-china-southwest-hainan-01.png" alt="Southwest/Hainan" />
+          <figcaption>Southwest/Hainan</figcaption>
+        </figure>
+        <figure>
+          <img src="../assets/eastwar/terrain-china-northwest-01.png" alt="Northwest" />
+          <figcaption>Northwest</figcaption>
+        </figure>
+      </div>
+
+      <h3>The Finished Second Face</h3>
+      <p>Here's the result once the background swap and territory shader both landed.</p>
+
+      <figure style="max-width:900px;margin:32px auto">
+        <img src="../assets/eastwar/worldmap-design2-territory-final-01.png" alt="World map second design pass — the finished version with territory display" />
+        <figcaption>World map second design pass — the finished version with territory display</figcaption>
       </figure>
 
-      <p>All three PNGs got matched to the same canvas size (190×190) with the rotation axis locked precisely at center (50%, 50%). With that in place, the next step wasn't building new rotation logic — it was simply swapping the already-working rotation target from "the entire compass" to "just the needle layer." The already-verified "compass completes one spin → actual turn proceeds" structure stayed exactly as it was.</p>
-
-      <p>The compass got promoted one step further after that — from a decoration into an actual end-turn control. A semi-transparent "End Turn" label sits on it, highlights on hover, disappears on click, and reappears once the spin completes.</p>
-
-      <figure style="max-width:360px;margin:32px auto">
-        <img src="../assets/eastwar/worldmap-turn-end-plaque-01.png" alt="End-turn plaque — the ribbon-style label sitting on top of the compass" style="width:100%;border-radius:2px" />
-        <figcaption>End-turn plaque — the ribbon-style label sitting on top of the compass</figcaption>
-      </figure>
-
-      <p>Size and position got adjusted too. It grew from 190px to 240px, and the logic that always reserved horizontal space for the right panel — which had been shoving the compass leftward — got removed. At 1920×1080, it now sits with roughly 120px of right margin and 115-120px of bottom margin, centering around approximately (1680, 840).</p>
-
-      <h3>Rebuilding the Map Around a 16:9 Master</h3>
-      <p>A new map master arrived as a single 4096×2304 PNG. A new scene got built around it, and work proceeded in order — a 4-way split layout, camera bounds reset, repositioning the Korea/China/Japan castles, reconnecting the routes — followed by live-play QA before porting it into Production.</p>
-
-      <p>The info panels went through several refinement passes along the way. Left and right panel header heights got unified, the <code>?</code> icon got replaced with hover tooltips, and public sentiment/security/commerce/agriculture got compressed onto a single line. "Castle loyalty" got renamed to "castle stability" and tied to status and bar coloring. Garrisoned generals got trimmed down to just face + name across 3 columns. Selecting a policy or appointing an official switched from a wall of effect text to a center popup showing the character and a line of dialogue instead.</p>
-
-      <p>Readability got a pass too — major titles and body/number text both grew by 2pt, turn display got simplified to something like "Year 154, Spring, Turn 1," duplicate names on the prime minister and governor cards got removed, and the prime minister's portrait got sized a step larger than the governor's. The national treasury split into a Gold/Food tab and a Specialty Goods tab, defaulting to Gold/Food. Resource icons weren't ready yet, so colored square placeholders stood in for now.</p>
-
-      <p>The final left/right HUD layout got locked too. The left-side end-turn button got removed (the compass now owns that role), and a 5×3 grid of completed tech badges got added to the bottom of both panels, with vertical scrolling kicking in past 15 entries. This stage only filled in 3 sample badges on each side — wiring in the real tech data got pushed to a later task.</p>
-
-      <h3>The Real Reason the Screen Was Jumping</h3>
-      <p>Even with the design mostly settled, the screen kept jumping. The compass would spin and hitch, stale info would briefly flash in the info panel right at that moment, and clicking between the treasury's Gold/Food and Specialty Goods tabs made the panel jump every time.</p>
-
-      <p>The first instinct was to patch each symptom individually, but breaking the footage down frame by frame revealed two overlapping causes.</p>
-
-      <ul>
-        <li><strong>End-turn jump</strong>: Production drew an intermediate turn-transition state first, and the test controller cleaned it up a moment later — producing a one-frame flash.</li>
-        <li><strong>Tab-switch jump</strong>: switching the treasury tab between Gold/Food (4 rows) and Specialty Goods (5 rows) changed the content height each time, which triggered a panel-height recalculation function, re-laying out the entire panel every time.</li>
-      </ul>
-
-      <p>In other words, multiple controllers were post-processing the Production UI every single frame, and layout recalculation kept colliding with text rewriting in unpredictable order. This wasn't something one more guard clause would fix.</p>
-
-      <p>So the approach changed at the root — <strong>W2-A14 Stable HUD Presentation Refactor</strong>.</p>
-
-      <ul>
-        <li>Left/right panel heights stopped being recalculated at runtime and got locked into a fixed layout contract.</li>
-        <li>Both treasury tabs got set to use the same fixed height, so clicking between them no longer changes the panel size at all.</li>
-        <li>Instead of hiding a mid-turn state and overwriting it later, the UI's displayed values now hold a stable snapshot, swapped exactly once the moment new turn data is fully ready.</li>
-        <li>The per-frame text/layout rewriting that had been running constantly got stripped out, leaving only a minimal visibility guard.</li>
-      </ul>
-
-      <p>Digging further into the code made the cause even clearer — every click on the treasury tab was deleting the entire resource row list and rebuilding it from scratch, then immediately calling the panel-resize function, which recalculated the left and right panels' minimum size, size, and position every single time it ran. A structure like that was bound to jump. So rather than adding yet another guard, the layout regeneration itself got removed entirely. The turn-transition flash also moved away from a deferred approach to a single presentation pass that runs right before rendering — whatever Production had written that frame gets tidied into its final form exactly once, right before it hits the screen.</p>
+      <p>A soft blue sphere of influence spreads outward around Hanseong; Pyongyang, Gyeongju, and Sabi are each tinted with their own colors too. The same holds for the Japanese side around Osaka and Kyoto — regions with dense city clusters blend naturally into connected territory, while distant areas keep their original terrain color. This matches the target exactly: only the land immediately around each castle gets a soft faction tint, distant areas between cities stay neutral, and the ocean never gets colored at all.</p>
 
       <h3>What's Next</h3>
-      <p>The three-layer compass, the 16:9 master map, the cleaned-up info panels, and a HUD that no longer jumps — the first design pass on the world map UI wraps up here. What's left is wiring real tech tree data into the badge slots at the bottom of the left and right panels.</p>
+      <p>With the background map and territory display both in place, the world map now has its second face. What's left is hooking this territory system into actual ownership changes — invasion and occupation — so that the outcome of a war shows up immediately as a shift in color on the map.</p>
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-034-en.html" class="log-nav__prev">
+      <a href="eastwar-devlog-035-en.html" class="log-nav__prev">
         <span class="log-nav__label">Previous</span>
-        <span class="log-nav__title">← Dev Log #034</span>
+        <span class="log-nav__title">← Dev Log #035</span>
       </a>
-      <a href="eastwar-devlog-036-en.html" class="log-nav__next">
-        <span class="log-nav__label">Next</span>
-        <span class="log-nav__title">Dev Log #036 →</span>
+      <a href="eastwar-en.html" class="log-nav__next">
+        <span class="log-nav__label">Index</span>
+        <span class="log-nav__title">Back to index →</span>
       </a>
     </div>
 
@@ -293,7 +287,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '035');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '036');
 </script>
 </body>
 </html>
