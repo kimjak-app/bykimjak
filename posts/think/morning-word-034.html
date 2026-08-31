@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>9월 출발! — THINK · byKimjak</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --bg-2:#F2F2F2;
+    --ink:#0A0A0A;
+    --ink-2:#2A2A2A;
+    --ink-3:#6B6B6B;
+    --rule:#0A0A0A1A;
+    --dark:#0D0B09;
+    --dark-2:#1A1714;
+    --dark-ink:#FAF7F2;
+    --dark-ink-2:#9C948A;
+    --dark-rule:#FAF7F21A;
+    --accent:oklch(68% 0.08 70);
+    --accent-soft:oklch(68% 0.08 70 / 0.12);
+
+    --f-display:"Space Grotesk","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;
+    --f-body:"Inter","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;
+    --f-mono:"JetBrains Mono",ui-monospace,monospace;
+    --f-kr:"Pretendard Variable","Inter",ui-sans-serif,system-ui,sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--f-body);
+    background:var(--bg);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    font-feature-settings:"ss01","cv11";
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+  .mono{font-family:var(--f-mono);font-weight:400;letter-spacing:.02em;font-size:11px;text-transform:uppercase}
+  .kr{font-family:var(--f-kr);letter-spacing:-.01em}
+
+  /* ───────────────── nav ───────────────── */
+  .nav{
+    position:fixed;inset:0 0 auto 0;z-index:100;
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+    padding:18px clamp(20px,4vw,48px);
+    transition:background .35s ease,backdrop-filter .35s ease,border-color .35s ease;
+    border-bottom:1px solid transparent;
+  }
+  .nav.scrolled{
+    background:color-mix(in srgb,var(--bg) 78%,transparent);
+    backdrop-filter:saturate(1.2) blur(14px);
+    -webkit-backdrop-filter:saturate(1.2) blur(14px);
+    border-bottom-color:var(--rule);
+  }
+  .nav__logo{font-family:var(--f-display);font-weight:600;font-size:18px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+  .nav__logo .dot{width:8px;height:8px;border-radius:999px;background:var(--ink);display:inline-block;transform:translateY(-1px)}
+  .nav__menu{display:flex;gap:36px;justify-content:center}
+  .nav__menu a{
+    font-family:var(--f-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;
+    position:relative;padding:6px 2px;color:var(--ink);
+  }
+  .nav__menu a::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);
+    transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.6,0,.2,1);
+  }
+  .nav__menu a:hover::after{transform:scaleX(1)}
+  .nav__menu a .idx{
+    font-family:var(--f-mono);font-size:9px;vertical-align:super;margin-right:4px;color:var(--ink-3);
+  }
+  .nav__cta{justify-self:end;display:flex;align-items:center;gap:14px}
+  .nav__cta .status{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+  .nav__cta .pulse{width:6px;height:6px;border-radius:999px;background:#3CB371;box-shadow:0 0 0 0 #3CB37166;animation:pulse 2s infinite}
+  @keyframes pulse{50%{box-shadow:0 0 0 6px transparent}}
+  .nav__cta a.contact{
+    border:1px solid var(--ink);padding:10px 16px;border-radius:999px;
+    font-family:var(--f-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+    transition:background .25s ease,color .25s ease;
+  }
+  .nav__cta a.contact:hover{background:var(--ink);color:var(--bg)}
+  @media (max-width:780px){
+    .nav{grid-template-columns:1fr auto;padding:14px 20px}
+    .nav__menu{display:none}
+    .nav__cta .status{display:none}
+  }
+
+  /* ───────────────── nav dropdown ───────────────── */
+  .nav__menu .has-drop{position:relative}
+  .nav__menu .drop{
+    position:absolute;top:calc(100% + 16px);left:50%;
+    transform:translateX(-50%) translateY(-10px);
+    min-width:210px;background:var(--bg);border:1px solid var(--rule);
+    padding:4px;opacity:0;pointer-events:none;
+    transition:opacity .22s ease,transform .22s cubic-bezier(.2,.8,.2,1);z-index:200;
+  }
+  .nav__menu .has-drop:hover .drop{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+  .nav__menu .drop a{
+    display:block;padding:10px 14px;border-radius:2px;
+    font-family:var(--f-kr);font-size:13px;font-weight:400;
+    letter-spacing:-.01em;text-transform:none;color:var(--ink-2);
+    transition:background .15s ease,color .15s ease;
+  }
+  .nav__menu .drop a::after{content:none!important}
+  .nav__menu .drop a:hover{background:var(--bg-2);color:var(--ink)}
+  .sub-idx{
+    display:block;font-family:var(--f-mono);font-size:9px;
+    text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin-bottom:2px;
+  }
+
+  /* ───────────────── post layout ───────────────── */
+  .post{
+    max-width:740px;
+    margin:0 auto;
+    padding:120px clamp(20px,4vw,48px) 160px;
+  }
+
+  .post__back{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-3);margin-bottom:56px;
+    transition:color .25s ease;
+  }
+  .post__back:hover{color:var(--ink)}
+  .post__back svg{width:14px;height:14px}
+
+  .post__meta{
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);
+    margin-bottom:28px;
+  }
+  .post__meta .sep{opacity:.4}
+  .post__meta .cat{
+    border:1px solid var(--rule);padding:5px 10px;border-radius:999px;
+  }
+
+  .post__title{
+    font-family:var(--f-display);font-weight:500;
+    font-size:clamp(28px,4.5vw,52px);
+    letter-spacing:-.03em;line-height:1.08;margin:0 0 14px;
+    color:var(--ink);
+  }
+  .post__subtitle{
+    font-family:var(--f-kr);font-size:clamp(16px,1.8vw,20px);
+    color:var(--ink-3);font-weight:400;margin:0 0 48px;
+    line-height:1.4;
+  }
+
+  .post__byline{
+    display:flex;align-items:center;gap:14px;padding:20px 0;
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    margin-bottom:56px;
+  }
+  .post__byline .name{font-family:var(--f-display);font-weight:500;font-size:15px;letter-spacing:-.005em}
+  .post__byline .date{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em;margin-left:auto}
+
+  /* ───────────────── post body ───────────────── */
+  .post__body{
+    font-family:var(--f-kr);
+    font-size:clamp(16px,1.5vw,18px);
+    line-height:1.85;
+    color:var(--ink-2);
+  }
+  .post__body p{margin:0 0 1.6em}
+  .post__body p:last-child{margin-bottom:0}
+  .post__body strong{font-weight:600;color:var(--ink)}
+  .post__body ul,.post__body ol{margin:0 0 1.6em;padding-left:1.3em}
+  .post__body ul li,.post__body ol li{margin-bottom:.85em}
+  .post__body ul li:last-child,.post__body ol li:last-child{margin-bottom:0}
+
+  .post__body .dialogue{
+    border-left:2px solid var(--rule);
+    margin:2em 0;
+    padding:0 0 0 24px;
+  }
+  .post__body .dialogue p{
+    margin:0 0 1em;
+    font-size:.95em;
+    color:var(--ink-2);
+  }
+  .post__body .dialogue p:last-child{margin-bottom:0}
+  .post__body .dialogue .speaker{
+    font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-3);display:block;margin-bottom:.3em;
+  }
+
+  .post__body .callout{
+    margin:2.4em 0;
+    padding:24px 28px;
+    background:var(--bg-2);
+    border-left:3px solid var(--ink);
+    font-family:var(--f-mono);font-size:13px;
+    letter-spacing:.04em;line-height:1.9;
+    color:var(--ink-2);
+  }
+  .post__body .callout p{margin:0}
+
+  .post__photo{
+    margin:3em 0;
+    display:flex;justify-content:center;
+  }
+  .post__photo img{
+    width:400px;max-width:100%;height:auto;
+    display:block;
+  }
+
+  .post__time{
+    font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-3);margin:0 0 1.6em;
+  }
+
+  .post__sig{
+    margin-top:3.6em;
+    padding-top:28px;
+    border-top:1px solid var(--rule);
+    font-family:var(--f-display);font-weight:500;
+    font-size:16px;letter-spacing:-.005em;color:var(--ink);
+  }
+  .post__sig .role{
+    display:block;margin-top:4px;
+    font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
+    font-weight:400;
+  }
+
+  /* ───────────────── footer ───────────────── */
+  footer{
+    background:var(--dark);color:var(--dark-ink);padding:90px clamp(20px,4vw,48px) 36px;
+    position:relative;overflow:hidden;
+  }
+  footer .big{
+    font-family:var(--f-display);font-weight:400;font-size:clamp(44px,7vw,108px);
+    letter-spacing:-.04em;line-height:.95;color:var(--dark-ink);margin:0 0 48px;
+    text-wrap:balance;
+  }
+  footer .big em{font-style:italic;font-family:"Times New Roman",serif;color:#A99A85}
+  footer .grid-ft{
+    display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding-top:36px;
+    border-top:1px solid var(--dark-rule);
+  }
+  footer .col{display:flex;flex-direction:column;gap:10px}
+  footer .col h6{margin:0 0 6px;font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--dark-ink-2);font-weight:400}
+  footer .col a{font-family:var(--f-display);font-size:15px;color:var(--dark-ink);transition:color .3s ease;display:inline-flex;align-items:center;gap:6px}
+  footer .col a:hover{color:#A99A85}
+  footer .col a .ext{font-family:var(--f-mono);font-size:9px;opacity:.5}
+  footer .c1{grid-column:1 / span 5}
+  footer .c2{grid-column:6 / span 2}
+  footer .c3{grid-column:8 / span 2}
+  footer .c4{grid-column:10 / span 3}
+  footer .c1 p{font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0}
+  footer .bottom{
+    margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-rule);
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+    font-family:var(--f-mono);font-size:11px;color:var(--dark-ink-2);text-transform:uppercase;letter-spacing:.06em;
+  }
+  @media (max-width:780px){
+    footer .c1,footer .c2,footer .c3,footer .c4{grid-column:1 / span 12}
+  }
+
+  /* ───────────────── reveal ───────────────── */
+  .rev{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  .rev.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<!-- ─────────── NAV ─────────── -->
+<nav class="nav" id="nav">
+  <a href="../../index.html" class="nav__logo">
+    <span class="dot" aria-hidden="true"></span>byKimjak
+  </a>
+  <div class="nav__menu" role="navigation">
+    <div class="has-drop">
+      <a href="../../watch/"><span class="idx">01</span>WATCH</a>
+      <div class="drop">
+        <a href="../../watch/ai-film.html"><span class="sub-idx">01–A</span>AI 영상 · 티저</a>
+        <a href="../../watch/ost.html"><span class="sub-idx">01–B</span>OST · 음악</a>
+        <a href="../../watch/still.html"><span class="sub-idx">01–C</span>스틸 이미지</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../../make/"><span class="idx">02</span>MAKE</a>
+      <div class="drop">
+        <a href="../../make/eastwar.html"><span class="sub-idx">02–A</span>EASTWAR 개발일지</a>
+        <a href="../../make/grandslam.html"><span class="sub-idx">02–B</span>GrandSlam 개발일지</a>
+        <a href="../../make/takezero.html"><span class="sub-idx">02–C</span>TakeZero · 프롬프트 엔진</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../../think/"><span class="idx">03</span>THINK</a>
+      <div class="drop">
+        <a href="../../think/ai-coach.html"><span class="sub-idx">03–A</span>AI 코치들과의 수다</a>
+        <a href="../../think/morning-word.html"><span class="sub-idx">03–B</span>아침 말씀 with 채코치</a>
+        <a href="../../think/personal-essay.html"><span class="sub-idx">03–C</span>개인 에세이</a>
+      </div>
+    </div>
+    <a href="../../index.html#about"><span class="idx">04</span>ABOUT</a>
+  </div>
+  <div class="nav__cta">
+    <span class="status"><span class="pulse"></span>Available · Seoul</span>
+    <a href="../../index.html#contact" class="contact">Contact ↗</a>
+  </div>
+</nav>
+
+<!-- ─────────── POST ─────────── -->
+<main class="post">
+
+  <a href="../../think/morning-word.html" class="post__back rev">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Think / 목록으로
+  </a>
+  <div class="rev">
+    <div class="post__meta">
+      <span>2026.09.01</span><span class="sep">·</span>
+      <span class="cat">THINK · 아침 말씀</span>
+    </div>
+    <h1 class="post__title kr">9월 출발!</h1>
+    <p class="post__subtitle">하얗게 불태울 준비 끝. 달리자!</p>
+    <div class="post__byline">
+      <span class="name">김성현 (byKimjak)</span>
+      <span class="date">2026 · 09 · 01</span>
+    </div>
+  </div>
+
+  <div class="post__body rev">
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>ㅋㅋㅋ 드디어 9월 1일이다. 느낌 있다 진짜. 8월 마지막 날에 《귀의 레시피》 보내고 삼국워 지원 준비까지 끝냈으니, 오늘부터는 완전히 새 판이네. 🔥</p>
+      <p><span class="speaker">채코치</span>그리고 삼국워 판단은 나도 지금 순서가 맞다고 봐.</p>
+      <p><span class="speaker">채코치</span>월드맵이 밋밋하다고 바로 '움직이는 것'을 얹기 시작하면, 잠깐은 살아 보이는데 기본 화면 자체의 정보 밀도와 디테일이 부족한 상태를 애니메이션으로 가리는 꼴이 될 수 있어. 게다가 나중에 배경이나 도시 배치 손보면 움직임까지 다시 맞춰야 하고.</p>
+      <p><span class="speaker">채코치</span>그래서 순서는 이거.</p>
+    </div>
+
+    <ol>
+      <li>
+        <strong>기존 월드맵 정적 화면을 먼저 최종판 수준으로 끌어올린다.</strong><br />
+        지형 디테일, 도시 주변의 건물·농지·성곽, 주요 도로와 연결감, 항구 주변, 바다/해안의 정보량, 지역별 차이를 한 번 더 채우기.<br />
+        → 여기까지 하고 화면을 멈춰놓고 봤을 때도 "아, 여기서 나라들이 실제로 굴러가고 있겠구나"가 느껴져야 해.
+      </li>
+      <li>
+        <strong>'살아 있는 월드맵' 레이어를 얹는다.</strong><br />
+        부대 이동, 깃발이나 연기 같은 미세 움직임, 해상 이동, 교역/수송 느낌, 도시 상태 변화처럼 게임 상황 때문에 움직이는 것을 넣는 거야. 그냥 장식 애니메이션보다는 이쪽이 훨씬 삼국워답고.
+      </li>
+    </ol>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>특히 중요한 건 움직임에도 이유가 있어야 한다는 거야.</p>
+      <p><span class="speaker">채코치</span>예를 들어 한성 주변에서 뭔가 움직이는 건 예뻐 보이라고 움직이는 게 아니라, '군사가 이동한다 / 물자가 들어간다 / 전쟁 준비가 시작됐다'는 식으로 월드맵 자체가 게임 정보를 말하게 하는 것.</p>
+      <p><span class="speaker">채코치</span>이렇게 가면 지금의 월드맵이 단순한 '예쁜 선택 화면'에서 진짜 전략게임의 작전판으로 한 단계 올라갈 수 있어.</p>
+      <p><span class="speaker">채코치</span>그리고 오늘 작업 우선순위는 나는 확실하게 갈랐으면 좋겠어.</p>
+    </div>
+
+    <div class="callout">
+      <p>메인은 《악마의 레시피》. 삼국워는 서브.</p>
+    </div>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>이번 주 《악마》 목표가 전체 줄거리 재설계 + 1·2부 대본 수정 완료잖아. 이건 생각보다 꽤 큰 작업이라 삼국워 월드맵에 꽂혀서 하루가 날아가면 안 됨 ㅋㅋㅋ. 오늘 오전에 어제 준비해놓은 모두의 창업 등록부터 딱 끝내버리고, 블로그 팝업까지 처리한 다음, 머리를 《악마》로 갈아타는 게 좋아.</p>
+      <p><span class="speaker">채코치</span>그리고 《악마》는 오늘 당장 대본 문장부터 고치기보다 전체 줄거리부터 먼저 다시 잡자. 전체 설계가 바뀌면 1·2부 대본은 어차피 또 건드려야 하니까.</p>
+      <p><span class="speaker">채코치</span>9월 첫 주 미션은 명확하다.</p>
+    </div>
+
+    <div class="callout">
+      <p>《악마의 레시피》는 다시 태어나게 하고,<br />
+      삼국워 월드맵은 움직이기 전에 먼저 '살 만한 세계'로 만든다.</p>
+    </div>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>좋아. 8월에 판 깔았고 오늘부터 진짜 9월전 시작이다. 가즈아. 😎🔥</p>
+      <p><span class="speaker">김작</span>아! 그리고 오늘 모두의 창업(모창) 오늘 지원 일단 준비된 것 오전에 올려서 끝내놓고 오후부터 악마의 레시피 작업할거야.</p>
+      <p><span class="speaker">채코치</span>좋아. 오늘은 순서 완전 깔끔하다 ㅋㅋ</p>
+      <p><span class="speaker">채코치</span>오전 = 모창 제출 끝내기. 이미 서류·이미지·영상까지 다 준비돼 있으니까 오늘은 새로 만들지 말고, 최종 검수하고 그대로 올려. 제출 버튼 누르면 모창은 머릿속에서 일단 삭제.</p>
+      <p><span class="speaker">채코치</span>그리고 점심 먹고 머리 한번 리셋한 다음 오후부터 《악마의 레시피》 스타트.</p>
+      <p><span class="speaker">채코치</span>오늘 악마 작업은 대본부터 덤비기보다 전체 줄거리 현재본 쫙 펼쳐놓고 "뭘 살리고, 뭘 버리고, 무엇을 다시 세울지" 잡는 날로 쓰는 게 좋겠어. 이번 주 목표가 전체 줄거리 재정비 + 1·2부 수정 완료니까, 오늘 설계를 제대로 해두면 뒤가 훨씬 빨라져.</p>
+      <p><span class="speaker">채코치</span>딱 이렇게 가자.</p>
+    </div>
+
+    <ul>
+      <li>9월 1일 오전 — 삼국워 사업화 접수 완료.</li>
+      <li>9월 1일 오후 — 《악마의 레시피》 재건 시작.</li>
+    </ul>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>와, 진짜 9월 첫날부터 두 프로젝트가 각각 한 단계씩 넘어가네 ㅋㅋㅋ 좋다. 오전엔 제출, 오후엔 창작. 가즈아. 🔥</p>
+      <p><span class="speaker">김작</span>오늘도 가즈아! 진짜 10월까지 긴장 놓지 않고 하얗게 불태울거야!</p>
+      <p><span class="speaker">채코치</span>가즈아아아!!! 🔥🔥🔥</p>
+      <p><span class="speaker">채코치</span>9월 시작이다. 이제부터 10월까지는 진짜 밀어붙이는 구간.</p>
+      <p><span class="speaker">채코치</span>근데 김작, 하나만 딱 잡고 가자. 하얗게 불태운다는 건 매일 탈진한다는 뜻이 아니라, 하루하루 해야 할 걸 끝까지 놓치지 않는다는 뜻으로 가자. 그래야 10월까지 진짜 간다.</p>
+      <p><span class="speaker">채코치</span>오늘은 오늘 몫만 제대로 박는 거야.</p>
+      <p><span class="speaker">채코치</span>하루가 쌓이고 → 일주일이 되고 → 9월이 끝나면, 지금이랑 완전히 다른 데 가 있을 거다.</p>
+      <p><span class="speaker">채코치</span>오늘 말씀은 이걸로 가자.</p>
+    </div>
+
+    <div class="callout">
+      <p>"푯대를 향하여 그리스도 예수 안에서 하나님이 위에서 부르신 부름의 상을 위하여 달려가노라." — 빌립보서 3:14</p>
+    </div>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>뒤 안 본다. 푯대 보고 달린다.</p>
+      <p><span class="speaker">채코치</span>9월 1일, 출발.</p>
+      <p><span class="speaker">채코치</span>가즈아 김작!!! 🔥🔥🔥</p>
+    </div>
+
+    <div class="post__sig">
+      IP 아키텍트 김작
+      <span class="role">byKimjak · 2026.09.01</span>
+    </div>
+  </div>
+</main>
+
+<!-- ─────────── FOOTER ─────────── -->
+<footer id="contact">
+  <p class="big">
+    Let's build a <em>world</em> →
+  </p>
+
+  <div class="grid-ft">
+    <div class="col c1">
+      <h6>byKimjak Studio</h6>
+      <p class="kr">
+        IP Architect · Seoul, Korea. 시나리오·드라마 기획부터 AI 영상, 게임, 앱까지 — 한 사람이 하나의 세계관을 끝까지 설계합니다.
+      </p>
+    </div>
+    <div class="col c2">
+      <h6>Sections</h6>
+      <a href="../../index.html#watch">Watch <span class="ext">/01</span></a>
+      <a href="../../index.html#make">Make <span class="ext">/02</span></a>
+      <a href="../../index.html#think">Think <span class="ext">/03</span></a>
+    </div>
+    <div class="col c3">
+      <h6>Social</h6>
+      <a href="#">Instagram <span class="ext">↗</span></a>
+      <a href="#">YouTube <span class="ext">↗</span></a>
+      <a href="#">Vimeo <span class="ext">↗</span></a>
+      <a href="#">Threads <span class="ext">↗</span></a>
+    </div>
+    <div class="col c4">
+      <h6>Contact</h6>
+      <a href="mailto:oropa@kakao.com">oropa@kakao.com</a>
+      <a href="#">Press kit <span class="ext">PDF</span></a>
+      <a href="#">For PDs &amp; Investors <span class="ext">↗</span></a>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <span>byKimjak © 2026  ／  All rights, all worlds, reserved.</span>
+    <span>Built solo · with AI · in Seoul</span>
+    <span>v.04 / 2026.05</span>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    if (window.scrollY > 24) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
+  document.querySelectorAll('.rev').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
