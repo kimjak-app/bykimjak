@@ -183,9 +183,10 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
       <div class="nation-tabs rev" role="tablist">
         <button type="button" class="nation-tab active" data-nation="all">전체 <span class="tab-count"></span></button>
-        <button type="button" class="nation-tab" data-nation="kr">한국 <span class="tab-count"></span></button>
-        <button type="button" class="nation-tab" data-nation="cn">중국 <span class="tab-count"></span></button>
-        <button type="button" class="nation-tab" data-nation="jp">일본 <span class="tab-count"></span></button>
+        <button type="button" class="nation-tab" data-nation="kr">한국(Korea) <span class="tab-count"></span></button>
+        <button type="button" class="nation-tab" data-nation="cn">중국(China) <span class="tab-count"></span></button>
+        <button type="button" class="nation-tab" data-nation="jp">일본(Japan) <span class="tab-count"></span></button>
+        <button type="button" class="nation-tab" data-nation="etc">기타(ETC) <span class="tab-count"></span></button>
       </div>
 
       <div class="hero-card rev" data-nation="kr">
@@ -354,7 +355,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb();});
 /* ── Nation tabs ── */
 const heroCards=document.querySelectorAll('.hero-card');
 const nationTabs=document.querySelectorAll('.nation-tab');
-const counts={all:heroCards.length,kr:0,cn:0,jp:0};
+const counts={all:heroCards.length,kr:0,cn:0,jp:0,etc:0};
 heroCards.forEach(c=>{const n=c.dataset.nation;if(n&&counts[n]!==undefined)counts[n]++;});
 nationTabs.forEach(t=>{const n=t.dataset.nation;const c=t.querySelector('.tab-count');if(c)c.textContent=counts[n]||0;});
 nationTabs.forEach(tab=>{
