@@ -103,6 +103,14 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 .hero-card__desc-kr{font-family:var(--f-kr);font-size:15px;line-height:1.85;color:var(--ink-2);margin:0 0 14px}
 .hero-card__desc-en{font-family:var(--f-body);font-size:14px;line-height:1.8;color:var(--ink-3);margin:0;padding-top:14px;border-top:1px solid var(--rule)}
 @media(max-width:600px){.hero-card{grid-template-columns:1fr;gap:20px}}
+
+/* ── Nation tabs ── */
+.nation-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.nation-tab{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);border:1px solid var(--rule);padding:9px 16px;border-radius:999px;background:none;cursor:pointer;transition:background .2s ease,color .2s ease,border-color .2s ease;display:inline-flex;align-items:center;gap:6px}
+.nation-tab:hover{border-color:var(--ink-3)}
+.nation-tab.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.nation-tab .tab-count{font-size:10px;opacity:.6}
+.hero-card.is-hidden{display:none}
 </style>
 </head>
 <body>
@@ -173,7 +181,14 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     <div class="hero-showcase">
       <p class="hero-showcase__title rev">EASTWAR 영웅 캐릭터 · Character Art</p>
 
-      <div class="hero-card rev">
+      <div class="nation-tabs rev" role="tablist">
+        <button type="button" class="nation-tab active" data-nation="all">전체 <span class="tab-count"></span></button>
+        <button type="button" class="nation-tab" data-nation="kr">한국 <span class="tab-count"></span></button>
+        <button type="button" class="nation-tab" data-nation="cn">중국 <span class="tab-count"></span></button>
+        <button type="button" class="nation-tab" data-nation="jp">일본 <span class="tab-count"></span></button>
+      </div>
+
+      <div class="hero-card rev" data-nation="kr">
         <img src="../assets/eastwar/eastwar-hero-yi-sunshin.png" alt="이순신" loading="lazy" />
         <div>
           <h3 class="hero-card__name">이순신</h3>
@@ -184,7 +199,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
         </div>
       </div>
 
-      <div class="hero-card rev">
+      <div class="hero-card rev" data-nation="cn">
         <img src="../assets/eastwar/eastwar-hero-gwanwoo.png" alt="관우" loading="lazy" />
         <div>
           <h3 class="hero-card__name">관우</h3>
@@ -195,7 +210,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
         </div>
       </div>
 
-      <div class="hero-card rev">
+      <div class="hero-card rev" data-nation="cn">
         <img src="../assets/eastwar/eastwar-hero-jangbi.png" alt="장비" loading="lazy" />
         <div>
           <h3 class="hero-card__name">장비</h3>
@@ -206,7 +221,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
         </div>
       </div>
 
-      <div class="hero-card rev">
+      <div class="hero-card rev" data-nation="jp">
         <img src="../assets/eastwar/eastwar-hero-oda-nobunaga.png" alt="오다 노부나가" loading="lazy" />
         <div>
           <h3 class="hero-card__name">오다 노부나가</h3>
@@ -217,7 +232,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
         </div>
       </div>
 
-      <div class="hero-card rev">
+      <div class="hero-card rev" data-nation="kr">
         <img src="../assets/eastwar/eastwar-hero-jeong-dojeon.png" alt="정도전" loading="lazy" />
         <div>
           <h3 class="hero-card__name">정도전</h3>
@@ -228,7 +243,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
         </div>
       </div>
 
-      <div class="hero-card rev">
+      <div class="hero-card rev" data-nation="jp">
         <img src="../assets/eastwar/eastwar-hero-takeda-shingen.png" alt="다케다 신겐" loading="lazy" />
         <div>
           <h3 class="hero-card__name">다케다 신겐</h3>
@@ -239,7 +254,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
         </div>
       </div>
 
-      <div class="hero-card rev">
+      <div class="hero-card rev" data-nation="kr">
         <img src="../assets/eastwar/eastwar-hero-cheok-jungyeong.png" alt="척준경" loading="lazy" />
         <div>
           <h3 class="hero-card__name">척준경</h3>
@@ -250,7 +265,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
         </div>
       </div>
 
-      <div class="hero-card rev">
+      <div class="hero-card rev" data-nation="jp">
         <img src="../assets/eastwar/eastwar-hero-uesugi-kenshin.png" alt="우에스기 겐신" loading="lazy" />
         <div>
           <h3 class="hero-card__name">우에스기 겐신</h3>
@@ -261,7 +276,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
         </div>
       </div>
 
-      <div class="hero-card rev">
+      <div class="hero-card rev" data-nation="cn">
         <img src="../assets/eastwar/eastwar-hero-zhuge-liang.png" alt="제갈량" loading="lazy" />
         <div>
           <h3 class="hero-card__name">제갈량</h3>
@@ -272,7 +287,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
         </div>
       </div>
 
-      <div class="hero-card rev">
+      <div class="hero-card rev" data-nation="kr">
         <img src="../assets/eastwar/eastwar-hero-gwanggaeto.png" alt="광개토대왕" loading="lazy" />
         <div>
           <h3 class="hero-card__name">광개토대왕</h3>
@@ -335,6 +350,22 @@ document.querySelectorAll('.g-item').forEach(el=>el.addEventListener('click',()=
 document.getElementById('lb-close').addEventListener('click',closeLb);
 lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb();});
+
+/* ── Nation tabs ── */
+const heroCards=document.querySelectorAll('.hero-card');
+const nationTabs=document.querySelectorAll('.nation-tab');
+const counts={all:heroCards.length,kr:0,cn:0,jp:0};
+heroCards.forEach(c=>{const n=c.dataset.nation;if(n&&counts[n]!==undefined)counts[n]++;});
+nationTabs.forEach(t=>{const n=t.dataset.nation;const c=t.querySelector('.tab-count');if(c)c.textContent=counts[n]||0;});
+nationTabs.forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    const nation=tab.dataset.nation;
+    nationTabs.forEach(t=>t.classList.toggle('active',t===tab));
+    heroCards.forEach(card=>{
+      card.classList.toggle('is-hidden', nation!=='all' && card.dataset.nation!==nation);
+    });
+  });
+});
 </script>
 </body>
 </html>
