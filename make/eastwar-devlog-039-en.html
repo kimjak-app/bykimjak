@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR 개발일지 #038 — 전투화면에 검은 막이 덮였다 사라진 이유 · byKimjak</title>
+<title>EASTWAR Dev Log #039 — Eight Doors Now Hang Over the Map · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -130,25 +130,25 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     <div class="has-drop">
       <a href="../watch/"><span class="idx">01</span>WATCH</a>
       <div class="drop">
-        <a href="../watch/ai-film.html"><span class="sub-idx">01–A</span>AI 영상 · 티저</a>
-        <a href="../watch/ost.html"><span class="sub-idx">01–B</span>OST · 음악</a>
-        <a href="../watch/still.html"><span class="sub-idx">01–C</span>스틸 이미지</a>
+        <a href="../watch/ai-film.html"><span class="sub-idx">01–A</span>AI Films · Teasers</a>
+        <a href="../watch/ost.html"><span class="sub-idx">01–B</span>OST · Music</a>
+        <a href="../watch/still.html"><span class="sub-idx">01–C</span>Stills</a>
       </div>
     </div>
     <div class="has-drop">
       <a href="../make/"><span class="idx">02</span>MAKE</a>
       <div class="drop">
-        <a href="../make/eastwar.html"><span class="sub-idx">02–A</span>EASTWAR 개발일지</a>
-        <a href="../make/grandslam.html"><span class="sub-idx">02–B</span>GrandSlam 개발일지</a>
-        <a href="../make/takezero.html"><span class="sub-idx">02–C</span>TakeZero · 프롬프트 엔진</a>
+        <a href="../make/eastwar.html"><span class="sub-idx">02–A</span>EASTWAR Dev Log</a>
+        <a href="../make/grandslam.html"><span class="sub-idx">02–B</span>GrandSlam Dev Log</a>
+        <a href="../make/takezero.html"><span class="sub-idx">02–C</span>TakeZero · Prompt Engine</a>
       </div>
     </div>
     <div class="has-drop">
       <a href="../think/"><span class="idx">03</span>THINK</a>
       <div class="drop">
-        <a href="../think/ai-coach.html"><span class="sub-idx">03–A</span>AI 코치들과의 수다</a>
-        <a href="../think/morning-word.html"><span class="sub-idx">03–B</span>아침 말씀 with 채코치</a>
-        <a href="../think/personal-essay.html"><span class="sub-idx">03–C</span>개인 에세이</a>
+        <a href="../think/ai-coach.html"><span class="sub-idx">03–A</span>Chats With AI Coaches</a>
+        <a href="../think/morning-word.html"><span class="sub-idx">03–B</span>Morning Word with Chaekochi</a>
+        <a href="../think/personal-essay.html"><span class="sub-idx">03–C</span>Personal Essays</a>
       </div>
     </div>
     <a href="../index.html#about"><span class="idx">04</span>ABOUT</a>
@@ -164,74 +164,69 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     <div class="breadcrumb rev">
       <a href="../index.html">bykimjak</a>
       <span class="sep">›</span>
-      <a href="eastwar.html">EASTWAR</a>
+      <a href="eastwar-en.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #038</span>
+      <span>Dev Log #039</span>
     </div>
     <div class="lang-switch rev">
-      <span class="lang-current">🇰🇷 한국어</span>
+      <a href="eastwar-devlog-039.html" class="lang-other">🇰🇷 한국어</a>
       <span class="lang-sep">|</span>
-      <a href="eastwar-devlog-038-en.html" class="lang-other">🇺🇸 English</a>
+      <span class="lang-current">🇺🇸 English</span>
     </div>
     <h1 class="rev">EASTWAR</h1>
     <p class="sub-ko rev">이스트워 개발일지</p>
-    <p class="listing-desc rev">전략 가상역사 시뮬레이션 — 1인 개발 기록</p>
+    <p class="listing-desc rev">Strategy alt-history simulation — solo dev log</p>
   </div>
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-038">
+  <article class="devlog" id="log-039">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #038</span>
-      <h1>전투화면에 검은 막이 덮였다 사라진 이유</h1>
-      <h2>튐 현상 버그 수정 & 방향표시 다듬기</h2>
-      <span class="log-date">2026년 08월 29일</span>
+      <span class="log-num">Dev Log · #039</span>
+      <h1>Eight Doors Now Hang Over the Map</h1>
+      <h2>Building the World Map's Top Navigation Bar</h2>
+      <span class="log-date">September 3, 2026</span>
 
       <hr />
-      <h3>브라운관처럼 툭툭 튀던 화면</h3>
-      <p>전투 엔진 최적화 작업을 하고 나서, 갑자기 화면이 브라운관처럼 툭툭 튀는 현상이 생겼다. 가장 먼저 의심한 건 하루 전에 넣었던 1차 성능 실험이었다 — 정지 상태 UI를 10/20/30Hz 단위로 제한하고, 전투 시작과 동시에 여러 OGV 컷인 리소스를 백그라운드에서 미리 로드하도록 만든 코드였다. 특히 이동·idle Tween이 도는 도중에 IO나 프레임 페이싱이 조금이라도 튀면, 유닛이 순간이동하듯 보일 수 있는 구조였다.</p>
+      <h3>Eight Menus</h3>
+      <p>A top navigation bar landed on the world map. Tech Tree, Military, Personnel, Diplomacy, Trade, Espionage, Intelligence, System — eight icons now sit in a row above the Eastern World Map title.</p>
 
-      <p>그래서 그 실험을 통째로 ISO 테스트 씬에서 걷어내고 원래의 매 프레임 갱신 방식으로 되돌렸다. 원인이 될 만한 것부터 먼저 지워서 회귀인지 아닌지 확인하는 순서였다. 원래 있던 가끔의 미세 스터터 최적화는, 이게 안정된 뒤에 Profiler로 다시 잡기로 미뤘다.</p>
+      <figure>
+        <img src="../assets/eastwar/worldmap-topnav-base-01.png" alt="World map top nav bar, base state — eight icons" />
+        <figcaption>World map top nav bar, base state — eight icons</figcaption>
+      </figure>
 
-      <h3>진짜 원인은 따로 있었다</h3>
-      <p>성능 실험을 걷어냈는데도 튐이 남아 있었다. 다시 파보니 원인이 명확하게 나왔다 — 아군 턴이 돌아올 때 실행되는 "현재 행동 진영 강조(active ally turn pulse)" 연출이 부대 토큰만 커지는 게 아니라, <code>AllyUnitVisualRoot</code> 전체를 1.5배로 확대하고 있었다. 그런데 이 루트 노드 안에는 검은색 <code>UnitShadow</code>(유닛 그림자)까지 함께 들어 있었다.</p>
+      <p>In its default state, only the icons sit there quietly. Hovering over one expands a hover label — "Tech Tree," "Military," and so on. The bar stays out of the way most of the time, only revealing names when needed.</p>
 
-      <p>그러니까 실제로 일어난 일은 이거였다 — 턴이 넘어올 때마다 그림자가 순간적으로 확 커졌다가 줄어들면서, 화면에 "검은 막이 덮였다가 사라지는" 것처럼 보였던 것. 최적화 문제가 아니라, 턴 강조 연출의 적용 범위가 잘못 잡힌 버그성 연출이었다.</p>
+      <figure>
+        <img src="../assets/eastwar/worldmap-topnav-hover-01.png" alt="World map top nav bar, hover state — &quot;Tech Tree&quot; label expanded" />
+        <figcaption>World map top nav bar, hover state — "Tech Tree" label expanded</figcaption>
+      </figure>
 
-      <p>수정 방향은 명확했다. ISO 테스트에서는 그림자·HP·텍스트가 전부 들어 있는 전체 루트를 키우는 대신, 부대 토큰과 장수 초상만 기존처럼 펄스시키도록 범위를 좁혔다.</p>
+      <h3>Making the Tech Tree Window More Intuitive</h3>
+      <p>Of the eight menus, Tech Tree was the first to get an actual working window built out. National Tech Tree and City Tech Tree descriptions got fully split left and right — nation-level research like taxation, military, and diplomacy sits on the left, while city-level choices like agriculture, fishing, and salt production sit on the right.</p>
 
-      <h3>방향 표시, 어디는 벡터로 어디는 이미지로</h3>
-      <p>버그를 잡은 김에 전투화면의 부대 방향 표시와 방향선택 UI도 다듬었다.</p>
+      <p>To keep empty space from feeling hollow, areas without content now show a soft tech-tree emblem as a watermark.</p>
 
-      <p>부대 위에 뜨는 이동 방향 화살표는 기존 벡터 이미지를 그대로 유지했다. 이유는 단순했다 — 크기가 워낙 작아서, 여기에 이미지를 씌우면 오히려 조잡해 보였다. 벡터 그대로 두는 게 더 깔끔했다.</p>
+      <figure>
+        <img src="../assets/eastwar/worldmap-techtree-watermark-01.png" alt="Tech tree overlay watermark emblem" />
+        <figcaption>Tech tree overlay watermark emblem</figcaption>
+      </figure>
 
-      <p>반대로 이동을 마친 뒤 나타나는 방향 선택 UI는 이미지로 바꿨다. 이쪽은 화면에서 차지하는 크기가 커서 이미지를 적용했을 때 훨씬 예뻐 보였고, 여기에 입체감을 주기 위해 그림자 효과도 고도엔진에서 직접 구현했다.</p>
+      <p>The work order went: first correcting the tech tree overlay to sit as a layer above the top nav, then auditing whether the existing nation/city selection and research-detail bindings still connected properly, then splitting the lower area into two, and finally making the watermark appear conditionally based on whether content is present.</p>
 
-      <div class="fig-2col">
-        <figure>
-          <img src="../assets/eastwar/battle-unit-direction-arrow-02.png" alt="부대 이동 방향 표시 — 벡터 이미지 유지" />
-          <figcaption>부대 이동 방향 표시 — 벡터 이미지 유지</figcaption>
-        </figure>
-        <figure>
-          <img src="../assets/eastwar/battle-direction-select-ui-02.png" alt="이동 후 방향 선택 UI — 그래픽 + 그림자 적용" />
-          <figcaption>이동 후 방향 선택 UI — 그래픽 + 그림자 적용</figcaption>
-        </figure>
-      </div>
-
-      <p>방향선택 화살표는 한 번에 끝나지 않았다. 처음엔 각도만 조정해서 넣었는데, 실제 게임 화면에서는 삐뚤어져 보였다 — 아이소메트릭 화면 특성상 단순 각도 회전으로는 평행이 안 맞았던 것. 그래서 포토샵에서 화면에 실제로 맞춰가며 화살표를 다시 조정한 뒤에야 반듯하게 자리 잡았다.</p>
-
-      <h3>앞으로</h3>
-      <p>성능 실험은 걷어내고 검증된 상태로 되돌렸고, 진짜 원인이었던 턴 강조 연출의 범위도 바로잡았다. 방향 표시도 벡터와 이미지를 적재적소에 나눠 썼다. 다음은 걷어냈던 미세 스터터 최적화를 Profiler로 다시 잡는 일과, 이 방향선택 UI를 실제 전투 흐름에 완전히 연결하는 작업이 남아 있다.</p>
+      <h3>What's Next</h3>
+      <p>Of the eight top-nav items, Tech Tree found its footing this round. Military, Personnel, Diplomacy, Trade, Espionage, Intelligence, and System are next in line to get filled in with real functionality.</p>
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-037.html" class="log-nav__prev">
-        <span class="log-nav__label">이전</span>
-        <span class="log-nav__title">← Dev Log #037</span>
+      <a href="eastwar-devlog-038-en.html" class="log-nav__prev">
+        <span class="log-nav__label">Previous</span>
+        <span class="log-nav__title">← Dev Log #038</span>
       </a>
-      <a href="eastwar-devlog-039.html" class="log-nav__next">
-        <span class="log-nav__label">다음</span>
-        <span class="log-nav__title">Dev Log #039 →</span>
+      <a href="eastwar-devlog-040-en.html" class="log-nav__next">
+        <span class="log-nav__label">Next</span>
+        <span class="log-nav__title">Dev Log #040 →</span>
       </a>
     </div>
 
@@ -241,7 +236,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 <footer id="contact">
   <p class="big">Let's build a <em>world</em> →</p>
   <div class="grid-ft">
-    <div class="col c1"><h6>byKimjak Studio</h6><p style="font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0">IP Architect · Seoul, Korea. 시나리오·드라마 기획부터 AI 영상, 게임, 앱까지 — 한 사람이 하나의 세계관을 끝까지 설계합니다.</p></div>
+    <div class="col c1"><h6>byKimjak Studio</h6><p style="font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0">IP Architect · Seoul, Korea. From scenario and drama planning to AI film, games, and apps — one person designing a single universe end to end.</p></div>
     <div class="col c2"><h6>Sections</h6><a href="../watch/">Watch <span class="ext">/01</span></a><a href="../make/">Make <span class="ext">/02</span></a><a href="../think/">Think <span class="ext">/03</span></a></div>
     <div class="col c3"><h6>Social</h6><a href="#">Instagram <span class="ext">↗</span></a><a href="#">YouTube <span class="ext">↗</span></a><a href="#">Vimeo <span class="ext">↗</span></a><a href="#">Threads <span class="ext">↗</span></a></div>
     <div class="col c4"><h6>Contact</h6><a href="mailto:oropa@kakao.com">oropa@kakao.com</a><a href="#">Press kit <span class="ext">PDF</span></a><a href="#">For PDs &amp; Investors <span class="ext">↗</span></a></div>
@@ -255,7 +250,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '038');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '039');
 </script>
 <script src="/bykimjak/eastwar-hub.js"></script>
 </body>

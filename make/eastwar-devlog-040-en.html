@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR 개발일지 #038 — 전투화면에 검은 막이 덮였다 사라진 이유 · byKimjak</title>
+<title>EASTWAR Dev Log #040 — Twenty-Three Quiet Time Bombs · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -130,25 +130,25 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     <div class="has-drop">
       <a href="../watch/"><span class="idx">01</span>WATCH</a>
       <div class="drop">
-        <a href="../watch/ai-film.html"><span class="sub-idx">01–A</span>AI 영상 · 티저</a>
-        <a href="../watch/ost.html"><span class="sub-idx">01–B</span>OST · 음악</a>
-        <a href="../watch/still.html"><span class="sub-idx">01–C</span>스틸 이미지</a>
+        <a href="../watch/ai-film.html"><span class="sub-idx">01–A</span>AI Films · Teasers</a>
+        <a href="../watch/ost.html"><span class="sub-idx">01–B</span>OST · Music</a>
+        <a href="../watch/still.html"><span class="sub-idx">01–C</span>Stills</a>
       </div>
     </div>
     <div class="has-drop">
       <a href="../make/"><span class="idx">02</span>MAKE</a>
       <div class="drop">
-        <a href="../make/eastwar.html"><span class="sub-idx">02–A</span>EASTWAR 개발일지</a>
-        <a href="../make/grandslam.html"><span class="sub-idx">02–B</span>GrandSlam 개발일지</a>
-        <a href="../make/takezero.html"><span class="sub-idx">02–C</span>TakeZero · 프롬프트 엔진</a>
+        <a href="../make/eastwar.html"><span class="sub-idx">02–A</span>EASTWAR Dev Log</a>
+        <a href="../make/grandslam.html"><span class="sub-idx">02–B</span>GrandSlam Dev Log</a>
+        <a href="../make/takezero.html"><span class="sub-idx">02–C</span>TakeZero · Prompt Engine</a>
       </div>
     </div>
     <div class="has-drop">
       <a href="../think/"><span class="idx">03</span>THINK</a>
       <div class="drop">
-        <a href="../think/ai-coach.html"><span class="sub-idx">03–A</span>AI 코치들과의 수다</a>
-        <a href="../think/morning-word.html"><span class="sub-idx">03–B</span>아침 말씀 with 채코치</a>
-        <a href="../think/personal-essay.html"><span class="sub-idx">03–C</span>개인 에세이</a>
+        <a href="../think/ai-coach.html"><span class="sub-idx">03–A</span>Chats With AI Coaches</a>
+        <a href="../think/morning-word.html"><span class="sub-idx">03–B</span>Morning Word with Chaekochi</a>
+        <a href="../think/personal-essay.html"><span class="sub-idx">03–C</span>Personal Essays</a>
       </div>
     </div>
     <a href="../index.html#about"><span class="idx">04</span>ABOUT</a>
@@ -164,74 +164,108 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     <div class="breadcrumb rev">
       <a href="../index.html">bykimjak</a>
       <span class="sep">›</span>
-      <a href="eastwar.html">EASTWAR</a>
+      <a href="eastwar-en.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #038</span>
+      <span>Dev Log #040</span>
     </div>
     <div class="lang-switch rev">
-      <span class="lang-current">🇰🇷 한국어</span>
+      <a href="eastwar-devlog-040.html" class="lang-other">🇰🇷 한국어</a>
       <span class="lang-sep">|</span>
-      <a href="eastwar-devlog-038-en.html" class="lang-other">🇺🇸 English</a>
+      <span class="lang-current">🇺🇸 English</span>
     </div>
     <h1 class="rev">EASTWAR</h1>
     <p class="sub-ko rev">이스트워 개발일지</p>
-    <p class="listing-desc rev">전략 가상역사 시뮬레이션 — 1인 개발 기록</p>
+    <p class="listing-desc rev">Strategy alt-history simulation — solo dev log</p>
   </div>
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-038">
+  <article class="devlog" id="log-040">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #038</span>
-      <h1>전투화면에 검은 막이 덮였다 사라진 이유</h1>
-      <h2>튐 현상 버그 수정 & 방향표시 다듬기</h2>
-      <span class="log-date">2026년 08월 29일</span>
+      <span class="log-num">Dev Log · #040</span>
+      <h1>Twenty-Three Quiet Time Bombs</h1>
+      <h2>A Full Structural Audit That Started With a Tech Tree Collision</h2>
+      <span class="log-date">September 3, 2026</span>
 
       <hr />
-      <h3>브라운관처럼 툭툭 튀던 화면</h3>
-      <p>전투 엔진 최적화 작업을 하고 나서, 갑자기 화면이 브라운관처럼 툭툭 튀는 현상이 생겼다. 가장 먼저 의심한 건 하루 전에 넣었던 1차 성능 실험이었다 — 정지 상태 UI를 10/20/30Hz 단위로 제한하고, 전투 시작과 동시에 여러 OGV 컷인 리소스를 백그라운드에서 미리 로드하도록 만든 코드였다. 특히 이동·idle Tween이 도는 도중에 IO나 프레임 페이싱이 조금이라도 튀면, 유닛이 순간이동하듯 보일 수 있는 구조였다.</p>
+      <h3>A Screen That Kept Collapsing</h3>
+      <p>While polishing the tech tree window, a bug showed up — the window kept rendering wrong. The detail panel area would shrink to half its intended space, or less. It repeated every time a different city got selected during testing.</p>
 
-      <p>그래서 그 실험을 통째로 ISO 테스트 씬에서 걷어내고 원래의 매 프레임 갱신 방식으로 되돌렸다. 원인이 될 만한 것부터 먼저 지워서 회귀인지 아닌지 확인하는 순서였다. 원래 있던 가끔의 미세 스터터 최적화는, 이게 안정된 뒤에 Profiler로 다시 잡기로 미뤘다.</p>
+      <p>Digging into the cause turned up a clear picture. One UI node, <code>content_root</code>, was being touched simultaneously by two scripts that had no idea the other existed.</p>
 
-      <h3>진짜 원인은 따로 있었다</h3>
-      <p>성능 실험을 걷어냈는데도 튐이 남아 있었다. 다시 파보니 원인이 명확하게 나왔다 — 아군 턴이 돌아올 때 실행되는 "현재 행동 진영 강조(active ally turn pulse)" 연출이 부대 토큰만 커지는 게 아니라, <code>AllyUnitVisualRoot</code> 전체를 1.5배로 확대하고 있었다. 그런데 이 루트 노드 안에는 검은색 <code>UnitShadow</code>(유닛 그림자)까지 함께 들어 있었다.</p>
+      <ul>
+        <li><code>worldmap_main.gd</code>'s <code>_refresh_domestic_tech_tree_overlay_mvp()</code> — clears this node entirely and rebuilds it from scratch every time the selected city changes: header_row → split (national/city tree) → inspector (detail info), in that order — the originally intended, correct layout.</li>
+        <li><code>worldmap_tech_tree_split_detail_test_controller.gd</code>'s <code>_process()</code> — running every frame, quietly detaching the split and inspector nodes built above and re-wrapping them into a 42%/58% ratio.</li>
+      </ul>
 
-      <p>그러니까 실제로 일어난 일은 이거였다 — 턴이 넘어올 때마다 그림자가 순간적으로 확 커졌다가 줄어들면서, 화면에 "검은 막이 덮였다가 사라지는" 것처럼 보였던 것. 최적화 문제가 아니라, 턴 강조 연출의 적용 범위가 잘못 잡힌 버그성 연출이었다.</p>
+      <p>The problem was that neither knew about the other. The moment a city click triggered the first script to clear <code>content_root</code>, the node the second script had built was still sitting in the tree that frame — only "scheduled for deletion" via <code>queue_free()</code>, not actually gone yet. If the first script added its new nodes right at that moment, two sets of space-competing nodes briefly existed on screen at once. A VBoxContainer splits remaining space evenly between such nodes, so the detail panel collapsing was the inevitable result.</p>
 
-      <p>수정 방향은 명확했다. ISO 테스트에서는 그림자·HP·텍스트가 전부 들어 있는 전체 루트를 키우는 대신, 부대 토큰과 장수 초상만 기존처럼 펄스시키도록 범위를 좁혔다.</p>
+      <h3>One Room, Two People</h3>
+      <p>Here's the metaphor that made the situation click. Two people are tidying the same room, each on their own. One person (A) clears the entire room and rearranges the furniture from scratch every time a new guest arrives. The other (B) quietly follows behind, re-arranging what A just placed into a nicer 42:58 split. Neither knows about the other. The instant A clears the room, the furniture B had just rearranged is still sitting there, not fully removed — and if A then moves in new furniture on top of that, for one brief moment the room holds two competing sets of furniture trying to claim the same space. Neither ends up settling properly; both get crushed into a corner.</p>
 
-      <h3>방향 표시, 어디는 벡터로 어디는 이미지로</h3>
-      <p>버그를 잡은 김에 전투화면의 부대 방향 표시와 방향선택 UI도 다듬었다.</p>
+      <figure>
+        <img src="../assets/eastwar/worldmap-techtree-detail-panel-01.png" alt="The actual tech tree detail panel screen where the bug occurred" />
+        <figcaption>The actual tech tree detail panel screen where the bug occurred</figcaption>
+      </figure>
 
-      <p>부대 위에 뜨는 이동 방향 화살표는 기존 벡터 이미지를 그대로 유지했다. 이유는 단순했다 — 크기가 워낙 작아서, 여기에 이미지를 씌우면 오히려 조잡해 보였다. 벡터 그대로 두는 게 더 깔끔했다.</p>
+      <p>The fix broke down into three steps.</p>
 
-      <p>반대로 이동을 마친 뒤 나타나는 방향 선택 UI는 이미지로 바꿨다. 이쪽은 화면에서 차지하는 크기가 커서 이미지를 적용했을 때 훨씬 예뻐 보였고, 여기에 입체감을 주기 위해 그림자 효과도 고도엔진에서 직접 구현했다.</p>
+      <ul>
+        <li><strong>Build it complete from the start</strong> — instead of keeping B separate, have A build the finished "42:58 split room" in one pass from the beginning.</li>
+        <li><strong>Carry over the rules B knew too</strong> — B wasn't just rearranging furniture; it also held a rule: "national topics go left, city topics go right." Dropping B without carrying this rule over would stop the collapsing, but the feature itself would vanish. So this rule had to be handed off to A as well.</li>
+        <li><strong>Clean up the now-unnecessary contract with B</strong> — once steps 1 and 2 are done, B has nothing left to touch and naturally stops mattering on its own. The file still exists, though, so this final step formally retires it to avoid confusion later.</li>
+      </ul>
 
-      <div class="fig-2col">
-        <figure>
-          <img src="../assets/eastwar/battle-unit-direction-arrow-02.png" alt="부대 이동 방향 표시 — 벡터 이미지 유지" />
-          <figcaption>부대 이동 방향 표시 — 벡터 이미지 유지</figcaption>
-        </figure>
-        <figure>
-          <img src="../assets/eastwar/battle-direction-select-ui-02.png" alt="이동 후 방향 선택 UI — 그래픽 + 그림자 적용" />
-          <figcaption>이동 후 방향 선택 UI — 그래픽 + 그림자 적용</figcaption>
-        </figure>
-      </div>
+      <h3>Was This Just a One-Off Problem?</h3>
+      <p>Fixing the bug raised a question: could this pattern exist elsewhere too? So the entire <code>scripts/worldmap/ui/</code> folder got scanned.</p>
 
-      <p>방향선택 화살표는 한 번에 끝나지 않았다. 처음엔 각도만 조정해서 넣었는데, 실제 게임 화면에서는 삐뚤어져 보였다 — 아이소메트릭 화면 특성상 단순 각도 회전으로는 평행이 안 맞았던 것. 그래서 포토샵에서 화면에 실제로 맞춰가며 화살표를 다시 조정한 뒤에야 반듯하게 자리 잡았다.</p>
+      <p>23 test_controller-type scripts existed. Of those, exactly two others — besides the tech tree one — used the identical pattern: polling every frame via <code>_process()</code> and directly reaching into a node built by <code>worldmap_main.gd</code>. One touched garrison cards; the other touched the left/right HUD panels and the prime minister/governor cards.</p>
 
-      <h3>앞으로</h3>
-      <p>성능 실험은 걷어내고 검증된 상태로 되돌렸고, 진짜 원인이었던 턴 강조 연출의 범위도 바로잡았다. 방향 표시도 벡터와 이미지를 적재적소에 나눠 썼다. 다음은 걷어냈던 미세 스터터 최적화를 Profiler로 다시 잡는 일과, 이 방향선택 UI를 실제 전투 흐름에 완전히 연결하는 작업이 남아 있다.</p>
+      <p>Fortunately, only the tech tree case had actually broken so far. The reason was clear — across all of <code>worldmap_main.gd</code>, exactly one destructive function existed that "clears children entirely and rebuilds from scratch," and it belonged only to the tech tree. The other two targets (garrison cards, HUD panels) only get their values updated, never cleared and rebuilt. That's why the same bug hasn't triggered there — yet.</p>
+
+      <p>But the core point was that all three shared the same underlying risk. The bug only fires when "destructive rebuild" and "external polling patch" overlap — right now, that overlap just happens to exist only in the tech tree. The moment either of the other two gets refactored into a "clear and rebuild" pattern, the same collision could resurface.</p>
+
+      <h3>A Three-Step Response</h3>
+      <p><strong>Step 1 — Fix what actually broke.</strong> The separate controller's after-the-fact re-wrapping structure got removed, and the final 42:58 layout got merged directly into <code>worldmap_main.gd</code>'s owning function. National and city detail views got properly separated, the watermark got made conditional, and rebuilds now detach and queue_free immediately.</p>
+
+      <p><strong>Step 2 — Audit the two risky remaining cases.</strong> Code didn't get moved blindly here. First came determining exactly what <code>_process()</code> was looking for, which nodes it directly modified, whether main-side code currently rebuilds those nodes, and whether the feature had already stabilized. The verdict split three ways: safe-but-temporary patches stay as-is with the risk documented; anything stabilized and worth promoting gets merged into proper code; risky polling structures get converted to a signal-based approach or merged into the owning function.</p>
+
+      <p><strong>Step 3 — Lock the prevention rule into the docs.</strong> This turned out to be the most valuable outcome of the whole bug.</p>
+
+      <blockquote>
+        <p>A UI subtree that gets destructively (clear+rebuild) regenerated must never be the target of a separate controller polling it via <code>_process()</code>. It must either (a) have its logic merged directly into the owning function, or (b) emit a Signal once the rebuild finishes, with any external script reacting only once, on receiving that Signal.</p>
+      </blockquote>
+
+      <p>Going forward, whenever a new test_controller gets added, the verification routine now includes listing which node paths it looks up inside <code>_process()</code> and cross-checking whether <code>worldmap_main.gd</code> contains a function that clears and rebuilds that same node path. Longer term, test_controllers that have already stabilized with no further changes get periodically promoted into the main body or a proper system file — managing the sheer count of files still carrying the "test_controller" label.</p>
+
+      <p>The goal of this cleanup was never to move all 23 into the main body. It was to audit all 23 and only touch the ones that are genuinely risky or worth promoting — that line got drawn clearly.</p>
+
+      <h3>The Branches Got Cleaned Up Too</h3>
+      <p>Something else surfaced while fixing the bug. Two large ongoing efforts — the map screen overhaul and the battle movement experiment — had zero relationship to each other, yet were tangled together in the same branch. As it stood, there was no way to say "let's just lock in this one piece" without dragging the other along.</p>
+
+      <p>So the branches got fully separated. Using main as the reference point, each file's final state from the original branch got sorted and moved by path, with the original branch preserved untouched. Here's how it split:</p>
+
+      <ul>
+        <li>WorldMap → <code>feature/worldmap-territory-techtree-hud</code> (106 files)</li>
+        <li>Battle Iso → <code>feature/battle-iso-movement</code> (23 files)</li>
+        <li>AI Workflow Docs → <code>docs/ai-implementation-workflow</code> (2 files)</li>
+        <li>Hero Cutin Perf → <code>perf/hero-cutin-registry-cache</code> (1 file)</li>
+      </ul>
+
+      <p>File overlap between WorldMap and Battle Iso came out to zero.</p>
+
+      <h3>Today in One Line</h3>
+      <p>A screen kept rendering wrong, and fixing it turned out to mean two separate pieces of code touching the same screen without either knowing the other existed. Fixing that raised the question "is this happening anywhere else?" — and a full codebase scan turned up two more instances of the same pattern. Along the way, it also became obvious that two currently unrelated efforts had been sitting in the same branch this whole time. A day that started with one screen bug ended up revealing that the way things had been working needed a cleanup of its own.</p>
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-037.html" class="log-nav__prev">
-        <span class="log-nav__label">이전</span>
-        <span class="log-nav__title">← Dev Log #037</span>
+      <a href="eastwar-devlog-039-en.html" class="log-nav__prev">
+        <span class="log-nav__label">Previous</span>
+        <span class="log-nav__title">← Dev Log #039</span>
       </a>
-      <a href="eastwar-devlog-039.html" class="log-nav__next">
-        <span class="log-nav__label">다음</span>
-        <span class="log-nav__title">Dev Log #039 →</span>
+      <a href="eastwar-en.html" class="log-nav__next">
+        <span class="log-nav__label">Index</span>
+        <span class="log-nav__title">Back to index →</span>
       </a>
     </div>
 
@@ -241,7 +275,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 <footer id="contact">
   <p class="big">Let's build a <em>world</em> →</p>
   <div class="grid-ft">
-    <div class="col c1"><h6>byKimjak Studio</h6><p style="font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0">IP Architect · Seoul, Korea. 시나리오·드라마 기획부터 AI 영상, 게임, 앱까지 — 한 사람이 하나의 세계관을 끝까지 설계합니다.</p></div>
+    <div class="col c1"><h6>byKimjak Studio</h6><p style="font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0">IP Architect · Seoul, Korea. From scenario and drama planning to AI film, games, and apps — one person designing a single universe end to end.</p></div>
     <div class="col c2"><h6>Sections</h6><a href="../watch/">Watch <span class="ext">/01</span></a><a href="../make/">Make <span class="ext">/02</span></a><a href="../think/">Think <span class="ext">/03</span></a></div>
     <div class="col c3"><h6>Social</h6><a href="#">Instagram <span class="ext">↗</span></a><a href="#">YouTube <span class="ext">↗</span></a><a href="#">Vimeo <span class="ext">↗</span></a><a href="#">Threads <span class="ext">↗</span></a></div>
     <div class="col c4"><h6>Contact</h6><a href="mailto:oropa@kakao.com">oropa@kakao.com</a><a href="#">Press kit <span class="ext">PDF</span></a><a href="#">For PDs &amp; Investors <span class="ext">↗</span></a></div>
@@ -255,7 +289,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '038');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '040');
 </script>
 <script src="/bykimjak/eastwar-hub.js"></script>
 </body>

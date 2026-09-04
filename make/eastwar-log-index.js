@@ -193,6 +193,16 @@
       num: '038', date: '2026 · 08 · 29',
       ko: { href: 'eastwar-devlog-038.html',    title: '전투화면에 검은 막이 덮였다 사라진 이유', sub: '튐 현상 버그 수정 & 방향표시 다듬기' },
       en: { href: 'eastwar-devlog-038-en.html', title: 'Why a Black Veil Kept Covering the Battle Screen', sub: 'Fixing the Stutter Bug & Polishing Direction Indicators' }
+    },
+    {
+      num: '039', date: '2026 · 09 · 03',
+      ko: { href: 'eastwar-devlog-039.html',    title: '여덟 개의 문이 지도 위에 걸렸다', sub: '월드맵 상단메뉴바 제작기' },
+      en: { href: 'eastwar-devlog-039-en.html', title: 'Eight Doors Now Hang Over the Map', sub: "Building the World Map's Top Navigation Bar" }
+    },
+    {
+      num: '040', date: '2026 · 09 · 03',
+      ko: { href: 'eastwar-devlog-040.html',    title: '23개의 조용한 폭탄', sub: '테크트리 충돌에서 시작된 전체 구조 감사' },
+      en: { href: 'eastwar-devlog-040-en.html', title: 'Twenty-Three Quiet Time Bombs', sub: 'A Full Structural Audit That Started With a Tech Tree Collision' }
     }
   ];
 
