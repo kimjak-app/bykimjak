@@ -188,6 +188,11 @@
       num: '037', date: '2026 · 08 · 28',
       ko: { href: 'eastwar-devlog-037.html',    title: '전투엔진 한 단계 더 입체적으로',           sub: '아이소메트릭 이동 셀 A/B 테스트' },
       en: { href: 'eastwar-devlog-037-en.html', title: 'Making the Battle Engine One Step More Three-Dimensional', sub: 'An Isometric Movement Cell A/B Test' }
+    },
+    {
+      num: '038', date: '2026 · 08 · 29',
+      ko: { href: 'eastwar-devlog-038.html',    title: '전투화면에 검은 막이 덮였다 사라진 이유', sub: '튐 현상 버그 수정 & 방향표시 다듬기' },
+      en: { href: 'eastwar-devlog-038-en.html', title: 'Why a Black Veil Kept Covering the Battle Screen', sub: 'Fixing the Stutter Bug & Polishing Direction Indicators' }
     }
   ];
 

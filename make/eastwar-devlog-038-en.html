@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR Dev Log #037 — Making the Battle Engine One Step More Three-Dimensional · byKimjak</title>
+<title>EASTWAR Dev Log #038 — Why a Black Veil Kept Covering the Battle Screen · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -130,25 +130,25 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     <div class="has-drop">
       <a href="../watch/"><span class="idx">01</span>WATCH</a>
       <div class="drop">
-        <a href="../watch/ai-film.html"><span class="sub-idx">01–A</span>AI 영상 · 티저</a>
-        <a href="../watch/ost.html"><span class="sub-idx">01–B</span>OST · 음악</a>
-        <a href="../watch/still.html"><span class="sub-idx">01–C</span>스틸 이미지</a>
+        <a href="../watch/ai-film.html"><span class="sub-idx">01–A</span>AI Films · Teasers</a>
+        <a href="../watch/ost.html"><span class="sub-idx">01–B</span>OST · Music</a>
+        <a href="../watch/still.html"><span class="sub-idx">01–C</span>Stills</a>
       </div>
     </div>
     <div class="has-drop">
       <a href="../make/"><span class="idx">02</span>MAKE</a>
       <div class="drop">
-        <a href="../make/eastwar.html"><span class="sub-idx">02–A</span>EASTWAR 개발일지</a>
-        <a href="../make/grandslam.html"><span class="sub-idx">02–B</span>GrandSlam 개발일지</a>
-        <a href="../make/takezero.html"><span class="sub-idx">02–C</span>TakeZero · 프롬프트 엔진</a>
+        <a href="../make/eastwar.html"><span class="sub-idx">02–A</span>EASTWAR Dev Log</a>
+        <a href="../make/grandslam.html"><span class="sub-idx">02–B</span>GrandSlam Dev Log</a>
+        <a href="../make/takezero.html"><span class="sub-idx">02–C</span>TakeZero · Prompt Engine</a>
       </div>
     </div>
     <div class="has-drop">
       <a href="../think/"><span class="idx">03</span>THINK</a>
       <div class="drop">
-        <a href="../think/ai-coach.html"><span class="sub-idx">03–A</span>AI 코치들과의 수다</a>
-        <a href="../think/morning-word.html"><span class="sub-idx">03–B</span>아침 말씀 with 채코치</a>
-        <a href="../think/personal-essay.html"><span class="sub-idx">03–C</span>개인 에세이</a>
+        <a href="../think/ai-coach.html"><span class="sub-idx">03–A</span>Chats With AI Coaches</a>
+        <a href="../think/morning-word.html"><span class="sub-idx">03–B</span>Morning Word with Chaekochi</a>
+        <a href="../think/personal-essay.html"><span class="sub-idx">03–C</span>Personal Essays</a>
       </div>
     </div>
     <a href="../index.html#about"><span class="idx">04</span>ABOUT</a>
@@ -166,10 +166,10 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar-en.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #037</span>
+      <span>Dev Log #038</span>
     </div>
     <div class="lang-switch rev">
-      <a href="eastwar-devlog-037.html" class="lang-other">🇰🇷 한국어</a>
+      <a href="eastwar-devlog-038.html" class="lang-other">🇰🇷 한국어</a>
       <span class="lang-sep">|</span>
       <span class="lang-current">🇺🇸 English</span>
     </div>
@@ -180,55 +180,58 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-037">
+  <article class="devlog" id="log-038">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #037</span>
-      <h1>Making the Battle Engine One Step More Three-Dimensional</h1>
-      <h2>An Isometric Movement Cell A/B Test</h2>
-      <span class="log-date">August 28, 2026</span>
+      <span class="log-num">Dev Log · #038</span>
+      <h1>Why a Black Veil Kept Covering the Battle Screen</h1>
+      <h2>Fixing the Stutter Bug & Polishing Direction Indicators</h2>
+      <span class="log-date">August 29, 2026</span>
 
       <hr />
-      <h3>The Original Stays Untouched — Only the Clone Gets Modified</h3>
-      <p>The battle screen's movement display was working fine functionally. The issue was how movement paths and directions rendered over the diamond cells — they read as ↑↓←→, a grid-axis feel, even though the screen itself is isometric. Movement was the one thing still behaving like a straight grid in an otherwise angled view.</p>
+      <h3>A Screen Stuttering Like an Old CRT</h3>
+      <p>Right after a battle engine optimization pass, the screen suddenly started stuttering like an old CRT television. The prime suspect was the first-round performance experiment added the day before — code that throttled idle-state UI to 10/20/30Hz increments and preloaded multiple OGV cutin resources in the background the moment a battle started. Any hiccup in IO or frame pacing during a movement or idle tween could make a unit look like it was teleporting under this setup.</p>
 
-      <p>The goal of this experiment wasn't adding new functionality — it was making the existing battle look one step more three-dimensional. So the approach got handled carefully: the original Imjin War battle test scene got duplicated as-is into <code>Battle_Imjin_IsoMovement_Test.tscn</code>, and only the clone received the following changes:</p>
+      <p>So the entire experiment got stripped out of the ISO test scene, reverting back to the original every-frame update approach. The idea was to eliminate the most likely cause first and confirm whether it was actually a regression. The occasional micro-stutter optimization that had existed before got deferred — to be picked back up with the Profiler once things stabilized.</p>
 
-      <ul>
-        <li>Movable tiles switched to isometric diamond cells</li>
-        <li>Click/selection position aligned to the center of those cells</li>
-        <li>Unit movement switched from an ↑↓←→ feel to an ↖↗↙↘ diagonal axis</li>
-        <li>Movement path display switched to the same diagonal axis</li>
-        <li>The post-move direction-selection arrows switched to diagonal directions too</li>
-        <li>Final unit facing matched to that same direction</li>
-      </ul>
+      <h3>The Real Cause Was Somewhere Else</h3>
+      <p>Even after pulling out the performance experiment, the stutter remained. Digging further turned up a clear cause: the "active ally turn pulse" effect — which plays when a turn returns to the ally side — wasn't just scaling up the unit token. It was scaling the entire <code>AllyUnitVisualRoot</code> by 1.5x. And that root node happened to contain the black <code>UnitShadow</code> as well.</p>
 
-      <p>Just as importantly, what absolutely wasn't touched got locked down clearly too: combat logic, movement range, attack resolution, turn order, AI, unique skills, momentum, hero data, the left/right rosters, the bottom HUD, background art, terrain, and unit graphics — all of it stayed exactly as it was in the original.</p>
+      <p>So what was actually happening: every time a turn switched over, the shadow briefly ballooned and shrank back down, reading on screen as a black veil covering and then disappearing. This wasn't a performance issue — it was a buggy effect where the turn-highlight animation's scope had simply been set wrong.</p>
+
+      <p>The fix was straightforward. In the ISO test, instead of scaling the entire root — which contains the shadow, HP bar, and text all together — the scope narrowed to pulse only the unit token and the general's portrait, the way it originally should have.</p>
+
+      <h3>Direction Indicators — Vector Here, Image There</h3>
+      <p>While fixing the bug, the battle screen's unit direction indicator and post-move direction selector both got a polish pass.</p>
+
+      <p>The movement direction arrow that appears above a unit stayed as the existing vector image. The reason was simple — it's small enough that applying a raster image there actually made it look messier. Keeping it as a vector was the cleaner choice.</p>
+
+      <p>The direction-selection UI that appears after a move completes, on the other hand, switched over to image assets. That element takes up more screen space, so an image applied there looked noticeably better — and a shadow effect got implemented directly in Godot to give it some depth.</p>
 
       <div class="fig-2col">
         <figure>
-          <img src="../assets/eastwar/battle-iso-movement-before-01.png" alt="Before — grid-axis (↑↓←→) movement" />
-          <figcaption>Before — grid-axis (↑↓←→) movement</figcaption>
+          <img src="../assets/eastwar/battle-unit-direction-arrow-02.png" alt="Unit movement direction indicator — kept as vector" />
+          <figcaption>Unit movement direction indicator — kept as vector</figcaption>
         </figure>
         <figure>
-          <img src="../assets/eastwar/battle-iso-movement-after-01.png" alt="After — diagonal-axis (↖↗↙↘) movement" />
-          <figcaption>After — diagonal-axis (↖↗↙↘) movement</figcaption>
+          <img src="../assets/eastwar/battle-direction-select-ui-02.png" alt="Post-move direction selection UI — graphic with shadow applied" />
+          <figcaption>Post-move direction selection UI — graphic with shadow applied</figcaption>
         </figure>
       </div>
 
-      <p>The advantage of this approach was that the comparison didn't rely on gut feeling — it was visible directly. Pulling up the original and the clone alternately via F6 made "did this actually get better?" an immediate side-by-side judgment, not a guess. Once confirmed this way, the next step is porting it into Production.</p>
+      <p>Getting the direction-selection arrows right took more than one pass. The first attempt just rotated the angles and dropped them in, but on the actual game screen they looked crooked — a simple angle rotation doesn't stay parallel correctly on an isometric view. It took a second pass in Photoshop, adjusting the arrows against the real screen until they actually sat straight.</p>
 
       <h3>What's Next</h3>
-      <p>If this experiment holds up, the next step is porting this diagonal movement axis into the actual battle scene. It's a small change, but it's the last piece needed to make the whole screen move like real isometric terrain instead of a grid.</p>
+      <p>The performance experiment got pulled back to a verified baseline, and the real culprit — the turn-highlight effect's scope — got corrected. Direction indicators now use vector and image assets where each fits best. What's left is picking the deferred micro-stutter optimization back up with the Profiler, and fully wiring this direction-selection UI into actual battle flow.</p>
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-036-en.html" class="log-nav__prev">
+      <a href="eastwar-devlog-037-en.html" class="log-nav__prev">
         <span class="log-nav__label">Previous</span>
-        <span class="log-nav__title">← Dev Log #036</span>
+        <span class="log-nav__title">← Dev Log #037</span>
       </a>
-      <a href="eastwar-devlog-038-en.html" class="log-nav__next">
-        <span class="log-nav__label">Next</span>
-        <span class="log-nav__title">Dev Log #038 →</span>
+      <a href="eastwar-en.html" class="log-nav__next">
+        <span class="log-nav__label">Index</span>
+        <span class="log-nav__title">Back to index →</span>
       </a>
     </div>
 
@@ -238,7 +241,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 <footer id="contact">
   <p class="big">Let's build a <em>world</em> →</p>
   <div class="grid-ft">
-    <div class="col c1"><h6>byKimjak Studio</h6><p style="font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0">IP Architect · Seoul, Korea. 시나리오·드라마 기획부터 AI 영상, 게임, 앱까지 — 한 사람이 하나의 세계관을 끝까지 설계합니다.</p></div>
+    <div class="col c1"><h6>byKimjak Studio</h6><p style="font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0">IP Architect · Seoul, Korea. From scenario and drama planning to AI film, games, and apps — one person designing a single universe end to end.</p></div>
     <div class="col c2"><h6>Sections</h6><a href="../watch/">Watch <span class="ext">/01</span></a><a href="../make/">Make <span class="ext">/02</span></a><a href="../think/">Think <span class="ext">/03</span></a></div>
     <div class="col c3"><h6>Social</h6><a href="#">Instagram <span class="ext">↗</span></a><a href="#">YouTube <span class="ext">↗</span></a><a href="#">Vimeo <span class="ext">↗</span></a><a href="#">Threads <span class="ext">↗</span></a></div>
     <div class="col c4"><h6>Contact</h6><a href="mailto:oropa@kakao.com">oropa@kakao.com</a><a href="#">Press kit <span class="ext">PDF</span></a><a href="#">For PDs &amp; Investors <span class="ext">↗</span></a></div>
@@ -252,7 +255,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '037');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '038');
 </script>
 <script src="/bykimjak/eastwar-hub.js"></script>
 </body>
