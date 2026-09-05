@@ -317,7 +317,10 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
         <span class="log-nav__label" id="nav-label-prev">← 이전 일지</span>
         <span class="log-nav__title" id="nav-title-prev">#002 — 엔진을 선택하다</span>
       </a>
-      <div></div>
+      <a href="eastwar-devlog-004.html" class="log-nav__next" id="nav-next-link">
+        <span class="log-nav__label" id="nav-label-next">다음 일지 →</span>
+        <span class="log-nav__title" id="nav-title-next">#004 — Phaser를 어떻게 쓸 것인가</span>
+      </a>
     </div>
 
   </article>
@@ -351,6 +354,9 @@ const dateEl = document.getElementById('devlog-date');
 const navPrevLink = document.getElementById('nav-prev-link');
 const navLabelPrev = document.getElementById('nav-label-prev');
 const navTitlePrev = document.getElementById('nav-title-prev');
+const navNextLink = document.getElementById('nav-next-link');
+const navLabelNext = document.getElementById('nav-label-next');
+const navTitleNext = document.getElementById('nav-title-next');
 const logSect = document.getElementById('log-index-sect');
 EASTWAR_LI.render(logSect, 'ko', '003');
 tabs.forEach(tab => {
@@ -367,6 +373,9 @@ tabs.forEach(tab => {
       navPrevLink.href = 'eastwar-devlog-002.html';
       navLabelPrev.textContent = '← 이전 일지';
       navTitlePrev.textContent = '#002 — 엔진을 선택하다';
+      navNextLink.href = 'eastwar-devlog-004.html';
+      navLabelNext.textContent = '다음 일지 →';
+      navTitleNext.textContent = '#004 — Phaser를 어떻게 쓸 것인가';
       EASTWAR_LI.render(logSect, 'ko', '003');
     } else {
       panelKo.style.display = 'none';
@@ -377,6 +386,9 @@ tabs.forEach(tab => {
       navPrevLink.href = 'eastwar-devlog-002-en.html';
       navLabelPrev.textContent = '← Prev Log';
       navTitlePrev.textContent = '#002 — Choosing the Engine';
+      navNextLink.href = 'eastwar-devlog-004-en.html';
+      navLabelNext.textContent = 'Next Log →';
+      navTitleNext.textContent = '#004 — How to Use Phaser — Design Principles';
       EASTWAR_LI.render(logSect, 'en', '003');
     }
   });

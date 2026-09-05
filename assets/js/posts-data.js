@@ -543,6 +543,13 @@
       date: '2026-06-04', dl: '2026 · 06 · 04'
     },
     {
+      url: 'posts/think/ai-coach-005.html',
+      catKey: 'ai-coach', cat: 'AI Conversations',
+      title: '"삼촌 그러다 죽어!"',
+      sub: '3개월 12kg 다이어트 성공기',
+      date: '2026-06-04', dl: '2026 · 06 · 04'
+    },
+    {
       url: 'posts/think/ai-coach-003.html',
       catKey: 'ai-coach', cat: 'AI Conversations',
       title: '마인드셋, 그걸로는 나를 못 바꿔.',

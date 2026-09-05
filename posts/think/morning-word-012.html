@@ -264,6 +264,13 @@
   /* ───────────────── reveal ───────────────── */
   .rev{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
   .rev.in{opacity:1;transform:none}
+
+  .post-nav{display:flex;justify-content:space-between;padding:52px 0 0;margin-top:64px;border-top:1px solid var(--rule)}
+  .post-nav__prev,.post-nav__next{display:flex;flex-direction:column;gap:6px;max-width:46%}
+  .post-nav__next{align-items:flex-end;text-align:right;margin-left:auto}
+  .post-nav__label{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+  .post-nav__title{font-family:var(--f-display);font-size:clamp(14px,1.6vw,18px);font-weight:500;letter-spacing:-.01em;color:var(--ink);transition:color .2s}
+  .post-nav a:hover .post-nav__title{color:var(--accent)}
 </style>
 </head>
 <body>
@@ -365,6 +372,17 @@
 
   </div>
 
+
+  <nav class="post-nav">
+    <a href="morning-word-011.html" class="post-nav__prev">
+      <span class="post-nav__label">← 이전 글</span>
+      <span class="post-nav__title">콘텐츠 원석 채굴 중</span>
+    </a>
+    <a href="morning-word-013.html" class="post-nav__next">
+      <span class="post-nav__label">다음 글 →</span>
+      <span class="post-nav__title">대본 초고 끝내고 이젠 또 게임작업</span>
+    </a>
+  </nav>
 </main>
 
 <!-- ─────────── FOOTER ─────────── -->

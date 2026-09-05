@@ -101,6 +101,13 @@
     footer .c3 { grid-column: 2/3; }
     footer .c4 { grid-column: 1/3; text-align: left; }
   }
+
+  .post-nav{display:flex;justify-content:space-between;padding:52px 0 0;margin-top:64px;border-top:1px solid var(--rule)}
+  .post-nav__prev,.post-nav__next{display:flex;flex-direction:column;gap:6px;max-width:46%}
+  .post-nav__next{align-items:flex-end;text-align:right;margin-left:auto}
+  .post-nav__label{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+  .post-nav__title{font-family:var(--f-display);font-size:clamp(14px,1.6vw,18px);font-weight:500;letter-spacing:-.01em;color:var(--ink);transition:color .2s}
+  .post-nav a:hover .post-nav__title{color:var(--accent)}
 </style>
 </head>
 <body>
@@ -189,6 +196,17 @@
     </div>
 
   </div>
+
+  <nav class="post-nav">
+    <a href="personal-essay-002.html" class="post-nav__prev">
+      <span class="post-nav__label">← 이전 글</span>
+      <span class="post-nav__title">AI와 함께 게임을 만드는 법 — 맥락 관리 시스템</span>
+    </a>
+    <a href="think-004.html" class="post-nav__next">
+      <span class="post-nav__label">다음 글 →</span>
+      <span class="post-nav__title">챗GPT, 코덱스 개발 복붙 사라지다 - v5.6에서의 혁명적 변화</span>
+    </a>
+  </nav>
 </main>
 
 <footer>
