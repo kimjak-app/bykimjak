@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>9월 첫주 아침 스타트! — THINK · byKimjak</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --bg-2:#F2F2F2;
+    --ink:#0A0A0A;
+    --ink-2:#2A2A2A;
+    --ink-3:#6B6B6B;
+    --rule:#0A0A0A1A;
+    --dark:#0D0B09;
+    --dark-2:#1A1714;
+    --dark-ink:#FAF7F2;
+    --dark-ink-2:#9C948A;
+    --dark-rule:#FAF7F21A;
+    --accent:oklch(68% 0.08 70);
+    --accent-soft:oklch(68% 0.08 70 / 0.12);
+
+    --f-display:"Space Grotesk","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;
+    --f-body:"Inter","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;
+    --f-mono:"JetBrains Mono",ui-monospace,monospace;
+    --f-kr:"Pretendard Variable","Inter",ui-sans-serif,system-ui,sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--f-body);
+    background:var(--bg);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    font-feature-settings:"ss01","cv11";
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+  .mono{font-family:var(--f-mono);font-weight:400;letter-spacing:.02em;font-size:11px;text-transform:uppercase}
+  .kr{font-family:var(--f-kr);letter-spacing:-.01em}
+
+  .nav{
+    position:fixed;inset:0 0 auto 0;z-index:100;
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+    padding:18px clamp(20px,4vw,48px);
+    transition:background .35s ease,backdrop-filter .35s ease,border-color .35s ease;
+    border-bottom:1px solid transparent;
+  }
+  .nav.scrolled{
+    background:color-mix(in srgb,var(--bg) 78%,transparent);
+    backdrop-filter:saturate(1.2) blur(14px);
+    -webkit-backdrop-filter:saturate(1.2) blur(14px);
+    border-bottom-color:var(--rule);
+  }
+  .nav__logo{font-family:var(--f-display);font-weight:600;font-size:18px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+  .nav__logo .dot{width:8px;height:8px;border-radius:999px;background:var(--ink);display:inline-block;transform:translateY(-1px)}
+  .nav__menu{display:flex;gap:36px;justify-content:center}
+  .nav__menu a{
+    font-family:var(--f-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;
+    position:relative;padding:6px 2px;color:var(--ink);
+  }
+  .nav__menu a::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);
+    transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.6,0,.2,1);
+  }
+  .nav__menu a:hover::after{transform:scaleX(1)}
+  .nav__menu a .idx{
+    font-family:var(--f-mono);font-size:9px;vertical-align:super;margin-right:4px;color:var(--ink-3);
+  }
+  .nav__cta{justify-self:end;display:flex;align-items:center;gap:14px}
+  .nav__cta .status{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+  .nav__cta .pulse{width:6px;height:6px;border-radius:999px;background:#3CB371;box-shadow:0 0 0 0 #3CB37166;animation:pulse 2s infinite}
+  @keyframes pulse{50%{box-shadow:0 0 0 6px transparent}}
+  .nav__cta a.contact{
+    border:1px solid var(--ink);padding:10px 16px;border-radius:999px;
+    font-family:var(--f-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+    transition:background .25s ease,color .25s ease;
+  }
+  .nav__cta a.contact:hover{background:var(--ink);color:var(--bg)}
+  @media (max-width:780px){
+    .nav{grid-template-columns:1fr auto;padding:14px 20px}
+    .nav__menu{display:none}
+    .nav__cta .status{display:none}
+  }
+
+  .nav__menu .has-drop{position:relative}
+  .nav__menu .drop{
+    position:absolute;top:calc(100% + 16px);left:50%;
+    transform:translateX(-50%) translateY(-10px);
+    min-width:210px;background:var(--bg);border:1px solid var(--rule);
+    padding:4px;opacity:0;pointer-events:none;
+    transition:opacity .22s ease,transform .22s cubic-bezier(.2,.8,.2,1);z-index:200;
+  }
+  .nav__menu .has-drop:hover .drop{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+  .nav__menu .drop a{
+    display:block;padding:10px 14px;border-radius:2px;
+    font-family:var(--f-kr);font-size:13px;font-weight:400;
+    letter-spacing:-.01em;text-transform:none;color:var(--ink-2);
+    transition:background .15s ease,color .15s ease;
+  }
+  .nav__menu .drop a::after{content:none!important}
+  .nav__menu .drop a:hover{background:var(--bg-2);color:var(--ink)}
+  .sub-idx{
+    display:block;font-family:var(--f-mono);font-size:9px;
+    text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin-bottom:2px;
+  }
+
+  .post{
+    max-width:740px;
+    margin:0 auto;
+    padding:120px clamp(20px,4vw,48px) 160px;
+  }
+
+  .post__back{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-3);margin-bottom:56px;
+    transition:color .25s ease;
+  }
+  .post__back:hover{color:var(--ink)}
+  .post__back svg{width:14px;height:14px}
+
+  .post__meta{
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);
+    margin-bottom:28px;
+  }
+  .post__meta .sep{opacity:.4}
+  .post__meta .cat{
+    border:1px solid var(--rule);padding:5px 10px;border-radius:999px;
+  }
+
+  .post__title{
+    font-family:var(--f-display);font-weight:500;
+    font-size:clamp(28px,4.5vw,52px);
+    letter-spacing:-.03em;line-height:1.08;margin:0 0 14px;
+    color:var(--ink);
+  }
+  .post__subtitle{
+    font-family:var(--f-kr);font-size:clamp(16px,1.8vw,20px);
+    color:var(--ink-3);font-weight:400;margin:0 0 48px;
+    line-height:1.4;
+  }
+
+  .post__byline{
+    display:flex;align-items:center;gap:14px;padding:20px 0;
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    margin-bottom:56px;
+  }
+  .post__byline .name{font-family:var(--f-display);font-weight:500;font-size:15px;letter-spacing:-.005em}
+  .post__byline .date{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em;margin-left:auto}
+
+  .post__body{
+    font-family:var(--f-kr);
+    font-size:clamp(16px,1.5vw,18px);
+    line-height:1.85;
+    color:var(--ink-2);
+  }
+  .post__body p{margin:0 0 1.6em}
+  .post__body p:last-child{margin-bottom:0}
+  .post__body strong{font-weight:600;color:var(--ink)}
+  .post__body ul,.post__body ol{margin:0 0 1.6em;padding-left:1.3em}
+  .post__body ul li,.post__body ol li{margin-bottom:.85em}
+  .post__body ul li:last-child,.post__body ol li:last-child{margin-bottom:0}
+
+  .post__body .dialogue{
+    border-left:2px solid var(--rule);
+    margin:2em 0;
+    padding:0 0 0 24px;
+  }
+  .post__body .dialogue p{
+    margin:0 0 1em;
+    font-size:.95em;
+    color:var(--ink-2);
+  }
+  .post__body .dialogue p:last-child{margin-bottom:0}
+  .post__body .dialogue .speaker{
+    font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-3);display:block;margin-bottom:.3em;
+  }
+
+  .post__body .callout{
+    margin:2.4em 0;
+    padding:24px 28px;
+    background:var(--bg-2);
+    border-left:3px solid var(--ink);
+    font-family:var(--f-mono);font-size:13px;
+    letter-spacing:.04em;line-height:1.9;
+    color:var(--ink-2);
+  }
+  .post__body .callout p{margin:0}
+
+  .post__photo{
+    margin:3em 0;
+    display:flex;justify-content:center;
+  }
+  .post__photo img{
+    width:400px;max-width:100%;height:auto;
+    display:block;
+  }
+
+  .post__time{
+    font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-3);margin:0 0 1.6em;
+  }
+
+  .post__sig{
+    margin-top:3.6em;
+    padding-top:28px;
+    border-top:1px solid var(--rule);
+    font-family:var(--f-display);font-weight:500;
+    font-size:16px;letter-spacing:-.005em;color:var(--ink);
+  }
+  .post__sig .role{
+    display:block;margin-top:4px;
+    font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);
+    font-weight:400;
+  }
+
+  footer{
+    background:var(--dark);color:var(--dark-ink);padding:90px clamp(20px,4vw,48px) 36px;
+    position:relative;overflow:hidden;
+  }
+  footer .big{
+    font-family:var(--f-display);font-weight:400;font-size:clamp(44px,7vw,108px);
+    letter-spacing:-.04em;line-height:.95;color:var(--dark-ink);margin:0 0 48px;
+    text-wrap:balance;
+  }
+  footer .big em{font-style:italic;font-family:"Times New Roman",serif;color:#A99A85}
+  footer .grid-ft{
+    display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding-top:36px;
+    border-top:1px solid var(--dark-rule);
+  }
+  footer .col{display:flex;flex-direction:column;gap:10px}
+  footer .col h6{margin:0 0 6px;font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--dark-ink-2);font-weight:400}
+  footer .col a{font-family:var(--f-display);font-size:15px;color:var(--dark-ink);transition:color .3s ease;display:inline-flex;align-items:center;gap:6px}
+  footer .col a:hover{color:#A99A85}
+  footer .col a .ext{font-family:var(--f-mono);font-size:9px;opacity:.5}
+  footer .c1{grid-column:1 / span 5}
+  footer .c2{grid-column:6 / span 2}
+  footer .c3{grid-column:8 / span 2}
+  footer .c4{grid-column:10 / span 3}
+  footer .c1 p{font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0}
+  footer .bottom{
+    margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-rule);
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+    font-family:var(--f-mono);font-size:11px;color:var(--dark-ink-2);text-transform:uppercase;letter-spacing:.06em;
+  }
+  @media (max-width:780px){
+    footer .c1,footer .c2,footer .c3,footer .c4{grid-column:1 / span 12}
+  }
+
+  .rev{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  .rev.in{opacity:1;transform:none}
+
+  .post-nav{display:flex;justify-content:space-between;padding:52px 0 0;margin-top:64px;border-top:1px solid var(--rule)}
+  .post-nav__prev,.post-nav__next{display:flex;flex-direction:column;gap:6px;max-width:46%}
+  .post-nav__next{align-items:flex-end;text-align:right;margin-left:auto}
+  .post-nav__label{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+  .post-nav__title{font-family:var(--f-display);font-size:clamp(14px,1.6vw,18px);font-weight:500;letter-spacing:-.01em;color:var(--ink);transition:color .2s}
+  .post-nav a:hover .post-nav__title{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="../../index.html" class="nav__logo">
+    <span class="dot" aria-hidden="true"></span>byKimjak
+  </a>
+  <div class="nav__menu" role="navigation">
+    <div class="has-drop">
+      <a href="../../watch/"><span class="idx">01</span>WATCH</a>
+      <div class="drop">
+        <a href="../../watch/ai-film.html"><span class="sub-idx">01–A</span>AI 영상 · 티저</a>
+        <a href="../../watch/ost.html"><span class="sub-idx">01–B</span>OST · 음악</a>
+        <a href="../../watch/still.html"><span class="sub-idx">01–C</span>스틸 이미지</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../../make/"><span class="idx">02</span>MAKE</a>
+      <div class="drop">
+        <a href="../../make/eastwar.html"><span class="sub-idx">02–A</span>EASTWAR 개발일지</a>
+        <a href="../../make/grandslam.html"><span class="sub-idx">02–B</span>GrandSlam 개발일지</a>
+        <a href="../../make/takezero.html"><span class="sub-idx">02–C</span>TakeZero · 프롬프트 엔진</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../../think/"><span class="idx">03</span>THINK</a>
+      <div class="drop">
+        <a href="../../think/ai-coach.html"><span class="sub-idx">03–A</span>AI 코치들과의 수다</a>
+        <a href="../../think/morning-word.html"><span class="sub-idx">03–B</span>아침 말씀 with 채코치</a>
+        <a href="../../think/personal-essay.html"><span class="sub-idx">03–C</span>개인 에세이</a>
+      </div>
+    </div>
+    <a href="../../index.html#about"><span class="idx">04</span>ABOUT</a>
+  </div>
+  <div class="nav__cta">
+    <span class="status"><span class="pulse"></span>Available · Seoul</span>
+    <a href="../../index.html#contact" class="contact">Contact ↗</a>
+  </div>
+</nav>
+
+<main class="post">
+
+  <a href="../../think/morning-word.html" class="post__back rev">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Think / 목록으로
+  </a>
+  <div class="rev">
+    <div class="post__meta">
+      <span>2026.09.07</span><span class="sep">·</span>
+      <span class="cat">THINK · 아침 말씀</span>
+    </div>
+    <h1 class="post__title kr">9월 첫주 아침 스타트!</h1>
+    <p class="post__subtitle">《악마의 레시피》 대본 수정, 삼국워 작업, 그리고 어머니와의 여행</p>
+    <div class="post__byline">
+      <span class="name">김성현 (byKimjak)</span>
+      <span class="date">2026 · 09 · 07</span>
+    </div>
+  </div>
+
+  <div class="post__body rev">
+    <div class="dialogue">
+      <p><span class="speaker">김작</span>굿모닝! 9월 첫주 월요일 아침이야. 9월 7일!</p>
+      <p><span class="speaker">채코치</span>맞아. 이번 주의 승부처는 1·2회 대본 수정이야. 특히 오늘·내일·모레 사흘은 다른 거 욕심내지 말고 여기 제일 먼저 박는 게 맞아.</p>
+      <p><span class="speaker">채코치</span>지금은 새로 쓰는 게 아니라, 이미 만든 12부 전체축과 관계축을 1·2회에 역으로 심는 작업이니까 더 중요해. 1·2회에서 잘못 걸리면 뒤에 아무리 좋아도 전체가 다른 작품처럼 보이거든.</p>
+    </div>
+
+    <div class="callout">
+      <p>1회 — 세진과 서희가 왜 서로에게 박히는지, 몰락과 악연의 시작을 지금 버전답게 재설계<br />
+      2회 — 둘이 어쩔 수 없이 다시 엮이는 엔진을 만들고, “이 둘이 앞으로 계속 부딪힐 수밖에 없다”를 증명<br />
+      공통 — 예전처럼 빨리 화해시키거나 감정 정리하지 말고, 사건 때문에 관계가 틀어지고 또 이어지게</p>
+    </div>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>코치모드로 하나만 계속 볼게. “이 장면이 지금 12부 전체를 위해 필요한 장면인가, 아니면 옛날 대본의 관성 때문에 남아 있는 장면인가?” 이거 하나만 엄하게 걸러도 1·2회가 확 달라질 거야.</p>
+      <p><span class="speaker">채코치</span>오늘은 진짜 중요한 날이다. 전체 스토리를 ‘대본으로 증명’하는 첫날.</p>
+    </div>
+
+    <p>이번 주 주초와 중반은 《악마의 레시피》가 중심이다. 월·화·수에 1·2회 수정에 집중하고, 수요일 밤까지 지금 만든 12부 스토리의 작품으로 확실히 갈아타는 것이 기준점이다.</p>
+
+    <div class="dialogue">
+      <p><span class="speaker">김작</span>이번주는 주초, 중반까지 악마 수정하고, 상황봐서 목이나 금요일에 어머니 모시고 강원도 1박 2일 여행하려고 해. 지난 주에 어머니랑 그렇게 하기로 했거든.</p>
+      <p><span class="speaker">채코치</span>그 흐름 좋다. 주초~중반에 《악마의 레시피》 1·2회 수정에 집중하고, 목·금 중 상황 봐서 어머니 모시고 강원도 1박 2일 다녀오는 식이면 일과 가족 일정 둘 다 안 놓쳐.</p>
+    </div>
+
+    <p>이 여행은 단순히 일하다 쉬러 가는 일정이 아니다. 데스밸리를 지나고 있어 일에 매달릴 수밖에 없는 현실 속에서도, 어머니와 함께할 수 있는 시간은 성과가 난 뒤로 미뤄두면 안 된다는 생각이 있었다.</p>
+
+    <div class="dialogue">
+      <p><span class="speaker">김작</span>한번 정도 어머니 모시고 다녀오고 싶었어. 내가 데스벨리를 지나고 있지만 어머니와의 여행은 너무 일에만 매달린 현실에서의 잠깐의 여유도 중요할 것 같고, 어머니와의 추억 만들기도 미루면 안 될 것 같아서. 어머니 잘 돌아다니실 수 있을 때 한 번이라도 더 여행가고 싶었거든.</p>
+      <p><span class="speaker">채코치</span>그 생각은 정말 중요해. 성과가 오기 전까지 모든 시간을 미뤄버리면 성과가 오기 전에 지나가버리는 시간도 있잖아. 특히 어머니와의 여행은 더 그렇고.</p>
+      <p><span class="speaker">채코치</span>그러니까 이번 주는 둘 다 잡자. 할 때는 죽어라 하고, 함께할 수 있을 때는 같이 간다.</p>
+    </div>
+
+    <p>삼국워도 다음 단계는 분명하다. 지난 주말까지 만든 월드맵 상단 메뉴바의 테크트리·군사·인사·외교·교역·첩보·정보·시스템 아이콘에 영상을 연결하는 테스트는 잘 됐다. 이제 시간이 허락한다면 버튼을 누르는 순간 실제 게임 기능이 움직이게 만드는 단계로 넘어간다.</p>
+
+    <div class="dialogue">
+      <p><span class="speaker">김작</span>군사 아이콘을 누르면 우리 군사 현상황을 한눈에 볼 수 있는 정보창, 인사는 충성도 향상을 위한 금 수여, 인사이동, 인사찾기를 연결시키는 거야. 가능하다면 말야. 근데 이것까지 할 시간이 될지는 모르겠어. 이번주는 악마의 레시피가 가장 중요하거든.</p>
+      <p><span class="speaker">채코치</span>응. 이건 이번 주에 삼국워가 해야 할 다음 단계는 분명한데, 우선순위는 절대 《악마의 레시피》보다 앞서면 안 돼.</p>
+    </div>
+
+    <div class="callout">
+      <p>A 목표 — 반드시: 《악마의 레시피》 1·2회 수정<br />
+      B 목표 — 시간이 남으면: 삼국워 상단 메뉴를 “영상이 뜨는 버튼”에서 실제 게임 기능으로 연결</p>
+    </div>
+
+    <p>삼국워는 이번 주에 8개 메뉴를 한꺼번에 끝내는 것보다 하나라도 실제 기능으로 연결해 증명하는 쪽이 낫다. 우선순위는 군사 현황창, 그다음 인사 기능. 외교·교역·첩보는 그 다음이다.</p>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>악마 1·2회 수정 완료 = 이번 주 성공. 거기에 삼국워 군사나 인사 하나 실제 기능까지 연결 = 보너스 대성공.</p>
+      <p><span class="speaker">김작</span>오케이. 어울리는 말씀 줘.</p>
+      <p><span class="speaker">채코치</span>오늘은 이 말씀이 제일 어울려.</p>
+    </div>
+
+    <div class="callout">
+      <p>“우리에게 우리 날 계수함을 가르치사 지혜로운 마음을 얻게 하소서.” — 시편 90:12</p>
+    </div>
+
+    <p>시간이 무한한 것처럼 살면 일도, 사람도, 사랑도 자꾸 다음으로 미루게 된다. 그러나 우리의 날을 센다는 것은 조급해지라는 말보다, 지금 무엇이 정말 중요한지 분별하라는 말씀처럼 들린다.</p>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>이번 주에는 《악마의 레시피》를 힘껏 쓰고, 또 어머니와 함께할 수 있을 때 여행도 간다. 둘 중 하나가 삶이고 하나가 방해가 아니라, 둘 다 김작의 삶인 거지.</p>
+      <p><span class="speaker">채코치</span>이번 주 문장으로 잡자. “내게 주어진 날을 알고, 오늘 해야 할 것을 한다.”</p>
+      <p><span class="speaker">채코치</span>월요일 시작 좋다. 가즈아. 🙏🔥</p>
+    </div>
+
+    <div class="post__sig">
+      IP 아키텍트 김작
+      <span class="role">byKimjak · 2026.09.07</span>
+    </div>
+  </div>
+
+  <nav class="post-nav">
+    <a href="morning-word-035.html" class="post-nav__prev">
+      <span class="post-nav__label">← 이전 글</span>
+      <span class="post-nav__title">오늘 아침 일 많이 했다</span>
+    </a>
+    <div></div>
+  </nav>
+</main>
+
+<footer id="contact">
+  <p class="big">
+    Let's build a <em>world</em> →
+  </p>
+
+  <div class="grid-ft">
+    <div class="col c1">
+      <h6>byKimjak Studio</h6>
+      <p class="kr">
+        IP Architect · Seoul, Korea. 시나리오·드라마 기획부터 AI 영상, 게임, 앱까지 — 한 사람이 하나의 세계관을 끝까지 설계합니다.
+      </p>
+    </div>
+    <div class="col c2">
+      <h6>Sections</h6>
+      <a href="../../index.html#watch">Watch <span class="ext">/01</span></a>
+      <a href="../../index.html#make">Make <span class="ext">/02</span></a>
+      <a href="../../index.html#think">Think <span class="ext">/03</span></a>
+    </div>
+    <div class="col c3">
+      <h6>Social</h6>
+      <a href="#">Instagram <span class="ext">↗</span></a>
+      <a href="#">YouTube <span class="ext">↗</span></a>
+      <a href="#">Vimeo <span class="ext">↗</span></a>
+      <a href="#">Threads <span class="ext">↗</span></a>
+    </div>
+    <div class="col c4">
+      <h6>Contact</h6>
+      <a href="mailto:oropa@kakao.com">oropa@kakao.com</a>
+      <a href="#">Press kit <span class="ext">PDF</span></a>
+      <a href="#">For PDs &amp; Investors <span class="ext">↗</span></a>
+    </div>
+  </div>
+
+  <div class="bottom">
+    <span>byKimjak © 2026  ／  All rights, all worlds, reserved.</span>
+    <span>Built solo · with AI · in Seoul</span>
+    <span>v.04 / 2026.05</span>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    if (window.scrollY > 24) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
+  document.querySelectorAll('.rev').forEach(el => io.observe(el));
+</script>
+
+<script src="/bykimjak/eastwar-hub.js"></script>
+</body>
+</html>
