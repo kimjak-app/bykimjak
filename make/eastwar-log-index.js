@@ -203,6 +203,11 @@
       num: '040', date: '2026 · 09 · 03',
       ko: { href: 'eastwar-devlog-040.html',    title: '23개의 조용한 폭탄', sub: '테크트리 충돌에서 시작된 전체 구조 감사' },
       en: { href: 'eastwar-devlog-040-en.html', title: 'Twenty-Three Quiet Time Bombs', sub: 'A Full Structural Audit That Started With a Tech Tree Collision' }
+    },
+    {
+      num: '041', date: '2026 · 09 · 08',
+      ko: { href: 'eastwar-devlog-041.html',    title: '게임에 소리가 생긴 날', sub: '브랜치 세 개, 효과음을 안전하게 합치는 법' },
+      en: { href: 'eastwar-devlog-041-en.html', title: 'The Day the Game Got Sound', sub: 'Merging Three Branches Without Losing Anything' }
     }
   ];
 
