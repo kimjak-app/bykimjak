@@ -25,6 +25,20 @@
       date: '2026-09-04', dl: '2026 · 09 · 04'
     },
     {
+      url: 'make/eastwar-devlog-040.html',
+      catKey: 'eastwar', cat: 'Architect Notes',
+      title: '23개의 조용한 폭탄',
+      sub: '테크트리 충돌에서 시작된 전체 구조 감사',
+      date: '2026-09-03', dl: '2026 · 09 · 03'
+    },
+    {
+      url: 'make/eastwar-devlog-039.html',
+      catKey: 'eastwar', cat: 'Architect Notes',
+      title: '여덟 개의 문이 지도 위에 걸렸다',
+      sub: '월드맵 상단메뉴바 제작기',
+      date: '2026-09-03', dl: '2026 · 09 · 03'
+    },
+    {
       url: 'posts/think/morning-word-034.html',
       catKey: 'morning-word', cat: 'Morning Word',
       title: '9월 출발!',
@@ -44,6 +58,27 @@
       title: '9월은 방향, 10월은 결과, 11월은 드디어 도전! 그 출발일',
       sub: '대본 대장정과 삼국워 모두의 창업 도전 시작',
       date: '2026-08-26', dl: '2026 · 08 · 26'
+    },
+    {
+      url: 'make/eastwar-devlog-038.html',
+      catKey: 'eastwar', cat: 'Architect Notes',
+      title: '전투화면에 검은 막이 덮였다 사라진 이유',
+      sub: '튐 현상 버그 수정 & 방향표시 다듬기',
+      date: '2026-08-29', dl: '2026 · 08 · 29'
+    },
+    {
+      url: 'make/eastwar-devlog-037.html',
+      catKey: 'eastwar', cat: 'Architect Notes',
+      title: '전투엔진 한 단계 더 입체적으로',
+      sub: '아이소메트릭 이동 셀 A/B 테스트',
+      date: '2026-08-28', dl: '2026 · 08 · 28'
+    },
+    {
+      url: 'make/eastwar-devlog-036.html',
+      catKey: 'eastwar', cat: 'Architect Notes',
+      title: '얼굴을 두 번째로 바꾸다',
+      sub: '월드맵 2번째 디자인 교체 작업과 영역 표시 넣기',
+      date: '2026-08-27', dl: '2026 · 08 · 27'
     },
     {
       url: 'make/eastwar-devlog-035.html',
