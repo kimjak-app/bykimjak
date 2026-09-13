@@ -11,6 +11,13 @@
       date: '2026-09-08', dl: '2026 · 09 · 08'
     },
     {
+      url: 'posts/think/morning-word-037.html',
+      catKey: 'morning-word', cat: 'Morning Word',
+      title: '급한 건 마음이지, 작업은 급하면 안 된다',
+      sub: '거대한 환상이 아니라 실제 티켓을 만드는 사람, 하박국 2장 3절',
+      date: '2026-09-13', dl: '2026 · 09 · 13'
+    },
+    {
       url: 'posts/think/morning-word-036.html',
       catKey: 'morning-word', cat: 'Morning Word',
       title: '9월 첫주 아침 스타트!',
