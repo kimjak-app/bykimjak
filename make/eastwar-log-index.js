@@ -208,6 +208,11 @@
       num: '041', date: '2026 · 09 · 08',
       ko: { href: 'eastwar-devlog-041.html',    title: '게임에 소리가 생긴 날', sub: '브랜치 세 개, 효과음을 안전하게 합치는 법' },
       en: { href: 'eastwar-devlog-041-en.html', title: 'The Day the Game Got Sound', sub: 'Merging Three Branches Without Losing Anything' }
+    },
+    {
+      num: '042', date: '2026 · 09 · 12–14',
+      ko: { href: 'eastwar-devlog-042.html',    title: '월드맵 리팩토링', sub: '24,762줄짜리 파일이 통째로 날아간 날을 딛고, 외교·무역·첩보를 분리하다' },
+      en: { href: 'eastwar-devlog-042-en.html', title: 'World Map Refactor', sub: 'Recovering from a 24,762-Line File Vanishing, Then Splitting Off Diplomacy, Trade, and Espionage' }
     }
   ];
 
