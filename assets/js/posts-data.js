@@ -4,6 +4,13 @@
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
     {
+      url: 'posts/think/think-007.html',
+      catKey: 'personal-essay', cat: 'Essay',
+      title: '게임 리팩토링 작업시 필요한 스킬 만들기',
+      sub: '바이브코딩 게임제작시 리팩토링 과정에서 필요한 스킬 작업',
+      date: '2026-09-17', dl: '2026 · 09 · 17'
+    },
+    {
       url: 'posts/think/morning-word-038.html',
       catKey: 'morning-word', cat: 'Morning Word',
       title: '혼자 버티는 삶에서, 함께 더 멀리 가는 삶으로',
