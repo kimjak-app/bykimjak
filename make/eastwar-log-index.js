@@ -213,6 +213,11 @@
       num: '042', date: '2026 · 09 · 12–14',
       ko: { href: 'eastwar-devlog-042.html',    title: '월드맵 리팩토링', sub: '24,762줄짜리 파일이 통째로 날아간 날을 딛고, 외교·무역·첩보를 분리하다' },
       en: { href: 'eastwar-devlog-042-en.html', title: 'World Map Refactor', sub: 'Recovering from a 24,762-Line File Vanishing, Then Splitting Off Diplomacy, Trade, and Espionage' }
+    },
+    {
+      num: '043', date: '2026 · 09 · 15–17',
+      ko: { href: 'eastwar-devlog-043.html',    title: '24,762줄에서 14,094줄로 — 월드맵 리팩토링 완결편', sub: '군사·테크트리·도시내정·화면 UI·턴 진행까지, 8개 도메인 완전 분리' },
+      en: { href: 'eastwar-devlog-043-en.html', title: 'From 24,762 to 14,094 Lines — The World Map Refactor, Finished', sub: 'Military, tech tree, city administration, screen UI, and turn processing — all eight domains fully separated' }
     }
   ];
 

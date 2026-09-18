@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR Dev Log #042 — World Map Refactor · byKimjak</title>
+<title>EASTWAR 개발일지 #043 — 월드맵 리팩토링 완결편 · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -120,6 +120,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 .log-nav__label{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
 .log-nav__title{font-family:var(--f-display);font-size:clamp(14px,1.8vw,20px);font-weight:500;letter-spacing:-.01em;color:var(--ink);transition:color .2s}
 .log-nav a:hover .log-nav__title{color:var(--accent)}
+.log-nav__next--disabled{opacity:.4;cursor:default}
 </style>
 </head>
 <body>
@@ -164,69 +165,81 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     <div class="breadcrumb rev">
       <a href="../index.html">bykimjak</a>
       <span class="sep">›</span>
-      <a href="eastwar-en.html">EASTWAR</a>
+      <a href="eastwar.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #042</span>
+      <span>Dev Log #043</span>
     </div>
     <div class="lang-switch rev">
-      <a href="eastwar-devlog-042.html" class="lang-other">🇰🇷 한국어</a>
+      <span class="lang-current">🇰🇷 한국어</span>
       <span class="lang-sep">|</span>
-      <span class="lang-current">🇺🇸 English</span>
+      <a href="eastwar-devlog-043-en.html" class="lang-other">🇺🇸 English</a>
     </div>
     <h1 class="rev">EASTWAR</h1>
     <p class="sub-ko rev">이스트워 개발일지</p>
-    <p class="listing-desc rev">Strategy alt-history simulation — solo dev log</p>
+    <p class="listing-desc rev">전략 가상역사 시뮬레이션 — 1인 개발 기록</p>
   </div>
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-042">
+  <article class="devlog" id="log-043">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #042</span>
-      <h1>EASTWAR Devlog #042</h1>
-      <h2>World Map Refactor — Recovering from a 24,762-Line File Vanishing, Then Splitting Off Diplomacy, Trade, and Espionage</h2>
-      <span class="log-date">September 12–14, 2026</span>
+      <span class="log-num">Dev Log · #043</span>
+      <h1>EASTWAR 개발일지 #043</h1>
+      <h2>24,762줄에서 14,094줄로 — 월드맵 리팩토링 완결편</h2>
+      <span class="log-date">2026년 9월 15일 – 17일</span>
 
       <hr />
-      <h3>The Accident: The Day 20,600 Lines Disappeared</h3>
-      <p><code>worldmap_main.gd</code> — the file holding almost all of EASTWAR's world map logic. I started pulling diplomacy, trade, and espionage out of it, and things went wrong immediately. What was supposed to be a clean split instead wiped out over 20,000 lines of the file.</p>
-      <p>Searching the whole repository for the deleted functions, I found around 1,000 of them had vanished completely — and less than a quarter had anything to do with diplomacy, trade, or espionage. Combat resolution, AI decisions, the camera, the save system — nearly every core system had gone missing along with it. Worse, this exact file had already been wiped the same way once before, days earlier, and recovered. The same accident had happened twice.</p>
+      <h3>여기까지 오는 길</h3>
+      <p>지난 회차에서 <code>worldmap_main.gd</code>라는 파일 이야기를 했다. 사고로 2만 줄이 통째로 날아갔다가 복구했고, 그 이후엔 "한 번에 많이 지우지 않는다, 매번 확인한다"는 원칙으로 외교·무역·첩보를 하나씩 따로 떼어냈다는 이야기. 사흘 만에 3,700줄 넘게 이사시켰다.</p>
+      <p>이번 사흘은 그 나머지를 전부 끝낸 이야기다. 군사, 테크트리, 도시내정, 화면 UI, 턴 진행까지. 이걸 다 합치면 이 시리즈는 완결이다.</p>
 
-      <h3>Rolling Back, and Starting Over Differently</h3>
-      <p>After rolling back to before the accident, I changed the whole approach. Three rules:</p>
+      <h3>군사: 전투 하나가 어떻게 굴러가는지 정리하다</h3>
+      <p>군사는 성격이 좀 달랐다. 외교·무역·첩보는 "입력하면 계산하고 상태가 바뀐다"는 단순한 흐름이지만, 군사는 전투 화면으로 넘어갔다가 다시 돌아오는 왕복이 있다. 그래서 이렇게 잘게 쪼갰다.</p>
       <ul>
-        <li>Never rewrite the whole file. Only allow <strong>small, isolated patches</strong>.</li>
-        <li>Run an integrity-check script after every single change — a safeguard built specifically because of this accident, designed to fail instantly if the file suddenly shrinks or a core function disappears.</li>
-        <li>Never delete old logic outright. Keep it in place, and let a new dedicated file build a thin bridge on top of it.</li>
+        <li>전투 결과를 실제로 적용하는 부분 (Settlement)</li>
+        <li>자동전투 하나를 "준비 → 비용 지불 → 결과 해석 → 실패 시 되돌리기"까지 하나의 안전한 묶음으로 만드는 부분 (T03 Transaction)</li>
+        <li>부상당한 병사가 회복되는 로직 (Wounded & Recovery)</li>
+        <li>출정·보급·병력 재배치 (Deployment & Supply)</li>
       </ul>
-      <p>Picture it like this: one person used to handle accounting, diplomacy, trade, and espionage all in the same room. Now each job gets its own department — but every time something moves to a new department, you check that it actually arrived intact before moving on.</p>
+      <p>특히 부상·회복 로직을 옮길 땐 저장 파일 호환성까지 신경 썼다. 예전 세이브 파일에 저장된 이름과 새 이름이 서로 달라도 둘 다 인식하게 해뒀고, 같은 달에 회복 처리가 중복으로 실행되지 않도록 하는 체크도 그대로 옮겨왔다. 회복 기간 같은 밸런스 수치는 하나도 안 건드렸다.</p>
+      <p>이 네 단계를 다 거치고 나니 전투 화면과 왔다 갔다 하는 연결부는 처음부터 끝까지 단 하나도 안 바뀌었다. 군사 도메인의 계산·판정 로직은 이제 <code>worldmap_main.gd</code> 밖으로 완전히 나갔고, 남은 건 "장수 이동·포로·점령"처럼 군사와 다른 영역이 겹치는 부분뿐이었는데, 이건 군사 핵심이 아니라 인접 영역이라 따로 남겨두기로 선을 그었다.</p>
 
-      <h3>Diplomacy, One Step at a Time</h3>
-      <p>Moving diplomacy into its own service happened in stages. The first few stages only built new bridges without removing anything, so the file's line count actually went up at first — new bridges, old code still there.</p>
-      <p>The real shift came next: 82 lines defining diplomatic actions, validating them, and generating failure results were finally removed for real — and those exact 82 lines, down to the Korean error message text, had been moved intact into the new service file. After that, resource-cost deduction, relationship-score changes, and alliance/cooldown/trade-agreement state all followed the same path.</p>
-      <p>Every stage got checked against the integrity script, and every time, all 172 existing diplomacy functions were re-confirmed working. By the end, diplomacy alone had removed 1,129 lines from <code>worldmap_main.gd</code>.</p>
+      <h3>테크트리: 두 번째로 큰 산</h3>
+      <p>군사가 끝나자마자 다음 타깃은 테크트리였다. 연구 상수, 카테고리, 효과표, 화면 배치 값까지 파일 위쪽에 잔뜩 붙어 있던 부분이다. 이번에도 한 번에 다 뜯지 않고 넷으로 쪼갰다.</p>
+      <ul>
+        <li>연구 가능 여부, 선행기술, 비용, 효과 계산 (규칙)</li>
+        <li>연구 진행도와 완료 상태 (진행)</li>
+        <li>다른 도메인(군사·경제·외교)이 테크 효과를 가져다 쓰는 창구 (제공)</li>
+        <li>화면에 트리를 그리고, 아이콘·설명·완료 영상을 보여주는 부분 (표현)</li>
+      </ul>
+      <p>여기서 제일 조심스러웠던 건 숫자였다. "누적 효과는 덧셈으로만 계산한다", "같은 완료 항목은 한 번만 적용한다", "기병 돌격 보너스는 기존 상한선을 그대로 유지한다" 같은 세세한 규칙까지 문서로 남기고, 그 규칙이 실제로 지켜졌는지 하나하나 대조했다. 밸런스에 직결되는 숫자라 제일 위험할 수 있었는데, 결과적으로 아무것도 안 틀어졌다.</p>
+      <p>테크트리를 다 정리하고 나니 <code>worldmap_main.gd</code>에는 카탈로그도, 규칙도, 진행 상태도, 효과 계산도, 화면 그리기도 남지 않았다. 남은 건 얇은 연결부와 안내 문구뿐이었다.</p>
 
-      <h3>Trade, All the Way to Full Separation</h3>
-      <p>Trade went even further. First, manual (player-initiated) trade moved out, cutting 408 more lines. Then the next stage moved out automated trade (run by the in-game minister) and internal trade between a player's own cities.</p>
-      <p>Crucially, warehouse, market, and city data still belong to other systems (economy, city). The dedicated trade file only owns the rules of "what moves from where to where, and how much." The boundary stayed clean.</p>
+      <h3>도시내정, 그리고 화면 껍데기</h3>
+      <p>그다음은 도시 상세 화면이었다. 태수·도시정책 효과, 도시의 자원과 창고·생산, 그리고 도시상세 화면을 보여주는 부분, 이렇게 셋으로 나눴다. 다만 모병이나 무장 이동, 창고 UI의 뼈대 같은 건 다른 도메인(군사, HUD)이 이미 관리하고 있는 영역이라 건드리지 않고 그대로 보호했다.</p>
+      <p>그다음은 카메라 이동·줌 관련 상수와, 월드맵 여기저기서 공통으로 쓰는 화면 패널 배치였다. 외교·무역·군사·테크트리 같은 "게임 규칙"은 이미 다 빠져나갔으니, 이제 남은 건 순수하게 화면을 어떻게 그릴지 정하는 껍데기 계층이었다. 이걸 정리하고 나니 <code>worldmap_main.gd</code>가 448줄 더 가벼워졌다.</p>
 
-      <h3>Espionage, and Where Things Stand</h3>
-      <p>Espionage moved all five of its actions — intelligence gathering, public unrest, loyalty disruption, rebellion incitement, and the wedge tactic — into its own dedicated file. This was the single biggest drop yet: 1,795 lines in one step.</p>
-      <p>Add up all three days, and <code>worldmap_main.gd</code> went from 24,762 lines down to 21,038 — over 3,700 lines relocated elsewhere. But the number itself isn't really the point. After getting badly burned once, the whole approach changed from "delete a lot at once" to "check everything, move a little at a time." It looked slower. It ended up being both safer and, in the end, faster.</p>
+      <h3>마지막 관문: 턴이 굴러가는 방식</h3>
+      <p>제일 마지막으로 남은 건 "한 턴이 넘어갈 때 무슨 일이 일어나는가"였다. 달력과 계절이 넘어가고, 매턴 세금과 수입이 들어오고, 민심과 충성도가 조금씩 변하고, 상대 진영이 자기 턴을 처리하는 흐름 전체. 이미 밖으로 나간 외교·전투 로직을 다시 건드리는 게 아니라, main이 직접 들고 있던 "턴 하나를 굴리는 책임"만 골라서 떼어냈다.</p>
+      <p>이 단계가 끝나고서야 전투 연결부와 입력 처리, 저장·불러오기 기능까지 전부 예전과 완전히 똑같이 작동하는 걸 확인했다. 그리고 이게 진짜 마지막 조각이었다.</p>
 
-      <h3>What's Next</h3>
-      <p>The military domain is left. Diplomacy, trade, and espionage all followed a relatively simple pattern — input, calculation, state change, result. Military is different: it hands off to the battle screen and comes back, so it can't be cut the same way. It'll likely need its own dedicated transition layer.</p>
+      <h3>사흘의 결과, 그리고 시리즈 완결</h3>
+      <p>사고가 났던 첫날부터 지금까지 쌓인 숫자를 한 번에 정리하면 이렇다.</p>
+      <ul>
+        <li><strong>24,762줄 → 14,094줄</strong> (약 43.1% 감소)</li>
+        <li>외교·무역·첩보·군사·테크트리·도시내정·화면(HUD)/카메라·턴 진행, 총 8개 도메인 완전 분리</li>
+        <li>전투 화면으로 넘어갔다 돌아오는 연결부는 카메라 도메인 이관 한 번을 빼고는 처음부터 끝까지 단 한 줄도 흔들리지 않음</li>
+        <li>사고는 첫날 딱 한 번, 그 이후로는 매 단계 전부 검증 통과</li>
+      </ul>
+      <p>돌이켜보면 처음 사고가 났을 때 제일 무서웠던 건 "다시 이렇게 될까 봐"였다. 그런데 그 사고 덕분에 오히려 검증 스크립트라는 안전장치가 생겼고, 그 장치 하나로 여덟 개 도메인을 하나도 안 잃고 옮길 수 있었다. 결국 한 번 크게 넘어져 봐야 진짜 안전하게 걷는 법을 배우는 것 같다.</p>
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-041-en.html" class="log-nav__prev">
-        <span class="log-nav__label">Previous</span>
-        <span class="log-nav__title">← Dev Log #041</span>
+      <a href="eastwar-devlog-042.html" class="log-nav__prev">
+        <span class="log-nav__label">이전</span>
+        <span class="log-nav__title">← #042</span>
       </a>
-      <a href="eastwar-devlog-043-en.html" class="log-nav__next">
-        <span class="log-nav__label">Next</span>
-        <span class="log-nav__title">#043 →</span>
-      </a>
+      <span class="log-nav__next log-nav__next--disabled">다음 편 준비 중 →</span>
     </div>
 
   </article>
@@ -235,7 +248,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 <footer id="contact">
   <p class="big">Let's build a <em>world</em> →</p>
   <div class="grid-ft">
-    <div class="col c1"><h6>byKimjak Studio</h6><p style="font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0">IP Architect · Seoul, Korea. From scenario and drama planning to AI film, games, and apps — one person designing a single universe end to end.</p></div>
+    <div class="col c1"><h6>byKimjak Studio</h6><p style="font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0">IP Architect · Seoul, Korea. 시나리오·드라마 기획부터 AI 영상, 게임, 앱까지 — 한 사람이 하나의 세계관을 끝까지 설계합니다.</p></div>
     <div class="col c2"><h6>Sections</h6><a href="../watch/">Watch <span class="ext">/01</span></a><a href="../make/">Make <span class="ext">/02</span></a><a href="../think/">Think <span class="ext">/03</span></a></div>
     <div class="col c3"><h6>Social</h6><a href="#">Instagram <span class="ext">↗</span></a><a href="#">YouTube <span class="ext">↗</span></a><a href="#">Vimeo <span class="ext">↗</span></a><a href="#">Threads <span class="ext">↗</span></a></div>
     <div class="col c4"><h6>Contact</h6><a href="mailto:oropa@kakao.com">oropa@kakao.com</a><a href="#">Press kit <span class="ext">PDF</span></a><a href="#">For PDs &amp; Investors <span class="ext">↗</span></a></div>
@@ -249,7 +262,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '042');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '043');
 </script>
 <script src="/bykimjak/eastwar-hub.js"></script>
 </body>

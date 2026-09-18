@@ -18,6 +18,13 @@
       date: '2026-09-17', dl: '2026 · 09 · 17'
     },
     {
+      url: 'make/eastwar-devlog-043.html',
+      catKey: 'eastwar', cat: 'Architect Notes',
+      title: '24,762줄에서 14,094줄로 — 월드맵 리팩토링 완결편',
+      sub: '군사·테크트리·도시내정·화면 UI·턴 진행까지, 8개 도메인 완전 분리',
+      date: '2026-09-17', dl: '2026 · 09 · 15–17'
+    },
+    {
       url: 'posts/think/morning-word-038.html',
       catKey: 'morning-word', cat: 'Morning Word',
       title: '혼자 버티는 삶에서, 함께 더 멀리 가는 삶으로',
