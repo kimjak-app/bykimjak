@@ -218,6 +218,11 @@
       num: '043', date: '2026 · 09 · 15–17',
       ko: { href: 'eastwar-devlog-043.html',    title: '24,762줄에서 14,094줄로 — 월드맵 리팩토링 완결편', sub: '군사·테크트리·도시내정·화면 UI·턴 진행까지, 8개 도메인 완전 분리' },
       en: { href: 'eastwar-devlog-043-en.html', title: 'From 24,762 to 14,094 Lines — The World Map Refactor, Finished', sub: 'Military, tech tree, city administration, screen UI, and turn processing — all eight domains fully separated' }
+    },
+    {
+      num: '044', date: '2026 · 09 · 18',
+      ko: { href: 'eastwar-devlog-044.html',    title: '[3부작 후기] 사고 하나가 만든 안전한 습관', sub: 'worldmap_main.gd 리팩터링을 돌아보며' },
+      en: { href: 'eastwar-devlog-044-en.html', title: '[Trilogy Retrospective] One Accident, One Safe Habit', sub: 'Looking Back on the worldmap_main.gd Refactor' }
     }
   ];
 
