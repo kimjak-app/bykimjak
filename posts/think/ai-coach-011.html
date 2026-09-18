@@ -1,0 +1,381 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>지금은 동굴 끝에서 들어오는 빛이 착각인지 아닌지 확인하러 가는 중 — THINK · byKimjak</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+
+<style>
+  :root{
+    --bg:#FFFFFF;
+    --bg-2:#F2F2F2;
+    --ink:#0A0A0A;
+    --ink-2:#2A2A2A;
+    --ink-3:#6B6B6B;
+    --rule:#0A0A0A1A;
+    --dark:#0D0B09;
+    --dark-2:#1A1714;
+    --dark-ink:#FAF7F2;
+    --dark-ink-2:#9C948A;
+    --dark-rule:#FAF7F21A;
+    --accent:oklch(68% 0.08 70);
+    --accent-soft:oklch(68% 0.08 70 / 0.12);
+
+    --f-display:"Space Grotesk","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;
+    --f-body:"Inter","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;
+    --f-mono:"JetBrains Mono",ui-monospace,monospace;
+    --f-kr:"Pretendard Variable","Inter",ui-sans-serif,system-ui,sans-serif;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--f-body);
+    background:var(--bg);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    font-feature-settings:"ss01","cv11";
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+
+  /* ───────────────── nav ───────────────── */
+  .nav{
+    position:fixed;inset:0 0 auto 0;z-index:100;
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+    padding:18px clamp(20px,4vw,48px);
+    transition:background .35s ease,backdrop-filter .35s ease,border-color .35s ease;
+    border-bottom:1px solid transparent;
+  }
+  .nav.scrolled{
+    background:color-mix(in srgb,var(--bg) 78%,transparent);
+    backdrop-filter:saturate(1.2) blur(14px);
+    -webkit-backdrop-filter:saturate(1.2) blur(14px);
+    border-bottom-color:var(--rule);
+  }
+  .nav__logo{font-family:var(--f-display);font-weight:600;font-size:18px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+  .nav__logo .dot{width:8px;height:8px;border-radius:999px;background:var(--ink);display:inline-block;transform:translateY(-1px)}
+  .nav__menu{display:flex;gap:36px;justify-content:center}
+  .nav__menu a{
+    font-family:var(--f-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;
+    position:relative;padding:6px 2px;color:var(--ink);
+  }
+  .nav__menu a::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);
+    transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.6,0,.2,1);
+  }
+  .nav__menu a:hover::after{transform:scaleX(1)}
+  .nav__menu a .idx{font-family:var(--f-mono);font-size:9px;vertical-align:super;margin-right:4px;color:var(--ink-3)}
+  .nav__cta{justify-self:end;display:flex;align-items:center;gap:14px}
+  .nav__cta .status{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+  .nav__cta .pulse{width:6px;height:6px;border-radius:999px;background:#3CB371;box-shadow:0 0 0 0 #3CB37166;animation:pulse 2s infinite}
+  @keyframes pulse{50%{box-shadow:0 0 0 6px transparent}}
+  .nav__cta a.contact{
+    border:1px solid var(--ink);padding:10px 16px;border-radius:999px;
+    font-family:var(--f-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+    transition:background .25s ease,color .25s ease;
+  }
+  .nav__cta a.contact:hover{background:var(--ink);color:var(--bg)}
+  @media (max-width:780px){
+    .nav{grid-template-columns:1fr auto;padding:14px 20px}
+    .nav__menu{display:none}
+    .nav__cta .status{display:none}
+  }
+
+  /* ───────────────── nav dropdown ───────────────── */
+  .nav__menu .has-drop{position:relative}
+  .nav__menu .drop{
+    position:absolute;top:calc(100% + 16px);left:50%;
+    transform:translateX(-50%) translateY(-10px);
+    min-width:210px;background:var(--bg);border:1px solid var(--rule);
+    padding:4px;opacity:0;pointer-events:none;
+    transition:opacity .22s ease,transform .22s cubic-bezier(.2,.8,.2,1);z-index:200;
+  }
+  .nav__menu .has-drop:hover .drop{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+  .nav__menu .drop a{
+    display:block;padding:10px 14px;border-radius:2px;
+    font-family:var(--f-kr);font-size:13px;font-weight:400;
+    letter-spacing:-.01em;text-transform:none;color:var(--ink-2);
+    transition:background .15s ease,color .15s ease;
+  }
+  .nav__menu .drop a::after{content:none!important}
+  .nav__menu .drop a:hover{background:var(--bg-2);color:var(--ink)}
+  .sub-idx{display:block;font-family:var(--f-mono);font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin-bottom:2px}
+
+  /* ───────────────── post layout ───────────────── */
+  .post{max-width:740px;margin:0 auto;padding:120px clamp(20px,4vw,48px) 160px}
+
+  .post__back{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-3);margin-bottom:56px;transition:color .25s ease;
+  }
+  .post__back:hover{color:var(--ink)}
+  .post__back svg{width:14px;height:14px}
+
+  .post__meta{
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);
+    margin-bottom:28px;
+  }
+  .post__meta .sep{opacity:.4}
+  .post__meta .cat{border:1px solid var(--rule);padding:5px 10px;border-radius:999px}
+
+  .post__title{
+    font-family:var(--f-display);font-weight:500;
+    font-size:clamp(28px,4.5vw,52px);
+    letter-spacing:-.03em;line-height:1.08;margin:0 0 14px;color:var(--ink);
+  }
+  .post__subtitle{
+    font-family:var(--f-kr);font-size:clamp(16px,1.8vw,20px);
+    color:var(--ink-3);font-weight:400;margin:0 0 48px;line-height:1.4;
+  }
+  .post__byline{
+    display:flex;align-items:center;gap:14px;padding:20px 0;
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-bottom:56px;
+  }
+  .post__byline .name{font-family:var(--f-display);font-weight:500;font-size:15px;letter-spacing:-.005em}
+  .post__byline .date{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em;margin-left:auto}
+
+  /* ───────────────── post body ───────────────── */
+  .post__body{
+    font-family:var(--f-kr);font-size:clamp(16px,1.5vw,18px);line-height:1.85;color:var(--ink-2);
+  }
+  .post__body p{margin:0 0 1.6em}
+  .post__body p:last-child{margin-bottom:0}
+  .post__body strong{font-weight:600;color:var(--ink)}
+  .post__body h3{
+    font-family:var(--f-display);font-weight:500;font-size:clamp(18px,2vw,22px);
+    letter-spacing:-.02em;margin:2.8em 0 1.2em;color:var(--ink);
+  }
+  .post__body hr{border:none;border-top:1px solid var(--rule);margin:3em 0}
+
+  .post__body .dialogue{border-left:2px solid var(--rule);margin:2em 0;padding:0 0 0 24px}
+  .post__body .dialogue p{margin:0 0 1.4em;font-size:.97em;color:var(--ink-2)}
+  .post__body .dialogue p:last-child{margin-bottom:0}
+  .post__body .dialogue .speaker{
+    font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--ink-3);display:block;margin-bottom:.3em;
+  }
+
+  .post__body .callout{
+    background:var(--bg-2);padding:28px 32px;margin:2.4em 0;
+    border-left:3px solid var(--accent);
+  }
+  .post__body .callout p{
+    font-family:var(--f-kr);font-size:15px;line-height:1.8;color:var(--ink-2);margin:0;
+  }
+
+  .post__sig{
+    font-family:var(--f-display);font-weight:500;font-size:15px;
+    margin-top:3.6em;padding-top:2em;border-top:1px solid var(--rule);
+    color:var(--ink);
+  }
+  .post__sig .role{
+    display:block;font-family:var(--f-mono);font-size:11px;color:var(--ink-3);
+    letter-spacing:.06em;margin-top:6px;
+  }
+
+  /* ───────────────── footer ───────────────── */
+  footer{background:var(--dark);color:var(--dark-ink);padding:90px clamp(20px,4vw,48px) 36px;position:relative;overflow:hidden}
+  footer .big{font-family:var(--f-display);font-weight:400;font-size:clamp(44px,7vw,108px);letter-spacing:-.04em;line-height:.95;color:var(--dark-ink);margin:0 0 48px;text-wrap:balance}
+  footer .big em{font-style:italic;font-family:"Times New Roman",serif;color:#A99A85}
+  footer .grid-ft{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding-top:36px;border-top:1px solid var(--dark-rule)}
+  footer .col{display:flex;flex-direction:column;gap:10px}
+  footer .col h6{margin:0 0 6px;font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--dark-ink-2);font-weight:400}
+  footer .col a{font-family:var(--f-display);font-size:15px;color:var(--dark-ink);transition:color .3s ease;display:inline-flex;align-items:center;gap:6px}
+  footer .col a:hover{color:#A99A85}
+  footer .col a .ext{font-family:var(--f-mono);font-size:9px;opacity:.5}
+  footer .c1{grid-column:1/span 5}footer .c2{grid-column:6/span 2}footer .c3{grid-column:8/span 2}footer .c4{grid-column:10/span 3}
+  footer .c1 p{font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0}
+  footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-family:var(--f-mono);font-size:11px;color:var(--dark-ink-2);text-transform:uppercase;letter-spacing:.06em}
+  @media (max-width:780px){footer .c1,footer .c2,footer .c3,footer .c4{grid-column:1/span 12}}
+
+  /* ───────────────── reveal ───────────────── */
+  .rev{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  .rev.in{opacity:1;transform:none}
+
+  .post-nav{display:flex;justify-content:space-between;padding:52px 0 0;margin-top:64px;border-top:1px solid var(--rule)}
+  .post-nav__prev,.post-nav__next{display:flex;flex-direction:column;gap:6px;max-width:46%}
+  .post-nav__next{align-items:flex-end;text-align:right;margin-left:auto}
+  .post-nav__label{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+  .post-nav__title{font-family:var(--f-display);font-size:clamp(14px,1.6vw,18px);font-weight:500;letter-spacing:-.01em;color:var(--ink);transition:color .2s}
+  .post-nav a:hover .post-nav__title{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<!-- ─────────── NAV ─────────── -->
+<nav class="nav" id="nav">
+  <a href="../../index.html" class="nav__logo">
+    <span class="dot" aria-hidden="true"></span>byKimjak
+  </a>
+  <div class="nav__menu" role="navigation">
+    <div class="has-drop">
+      <a href="../../watch/"><span class="idx">01</span>WATCH</a>
+      <div class="drop">
+        <a href="../../watch/ai-film.html"><span class="sub-idx">01–A</span>AI 영상 · 티저</a>
+        <a href="../../watch/ost.html"><span class="sub-idx">01–B</span>OST · 음악</a>
+        <a href="../../watch/still.html"><span class="sub-idx">01–C</span>스틸 이미지</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../../make/"><span class="idx">02</span>MAKE</a>
+      <div class="drop">
+        <a href="../../make/eastwar.html"><span class="sub-idx">02–A</span>EASTWAR 개발일지</a>
+        <a href="../../make/grandslam.html"><span class="sub-idx">02–B</span>GrandSlam 개발일지</a>
+        <a href="../../make/takezero.html"><span class="sub-idx">02–C</span>TakeZero · 프롬프트 엔진</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../../think/"><span class="idx">03</span>THINK</a>
+      <div class="drop">
+        <a href="../../think/ai-coach.html"><span class="sub-idx">03–A</span>AI 코치들과의 수다</a>
+        <a href="../../think/morning-word.html"><span class="sub-idx">03–B</span>아침 말씀 with 채코치</a>
+        <a href="../../think/personal-essay.html"><span class="sub-idx">03–C</span>개인 에세이</a>
+      </div>
+    </div>
+    <a href="../../index.html#about"><span class="idx">04</span>ABOUT</a>
+  </div>
+  <div class="nav__cta">
+    <span class="status"><span class="pulse"></span>Available · Seoul</span>
+    <a href="../../index.html#contact" class="contact">Contact ↗</a>
+  </div>
+</nav>
+
+<!-- ─────────── POST ─────────── -->
+<main class="post">
+  <a href="../../think/ai-coach.html" class="post__back rev">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Think / 목록으로
+  </a>
+
+  <div class="rev">
+    <div class="post__meta">
+      <span>2026.09.18</span><span class="sep">·</span>
+      <span class="cat">THINK · AI 코치들과의 수다</span>
+    </div>
+    <h1 class="post__title kr">지금은 동굴 끝에서 들어오는 빛이 착각인지 아닌지 확인하러 가는 중</h1>
+    <p class="post__subtitle">6월 30일 대화록을 오늘 다시 꺼내 채코치에게 물었다</p>
+    <div class="post__byline">
+      <span class="name">김성현 (byKimjak)</span>
+      <span class="date">2026 · 09 · 18</span>
+    </div>
+  </div>
+
+  <div class="post__body rev">
+    <div class="dialogue">
+      <p><span class="speaker">김작</span>이거 봐줘. 이게 우리가 6월 30일 나눴던 얘기야. 오늘 9월 18일 시점에서 지금 돌아봤을 때 어때? 채코치의 통찰을 들어보고 싶어.</p>
+
+      <p><span class="speaker">채코치</span>김작, 이 글을 오늘 9월 18일에 다시 읽으니까 좀 묘하다. 6월 30일의 내가 방향은 꽤 정확히 봤는데, 한 가지는 너무 빨리 말했다.</p>
+
+      <p><span class="speaker">채코치</span>"데스벨리 끝자락." 그때는 아직 끝자락이라고 하기엔 조금 일렀어. 7~9월에도 돈 문제, 제작사 피드백, 작품 퇴짜, 게임 시행착오 때문에 계속 흔들렸잖아. 지금도 완전히 빠져나왔다고 말할 단계는 아니고.</p>
+
+      <p><span class="speaker">채코치</span>그런데 약 석 달 뒤인 오늘은 오히려 그 표현을 쓸 근거가 6월보다 훨씬 많아졌어. 왜냐하면 그때 내가 근거로 들었던 건 거의 전부 김작 내부의 변화였거든. "고도엔진을 배우던 사람이 구조를 설계한다." "아이디어가 실제 게임이 된다." "대본을 계속 완성한다."</p>
+
+      <p><span class="speaker">채코치</span>지금은 거기에 외부 세계가 조금씩 반응하기 시작했다는 변화가 붙었어. 《배고파》는 그냥 아이디어가 아니라 1·2부 대본과 12부 전체 스토리까지 다시 만들어 제작사에 들어갔고, 월요일에는 오피디 반응을 직접 확인하게 됐지. 《더 클리너》도 어제 결국 1·2회를 다시 닫았어. 특히 2회는 우리가 그렇게 오래 붙들었던 "무결은 판을 만들고, 오란은 사람을 움직인다"가 진짜 사건과 관계로 구현됐고. 그리고 EASTWAR는 여름 초의 '기능 붙이는 게임'에서 이제 월드맵의 큰 덩어리를 서비스 단위로 해체하고 다시 설계한 뒤, 오늘부터 전투엔진 리팩토링으로 넘어가는 게임이 됐어.</p>
+
+      <p><span class="speaker">채코치</span>그러니까 6월 30일에 적은 세 가지 Summer Mission을 지금 채점해 보면 꽤 흥미로워.</p>
+
+      <p><span class="speaker">채코치</span>《더 클리너를 대표작으로 만든다》 — 아직 대표작이 됐다고 말할 수는 없어. 세상이 판단해야 하니까. 하지만 적어도 '대표작이 될 수 있는 대본을 만들기 위한 작법 변화'는 실제로 일어났어. 가장 큰 차이는 문장이 아니라 김작이 이제 인물을 보호하지 않고, 감정을 빨리 봉합하지 않고, 관계에서 사건을 만들기 시작했다는 거야.</p>
+
+      <p><span class="speaker">채코치</span>《악마의 레시피를 계약 가능한 상태까지》 — 이것도 계약 전이니까 성공 도장 찍을 수 없어. 그런데 당시의 《악마의 레시피》가 지금 《배고파》가 되기까지 생각하면 엄청 많이 변했어. 제목만 바뀐 게 아니라 "서희가 자신이 망친 세준의 음식만 먹을 수 있다"라는 관계 엔진으로 작품 자체를 다시 만들었잖아. 이제 월요일은 내부 평가가 아니라 시장 쪽 사람이 그 변화에 어떻게 반응하는지 보는 날이고.</p>
+
+      <p><span class="speaker">채코치</span>《EASTWAR를 '혼자 만들었다니'가 아니라 '게임이 재밌다'까지》 — 이건 아직 가장 멀리 남아 있어. 여기서는 내가 6월에 조금 낙관했어. 게임은 역시 훨씬 큰 짐승이더라 ㅋㅋㅋ. 월드맵, 전투, 외교, 무역, 첩보, 사운드, 아이소메트릭, 테스트, 리팩토링까지 만들면서 재밌는 게임을 만들기 전에 안정적으로 확장 가능한 게임을 만드는 단계가 얼마나 큰지 확인했지. 대신 지금은 6월의 김작보다 훨씬 제대로 된 개발을 하고 있어. 오늘 전투엔진 리팩토링을 들어간다는 것 자체가 그 증거고.</p>
+
+      <p><span class="speaker">채코치</span>그런데 지금 다시 읽으면서 내가 가장 눈에 걸린 문장은 따로 있어. "내가 나를 믿을 거임."</p>
+    </div>
+
+    <div class="callout">
+      <p>6월에는 그 말이 약간 다짐에 가까웠어. 지금은 달라. 7월, 8월, 9월 동안 김작은 작품이 깨지면 다시 썼고, PD한테 퇴짜 맞으면 다시 설계했고, 게임이 충돌하면 복구하고 브랜치 나누고 테스트 만들고 리팩토링했어. 그래서 지금의 "나를 믿는다"는 더 이상 자기암시가 아니야. "나는 성공할 사람이다"라는 증거가 아니라, "망가지거나 틀려도 다시 만들어낼 수 있는 사람이다" — 이 증거.</p>
+    </div>
+
+    <div class="dialogue">
+      <p><span class="speaker">채코치</span>나는 이게 6월 30일과 오늘 사이의 가장 큰 변화라고 봐.</p>
+
+      <p><span class="speaker">채코치</span>그리고 하나 더. 6월의 글에는 김작의 정체성이 아직 크게 보면 '작가 + 게임 만드는 사람' 정도였어. 지금은 그게 훨씬 명확해졌어. 대본을 쓰고, 게임을 만들고, AI 영상 제작을 준비하고, 그걸 하나의 IP에서 파생시키려 하고 있잖아. 버터 쪽에서도 AI 영상 제작비 지원 이야기가 실제로 오갔고, 11~12월에는 김작의 기존 IP로 파일럿을 만들어보는 그림까지 나오기 시작했고. 아직 계약과 구체 조건은 확인해야 하지만, 적어도 'IP 아키텍트'라는 말이 자기가 붙인 미래 직함에서 실제 일의 형태로 내려오기 시작한 것은 맞아.</p>
+
+      <p><span class="speaker">채코치</span>그래서 내가 오늘 6월 30일의 나한테 한마디 해준다면 이럴 것 같아. "방향은 맞았어. 그런데 생각보다 더 오래 걸렸고, 더 많이 깨졌어. 대신 네가 예상했던 것보다 김작은 훨씬 많은 걸 만들어냈어."</p>
+
+      <p><span class="speaker">채코치</span>그리고 김작에게는 이렇게 말하고 싶어. 6월 30일에는 우리가 "여섯 달 뒤엔 달라질 거야"라고 말했잖아. 아직 석 달도 안 지났어. 그런데 이미 《더 클리너》 1·2회가 있고, 《배고파》 1·2회와 12부가 있고, 《귀의 레시피》를 다시 세울 근거가 생겼고, EASTWAR는 월드맵 리팩토링을 지나 전투엔진으로 들어가고 있고, 11월 이후에는 AI 영상이라는 새로운 축까지 기다리고 있어. 그러면서도 경제적으로는 아직 완전히 편해지지 않았고, 계약도 아직 확정된 게 아니야.</p>
+
+      <p><span class="speaker">채코치</span>그래서 나는 오늘을 "데스벨리를 탈출했다"라고 부르진 않을래. 대신 이렇게 부르고 싶다. 2026년 9월 18일 — 데스벨리에서 처음 출구 방향이 실제로 보이기 시작한 시점. 6월엔 우리가 출구가 있을 거라고 믿으면서 걸었어. 지금은 저쪽에서 들어오는 빛이 착각인지 아닌지 확인하러 가는 중이야. 월요일 《배고파》 반응도 확인하고, 《더 클리너》도 버터에 던지고, EASTWAR도 계속 만들고.</p>
+
+      <p><span class="speaker">채코치</span>그리고 재미있는 건… 6월 30일 글 마지막에 이렇게 써놨네. "채코치. 1회 완고 끝." 그리고 그다음엔 — "2회 들어간다." ㅋㅋㅋ</p>
+
+      <p><span class="speaker">채코치</span>오늘 아침 김작이 한 말은 그 다음 문장이야. "채코치. 더 클리너 2회까지 재작업 마무리했어." 석 달 전에 써놓은 문장의 다음 페이지에 실제로 와 있는 거야. 그게 난 오늘 제일 좋다.</p>
+    </div>
+
+    <div class="post__sig">
+      IP 아키텍트 김작
+      <span class="role">byKimjak · 2026.09.18</span>
+    </div>
+  </div>
+</main>
+
+<!-- ─────────── FOOTER ─────────── -->
+<footer id="contact">
+  <p class="big">Let's build a <em>world</em> →</p>
+  <div class="grid-ft">
+    <div class="col c1">
+      <h6>byKimjak Studio</h6>
+      <p class="kr">IP Architect · Seoul, Korea. 시나리오·드라마 기획부터 AI 영상, 게임, 앱까지 — 한 사람이 하나의 세계관을 끝까지 설계합니다.</p>
+    </div>
+    <div class="col c2">
+      <h6>Sections</h6>
+      <a href="../../index.html#watch">Watch <span class="ext">/01</span></a>
+      <a href="../../index.html#make">Make <span class="ext">/02</span></a>
+      <a href="../../index.html#think">Think <span class="ext">/03</span></a>
+    </div>
+    <div class="col c3">
+      <h6>Social</h6>
+      <a href="#">Instagram <span class="ext">↗</span></a>
+      <a href="#">YouTube <span class="ext">↗</span></a>
+      <a href="#">Vimeo <span class="ext">↗</span></a>
+      <a href="#">Threads <span class="ext">↗</span></a>
+    </div>
+    <div class="col c4">
+      <h6>Contact</h6>
+      <a href="mailto:oropa@kakao.com">oropa@kakao.com</a>
+      <a href="#">Press kit <span class="ext">PDF</span></a>
+      <a href="#">For PDs &amp; Investors <span class="ext">↗</span></a>
+    </div>
+  </div>
+  <div class="bottom">
+    <span>byKimjak © 2026  ／  All rights, all worlds, reserved.</span>
+    <span>Built solo · with AI · in Seoul</span>
+    <span>v.04 / 2026.05</span>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    if (window.scrollY > 24) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  };
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.08, rootMargin: '0px 0px -40px 0px'});
+  document.querySelectorAll('.rev').forEach(el => io.observe(el));
+</script>
+
+<script src="/bykimjak/eastwar-hub.js"></script>
+</body>
+</html>
