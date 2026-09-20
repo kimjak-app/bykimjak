@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR Dev Log #042 — World Map Refactor · byKimjak</title>
+<title>EASTWAR Dev Log #043 — World Map Refactor, Finished · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -120,6 +120,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 .log-nav__label{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
 .log-nav__title{font-family:var(--f-display);font-size:clamp(14px,1.8vw,20px);font-weight:500;letter-spacing:-.01em;color:var(--ink);transition:color .2s}
 .log-nav a:hover .log-nav__title{color:var(--accent)}
+.log-nav__next--disabled{opacity:.4;cursor:default}
 </style>
 </head>
 <body>
@@ -166,10 +167,10 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar-en.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #042</span>
+      <span>Dev Log #043</span>
     </div>
     <div class="lang-switch rev">
-      <a href="eastwar-devlog-042.html" class="lang-other">🇰🇷 한국어</a>
+      <a href="eastwar-devlog-043.html" class="lang-other">🇰🇷 한국어</a>
       <span class="lang-sep">|</span>
       <span class="lang-current">🇺🇸 English</span>
     </div>
@@ -180,52 +181,67 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-042">
+  <article class="devlog" id="log-043">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #042</span>
-      <h1>EASTWAR Devlog #042</h1>
-      <h2>World Map Refactor — Recovering from a 24,762-Line File Vanishing, Then Splitting Off Diplomacy, Trade, and Espionage</h2>
-      <span class="log-date">September 12–14, 2026</span>
+      <span class="log-num">Dev Log · #043</span>
+      <h1>EASTWAR Devlog #043</h1>
+      <h2>From 24,762 to 14,094 Lines — The World Map Refactor, Finished</h2>
+      <span class="log-date">September 15–17, 2026</span>
 
       <hr />
-      <h3>The Accident: The Day 20,600 Lines Disappeared</h3>
-      <p><code>worldmap_main.gd</code> — the file holding almost all of EASTWAR's world map logic. I started pulling diplomacy, trade, and espionage out of it, and things went wrong immediately. What was supposed to be a clean split instead wiped out over 20,000 lines of the file.</p>
-      <p>Searching the whole repository for the deleted functions, I found around 1,000 of them had vanished completely — and less than a quarter had anything to do with diplomacy, trade, or espionage. Combat resolution, AI decisions, the camera, the save system — nearly every core system had gone missing along with it. Worse, this exact file had already been wiped the same way once before, days earlier, and recovered. The same accident had happened twice.</p>
+      <h3>How We Got Here</h3>
+      <p>Last time, I wrote about <code>worldmap_main.gd</code> — the file that lost 20,000 lines in an accident, got recovered, and was then rebuilt with one rule: never delete a lot at once, always verify. Over three days, diplomacy, trade, and espionage got pulled out one at a time, relocating over 3,700 lines.</p>
+      <p>These next three days finished everything else — military, tech tree, city administration, screen UI, and turn processing. Put it all together, and this series is complete.</p>
 
-      <h3>Rolling Back, and Starting Over Differently</h3>
-      <p>After rolling back to before the accident, I changed the whole approach. Three rules:</p>
+      <h3>Military: Mapping Out How a Single Battle Actually Runs</h3>
+      <p>Military was different in nature. Diplomacy, trade, and espionage all followed a simple pattern — input, calculation, state change. Military involves a round trip to the battle screen and back. So it got broken into smaller pieces:</p>
       <ul>
-        <li>Never rewrite the whole file. Only allow <strong>small, isolated patches</strong>.</li>
-        <li>Run an integrity-check script after every single change — a safeguard built specifically because of this accident, designed to fail instantly if the file suddenly shrinks or a core function disappears.</li>
-        <li>Never delete old logic outright. Keep it in place, and let a new dedicated file build a thin bridge on top of it.</li>
+        <li>Actually applying battle results (Settlement)</li>
+        <li>Wrapping a single automated battle — prepare, pay cost, interpret result, roll back on failure — into one safe transaction (T03 Transaction)</li>
+        <li>The logic for wounded soldiers recovering (Wounded &amp; Recovery)</li>
+        <li>Deployment, supply, and troop reassignment</li>
       </ul>
-      <p>Picture it like this: one person used to handle accounting, diplomacy, trade, and espionage all in the same room. Now each job gets its own department — but every time something moves to a new department, you check that it actually arrived intact before moving on.</p>
+      <p>Moving the wounded/recovery logic in particular meant caring about save-file compatibility — old saves used a different field name than the new code, so both got recognized, and the check preventing duplicate recovery in the same month came along intact. None of the balance numbers, like recovery duration, got touched.</p>
+      <p>After all four stages, the handoff to and from the battle screen didn't change by a single line, start to finish. The military domain's calculations and rulings are now completely outside <code>worldmap_main.gd</code>. What's left — things like hero movement, prisoners, and territory occupation — overlaps with other domains rather than being core military logic, so a clear line was drawn to leave it for later.</p>
 
-      <h3>Diplomacy, One Step at a Time</h3>
-      <p>Moving diplomacy into its own service happened in stages. The first few stages only built new bridges without removing anything, so the file's line count actually went up at first — new bridges, old code still there.</p>
-      <p>The real shift came next: 82 lines defining diplomatic actions, validating them, and generating failure results were finally removed for real — and those exact 82 lines, down to the Korean error message text, had been moved intact into the new service file. After that, resource-cost deduction, relationship-score changes, and alliance/cooldown/trade-agreement state all followed the same path.</p>
-      <p>Every stage got checked against the integrity script, and every time, all 172 existing diplomacy functions were re-confirmed working. By the end, diplomacy alone had removed 1,129 lines from <code>worldmap_main.gd</code>.</p>
+      <h3>Tech Tree: The Second Big Mountain</h3>
+      <p>Right after military wrapped up, tech tree was next — research constants, categories, effect tables, and layout values all piled up near the top of the file. Again, it got split into four pieces instead of one big cut:</p>
+      <ul>
+        <li>Whether research is available, prerequisites, cost, effect calculation (rules)</li>
+        <li>Research progress and completion state (lifecycle)</li>
+        <li>The interface other domains — military, economy, diplomacy — use to query tech effects (provider)</li>
+        <li>Drawing the tree on screen, icons, descriptions, completion videos (presentation)</li>
+      </ul>
+      <p>The numbers were the scariest part here. Rules like "cumulative effects only ever add, never multiply," "a duplicate completion ID applies exactly once," and "the cavalry-charge bonus keeps its existing per-city cap" all got written down explicitly and checked one by one. These numbers are directly tied to game balance, so this was the highest-risk part — and in the end, nothing shifted.</p>
+      <p>Once tech tree was fully sorted, <code>worldmap_main.gd</code> had no catalog, no rules, no progress state, no effect math, and no drawing logic left for it. What remained was a thin adapter and some UI copy.</p>
 
-      <h3>Trade, All the Way to Full Separation</h3>
-      <p>Trade went even further. First, manual (player-initiated) trade moved out, cutting 408 more lines. Then the next stage moved out automated trade (run by the in-game minister) and internal trade between a player's own cities.</p>
-      <p>Crucially, warehouse, market, and city data still belong to other systems (economy, city). The dedicated trade file only owns the rules of "what moves from where to where, and how much." The boundary stayed clean.</p>
+      <h3>City Administration, Then the Screen Shell</h3>
+      <p>Next was the city detail screen — split into governor/city-policy effects, city resources/warehouse/production, and the city-detail presentation itself. Recruitment, hero movement, and the warehouse UI's shell were already owned by other domains (military, HUD), so those stayed untouched on purpose.</p>
+      <p>After that came camera movement/zoom constants and the shared screen-panel layout used across the world map. With diplomacy, trade, military, and tech tree — all the actual "game rules" — already gone, what remained was purely a shell layer deciding how things get drawn. Clearing this out shaved off another 448 lines.</p>
 
-      <h3>Espionage, and Where Things Stand</h3>
-      <p>Espionage moved all five of its actions — intelligence gathering, public unrest, loyalty disruption, rebellion incitement, and the wedge tactic — into its own dedicated file. This was the single biggest drop yet: 1,795 lines in one step.</p>
-      <p>Add up all three days, and <code>worldmap_main.gd</code> went from 24,762 lines down to 21,038 — over 3,700 lines relocated elsewhere. But the number itself isn't really the point. After getting badly burned once, the whole approach changed from "delete a lot at once" to "check everything, move a little at a time." It looked slower. It ended up being both safer and, in the end, faster.</p>
+      <h3>The Last Gate: How a Turn Actually Runs</h3>
+      <p>The final piece was "what happens when a turn advances" — the calendar and seasons moving forward, taxes and income arriving each turn, public support and loyalty shifting bit by bit, and the enemy faction processing its own turn. Rather than touching diplomacy or battle logic that had already moved out, this stage isolated only the "responsibility for running one turn" that main was still directly holding.</p>
+      <p>Only after this stage did the battle handoff, input handling, and save/load functionality all get confirmed working exactly as before. And this was, genuinely, the last piece.</p>
 
-      <h3>What's Next</h3>
-      <p>The military domain is left. Diplomacy, trade, and espionage all followed a relatively simple pattern — input, calculation, state change, result. Military is different: it hands off to the battle screen and comes back, so it can't be cut the same way. It'll likely need its own dedicated transition layer.</p>
+      <h3>Three Days' Results, and the Series' Ending</h3>
+      <p>Adding up everything from the day of the accident to now:</p>
+      <ul>
+        <li><strong>24,762 lines → 14,094 lines</strong> (about a 43.1% reduction)</li>
+        <li>Eight domains fully separated: diplomacy, trade, espionage, military, tech tree, city administration, HUD/camera, and turn processing</li>
+        <li>The round-trip handoff to and from the battle screen never changed by a single line, except for the one camera-domain move</li>
+        <li>The accident happened exactly once, on day one — every stage since then has passed verification</li>
+      </ul>
+      <p>Looking back, the scariest part of the original accident was the fear of it happening again. But that same accident is exactly what forced the integrity-check safeguard into existence — and that one safeguard is what made it possible to move eight domains out without losing a single piece. Sometimes you really do have to fall hard once before you learn how to walk safely.</p>
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-041-en.html" class="log-nav__prev">
+      <a href="eastwar-devlog-042-en.html" class="log-nav__prev">
         <span class="log-nav__label">Previous</span>
-        <span class="log-nav__title">← Dev Log #041</span>
+        <span class="log-nav__title">← #042</span>
       </a>
-      <a href="eastwar-devlog-043-en.html" class="log-nav__next">
+      <a href="eastwar-devlog-044-en.html" class="log-nav__next">
         <span class="log-nav__label">Next</span>
-        <span class="log-nav__title">#043 →</span>
+        <span class="log-nav__title">#044 →</span>
       </a>
     </div>
 
@@ -249,7 +265,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '042');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '043');
 </script>
 <script src="/bykimjak/eastwar-hub.js"></script>
 </body>

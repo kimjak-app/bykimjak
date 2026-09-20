@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR Dev Log #042 — World Map Refactor · byKimjak</title>
+<title>EASTWAR 개발일지 #044 — 3부작 후기 · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -120,6 +120,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 .log-nav__label{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
 .log-nav__title{font-family:var(--f-display);font-size:clamp(14px,1.8vw,20px);font-weight:500;letter-spacing:-.01em;color:var(--ink);transition:color .2s}
 .log-nav a:hover .log-nav__title{color:var(--accent)}
+.log-nav__next--disabled{opacity:.4;cursor:default}
 </style>
 </head>
 <body>
@@ -164,69 +165,63 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     <div class="breadcrumb rev">
       <a href="../index.html">bykimjak</a>
       <span class="sep">›</span>
-      <a href="eastwar-en.html">EASTWAR</a>
+      <a href="eastwar.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #042</span>
+      <span>Dev Log #044</span>
     </div>
     <div class="lang-switch rev">
-      <a href="eastwar-devlog-042.html" class="lang-other">🇰🇷 한국어</a>
+      <span class="lang-current">🇰🇷 한국어</span>
       <span class="lang-sep">|</span>
-      <span class="lang-current">🇺🇸 English</span>
+      <a href="eastwar-devlog-044-en.html" class="lang-other">🇺🇸 English</a>
     </div>
     <h1 class="rev">EASTWAR</h1>
     <p class="sub-ko rev">이스트워 개발일지</p>
-    <p class="listing-desc rev">Strategy alt-history simulation — solo dev log</p>
+    <p class="listing-desc rev">전략 가상역사 시뮬레이션 — 1인 개발 기록</p>
   </div>
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-042">
+  <article class="devlog" id="log-044">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #042</span>
-      <h1>EASTWAR Devlog #042</h1>
-      <h2>World Map Refactor — Recovering from a 24,762-Line File Vanishing, Then Splitting Off Diplomacy, Trade, and Espionage</h2>
-      <span class="log-date">September 12–14, 2026</span>
+      <span class="log-num">Dev Log · #044</span>
+      <h1>EASTWAR 개발일지 #044</h1>
+      <h2>[3부작 후기] 사고 하나가 만든 안전한 습관 — worldmap_main.gd 리팩터링을 돌아보며</h2>
+      <span class="log-date">2026년 9월 18일</span>
 
       <hr />
-      <h3>The Accident: The Day 20,600 Lines Disappeared</h3>
-      <p><code>worldmap_main.gd</code> — the file holding almost all of EASTWAR's world map logic. I started pulling diplomacy, trade, and espionage out of it, and things went wrong immediately. What was supposed to be a clean split instead wiped out over 20,000 lines of the file.</p>
-      <p>Searching the whole repository for the deleted functions, I found around 1,000 of them had vanished completely — and less than a quarter had anything to do with diplomacy, trade, or espionage. Combat resolution, AI decisions, the camera, the save system — nearly every core system had gone missing along with it. Worse, this exact file had already been wiped the same way once before, days earlier, and recovered. The same accident had happened twice.</p>
+      <h3>세 편을 다 쓰고 나서</h3>
+      <p>041, 042, 043을 차례로 쓰면서 계속 같은 파일 하나(<code>worldmap_main.gd</code>) 이야기를 했다. 하나는 효과음, 둘은 외교·무역·첩보, 셋은 군사·테크트리·도시내정까지. 다 쓰고 나서 다시 읽어보니, 이게 사실 코드 이야기가 아니라 <strong>일하는 방식이 바뀐 이야기</strong>였다는 걸 깨달았다.</p>
 
-      <h3>Rolling Back, and Starting Over Differently</h3>
-      <p>After rolling back to before the accident, I changed the whole approach. Three rules:</p>
+      <h3>나는 코드를 안 짠다</h3>
+      <p>나는 개발자가 아니다. IP 아키텍트로서 방향을 정하고, 무엇을 만들지 결정하고, AI 팀에게 일을 맡기는 사람이다. 그래서 이번 리팩터링 시리즈를 지켜보면서 제일 인상 깊었던 건 코드 자체가 아니라, <strong>사고가 난 뒤에 신뢰를 회복하는 방식</strong>이었다.</p>
+      <p>20,600줄이 통째로 날아갔던 그 순간, 내가 만약 그 자리에서 코드를 직접 봤다면 아무것도 못 알아봤을 거다. 대신 내가 본 건 숫자였다. "삭제된 함수 1,000개", "그중 4분의 1도 관련 없음", "9월 6일에도 같은 사고 있었음". 이 숫자들만으로도 이건 다시 믿을 수 있는 방식으로 고쳐야 한다는 게 명확했다.</p>
+
+      <h3>검증이 곧 신뢰였다</h3>
+      <p>사고 이후로 만든 정합성 검증 스크립트, 그게 이 시리즈 전체를 지탱한 축이었다. 파일이 갑자기 짧아지면 실패, 핵심 함수가 사라지면 실패. 이 장치 하나 덕분에 나는 매번 코드를 안 뜯어봐도 "괜찮다"는 확신을 가질 수 있었다.</p>
+      <p>이게 사실 내가 드라마 작업할 때 채코치한테 늘 하는 말과 똑같다. "이 장면이 왜 이렇게 편하게 풀렸지?", "이 인물이 제일 피하고 싶은 선택이 뭔데 왜 안 시켰지?" — 매번 의심하고 확인하는 것. 코드든 대본이든, 결국 편하게 넘어가려는 순간을 붙잡고 물어보는 게 진짜 실력이더라.</p>
+
+      <h3>느리게 가는 게 결국 빨랐다</h3>
+      <p>외교 하나 옮기는 데도 다섯 단계(2A~2E)로 쪼갰고, 군사는 아홉 단계(M-1~M-9)로 쪼갰다. 처음 봤을 땐 "이렇게까지 잘게 나눠야 하나" 싶었다. 그런데 결과를 보면 답이 나온다. 8개 도메인을 옮기는 동안 사고는 <strong>단 한 번</strong>이었다. 그것도 방식을 바꾸기 전, 첫날에.</p>
+      <p>그 이후로는 매 단계 검증 통과, 댕글링 콜 0건, 밸런스 수치 무손상. 처음에 5천 줄씩 밀어붙였다면 아마 두세 번은 더 사고가 났을 거고, 복구하느라 오히려 더 오래 걸렸을 거다. 작게, 자주, 확인하면서 — 이게 결국 가장 빠른 길이었다.</p>
+
+      <h3>숫자로 남는 것</h3>
       <ul>
-        <li>Never rewrite the whole file. Only allow <strong>small, isolated patches</strong>.</li>
-        <li>Run an integrity-check script after every single change — a safeguard built specifically because of this accident, designed to fail instantly if the file suddenly shrinks or a core function disappears.</li>
-        <li>Never delete old logic outright. Keep it in place, and let a new dedicated file build a thin bridge on top of it.</li>
+        <li><strong>24,762줄 → 14,094줄</strong> (약 43.1% 감소)</li>
+        <li>외교·무역·첩보·군사·테크트리·도시내정·화면(HUD)/카메라·턴 진행, 8개 도메인 완전 분리</li>
+        <li>사고 1번, 그 이후 검증 통과 100%</li>
       </ul>
-      <p>Picture it like this: one person used to handle accounting, diplomacy, trade, and espionage all in the same room. Now each job gets its own department — but every time something moves to a new department, you check that it actually arrived intact before moving on.</p>
+      <p>이 숫자들이 멋있어 보이긴 하지만, 진짜 남는 건 숫자가 아니다. "무너진 뒤에 다시 짓는 법"을 하나 배웠다는 것. 그리고 그 방법이 코드에만 적용되는 게 아니라는 것. 어떤 작업이든, 한 번 크게 넘어져 봐야 진짜 안전하게 걷는 법을 배우는 것 같다.</p>
 
-      <h3>Diplomacy, One Step at a Time</h3>
-      <p>Moving diplomacy into its own service happened in stages. The first few stages only built new bridges without removing anything, so the file's line count actually went up at first — new bridges, old code still there.</p>
-      <p>The real shift came next: 82 lines defining diplomatic actions, validating them, and generating failure results were finally removed for real — and those exact 82 lines, down to the Korean error message text, had been moved intact into the new service file. After that, resource-cost deduction, relationship-score changes, and alliance/cooldown/trade-agreement state all followed the same path.</p>
-      <p>Every stage got checked against the integrity script, and every time, all 172 existing diplomacy functions were re-confirmed working. By the end, diplomacy alone had removed 1,129 lines from <code>worldmap_main.gd</code>.</p>
-
-      <h3>Trade, All the Way to Full Separation</h3>
-      <p>Trade went even further. First, manual (player-initiated) trade moved out, cutting 408 more lines. Then the next stage moved out automated trade (run by the in-game minister) and internal trade between a player's own cities.</p>
-      <p>Crucially, warehouse, market, and city data still belong to other systems (economy, city). The dedicated trade file only owns the rules of "what moves from where to where, and how much." The boundary stayed clean.</p>
-
-      <h3>Espionage, and Where Things Stand</h3>
-      <p>Espionage moved all five of its actions — intelligence gathering, public unrest, loyalty disruption, rebellion incitement, and the wedge tactic — into its own dedicated file. This was the single biggest drop yet: 1,795 lines in one step.</p>
-      <p>Add up all three days, and <code>worldmap_main.gd</code> went from 24,762 lines down to 21,038 — over 3,700 lines relocated elsewhere. But the number itself isn't really the point. After getting badly burned once, the whole approach changed from "delete a lot at once" to "check everything, move a little at a time." It looked slower. It ended up being both safer and, in the end, faster.</p>
-
-      <h3>What's Next</h3>
-      <p>The military domain is left. Diplomacy, trade, and espionage all followed a relatively simple pattern — input, calculation, state change, result. Military is different: it hands off to the battle screen and comes back, so it can't be cut the same way. It'll likely need its own dedicated transition layer.</p>
+      <h3>다음은</h3>
+      <p>이제 <code>worldmap_main.gd</code>는 진짜 허브가 됐다. 게임 규칙을 직접 계산하지 않고, 각 담당 파일을 불러다 쓰는 역할만 남았다. 다음 시리즈는 이 새 구조 위에서 무엇을 더 만들 수 있을지에 대한 이야기가 될 것 같다.</p>
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-041-en.html" class="log-nav__prev">
-        <span class="log-nav__label">Previous</span>
-        <span class="log-nav__title">← Dev Log #041</span>
+      <a href="eastwar-devlog-043.html" class="log-nav__prev">
+        <span class="log-nav__label">이전</span>
+        <span class="log-nav__title">← #043</span>
       </a>
-      <a href="eastwar-devlog-043-en.html" class="log-nav__next">
-        <span class="log-nav__label">Next</span>
-        <span class="log-nav__title">#043 →</span>
-      </a>
+      <span class="log-nav__next log-nav__next--disabled">다음 편 준비 중 →</span>
     </div>
 
   </article>
@@ -235,7 +230,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 <footer id="contact">
   <p class="big">Let's build a <em>world</em> →</p>
   <div class="grid-ft">
-    <div class="col c1"><h6>byKimjak Studio</h6><p style="font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0">IP Architect · Seoul, Korea. From scenario and drama planning to AI film, games, and apps — one person designing a single universe end to end.</p></div>
+    <div class="col c1"><h6>byKimjak Studio</h6><p style="font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0">IP Architect · Seoul, Korea. 시나리오·드라마 기획부터 AI 영상, 게임, 앱까지 — 한 사람이 하나의 세계관을 끝까지 설계합니다.</p></div>
     <div class="col c2"><h6>Sections</h6><a href="../watch/">Watch <span class="ext">/01</span></a><a href="../make/">Make <span class="ext">/02</span></a><a href="../think/">Think <span class="ext">/03</span></a></div>
     <div class="col c3"><h6>Social</h6><a href="#">Instagram <span class="ext">↗</span></a><a href="#">YouTube <span class="ext">↗</span></a><a href="#">Vimeo <span class="ext">↗</span></a><a href="#">Threads <span class="ext">↗</span></a></div>
     <div class="col c4"><h6>Contact</h6><a href="mailto:oropa@kakao.com">oropa@kakao.com</a><a href="#">Press kit <span class="ext">PDF</span></a><a href="#">For PDs &amp; Investors <span class="ext">↗</span></a></div>
@@ -249,7 +244,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '042');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '044');
 </script>
 <script src="/bykimjak/eastwar-hub.js"></script>
 </body>

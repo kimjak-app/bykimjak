@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>EASTWAR Dev Log #042 — World Map Refactor · byKimjak</title>
+<title>EASTWAR Dev Log #044 — Trilogy Retrospective · byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -120,6 +120,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 .log-nav__label{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
 .log-nav__title{font-family:var(--f-display);font-size:clamp(14px,1.8vw,20px);font-weight:500;letter-spacing:-.01em;color:var(--ink);transition:color .2s}
 .log-nav a:hover .log-nav__title{color:var(--accent)}
+.log-nav__next--disabled{opacity:.4;cursor:default}
 </style>
 </head>
 <body>
@@ -166,10 +167,10 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <span class="sep">›</span>
       <a href="eastwar-en.html">EASTWAR</a>
       <span class="sep">›</span>
-      <span>Dev Log #042</span>
+      <span>Dev Log #044</span>
     </div>
     <div class="lang-switch rev">
-      <a href="eastwar-devlog-042.html" class="lang-other">🇰🇷 한국어</a>
+      <a href="eastwar-devlog-044.html" class="lang-other">🇰🇷 한국어</a>
       <span class="lang-sep">|</span>
       <span class="lang-current">🇺🇸 English</span>
     </div>
@@ -180,53 +181,47 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-042">
+  <article class="devlog" id="log-044">
     <div class="devlog__body rev">
-      <span class="log-num">Dev Log · #042</span>
-      <h1>EASTWAR Devlog #042</h1>
-      <h2>World Map Refactor — Recovering from a 24,762-Line File Vanishing, Then Splitting Off Diplomacy, Trade, and Espionage</h2>
-      <span class="log-date">September 12–14, 2026</span>
+      <span class="log-num">Dev Log · #044</span>
+      <h1>EASTWAR Devlog #044</h1>
+      <h2>[Trilogy Retrospective] One Accident, One Safe Habit — Looking Back on the worldmap_main.gd Refactor</h2>
+      <span class="log-date">September 18, 2026</span>
 
       <hr />
-      <h3>The Accident: The Day 20,600 Lines Disappeared</h3>
-      <p><code>worldmap_main.gd</code> — the file holding almost all of EASTWAR's world map logic. I started pulling diplomacy, trade, and espionage out of it, and things went wrong immediately. What was supposed to be a clean split instead wiped out over 20,000 lines of the file.</p>
-      <p>Searching the whole repository for the deleted functions, I found around 1,000 of them had vanished completely — and less than a quarter had anything to do with diplomacy, trade, or espionage. Combat resolution, AI decisions, the camera, the save system — nearly every core system had gone missing along with it. Worse, this exact file had already been wiped the same way once before, days earlier, and recovered. The same accident had happened twice.</p>
+      <h3>After Writing All Three</h3>
+      <p>Across 041, 042, and 043, I kept coming back to the same file: <code>worldmap_main.gd</code>. First, sound effects. Then diplomacy, trade, and espionage. Then military, tech tree, and city administration. Reading all three back to back, I realized this was never really a story about code — it was a story about how a way of working changed.</p>
 
-      <h3>Rolling Back, and Starting Over Differently</h3>
-      <p>After rolling back to before the accident, I changed the whole approach. Three rules:</p>
+      <h3>I Don't Write Code</h3>
+      <p>I'm not a developer. As an IP Architect, my job is to set direction, decide what gets built, and hand the work to an AI team. So watching this refactor series unfold, what struck me most wasn't the code itself — it was <strong>how trust got rebuilt after things broke</strong>.</p>
+      <p>The moment 20,600 lines vanished, if I'd looked at the code directly, I wouldn't have understood any of it. What I understood instead were numbers: "1,000 deleted functions," "less than a quarter of them actually related," "the same accident happened once before, on September 6." Just from those numbers, it was obvious this needed to be fixed in a way I could trust again.</p>
+
+      <h3>Verification Was the Trust</h3>
+      <p>The integrity-check script built after the accident is what carried the entire series. Fail if the file suddenly shrinks. Fail if a core function disappears. That one safeguard let me feel confident every single time, without ever having to inspect the code myself.</p>
+      <p>It's actually the same thing I tell my drama coach on script work, over and over: "Why did this scene resolve so comfortably?" "What's the one choice this character most wants to avoid — and why am I not making them face it?" Doubting and checking, every time. Whether it's code or a script, real skill seems to come down to catching the moment you're tempted to let something slide, and asking about it anyway.</p>
+
+      <h3>Going Slow Turned Out to Be Faster</h3>
+      <p>Moving diplomacy alone took five stages (2A–2E). Military took nine (M-1–M-9). At first glance, that looked like overkill. But the results speak for themselves. Across eight domains being relocated, there was exactly <strong>one</strong> accident — and it happened before the approach changed, on day one.</p>
+      <p>Every stage after that: verification passed, zero dangling calls, zero balance numbers disturbed. If I'd pushed through 5,000 lines at a time from the start, there probably would have been two or three more accidents — and recovering from those would have taken far longer than doing it carefully in the first place. Small steps, done often, always checked — that turned out to be the fastest path after all.</p>
+
+      <h3>What's Left in Numbers</h3>
       <ul>
-        <li>Never rewrite the whole file. Only allow <strong>small, isolated patches</strong>.</li>
-        <li>Run an integrity-check script after every single change — a safeguard built specifically because of this accident, designed to fail instantly if the file suddenly shrinks or a core function disappears.</li>
-        <li>Never delete old logic outright. Keep it in place, and let a new dedicated file build a thin bridge on top of it.</li>
+        <li><strong>24,762 lines → 14,094 lines</strong> (about a 43.1% reduction)</li>
+        <li>Eight domains fully separated: diplomacy, trade, espionage, military, tech tree, city administration, HUD/camera, and turn processing</li>
+        <li>One accident, followed by a 100% pass rate on every verification since</li>
       </ul>
-      <p>Picture it like this: one person used to handle accounting, diplomacy, trade, and espionage all in the same room. Now each job gets its own department — but every time something moves to a new department, you check that it actually arrived intact before moving on.</p>
-
-      <h3>Diplomacy, One Step at a Time</h3>
-      <p>Moving diplomacy into its own service happened in stages. The first few stages only built new bridges without removing anything, so the file's line count actually went up at first — new bridges, old code still there.</p>
-      <p>The real shift came next: 82 lines defining diplomatic actions, validating them, and generating failure results were finally removed for real — and those exact 82 lines, down to the Korean error message text, had been moved intact into the new service file. After that, resource-cost deduction, relationship-score changes, and alliance/cooldown/trade-agreement state all followed the same path.</p>
-      <p>Every stage got checked against the integrity script, and every time, all 172 existing diplomacy functions were re-confirmed working. By the end, diplomacy alone had removed 1,129 lines from <code>worldmap_main.gd</code>.</p>
-
-      <h3>Trade, All the Way to Full Separation</h3>
-      <p>Trade went even further. First, manual (player-initiated) trade moved out, cutting 408 more lines. Then the next stage moved out automated trade (run by the in-game minister) and internal trade between a player's own cities.</p>
-      <p>Crucially, warehouse, market, and city data still belong to other systems (economy, city). The dedicated trade file only owns the rules of "what moves from where to where, and how much." The boundary stayed clean.</p>
-
-      <h3>Espionage, and Where Things Stand</h3>
-      <p>Espionage moved all five of its actions — intelligence gathering, public unrest, loyalty disruption, rebellion incitement, and the wedge tactic — into its own dedicated file. This was the single biggest drop yet: 1,795 lines in one step.</p>
-      <p>Add up all three days, and <code>worldmap_main.gd</code> went from 24,762 lines down to 21,038 — over 3,700 lines relocated elsewhere. But the number itself isn't really the point. After getting badly burned once, the whole approach changed from "delete a lot at once" to "check everything, move a little at a time." It looked slower. It ended up being both safer and, in the end, faster.</p>
+      <p>These numbers look impressive, but they're not really what stays with me. What stays is learning how to rebuild after something collapses — and realizing that lesson isn't just about code. Whatever the work is, it seems you really do have to fall hard once before you learn how to walk safely.</p>
 
       <h3>What's Next</h3>
-      <p>The military domain is left. Diplomacy, trade, and espionage all followed a relatively simple pattern — input, calculation, state change, result. Military is different: it hands off to the battle screen and comes back, so it can't be cut the same way. It'll likely need its own dedicated transition layer.</p>
+      <p><code>worldmap_main.gd</code> is a genuine hub now. It doesn't calculate game rules directly anymore — it just wires together the files that do. The next series will probably be about what becomes possible to build on top of this new structure.</p>
     </div>
 
     <div class="log-nav">
-      <a href="eastwar-devlog-041-en.html" class="log-nav__prev">
+      <a href="eastwar-devlog-043-en.html" class="log-nav__prev">
         <span class="log-nav__label">Previous</span>
-        <span class="log-nav__title">← Dev Log #041</span>
+        <span class="log-nav__title">← #043</span>
       </a>
-      <a href="eastwar-devlog-043-en.html" class="log-nav__next">
-        <span class="log-nav__label">Next</span>
-        <span class="log-nav__title">#043 →</span>
-      </a>
+      <span class="log-nav__next log-nav__next--disabled">Next episode coming soon →</span>
     </div>
 
   </article>
@@ -249,7 +244,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '042');
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '044');
 </script>
 <script src="/bykimjak/eastwar-hub.js"></script>
 </body>

@@ -4,6 +4,13 @@
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
     {
+      url: 'make/eastwar-devlog-044.html',
+      catKey: 'eastwar', cat: 'Architect Notes',
+      title: '[3부작 후기] 사고 하나가 만든 안전한 습관',
+      sub: 'worldmap_main.gd 리팩터링을 돌아보며',
+      date: '2026-09-18', dl: '2026 · 09 · 18'
+    },
+    {
       url: 'posts/think/ai-coach-011.html',
       catKey: 'ai-coach', cat: 'AI Conversations',
       title: '지금은 동굴 끝에서 들어오는 빛이 착각인지 아닌지 확인하러 가는 중',
@@ -16,6 +23,13 @@
       title: '게임 리팩토링 작업시 필요한 스킬 만들기',
       sub: '바이브코딩 게임제작시 리팩토링 과정에서 필요한 스킬 작업',
       date: '2026-09-17', dl: '2026 · 09 · 17'
+    },
+    {
+      url: 'make/eastwar-devlog-043.html',
+      catKey: 'eastwar', cat: 'Architect Notes',
+      title: '24,762줄에서 14,094줄로 — 월드맵 리팩토링 완결편',
+      sub: '군사·테크트리·도시내정·화면 UI·턴 진행까지, 8개 도메인 완전 분리',
+      date: '2026-09-17', dl: '2026 · 09 · 15–17'
     },
     {
       url: 'posts/think/morning-word-038.html',
