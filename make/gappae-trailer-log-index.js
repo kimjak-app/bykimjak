@@ -7,7 +7,13 @@
      { num: '001', date: '2026.09.19',
        ko: { href: 'gappae-trailer-devlog-001.html',    title: '...', sub: '' },
        en: { href: 'gappae-trailer-devlog-001-en.html', title: '...', sub: '' } } */
-  var LOGS = [];
+  var LOGS = [
+    {
+      num: '001', date: '2026.09.19',
+      ko: { href: 'gappae-trailer-devlog-001.html',    title: '드라마를 2분에 담다 — 갑패 트레일러 테스트 제작 첫날', sub: '' },
+      en: { href: 'gappae-trailer-devlog-001-en.html', title: 'Fitting a Drama into Two Minutes — Day One of the Gappae Trailer Test', sub: '' }
+    }
+  ];
 
   /* Find which page the current log falls on */
   function pageOf(num) {
@@ -43,14 +49,14 @@
         html += '<span class="' + cls + '">'
           + '<span class="log-index__num">#' + log.num + '</span>'
           + '<span class="log-index__t">' + d.title
-          + '<span class="ko">' + d.sub + '</span></span>'
+          + (d.sub ? '<span class="ko">' + d.sub + '</span>' : '') + '</span>'
           + '<span class="log-index__date">' + log.date + '</span>'
           + '</span>';
       } else {
         html += '<a href="' + d.href + '" class="' + cls + '">'
           + '<span class="log-index__num">#' + log.num + '</span>'
           + '<span class="log-index__t">' + d.title
-          + '<span class="ko">' + d.sub + '</span></span>'
+          + (d.sub ? '<span class="ko">' + d.sub + '</span>' : '') + '</span>'
           + '<span class="log-index__date">' + log.date + '</span>'
           + '</a>';
       }
