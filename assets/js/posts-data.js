@@ -4,6 +4,13 @@
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
     {
+      url: 'make/gappae-trailer-devlog-002.html',
+      catKey: 'gappae-trailer', cat: 'Gappae Trailer',
+      title: '휴일, 디테일을 채우다',
+      sub: '갑패 트레일러 테스트 제작 이틀째',
+      date: '2026-09-20', dl: '2026 · 09 · 20'
+    },
+    {
       url: 'make/eastwar-devlog-044.html',
       catKey: 'eastwar', cat: 'Architect Notes',
       title: '[3부작 후기] 사고 하나가 만든 안전한 습관',
@@ -736,6 +743,7 @@
   // STUDIO_CATS: category order for FROM THE STUDIO in index.html.
   // Each category shows its most recent post from ALL_POSTS.
   window.STUDIO_CATS = [
+    { key: 'gappae-trailer', label: 'Gappae Trailer', dark: false },
     { key: 'ai-coach',     label: 'AI Conversations', dark: false },
     { key: 'eastwar',      label: 'Architect Notes',  dark: false },
     { key: 'grandslam',    label: 'Grand Slam',       dark: false },
