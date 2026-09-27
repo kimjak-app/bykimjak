@@ -4,6 +4,13 @@
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
     {
+      url: 'posts/think/morning-word-039.html',
+      catKey: 'morning-word', cat: 'Morning Word',
+      title: '목표 하나 더 — 예루살렘을 향해',
+      sub: '예레미야 29:13, 온 마음으로 찾으면 만나리라',
+      date: '2026-09-27', dl: '2026 · 09 · 27'
+    },
+    {
       url: 'make/gappae-trailer-devlog-002.html',
       catKey: 'gappae-trailer', cat: 'Gappae Trailer',
       title: '휴일, 디테일을 채우다',
@@ -37,13 +44,6 @@
       title: '24,762줄에서 14,094줄로 — 월드맵 리팩토링 완결편',
       sub: '군사·테크트리·도시내정·화면 UI·턴 진행까지, 8개 도메인 완전 분리',
       date: '2026-09-17', dl: '2026 · 09 · 15–17'
-    },
-    {
-      url: 'posts/think/morning-word-039.html',
-      catKey: 'morning-word', cat: 'Morning Word',
-      title: '목표 하나 더 — 예루살렘을 향해',
-      sub: '예레미야 29:13, 온 마음으로 찾으면 만나리라',
-      date: '2026-09-27', dl: '2026 · 09 · 27'
     },
     {
       url: 'posts/think/morning-word-038.html',
