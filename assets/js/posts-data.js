@@ -39,6 +39,13 @@
       date: '2026-09-17', dl: '2026 · 09 · 15–17'
     },
     {
+      url: 'posts/think/morning-word-039.html',
+      catKey: 'morning-word', cat: 'Morning Word',
+      title: '목표 하나 더 — 예루살렘을 향해',
+      sub: '예레미야 29:13, 온 마음으로 찾으면 만나리라',
+      date: '2026-09-27', dl: '2026 · 09 · 27'
+    },
+    {
       url: 'posts/think/morning-word-038.html',
       catKey: 'morning-word', cat: 'Morning Word',
       title: '혼자 버티는 삶에서, 함께 더 멀리 가는 삶으로',
