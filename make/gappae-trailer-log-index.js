@@ -32,6 +32,11 @@
       num: '005', date: '2026.09.24–26',
       ko: { href: 'gappae-trailer-devlog-005.html',    title: '그림 스토리 보드 완성', sub: '텍스트 콘티를 화면으로 옮기다' },
       en: { href: 'gappae-trailer-devlog-005-en.html', title: 'Illustrated Storyboard Complete', sub: 'Turning the text storyboard into visible shots' }
+    },
+    {
+      num: '006', date: '2026.09.26–28',
+      ko: { href: 'gappae-trailer-devlog-006.html',    title: '장소 이미지 확정', sub: '카메라가 움직이기 전에, 공간부터 고정했다' },
+      en: { href: 'gappae-trailer-devlog-006-en.html', title: 'Location Images Locked', sub: 'Before moving the camera, I had to lock the space' }
     }
   ];
 
