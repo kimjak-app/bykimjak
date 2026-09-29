@@ -18,6 +18,13 @@
       date: '2026-09-27', dl: '2026 · 09 · 27'
     },
     {
+      url: 'make/gappae-trailer-devlog-005.html',
+      catKey: 'gappae-trailer', cat: 'Gappae Trailer',
+      title: '그림 스토리 보드 완성',
+      sub: '텍스트 콘티를 화면으로 옮기다',
+      date: '2026-09-26', dl: '2026 · 09 · 24–26'
+    },
+    {
       url: 'make/gappae-trailer-devlog-004.html',
       catKey: 'gappae-trailer', cat: 'Gappae Trailer',
       title: '텍스트 콘티 완성',
