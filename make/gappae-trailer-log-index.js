@@ -19,7 +19,7 @@
       en: { href: 'gappae-trailer-devlog-002-en.html', title: 'A Day Off, Filling in the Details — Day Two of the Gappae Trailer Test', sub: '' }
     },
     {
-      num: '003', date: '2026.09.28',
+      num: '003', date: '2026.09.22–28',
       ko: { href: 'gappae-trailer-devlog-003.html',    title: '캐릭터 시트 완성', sub: '영상을 만들기 전에, 사람부터 고정했다' },
       en: { href: 'gappae-trailer-devlog-003-en.html', title: 'Character Sheets Complete', sub: 'Locking the people before generating the trailer' }
     }
