@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>갑패 트레일러 제작일지 #007 — 갑패 주요인물 캐릭터시트 재작업 — byKimjak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<style>
+:root{--bg:#FFFFFF;--bg-2:#F2F2F2;--ink:#0A0A0A;--ink-2:#2A2A2A;--ink-3:#6B6B6B;--rule:#0A0A0A1A;--dark:#0D0B09;--dark-2:#1A1714;--dark-ink:#FAF7F2;--dark-ink-2:#9C948A;--dark-rule:#FAF7F21A;--accent:oklch(68% 0.08 70);--accent-soft:oklch(68% 0.08 70 / 0.12);--f-display:"Space Grotesk","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-body:"Inter","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-mono:"JetBrains Mono",ui-monospace,monospace;--f-kr:"Pretendard Variable","Inter",ui-sans-serif,system-ui,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:var(--f-body);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.nav{position:fixed;inset:0 0 auto 0;z-index:100;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:18px clamp(20px,4vw,48px);transition:background .35s ease,backdrop-filter .35s ease,border-color .35s ease;border-bottom:1px solid transparent}
+.nav.scrolled{background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:saturate(1.2) blur(14px);-webkit-backdrop-filter:saturate(1.2) blur(14px);border-bottom-color:var(--rule)}
+.nav__logo{font-family:var(--f-display);font-weight:600;font-size:18px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.nav__logo .dot{width:8px;height:8px;border-radius:999px;background:var(--ink);display:inline-block;transform:translateY(-1px)}
+.nav__menu{display:flex;gap:36px;justify-content:center;align-items:center}
+.nav__menu > a,.nav__menu .has-drop > a{font-family:var(--f-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;position:relative;padding:6px 2px;color:var(--ink)}
+.nav__menu > a::after,.nav__menu .has-drop > a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.6,0,.2,1)}
+.nav__menu > a:hover::after,.nav__menu .has-drop:hover > a::after{transform:scaleX(1)}
+.nav__menu .idx{font-family:var(--f-mono);font-size:9px;vertical-align:super;margin-right:4px;color:var(--ink-3)}
+.nav__cta{justify-self:end;display:flex;align-items:center;gap:14px}
+.nav__cta .status{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+.nav__cta .pulse{width:6px;height:6px;border-radius:999px;background:#3CB371;animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px transparent}}
+.nav__cta a.contact{border:1px solid var(--ink);padding:10px 16px;border-radius:999px;font-family:var(--f-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .25s,color .25s}
+.nav__cta a.contact:hover{background:var(--ink);color:var(--bg)}
+.nav__menu .has-drop{position:relative}
+.nav__menu .drop{position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%) translateY(-10px);min-width:210px;background:var(--bg);border:1px solid var(--rule);padding:4px;opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s cubic-bezier(.2,.8,.2,1);z-index:200}
+.nav__menu .has-drop:hover .drop{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.nav__menu .drop a{display:block;padding:10px 14px;border-radius:2px;font-family:var(--f-kr);font-size:13px;font-weight:400;letter-spacing:-.01em;text-transform:none;color:var(--ink-2);transition:background .15s,color .15s}
+.nav__menu .drop a::after{content:none!important}
+.nav__menu .drop a:hover{background:var(--bg-2);color:var(--ink)}
+.sub-idx{display:block;font-family:var(--f-mono);font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin-bottom:2px}
+@media(max-width:780px){.nav{grid-template-columns:1fr auto;padding:14px 20px}.nav__menu{display:none}.nav__cta .status{display:none}}
+.listing-head{padding:120px clamp(20px,4vw,48px) 64px;border-bottom:1px solid var(--rule)}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:28px}
+.breadcrumb a{transition:color .2s}.breadcrumb a:hover{color:var(--ink)}
+.breadcrumb .sep{opacity:.4}
+.listing-head h1{font-family:var(--f-display);font-weight:500;font-size:clamp(44px,9vw,120px);letter-spacing:-.04em;line-height:.92;margin:0 0 8px}
+.listing-head .sub-ko{font-family:var(--f-kr);font-size:clamp(16px,2vw,22px);color:var(--ink-3);margin:0 0 20px;font-weight:400}
+.listing-head .listing-desc{font-family:var(--f-kr);font-size:15px;line-height:1.65;color:var(--ink-3);max-width:48ch}
+.lang-switch{display:inline-flex;align-items:center;margin-bottom:28px}
+.lang-current{font-family:var(--f-display);font-size:14px;font-weight:700;color:var(--ink);padding:10px 20px;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px;cursor:default;letter-spacing:.01em}
+.lang-sep{font-family:var(--f-mono);font-size:14px;color:var(--ink-3);opacity:.35;user-select:none;line-height:1}
+.lang-other{font-family:var(--f-display);font-size:14px;font-weight:400;color:var(--ink-3);padding:10px 20px;transition:color .2s;letter-spacing:.01em}
+.lang-other:hover{color:var(--ink)}
+footer{background:var(--dark);color:var(--dark-ink);padding:90px clamp(20px,4vw,48px) 36px;overflow:hidden}
+footer .big{font-family:var(--f-display);font-weight:400;font-size:clamp(44px,7vw,108px);letter-spacing:-.04em;line-height:.95;color:var(--dark-ink);margin:0 0 48px;text-wrap:balance}
+footer .big em{font-style:italic;font-family:"Times New Roman",serif;color:#A99A85}
+footer .grid-ft{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding-top:36px;border-top:1px solid var(--dark-rule)}
+footer .col{display:flex;flex-direction:column;gap:10px}
+footer .col h6{margin:0 0 6px;font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--dark-ink-2);font-weight:400}
+footer .col a{font-family:var(--f-display);font-size:15px;color:var(--dark-ink);transition:color .3s;display:inline-flex;align-items:center;gap:6px}
+footer .col a:hover{color:#A99A85}
+footer .col a .ext{font-family:var(--f-mono);font-size:9px;opacity:.5}
+footer .c1{grid-column:1/span 5}footer .c2{grid-column:6/span 2}footer .c3{grid-column:8/span 2}footer .c4{grid-column:10/span 3}
+footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-family:var(--f-mono);font-size:11px;color:var(--dark-ink-2);text-transform:uppercase;letter-spacing:.06em}
+@media(max-width:780px){footer .c1,footer .c2,footer .c3,footer .c4{grid-column:1/span 12}}
+.rev{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}.rev.in{opacity:1;transform:none}
+/* ── Dev Log Article ── */
+.devlog{padding:0 0 140px}
+.devlog__body{padding:64px clamp(20px,4vw,48px) 0;max-width:760px}
+.devlog__body .log-num{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:12px}
+.devlog__body h1{font-family:var(--f-display);font-weight:500;font-size:clamp(26px,4vw,48px);letter-spacing:-.03em;line-height:1.1;margin:0 0 10px}
+.devlog__body h2{font-family:var(--f-kr);font-size:clamp(15px,1.8vw,20px);font-weight:400;color:var(--ink-3);margin:0;line-height:1.5}
+.devlog__body .log-date{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);display:block;margin:24px 0 40px;padding-top:20px;border-top:1px solid var(--rule)}
+.devlog__body h3{font-family:var(--f-display);font-weight:500;font-size:clamp(16px,2vw,22px);letter-spacing:-.02em;margin:56px 0 10px;padding-top:48px;border-top:1px solid var(--rule)}
+.devlog__body .section-date{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 28px;display:block}
+.devlog__body p{font-family:var(--f-kr);font-size:16px;line-height:1.95;color:var(--ink-2);margin:0 0 22px}
+.devlog__body strong{font-weight:700;color:var(--ink)}
+.devlog__body em{font-style:italic;color:var(--ink)}
+.devlog__body hr{border:none;border-top:1px solid var(--rule);margin:52px 0}
+.devlog__body ul{padding-left:20px;margin:0 0 24px}
+.devlog__body li{font-family:var(--f-kr);font-size:16px;line-height:1.85;color:var(--ink-2);margin-bottom:10px}
+.devlog__body blockquote{margin:28px 0;padding:20px 24px;border-left:3px solid var(--ink);background:var(--bg-2);font-family:var(--f-kr);font-size:16px;line-height:1.8;color:var(--ink)}
+.devlog__body blockquote p{margin:0;color:var(--ink)}
+.devlog__body pre{background:var(--bg-2);border:1px solid var(--rule);padding:20px 24px;margin:0 0 28px;overflow-x:auto;border-radius:2px}
+.devlog__body code{font-family:var(--f-mono);font-size:13px;line-height:1.7;color:var(--ink-2)}
+.devlog__body figure{margin:32px 0}
+.devlog__body figure img{width:100%;border-radius:2px}
+.devlog__body figure figcaption{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
+.devlog__body .fig-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0}
+.devlog__body .fig-2col figure{margin:0}
+.devlog__body .fig-4col{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:32px 0}
+.devlog__body .fig-4col figure{margin:0}
+@media(max-width:640px){.devlog__body .fig-2col{grid-template-columns:1fr}.devlog__body .fig-4col{grid-template-columns:repeat(2,1fr)}}
+.devlog__body .dialogue{border-left:2px solid var(--rule);margin:2em 0;padding:0 0 0 24px}
+.devlog__body .dialogue p{margin:0 0 1em;font-size:.95em;color:var(--ink-2)}
+.devlog__body .dialogue p:last-child{margin-bottom:0}
+.devlog__body .dialogue .speaker{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:.3em}
+.devlog__body table{width:100%;border-collapse:collapse;margin:0 0 28px}
+.devlog__body thead th{font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:10px 14px;border-bottom:1px solid var(--ink);font-weight:500}
+.devlog__body tbody td{font-family:var(--f-kr);font-size:14px;line-height:1.6;color:var(--ink-2);padding:10px 14px;border-bottom:1px solid var(--rule)}
+.devlog__body tbody tr:hover{background:var(--bg-2)}
+/* ── Log Index ── */
+.log-index{padding:0 clamp(20px,4vw,48px)}
+.log-index__hd{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0;padding:32px 0 0}
+.log-index__item{display:grid;grid-template-columns:52px 1fr auto;gap:20px;align-items:baseline;padding:20px 0;border-top:1px solid var(--rule);transition:background .25s;text-decoration:none}
+.log-index__item:last-child{border-bottom:1px solid var(--rule);margin-bottom:48px}
+.log-index__item:hover{background:linear-gradient(90deg,transparent,var(--accent-soft) 20%,var(--accent-soft) 80%,transparent)}
+.log-index__num{font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
+.log-index__t{font-family:var(--f-display);font-size:clamp(14px,1.6vw,18px);font-weight:500;letter-spacing:-.01em;line-height:1.2;color:var(--ink)}
+.log-index__t .ko{display:block;font-family:var(--f-kr);font-size:12px;color:var(--ink-3);font-weight:400;margin-top:3px}
+.log-index__date{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);white-space:nowrap}
+.log-index__item--current{pointer-events:none;background:var(--accent-soft);display:grid}
+.log-index__item--current .log-index__num{color:var(--accent)}
+/* ── Log Pager ── */
+.log-pager{display:flex;gap:8px;padding:12px 0 0;margin-bottom:48px;justify-content:center;border-top:1px solid var(--rule)}
+.log-pager__btn{font-family:var(--f-mono);font-size:11px;width:32px;height:32px;border:1px solid var(--rule);background:none;cursor:pointer;color:var(--ink-3);transition:background .2s,color .2s;border-radius:2px}
+.log-pager__btn:hover{background:var(--bg-2);color:var(--ink)}
+.log-pager__btn--active{background:var(--ink);color:var(--bg);border-color:var(--ink);cursor:default}
+/* ── Log Nav ── */
+.log-nav{display:flex;justify-content:space-between;padding:52px clamp(20px,4vw,48px) 0;margin-top:64px;border-top:1px solid var(--rule)}
+.log-nav__prev,.log-nav__next{display:flex;flex-direction:column;gap:6px}
+.log-nav__next{align-items:flex-end;text-align:right}
+.log-nav__label{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.log-nav__title{font-family:var(--f-display);font-size:clamp(14px,1.8vw,20px);font-weight:500;letter-spacing:-.01em;color:var(--ink);transition:color .2s}
+.log-nav a:hover .log-nav__title{color:var(--accent)}
+.log-nav__next--disabled{opacity:.4;cursor:default}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav__logo"><span class="dot" aria-hidden="true"></span>byKimjak</a>
+  <div class="nav__menu" role="navigation">
+    <div class="has-drop">
+      <a href="../watch/"><span class="idx">01</span>WATCH</a>
+      <div class="drop">
+        <a href="../watch/ai-film.html"><span class="sub-idx">01–A</span>AI 영상 · 티저</a>
+        <a href="../watch/ost.html"><span class="sub-idx">01–B</span>OST · 음악</a>
+        <a href="../watch/still.html"><span class="sub-idx">01–C</span>스틸 이미지</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../make/"><span class="idx">02</span>MAKE</a>
+      <div class="drop">
+        <a href="../make/eastwar.html"><span class="sub-idx">02–A</span>EASTWAR 개발일지</a>
+        <a href="../make/grandslam.html"><span class="sub-idx">02–B</span>GrandSlam 개발일지</a>
+        <a href="../make/takezero.html"><span class="sub-idx">02–C</span>TakeZero · 프롬프트 엔진</a>
+        <a href="../make/gappae-trailer.html"><span class="sub-idx">02–D</span>갑패 트레일러</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../think/"><span class="idx">03</span>THINK</a>
+      <div class="drop">
+        <a href="../think/ai-coach.html"><span class="sub-idx">03–A</span>AI 코치들과의 수다</a>
+        <a href="../think/morning-word.html"><span class="sub-idx">03–B</span>아침 말씀 with 채코치</a>
+        <a href="../think/personal-essay.html"><span class="sub-idx">03–C</span>개인 에세이</a>
+      </div>
+    </div>
+    <a href="../index.html#about"><span class="idx">04</span>ABOUT</a>
+  </div>
+  <div class="nav__cta">
+    <span class="status"><span class="pulse"></span>Available · Seoul</span>
+    <a href="../index.html#contact" class="contact">Contact ↗</a>
+  </div>
+</nav>
+
+<main>
+  <div class="listing-head rev">
+    <div class="breadcrumb">
+      <a href="../make/">MAKE</a><span class="sep">›</span><span>02–D 갑패 트레일러</span>
+    </div>
+    <div class="lang-switch">
+      <span class="lang-current">🇰🇷 한국어</span>
+      <span class="lang-sep">|</span>
+      <a href="gappae-trailer-devlog-007-en.html" class="lang-other">🇺🇸 English</a>
+    </div>
+    <h1>갑패 트레일러</h1>
+    <p class="sub-ko">제작일지</p>
+    <p class="listing-desc">트레일러 제작 과정의 기록. 기획, 컷 설계, 영상 제작까지 한 컷씩 쌓아갑니다.</p>
+  </div>
+
+  <section class="log-index rev" id="log-index-sect"></section>
+
+  <article class="devlog" id="log-007">
+    <div class="devlog__body rev">
+      <span class="log-num">Production Log · #007</span>
+      <h1>갑패 주요인물 캐릭터시트 재작업</h1>
+      <h2>실사 배우의 얼굴 감각을 더 정확히 고정하다</h2>
+      <span class="log-date">2026년 9월 29일</span>
+
+      <hr />
+      <h3>실사감 보강을 위한 주요인물 재정비</h3>
+      <p>앞서 완성한 캐릭터 시트는 트레일러의 인물 설계에 충분한 기준이 되었지만, 실제 영상 생성 단계로 갈수록 한 가지 문제가 더 분명해졌다. 인물의 구조와 의상은 잘 잡혀 있었지만, <strong>실제 배우처럼 느껴지는 얼굴의 정체성과 피부의 현실감</strong>을 더 밀어붙일 필요가 있었다는 점이다.</p>
+      <p>그래서 9월 29일에는 필복, 여생, 이현 세 주연 인물을 다시 다듬었다. 이번 작업은 새 얼굴을 찾는 것이 아니라, <strong>기존 이미지에서 인물의 얼굴 정체성을 먼저 고정한 뒤 그 위에 신분·상황·의상·장비를 다시 설계하는 방식</strong>으로 진행했다.</p>
+      <p>핵심은 인공지능 특유의 지나치게 매끈한 느낌을 줄이는 것이었다. 모공, 잔주름, 주근깨, 수염 자국, 잔상처, 자연스러운 좌우 비대칭 같은 요소를 세밀하게 보강해 실제 배우의 피부와 얼굴에 가까운 질감을 만들었다. 또한 <strong>회색 스튜디오 배경, 부드러운 측면광, 정면·후면·얼굴 클로즈업의 3단 구성</strong>을 통일해 영화 의상 테스트 사진처럼 보이도록 맞췄다.</p>
+      <blockquote><p>이번 재작업의 핵심은 ‘더 멋진 이미지’가 아니라, 같은 사람이 다른 의상과 상황 속에서도 계속 같은 배우처럼 보이도록 만드는 일이었다.</p></blockquote>
+
+      <hr />
+      <h3>필복 — 백정의 거칠음과 주인공의 존재감을 함께</h3>
+      <p>필복은 거칠게 살아온 백정이라는 배경과, 이야기의 중심에 서는 주인공다운 존재감을 동시에 살리는 데 중점을 두었다. 동일한 얼굴을 유지하면서 햇볕에 그을린 피부, 모공, 주근깨, 수염 자국과 상처를 더해 생활감을 높였고, 체형은 <strong>키가 크고 팔다리가 긴 노동형 몸</strong>으로 조정했다. 평상복과 전투복에서도 낡은 옷감과 붉은 천, 흐트러진 상투가 일관되게 이어지도록 했다.</p>
+      <div class="fig-2col">
+        <figure><img src="../assets/gappae-trailer/character-pilbok-butcher-rework-01.png" alt="필복 평상복 재작업 캐릭터 시트" loading="lazy" /><figcaption>필복 · 백정 평상복</figcaption></figure>
+        <figure><img src="../assets/gappae-trailer/character-pilbok-battle-rework-01.png" alt="필복 전투형 재작업 캐릭터 시트" loading="lazy" /><figcaption>필복 · 전투형</figcaption></figure>
+      </div>
+      <figure>
+        <img src="../assets/gappae-trailer/character-pilbok-face-front-rework-01.png" alt="필복 정면 얼굴 재작업 캐릭터 시트" loading="lazy" />
+        <figcaption>필복 · 얼굴 정체성 기준 시트</figcaption>
+      </figure>
+      <p>이번 필복 작업에서 가장 중요했던 것은 ‘거친 생활감’이 단순한 분장처럼 보이지 않게 하는 것이었다. 피부의 흔적이 과장된 효과가 아니라 실제로 햇볕과 노동을 견뎌온 얼굴처럼 읽혀야 했다. 동시에 주연으로서 시선이 모이는 얼굴이어야 했기 때문에, 지친 피부와 강한 존재감이 같이 서도록 균형을 맞췄다.</p>
+
+      <hr />
+      <h3>여생 — 하나의 얼굴로 여러 신분을 설득하다</h3>
+      <p>여생은 이번 재작업에서 가장 섬세한 인물이었다. 몰락한 규수이자 평민으로 숨어 지내는 모습, 화려한 기녀 ‘단휘’, 냉정한 암살자까지 <strong>하나의 얼굴로 여러 신분을 설득력 있게 표현해야 했기 때문</strong>이다. 얼굴의 정체성은 유지하되 표정·화장·머리·의상을 달리했다.</p>
+      <p>특히 따뜻한 미소, 속내를 감춘 반미소, 감정이 억제된 살수의 눈빛처럼 <strong>상황마다 미세한 표정 차이</strong>를 만드는 데 집중했다. 여생은 설정상 변화폭이 큰 인물이지만, 그 변화가 ‘다른 사람’처럼 보이면 안 되기 때문이다.</p>
+      <div class="fig-2col">
+        <figure><img src="../assets/gappae-trailer/character-yeosaeng-noble-rework-01.png" alt="여생 규수 재작업 캐릭터 시트" loading="lazy" /><figcaption>여생 · 몰락한 규수</figcaption></figure>
+        <figure><img src="../assets/gappae-trailer/character-yeosaeng-danhwi-gisaeng-rework-01.png" alt="여생 단휘 기녀 재작업 캐릭터 시트" loading="lazy" /><figcaption>여생 · 단휘 / 기녀</figcaption></figure>
+      </div>
+      <div class="fig-2col">
+        <figure><img src="../assets/gappae-trailer/character-yeosaeng-battle-rework-01.png" alt="여생 전투형 재작업 캐릭터 시트" loading="lazy" /><figcaption>여생 · 전투형</figcaption></figure>
+        <figure><img src="../assets/gappae-trailer/character-yeosaeng-masked-rework-01.png" alt="여생 가면형 재작업 캐릭터 시트" loading="lazy" /><figcaption>여생 · 가면형</figcaption></figure>
+      </div>
+      <p>이 재작업으로 여생은 ‘한 명의 배우가 여러 얼굴을 연기하는 인물’로 더 분명해졌다. 미세한 표정 변화와 피부 디테일이 더해지면서, 같은 얼굴이 상황에 따라 완전히 다른 긴장감을 가지도록 만드는 것이 가능해졌다.</p>
+
+      <hr />
+      <h3>이현 — 왕자다운 세련됨과 차갑고 야심 찬 성격</h3>
+      <p>이현은 왕자다운 세련됨과 차갑고 야심 찬 성격을 함께 드러내는 데 중점을 두었다. 전투형·갓을 쓴 평상복·사냥복 모두 <strong>같은 배우로 보이도록 얼굴과 체형을 고정</strong>하고, 창백하지만 모공과 수염 자국이 보이는 실제 남성 피부를 구현했다.</p>
+      <p>검은 금문 의상, 갓과 구슬 장식, 상투관, 활과 화살통 등의 왕실 소품도 실제 재질과 무게감이 느껴지도록 다듬었다. 왕실 인물인 만큼 지나친 미화보다 <strong>절제된 귀함과 냉기</strong>가 느껴지도록 정리했다.</p>
+      <div class="fig-2col">
+        <figure><img src="../assets/gappae-trailer/character-ihyeon-gat-rework-01.png" alt="이현 갓 쓴 모습 재작업 캐릭터 시트" loading="lazy" /><figcaption>이현 · 갓 쓴 평상복</figcaption></figure>
+        <figure><img src="../assets/gappae-trailer/character-ihyeon-battle-rework-01.png" alt="이현 전투형 재작업 캐릭터 시트" loading="lazy" /><figcaption>이현 · 전투형</figcaption></figure>
+      </div>
+      <figure>
+        <img src="../assets/gappae-trailer/character-ihyeon-hunt-rework-01.png" alt="이현 사냥복 재작업 캐릭터 시트" loading="lazy" />
+        <figcaption>이현 · 사냥복</figcaption>
+      </figure>
+      <p>이현의 경우 가장 중요한 것은 ‘깔끔하다’와 ‘차갑다’가 동시에 보여야 한다는 점이었다. 왕실 인물의 정제된 인상은 유지하되, 피부와 표정에서는 실제 인간의 결이 보여야 했다. 그래서 과도하게 미끈한 AI 미남상이 아니라, 가까이서 보면 숨결과 피로가 느껴지는 배우형 얼굴로 밀어붙였다.</p>
+
+      <hr />
+      <h3>같은 사람처럼 보이게 만드는 기준값</h3>
+      <p>이번 재작업을 통해 세 인물 모두 이전보다 훨씬 안정된 얼굴 정체성을 갖게 되었다. 캐릭터별 상황과 의상이 달라져도 같은 사람으로 읽히고, 영상 생성 단계에서 다른 장면을 만들어도 얼굴이 쉽게 흔들리지 않도록 기준값을 단단히 잡은 셈이다.</p>
+      <p>이제 《갑패》 트레일러의 주연 인물들은 캐릭터 설정 차원을 넘어, 실제로 카메라 앞에 설 배우처럼 다룰 수 있는 상태에 가까워졌다. <strong>사람의 일관성이 더 단단해질수록, 이후 장소와 카메라, 액션도 더 안정적으로 통제할 수 있다.</strong></p>
+    </div>
+
+    <div class="log-nav">
+      <a href="gappae-trailer-devlog-006.html" class="log-nav__prev">
+        <span class="log-nav__label">이전</span>
+        <span class="log-nav__title">← #006</span>
+      </a>
+      <span class="log-nav__next log-nav__next--disabled">다음 편 준비 중 →</span>
+    </div>
+  </article>
+</main>
+
+<footer id="contact">
+  <p class="big">Let's build a <em>world</em> →</p>
+  <div class="grid-ft">
+    <div class="col c1"><h6>byKimjak Studio</h6><p style="font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0">IP Architect · Seoul, Korea. 시나리오·드라마 기획부터 AI 영상, 게임, 앱까지 — 한 사람이 하나의 세계관을 끝까지 설계합니다.</p></div>
+    <div class="col c2"><h6>Sections</h6><a href="../watch/">Watch <span class="ext">/01</span></a><a href="../make/">Make <span class="ext">/02</span></a><a href="../think/">Think <span class="ext">/03</span></a></div>
+    <div class="col c3"><h6>Social</h6><a href="#">Instagram <span class="ext">↗</span></a><a href="#">YouTube <span class="ext">↗</span></a><a href="#">Vimeo <span class="ext">↗</span></a><a href="#">Threads <span class="ext">↗</span></a></div>
+    <div class="col c4"><h6>Contact</h6><a href="mailto:oropa@kakao.com">oropa@kakao.com</a><a href="#">Press kit <span class="ext">PDF</span></a><a href="#">For PDs &amp; Investors <span class="ext">↗</span></a></div>
+  </div>
+  <div class="bottom"><span>byKimjak © 2026  ／  All rights, all worlds, reserved.</span><span>Built solo · with AI · in Seoul</span><span>v.04 / 2026.05</span></div>
+</footer>
+
+<script src="gappae-trailer-log-index.js"></script>
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+GAPPAE_LI.render(document.getElementById('log-index-sect'), 'ko', '007');
+</script>
+<script src="lightbox.js"></script>
+</body>
+</html>
