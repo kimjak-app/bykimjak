@@ -16,7 +16,7 @@
   var SESSION_KEY = 'gappaePopupClosed';
   var DRAG_THRESHOLD = 4;
 
-  var isMainPage = /^\\/bykimjak\\/?(index\\.html)?$/.test(window.location.pathname);
+  var isMainPage = /^\/bykimjak\/?(index\.html)?$/.test(window.location.pathname);
   if (!isMainPage) return;
 
   function el(tag, attrs, html) {
