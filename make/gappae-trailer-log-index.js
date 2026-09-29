@@ -42,6 +42,11 @@
       num: '007', date: '2026.09.29',
       ko: { href: 'gappae-trailer-devlog-007.html',    title: '갑패 주요인물 캐릭터시트 재작업', sub: '실사 배우의 얼굴 감각을 더 정확히 고정하다' },
       en: { href: 'gappae-trailer-devlog-007-en.html', title: 'Reworking the Main Character Sheets', sub: 'Pushing the cast closer to the feel of real actors' }
+    },
+    {
+      num: '008', date: '2026.09.30',
+      ko: { href: 'gappae-trailer-devlog-008.html',    title: '새 얼굴, 같은 세계 — 캐릭터와 장소 조화 테스트', sub: '재작업한 주연 캐릭터를 기존 장소 이미지와 영상으로 맞춰보다' },
+      en: { href: 'gappae-trailer-devlog-008-en.html', title: 'New Faces, Same World — Character & Location Harmony Test', sub: 'Testing the reworked leads inside the established locations' }
     }
   ];
 
