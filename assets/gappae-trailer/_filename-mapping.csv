@@ -1,31 +1,11 @@
 ﻿original_filename,renamed_filename,blog_target_folder
-BEAT1-설향루-우측.png,location-seolhyangru-right-view-01.png,assets/gappae-trailer/
-BEAT1-설향루-정면 한 장.png,location-seolhyangru-front-view-01.png,assets/gappae-trailer/
-BEAT2-육조거리_평상시_밤.png,location-yukjo-street-normal-night-01.png,assets/gappae-trailer/
-BEAT2-육조거리_학살중_밤.png,location-yukjo-street-massacre-night-01.png,assets/gappae-trailer/
-BEAT3-학살_직후_폐허.png,location-massacre-aftermath-ruins-01.png,assets/gappae-trailer/
-BEAT4-숲속_사냥터_이각방향_낮.png,location-forest-hunting-ground-yi-gak-view-day-01.png,assets/gappae-trailer/
-BEAT4-숲속_사냥터_이현방향_낮.png,location-forest-hunting-ground-yi-hyeon-view-day-01.png,assets/gappae-trailer/
-BEAT5-불타는_초가집_역방향_밤.png,location-burning-cottage-reverse-view-night-01.png,assets/gappae-trailer/
-BEAT5-불타는_초가집_정면_밤.png,location-burning-cottage-front-night-01.png,assets/gappae-trailer/
-BEAT6-거렁패_근거지_개천방향_흐린낮.png,location-rogues-hideout-stream-view-overcast-day-01.png,assets/gappae-trailer/
-BEAT6-거렁패_근거지_흐린낮.png,location-rogues-hideout-overcast-day-01.png,assets/gappae-trailer/
-BEAT7-묘지_공터_흐린낮.png,location-gravesite-clearing-overcast-day-01.png,assets/gappae-trailer/
-BEAT8-삼개나루_낮.png,location-samgaenaru-day-01.png,assets/gappae-trailer/
-BEAT9-노름판_밤.png,location-gambling-den-night-01.png,assets/gappae-trailer/
-BEAT9-시장골목_낮.png,location-market-alley-day-01.png,assets/gappae-trailer/
-BEAT10-거렁패_근거지_노을.png,location-rogues-hideout-sunset-01.png,assets/gappae-trailer/
-BEAT11-벚꽃_빈터_낮.png,location-cherry-blossom-clearing-day-01.png,assets/gappae-trailer/
-BEAT12-장터_축제_밤.png,location-market-festival-night-01.png,assets/gappae-trailer/
-BEAT13-설인향의 방.png,location-seol-inhyang-room-01.png,assets/gappae-trailer/
-BEAT14-여생의 방.png,location-yeosaeng-room-01.png,assets/gappae-trailer/
-BEAT15-거렁패_천막내부_밤.png,location-rogues-tent-interior-night-01.png,assets/gappae-trailer/
-BEAT16-불탄_한성거리_밤.png,location-burned-hanseong-street-night-01.png,assets/gappae-trailer/
-BEAT17-외곽_숲_밤.png,location-outskirts-forest-night-01.png,assets/gappae-trailer/
-BEAT18-영제교_마당_근정문방향_흐린낮.png,location-yeongjegyo-courtyard-geunjeongmun-view-overcast-day-01.png,assets/gappae-trailer/
-BEAT18-영제교_마당_흥례문방향_흐린낮.png,location-yeongjegyo-courtyard-heungnyemun-view-overcast-day-01.png,assets/gappae-trailer/
-BEAT19-근정전_내부_왕좌.png,location-geunjeongjeon-throne-interior-01.png,assets/gappae-trailer/
-BEAT20-근정전_앞마당_역방향_흐린낮.png,location-geunjeongjeon-front-courtyard-reverse-view-overcast-day-01.png,assets/gappae-trailer/
-BEAT20-근정전_앞마당_측면동_흐린낮.png,location-geunjeongjeon-front-courtyard-east-side-overcast-day-01.png,assets/gappae-trailer/
-BEAT20-근정전_앞마당_측면서_흐린낮.png,location-geunjeongjeon-front-courtyard-west-side-overcast-day-01.png,assets/gappae-trailer/
-BEAT20-근정전_앞마당_흐린낮.png,location-geunjeongjeon-front-courtyard-overcast-day-01.png,assets/gappae-trailer/
+1-1_필복-평상복.png,character-pilbok-butcher-rework-01.png,assets/gappae-trailer/
+1-2_필복-전투형.png,character-pilbok-battle-rework-01.png,assets/gappae-trailer/
+1-3_필복-정면얼굴.png,character-pilbok-face-front-rework-01.png,assets/gappae-trailer/
+2-1_이현-갓쓴모습.png,character-ihyeon-gat-rework-01.png,assets/gappae-trailer/
+2-2_이현-전투형.png,character-ihyeon-battle-rework-01.png,assets/gappae-trailer/
+2-3_이현-사냥터.png,character-ihyeon-hunt-rework-01.png,assets/gappae-trailer/
+3-1_여생-규수.png,character-yeosaeng-noble-rework-01.png,assets/gappae-trailer/
+3-2_여생-단휘-기녀.png,character-yeosaeng-danhwi-gisaeng-rework-01.png,assets/gappae-trailer/
+3-3_여생-전투형.png,character-yeosaeng-battle-rework-01.png,assets/gappae-trailer/
+3-4_여생-가면.png,character-yeosaeng-masked-rework-01.png,assets/gappae-trailer/
