@@ -1,23 +1,31 @@
 ﻿original_filename,renamed_filename,blog_target_folder
-1-그림콘티-비트1.png,storyboard-beat-01.png,assets/gappae-trailer/
-2-그림콘티- 비트2.png,storyboard-beat-02.png,assets/gappae-trailer/
-3-그림콘티-비트3.png,storyboard-beat-03.png,assets/gappae-trailer/
-4-그림콘티-비트4.png,storyboard-beat-04.png,assets/gappae-trailer/
-5-그림콘티-비트5.png,storyboard-beat-05.png,assets/gappae-trailer/
-6-그림콘티-비트6.png,storyboard-beat-06.png,assets/gappae-trailer/
-7-그림콘티-비트7.png,storyboard-beat-07.png,assets/gappae-trailer/
-8-그림콘티-비트8.png,storyboard-beat-08.png,assets/gappae-trailer/
-9-그림콘티-비트9.png,storyboard-beat-09.png,assets/gappae-trailer/
-9_1-그림콘티-비트9-1모은 몽타쥬.png,storyboard-beat-09-montage.png,assets/gappae-trailer/
-10-그림콘티-비트10.png,storyboard-beat-10.png,assets/gappae-trailer/
-11-그림콘티-비트11.png,storyboard-beat-11.png,assets/gappae-trailer/
-12-그림콘티-비트12.png,storyboard-beat-12.png,assets/gappae-trailer/
-13-그림콘티-비트13.png,storyboard-beat-13.png,assets/gappae-trailer/
-14-그림콘티-비트14.png,storyboard-beat-14.png,assets/gappae-trailer/
-15-그림콘티-비트15.png,storyboard-beat-15.png,assets/gappae-trailer/
-16-그림콘티-비트16.png,storyboard-beat-16.png,assets/gappae-trailer/
-17-그림콘티-비트17.png,storyboard-beat-17.png,assets/gappae-trailer/
-18-그림콘티-비트18.png,storyboard-beat-18.png,assets/gappae-trailer/
-19-그림콘티-비트19.png,storyboard-beat-19.png,assets/gappae-trailer/
-20-그림콘티-비트20.png,storyboard-beat-20.png,assets/gappae-trailer/
-21-그림콘티-비트21.png,storyboard-beat-21.png,assets/gappae-trailer/
+BEAT1-설향루-우측.png,location-seolhyangru-right-view-01.png,assets/gappae-trailer/
+BEAT1-설향루-정면 한 장.png,location-seolhyangru-front-view-01.png,assets/gappae-trailer/
+BEAT2-육조거리_평상시_밤.png,location-yukjo-street-normal-night-01.png,assets/gappae-trailer/
+BEAT2-육조거리_학살중_밤.png,location-yukjo-street-massacre-night-01.png,assets/gappae-trailer/
+BEAT3-학살_직후_폐허.png,location-massacre-aftermath-ruins-01.png,assets/gappae-trailer/
+BEAT4-숲속_사냥터_이각방향_낮.png,location-forest-hunting-ground-yi-gak-view-day-01.png,assets/gappae-trailer/
+BEAT4-숲속_사냥터_이현방향_낮.png,location-forest-hunting-ground-yi-hyeon-view-day-01.png,assets/gappae-trailer/
+BEAT5-불타는_초가집_역방향_밤.png,location-burning-cottage-reverse-view-night-01.png,assets/gappae-trailer/
+BEAT5-불타는_초가집_정면_밤.png,location-burning-cottage-front-night-01.png,assets/gappae-trailer/
+BEAT6-거렁패_근거지_개천방향_흐린낮.png,location-rogues-hideout-stream-view-overcast-day-01.png,assets/gappae-trailer/
+BEAT6-거렁패_근거지_흐린낮.png,location-rogues-hideout-overcast-day-01.png,assets/gappae-trailer/
+BEAT7-묘지_공터_흐린낮.png,location-gravesite-clearing-overcast-day-01.png,assets/gappae-trailer/
+BEAT8-삼개나루_낮.png,location-samgaenaru-day-01.png,assets/gappae-trailer/
+BEAT9-노름판_밤.png,location-gambling-den-night-01.png,assets/gappae-trailer/
+BEAT9-시장골목_낮.png,location-market-alley-day-01.png,assets/gappae-trailer/
+BEAT10-거렁패_근거지_노을.png,location-rogues-hideout-sunset-01.png,assets/gappae-trailer/
+BEAT11-벚꽃_빈터_낮.png,location-cherry-blossom-clearing-day-01.png,assets/gappae-trailer/
+BEAT12-장터_축제_밤.png,location-market-festival-night-01.png,assets/gappae-trailer/
+BEAT13-설인향의 방.png,location-seol-inhyang-room-01.png,assets/gappae-trailer/
+BEAT14-여생의 방.png,location-yeosaeng-room-01.png,assets/gappae-trailer/
+BEAT15-거렁패_천막내부_밤.png,location-rogues-tent-interior-night-01.png,assets/gappae-trailer/
+BEAT16-불탄_한성거리_밤.png,location-burned-hanseong-street-night-01.png,assets/gappae-trailer/
+BEAT17-외곽_숲_밤.png,location-outskirts-forest-night-01.png,assets/gappae-trailer/
+BEAT18-영제교_마당_근정문방향_흐린낮.png,location-yeongjegyo-courtyard-geunjeongmun-view-overcast-day-01.png,assets/gappae-trailer/
+BEAT18-영제교_마당_흥례문방향_흐린낮.png,location-yeongjegyo-courtyard-heungnyemun-view-overcast-day-01.png,assets/gappae-trailer/
+BEAT19-근정전_내부_왕좌.png,location-geunjeongjeon-throne-interior-01.png,assets/gappae-trailer/
+BEAT20-근정전_앞마당_역방향_흐린낮.png,location-geunjeongjeon-front-courtyard-reverse-view-overcast-day-01.png,assets/gappae-trailer/
+BEAT20-근정전_앞마당_측면동_흐린낮.png,location-geunjeongjeon-front-courtyard-east-side-overcast-day-01.png,assets/gappae-trailer/
+BEAT20-근정전_앞마당_측면서_흐린낮.png,location-geunjeongjeon-front-courtyard-west-side-overcast-day-01.png,assets/gappae-trailer/
+BEAT20-근정전_앞마당_흐린낮.png,location-geunjeongjeon-front-courtyard-overcast-day-01.png,assets/gappae-trailer/
