@@ -37,6 +37,11 @@
       num: '006', date: '2026.09.26–28',
       ko: { href: 'gappae-trailer-devlog-006.html',    title: '장소 이미지 확정', sub: '카메라가 움직이기 전에, 공간부터 고정했다' },
       en: { href: 'gappae-trailer-devlog-006-en.html', title: 'Location Images Locked', sub: 'Before moving the camera, I had to lock the space' }
+    },
+    {
+      num: '007', date: '2026.09.29',
+      ko: { href: 'gappae-trailer-devlog-007.html',    title: '갑패 주요인물 캐릭터시트 재작업', sub: '실사 배우의 얼굴 감각을 더 정확히 고정하다' },
+      en: { href: 'gappae-trailer-devlog-007-en.html', title: 'Reworking the Main Character Sheets', sub: 'Pushing the cast closer to the feel of real actors' }
     }
   ];
 
