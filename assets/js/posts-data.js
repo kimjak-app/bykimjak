@@ -4,6 +4,13 @@
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
     {
+      url: 'make/gappae-trailer-devlog-003.html',
+      catKey: 'gappae-trailer', cat: 'Gappae Trailer',
+      title: '캐릭터 시트 완성',
+      sub: '영상을 만들기 전에, 사람부터 고정했다',
+      date: '2026-09-28', dl: '2026 · 09 · 28'
+    },
+    {
       url: 'posts/think/morning-word-039.html',
       catKey: 'morning-word', cat: 'Morning Word',
       title: '목표 하나 더 — 예루살렘을 향해',
