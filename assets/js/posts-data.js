@@ -8,7 +8,7 @@
       catKey: 'gappae-trailer', cat: 'Gappae Trailer',
       title: '캐릭터 시트 완성',
       sub: '영상을 만들기 전에, 사람부터 고정했다',
-      date: '2026-09-28', dl: '2026 · 09 · 28'
+      date: '2026-09-28', dl: '2026 · 09 · 22–28'
     },
     {
       url: 'posts/think/morning-word-039.html',
