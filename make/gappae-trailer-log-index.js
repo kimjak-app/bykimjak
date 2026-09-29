@@ -22,6 +22,11 @@
       num: '003', date: '2026.09.22–28',
       ko: { href: 'gappae-trailer-devlog-003.html',    title: '캐릭터 시트 완성', sub: '영상을 만들기 전에, 사람부터 고정했다' },
       en: { href: 'gappae-trailer-devlog-003-en.html', title: 'Character Sheets Complete', sub: 'Locking the people before generating the trailer' }
+    },
+    {
+      num: '004', date: '2026.09.22–23',
+      ko: { href: 'gappae-trailer-devlog-004.html',    title: '텍스트 콘티 완성', sub: '2분을 20개의 비트로 쪼개다' },
+      en: { href: 'gappae-trailer-devlog-004-en.html', title: 'Text Storyboard Complete', sub: 'Breaking two minutes into twenty beats' }
     }
   ];
 
