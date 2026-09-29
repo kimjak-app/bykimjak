@@ -18,6 +18,13 @@
       date: '2026-09-27', dl: '2026 · 09 · 27'
     },
     {
+      url: 'make/gappae-trailer-devlog-004.html',
+      catKey: 'gappae-trailer', cat: 'Gappae Trailer',
+      title: '텍스트 콘티 완성',
+      sub: '2분을 20개의 비트로 쪼개다',
+      date: '2026-09-23', dl: '2026 · 09 · 22–23'
+    },
+    {
       url: 'make/gappae-trailer-devlog-002.html',
       catKey: 'gappae-trailer', cat: 'Gappae Trailer',
       title: '휴일, 디테일을 채우다',
