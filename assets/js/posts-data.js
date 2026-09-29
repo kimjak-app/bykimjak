@@ -4,6 +4,13 @@
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
     {
+      url: 'make/gappae-trailer-devlog-008.html',
+      catKey: 'gappae-trailer', cat: 'Gappae Trailer',
+      title: '새 얼굴, 같은 세계 — 캐릭터와 장소 조화 테스트',
+      sub: '재작업한 주연 캐릭터를 기존 장소 이미지와 영상으로 맞춰보다',
+      date: '2026-09-30', dl: '2026 · 09 · 30'
+    },
+    {
       url: 'make/gappae-trailer-devlog-007.html',
       catKey: 'gappae-trailer', cat: 'Gappae Trailer',
       title: '갑패 주요인물 캐릭터시트 재작업',
