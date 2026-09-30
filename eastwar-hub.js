@@ -274,7 +274,11 @@
       var alreadyClosed = false;
       try { alreadyClosed = sessionStorage.getItem(SESSION_KEY) === '1'; } catch (e) {}
       if (!alreadyClosed) {
-        setTimeout(openPanel, 500);
+        setTimeout(function () {
+          var gappaeOwnsMobileHome = window.innerWidth <= 760 && document.getElementById('gp-popup-root');
+          if (gappaeOwnsMobileHome) return;
+          openPanel();
+        }, 500);
       }
     }
   }
