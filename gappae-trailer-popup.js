@@ -54,7 +54,7 @@
 
       '#gp-popup-panel{position:absolute;left:0;top:0;width:320px;max-width:calc(100vw - 24px);',
       'aspect-ratio:3/4;overflow:hidden;border-radius:6px;',
-      'box-shadow:0 20px 55px rgba(0,0,0,.55);background:#0b0907;',
+      'box-shadow:0 20px 55px rgba(0,0,0,.55);background:transparent;',
       'transform:scale(.9);opacity:0;pointer-events:none;transform-origin:top left;',
       'transition:transform .26s cubic-bezier(.2,.8,.2,1),opacity .22s ease;}',
 
@@ -295,12 +295,23 @@
       alreadyClosed = sessionStorage.getItem(SESSION_KEY) === '1';
     } catch (e) {}
 
-    // MOBILE HOTFIX 2026-09-30:
-    // 모바일에서는 큰 패널을 자동으로 열지 않는다.
-    // 랜딩 본문을 가리는 검은 화면/오버레이를 원천 차단하고,
-    // 사용자가 '갑' 버튼을 눌렀을 때만 패널을 연다.
-    if (!alreadyClosed && window.innerWidth > 760) {
-      setTimeout(openPanel, 900);
+    // AUTO OPEN FIX 2026-09-30:
+    // 이미지가 준비되기 전에 검은 패널이 먼저 보이지 않도록,
+    // 갑패 아트워크 로딩 완료 후 즉시 팝업을 연다.
+    if (!alreadyClosed) {
+      var art = panel.querySelector('#gp-popup-art');
+      var autoOpen = function () {
+        if (!panel.classList.contains('gp-open')) openPanel();
+      };
+
+      if (art.complete && art.naturalWidth > 0) {
+        requestAnimationFrame(autoOpen);
+      } else {
+        art.addEventListener('load', autoOpen, { once: true });
+        art.addEventListener('error', function () {
+          collapsed.classList.remove('gp-hidden');
+        }, { once: true });
+      }
     }
   }
 
