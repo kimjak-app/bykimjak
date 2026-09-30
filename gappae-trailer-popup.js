@@ -67,13 +67,21 @@
       'cursor:grab;touch-action:none;user-select:none;}',
       '#gp-popup-drag:active{cursor:grabbing;}',
 
-      '#gp-popup-enter{position:absolute;left:29%;right:29%;top:72.5%;height:11%;z-index:6;',
-      'display:block;border-radius:3px;background:transparent;color:transparent;',
-      'font-size:0;text-decoration:none;cursor:pointer;}',
-      '#gp-popup-enter:focus-visible{outline:2px solid #e2bc69;outline-offset:-3px;}',
+      '#gp-popup-caption{position:absolute;left:10%;right:10%;top:65.5%;z-index:5;text-align:center;',
+      'font-family:var(--f-kr,var(--f-body,sans-serif));font-size:13px;font-weight:700;',
+      'letter-spacing:.04em;color:#f3e6ca;text-shadow:0 2px 8px rgba(0,0,0,.95);}',
+      '#gp-popup-enter{position:absolute;left:27%;right:27%;top:72%;height:11%;z-index:6;',
+      'display:flex;align-items:center;justify-content:center;border-radius:4px;',
+      'border:1px solid rgba(226,188,105,.88);background:rgba(11,9,7,.78);',
+      'color:#f3e6ca;font-family:var(--f-kr,var(--f-body,sans-serif));font-size:14px;',
+      'font-weight:700;letter-spacing:.06em;text-decoration:none;cursor:pointer;',
+      'box-shadow:0 6px 20px rgba(0,0,0,.38);backdrop-filter:blur(2px);}',
+      '#gp-popup-enter:hover{background:rgba(40,28,15,.88);}',
+      '#gp-popup-enter:focus-visible{outline:2px solid #e2bc69;outline-offset:2px;}',
 
       '#gp-popup-close{position:absolute;left:36%;right:36%;top:88%;height:6%;z-index:7;',
-      'border:0;background:transparent;color:transparent;font-size:0;cursor:pointer;padding:0;}',
+      'border:0;background:rgba(0,0,0,.42);color:#c9b184;font-size:11px;cursor:pointer;padding:0;',
+      'border-radius:999px;}',
       '#gp-popup-close:focus-visible{outline:1px solid #c79a4d;outline-offset:-2px;}',
 
       '@media(max-width:760px){',
@@ -208,8 +216,9 @@
     });
 
     panel.innerHTML =
-      '<img id="gp-popup-art" src="' + PANEL_IMAGE + '" alt="" aria-hidden="true" draggable="false">' +
+      '<img id="gp-popup-art" src="' + PANEL_IMAGE + '" alt="갑패 트레일러 팝업 이미지" draggable="false">' +
       '<div id="gp-popup-drag" title="드래그해서 위치를 옮길 수 있어요"></div>' +
+      '<div id="gp-popup-caption">갑패 트레일러 작업</div>' +
       '<a id="gp-popup-enter" href="' + TARGET + '" aria-label="갑패 트레일러 제작일지로 바로가기">바로가기</a>' +
       '<button id="gp-popup-close" type="button" aria-label="갑패 트레일러 팝업 닫기">닫기</button>';
 
