@@ -295,8 +295,12 @@
       alreadyClosed = sessionStorage.getItem(SESSION_KEY) === '1';
     } catch (e) {}
 
-    if (!alreadyClosed) {
-      setTimeout(openPanel, window.innerWidth <= 760 ? 650 : 900);
+    // MOBILE HOTFIX 2026-09-30:
+    // 모바일에서는 큰 패널을 자동으로 열지 않는다.
+    // 랜딩 본문을 가리는 검은 화면/오버레이를 원천 차단하고,
+    // 사용자가 '갑' 버튼을 눌렀을 때만 패널을 연다.
+    if (!alreadyClosed && window.innerWidth > 760) {
+      setTimeout(openPanel, 900);
     }
   }
 
