@@ -1,291 +1,251 @@
 /**
- * EASTWAR HUB — 블로그 전역 링크 허브 위젯 (드래그 이동형) v3
- * v2 대비 변경점:
- * - 첫 위치: 우측 하단 → 우측 상단
- * - 접힌 버튼 / 펼친 패널 모두 마우스(또는 터치)로 드래그해서 화면 아무 곳이나 이동 가능
- * - 옮긴 위치는 localStorage에 저장돼서 새로고침해도, 다른 페이지로 이동해도 유지됨
- *
- * 사용법: 모든 페이지의 </body> 직전에 아래 한 줄만 추가
- * <script src="/bykimjak/eastwar-hub.js"></script>
+ * byKimjak PROJECT HUB — GAPPAE + EASTWAR, 20261001-combined-02
+ * One widget; live HTML links; 640x960 web-optimized artwork from the supplied PNG.
+ * Home opens expanded on every visit; other pages start collapsed.
  */
 (function () {
-  if (document.getElementById('ew-hub-root')) return; // 중복 삽입 방지
+  'use strict';
+  if (window.__byKimjakProjectHubV1) return;
+  window.__byKimjakProjectHubV1 = true;
 
   var BASE = '/bykimjak';
-  var BG_IMAGE = BASE + '/assets/eastwar/hub-panel-bg-01.png';
-  var POS_KEY = 'ewHubPos';
-  var SESSION_KEY = 'ewHubClosed';
-  var DRAG_THRESHOLD = 4; // 이 이상 움직여야 '클릭'이 아니라 '드래그'로 인정
-
+  var VERSION = '20261001-combined-02';
+  var ART = BASE + '/assets/ui/gappae-eastwar-popup-bg-01.webp?v=' + VERSION;
+  var POSITION_KEY = 'byKimjakProjectHubPositionV1';
+  var HOME = new RegExp('^' + BASE + '/?(?:index\\.html)?$').test(location.pathname);
   var LINKS = [
-    { label: 'DEVLOG · 02–A', title: '개발일지', titleEn: 'Devlog', href: BASE + '/make/eastwar.html' },
-    { label: 'STILL · 01–C', title: '스틸', titleEn: 'Still', href: BASE + '/watch/still.html' },
-    { label: 'OST · 01–B', title: 'OST', titleEn: '', href: BASE + '/watch/ost.html' },
-    { label: 'FILM · 01–A', title: '영상', titleEn: 'Film', href: BASE + '/watch/ai-film.html' }
+    ['DEVLOG · 02–A', '개발일지', 'Devlog', '/make/eastwar.html'],
+    ['STILL · 01–C', '스틸', 'Still', '/watch/still.html'],
+    ['OST · 01–B', 'OST', '', '/watch/ost.html'],
+    ['FILM · 01–A', '영상', 'Film', '/watch/ai-film.html']
   ];
 
-  var isMainPage = /^\/bykimjak\/?(index\.html)?$/.test(window.location.pathname);
-
-  function el(tag, attrs, html) {
-    var e = document.createElement(tag);
-    if (attrs) {
-      for (var k in attrs) {
-        if (k === 'class') e.className = attrs[k];
-        else e.setAttribute(k, attrs[k]);
-      }
-    }
-    if (html !== undefined) e.innerHTML = html;
-    return e;
-  }
-
-  function injectStyles() {
-    var css = [
-      '#ew-hub-root{position:fixed;top:20px;right:20px;z-index:9998;',
-      'font-family:var(--f-body,sans-serif);}',
-
-      '#ew-hub-collapsed{width:56px;height:56px;border-radius:50%;',
-      'background:var(--dark,#111);border:1px solid rgba(200,166,90,.55);',
-      'display:flex;align-items:center;justify-content:center;cursor:grab;',
-      'box-shadow:0 6px 18px rgba(0,0,0,.35);touch-action:none;user-select:none;',
-      'transition:transform .2s cubic-bezier(.2,.8,.2,1), opacity .16s ease, box-shadow .18s ease;',
-      'transform:scale(1);opacity:1;}',
-      '#ew-hub-collapsed:active{cursor:grabbing;}',
-      '#ew-hub-collapsed:hover{transform:scale(1.06);box-shadow:0 10px 24px rgba(0,0,0,.42);}',
-      '#ew-hub-collapsed.ew-hidden{transform:scale(0);opacity:0;pointer-events:none;position:absolute;top:0;right:0;}',
-      '#ew-hub-collapsed svg{width:22px;height:22px;pointer-events:none;}',
-
-      '#ew-hub-panel{position:absolute;top:0;right:0;width:320px;height:400px;',
-      'max-width:calc(100vw - 40px);background-image:url(' + BG_IMAGE + ');',
-      'background-size:cover;background-position:center;border-radius:4px;',
-      'box-shadow:0 20px 50px rgba(0,0,0,.5);overflow:hidden;',
-      'display:flex;flex-direction:column;padding:34px 32px 22px;box-sizing:border-box;',
-      'transform:scale(.9);opacity:0;pointer-events:none;transform-origin:top right;',
-      'transition:transform .26s cubic-bezier(.2,.8,.2,1), opacity .22s ease;}',
-      '#ew-hub-panel.ew-open{transform:scale(1);opacity:1;pointer-events:auto;}',
-
-      '#ew-hub-title{text-align:center;margin-bottom:8px;cursor:grab;touch-action:none;',
-      'user-select:none;padding:2px 0 10px;}',
-      '#ew-hub-title:active{cursor:grabbing;}',
-      '#ew-hub-title .ew-eyebrow{font-family:var(--f-mono,monospace);font-size:9px;',
-      'letter-spacing:.14em;color:#a3854f;margin-bottom:6px;}',
-      '#ew-hub-title .ew-main{font-family:var(--f-display,var(--f-body,sans-serif));',
-      'font-size:17px;letter-spacing:.04em;color:#f1e8d6;}',
-
-      '#ew-hub-links{flex:1;display:flex;flex-direction:column;justify-content:center;gap:16px;}',
-      '.ew-hub-link{display:block;text-align:center;text-decoration:none;',
-      'padding-bottom:12px;border-bottom:1px solid rgba(200,166,90,.22);',
-      'transition:opacity .15s ease;}',
-      '.ew-hub-link:last-child{border-bottom:none;padding-bottom:0;}',
-      '.ew-hub-link:hover{opacity:.68;}',
-      '.ew-hub-link .ew-label{display:block;font-family:var(--f-mono,monospace);',
-      'font-size:9px;letter-spacing:.12em;color:#8a7550;margin-bottom:4px;}',
-      '.ew-hub-link .ew-name{display:block;font-family:var(--f-kr,var(--f-body,sans-serif));',
-      'font-size:14px;color:#f1e8d6;}',
-      '.ew-hub-link .ew-name-en{font-family:var(--f-body,sans-serif);font-size:10px;',
-      'color:#8a7550;margin-left:4px;font-style:normal;}',
-
-      '#ew-hub-close{margin-top:8px;text-align:center;background:none;border:none;',
-      'cursor:pointer;font-family:var(--f-mono,monospace);font-size:10px;',
-      'letter-spacing:.1em;color:#6b5d42;padding:5px;}',
-      '#ew-hub-close:hover{color:#a3854f;}',
-
-      '@media(max-width:380px){#ew-hub-panel{width:calc(100vw - 24px);height:360px;',
-      'padding:28px 24px 18px;}}'
-    ].join('');
-    document.head.appendChild(el('style', { id: 'ew-hub-style' }, css));
-  }
-
-  function buildLinks() {
-    return LINKS.map(function (l) {
-      var enPart = l.titleEn ? '<span class="ew-name-en">(' + l.titleEn + ')</span>' : '';
-      return (
-        '<a class="ew-hub-link" href="' + l.href + '">' +
-        '<span class="ew-label">' + l.label + '</span>' +
-        '<span class="ew-name">' + l.title + enPart + '</span>' +
-        '</a>'
-      );
-    }).join('');
-  }
-
-  function collapsedIconSVG() {
-    return (
-      '<svg viewBox="0 0 24 24" fill="none" stroke="#c8a65a" stroke-width="1.6" ' +
-      'stroke-linecap="round" stroke-linejoin="round">' +
-      '<path d="M12 2l7 4v6c0 5-3.2 8.5-7 10-3.8-1.5-7-5-7-10V6l7-4z"/>' +
-      '<path d="M9.5 12l1.8 1.8L15 10"/>' +
-      '</svg>'
-    );
-  }
-
-  function forceReflow(node) {
-    return node.offsetHeight;
-  }
-
-  function clamp(v, min, max) {
-    return Math.min(Math.max(v, min), max);
-  }
-
-  function savePosition(left, top) {
-    try { localStorage.setItem(POS_KEY, JSON.stringify({ left: left, top: top })); } catch (e) {}
-  }
-  function loadPosition() {
-    try {
-      var raw = localStorage.getItem(POS_KEY);
-      if (!raw) return null;
-      var p = JSON.parse(raw);
-      if (typeof p.left === 'number' && typeof p.top === 'number') return p;
-    } catch (e) {}
-    return null;
-  }
-
-  // root를 특정 화면 좌표(left, top 픽셀)에 고정시킨다.
-  // 처음엔 top:20px;right:20px 앵커로 떠있다가, 한 번이라도 옮기면
-  // 이후로는 left/top 픽셀 좌표로 위치를 관리한다 (right/bottom 앵커 해제).
-  function pinToPixels(root, left, top) {
-    var w = root.offsetWidth || 56;
-    var h = root.offsetHeight || 56;
-    left = clamp(left, 4, window.innerWidth - w - 4);
-    top = clamp(top, 4, window.innerHeight - h - 4);
-    root.style.right = 'auto';
-    root.style.left = left + 'px';
-    root.style.top = top + 'px';
-    return { left: left, top: top };
-  }
-
-  function makeDraggable(root, handle, onDragEnd) {
-    var dragging = false;
-    var moved = false;
-    var startX = 0, startY = 0;
-    var startLeft = 0, startTop = 0;
-
-    handle.addEventListener('pointerdown', function (e) {
-      if (e.button !== undefined && e.button !== 0) return;
-      dragging = true;
-      moved = false;
-      startX = e.clientX;
-      startY = e.clientY;
-      var rect = root.getBoundingClientRect();
-      startLeft = rect.left;
-      startTop = rect.top;
-      handle.setPointerCapture && handle.setPointerCapture(e.pointerId);
-    });
-
-    handle.addEventListener('pointermove', function (e) {
-      if (!dragging) return;
-      var dx = e.clientX - startX;
-      var dy = e.clientY - startY;
-      if (!moved && (Math.abs(dx) > DRAG_THRESHOLD || Math.abs(dy) > DRAG_THRESHOLD)) {
-        moved = true;
-      }
-      if (moved) {
-        var pos = pinToPixels(root, startLeft + dx, startTop + dy);
-        savePosition(pos.left, pos.top);
-      }
-    });
-
-    function endDrag(e) {
-      if (!dragging) return;
-      dragging = false;
-      if (onDragEnd) onDragEnd(moved, e);
-    }
-    handle.addEventListener('pointerup', endDrag);
-    handle.addEventListener('pointercancel', endDrag);
-
-    return { wasDragged: function () { return moved; } };
-  }
-
   function init() {
-    injectStyles();
-
-    var root = el('div', { id: 'ew-hub-root' });
-
-    var collapsed = el(
-      'button',
-      { id: 'ew-hub-collapsed', 'aria-label': 'EASTWAR 허브 열기 (드래그로 위치 이동 가능)' },
-      collapsedIconSVG()
-    );
-
-    var panel = el('div', { id: 'ew-hub-panel', role: 'dialog', 'aria-label': 'EASTWAR 허브' });
-    panel.innerHTML =
-      '<div id="ew-hub-title" title="드래그해서 위치를 옮길 수 있어요">' +
-      '<div class="ew-eyebrow">EASTWAR · 02–A</div>' +
-      '<div class="ew-main">EASTWAR HUB</div>' +
-      '</div>' +
-      '<div id="ew-hub-links">' + buildLinks() + '</div>' +
-      '<button id="ew-hub-close">닫기 ✕</button>';
-
-    root.appendChild(collapsed);
-    root.appendChild(panel);
+    if (document.getElementById('project-hub-root')) return;
+    // Remove only our superseded widgets, never page content or unrelated dialogs.
+    ['gp-popup-root', 'gp-hub-root', 'gappae-popup-clean', 'ew-hub-root'].forEach(function (id) {
+      var old = document.getElementById(id);
+      if (old) old.remove();
+    });
+    var root = document.createElement('div');
+    root.id = 'project-hub-root';
+    root.dataset.version = VERSION;
+    root.dataset.art = 'loading';
+    root.style.cssText = 'all:initial;position:fixed;z-index:9998;visibility:hidden;display:block;';
+    // Page-wide CSS and image-slot observers cannot alter this widget's controls.
+    var shadow = root.attachShadow({ mode: 'open' });
+    var style = document.createElement('style');
+    style.textContent = `
+      :host{color-scheme:light;font-family:var(--f-kr,"Pretendard Variable",system-ui,sans-serif);}
+      *,*::before,*::after{box-sizing:border-box;}
+      [hidden]{display:none!important;}
+      button,a{-webkit-tap-highlight-color:transparent;}
+      button{font:inherit;cursor:pointer;}
+      a{color:inherit;text-decoration:none;}
+      #ph-panel{position:relative;width:var(--ph-width,320px);max-height:var(--ph-max-height,650px);
+        overflow:auto;overscroll-behavior:contain;border-radius:7px;
+        box-shadow:0 16px 42px rgba(0,0,0,.35);scrollbar-width:thin;}
+      #ph-card{position:relative;isolation:isolate;width:100%;height:var(--ph-card-height,480px);
+        background:#f3eee5 center top/100% 100% no-repeat;color:#29241d;}
+      #ph-card::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;}
+      :host([data-art="ready"]) #ph-card{color:#fff8e9;background-color:#211d18;}
+      :host([data-art="ready"]) #ph-card::before{background:linear-gradient(180deg,
+        rgba(0,0,0,.08) 0%,rgba(0,0,0,.16) 34.375%,rgba(0,0,0,.26) 34.375%,rgba(0,0,0,.36) 100%);}
+      .ph-gappae{height:34.375%;display:flex;flex-direction:column;align-items:center;
+        justify-content:center;padding:19px 28px 17px;}
+      .ph-heading{margin:0;text-align:center;cursor:grab;touch-action:none;user-select:none;}
+      .ph-heading:active{cursor:grabbing;}
+      .ph-eyebrow{display:block;font-family:var(--f-mono,monospace);font-size:9px;line-height:1.4;
+        font-weight:500;letter-spacing:.16em;color:#66532f;}
+      .ph-gappae h2{margin:6px 0 0;font-size:18px;font-weight:650;line-height:1.35;letter-spacing:-.015em;}
+      #ph-gappae-link{display:flex;align-items:center;justify-content:center;gap:16px;
+        min-height:44px;width:158px;margin-top:13px;border:1px solid #b59b65;border-radius:3px;
+        font-size:14px;font-weight:650;letter-spacing:.03em;background:rgba(255,255,255,.5);}
+      .ph-eastwar{height:65.625%;padding:15px 28px 7px;display:flex;flex-direction:column;}
+      .ph-eastwar h2{margin:0;font-family:var(--f-display,system-ui,sans-serif);font-size:16px;
+        font-weight:600;line-height:1.4;letter-spacing:.12em;text-align:center;}
+      .ph-links{display:flex;flex:1;min-height:0;flex-direction:column;justify-content:center;gap:3px;}
+      .ph-link{display:flex;flex-direction:column;align-items:center;justify-content:center;
+        min-height:44px;padding:4px 4px 6px;border-bottom:1px solid rgba(112,89,43,.25);}
+      .ph-link:last-child{border-bottom:0;}
+      .ph-label{font-family:var(--f-mono,monospace);font-size:9px;line-height:1.25;
+        letter-spacing:.11em;font-weight:500;color:#66532f;}
+      .ph-name{font-size:14px;font-weight:600;line-height:1.45;}
+      .ph-en{font-size:10px;font-weight:400;margin-left:4px;}
+      #ph-close{flex-shrink:0;align-self:center;min-width:130px;min-height:44px;padding:7px 12px;
+        border:0;background:none;font-size:11px;letter-spacing:.1em;color:inherit;}
+      #ph-top-close{position:absolute;right:2px;top:2px;z-index:3;width:44px;height:44px;
+        padding:0;border:0;border-radius:50%;background:transparent;color:inherit;font-size:18px;}
+      :host([data-art="ready"]) .ph-heading,
+      :host([data-art="ready"]) .ph-name,
+      :host([data-art="ready"]) #ph-close,
+      :host([data-art="ready"]) #ph-top-close{text-shadow:0 1px 3px #000,0 0 10px rgba(0,0,0,.85);}
+      :host([data-art="ready"]) #ph-top-close{color:#fff8e9;}
+      :host([data-art="ready"]) .ph-eyebrow,
+      :host([data-art="ready"]) .ph-label{color:#ead8ac;text-shadow:0 1px 3px #000;}
+      :host([data-art="ready"]) #ph-gappae-link{background:rgba(15,12,9,.7);border-color:#c8a86a;color:#fff4dc;}
+      :host([data-art="ready"]) .ph-link{border-color:rgba(230,205,150,.32);
+        background:linear-gradient(90deg,transparent,rgba(10,8,6,.32) 25%,rgba(10,8,6,.32) 75%,transparent);}
+      a:hover{filter:brightness(1.12);}
+      a:focus-visible,button:focus-visible{outline:2px solid #d8b65e;outline-offset:-3px;}
+      #ph-collapsed{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+        background:#17130f;border:1px solid #c8a86a;box-shadow:0 6px 18px rgba(0,0,0,.28);
+        color:#dec38d;touch-action:none;cursor:grab;padding:0;}
+      #ph-collapsed svg{width:25px;height:25px;pointer-events:none;}
+      #ph-collapsed:active{cursor:grabbing;}
+      :host([data-art="missing"]) .ph-gappae{border-bottom:1px solid #b59b65;}
+      @media(prefers-reduced-motion:no-preference){a,button{transition:filter .15s ease;}}
+    `;
+    shadow.appendChild(style);
+    var panel = document.createElement('section');
+    panel.id = 'ph-panel';
+    panel.setAttribute('role', 'region');
+    panel.setAttribute('aria-label', '갑패 트레일러와 EASTWAR 바로가기');
+    panel.innerHTML = '<div id="ph-card">' +
+      '<section class="ph-gappae" aria-labelledby="ph-gappae-title">' +
+      '<div class="ph-heading" title="드래그하여 이동">' +
+      '<span class="ph-eyebrow">GAPPAE TRAILER</span>' +
+      '<h2 id="ph-gappae-title">갑패 트레일러 작업</h2></div>' +
+      '<a id="ph-gappae-link" href="' + BASE + '/make/gappae-trailer.html">바로가기 <span aria-hidden="true">→</span></a>' +
+      '</section><section class="ph-eastwar" aria-labelledby="ph-eastwar-title">' +
+      '<h2 class="ph-heading" id="ph-eastwar-title" title="드래그하여 이동">EASTWAR HUB</h2>' +
+      '<nav class="ph-links" aria-label="EASTWAR 메뉴">' + LINKS.map(function (link) {
+        return '<a class="ph-link" href="' + BASE + link[3] + '"><span class="ph-label">' + link[0] +
+          '</span><span class="ph-name">' + link[1] + (link[2] ? '<span class="ph-en">(' + link[2] + ')</span>' : '') + '</span></a>';
+      }).join('') + '</nav><button id="ph-close" type="button">닫기 ✕</button></section></div>' +
+      '<button id="ph-top-close" type="button" aria-label="통합 팝업 접기">×</button>';
+    var collapsed = document.createElement('button');
+    collapsed.id = 'ph-collapsed';
+    collapsed.type = 'button';
+    collapsed.setAttribute('aria-label', '갑패 · EASTWAR 통합 팝업 열기. 드래그하여 이동 가능');
+    collapsed.setAttribute('aria-controls', 'ph-panel');
+    collapsed.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-4 8-8 10-4-2-8-5-8-10V6l8-4z"/><path d="M8 9l8 8M16 9l-8 8M7 8l2 2M15 10l2-2"/></svg>';
+    shadow.appendChild(panel);
+    shadow.appendChild(collapsed);
     document.body.appendChild(root);
 
-    // 저장된 위치가 있으면 그 자리에서 시작, 없으면 기본값(우측 상단) 유지
-    // 단, 복원 시점에 뷰포트 크기가 아직 0으로 잡히면(백그라운드 탭 등) 건너뛴다 —
-    // 그대로 pinToPixels를 호출하면 화면 밖 좌표로 clamp된 값이 굳어버린다.
-    var saved = loadPosition();
-    if (saved) {
-      requestAnimationFrame(function () {
-        if (!window.innerWidth || !window.innerHeight) return;
-        pinToPixels(root, saved.left, saved.top);
-      });
-    }
+    var isOpen = HOME;
+    var position = null;
+    var ready = false;
+    var card = shadow.getElementById('ph-card');
+    try {
+      var stored = JSON.parse(localStorage.getItem(POSITION_KEY));
+      if (stored && typeof stored.left === 'number' && isFinite(stored.left) &&
+          typeof stored.top === 'number' && isFinite(stored.top)) position = stored;
+    } catch (e) { /* Storage disabled must not disable navigation. */ }
 
-    function openPanel() {
-      collapsed.classList.add('ew-hidden');
-      forceReflow(panel);
-      requestAnimationFrame(function () {
-        panel.classList.add('ew-open');
-      });
+    function viewport() {
+      var vv = window.visualViewport;
+      return { width: vv ? vv.width : document.documentElement.clientWidth,
+        height: vv ? vv.height : window.innerHeight,
+        left: vv ? vv.offsetLeft : 0, top: vv ? vv.offsetTop : 0 };
     }
+    function place() {
+      var view = viewport();
+      if (view.width < 1 || view.height < 1) return;
+      var width = Math.min(320, Math.max(1, view.width - 24));
+      var cardHeight = Math.max(420, width * 1.5);
+      var maxHeight = Math.max(44, view.height - 24);
+      root.style.setProperty('--ph-width', width + 'px');
+      root.style.setProperty('--ph-card-height', cardHeight + 'px');
+      root.style.setProperty('--ph-max-height', maxHeight + 'px');
+      var actualWidth = isOpen ? width : 56;
+      var actualHeight = isOpen ? Math.min(cardHeight, maxHeight) : 56;
+      var margin = view.width <= 760 ? 12 : 20;
+      var defaultTop = view.width <= 760 ? view.top + view.height - actualHeight - 12 : view.top + 92;
+      var desired = position || { left: view.left + view.width - actualWidth - margin, top: defaultTop };
+      var maxLeft = Math.max(view.left + 4, view.left + view.width - actualWidth - 4);
+      var maxTop = Math.max(view.top + 4, view.top + view.height - actualHeight - 4);
+      root.style.left = Math.max(view.left + 4, Math.min(desired.left, maxLeft)) + 'px';
+      root.style.top = Math.max(view.top + 4, Math.min(desired.top, maxTop)) + 'px';
+      root.style.width = actualWidth + 'px';
+      root.style.height = actualHeight + 'px';
+    }
+    function savePosition() {
+      var r = root.getBoundingClientRect();
+      position = { left: r.left, top: r.top };
+      try { localStorage.setItem(POSITION_KEY, JSON.stringify(position)); } catch (e) {}
+    }
+    function render() {
+      root.dataset.open = isOpen ? 'true' : 'false';
+      panel.hidden = !isOpen;
+      collapsed.hidden = isOpen;
+      collapsed.setAttribute('aria-expanded', String(isOpen));
+      place();
+      if (ready || !HOME) root.style.visibility = 'visible';
+    }
+    function openPanel() { isOpen = true; render(); }
     function closePanel() {
-      panel.classList.remove('ew-open');
-      forceReflow(collapsed);
-      requestAnimationFrame(function () {
-        collapsed.classList.remove('ew-hidden');
+      isOpen = false;
+      savePosition();
+      render();
+      collapsed.focus({ preventScroll: true });
+    }
+    shadow.getElementById('ph-close').addEventListener('click', closePanel);
+    shadow.getElementById('ph-top-close').addEventListener('click', closePanel);
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && isOpen) closePanel();
+    });
+    function draggable(handle, tap) {
+      var drag = null;
+      var suppressClick = false;
+      handle.addEventListener('pointerdown', function (event) {
+        if (event.isPrimary === false || event.button !== 0) return;
+        var r = root.getBoundingClientRect();
+        drag = { x: event.clientX, y: event.clientY, left: r.left, top: r.top, moved: false };
+        suppressClick = false;
+        if (handle.setPointerCapture) handle.setPointerCapture(event.pointerId);
       });
-      try { sessionStorage.setItem(SESSION_KEY, '1'); } catch (e) {}
+      handle.addEventListener('pointermove', function (event) {
+        if (!drag) return;
+        var dx = event.clientX - drag.x;
+        var dy = event.clientY - drag.y;
+        if (Math.abs(dx) + Math.abs(dy) > 5) drag.moved = true;
+        if (!drag.moved) return;
+        position = { left: drag.left + dx, top: drag.top + dy };
+        place();
+      });
+      handle.addEventListener('pointerup', function () {
+        if (!drag) return;
+        suppressClick = drag.moved;
+        if (drag.moved) savePosition();
+        drag = null;
+      });
+      handle.addEventListener('pointercancel', function () { drag = null; suppressClick = true; });
+      if (tap) handle.addEventListener('click', function (event) {
+        if (suppressClick && event.detail !== 0) { suppressClick = false; return; }
+        tap();
+      });
     }
-
-    // 접힌 버튼: 드래그하면 이동, 그냥 클릭하면 열림
-    var collapsedDrag = makeDraggable(root, collapsed, function (wasDragged) {
-      if (!wasDragged) openPanel();
-    });
-
-    // 펼친 패널: 타이틀 영역을 잡고 드래그하면 이동 (링크는 그대로 클릭 가능)
-    makeDraggable(root, panel.querySelector('#ew-hub-title'), function () {});
-
-    panel.querySelector('#ew-hub-close').addEventListener('click', closePanel);
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && panel.classList.contains('ew-open')) closePanel();
-    });
-
-    // 창 크기가 바뀌어도(모바일 회전 등) 위젯이 화면 밖으로 나가지 않게 보정
-    // 단, 탭이 백그라운드로 가는 등 뷰포트 크기가 일시적으로 0으로 잡히는
-    // 순간의 resize는 무시한다 (그대로 반영하면 위젯이 (4,4)로 튕겨나가 저장됨)
-    window.addEventListener('resize', function () {
-      if (!window.innerWidth || !window.innerHeight) return;
-      var rect = root.getBoundingClientRect();
-      if (root.style.left) {
-        var pos = pinToPixels(root, rect.left, rect.top);
-        savePosition(pos.left, pos.top);
-      }
-    });
-
-    if (isMainPage) {
-      var alreadyClosed = false;
-      try { alreadyClosed = sessionStorage.getItem(SESSION_KEY) === '1'; } catch (e) {}
-      if (!alreadyClosed) {
-        setTimeout(function () {
-          var gappaeOwnsMobileHome = window.innerWidth <= 760 && document.getElementById('gp-popup-root');
-          if (gappaeOwnsMobileHome) return;
-          openPanel();
-        }, 500);
-      }
+    draggable(collapsed, openPanel);
+    shadow.querySelectorAll('.ph-heading').forEach(function (heading) { draggable(heading); });
+    window.addEventListener('resize', place);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', place);
+      window.visualViewport.addEventListener('scroll', place);
     }
-  }
+    window.addEventListener('pageshow', function (event) { if (event.persisted && HOME) openPanel(); });
+    render();
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
+    // Decode before painting artwork. Loading/failure never leaves an empty image box.
+    var art = new Image();
+    var timer = setTimeout(function () { finish(false); }, 6000);
+    function finish(ok) {
+      if (ready && !ok) return;
+      clearTimeout(timer);
+      root.dataset.art = ok ? 'ready' : 'missing';
+      if (ok) card.style.backgroundImage = 'url(' + JSON.stringify(ART) + ')';
+      ready = true;
+      render();
+    }
+    art.onload = function () {
+      if (art.naturalWidth !== 640 || art.naturalHeight !== 960) { finish(false); return; }
+      if (art.decode) art.decode().then(function () { finish(true); }, function () { finish(false); });
+      else finish(true);
+    };
+    art.onerror = function () { finish(false); };
+    art.src = ART;
   }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
+  else init();
 })();
