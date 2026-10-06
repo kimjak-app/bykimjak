@@ -51,6 +51,10 @@
     { num: '009', date: '2026.10.01',
       ko: { href: 'gappae-trailer-devlog-009.html', title: '사슴을 빗겨 간 화살', sub: '블렌더 프리비즈로 AI 영상에 연출 의도를 전하다' },
       en: { href: 'gappae-trailer-devlog-009-en.html', title: 'The Arrow That Missed the Deer', sub: 'Communicating Directorial Intent to AI Video with Blender Previs' }
+    },
+    { num: '010', date: '2026.10.01–05',
+      ko: { href: 'gappae-trailer-devlog-010.html', title: '영상 생성 작업 스타트', sub: '106개 생성, 60개 편집 활용 — 쓸 수 있는 순간을 살려 4분을 만들다' },
+      en: { href: 'gappae-trailer-devlog-010-en.html', title: 'Starting Video Production', sub: '106 generated, 60 used in the edit — recovering useful moments for a four-minute trailer' }
     }
   ];
 

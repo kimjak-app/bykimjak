@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>갑패 트레일러 제작일지 #009 — 사슴을 빗겨 간 화살 — byKimjak</title>
+<title>갑패 트레일러 제작일지 #010 — 영상 생성 작업 스타트 — byKimjak</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -122,7 +122,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 .log-nav__title{font-family:var(--f-display);font-size:clamp(14px,1.8vw,20px);font-weight:500;letter-spacing:-.01em;color:var(--ink);transition:color .2s}
 .log-nav a:hover .log-nav__title{color:var(--accent)}
 .log-nav__next--disabled{opacity:.4;cursor:default}
-.devlog__body ol{padding-left:22px;margin:0 0 28px}.devlog__body h1{line-height:1.25}</style>
+.devlog__body ol{padding-left:22px;margin:0 0 28px}.devlog__body h1{line-height:1.25}.devlog__body h4{font-family:var(--f-kr);font-size:18px;margin:32px 0 12px}.devlog__body pre{max-width:100%;box-sizing:border-box;white-space:pre-wrap;overflow-wrap:anywhere}.table-scroll{max-width:100%;overflow-x:auto;margin:24px 0 32px}.devlog__body table{width:100%;border-collapse:collapse;font-family:var(--f-kr);font-size:14px;line-height:1.8}.devlog__body th,.devlog__body td{border-bottom:1px solid var(--rule);padding:12px 10px;text-align:left;vertical-align:top;overflow-wrap:anywhere}.devlog__body th{background:var(--bg-2);font-weight:600}.devlog__body.rev{opacity:1;transform:none}</style>
 <link rel="stylesheet" href="../assets/css/site-navigation.css" />
 </head>
 <body>
@@ -167,7 +167,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     <div class="lang-switch">
       <span class="lang-current">🇰🇷 한국어</span>
       <span class="lang-sep">|</span>
-      <a href="gappae-trailer-devlog-009-en.html" class="lang-other">🇺🇸 English</a>
+      <a href="gappae-trailer-devlog-010-en.html" class="lang-other">🇺🇸 English</a>
     </div>
     <h1>갑패 트레일러</h1>
     <p class="sub-ko">제작일지</p>
@@ -176,33 +176,71 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 
   <section class="log-index rev" id="log-index-sect"></section>
 
-  <article class="devlog" id="log-009"><div class="devlog__body rev"><span class="log-num">Production Log · #009</span><h1>사슴을 빗겨 간 화살</h1><h2>블렌더 프리비즈로 AI 영상에 연출 의도를 전하다</h2><span class="log-date">2026년 10월 1일</span><p>갑패 트레일러 비트4에는 화살 한 발이 있다. 왕인 이각이 쏜 화살이 사슴을 빗겨 날아가, 반대편에 선 왕세제 이현의 얼굴 곁을 스치고 고목에 꽂힌다. 그림 스토리보드로는 5번 발사, 6번 화살의 궤적, 7번 나무에 박힌 화살이다. 원래 세 컷이던 이 부분을, 나는 화살 바로 뒤에서 카메라가 함께 날아가는 하나의 원테이크로 만들고 싶었다.</p>
-<p>결과부터 말하면, 블렌더로 만든 3D 프리비즈를 시댄스 2.5에 레퍼런스로 넣은 이 컷은 <strong>첫 번째 생성에서 의도한 그대로 나왔다.</strong></p>
-<figure><img src="../assets/gappae-trailer/storyboard-beat-04.png" alt="그림 스토리보드 비트4" loading="lazy" /><figcaption>그림 스토리보드 비트4</figcaption></figure>
-<h3>말로는 전해지지 않는 장면</h3>
-<p>문제는 이 장면의 핵심이 말로 잘 전해지지 않는다는 것이었다. 이각은 사슴을 쏜 게 아니다. 사슴은 두 사람 사이에 있을 뿐이고, 화살은 사슴을 일부러 빗겨 이현을 향한다. 그런데 &quot;활을 쏘는 사람, 사슴, 날아가는 화살&quot;이라고만 적어 주면 영상 생성 모델이 사슴을 맞히는 그림으로 읽을 위험이 있다. 엉뚱한 영상이 나오면 장면의 의미가 통째로 달라진다. 이 장면은 문장이 아니라 <strong>위치와 방향, 속도</strong>로 전해야 했다.</p>
-<p>그래서 영상 모델에게 줄 &quot;카메라 움직임의 정답지&quot;를 3D로 먼저 만들기로 했다.</p>
-<h3>블렌더와 Claude를 연결하다</h3>
-<p>힉스필드가 제공하는 블렌더 플러그인과 연결 통로(MCP)를 이용해, 블렌더를 <strong>Claude</strong>와 연결했다. MCP는 AI가 다른 프로그램에 명령을 보낼 수 있게 열어두는 길이다. 실제 대화와 작업 지시는 블렌더 안의 채팅 패널이 아니라 <strong>Claude 채팅 창</strong>에서 진행했다. Claude가 MCP를 통해 블렌더가 받는 명령을 보내 도형을 만들고, 위치와 회전을 정하고, 카메라를 놓았다. 필요하면 파이썬 코드를 실행해 프레임마다 위치를 찍고, 스크린샷과 렌더 이미지를 보며 결과를 확인했다.</p>
-<p>나는 감독으로서 그림 스토리보드와 연출 의도를 Claude와 상의하며 판단했다. 무엇이 보여야 하는지, 화살이 어디를 지나야 하는지, 이현이 어떻게 피해야 하는지는 내가 정했고, Claude가 그것을 3D 장면으로 만들었다.</p>
-<figure><img src="../assets/gappae-trailer/gappae-b04-blender-workspace.png" alt="Blender · 비트4 프리비즈 작업 화면" loading="lazy" /><figcaption>Blender 작업 화면 · 단순한 모형으로 인물의 배치와 화살·카메라의 동선을 설계했다. 캡처의 ‘Claude Opus 5.5’ 표시는 블렌더 패널에 자동 선택된 값을 바꾸지 않아 남아 있는 것이다. 실제 작업은 별도의 Claude 채팅 창에서 진행했다.</figcaption></figure>
-<h3>프리비즈는 이렇게 만들었다</h3>
-<ol><li><strong>공간부터 정했다.</strong> 장소 이미지를 기준으로 이각, 사슴, 이현, 고목이 <strong>일직선</strong>에 놓이게 했다. 사슴을 쏘면 그 선 위의 이현을 쏘는 배치다.</li><li><strong>모형은 일부러 단순하게 만들었다.</strong> 이각은 붉은 캡슐, 이현은 파란 캡슐, 사슴은 갈색 모형, 화살은 노란색이다. 필요한 건 연기가 아니라 카메라와 구도, 화살의 속도였다.</li><li><strong>화살의 속도와 카메라를 설계했다.</strong> 화살은 느리게 날다가 사슴을 스치는 순간 빨라지고, 이현 곁에서 다시 느려진다. 카메라는 화살 바로 뒤에서 함께 날아가다가 고목에서 멈춘다.</li><li><strong>다섯 번 넘게 고쳤다.</strong> 가장 많이 고친 건 이현의 회피다. 최종안에서는 이현이 반 걸음 비껴 몸을 기울여 피하되, 몸 어디에서도 15cm 이상 간격을 두도록 했다. 스토리보드의 이현은 화살이 코를 스치는 순간 얼굴을 돌려 피한다. 닿을 듯 말 듯하면서 닿지 않는 아슬아슬함이 이 장면의 긴장이다.</li></ol>
-<figure><img src="../assets/gappae-trailer/gappae-b04-previz-release.png" alt="이각이 활을 놓는 순간" loading="lazy" /><figcaption>이각이 활을 놓는 순간. 카메라는 화살 바로 뒤에서 출발한다.</figcaption></figure>
-<figure><img src="../assets/gappae-trailer/gappae-b04-previz-deer-pass.png" alt="화살이 사슴을 스치는 순간" loading="lazy" /><figcaption>화살이 사슴을 스치는 순간. 이현을 향한 직선 위에 사슴이 있다.</figcaption></figure>
-<figure><img src="../assets/gappae-trailer/gappae-b04-previz-near-miss.png" alt="이현 곁을 아슬하게 지나가는 순간" loading="lazy" /><figcaption>이현 곁을 아슬하게 지나가는 순간. 몸 어디에서도 15cm 이상 간격을 둔다.</figcaption></figure>
-<figure><img src="../assets/gappae-trailer/gappae-b04-previz-impact.png" alt="고목에 꽂힌 화살" loading="lazy" /><figcaption>고목에 꽂힌 화살. 카메라 이동의 끝.</figcaption></figure>
-<h3>블렌더 영상을 AI에게 어떻게 줬나</h3>
-<p>완성한 3D 장면의 렌더 영상을 시댄스 2.5에 <strong>영상 레퍼런스</strong>로 넣었다. 다만 블렌더 영상은 카메라 워크와 구도, 속도만 참고하라고 못 박았다. 캡슐의 어색한 움직임까지 따라 하면 안 되기 때문이다. 인물의 얼굴과 옷, 숲의 분위기는 이각과 이현의 시트 이미지, 그리고 이각 쪽과 이현 쪽 사냥터 장소 이미지에서 가져오게 했다.</p>
-<p>정리하면 이렇다. <strong>움직임은 블렌더가, 모습은 시트와 장소 이미지가 정했다.</strong></p>
-<figure><video controls playsinline preload="metadata" aria-label="Blender · 프리비즈 최종 렌더" style="display:block;width:100%;height:auto;background:#000" poster="../assets/gappae-trailer/gappae-b04-previz-release.png"><source src="../assets/gappae-trailer/gappae-b04-blender-previz-01.mp4" type="video/mp4" /></video><figcaption>Blender · 프리비즈 최종 렌더</figcaption></figure>
-<h3>결과: 단 한 번의 생성으로</h3>
-<p>이 컷은 시댄스 2.5에서 <strong>단 한 번의 생성으로 의도한 그대로</strong> 나왔다. 화살은 사슴을 빗겨 이현 곁을 아슬하게 스치고 고목에 꽂혔고, 카메라는 화살 뒤를 따라 날아갔다. 결과가 완전히 마음에 들어서, 비교하려고 다른 테이크를 더 뽑아 볼 필요도 없었다.</p>
-<figure><video controls playsinline preload="metadata" aria-label="Seedance 2.5 · 최종 생성 결과" style="display:block;width:100%;height:auto;background:#000"><source src="../assets/gappae-trailer/gappae-b04-arrow-follow-seedance-01.mp4" type="video/mp4" /></video><figcaption>Seedance 2.5 · 최종 생성 결과</figcaption></figure>
-<p>문장으로는 몇 번을 다시 써도 전하기 어려웠던 장면이, 위치와 속도를 3D로 먼저 정해 주니 한 번에 전해졌다.</p>
-<h3>앞으로</h3>
-<p>이번 작업은 연출 의도를 AI에게 정확히 전하는 방법으로 3D 프리비즈가 쓸 만하다는 걸 확인한 첫 시도였다. 카메라가 어디서 출발해 어디를 지나고 어디에서 끝나는지, 무엇이 얼마나 빠르게 움직이는지는 문장으로 설명하기 어렵지만 3D에서는 한눈에 보인다.</p>
-<p>갑패 영상을 본격적으로 제작하게 되면 블렌더를 더 적극적으로 활용할 계획이다. 특히 카메라가 복잡하게 움직이는 장면과 여러 인물의 동선이 얽히는 장면처럼, 문장으로는 순서와 위치가 뭉개지는 컷에서 쓰려고 한다. 이번 작업에서 만든 방식, 곧 <strong>단순한 모형으로 움직임만 정하고 모습은 시트와 장소 이미지에 맡기는 방식</strong>이 그 출발점이 될 것이다.</p></div><div class="log-nav"><a href="gappae-trailer-devlog-008.html" class="log-nav__prev"><span class="log-nav__label">이전</span><span class="log-nav__title">← #008</span></a><a href="gappae-trailer-devlog-010.html" class="log-nav__next"><span class="log-nav__label">다음</span><span class="log-nav__title">#010 →</span></a></div></article>
+  <article class="devlog" id="log-010"><div class="devlog__body rev"><span class="log-num">Production Log · #010</span><h1>영상 생성 작업 스타트</h1><h2>블렌더 영상을 들고 시댄스 2.5로 비트4를 만들다</h2><span class="log-date">2026년 10월 1일–5일</span><p><a href="gappae-trailer-devlog-009.html">앞 글</a>에서 블렌더로 비트4의 카메라 움직임과 화살의 속도를 정해 두었다. 이번 글은 그 영상을 들고 본격적으로 영상 생성에 들어간 첫 작업의 기록이다. 비트1도 후보였지만, 비트1은 시작과 끝 스틸 이미지를 박아서 만든 방식이라 이 이야기와 결이 다르다. 블렌더에서 이어지는 과정을 보여 주기에는 비트4가 맞았다.</p>
+<h3>10월 1일–5일: 106개를 생성하고, 60개를 편집에 활용하다</h3>
+<p>2026년 10월 1일부터 5일까지 <strong>시댄스 2.5로 총 106개의 영상을 생성했다. 그중 60개의 영상이 최종 4분짜리 트레일러 편집에 사용됐다.</strong> 이 60개가 모두 처음부터 끝까지 완벽한 OK 컷이었다는 뜻은 아니다. 전체로는 OK 컷이 아니어도, 쓸 수 있는 부분을 찾아 다빈치 리졸브에서 컷편집으로 최대한 살렸다.</p>
+<p>영상 하나를 통째로 채택하거나 버리는 방식보다, 완성할 장면에 필요한 순간을 골라 이어 붙이는 판단이 중요했다. <strong>부분적으로라도 활용할 수 있는 구간을 살려, 버리는 영상을 최소화하면서 최종 4분 영상을 만들었다.</strong> 이번 글의 비트4는 생성 설계를 보여 주는 대표 사례이고, 전체 트레일러는 이렇게 만든 재료를 감독이 고르고 편집한 결과다.</p>
+<h3>먼저, 이 작업의 원칙</h3>
+<p>프롬프트를 보기 전에, 이 작업 전체에 깔린 원칙 세 가지를 밝혀 둔다.</p>
+<p><strong>1. 편집은 감독이 다빈치 리졸브로 직접 한다.</strong> AI가 만드는 것은 완성된 영화가 아니라 컷이라는 재료다. 컷을 고르고 이어 붙이고, 속도와 색과 소리를 맞추는 일은 감독이 다빈치 리졸브에서 직접 한다.</p>
+<p><strong>2. 배경음악은 절대 넣지 않는다.</strong> 트레일러의 배경음악은 이미 미리 준비해 두었다. 그래서 영상 생성 단계에서는 음악이 한 조각이라도 섞이면 안 된다. 대신 <strong>효과음은 허용</strong>한다. 시위 소리, 화살이 날아가는 소리, 나무에 박히는 소리처럼 장면 안에서 실제로 나는 소리는 영상 속에서 함께 생성한다.</p>
+<p><strong>3. 영상 생성은 대부분 5~10초 안팎으로 한다.</strong> 짧은 컷을 이어 붙이는 편집 방식에 맞기도 하고, 생성 시간이 길어질수록 생길 수 있는 오류를 줄이기 위해서이기도 하다. 이번 비트4 컷도 5초다.</p>
+<h3>준비물: 영상 1개, 이미지 4장</h3>
+<p>시댄스 2.5에 넣은 레퍼런스는 다섯 개다.</p>
+<div class="table-scroll" role="region" aria-label="레퍼런스와 시간표" tabindex="0"><table><thead><tr><th scope="col">이름표</th><th scope="col">내용</th><th scope="col">맡은 역할</th></tr></thead><tbody><tr><td>video_1</td><td>블렌더 프리비즈 영상</td><td>카메라 경로, 타이밍, 구도, 인물의 위치</td></tr><tr><td>image_1</td><td>이각 캐릭터 시트</td><td>활을 쏘는 왕의 얼굴, 옷, 활</td></tr><tr><td>image_2</td><td>이현 캐릭터 시트</td><td>길 끝에 서 있는 왕세제의 얼굴, 옷</td></tr><tr><td>image_3</td><td>숲길 장소 이미지 (이현 쪽)</td><td>길 끝에 선 거대한 고목이 있는 풍경</td></tr><tr><td>image_4</td><td>숲길 장소 이미지 (이각 쪽)</td><td>같은 길을 활 쏘는 쪽에서 본 풍경</td></tr></tbody></table></div>
+<figure><video controls playsinline preload="metadata" aria-label="video_1 · Blender 프리비즈 레퍼런스" style="display:block;width:100%;height:auto;background:#000"><source src="../assets/gappae-trailer/gappae-b04-blender-previz-01.mp4" type="video/mp4" /></video><figcaption>video_1 · Blender 프리비즈 레퍼런스</figcaption></figure>
+<figure><img src="../assets/gappae-trailer/charsheet-igak-20261006.png" alt="이각 캐릭터 시트" loading="lazy" /><figcaption>image_1: 이각 시트. 활을 쏘는 왕의 얼굴과 옷, 활이다.</figcaption></figure>
+<figure><img src="../assets/gappae-trailer/character-ihyeon-hunt-rework-01.png" alt="이현 캐릭터 시트" loading="lazy" /><figcaption>image_2: 이현 시트. 길 끝에 서 있는 왕세제다.</figcaption></figure>
+<figure><img src="../assets/gappae-trailer/gappae-b04-location-yi-hyeon-20261006.png" alt="숲길 이현 방향" loading="lazy" /><figcaption>image_3: 화살이 꽂힐 고목이 길 끝에 서 있는 쪽이다.</figcaption></figure>
+<figure><img src="../assets/gappae-trailer/gappae-b04-location-yi-gak-20261006.png" alt="숲길 이각 방향" loading="lazy" /><figcaption>image_4: 같은 길을 활 쏘는 쪽에서 본 모습이다.</figcaption></figure>
+<p>사슴은 이미지 없이 글과 블렌더 영상 속 모형으로만 전했다. 장소 이미지가 두 장인 이유는 이 컷이 길의 양쪽 끝을 모두 지나기 때문이다.</p>
+<h3>프롬프트 전문</h3>
+<pre><code>REFERENCE ROLES:
+&lt;&lt;&lt;video_1&gt;&gt;&gt;= camera path, timing, framing and character positions ONLY. It is an untextured grey blockout: do NOT copy its grey capsules, colors or simple shapes.
+&lt;&lt;&lt;image_1&gt;&gt;&gt;= the archer (the King). Exact face, costume and bow.
+&lt;&lt;&lt;image_2&gt;&gt;&gt;= the young prince standing at the far end of the path. Exact face and costume.
+&lt;&lt;&lt;image_3&gt;&gt;&gt;= the forest path seen toward the prince, with the huge old oak at the end of the path on its right edge.
+&lt;&lt;&lt;image_4&gt;&gt;&gt;= the same path seen toward the archer.
+
+Live-action Korean Joseon-dynasty historical film, photorealistic, one continuous unbroken shot following the camera path of the reference video exactly. Dry, crisp, cold daylight in a pine and oak forest.
+
+0.0–1.3s: Close 3/4 front view from the King&#x27;s right side. He draws the bow at full tension, eyes cold and shadowed, bowstring hand at left of frame, bow and arrowhead at right. Very slow push-in.
+1.3–2.2s: Extreme slow motion release. The string snaps forward, the bow trembles, the arrow leaves the string and drifts left to right across frame, wobbling. The camera pans with the arrow and falls in directly behind it.
+2.2–3.0s: The arrow accelerates down the forest path. It grazes past the head of a stag standing on the path, missing it by a hand&#x27;s width; the stag flinches. The arrow ignores the stag and flies on.
+3.0–3.8s: The camera stops and punches in. Slow motion again: the arrow flies straight at the prince&#x27;s face. He steps half a pace aside and leans his whole upper body away. The arrow passes about 15 cm from his cheek and shoulder without touching his skin, hair or clothing.
+3.8–4.1s: Back to real speed. The arrow slams deep into the trunk of the old oak behind him with a heavy impact and quivers.
+4.1–5.0s: The prince turns to look back at the quivering arrow. Hold.
+
+Sound: bowstring release, arrow whistle, wind past the face, deep thud into wood, stag&#x27;s sharp breath, forest ambience. No background music, no score, no melody — sound effects and ambience only. No dialogue.
+
+Avoid: arrow touching or piercing the prince&#x27;s clothing or body, extra arrows, bow snapping, cuts or scene changes, grey blockout look, text, subtitles, modern objects.</code></pre>
+<h3>프롬프트의 각 파트 이해하기</h3>
+<p>이 프롬프트는 이야기를 들려주는 글이 아니라 <strong>명세서</strong>에 가깝다. 다섯 부분이 각자 다른 일을 한다.</p>
+<h4>1. 레퍼런스의 역할 (REFERENCE ROLES)</h4>
+<p>가장 먼저 한 일은 다섯 개의 레퍼런스에 각자 역할을 정해 준 것이다. 핵심은 블렌더 영상에 붙인 한 줄이다. 영상은 <strong>카메라 경로, 타이밍, 구도, 인물의 위치만</strong> 참고하게 하고, 회색 캡슐과 색, 단순한 형태는 따라 하지 말라고 못 박았다. 회색 모형의 모습이 결과에 새어 들어오는 걸 막으려는 장치다. 얼굴과 옷, 활은 이각과 이현의 시트 이미지가, 숲의 모습은 두 장소 이미지가 맡는다. 움직임은 영상에서, 모습은 이미지에서 가져오는 분업이다.</p>
+<h4>2. 룩의 선언</h4>
+<p>&quot;실사 영화, 하나로 이어지는 한 컷, 레퍼런스 영상의 카메라 경로를 그대로 따를 것, 건조하고 차가운 낮의 소나무와 참나무 숲.&quot; 한 문단으로 영화의 질감과 원테이크, 빛의 분위기를 고정한다. 컷이 끊기지 않게 하는 문장이 여기 있다.</p>
+<h4>3. 시간표</h4>
+<p>5초를 여섯 구간으로 나눠 그림 스토리보드의 5, 6, 7번과 블렌더에서 정한 설계를 그대로 옮겼다.</p>
+<div class="table-scroll" role="region" aria-label="레퍼런스와 시간표" tabindex="0"><table><thead><tr><th scope="col">구간</th><th scope="col">하는 일</th></tr></thead><tbody><tr><td>0.0–1.3초</td><td>이각의 오른쪽 3/4 클로즈업. 활을 최대로 당긴 차갑고 그늘진 눈. 아주 느린 푸시인. 스토리보드 5번이다.</td></tr><tr><td>1.3–2.2초</td><td>극단적 슬로모션으로 시위를 놓는다. 화살이 흔들리며 화면을 왼쪽에서 오른쪽으로 가로지르고, <strong>카메라가 화살을 따라 돌아 바로 뒤에 붙는다.</strong> 카메라가 화살이 되는 원테이크의 이음새다.</td></tr><tr><td>2.2–3.0초</td><td>화살이 가속해 길을 달린다. 길 위의 사슴 머리 곁을 손 한 뼘 차이로 스친다. 사슴은 움찔하지만 <strong>화살은 사슴을 무시하고 날아간다.</strong> 이 문장이 장면의 의도(사슴이 목표가 아니다)를 전한다.</td></tr><tr><td>3.0–3.8초</td><td>카메라가 멈추고 파고든다. 다시 슬로모션. 화살이 얼굴로 날아오고 이현이 반 걸음 비껴 몸을 기울인다. 화살은 뺨과 어깨에서 <strong>약 15cm</strong> 떨어져 지나간다. 블렌더에서 정한 회피 간격을 숫자로 한 번 더 못 박았다.</td></tr><tr><td>3.8–4.1초</td><td>속도가 돌아온다. 화살이 뒤의 고목에 깊이 꽂혀 떨린다. 스토리보드 7번이다.</td></tr><tr><td>4.1–5.0초</td><td>이현이 돌아서 떨리는 화살을 본다. 정지. 편집할 때 쓸 여유이자 장면의 여운이다.</td></tr></tbody></table></div>
+<p>느림, 빠름, 느림, 빠름의 리듬이 시간표에 들어 있다. 블렌더에서 정해 둔 속도의 변화를 글로도 한 번 더 적었다. 영상과 글이 같은 것을 다른 방식으로 말하게 해서, 하나가 놓치는 것을 다른 하나가 붙잡게 하려는 의도다.</p>
+<h4>4. 사운드</h4>
+<p>시위가 풀리는 소리, 화살의 휘파람, 얼굴 곁을 스치는 바람, 나무에 깊이 박히는 둔탁한 소리, 사슴의 날카로운 숨, 숲의 공기를 적었다. 이 작업의 원칙대로 <strong>효과음은 영상 안에서 만들게 한다.</strong> 소리마다 하는 일이 있다. 시위 소리는 긴장을, 휘파람은 속도를, 바람은 아슬아슬한 거리를, 둔탁한 소리는 충격의 무게를, 사슴의 숨은 놀람을, 숲의 공기는 공간을 만든다.</p>
+<p>그리고 <strong>배경음악, 음악 일체, 대사는 금지</strong>했다. 앞에서 밝힌 대로 배경음악은 이미 준비해 두었기 때문에, 생성 단계에서 음악이 섞이면 편집에서 쓸 수 없게 된다. 그래서 음악을 막는 문장을 단호하게 적었다. 소리를 이렇게 구체적으로 적어 두면 모델이 엉뚱한 음악이나 소리를 끼워 넣을 틈도 줄어든다.</p>
+<h4>5. 피할 것 (Avoid)</h4>
+<p>미리 막아 둔 것들이다.</p>
+<ul><li><strong>화살이 이현의 옷이나 몸에 닿거나 꿰뚫는 것.</strong> 이 장면의 긴장은 닿지 않는 아슬아슬함이다. 모델이 맞히는 그림으로 풀지 못하게 했다.</li><li><strong>화살이 여러 개로 늘어나는 것.</strong> 한 발이어야 한다.</li><li><strong>활이 부러지는 것.</strong> 시위를 놓는 순간의 물리적 오류를 막는다.</li><li><strong>컷이나 장면 전환.</strong> 원테이크를 지킨다.</li><li><strong>회색 블렌더의 모습.</strong> 영상 레퍼런스의 질감이 새어 나오는 것을 다시 한 번 막는다.</li><li><strong>글자, 자막, 현대의 물건.</strong> 흔히 끼어드는 것들이다.</li></ul>
+<h3>비트4 생성 결과</h3>
+<p>블렌더 프리비즈, 캐릭터 시트, 장소 이미지, 프롬프트를 함께 사용해 시댄스 2.5로 만든 5초짜리 결과 영상이다. 이 영상도 감독의 편집을 위한 컷 재료로 들어간다.</p>
+<figure><video controls playsinline preload="metadata" aria-label="Seedance 2.5 · 비트4 생성 결과" style="display:block;width:100%;height:auto;background:#000"><source src="../assets/gappae-trailer/gappae-b04-arrow-follow-seedance-01.mp4" type="video/mp4" /></video><figcaption>Seedance 2.5 · 비트4 생성 결과</figcaption></figure>
+<h3>그록 영상은 오프닝 인트로에만 사용했다</h3>
+<p>테스트 영상 작업에서는 그록 AI도 활용했지만, 본 작업의 영상들과 이질감이 있어 트레일러 본편에는 사용할 수 없었다. <strong>그록에서 생성한 영상은 트레일러 가장 앞에 들어가는 인트로 컷에만 활용했다.</strong> 아래의 ‘인트로 영상_마스터01’이 그록에서 생성한 인트로 영상이다.</p>
+<figure><video controls playsinline preload="metadata" aria-label="Grok AI · 트레일러 오프닝 인트로" style="display:block;width:100%;height:auto;background:#000"><source src="../assets/gappae-trailer/gappae-intro-grok-master-01.mp4" type="video/mp4" /></video><figcaption>Grok AI · 트레일러 오프닝 인트로</figcaption></figure>
+<h3>정리</h3>
+<p>이 컷은 세 가지가 각자 다른 일을 맡아서 만들어졌다.</p>
+<ul><li><strong>블렌더 영상</strong>이 움직임(카메라, 속도, 위치)을 맡았다.</li><li><strong>시트와 장소 이미지</strong>가 모습(얼굴, 옷, 숲)을 맡았다.</li><li><strong>프롬프트</strong>가 규칙(순서, 소리, 금지)을 맡았다.</li></ul>
+<p>하나에 모든 걸 맡기지 않은 것이 한 번에 의도대로 나온 이유라고 생각한다. 이렇게 만든 5초짜리 컷은 이제 다빈치 리졸브에서 다른 컷들과 이어 붙여, 미리 준비해 둔 음악 위에 올라간다.</p>
+<p>전체 제작에서는 <strong>시댄스 2.5로 생성한 106개 중 60개의 영상을 편집에 활용했다.</strong> 60개에는 완전한 OK 컷뿐 아니라 부분적으로 쓸 수 있는 테이크도 포함된다. 생성된 영상 속에서 필요한 순간을 찾아 연결하고 최대한 살리는 편집으로, 버리는 영상을 줄이며 최종 4분짜리 트레일러를 완성했다.</p></div><div class="log-nav"><a href="gappae-trailer-devlog-009.html" class="log-nav__prev"><span class="log-nav__label">이전</span><span class="log-nav__title">← #009</span></a><span class="log-nav__next log-nav__next--disabled">다음 편 준비 중 →</span></div></article>
 </main>
 
 <footer id="contact">
@@ -222,7 +260,7 @@ const nav=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
 const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rev').forEach(el=>io.observe(el));
-GAPPAE_LI.render(document.getElementById('log-index-sect'), 'ko', '009');
+GAPPAE_LI.render(document.getElementById('log-index-sect'), 'ko', '010');
 </script>
 <script src="lightbox.js"></script>
 <script src="../assets/js/site-navigation.js"></script>
