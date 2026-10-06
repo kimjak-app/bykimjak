@@ -1,7 +1,7 @@
 /**
  * byKimjak PROJECT HUB — GAPPAE + EASTWAR, 20261001-combined-02
  * One widget; live HTML links; 640x960 web-optimized artwork from the supplied PNG.
- * Home opens expanded on every visit; other pages start collapsed.
+ * Starts collapsed so the homepage trailer remains unobstructed.
  */
 (function () {
   'use strict';
@@ -15,12 +15,26 @@
   var HOME = new RegExp('^' + BASE + '/?(?:index\\.html)?$').test(location.pathname);
   var LINKS = [
     ['DEVLOG · 02–A', '개발일지', 'Devlog', '/make/eastwar.html'],
-    ['STILL · 01–C', '스틸', 'Still', '/watch/still.html'],
-    ['OST · 01–B', 'OST', '', '/watch/ost.html'],
-    ['FILM · 01–A', '영상', 'Film', '/watch/ai-film.html']
+    ['WATCH · EASTWAR', '작품 허브', 'Works', '/watch/eastwar.html'],
+    ['OST · EASTWAR', 'OST', '', '/watch/eastwar.html#ost'],
+    ['FILM · EASTWAR', '영상', 'Film', '/watch/eastwar.html#trailer']
   ];
 
   function init() {
+    // Older pages receive menu fixes without rewriting their document content.
+    if (document.querySelector('nav.nav')) {
+      if (!document.querySelector('link[href$="assets/css/site-navigation.css"]')) {
+        var navigationStyle = document.createElement('link');
+        navigationStyle.rel = 'stylesheet';
+        navigationStyle.href = BASE + '/assets/css/site-navigation.css';
+        document.head.appendChild(navigationStyle);
+      }
+      if (!document.querySelector('script[src$="assets/js/site-navigation.js"]')) {
+        var navigationScript = document.createElement('script');
+        navigationScript.src = BASE + '/assets/js/site-navigation.js';
+        document.body.appendChild(navigationScript);
+      }
+    }
     if (document.getElementById('project-hub-root')) return;
     // Remove only our superseded widgets, never page content or unrelated dialogs.
     ['gp-popup-root', 'gp-hub-root', 'gappae-popup-clean', 'ew-hub-root'].forEach(function (id) {
@@ -124,7 +138,7 @@
     shadow.appendChild(collapsed);
     document.body.appendChild(root);
 
-    var isOpen = HOME;
+    var isOpen = false;
     var position = null;
     var ready = false;
     var card = shadow.getElementById('ph-card');
@@ -224,7 +238,7 @@
       window.visualViewport.addEventListener('resize', place);
       window.visualViewport.addEventListener('scroll', place);
     }
-    window.addEventListener('pageshow', function (event) { if (event.persisted && HOME) openPanel(); });
+    window.addEventListener('pageshow', function (event) { if (event.persisted) closePanel(); });
     render();
 
     // Decode before painting artwork. Loading/failure never leaves an empty image box.

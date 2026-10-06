@@ -106,6 +106,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 .log-nav__title{font-family:var(--f-display);font-size:clamp(14px,1.8vw,20px);font-weight:500;letter-spacing:-.01em;color:var(--ink);transition:color .2s}
 .log-nav a:hover .log-nav__title{color:var(--accent)}
 </style>
+<link rel="stylesheet" href="../assets/css/site-navigation.css" />
 </head>
 <body>
 
@@ -114,11 +115,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
   <div class="nav__menu" role="navigation">
     <div class="has-drop">
       <a href="../watch/"><span class="idx">01</span>WATCH</a>
-      <div class="drop">
-        <a href="../watch/ai-film.html"><span class="sub-idx">01–A</span>AI 영상 · 티저</a>
-        <a href="../watch/ost.html"><span class="sub-idx">01–B</span>OST · 음악</a>
-        <a href="../watch/still.html"><span class="sub-idx">01–C</span>스틸 이미지</a>
-      </div>
+      <div class="drop"><a href="../watch/gappae.html"><span class="sub-idx">01–A</span>GAPPAE / 갑패</a><a href="../watch/eastwar.html"><span class="sub-idx">01–B</span>EASTWAR</a><a href="../watch/magic-block-master.html"><span class="sub-idx">01–C</span>MAGIC BLOCK MASTER</a></div>
     </div>
     <div class="has-drop">
       <a href="../make/"><span class="idx">02</span>MAKE</a>
@@ -308,10 +305,10 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
   <div class="grid-ft">
     <div class="col c1"><h6>byKimjak Studio</h6><p style="font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0">IP Architect · Seoul, Korea. 시나리오·드라마 기획부터 AI 영상, 게임, 앱까지 — 한 사람이 하나의 세계관을 끝까지 설계합니다.</p></div>
     <div class="col c2"><h6>Sections</h6><a href="../watch/">Watch <span class="ext">/01</span></a><a href="../make/">Make <span class="ext">/02</span></a><a href="../think/">Think <span class="ext">/03</span></a></div>
-    <div class="col c3"><h6>Social</h6><a href="#">Instagram <span class="ext">↗</span></a><a href="#">YouTube <span class="ext">↗</span></a><a href="#">Vimeo <span class="ext">↗</span></a><a href="#">Threads <span class="ext">↗</span></a></div>
-    <div class="col c4"><h6>Contact</h6><a href="mailto:oropa@kakao.com">oropa@kakao.com</a><a href="#">Press kit <span class="ext">PDF</span></a><a href="#">For PDs &amp; Investors <span class="ext">↗</span></a></div>
+    <div class="col c3"><h6>Social</h6><span class="unavailable-link">Instagram <span class="ext">↗</span></span><span class="unavailable-link">YouTube <span class="ext">↗</span></span><span class="unavailable-link">Vimeo <span class="ext">↗</span></span><span class="unavailable-link">Threads <span class="ext">↗</span></span></div>
+    <div class="col c4"><h6>Contact</h6><a href="mailto:oropa@kakao.com">oropa@kakao.com</a><span class="unavailable-link">Press kit <span class="ext">PDF</span></span><span class="unavailable-link">For PDs &amp; Investors <span class="ext">↗</span></span></div>
   </div>
-  <div class="bottom"><span>byKimjak © 2026  ／  All rights, all worlds, reserved.</span><span>Built solo · with AI · in Seoul</span><span>v.04 / 2026.05</span></div>
+  <div class="bottom"><span>byKimjak © 2026  ／  All rights, all worlds, reserved.</span><span>Built solo · with AI · in Seoul</span><span></span></div>
 </footer>
 
 <script src="eastwar-log-index.js"></script>
@@ -323,5 +320,6 @@ document.querySelectorAll('.rev').forEach(el=>io.observe(el));
 EASTWAR_LI.render(document.getElementById('log-index-sect'), 'ko', '008');
 </script>
 <script src="/bykimjak/eastwar-hub.js"></script>
+<script src="../assets/js/site-navigation.js"></script>
 </body>
 </html>

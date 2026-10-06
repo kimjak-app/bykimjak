@@ -1,0 +1,23 @@
+{
+  "gappaeTrailer01": {
+    "status": "ready",
+    "releaseTag": "media-gappae-trailer-01",
+    "filename": "gappae-trailer-01.mp4",
+    "releaseUrl": "https://github.com/kimjak-app/bykimjak/releases/download/media-gappae-trailer-01/gappae-trailer-01.mp4",
+    "publishPath": "assets/media/gappae/gappae-trailer-01.mp4",
+    "sha256": "81ba2f26d911d1caaf5cc39aff51e6c5765787088e53f5730c4f5b7784d20fb0",
+    "poster": "assets/gappae-trailer/keyart-master-01.png",
+    "required": true,
+    "bytes": 114636634,
+    "durationSeconds": 242.666667,
+    "sourceFilename": "갑패트레일러01최종_20261005.mp4",
+    "sourceSha256": "ce5d31244c7d27ddcbf06323486fbf5a6ee45b2841bc79e45f5d19634c287a31",
+    "sourceBytes": 301122517,
+    "encoding": "H.264 CRF 18 slow, 1280x720 24fps, original AAC audio copied, faststart; full duration retained"
+  },
+  "magicBlockMaster": {
+    "status": "in-progress",
+    "required": false,
+    "note": "Keep empty while the project is in progress. No assets required for this redesign."
+  }
+}

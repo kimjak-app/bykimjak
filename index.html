@@ -628,6 +628,8 @@
   .splitline.delay2 > span{transition-delay:.1s}
   .splitline.delay3 > span{transition-delay:.2s}
 </style>
+<link rel="stylesheet" href="assets/css/home-trailer.css" />
+<link rel="stylesheet" href="assets/css/site-navigation.css" />
 </head>
 <body>
 
@@ -653,11 +655,7 @@
   <div class="nav__menu" role="navigation">
     <div class="has-drop">
       <a href="watch/"><span class="idx">01</span>WATCH</a>
-      <div class="drop">
-        <a href="watch/ai-film.html"><span class="sub-idx">01–A</span>AI 영상 · 티저</a>
-        <a href="watch/ost.html"><span class="sub-idx">01–B</span>OST · 음악</a>
-        <a href="watch/still.html"><span class="sub-idx">01–C</span>스틸 이미지</a>
-      </div>
+      <div class="drop"><a href="watch/gappae.html"><span class="sub-idx">01–A</span>GAPPAE / 갑패</a><a href="watch/eastwar.html"><span class="sub-idx">01–B</span>EASTWAR</a><a href="watch/magic-block-master.html"><span class="sub-idx">01–C</span>MAGIC BLOCK MASTER</a></div>
     </div>
     <div class="has-drop">
       <a href="make/"><span class="idx">02</span>MAKE</a>
@@ -687,12 +685,15 @@
 <!-- ─────────── HERO ─────────── -->
 <section class="hero" id="top" data-screen-label="01 Hero">
 
-  <div class="hero__logo rev" style="position:relative">
-    <video id="hero-video" src="assets/bykimjak-intro.mp4" autoplay muted playsinline
-      style="display:block;width:100%;height:100%;object-fit:contain;opacity:1;transition:opacity .8s ease"></video>
-    <img id="hero-logo" src="assets/bykimjak-logo-v2.png" alt="byKimjak"
-      style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transition:opacity .8s ease" />
+  <div class="home-trailer" data-trailer-player data-video-path="assets/media/gappae/gappae-trailer-01.mp4">
+    <a class="home-trailer__journal" href="make/gappae-trailer.html" aria-label="갑패 트레일러 제작일지 보기">
+      <img class="trailer-poster" src="assets/gappae-trailer/keyart-master-01.png" alt="갑패 Trailer 01 · 기존 키아트" />
+      <video id="hero-video" hidden autoplay muted playsinline preload="metadata" aria-label="갑패 Trailer 01 전체 영상"></video>
+      <div class="home-trailer__caption"><h1>갑패 <span>Trailer 01</span></h1><p data-trailer-status>갑패 Trailer 01 · 제작일지 보기 →</p></div>
+    </a>
+    <div class="home-trailer__controls" hidden><button type="button" data-play>일시정지</button><button type="button" data-sound>소리 켜기</button></div>
   </div>
+  <a class="home-trailer__skip" href="#gallery">아래 작품 둘러보기 ↓</a>
 
   <div class="hero__row">
     <div class="hero__lede rev kr">
@@ -732,45 +733,6 @@
 
 </section>
 
-<!-- ─────────── FEATURED VIDEO ─────────── -->
-<section class="featured" id="featured" data-screen-label="02 Featured">
-  <div class="featured__head">
-    <h2 class="featured__title rev d1">
-      A new world, <em>built sentence by sentence,</em> rendered frame by frame.
-    </h2>
-  </div>
-
-  <div class="featured__frame rev d2" aria-label="EASTWAR Teaser 01">
-    <iframe class="yt-embed"
-      src="https://www.youtube.com/embed/PSWiWZCA8wk?rel=0&modestbranding=1"
-      title="EASTWAR Teaser 01"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen>
-    </iframe>
-    <div class="timecode mono">TC · EASTWAR · TEASER 01 · 2026</div>
-    <div class="overlay">
-      <span class="tag"><span class="rec"></span>TEASER · 2026 · 16∶9 · EASTWAR IP</span>
-      <div class="bottom">
-        <div class="name">
-          EASTWAR Teaser 01
-          <span class="ko">bykimjak의 첫번째 전략가상역사시뮬레이션 게임</span>
-          <span class="en">(bykimjak's first strategic alternate history simulation game)</span>
-        </div>
-        <div class="meta-r">
-          <span>TEASER 01</span>
-          <span>·</span>
-          <span>AI · DIRECTED BY KIMJAK</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="featured__caption mono">
-    <span>EASTWAR TEASER 01 ／ byKimjak ／ 2026</span>
-    <span>youtu.be/PSWiWZCA8wk</span>
-  </div>
-</section>
-
 <!-- ─────────── GALLERY (DARK) ─────────── -->
 <section class="gallery" id="gallery" data-screen-label="03 Gallery">
   <div class="gallery__inner">
@@ -784,121 +746,7 @@
       </p>
     </div>
 
-    <div class="grid">
-
-      <div class="tile t-wide t-video rev">
-        <iframe src="https://www.youtube.com/embed/fem7TBoZJi8?rel=0&modestbranding=1" title="GrandSlam Teaser 01" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe>
-        <span class="badge"><span class="rec" style="background:#E25C45;animation:pulse 2s infinite"></span>AI FILM</span>
-        <div class="meta">
-          <div class="t">GrandSlam Teaser 01
-            <span class="ko">그랜드슬램 티저01</span>
-          </div>
-          <div class="n">2026 · TEASER · GRANDSLAM</div>
-        </div>
-      </div>
-
-      <a href="watch/still.html" class="tile t-tall rev d1">
-        <img src="images/make/samwar-poster-01.png" alt="EASTWAR 포스터 01" loading="lazy" />
-        <span class="badge">STILL</span>
-        <div class="meta">
-          <div class="t">EASTWAR 포스터 01
-            <span class="ko">천하를 삼키는 자, 역사가 된다</span>
-          </div>
-          <div class="n">2026 · EASTWAR</div>
-        </div>
-      </a>
-
-      <a href="watch/still.html" class="tile t-third rev">
-        <img src="assets/eastwar/eastwar-hero-yi-sunshin.png" alt="이순신" loading="lazy" />
-        <span class="badge">CHARACTER</span>
-        <div class="meta">
-          <div class="t">이순신
-            <span class="ko">조선 수군 통사령관 — 불패의 제독</span>
-          </div>
-          <div class="n">2026 · EASTWAR</div>
-        </div>
-      </a>
-
-      <a href="watch/ai-film.html" class="tile t-third rev d1">
-        <img src="https://img.youtube.com/vi/8gXbT3S-Mpc/hqdefault.jpg" alt="Wish 01" loading="lazy" />
-        <span class="badge"><span class="rec" style="background:#E25C45;animation:pulse 2s infinite"></span>SCENE</span>
-        <div class="center-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 3v18l16-9z"/></svg></div>
-        <div class="meta">
-          <div class="t">Wish 01
-            <span class="ko">AI 단편 애니메이션 Wish — 장면 01</span>
-          </div>
-          <div class="n">2026 · AI FILM</div>
-        </div>
-      </a>
-
-      <a href="watch/ost.html" class="tile t-third t-music rev d2">
-        <img src="assets/ost/eastwar-ost-domestic-affairs.png" alt="" aria-hidden="true"
-          style="position:absolute;inset:auto 0 0 auto;height:88%;width:auto;object-fit:contain;object-position:bottom right;opacity:.55;pointer-events:none;-webkit-mask-image:radial-gradient(ellipse 100% 105% at 92% 98%,black 78%,transparent 100%);mask-image:radial-gradient(ellipse 100% 105% at 92% 98%,black 78%,transparent 100%)">
-        <div class="body">
-          <span class="badge" style="position:static">TRACK · OST</span>
-          <div>
-            <div class="t" style="font-family:var(--f-display);font-weight:500;font-size:22px;letter-spacing:-.01em;line-height:1.05">
-              East Asia Domestic Affairs
-              <span class="ko">동방의 내정 — 월드맵 테마</span>
-            </div>
-            <div class="eq" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
-            <audio controls preload="none" src="assets/ost/east_asia_domestic_affairs_5min_perfect_v2.mp3"
-              style="width:100%;height:28px;margin-top:10px;accent-color:var(--accent);display:block;position:relative;z-index:3"
-              onclick="event.stopPropagation()"></audio>
-          </div>
-        </div>
-      </a>
-
-      <div class="tile t-game-full t-video rev" aria-label="EASTWAR Battle Scene Test">
-        <iframe
-          src="https://www.youtube.com/embed/Qd5GlTZZtig"
-          title="EASTWAR Battle Scene Test"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allowfullscreen>
-        </iframe>
-        <span class="badge">
-          <span class="rec" style="background:#E25C45;animation:pulse 2s infinite"></span>
-          GAME
-        </span>
-        <div class="meta">
-          <div class="t">
-            Build &middot; v0.4 &quot;Strata&quot;
-            <span class="ko">스트라타 빌드 &middot; 플레이 영상</span>
-          </div>
-          <div class="n">PC &middot; WEBGL &middot; 12FPS PREVIEW</div>
-        </div>
-      </div>
-
-      <a class="tile t-half rev d1" href="make/takezero.html" style="text-decoration:none;color:inherit;display:block">
-        <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
-          <source src="assets/takezero/takezero-cheolhwan.mp4" type="video/mp4">
-        </video>
-        <span class="badge">TAKEZERO</span>
-        <div class="meta">
-          <div class="t">이철환 — AI 캐릭터
-            <span class="ko">TakeZero · 캐릭터 &amp; 이미지 생성</span>
-          </div>
-          <div class="n">CHARACTER</div>
-        </div>
-      </a>
-
-      <a class="tile t-half rev d2" href="make/takezero-devlog-001.html" style="text-decoration:none;color:inherit;display:block">
-        <video autoplay muted loop playsinline style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0">
-          <source src="assets/takezero/takezero-jimin2.mp4" type="video/mp4">
-        </video>
-        <span class="badge">TAKEZERO</span>
-        <div class="meta">
-          <div class="t">지민 — AI 캐릭터
-            <span class="ko">TakeZero · 단발 · 테니스 · 아이돌</span>
-          </div>
-          <div class="n">CHARACTER</div>
-        </div>
-      </a>
-
-    </div>
-
-    <div class="marquee" aria-hidden="true">
+<div class="grid"><div class="tile t-wide t-video rev"><iframe loading="lazy" src="https://www.youtube.com/embed/PSWiWZCA8wk?rel=0" title="EASTWAR Teaser 01" allowfullscreen allow="autoplay;encrypted-media;picture-in-picture"></iframe><span class="badge">EASTWAR · TEASER 01</span></div><a href="watch/gappae.html" class="tile t-tall rev"><img src="assets/gappae-trailer/keyart-master-01.png" alt="GAPPAE / 갑패" loading="lazy" /><span class="badge">PROJECT</span><div class="meta"><div class="t">GAPPAE / 갑패<span class="ko">Trailer · Characters · Storyboard</span></div></div></a><div class="tile t-half t-video rev"><iframe loading="lazy" src="https://www.youtube.com/embed/fem7TBoZJi8?rel=0" title="GrandSlam Teaser 01" allowfullscreen allow="autoplay;encrypted-media;picture-in-picture"></iframe><span class="badge">GRANDSLAM · TEASER 01</span></div><a href="watch/takezero.html" class="tile t-half rev"><img src="assets/takezero/takezero-jimin.png" alt="TakeZero" loading="lazy" /><span class="badge">CHARACTER</span><div class="meta"><div class="t">TakeZero<span class="ko">AI 캐릭터 · 프롬프트 엔진</span></div></div></a><a href="watch/magic-block-master.html" class="tile t-half rev"><div class="ph s5"></div><span class="badge">PROJECT</span><div class="meta"><div class="t">MAGIC BLOCK MASTER<span class="ko">작업 중</span></div></div></a><a href="watch/ai-film.html" class="tile t-half rev"><img src="https://img.youtube.com/vi/8gXbT3S-Mpc/hqdefault.jpg" alt="Wish 01" loading="lazy" /><span class="badge">ANIMATION</span><div class="meta"><div class="t">Wish 01<span class="ko">AI 단편 애니메이션</span></div></div></a></div><div class="gallery-project-links"><a href="watch/eastwar.html">EASTWAR 작품 전체 →</a><a href="watch/grandslam.html">GrandSlam 티저 →</a><a href="watch/">WATCH 프로젝트 둘러보기 →</a></div>    <div class="marquee" aria-hidden="true">
       <div class="marquee__track">
         <span>WORLDBUILDING <i></i> AI CINEMA <i></i> <em>solo studio</em> <i></i> SCENARIO <i></i> VIBE CODE <i></i> GAME DEV <i></i> <em>seoul, kr</em> <i></i> WORLDBUILDING <i></i> AI CINEMA <i></i> <em>solo studio</em> <i></i> SCENARIO <i></i> VIBE CODE <i></i> GAME DEV <i></i> <em>seoul, kr</em> <i></i></span>
         <span>WORLDBUILDING <i></i> AI CINEMA <i></i> <em>solo studio</em> <i></i> SCENARIO <i></i> VIBE CODE <i></i> GAME DEV <i></i> <em>seoul, kr</em> <i></i> WORLDBUILDING <i></i> AI CINEMA <i></i> <em>solo studio</em> <i></i> SCENARIO <i></i> VIBE CODE <i></i> GAME DEV <i></i> <em>seoul, kr</em> <i></i></span>
@@ -920,7 +768,7 @@
       <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 17 7M9 7h8v8"/></svg></div>
       <div>
         <div class="name">WATCH</div>
-        <div class="ko">AI 영상 & 음악 · Visual + Sonic Worlds</div>
+        <div class="ko">프로젝트별 결과물 · Visual + Sonic Worlds</div>
       </div>
       <div class="preview"><div class="ph s1"></div>
         <div class="center-icon" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:48px;height:48px;border-radius:999px;border:1px solid #ffffff66;color:#fff;display:grid;place-items:center">
@@ -928,7 +776,7 @@
         </div>
       </div>
       <div class="desc kr">
-        AI로 만든 단편 영상 시리즈와 자작 OST를 모아 두는 곳. 한 편의 영화처럼 보고, 한 곡의 사운드트랙처럼 듣습니다.
+        GAPPAE, EASTWAR, MAGIC BLOCK MASTER의 결과물을 프로젝트별로 봅니다. 영상, 캐릭터, 스토리보드와 음악을 한 세계 안에서 만납니다.
       </div>
       <div class="tags">
         <span>AI Film</span><span>OST</span><span>Trailer</span><span>16∶9</span>
@@ -940,13 +788,13 @@
       <div class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17 17 7M9 7h8v8"/></svg></div>
       <div>
         <div class="name">MAKE</div>
-        <div class="ko">게임 개발 + 앱 개발 · Built with Vibe Code</div>
+        <div class="ko">작품과 프로젝트의 제작 과정 · Making Worlds</div>
       </div>
       <div class="preview"><div class="ph s5"></div>
-        <div style="position:absolute;left:18px;bottom:14px;font-family:var(--f-mono);font-size:10px;color:#F2EFEAcc;letter-spacing:.08em">BUILD v0.4 · 12FPS · PREVIEW</div>
+        <div style="position:absolute;left:18px;bottom:14px;font-family:var(--f-mono);font-size:10px;color:#F2EFEAcc;letter-spacing:.08em">MAKING · FILM / GAME / APP</div>
       </div>
       <div class="desc kr">
-        세계관을 직접 만질 수 있도록 게임과 앱으로 구현합니다. 바이브 코딩 기반의 1인 개발 로그도 함께.
+        갑패 트레일러 제작일지, EASTWAR 개발일지와 앱 제작 기록. 작품이 만들어지는 과정을 남깁니다.
       </div>
       <div class="tags">
         <span>Game Dev</span><span>App</span><span>WebGL</span><span>Vibe Code</span>
@@ -960,15 +808,7 @@
         <div class="name">THINK</div>
         <div class="ko">아키텍트 노트 + AI 대화록 · Notes from the Studio</div>
       </div>
-      <div class="preview" style="background:#0D0B09;display:flex;align-items:center;justify-content:center">
-        <div style="font-family:var(--f-mono);font-size:10px;color:#F2EFEAaa;letter-spacing:.06em;line-height:1.7;padding:18px;text-align:left;width:100%">
-          &gt; THINKING.LOG · 0241<br/>
-          &gt; "If a world is built only in&nbsp;<br/>
-          &nbsp;&nbsp;&nbsp;one head, is it real yet?"<br/>
-          &gt; — entry · 2026.04.11<br/>
-          &gt; _
-        </div>
-      </div>
+      <div class="preview" style="background:#0D0B09;display:flex;align-items:center;justify-content:center;color:#F2EFEA"><div style="padding:24px;line-height:1.8">AI Conversations<br>Morning Word<br>Personal Essay</div></div>
       <div class="desc kr">
         세계관을 짓는 동안 떠오른 생각, AI와 나눈 대화의 단편, 창작 노트. 정리된 글보다는 진행 중인 생각에 가깝습니다.
       </div>
@@ -984,7 +824,7 @@
 <section class="notes" aria-labelledby="recent" data-screen-label="05 Recent">
   <div style="display:flex;justify-content:space-between;align-items:end;padding:20px 0;border-bottom:1px solid var(--rule)">
     <div class="mono" style="color:var(--ink-3)">From the Studio</div>
-    <a href="#" class="mono" style="color:var(--ink-3)">View all entries ↗</a>
+    <a href="entries.html" class="mono" style="color:var(--ink-3)">View all entries ↗</a>
   </div>
 
   <div id="studio-posts"></div>
@@ -1052,7 +892,7 @@
 
     <div class="about__cta">
       <a href="#contact" class="solid">Get in touch ↗</a>
-      <a href="#">Press kit · PDF</a>
+      <span class="unavailable-link">Press kit · PDF</span>
       <a href="#gallery">See selected works</a>
     </div>
   </div>
@@ -1073,29 +913,29 @@
     </div>
     <div class="col c2 rev d1">
       <h6>Sections</h6>
-      <a href="#watch">Watch <span class="ext">/01</span></a>
-      <a href="#make">Make <span class="ext">/02</span></a>
-      <a href="#think">Think <span class="ext">/03</span></a>
+      <a href="watch/">Watch <span class="ext">/01</span></a>
+      <a href="make/">Make <span class="ext">/02</span></a>
+      <a href="think/">Think <span class="ext">/03</span></a>
     </div>
     <div class="col c3 rev d2">
       <h6>Social</h6>
-      <a href="#">Instagram <span class="ext">↗</span></a>
-      <a href="#">YouTube <span class="ext">↗</span></a>
-      <a href="#">Vimeo <span class="ext">↗</span></a>
-      <a href="#">Threads <span class="ext">↗</span></a>
+      <span class="unavailable-link">Instagram <span class="ext">↗</span></span>
+      <span class="unavailable-link">YouTube <span class="ext">↗</span></span>
+      <span class="unavailable-link">Vimeo <span class="ext">↗</span></span>
+      <span class="unavailable-link">Threads <span class="ext">↗</span></span>
     </div>
     <div class="col c4 rev d3">
       <h6>Contact</h6>
       <a href="mailto:oropa@kakao.com">oropa@kakao.com</a>
-      <a href="#">Press kit <span class="ext">PDF</span></a>
-      <a href="#">For PDs & Investors <span class="ext">↗</span></a>
+      <span class="unavailable-link">Press kit <span class="ext">PDF</span></span>
+      <span class="unavailable-link">For PDs & Investors <span class="ext">↗</span></span>
     </div>
   </div>
 
   <div class="bottom">
     <span>byKimjak © 2026  ／  All rights, all worlds, reserved.</span>
     <span>Built solo · with AI · in Seoul</span>
-    <span>v.04 / 2026.05</span>
+    <span></span>
   </div>
 </footer>
 
@@ -1147,17 +987,10 @@
     });
   })();
 
-  // Hero: video → logo fade transition
-  const heroVideo = document.getElementById('hero-video');
-  const heroLogo  = document.getElementById('hero-logo');
-  if (heroVideo) {
-    heroVideo.addEventListener('ended', () => {
-      heroVideo.style.opacity = '0';
-      heroLogo.style.opacity  = '1';
-    });
-  }
 
 </script>
 <script src="/bykimjak/gappae-trailer-popup.js?v=20260930-1745"></script>
+<script src="assets/js/site-navigation.js"></script>
+<script src="assets/js/trailer-player.js"></script>
 </body>
 </html>
