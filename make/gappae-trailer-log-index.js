@@ -47,6 +47,10 @@
       num: '008', date: '2026.09.30',
       ko: { href: 'gappae-trailer-devlog-008.html',    title: '새 얼굴, 같은 세계 — 캐릭터와 장소 조화 테스트', sub: '재작업한 주연 캐릭터를 기존 장소 이미지와 영상으로 맞춰보다' },
       en: { href: 'gappae-trailer-devlog-008-en.html', title: 'New Faces, Same World — Character & Location Harmony Test', sub: 'Testing the reworked leads inside the established locations' }
+    },
+    { num: '009', date: '2026.10.01',
+      ko: { href: 'gappae-trailer-devlog-009.html', title: '사슴을 빗겨 간 화살', sub: '블렌더 프리비즈로 AI 영상에 연출 의도를 전하다' },
+      en: { href: 'gappae-trailer-devlog-009-en.html', title: 'The Arrow That Missed the Deer', sub: 'Communicating Directorial Intent to AI Video with Blender Previs' }
     }
   ];
 
