@@ -31,7 +31,7 @@ def main():
     parser.add_argument('--trailer-bytes', type=int)
     args = parser.parse_args()
     manifest = json.loads((ROOT / 'config/media-assets.json').read_text(encoding='utf-8'))
-    trailer = manifest['gappaeTrailer01']
+    trailer = manifest['gappaeTrailer03']
     files = list(sources())
     local = ROOT / trailer['publishPath']
     existing = sum(p.stat().st_size for p, _ in files)
