@@ -21,6 +21,14 @@
       drop.append(link);
     });
   }
+  if (drop && !drop.querySelector('a[href$="watch/baegopa.html"]')) {
+    var baegopaLink = document.createElement('a'), baegopaIndex = document.createElement('span');
+    baegopaLink.href = '/bykimjak/watch/baegopa.html';
+    baegopaIndex.className = 'sub-idx';
+    baegopaIndex.textContent = '01–D';
+    baegopaLink.append(baegopaIndex, document.createTextNode('깡셰프 배고파!'));
+    drop.append(baegopaLink);
+  }
   document.querySelectorAll('footer a[href="#"]').forEach(function (link) {
     link.removeAttribute('href');
     link.classList.add('unavailable-link');
