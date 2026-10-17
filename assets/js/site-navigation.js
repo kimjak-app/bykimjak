@@ -55,7 +55,7 @@
     mbmLink.href = '/bykimjak/make/magic-block-master.html';
     mbmIndex.className = 'sub-idx';
     mbmIndex.textContent = '02–F';
-    mbmLink.append(mbmIndex, document.createTextNode('매직블럭마스터 제작기'));
+    mbmLink.append(mbmIndex, document.createTextNode('매직블록마스터 제작기'));
     makeDrop.append(mbmLink);
   }
   document.querySelectorAll('footer a[href="#"]').forEach(function (link) {
