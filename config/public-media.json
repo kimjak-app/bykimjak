@@ -5440,6 +5440,860 @@
       "width": 1024,
       "height": 1536,
       "verified": true
+    },
+    {
+      "path": "assets/magic-block-master/매블마소스/still/MBM_Title_로고_v2.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-a126e5b5b47e9580.png",
+      "bytes": 5035236,
+      "sha256": "a126e5b5b47e95809373cfe5f17be6358be25f3b15caf37d933d754db6211d7e",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-a126e5b5b47e9580.webp",
+        "bytes": 126642,
+        "sha256": "4c8485f533f77fb61fc6e5171819eeb50780155c74f27dbf3953bf199c818190"
+      },
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "path": "assets/magic-block-master/캐릭터/MBM_Characters_스케일_네인물_v1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-4ac82764b925f1b6.png",
+      "bytes": 2987671,
+      "sha256": "4ac82764b925f1b613ef7ab4c4a02ed27e3ff91a683d3842b59c243b4bf48609",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-4ac82764b925f1b6.webp",
+        "bytes": 46726,
+        "sha256": "fba781e02404e4803664a3cde2d7e9ef89e845e5c28b89f8459e8ce8c15b81d6"
+      },
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "path": "assets/magic-block-master/캐릭터/민수캐릭/MBM_Characters_민수_단발_전신_v1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-38fda95cd459a1fa.png",
+      "bytes": 1727402,
+      "sha256": "38fda95cd459a1faf155958b8816b0e0c1c9ca9357508c5a49a829f9fe36db9b",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-38fda95cd459a1fa.webp",
+        "bytes": 65252,
+        "sha256": "c0309b35f31abee6364343a3eff0a387973b73f323d65ea6aae3860509989522"
+      },
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "path": "assets/magic-block-master/캐릭터/루마/MBM_Characters_루마_전신_v2.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-b962a036f8f7ca46.png",
+      "bytes": 1759089,
+      "sha256": "b962a036f8f7ca46ff7fd2702a9823d4fb0cf84c7db5fe0b3852d57cd8f58de7",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-b962a036f8f7ca46.webp",
+        "bytes": 58648,
+        "sha256": "d0422e60a960b96d718911af14bfa407de67e46b5ba126daaada3aab0379952a"
+      },
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "path": "assets/magic-block-master/캐릭터/츄파/MBM_Characters_츄파_전신_v1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-686b38bfd882e6a2.png",
+      "bytes": 1653417,
+      "sha256": "686b38bfd882e6a27e8513bb44e17f39845e3650d67f74f0bb119cca6c5c37f7",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-686b38bfd882e6a2.webp",
+        "bytes": 43680,
+        "sha256": "cd9f56b24a28e29846a8d83da877d35fe677af5e8a0d3124cfda045f12ef986c"
+      },
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "path": "assets/magic-block-master/final/magic-block-master-final-20261012.mp4",
+      "ip": "magic-block-master",
+      "mime": "video/mp4",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/magic-block-master-final-20261012.mp4",
+      "bytes": 148153547,
+      "sha256": "0cabb48010c7ab8d79108f40ac90f62db4368e6dde40da51e3394818085ae878"
+    },
+    {
+      "path": "assets/magic-block-master/캐릭터/파로/MBM_Characters_어둠의파로_모자씀_전신_v1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-89dff00a77ac7645.png",
+      "bytes": 1756387,
+      "sha256": "89dff00a77ac764546edc2e9b7067c38238e931fafc3c057c3a9cc046cb17a19",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-89dff00a77ac7645.webp",
+        "bytes": 43594,
+        "sha256": "19bbe1a13c1bc5800099d9c4f5bafc44262e83871c1b927a025d8de1e3390a69"
+      },
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "path": "assets/magic-block-master/캐릭터/민수캐릭/MBM_Characters_민수_단발_얼굴3컷_v1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-a0e9c6c9bdf9c13f.png",
+      "bytes": 1735315,
+      "sha256": "a0e9c6c9bdf9c13fe1772bea628acf20b6b5be58c5793f6d19a872a51fc530f5",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-a0e9c6c9bdf9c13f.webp",
+        "bytes": 70418,
+        "sha256": "e9a5e8db757f7f0298dd1ba2ba5b330277e254dee438d17396d7fc2581c3e326"
+      },
+      "width": 1774,
+      "height": 887
+    },
+    {
+      "path": "assets/magic-block-master/캐릭터/민수캐릭/MBM_Characters_민수_단발_표정6종_v1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-3a800180a7815ec7.png",
+      "bytes": 2000957,
+      "sha256": "3a800180a7815ec71459dd790877eaf7014f5304db65d1071a5f7d9288da335f",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-3a800180a7815ec7.webp",
+        "bytes": 108400,
+        "sha256": "11f5b4f10b423daf1559ae1f054012d007e21c2f13d9e035eb3acd94449e0a9c"
+      },
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "path": "assets/magic-block-master/캐릭터/민수캐릭/MBM_Characters_민수_손소품_v1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-8516dddc682a376a.png",
+      "bytes": 2120164,
+      "sha256": "8516dddc682a376a0fcdac391cba0a9ac086123aa2d62981c4ca20da15733fc5",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-8516dddc682a376a.webp",
+        "bytes": 88986,
+        "sha256": "19e75b6f0ab183b0e84a56eb586beab7701b72f20151eabf4bc4632de9f4570e"
+      },
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "path": "assets/magic-block-master/캐릭터/루마/MBM_Characters_루마_얼굴3컷_v3.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-60b5b17684bfb96e.png",
+      "bytes": 1941696,
+      "sha256": "60b5b17684bfb96e64a91df2129becd5a1fd59a46246051d70f8afaadb68959a",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-60b5b17684bfb96e.webp",
+        "bytes": 58694,
+        "sha256": "3ef198fecfc37332351ae322bf8bf0494f1d24b54f8dec293d37f5bb56bcfc8a"
+      },
+      "width": 1774,
+      "height": 887
+    },
+    {
+      "path": "assets/magic-block-master/캐릭터/루마/MBM_Characters_루마_표정6종_v1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-e159dbfb39d12daa.png",
+      "bytes": 2097686,
+      "sha256": "e159dbfb39d12daaf751056dc46d977e97f72cd40cbed9dde761deb5b46826bc",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-e159dbfb39d12daa.webp",
+        "bytes": 99016,
+        "sha256": "e355031d5f52fe596feab6c659225202816cf8d80ae475a97078e75833a1ffb9"
+      },
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "path": "assets/magic-block-master/캐릭터/루마/MBM_Characters_루마_손소품_v1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-e3a131deddb62d97.png",
+      "bytes": 1950739,
+      "sha256": "e3a131deddb62d970ce746f2852aaf2ffc21b623010b943930c889abe8a1c35d",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-e3a131deddb62d97.webp",
+        "bytes": 51058,
+        "sha256": "af82d92fa226e783855c2ce5d055719bfbbb0deee30c232329c96672b92ef0d5"
+      },
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "path": "assets/magic-block-master/캐릭터/츄파/MBM_Characters_츄파_표정6종_v1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-2deacd4ba69a08f2.png",
+      "bytes": 1700355,
+      "sha256": "2deacd4ba69a08f2d30cf93ee9c8f4a652b94e82977e6dd6971a6b0910f50cf0",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-2deacd4ba69a08f2.webp",
+        "bytes": 59876,
+        "sha256": "fcdbe0963c5596751a8fb67d8fc21e77e15bdb78e43f3fb54ae2e6a91a3a4353"
+      },
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "path": "assets/magic-block-master/캐릭터/츄파/MBM_Characters_츄파_얼굴3컷_v2.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-bcf61dfd86989c8c.png",
+      "bytes": 1597125,
+      "sha256": "bcf61dfd86989c8c1757d3e0d94c824d23a03d3559e2e6cac50ba96eebe3c0d5",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-bcf61dfd86989c8c.webp",
+        "bytes": 36300,
+        "sha256": "31d135b53c5c7b352499e81e056fc19b3b9d91672efb28c282a456fbe378cc7b"
+      },
+      "width": 1774,
+      "height": 887
+    },
+    {
+      "path": "assets/magic-block-master/캐릭터/츄파/MBM_Characters_츄파_분노상태_전신_v1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-2fa8d45734c936cd.png",
+      "bytes": 1625565,
+      "sha256": "2fa8d45734c936cda050cc0004d6794f549c61418448c921abc9cb8f6c933723",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-2fa8d45734c936cd.webp",
+        "bytes": 57154,
+        "sha256": "6cca588e63bc16d25723d291a6128ea600f301ea7e53879c8aaaec481dfe2b11"
+      },
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "path": "assets/magic-block-master/캐릭터/파로/MBM_Characters_어둠의파로_모자벗음_얼굴3컷_v2.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-a1d254f620ebbb72.png",
+      "bytes": 1968264,
+      "sha256": "a1d254f620ebbb72b28c65edd98b6af5cf97b01ed9e06531e12811a1e0280b98",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-a1d254f620ebbb72.webp",
+        "bytes": 61684,
+        "sha256": "80a8505a5d1c0e88481f551ef72d61c3742110ee62229127c351c90025fe1f89"
+      },
+      "width": 1774,
+      "height": 887
+    },
+    {
+      "path": "assets/magic-block-master/캐릭터/파로/MBM_Characters_어둠의파로_모자씀_얼굴3컷_v1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-85cde2b214eceaf8.png",
+      "bytes": 1844795,
+      "sha256": "85cde2b214eceaf829da1ffe77341cda8f9705b6cc1bb6d741f7611d8236c25c",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-85cde2b214eceaf8.webp",
+        "bytes": 51056,
+        "sha256": "db73d3399cf902924b3c52d92bae5e36a5684c64f50c7863d36d5c4ab42c86e8"
+      },
+      "width": 1774,
+      "height": 887
+    },
+    {
+      "path": "assets/magic-block-master/캐릭터/등장 캐릭터/MBM_Characters_큐브곰_전신_v2.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-6cd8220a124d6797.png",
+      "bytes": 2293586,
+      "sha256": "6cd8220a124d67973e348608e66edfd57c3057bedd79a73f05a23346c5f164df",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-6cd8220a124d6797.webp",
+        "bytes": 218950,
+        "sha256": "a54fae283c692621c8b126fd737aae4c050a14c15b3cd4ff1381685d316c01f3"
+      },
+      "width": 1448,
+      "height": 1086
+    },
+    {
+      "path": "assets/magic-block-master/캐릭터/등장 캐릭터/보석 블록 화룡 4면 턴어라운드.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-2e63596275c6c26f.png",
+      "bytes": 1835635,
+      "sha256": "2e63596275c6c26fedc0093d466856024da465a7c1dc0880618e108269075b35",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-2e63596275c6c26f.webp",
+        "bytes": 137106,
+        "sha256": "0fcf7bfebe2d7043880f411bf0473ceeacc1b226e59a3d1b44a8a47752dbd8c8"
+      },
+      "width": 1448,
+      "height": 1086
+    },
+    {
+      "path": "assets/magic-block-master/캐릭터/등장 캐릭터/보석빛 블록 드래곤 턴어라운드 시트.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-a9f70d9861ca6f5e.png",
+      "bytes": 2041568,
+      "sha256": "a9f70d9861ca6f5e2d3958fcda6eeff3a6ec015f4a1906348f4a50dc2777f763",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-a9f70d9861ca6f5e.webp",
+        "bytes": 159308,
+        "sha256": "ebccaa8be4065dc6f570e23b0934b238231ff30ed7df141a7f5eb32b96e650af"
+      },
+      "width": 1448,
+      "height": 1086
+    },
+    {
+      "path": "assets/magic-block-master/장소/마법의 숲속 빛나는 오솔길_반대편.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-8c21c2c8a6d1e1d7.png",
+      "bytes": 3162883,
+      "sha256": "8c21c2c8a6d1e1d71e76e38b2afaed164aa2fdca92eb035ce349e1312337d0fe",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-8c21c2c8a6d1e1d7.webp",
+        "bytes": 290724,
+        "sha256": "d0224632fc0b40639cf25ae41b839e8a2fe257698284ea9c4de06c78071075cd"
+      },
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "path": "assets/magic-block-master/장소/마법의 숲속 빛나는 오솔길.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-26f93df351ba9a17.png",
+      "bytes": 3235419,
+      "sha256": "26f93df351ba9a174260fcfeb3409e4ddd194fe6bb287aa096e58fc391a297e8",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-26f93df351ba9a17.webp",
+        "bytes": 295486,
+        "sha256": "95ef558e301a29a1f86a394e10b3cbd87218ac9f771fb87f05bae9ad123334d0"
+      },
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "path": "assets/magic-block-master/장소/황금 큐브의 마법 콜로세움.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-cb89f67758f61860.png",
+      "bytes": 3007907,
+      "sha256": "cb89f67758f61860343469f5937c4cf1d6aa6d68284f29f6d47da4544909d6b9",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-cb89f67758f61860.webp",
+        "bytes": 277720,
+        "sha256": "3a1b9f9e26d481fde5b41d766fc0e7defa984c3aa366948af0390d7a81b1688b"
+      },
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "path": "assets/magic-block-master/매블마소스/still/MBM_Place_골목_밤_v1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-93b24e0e1d479283.png",
+      "bytes": 2225051,
+      "sha256": "93b24e0e1d479283ee3af7a9ae531551e4c9d3e396e45b6abc0c49e4939c14c6",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-93b24e0e1d479283.webp",
+        "bytes": 112688,
+        "sha256": "e4e059b17a51afe2a13d44498aceecf4d8d3675f8f61bb642862efaa1d02cd23"
+      },
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "path": "assets/magic-block-master/매블마소스/still/MBM_Place_식당_v3.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-07946da32a2fc876.png",
+      "bytes": 5263494,
+      "sha256": "07946da32a2fc876bb4009118e6d3171c1af035c32831bedf17a632b5fd6871c",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-07946da32a2fc876.webp",
+        "bytes": 154168,
+        "sha256": "a81043a62624ba8ff0d81e745cda5c4fd9d5e049cf43b4312972eb206b1046b2"
+      },
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "path": "assets/magic-block-master/매블마소스/still/MBM_Place_서울도심_P1_협곡_v1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-792e30ac3786a015.png",
+      "bytes": 6724245,
+      "sha256": "792e30ac3786a0158df5acd23ddd27362877f3841a821980397085b80a155379",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-792e30ac3786a015.webp",
+        "bytes": 208608,
+        "sha256": "ce12371180b770b6b577802fd041164b1e410ef2e24b2ee9e1785c12c5f9b476"
+      },
+      "width": 2848,
+      "height": 1600
+    },
+    {
+      "path": "assets/magic-block-master/큐브관련/마법의 보석 큐브 퍼즐-색섞인.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-b321c66ddac880da.png",
+      "bytes": 2353286,
+      "sha256": "b321c66ddac880dac6fa0852878c7237f629c6032001b5cc94057cabb8ba9639",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-b321c66ddac880da.webp",
+        "bytes": 241790,
+        "sha256": "f903264da23e0428619a53d6a313de64a58d54b2f8770ecdb9d02bf802fea9d8"
+      },
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "assets/magic-block-master/매블마소스/still/MBM_Place_서울도심_골든아워_4컷시트_v1_1920x1080.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-c62c8158a20ab659.png",
+      "bytes": 5494765,
+      "sha256": "c62c8158a20ab6595a294f11af83d92ddc468e564487e4832e1dfb1789a3cf0f",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-c62c8158a20ab659.webp",
+        "bytes": 208076,
+        "sha256": "a8672ff29ead2a0c2e3213607422318c177b784dabbda12c095ce39541835d6b"
+      },
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "path": "assets/magic-block-master/큐브관련/마법의 보석 큐브 퍼즐-퍼져 나가는.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-0bdac0da704712f1.png",
+      "bytes": 2672547,
+      "sha256": "0bdac0da704712f11842d722159f8b5155b24e87e2faddc91aed67eea8de021e",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-0bdac0da704712f1.webp",
+        "bytes": 225970,
+        "sha256": "1c4c3abdedb11cfd367d6ca8fe9b9af302ae9829e61b6ac061988ca7241d4f3d"
+      },
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "path": "assets/magic-block-master/큐브관련/마법의 보석 큐브 퍼즐-색이 맞춰진.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-c77c063ab426deba.png",
+      "bytes": 2232333,
+      "sha256": "c77c063ab426deba1825cddd34bef497645df60affe7f958e029d645e2e57206",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-c77c063ab426deba.webp",
+        "bytes": 221256,
+        "sha256": "7040882559743811f4d12c6a43c2740c3e1284873d3900a4d64a0fc1f52a026d"
+      },
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "assets/magic-block-master/큐브관련/마법의 보석 큐브 퍼즐-회오리처럼 도는 큐브블록.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-2b179a0e303da42d.png",
+      "bytes": 2831984,
+      "sha256": "2b179a0e303da42d754666ebac4a8b0fdf0fdf8503dc5efc22bcd5969e1ed953",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-2b179a0e303da42d.webp",
+        "bytes": 263728,
+        "sha256": "c464d6c0bf0f2aa94065d86cf66c497eb073ce69cb673867f90ba86ac589ae8b"
+      },
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "path": "assets/magic-block-master/큐브관련/마법의 보석 큐브 퍼즐-회오리처럼 도는 큐브블록2.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-01442c2ec00e4445.png",
+      "bytes": 2930303,
+      "sha256": "01442c2ec00e44459b2bf7636ba3b6ba6499ec6cf0f7b2adb5ab6fe273f09a03",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-01442c2ec00e4445.webp",
+        "bytes": 282120,
+        "sha256": "7ae570210f85acbc2371739f3a059f727d25d3ec394f90b92014c28df0b92859"
+      },
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "path": "assets/magic-block-master/큐브관련/큐브_각성형_맞춰진모습.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-d87385a05d7372b8.png",
+      "bytes": 1918602,
+      "sha256": "d87385a05d7372b84b0ab57feba61f689b290d7e6c605d7b757dfb100419ce57",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-d87385a05d7372b8.webp",
+        "bytes": 109406,
+        "sha256": "6cca6d33397faa70a47e5aba1d0ca958e624db8e761467b4f4b0fd9d93427273"
+      },
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "path": "assets/magic-block-master/큐브관련/큐브_각성형_안맞춰진모습.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-d5c55dd5b8ecfc66.png",
+      "bytes": 2070032,
+      "sha256": "d5c55dd5b8ecfc6614b88f21b8f808bc38b516107dc13760e1ff5bf7d2ddb7e1",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-d5c55dd5b8ecfc66.webp",
+        "bytes": 115542,
+        "sha256": "ab67708473636240e5ae8bd54f9506623bd26b7f83b33240c3aeaccb8534cb69"
+      },
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "path": "assets/magic-block-master/컨셉이미지와 동영상/MBM_Style_환상의왕국컨셉_v1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-0a0960ab9f8f6a72.png",
+      "bytes": 2611960,
+      "sha256": "0a0960ab9f8f6a7290195e20e9aafb1b676495158a5e659a1c15a503f6fb877c",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-0a0960ab9f8f6a72.webp",
+        "bytes": 217684,
+        "sha256": "842ee3967b8080879fd4ee04caf559be5c5285f40a42c5276ad00477352bfcc6"
+      },
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "path": "assets/magic-block-master/그록/그록 최종안.jpg",
+      "ip": "magic-block-master",
+      "mime": "image/jpeg",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-7b0f821bb3bfef68.jpg",
+      "bytes": 1024210,
+      "sha256": "7b0f821bb3bfef689c1eed423ff0b539b9d7483c2a6a3334e48aa5b0505ae1cb",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-7b0f821bb3bfef68.webp",
+        "bytes": 219916,
+        "sha256": "94a662361a1a5530d509046e38486ab25edfde863f16d4760e8a49f41e312a12"
+      },
+      "width": 1728,
+      "height": 1152
+    },
+    {
+      "path": "assets/magic-block-master/민수이미지/민수와 빛나는 마법 큐브_16_9화면01.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-aa2d31f4be8fceb6.png",
+      "bytes": 2498918,
+      "sha256": "aa2d31f4be8fceb643a296ae6fc4e1fd9492e7c367960ba13b321977e5fc5236",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-aa2d31f4be8fceb6.webp",
+        "bytes": 190818,
+        "sha256": "8dca9c16a240f44bfd01ef2ed3689c096223bb37e2780354c9503d3bd17aa56a"
+      },
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "path": "assets/magic-block-master/매블마소스/still/수정 곰과 맞서는 숲속 추격전-4.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-04b1a3efef3e8c04.png",
+      "bytes": 2826738,
+      "sha256": "04b1a3efef3e8c04218fab5e53edac44e39d4a12da6e67830f4f8183427013dd",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-04b1a3efef3e8c04.webp",
+        "bytes": 238284,
+        "sha256": "2d5d929dfc26d262704efefefdd8dcd6568da41c347ecc171b0a20f42f516543"
+      },
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "path": "assets/magic-block-master/민수이미지/무지개 큐브 독수리의 소환술2.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-23b10855df017d39.png",
+      "bytes": 4053928,
+      "sha256": "23b10855df017d39fd195d24cb9e93b2a31b5ae5c901d062750a24d3fefe90cb",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-23b10855df017d39.webp",
+        "bytes": 299292,
+        "sha256": "9436a96f9ee6759f6a5d5946c9d3d9b7acffc5ec2b0e239eef3af64681637174"
+      },
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "path": "assets/magic-block-master/매블마소스/still/MBM_Frame_루마등장_끝_v1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-4d61790080ce5766.png",
+      "bytes": 4508632,
+      "sha256": "4d61790080ce5766700cfbb5b49a2a18d6d9ed1ad4629399a1e74264937ee207",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-4d61790080ce5766.webp",
+        "bytes": 75194,
+        "sha256": "a3007d4441227c45c76347a2f4445f3d3d73919f0f0fa292fdc99a2e89dffd99"
+      },
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "path": "assets/magic-block-master/매블마소스/still/수정 곰과 맞서는 숲속 추격전-5.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-672221c8ac7c377b.png",
+      "bytes": 2685524,
+      "sha256": "672221c8ac7c377be779320bd607a16af1197627bcc96a4800c14c2309af673f",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-672221c8ac7c377b.webp",
+        "bytes": 227298,
+        "sha256": "f6107b89784c8ae64f3c4e4c2203cdfe95ea904d99ad8a1a0a753447a05b2bda"
+      },
+      "width": 1672,
+      "height": 941
+    },
+    {
+      "path": "assets/magic-block-master/매블마소스/still/MBM_Frame_식당투샷_끝_v1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-e3c45b1b03cc1524.png",
+      "bytes": 5343320,
+      "sha256": "e3c45b1b03cc15246a03ade9d695395871302d026090052998e886724c51543b",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-e3c45b1b03cc1524.webp",
+        "bytes": 150920,
+        "sha256": "35c331b27d36db956119f1525878a90c4ccde286098e7284b1f830a127065d91"
+      },
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "path": "assets/magic-block-master/매블마소스/still/MBM_Frame_파로용_클로즈업_시작_v3.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-5d695e1da87a0d4b.png",
+      "bytes": 5528973,
+      "sha256": "5d695e1da87a0d4bd15bb624b57d96abc5f311eeee1055455e6fe6bc9f177688",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-5d695e1da87a0d4b.webp",
+        "bytes": 184486,
+        "sha256": "d87bb62ca4cfc9a55c8cb18aafb00a1c1d29b177c6ff054274f0a4d8e7cae2c1"
+      },
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "path": "assets/magic-block-master/매블마소스/still/MBM_Frame_두용격돌_끝_v1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-aa9aea3f743fdb99.png",
+      "bytes": 6126315,
+      "sha256": "aa9aea3f743fdb99d2df391316157173e1a25f398811470af1db192b535b3c75",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-aa9aea3f743fdb99.webp",
+        "bytes": 262352,
+        "sha256": "d0b1c90cc033794219e7ffc006efa4055f67f6ca884c36e9603f364e278f1c48"
+      },
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "path": "assets/magic-block-master/매블마소스/still/블랙홀_빨려들기전01_1_14_1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-e193c4c66439b2d6.png",
+      "bytes": 4015463,
+      "sha256": "e193c4c66439b2d6540c2c86a0ca645203a45f980af1a9099f4f866127cd479b",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-e193c4c66439b2d6.webp",
+        "bytes": 66710,
+        "sha256": "593184f7e1ae7b95af9782e50e515ecc464f72cc91260eda989fa0353722c13c"
+      },
+      "width": 2848,
+      "height": 1600
+    },
+    {
+      "path": "assets/magic-block-master/OST/Weaver_of_the_Cube.mp3",
+      "ip": "magic-block-master",
+      "mime": "audio/mpeg",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-c34ce456d82b971a.mp3",
+      "bytes": 1433221,
+      "sha256": "c34ce456d82b971a516858260e541fdef95c53a509ebbd57fa9efc030a6a2584"
+    },
+    {
+      "path": "assets/magic-block-master/매블마소스/still/블랙홀탈출직전.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-4a00dd0cd57b8699.png",
+      "bytes": 3258187,
+      "sha256": "4a00dd0cd57b86990738e93a38bf43cf99a6b82193ecd343e8d96a048a458e5b",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-4a00dd0cd57b8699.webp",
+        "bytes": 50328,
+        "sha256": "b44a9015928e8b3ceaab404956ba4537e1d1b88ee65d1ea5e79ae76621c4f61c"
+      },
+      "width": 2848,
+      "height": 1600
+    },
+    {
+      "path": "assets/magic-block-master/OST/Weight_of_the_Hangar.mp3",
+      "ip": "magic-block-master",
+      "mime": "audio/mpeg",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-649a014a32f45be3.mp3",
+      "bytes": 4280150,
+      "sha256": "649a014a32f45be36db92de3419232ef4e741312e99a308f2208f5e937890587"
+    },
+    {
+      "path": "assets/magic-block-master/OST/태양의_방패.mp3",
+      "ip": "magic-block-master",
+      "mime": "audio/mpeg",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-bfe08678eb2b8cdd.mp3",
+      "bytes": 1435729,
+      "sha256": "bfe08678eb2b8cdd7a17c23fbbd2084e94cfdd2434f283df45325fa272101f36"
+    },
+    {
+      "path": "assets/magic-block-master/OST/태양의_방패를_벼리다.mp3",
+      "ip": "magic-block-master",
+      "mime": "audio/mpeg",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-9ed67cf177b6678a.mp3",
+      "bytes": 1436356,
+      "sha256": "9ed67cf177b6678ae00fd1691e8a8ac85989f7092f89cf46d9801e848267804c"
+    },
+    {
+      "path": "assets/magic-block-master/OST/태양의_방패를_벼려내며.mp3",
+      "ip": "magic-block-master",
+      "mime": "audio/mpeg",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-25618086d00754dd.mp3",
+      "bytes": 3496476,
+      "sha256": "25618086d00754ddd047ff16a279b7e81ff1b8e904a92abe39867bca8d77d62c"
+    },
+    {
+      "path": "assets/magic-block-master/캐릭터/민수캐릭/MBM_Characters_민수_장발_얼굴3컷_v1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-96df8430c6b9d902.png",
+      "bytes": 1763841,
+      "sha256": "96df8430c6b9d902f64442157c6054dc6458a4aec272138dc1b9b3e9582a49ce",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-96df8430c6b9d902.webp",
+        "bytes": 72928,
+        "sha256": "356f4a603a8f47160a9af4632024fee991c4b9338379ebe6fdee32201a8efb05"
+      },
+      "width": 1774,
+      "height": 887
+    },
+    {
+      "path": "assets/magic-block-master/매블마소스/still/MBM_Frame_루마등장_시작_v1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-48c91ff11864b547.png",
+      "bytes": 3874348,
+      "sha256": "48c91ff11864b547b92c26aa02862652cf29617f52c20c135de8bf41be71979e",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-48c91ff11864b547.webp",
+        "bytes": 54656,
+        "sha256": "5200f5eff44bf6868a5746544da4ff3562ccd1db0d7bc216f8a91ebe1658e3cd"
+      },
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "path": "assets/magic-block-master/매블마소스/still/MBM_Frame_식당투샷_시작_v2.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-ab71d2f1bc08ce04.png",
+      "bytes": 5270775,
+      "sha256": "ab71d2f1bc08ce041aee85a3c22836ae0e92ede212b4d1399cd629b2fb7d455b",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-ab71d2f1bc08ce04.webp",
+        "bytes": 144406,
+        "sha256": "9b4b772d939a07faffce02403eefcac374dca687d3ab48c25845aa59575972e6"
+      },
+      "width": 1920,
+      "height": 1080
+    },
+    {
+      "path": "assets/magic-block-master/매블마소스/still/MBM_Frame_두용격돌_시작_v1.png",
+      "ip": "magic-block-master",
+      "mime": "image/png",
+      "verified": true,
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/mbm-830991abff11e8dd.png",
+      "bytes": 5674775,
+      "sha256": "830991abff11e8ddb312cf19354bd9400df35dac3bffe89a6ec6fb70761400bf",
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-magic-block-master-20261017/thumb-830991abff11e8dd.webp",
+        "bytes": 201040,
+        "sha256": "a2dfc42646051b3b5b993c2dbc0c0fe63a1072716a994ee44edde503de96ab35"
+      },
+      "width": 1920,
+      "height": 1080
     }
   ]
 }
