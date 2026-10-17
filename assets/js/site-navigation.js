@@ -29,6 +29,19 @@
     baegopaLink.append(baegopaIndex, document.createTextNode('깡셰프 배고파!'));
     drop.append(baegopaLink);
   }
+  var make = Array.from(menu.querySelectorAll('.has-drop')).find(function (item) {
+    var link = item.querySelector('a');
+    return link && link.textContent.toUpperCase().includes('MAKE');
+  });
+  var makeDrop = make && make.querySelector('.drop');
+  if (makeDrop && !makeDrop.querySelector('a[href$="make/baegopa.html"]')) {
+    var makingLink = document.createElement('a'), makingIndex = document.createElement('span');
+    makingLink.href = '/bykimjak/make/baegopa.html';
+    makingIndex.className = 'sub-idx';
+    makingIndex.textContent = '02–E';
+    makingLink.append(makingIndex, document.createTextNode('깡셰프 배고파! 제작기'));
+    makeDrop.append(makingLink);
+  }
   document.querySelectorAll('footer a[href="#"]').forEach(function (link) {
     link.removeAttribute('href');
     link.classList.add('unavailable-link');
