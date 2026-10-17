@@ -1,5 +1,6 @@
 """Build-time asset URL resolution. Source pages retain portable local paths."""
 import html
+import hashlib
 import json
 from pathlib import Path
 import re
@@ -32,6 +33,13 @@ class PublicMedia:
         text = self.pattern.sub(lambda m: self.aliases[m.group()], text)
         if suffix != '.html':
             return text
+        # Refresh cached players/viewers together with the rewritten media markup.
+        for script in ('assets/js/trailer-player.js', 'assets/js/baegopa-watch-lightbox.js', 'make/lightbox.js'):
+            source = self.root / script
+            if source.exists():
+                version = hashlib.sha256(source.read_bytes()).hexdigest()[:12]
+                name = re.escape(script.rsplit('/', 1)[-1])
+                text = re.sub(r'(<script\b[^>]*\bsrc=[\x27\x22][^\x27\x22?]*' + name + r')(?=[\x27\x22])', lambda m: m.group(1) + '?v=' + version, text)
         def image(match):
             tag = match.group()
             src = re.search(r'(?<![\w-])src=([\x27\x22])(.*?)\1', tag, re.S)
