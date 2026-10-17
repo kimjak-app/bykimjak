@@ -125,7 +125,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 .devlog__body ol{padding-left:22px;margin:0 0 28px}.devlog__body h1{line-height:1.25}.devlog__body h4{font-family:var(--f-kr);font-size:18px;margin:32px 0 12px}.devlog__body pre{max-width:100%;box-sizing:border-box;white-space:pre-wrap;overflow-wrap:anywhere}.table-scroll{max-width:100%;overflow-x:auto;margin:24px 0 32px}.devlog__body table{width:100%;border-collapse:collapse;font-family:var(--f-kr);font-size:14px;line-height:1.8}.devlog__body th,.devlog__body td{border-bottom:1px solid var(--rule);padding:12px 10px;text-align:left;vertical-align:top;overflow-wrap:anywhere}.devlog__body th{background:var(--bg-2);font-weight:600}.devlog__body.rev{opacity:1;transform:none}</style>
 <link rel="stylesheet" href="../assets/css/site-navigation.css" />
 <meta name="robots" content="noindex,nofollow" />
-<meta name="description" content="깡셰프 배고파! 제작 총괄. 캐릭터 시트부터 영상 생성과 1차 편집까지, 14개 비트의 제작 기록." />
+<meta name="description" content="깡셰프 배고파! 제작 총괄. 하루의 본 제작 + 다음 날 2시간의 최종 마무리. 14개 비트의 제작 기록." />
 <style>
 .baegopa-heading{padding:130px clamp(20px,4vw,48px) 64px;border-bottom:1px solid var(--rule)}
 .baegopa-kicker{font:11px var(--f-mono);letter-spacing:.12em;color:var(--ink-3);margin:36px 0 24px}
@@ -230,13 +230,13 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 <div class="devlog__body baegopa-lead-media"><figure><img src="../assets/baegopa/poster/KkangChef_Baegopa_Romcom_Poster_4K_v2.png" alt="《깡셰프 배고파!》 메인 포스터" width="3840" height="2160" loading="eager" decoding="async" /><figcaption>《깡셰프 배고파!》 메인 포스터 · 클릭하여 원본 확대</figcaption></figure><section class="baegopa-film" aria-labelledby="film-title"><h2 id="film-title">FILM / 최종 영상</h2><video controls playsinline preload="metadata" aria-label="깡셰프 배고파! 공식 최종 편집본" poster="../assets/baegopa/poster/KkangChef_Baegopa_Romcom_Poster_4K_v2.png"><source src="../assets/baegopa/video/kkaeng-chef-baegopa-final-20261016.mp4" type="video/mp4" />브라우저에서 영상을 재생할 수 없습니다.</video><p>《깡셰프 배고파!》 · 공식 최종 편집본 · 1분 18초</p></section></div>
     <p class="baegopa-kicker">PRODUCTION NOTES / 01</p>
     <h1>《깡셰프 배고파!》<br>하루의 제작,<br>14개의 비트</h1>
-    <p class="baegopa-subtitle">캐릭터에서 첫 편집까지.<br>AI 영상 제작의 설계와 실행을 기록하다.</p>
+    <p class="baegopa-subtitle">하루의 본 제작 + 다음 날 2시간의 최종 마무리.<br>AI 영상 제작의 설계와 실행을 기록하다.</p>
     <p class="baegopa-review">공개 전 미디어 검토본 · GitHub 미게시</p>
   </header>
   <article class="devlog" aria-label="제작 총괄">
     <div class="devlog__body">
       <p>《깡셰프 배고파!》는 한 편의 AI 영상을 만드는 과정에서, 캐릭터와 공간을 먼저 확정하고 장면을 설계한 뒤 영상 생성과 편집으로 이어간 제작 실험이다.</p>
-      <p>이번 제작기에서는 무엇을 준비했고, 어떻게 장면을 나누었으며, 어떤 기준으로 결과를 채택했는지를 정리한다. 캐릭터 시트부터 영상 생성, 1차 편집까지 하루에 진행한 과정의 기록이다.</p>
+      <p>이번 제작기에서는 무엇을 준비했고, 어떻게 장면을 나누었으며, 어떤 기준으로 결과를 채택했는지를 정리한다. 캐릭터·장소·음식 시트 작업부터 영상 생성과 1차 편집까지 하루에 진행하고, 다음 날 2시간 동안 최종 마무리한 과정의 기록이다.</p>
       <nav class="baegopa-contents" aria-label="이 글의 목차">
         <a href="#visual-foundation">01 · 인물과 공간의 기준</a>
         <a href="#beat-record">02 · 14비트의 생성 기록</a>
@@ -273,20 +273,20 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       </section>
 
       <section id="timeline">
-        <h2 class="baegopa-section-title">하루에 진행한 범위</h2>
+        <h2 class="baegopa-section-title">제작 순서와 시간</h2>
         <p>사전 테스트는 힉스필드에서 일주일 동안 무료로 영상을 생성할 기회가 우연히 생기면서 시작했다. 이 기회에 Wan 3.0으로 약 10회의 테스트를 진행했다. 우연히 주어진 것은 테스트를 시작할 기회였으며, 영상 제작 자체를 우연한 생성에 맡겼다는 뜻은 아니다.</p>
         <p>약 10회의 사전 테스트와 Blender 프리비즈를 통한 사전 연출 설계는 구분되는 작업이다. 사전 테스트는 본 제작에 앞서 진행했고, Blender에서는 장소와 두 주인공의 배치 및 여러 촬영 구도를 미리 설계했다.</p>
-        <p>본격적인 제작에서는 캐릭터 시트 정리부터 영상 생성, 1차 편집까지 하루에 진행했다. 힉스필드의 일주일 무료 생성 기회는 이용 기회의 기간이며, 실제 제작 소요 시간을 뜻하지 않는다. 사전 테스트와 최종 편집 시간도 이 하루의 작업에 합쳐 표기하지 않는다.</p>
-<div class="baegopa-time-summary"><div><span>캐릭터 시트 → 영상 생성 → 1차 편집</span><strong>하루</strong></div><div><span>최종 편집</span><strong>추후 별도 기록</strong></div></div>
+        <p>DAY 01에는 캐릭터·장소·음식 시트 작업과 Higgsfield Seedance 2.5를 활용한 14비트 영상 생성을 진행했다. 생성 결과를 즉시 검토하면서 DaVinci Resolve로 1차 편집을 병행했고, 이 모든 본 제작 작업을 하루 동안 진행했다. DAY 02에는 DaVinci Resolve에서 최종 색감 보정과 byKimjak 브랜드 로고 삽입을 진행해 2시간 만에 최종 영상 편집을 완료했다.</p>
+<div class="baegopa-time-summary"><div><span>DAY 01 — 본 제작 · 시트 작업 → 영상 생성 · 1차 편집 병행</span><strong>하루</strong></div><div><span>DAY 02 — 최종 마무리 · 색감 보정 → 브랜드 로고 삽입 → 최종 편집 완료</span><strong>다음 날 2시간</strong></div></div>
         <ol class="baegopa-timeline">
-          <li><strong>사전 테스트</strong><span>힉스필드의 일주일 무료 생성 기회를 계기로 Wan 3.0 약 10회 테스트 · 본 제작에 앞서 진행</span></li>
-          <li><strong>시트 정리</strong><span>캐릭터 · 장소 · 음식의 시각적 기준 마련</span></li>
+          <li><strong>별도 사전 작업</strong><span>힉스필드의 일주일 무료 생성 기회를 계기로 Wan 3.0 약 10회 테스트 · DAY 01 본 제작 시간과 구분</span></li>
+          <li><strong>DAY 01 · 시트 작업</strong><span>캐릭터 · 장소 · 음식의 시각적 기준 마련</span></li>
           <li><strong>사전 연출 설계</strong><span>Blender 프리비즈로 장소·두 주인공의 배치와 촬영 구도를 설계 · 사전 테스트와 구분</span></li>
-          <li><strong>영상 생성</strong><span>14비트 구성 · 마지막 14비트만 1회 재생성</span></li>
-          <li><strong>1차 편집</strong><span>캐릭터 시트부터 이 단계까지 하루에 진행</span></li>
-          <li><strong>최종 편집</strong><span>소요 시간은 추후 별도 기록</span></li>
+          <li><strong>DAY 01 · 영상 생성</strong><span>Higgsfield Seedance 2.5로 14비트 생성 · 마지막 14비트만 1회 재생성</span></li>
+          <li><strong>DAY 01 · 1차 편집 병행</strong><span>생성 결과를 즉시 검토하며 DaVinci Resolve로 1차 편집 병행 · 시트 작업부터 이 단계까지 하루 동안 진행</span></li>
+          <li><strong>DAY 02 · 최종 마무리</strong><span>다음 날 2시간 · DaVinci Resolve에서 최종 색감 보정, byKimjak 브랜드 로고 삽입, 최종 영상 편집 완료</span></li>
         </ol>
-        <p>이번 기록에서 ‘하루의 제작’은 <strong>캐릭터 시트부터 영상 생성, 1차 편집까지</strong>의 범위다. 최종 편집에 들어간 시간은 아직 기입하지 않았다.</p>
+        <p>이번 기록의 제작 시간은 <strong>하루의 본 제작 + 다음 날 2시간의 최종 마무리</strong>다. Wan 3.0 약 10회의 사전 테스트는 별도 사전 작업으로 구분한다. 힉스필드의 일주일 무료 생성 기회는 이용 기회의 기간이며, 실제 제작 소요 시간을 뜻하지 않는다.</p>
       </section>
 
       <section id="production-tools">
