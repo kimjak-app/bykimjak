@@ -229,7 +229,7 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
     <p class="baegopa-kicker">PRODUCTION NOTES / 02</p>
     <h1>《깡셰프 배고파!》<br>한 장면을 만드는 말</h1>
     <p class="baegopa-subtitle">최초 BEAT 설계에서 실제 제작 전략까지.<br>계획을 조정하고 장면의 통일성을 지키다.</p>
-    <p class="baegopa-review">공개 전 검수본 · 비트 01 프롬프트 공개 범위 확인 대기</p>
+    <p class="baegopa-review">공개 전 검수본 · 비트 01 프롬프트와 컨텍스트 제작 노트</p>
   </header>
   <article class="devlog" aria-label="설계와 제작 전략"><div class="devlog__body">
     <nav class="baegopa-contents" aria-label="이 글의 목차"><a href="#beat-plan">01 · 최초 설계</a><a href="#strategy">02 · 계획과 실제</a><a href="#decision">03 · 선택과 결과</a><a href="#bit-01">04 · 비트 01</a></nav>
@@ -268,7 +268,39 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
       <h2 class="baegopa-section-title">비트 01 · 실제 프롬프트와 결과 영상</h2>
       <p>실제 제작 사례는 비트 01이다. 아래 영상은 원본 저장소의 <code>video/beat1-2k.mp4</code>이며, Wan 3.0 사전 테스트 자료와 구분한다.</p>
       <div class="baegopa-film"><video controls playsinline preload="metadata" aria-label="비트 01 실제 결과 영상"><source src="../assets/baegopa/video/beat1-2k.mp4" type="video/mp4" />브라우저에서 영상을 재생할 수 없습니다.</video></div>
-      <div class="baegopa-review-list"><h3>프롬프트 공개 범위 확인 중</h3><p><code>prompts/bits/bit-01.md</code> 원본을 확인했다. 공개할 범위가 확정되면 승인된 원문만 이 자리에 배치한다. 현재 페이지에는 프롬프트 원문이나 비공개 참조 자료를 포함하지 않았다.</p></div>
+      <h3>프롬프트에 함께 넣은 컨텍스트</h3>
+      <p>아래 영문 프롬프트의 Image 1, Image 2, Audio 1은 각각 다음 자산을 가리킨다.</p>
+      <div class="fig-2col baegopa-gallery">
+        <figure><img src="../assets/baegopa/characters/Seohee_FrontBack_Paired77_OriginalPortrait_4K_v5.png" alt="Image 1 · 서희 캐릭터 컨텍스트" loading="lazy" /><figcaption>Character image · Image 1<br>Seohee_FrontBack_Paired77_OriginalPortrait_4K_v5.png</figcaption></figure>
+        <figure><img src="../assets/baegopa/locations/Restaurant_01_FiveSeat_WalnutConsole_4K_v4.png" alt="Image 2 · 레스토랑 장소 컨텍스트" loading="lazy" /><figcaption>Location image · Image 2<br>Restaurant_01_FiveSeat_WalnutConsole_4K_v4.png</figcaption></figure>
+      </div>
+      <p><strong>Audio reference · Audio 1:</strong> <code>서희-깡세프 배고파4.mp3</code> — ElevenLabs로 제작한 “깡셰프 배고파” 음성 파일.</p>
+      <aside aria-labelledby="audio-production-note">
+        <h3 id="audio-production-note">제작 노트 · 음성을 컨텍스트로 사용하다</h3>
+        <blockquote><p><strong>최종 영상에 원본 음성을 그대로 삽입한 것이 아니다.</strong> Seedance 2.5가 ElevenLabs로 제작한 이 오디오를 컨텍스트로 참고하여 새로운 사운드를 생성했다.</p></blockquote>
+        <p>같은 방식을 마지막 대사에도 적용했다. 음성을 생성 컨텍스트로 제공하는 방식은 장면 사이의 목소리 일관성을 유지하는 데 큰 도움이 되었다.</p>
+        <p>아래 프롬프트는 생성 당시의 지시문을 그대로 보존했다. 오디오를 사용한 실제 제작 방식과 결과는 이 제작 노트에 구분해 기록한다.</p>
+      </aside>
+      <h3>실제 영문 프롬프트</h3>
+      <pre lang="en" aria-label="비트 01 영문 프롬프트 원문"><code>Footage of a real restaurant scene shot on ARRI Alexa 35 with a Cooke S7/i lens, shallow depth of field. Natural film grain, slight lens imperfection. Documentary-quality realism, not CGI, not animation, no plastic skin.
+
+Image 1 is the woman: the woman in Image 1, Korean, brown bob with bangs, gold hoop earrings, beige oversized blazer over a white tee. Image 2 is the location reference: the whole background comes from Image 2, the small luxury restaurant counter with its blackstone wall, five leather seats and warm tungsten light. She sits at the middle seat of the counter. Only one person in the frame.
+
+Opening frame: medium close-up, 50mm, framed from the top of her head to mid-chest, her face in the upper half of the frame, the camera at her eye level directly in front of her.
+
+Audio 1 is her voice saying the Korean line &quot;깡셰프 배고파!&quot;. She speaks exactly this line in exactly this voice, her lip movements synced precisely to Audio 1, in Korean.
+
+4-second shot:
+0.0-1.6s: She looks straight into the camera with a flat, bored critic&#x27;s face, lips closed, a slow blink, the faintest tired breath. The camera is locked off and completely still.
+1.6-2.2s: She says &quot;깡셰프,&quot; with a bright, theatrical grin. The grin is a performance: her mouth smiles but her eyes stay empty and tired. The camera is still locked off.
+2.2-3.0s: She says &quot;배고파!&quot; and throws one hand up, palm open. At the moment she starts this word, the camera pulls back fast: a dolly-back combined with a zoom-out from 50mm toward 24mm, revealing the whole counter, the five seats and the dark restaurant around her. The pull-back stops dead at the wide frame.
+3.0-4.0s: Held wide and still. The grin drops at once back to the flat bored face, her hand lowering, her eyes still on the camera.
+
+Hollywood three-point lighting with strong subject-background separation: a hard key light from camera-left at a raking angle exposing her face about one stop brighter than the surroundings, with highlights rolling off gently and not clipping; a soft fill from camera-right at a low ratio; a thin warm rim light from behind-right separating her hair and shoulders from the background. The background stays clearly darker than her face.
+
+Real skin with visible pores, matte finish with minimal specular highlights, individual flyaway hairs, no airbrushed look. Her face stays identical to Image 1. Exactly one person, five fingers on each hand, natural hand anatomy.
+
+Audio: only the voice from Audio 1 and soft room tone. No background music, no score, no other voices.</code></pre>
     </section>
     <nav class="baegopa-series-menu" aria-label="제작기 이동"><a href="baegopa.html">← PAGE 01 · 제작 총괄</a><a href="baegopa.html#page-03-note">PAGE 03 · 생성 이전에 카메라를 설계하다 <span>순차 제작 예정</span></a></nav>
     <p class="baegopa-back"><a href="../make/">← MAKE 목록</a></p>
