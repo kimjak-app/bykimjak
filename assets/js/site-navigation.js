@@ -29,6 +29,14 @@
     baegopaLink.append(baegopaIndex, document.createTextNode('깡셰프 배고파!'));
     drop.append(baegopaLink);
   }
+  // Keep the WATCH label bilingual on both static and generated menus.
+  var mbmWatchLink = drop && drop.querySelector('a[href$="magic-block-master.html"]');
+  if (mbmWatchLink) {
+    var mbmWatchIndex = mbmWatchLink.querySelector('.sub-idx');
+    mbmWatchLink.replaceChildren();
+    if (mbmWatchIndex) mbmWatchLink.append(mbmWatchIndex);
+    mbmWatchLink.append(document.createTextNode('MAGIC BLOCK MASTER / 매직블록마스터'));
+  }
   var make = Array.from(menu.querySelectorAll('.has-drop')).find(function (item) {
     var link = item.querySelector('a');
     return link && link.textContent.toUpperCase().includes('MAKE');
