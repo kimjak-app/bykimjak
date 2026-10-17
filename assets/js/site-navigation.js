@@ -42,6 +42,14 @@
     makingLink.append(makingIndex, document.createTextNode('깡셰프 배고파! 제작기'));
     makeDrop.append(makingLink);
   }
+  if (makeDrop && !makeDrop.querySelector('a[href$="make/magic-block-master.html"]')) {
+    var mbmLink = document.createElement('a'), mbmIndex = document.createElement('span');
+    mbmLink.href = '/bykimjak/make/magic-block-master.html';
+    mbmIndex.className = 'sub-idx';
+    mbmIndex.textContent = '02–F';
+    mbmLink.append(mbmIndex, document.createTextNode('매직블럭마스터 제작기'));
+    makeDrop.append(mbmLink);
+  }
   document.querySelectorAll('footer a[href="#"]').forEach(function (link) {
     link.removeAttribute('href');
     link.classList.add('unavailable-link');
