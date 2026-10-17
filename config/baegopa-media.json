@@ -1,0 +1,74 @@
+[
+  {
+    "path": "assets/baegopa/video/beat1-2k.mp4",
+    "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-baegopa-20261017/beat1-2k.mp4",
+    "bytes": 5973772,
+    "sha256": "3671682eb293edbe52971629465e027b4af1fe4edee42e9feefcde39f6bfe332"
+  },
+  {
+    "path": "assets/baegopa/video/beat2-3_4부감-2K.mp4",
+    "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-baegopa-20261017/beat2-3_4.-2K.mp4",
+    "bytes": 4239266,
+    "sha256": "76313a920ac75a18966b6e43fa5071e03d1ab889866c61a4aa7d07386eca7c48"
+  },
+  {
+    "path": "assets/baegopa/video/beat6-2k.mp4",
+    "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-baegopa-20261017/beat6-2k.mp4",
+    "bytes": 19489463,
+    "sha256": "9a11212b3fd8ef66deadb9488898642bb8efa28015563fc218deae6c69a92cf5"
+  },
+  {
+    "path": "assets/baegopa/video/kkaeng-chef-baegopa-final-20261016.mp4",
+    "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-baegopa-20261017/kkaeng-chef-baegopa-final-20261016.mp4",
+    "bytes": 81365975,
+    "sha256": "0c7f8da4cb2df8445087cf4102abc93c5395ea3272237005a7dd83e5d5a5aa8d"
+  },
+  {
+    "path": "assets/baegopa/video/세진클로즈업01.mp4",
+    "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-baegopa-20261017/01.mp4",
+    "bytes": 6879995,
+    "sha256": "45f9cec79d33f675c2a9373ccfed4f31ff2798a27dcb9f91692d47c2ed04da8b"
+  },
+  {
+    "path": "assets/baegopa/video/인서트 여분01-2k.mp4",
+    "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-baegopa-20261017/01-2k.mp4",
+    "bytes": 11037392,
+    "sha256": "b23592fad6e93271ff869e50f6d31414b8b72478ca84858d2706199cbbc85415"
+  },
+  {
+    "path": "assets/baegopa/ost/Perfectly_Plated.mp3",
+    "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-baegopa-20261017/Perfectly_Plated.mp3",
+    "bytes": 2913864,
+    "sha256": "438d77041c8420c8cc890c6b8bffb354f3b4d12911ee714279b6e268a09ae06c"
+  },
+  {
+    "path": "assets/baegopa/ost/The_Secret_Ingredient.mp3",
+    "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-baegopa-20261017/The_Secret_Ingredient.mp3",
+    "bytes": 2925775,
+    "sha256": "0e810238a60f56e65b392109d24625a18609dfb210ba47e502b1a445729210da"
+  },
+  {
+    "path": "assets/baegopa/ost/Three_Pinches_of_Salt.mp3",
+    "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-baegopa-20261017/Three_Pinches_of_Salt.mp3",
+    "bytes": 4320714,
+    "sha256": "096af4d75e2ff8affb4b58bd513acfa5851476cadc941ddb8d4df18c5eeb4829"
+  },
+  {
+    "path": "assets/baegopa/ost/Three_Spoons_of_Honey.mp3",
+    "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-baegopa-20261017/Three_Spoons_of_Honey.mp3",
+    "bytes": 2872486,
+    "sha256": "bfac4acaae61e193de2fbf14dc8939f1becb50d0e4fe6e01b64508fd13c182e1"
+  },
+  {
+    "path": "assets/baegopa/ost/둘만의 레시피.mp3",
+    "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-baegopa-20261017/default.mp3",
+    "bytes": 2920760,
+    "sha256": "2396aeedc8570c4df402f008fc18c8b0dbca820c3fe71a9a622b7a85e19ea44a"
+  },
+  {
+    "path": "assets/baegopa/ost/사랑을_굽는_시간_깡세프배고파.mp3",
+    "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-baegopa-20261017/_._._.mp3",
+    "bytes": 4006618,
+    "sha256": "27df19da947f876899baf654c2f0b14d725881b4518b8ee0170effb4a85cefab"
+  }
+]

@@ -21,6 +21,9 @@ def sources():
         rel = path.relative_to(ROOT)
         if not path.is_file() or any(part.startswith('.') or part in EXCLUDED for part in rel.parts):
             continue
+        # Baegopa video/OST are served from the approved public release.
+        if rel.as_posix().startswith(('assets/baegopa/video/', 'assets/baegopa/ost/')):
+            continue
         if str(rel) in {'CLAUDE.md', 'blog-structure.md', 'byKimjak-standalone.html'}:
             continue
         yield path, rel
