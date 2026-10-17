@@ -295,4 +295,48 @@ MAKE
 
 **Document:** `BYKIMJAK_BLOG_MASTER_GUIDE.md`  
 **Version:** 2.0  
-**Updated:** 2026-10-06  
+**Updated:** 2026-10-17
+
+## 12. 통합 미디어 운영 — 공개 Releases / 2026-10-17
+
+### 역할과 원본 보존
+
+- Private 프로젝트 저장소는 제작 원본과 기록을 보관한다. 공개 승인 없이 전체 저장소를 동기화하지 않는다.
+- 최종 마스터와 기존 Release는 삭제하거나 덮어쓰지 않는다.
+- 현재 공개용 미디어는 `kimjak-app/bykimjak`의 작품별 Release로 분리한다. `media-gappae-20261017`, `media-eastwar-20261017`, `media-baegopa-20261017`을 사용하며 이미 게시된 갑패 최종 영상 Release도 재사용한다.
+- Pages는 페이지·코드·소형 UI를 담당한다. 이번 이전 범위는 갑패·EASTWAR·배고파 및 공용 EASTWAR OST, 별도 폴더의 EASTWAR 포스터·월드맵 이미지다. 다른 프로젝트와 THINK의 기존 미디어는 유지하므로 전체 사이트가 코드만 남는 것은 아니다.
+- Git에 보관된 원본은 그대로 유지하고 배포 산출물에서만 제외한다. Pages 경량화는 Git 이력·clone 용량 감소와 다르다.
+
+### 중앙 설정과 빌드
+
+- `config/public-media.json`을 공개 URL의 단일 기준으로 삼는다. `path`, `ip`, `url`, `bytes`, `sha256`, `mime`, `thumbnail`, `aliases`, `verified`를 관리한다.
+- 원본 파일명과 페이지의 상대 경로는 유지한다. Release 업로드명에는 충돌 방지를 위한 해시를 붙일 수 있으며 한글 파일명의 서버 정규화 결과는 API가 반환한 실제 URL을 기록한다.
+- `tools/public_media.py`가 빌드 시 상대 경로·과거 Release 별칭을 중앙 URL로 변환한다. 소스 HTML만 직접 열면 이전 로컬 자산이 보일 수 있으므로 검수는 반드시 빌드 산출물을 대상으로 한다.
+- `tools/build_pages.py`는 Git 추적 파일만 배포한다. 중앙 설정에 있는 미디어를 제외하고 HTML의 이미지 src를 별도 WebP 썸네일로 연결한다. `data-original-src`는 원본 Release URL을 유지한다.
+- 썸네일은 원본 비율을 유지하는 최대 1280px WebP다. 원본은 리사이즈·크롭·재인코딩하지 않는다. 그림의 확대는 반드시 원본 URL을 사용한다.
+- 새 Pages 용량 상한은 70MiB다. 최초 약 65.5MiB 목표에서 추가 EASTWAR 자산까지 분리한 검수 빌드는 약 56.49MiB다. 실제 빌드 바이트를 매번 기록한다. 70MiB 초과 시 새 콘텐츠와 자산 포함 범위를 검토한다.
+- 일반 빌드: `python tools/build_pages.py`. 예산 확인: `python tools/build_pages.py --dry-run`. 출력 폴더가 이미 있으면 새 출력 경로를 지정한다.
+
+### 검증 및 배포 순서
+
+1. 공개 승인 범위와 파일 목록·SHA-256 확인.
+2. 작품별 Release 업로드. 기존 파일을 덮어쓰지 않고 API가 반환한 바이트와 SHA-256을 대조.
+3. `python tools/verify_public_media.py --report <검수 JSON 경로>`로 인증 없는 공개 URL 및 byte-range 응답 확인. 실패 시 중앙 설정을 활성화하지 않는다.
+4. `python tools/test_public_media.py`와 빌드 실행. 배포 대상에 원본이 남지 않고 로컬 경로가 미디어 URL로 치환됐는지 확인.
+5. 실제 브라우저에서 영상 시작·시간 탐색, OST 재생, 썸네일·원본 확대·닫기·ESC·이전/다음, PC/모바일, WATCH/MAKE 메뉴, 전역 팝업 확인.
+6. 검수 브랜치 커밋·푸시 후 사용자 승인 범위에 따라 main 반영. 사전 승인이 있으면 반복 확인하지 않는다. Pages 성공과 실제 공개 사이트를 확인한다.
+
+### Release 호환성과 정책
+
+- URL은 `github.com/.../releases/download/<tag>/<filename>`만 저장한다. 리다이렉트된 서명 포함 임시 다운로드 주소는 만료되므로 설정에 저장하지 않는다.
+- 미디어 요소는 Release 리다이렉트를 따라갈 수 있지만 `fetch(..., {method:'HEAD'})`는 CORS에 막힐 수 있다. 갑패 플레이어는 `loadedmetadata`/`error`로 가용성을 판정한다.
+- 직접 이미지 링크는 다운로드될 수 있으므로 사이트 안의 기존 확대 뷰어에서 원본을 연다. 원본/썸네일 URL을 혼동하지 않는다.
+- GitHub 공식 문서 기준 Release당 최대 1,000개 자산, 파일당 2GiB 미만. 총 용량·대역폭에 정해진 Release 한도는 없지만 과도한 사용 시 제한될 수 있다. 전용 영상 CDN의 서비스 보장이나 장기 무제한 호스팅으로 간주하지 않는다.
+- 근거: https://docs.github.com/en/repositories/releasing-projects-on-github/about-releases 및 https://docs.github.com/en/site-policy/acceptable-use-policies/github-acceptable-use-policies#9-excessive-bandwidth-use
+- 현재 검증된 브라우저 범위를 보고서에 기록한다. 검증하지 않은 Safari/실기기까지 지원 확인했다고 표현하지 않는다.
+
+### 복구와 향후 R2 전환
+
+- `--legacy-media`로 이전 배포 구조를 재현할 수 있다. 당시 950MiB 예산에 매우 가까우므로 복구 빌드의 실제 크기를 다시 확인한다.
+- 원본 및 기존 Release를 유지하므로 변경 커밋과 빌드 규칙을 되돌릴 수 있다. 기존 Pages 미디어 직접 주소는 제외 후 404가 될 수 있으나 사이트 내부 링크는 중앙 매핑으로 전환한다. 옛 외부 직접 링크를 자동 리다이렉트한다고 가정하지 않는다.
+- 향후 R2로 이전할 때 동일 파일 해시를 확인하고 중앙 설정의 `url`/`thumbnail.url`/`provider`를 갱신한다. NAV·FOOTER·플레이어·페이지 디자인을 다시 만들지 않는다. CORS, Range, 캐시, 실제 브라우저 검수를 반복한다.

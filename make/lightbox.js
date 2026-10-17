@@ -6,7 +6,7 @@
   if (window.__gappaeLightbox) return;
   window.__gappaeLightbox = true;
 
-  var SEL = '.devlog__body img:not([data-nozoom])';
+  var SEL = '.devlog__body img:not([data-nozoom]), [data-media-lightbox] .project-images img, [data-media-lightbox] .gappae-characters img';
 
   var css = ''
     + SEL + '{cursor:zoom-in}'
@@ -73,7 +73,7 @@
     lb.classList.remove('actual');
     stage.scrollTop = 0;
     stage.scrollLeft = 0;
-    big.src = img.currentSrc || img.src;
+    big.src = img.dataset.originalSrc || img.currentSrc || img.src;
     big.alt = img.alt || '';
     cap.textContent = captionOf(img);
     count.textContent = (idx + 1) + ' / ' + list.length;

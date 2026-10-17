@@ -178,3 +178,7 @@ MAKE  = 제작 과정/판단/실패/수정
 
 **Document:** `BYKIMJAK_WATCH_GUIDE.md`  
 **Version:** 2.0
+
+## 2026-10-17 공개 미디어 운영 보완
+
+미디어 저장·공개·검수·복구는 [통합 Master Guide의 12절](BYKIMJAK_BLOG_MASTER_GUIDE.md#12-통합-미디어-운영--공개-releases--2026-10-17)을 따른다. `config/public-media.json`의 URL을 빌드 시 적용하며, 검수는 소스 폴더가 아닌 Pages 산출물에서 수행한다. 썸네일과 원본 확대 주소를 구분하고 기존 원본·Release는 보존한다.

@@ -72,7 +72,7 @@
     lb.classList.remove('actual');
     stage.scrollTop = 0;
     stage.scrollLeft = 0;
-    big.src = img.currentSrc || img.src;
+    big.src = img.dataset.originalSrc || img.currentSrc || img.src;
     big.alt = img.alt || '';
     cap.textContent = captionOf(img);
     count.textContent = (idx + 1) + ' / ' + list.length;
