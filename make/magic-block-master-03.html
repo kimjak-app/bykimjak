@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>매직블럭마스터 — 실제 장면 제작 · MAKE · byKimjak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<style>
+:root{--bg:#FFFFFF;--bg-2:#F2F2F2;--ink:#0A0A0A;--ink-2:#2A2A2A;--ink-3:#6B6B6B;--rule:#0A0A0A1A;--dark:#0D0B09;--dark-2:#1A1714;--dark-ink:#FAF7F2;--dark-ink-2:#9C948A;--dark-rule:#FAF7F21A;--accent:oklch(68% 0.08 70);--accent-soft:oklch(68% 0.08 70 / 0.12);--f-display:"Space Grotesk","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-body:"Inter","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-mono:"JetBrains Mono",ui-monospace,monospace;--f-kr:"Pretendard Variable","Inter",ui-sans-serif,system-ui,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:var(--f-body);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.nav{position:fixed;inset:0 0 auto 0;z-index:100;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:18px clamp(20px,4vw,48px);transition:background .35s ease,backdrop-filter .35s ease,border-color .35s ease;border-bottom:1px solid transparent}
+.nav.scrolled{background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:saturate(1.2) blur(14px);-webkit-backdrop-filter:saturate(1.2) blur(14px);border-bottom-color:var(--rule)}
+.nav__logo{font-family:var(--f-display);font-weight:600;font-size:18px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.nav__logo .dot{width:8px;height:8px;border-radius:999px;background:var(--ink);display:inline-block;transform:translateY(-1px)}
+.nav__menu{display:flex;gap:36px;justify-content:center;align-items:center}
+.nav__menu > a,.nav__menu .has-drop > a{font-family:var(--f-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;position:relative;padding:6px 2px;color:var(--ink)}
+.nav__menu > a::after,.nav__menu .has-drop > a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.6,0,.2,1)}
+.nav__menu > a:hover::after,.nav__menu .has-drop:hover > a::after{transform:scaleX(1)}
+.nav__menu .idx{font-family:var(--f-mono);font-size:9px;vertical-align:super;margin-right:4px;color:var(--ink-3)}
+.nav__cta{justify-self:end;display:flex;align-items:center;gap:14px}
+.nav__cta .status{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+.nav__cta .pulse{width:6px;height:6px;border-radius:999px;background:#3CB371;animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px transparent}}
+.nav__cta a.contact{border:1px solid var(--ink);padding:10px 16px;border-radius:999px;font-family:var(--f-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .25s,color .25s}
+.nav__cta a.contact:hover{background:var(--ink);color:var(--bg)}
+.nav__menu .has-drop{position:relative}
+.nav__menu .drop{position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%) translateY(-10px);min-width:210px;background:var(--bg);border:1px solid var(--rule);padding:4px;opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s cubic-bezier(.2,.8,.2,1);z-index:200}
+.nav__menu .has-drop:hover .drop{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.nav__menu .drop a{display:block;padding:10px 14px;border-radius:2px;font-family:var(--f-kr);font-size:13px;font-weight:400;letter-spacing:-.01em;text-transform:none;color:var(--ink-2);transition:background .15s,color .15s}
+.nav__menu .drop a::after{content:none!important}
+.nav__menu .drop a:hover{background:var(--bg-2);color:var(--ink)}
+.sub-idx{display:block;font-family:var(--f-mono);font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin-bottom:2px}
+@media(max-width:780px){.nav{grid-template-columns:1fr auto;padding:14px 20px}.nav__menu{display:none}.nav__cta .status{display:none}}
+.listing-head{padding:120px clamp(20px,4vw,48px) 64px;border-bottom:1px solid var(--rule)}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:28px}
+.breadcrumb a{transition:color .2s}.breadcrumb a:hover{color:var(--ink)}
+.breadcrumb .sep{opacity:.4}
+.listing-head h1{font-family:var(--f-display);font-weight:500;font-size:clamp(44px,9vw,120px);letter-spacing:-.04em;line-height:.92;margin:0 0 8px}
+.listing-head .sub-ko{font-family:var(--f-kr);font-size:clamp(16px,2vw,22px);color:var(--ink-3);margin:0 0 20px;font-weight:400}
+.listing-head .listing-desc{font-family:var(--f-kr);font-size:15px;line-height:1.65;color:var(--ink-3);max-width:48ch}
+.lang-switch{display:inline-flex;align-items:center;margin-bottom:28px}
+.lang-current{font-family:var(--f-display);font-size:14px;font-weight:700;color:var(--ink);padding:10px 20px;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px;cursor:default;letter-spacing:.01em}
+.lang-sep{font-family:var(--f-mono);font-size:14px;color:var(--ink-3);opacity:.35;user-select:none;line-height:1}
+.lang-other{font-family:var(--f-display);font-size:14px;font-weight:400;color:var(--ink-3);padding:10px 20px;transition:color .2s;letter-spacing:.01em}
+.lang-other:hover{color:var(--ink)}
+footer{background:var(--dark);color:var(--dark-ink);padding:90px clamp(20px,4vw,48px) 36px;overflow:hidden}
+footer .big{font-family:var(--f-display);font-weight:400;font-size:clamp(44px,7vw,108px);letter-spacing:-.04em;line-height:.95;color:var(--dark-ink);margin:0 0 48px;text-wrap:balance}
+footer .big em{font-style:italic;font-family:"Times New Roman",serif;color:#A99A85}
+footer .grid-ft{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding-top:36px;border-top:1px solid var(--dark-rule)}
+footer .col{display:flex;flex-direction:column;gap:10px}
+footer .col h6{margin:0 0 6px;font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--dark-ink-2);font-weight:400}
+footer .col a{font-family:var(--f-display);font-size:15px;color:var(--dark-ink);transition:color .3s;display:inline-flex;align-items:center;gap:6px}
+footer .col a:hover{color:#A99A85}
+footer .col a .ext{font-family:var(--f-mono);font-size:9px;opacity:.5}
+footer .c1{grid-column:1/span 5}footer .c2{grid-column:6/span 2}footer .c3{grid-column:8/span 2}footer .c4{grid-column:10/span 3}
+footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-family:var(--f-mono);font-size:11px;color:var(--dark-ink-2);text-transform:uppercase;letter-spacing:.06em}
+@media(max-width:780px){footer .c1,footer .c2,footer .c3,footer .c4{grid-column:1/span 12}}
+.rev{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}.rev.in{opacity:1;transform:none}
+@media(max-width:780px){.devlog__body.rev{opacity:1!important;transform:none!important;transition:none!important}}
+/* ── Dev Log Article ── */
+.devlog{padding:0 0 140px}
+.devlog__body{padding:64px clamp(20px,4vw,48px) 0;max-width:760px}
+.devlog__body .log-num{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:12px}
+.devlog__body h1{font-family:var(--f-display);font-weight:500;font-size:clamp(26px,4vw,48px);letter-spacing:-.03em;line-height:1.1;margin:0 0 10px}
+.devlog__body h2{font-family:var(--f-kr);font-size:clamp(15px,1.8vw,20px);font-weight:400;color:var(--ink-3);margin:0;line-height:1.5}
+.devlog__body .log-date{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);display:block;margin:24px 0 40px;padding-top:20px;border-top:1px solid var(--rule)}
+.devlog__body h3{font-family:var(--f-display);font-weight:500;font-size:clamp(16px,2vw,22px);letter-spacing:-.02em;margin:56px 0 10px;padding-top:48px;border-top:1px solid var(--rule)}
+.devlog__body .section-date{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 28px;display:block}
+.devlog__body p{font-family:var(--f-kr);font-size:16px;line-height:1.95;color:var(--ink-2);margin:0 0 22px}
+.devlog__body strong{font-weight:700;color:var(--ink)}
+.devlog__body em{font-style:italic;color:var(--ink)}
+.devlog__body hr{border:none;border-top:1px solid var(--rule);margin:52px 0}
+.devlog__body ul{padding-left:20px;margin:0 0 24px}
+.devlog__body li{font-family:var(--f-kr);font-size:16px;line-height:1.85;color:var(--ink-2);margin-bottom:10px}
+.devlog__body blockquote{margin:28px 0;padding:20px 24px;border-left:3px solid var(--ink);background:var(--bg-2);font-family:var(--f-kr);font-size:16px;line-height:1.8;color:var(--ink)}
+.devlog__body blockquote p{margin:0;color:var(--ink)}
+.devlog__body pre{background:var(--bg-2);border:1px solid var(--rule);padding:20px 24px;margin:0 0 28px;overflow-x:auto;border-radius:2px}
+.devlog__body code{font-family:var(--f-mono);font-size:13px;line-height:1.7;color:var(--ink-2)}
+.devlog__body figure{margin:32px 0}
+.devlog__body figure img{width:100%;border-radius:2px}
+.devlog__body figure figcaption{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
+.devlog__body .fig-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0}
+.devlog__body .fig-2col figure{margin:0}
+.devlog__body .fig-4col{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:32px 0}
+.devlog__body .fig-4col figure{margin:0}
+@media(max-width:640px){.devlog__body .fig-2col{grid-template-columns:1fr}.devlog__body .fig-4col{grid-template-columns:repeat(2,1fr)}}
+.devlog__body .dialogue{border-left:2px solid var(--rule);margin:2em 0;padding:0 0 0 24px}
+.devlog__body .dialogue p{margin:0 0 1em;font-size:.95em;color:var(--ink-2)}
+.devlog__body .dialogue p:last-child{margin-bottom:0}
+.devlog__body .dialogue .speaker{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:.3em}
+.devlog__body table{width:100%;border-collapse:collapse;margin:0 0 28px}
+.devlog__body thead th{font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:10px 14px;border-bottom:1px solid var(--ink);font-weight:500}
+.devlog__body tbody td{font-family:var(--f-kr);font-size:14px;line-height:1.6;color:var(--ink-2);padding:10px 14px;border-bottom:1px solid var(--rule)}
+.devlog__body tbody tr:hover{background:var(--bg-2)}
+/* ── Log Index ── */
+.log-index{padding:0 clamp(20px,4vw,48px)}
+.log-index__hd{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0;padding:32px 0 0}
+.log-index__item{display:grid;grid-template-columns:52px 1fr auto;gap:20px;align-items:baseline;padding:20px 0;border-top:1px solid var(--rule);transition:background .25s;text-decoration:none}
+.log-index__item:last-child{border-bottom:1px solid var(--rule);margin-bottom:48px}
+.log-index__item:hover{background:linear-gradient(90deg,transparent,var(--accent-soft) 20%,var(--accent-soft) 80%,transparent)}
+.log-index__num{font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
+.log-index__t{font-family:var(--f-display);font-size:clamp(14px,1.6vw,18px);font-weight:500;letter-spacing:-.01em;line-height:1.2;color:var(--ink)}
+.log-index__t .ko{display:block;font-family:var(--f-kr);font-size:12px;color:var(--ink-3);font-weight:400;margin-top:3px}
+.log-index__date{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);white-space:nowrap}
+.log-index__item--current{pointer-events:none;background:var(--accent-soft);display:grid}
+.log-index__item--current .log-index__num{color:var(--accent)}
+/* ── Log Pager ── */
+.log-pager{display:flex;gap:8px;padding:12px 0 0;margin-bottom:48px;justify-content:center;border-top:1px solid var(--rule)}
+.log-pager__btn{font-family:var(--f-mono);font-size:11px;width:32px;height:32px;border:1px solid var(--rule);background:none;cursor:pointer;color:var(--ink-3);transition:background .2s,color .2s;border-radius:2px}
+.log-pager__btn:hover{background:var(--bg-2);color:var(--ink)}
+.log-pager__btn--active{background:var(--ink);color:var(--bg);border-color:var(--ink);cursor:default}
+/* ── Log Nav ── */
+.log-nav{display:flex;justify-content:space-between;padding:52px clamp(20px,4vw,48px) 0;margin-top:64px;border-top:1px solid var(--rule)}
+.log-nav__prev,.log-nav__next{display:flex;flex-direction:column;gap:6px}
+.log-nav__next{align-items:flex-end;text-align:right}
+.log-nav__label{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.log-nav__title{font-family:var(--f-display);font-size:clamp(14px,1.8vw,20px);font-weight:500;letter-spacing:-.01em;color:var(--ink);transition:color .2s}
+.log-nav a:hover .log-nav__title{color:var(--accent)}
+.log-nav__next--disabled{opacity:.4;cursor:default}
+.devlog__body ol{padding-left:22px;margin:0 0 28px}.devlog__body h1{line-height:1.25}.devlog__body h4{font-family:var(--f-kr);font-size:18px;margin:32px 0 12px}.devlog__body pre{max-width:100%;box-sizing:border-box;white-space:pre-wrap;overflow-wrap:anywhere}.table-scroll{max-width:100%;overflow-x:auto;margin:24px 0 32px}.devlog__body table{width:100%;border-collapse:collapse;font-family:var(--f-kr);font-size:14px;line-height:1.8}.devlog__body th,.devlog__body td{border-bottom:1px solid var(--rule);padding:12px 10px;text-align:left;vertical-align:top;overflow-wrap:anywhere}.devlog__body th{background:var(--bg-2);font-weight:600}.devlog__body.rev{opacity:1;transform:none}</style>
+<link rel="stylesheet" href="../assets/css/site-navigation.css" />
+<meta name="description" content="매직블럭마스터의 캐릭터 시트와 공간, 큐브, 장면 프레임을 살펴보는 제작 기록.">
+
+<link rel="stylesheet" href="../assets/css/project-watch.css">
+<link rel="stylesheet" href="../assets/css/magic-block-master.css">
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav__logo"><span class="dot" aria-hidden="true"></span>byKimjak</a>
+  <div class="nav__menu" role="navigation">
+    <div class="has-drop">
+      <a href="../watch/"><span class="idx">01</span>WATCH</a>
+      <div class="drop"><a href="../watch/gappae.html"><span class="sub-idx">01–A</span>GAPPAE / 갑패</a><a href="../watch/eastwar.html"><span class="sub-idx">01–B</span>EASTWAR</a><a href="../watch/magic-block-master.html"><span class="sub-idx">01–C</span>MAGIC BLOCK MASTER</a></div>
+    </div>
+    <div class="has-drop">
+      <a href="../make/"><span class="idx">02</span>MAKE</a>
+      <div class="drop">
+        <a href="../make/eastwar.html"><span class="sub-idx">02–A</span>EASTWAR 개발일지</a>
+        <a href="../make/grandslam.html"><span class="sub-idx">02–B</span>GrandSlam 개발일지</a>
+        <a href="../make/takezero.html"><span class="sub-idx">02–C</span>TakeZero · 프롬프트 엔진</a>
+        <a href="../make/gappae-trailer.html"><span class="sub-idx">02–D</span>갑패 트레일러</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../think/"><span class="idx">03</span>THINK</a>
+      <div class="drop">
+        <a href="../think/ai-coach.html"><span class="sub-idx">03–A</span>AI 코치들과의 수다</a>
+        <a href="../think/morning-word.html"><span class="sub-idx">03–B</span>아침 말씀 with 채코치</a>
+        <a href="../think/personal-essay.html"><span class="sub-idx">03–C</span>개인 에세이</a>
+      </div>
+    </div>
+    <a href="../index.html#about"><span class="idx">04</span>ABOUT</a>
+  </div>
+  <div class="nav__cta">
+    <span class="status"><span class="pulse"></span>Available · Seoul</span>
+    <a href="../index.html#contact" class="contact">Contact ↗</a>
+  </div>
+</nav>
+
+<main class="mbm mbm-make"><header class="listing-head"><nav class="breadcrumb" aria-label="현재 위치"><a href="./">MAKE</a> / MAGIC BLOCK MASTER</nav><p class="mbm-kicker">PRODUCTION NOTES / 03</p><h1>이미지와 프롬프트로<br>장면을 설계하다</h1><p class="sub-ko">실제 장면 제작 사례</p></header><article class="devlog"><div class="devlog__body"><nav class="mbm-contents" aria-label="제작기 페이지"><a href="magic-block-master.html">PAGE 01 · 기획과 세계관</a><a href="magic-block-master-02.html">PAGE 02 · 첫 이미지와 Grok 영상 테스트</a><a href="magic-block-master-03.html">PAGE 03 · 실제 장면 제작</a></nav><section><h2>CASE 01 / 마법곰을 공격하는 츄파</h2><p>시작과 끝의 이미지, 중간 구도 가이드를 함께 넣어 츄파의 돌진과 카메라 움직임을 설계한 사례다. 프롬프트는 공격을 향해 달려드는 순간을 지시하며, 두 캐릭터의 실제 접촉은 금지한다.</p><h3>생성 설정</h3><dl><dt>모델</dt><dd>Seedance 2.5</dd><dt>품질 / 비트레이트</dt><dd>480p / High</dd><dt>생성 크기</dt><dd>854 × 480</dd><dt>생성 시각</dt><dd>2026년 10월 8일 오전 11:29 · 제공된 기록 기준</dd></dl><h3>입력 이미지의 역할</h3><p>Image 1은 첫 프레임, Image 3은 마지막 프레임을 지정한다. Image 2는 약 2초 시점의 배치 가이드이며, 정지 화면처럼 유지하지 않도록 지시했다.</p><div class="project-images mbm-cover"><figure><img src="../assets/magic-block-master/case-01/%EB%A7%88%EB%B2%95%EA%B3%B0%20%EA%B3%B5%EA%B2%A9%ED%95%98%EB%8A%94%20%EC%B8%84%ED%8C%8C01.png" alt="Image 1 · START FRAME · 시작 프레임" width="1672" height="941" loading="lazy" decoding="async"><figcaption>Image 1 · START FRAME · 시작 프레임</figcaption></figure><figure><img src="../assets/magic-block-master/case-01/%EB%A7%88%EB%B2%95%EA%B3%B0%20%EA%B3%B5%EA%B2%A9%ED%95%98%EB%8A%94%20%EC%B8%84%ED%8C%8C02.png" alt="Image 2 · MIDDLE GUIDE · 약 2초 시점의 구도 가이드" width="1672" height="941" loading="lazy" decoding="async"><figcaption>Image 2 · MIDDLE GUIDE · 약 2초 시점의 구도 가이드</figcaption></figure><figure><img src="../assets/magic-block-master/case-01/%EB%A7%88%EB%B2%95%EA%B3%B0%20%EA%B3%B5%EA%B2%A9%ED%95%98%EB%8A%94%20%EC%B8%84%ED%8C%8C03.png" alt="Image 3 · END FRAME · 마지막 프레임" width="1672" height="941" loading="lazy" decoding="async"><figcaption>Image 3 · END FRAME · 마지막 프레임</figcaption></figure></div><h3>연출 의도</h3><p>프롬프트상 목표는 5초의 연속 숏이다. 약 0.3초 뒤 카메라가 오른쪽으로 빠르게 휩 팬하고, 약 2초에 구도를 잡은 뒤 츄파를 향해 낮고 빠르게 전진한다.</p><p>곰은 250cm, 츄파는 어깨 높이 약 55cm로 크기 차이를 지정했다. 츄파는 네 발로 일정하게 달리고 곰은 미세한 호흡 외에 움직이지 않는다. 음악과 대사 없이 발소리, 흙과 잎 소리, 곰의 낮은 숨소리만 요청했다.</p><p class="mbm-caption">위 내용은 프롬프트의 지시 사항이다. 제공된 결과 파일의 길이는 5초로 확인했다. 카메라 움직임과 사운드는 아래 결과 영상에서 확인할 수 있다.</p><h3>실제 영문 프롬프트</h3><details><summary>프롬프트 원문 전체 보기</summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%;font-size:13px;line-height:1.8">&lt;&lt;&lt;image_1&gt;&gt;&gt;: START FRAME. The very first frame of the video must match this image exactly. Use it strictly for the opening frame, the look and the relative sizes.
+&lt;&lt;&lt;image_3&gt;&gt;&gt;: END FRAME. The very last frame of the video must match this image exactly. Use it strictly for the closing frame, the look and the relative sizes.
+&lt;&lt;&lt;image_2&gt;&gt;&gt;: MIDDLE GUIDE. Use it only to show where the bear and the creature sit in the frame at about 2 seconds. Never hold on it as a still.
+
+IMPORTANT: this clip has NO music of any kind. Its entire soundtrack is only natural in-world sound.
+
+IMPORTANT: there are exactly two beings in the whole clip: one small green creature and one gigantic crystal bear. Nobody and nothing else ever appears.
+
+IMPORTANT: SCALE. The bear stands 250 cm tall with its claws raised. The creature is only about 55 cm tall at the shoulder. The bear is more than four times larger than the creature. One clawed paw of the bear is larger than the creature&#x27;s whole head. The bear is in the foreground; the creature is in the midground, always farther from the camera than the bear&#x27;s paws, and it never passes in front of them. The creature stays small and light in every second, and in the final frame it fills about 30 percent of the frame height.
+
+IMPORTANT: the bear NEVER moves its body or arms, never strikes, never reaches for the creature and never touches it. It only breathes subtly. When the bear slides toward the left of the frame, it is only because the camera pans away from it. The creature never touches the bear.
+
+IMPORTANT: every tree, stone pillar, flower and every crystal facet of the bear stays perfectly still in every second of the clip. The crystals never flicker, shimmer, crawl or change their pattern. The only things that move are the creature, the dust kicked up by its paws, a few drifting leaves, and the natural parallax made by the camera&#x27;s own motion.
+
+IMPORTANT: the first frame is exactly the start image, with the creature already mid-stride and the dust already in the air. Nothing starts from a standstill. The last frame is exactly the end image. The creature runs on all four legs at a constant speed for the whole clip: it never stops, never rears up on two legs and never leaps.
+
+Soft stylized 3D animated feature-film look exactly as in the reference images, 5 seconds, one continuous shot, 16:9, no cuts. Warm golden light, glowing dust, shallow depth of field, matte clay-like creature skin, steady glossy crystal facets on the bear. Keep the colors and the lighting of the references unchanged. Everything moves in real time with real weight, no slow motion and no floaty movement. A fast, thrilling mood.
+
+THE PLACE: an ancient fantasy forest in golden-hour light with soft light shafts. A dirt path winds between huge mossy trees. On both sides stand mossy stone pillars with glowing blue runes, small glowing blue flowers, ferns and a few drifting leaves. All trees, pillars and flowers stand perfectly still.
+
+THE CREATURE: one small green quadruped lizard-like creature, about 55 cm tall, with large pointed ears, one cream horn on its forehead, cream spikes along its back, red eyes, small sharp fangs and a fierce grin. It runs low on all four legs. Keep its face, color and shape identical to the references.
+
+THE BEAR: one gigantic standing bear, 250 cm tall, built from multicolored crystal blocks with gold claws. It is in the foreground, out of focus, with its claws raised on both sides, seen from behind its shoulder. It is a still, menacing giant.
+
+THE CAMERA: the clip opens on the start image at a low angle behind the bear&#x27;s shoulder. After about a third of a second it makes one sudden fast whip pan to the right with strong motion blur and believable inertia, settling into a steady composition at about 2 seconds. Then it pushes in fast and low toward the charging creature and settles exactly on the end image. It never orbits, never passes through bodies, never enters the bear and always stays in the forest.
+
+PERFORMANCE, one continuous shot:
+0.0-2.0s: the creature is already mid-stride on the path, sprinting toward the camera on all four legs at a constant speed, with dust in the air. The bear&#x27;s blurred shoulder and claws fill the foreground. The camera holds for a moment, then whips right. As the camera pans away, the bear slides to the left side of the frame and the creature settles on the right side of the path, as in the middle guide at about 2 seconds.
+2.0-5.0s: the camera pushes in fast and low toward the creature while the bear stays in the left foreground, still and out of focus. The creature keeps sprinting, its paws kicking up dirt, its eyes locked forward. At 5 seconds the frame is exactly the end image: the creature on the right-center of the path, the bear in the left foreground, the creature far smaller than the bear.
+
+Sound design (strict): the soundtrack contains ONLY natural in-world sound: fast paws on dirt, dust and leaves, and one deep, low breath from the bear. There are no words. There is no music of any kind: no background music, no film score, no melody, no piano, no strings, no flute, no drums, no percussion, no synth, no choir, no singing, no humming, no drone, no pad, no riser, no swell, no heartbeat, no sub-bass, no rhythmic beat, no emotional underscore.
+
+Avoid: the creature larger than or as big as the bear, the creature growing toward the lens, the creature in front of the bear&#x27;s paws, the creature standing on two legs, stopping, leaping or slowing down, the bear moving, turning, striking or reaching for the creature, any contact between them, a third being, crystals that flicker, shimmer or change pattern, a tree that moves or sways by itself, a static camera, a camera that orbits or passes through bodies, a different creature design, text, watermark, subtitles, cuts, fade in, fade out, black frames, background music, music of any kind, score, piano, strings, drums, singing, humming.
+
+Reminder: no music, no words. Exactly two beings: the small green creature and the gigantic crystal bear. The bear is 250 cm tall and the creature 55 cm, so the bear is far larger in every frame. The creature always runs on four legs at constant speed, behind the bear&#x27;s paws. The bear never moves. The clip starts exactly on the start image, whips right at about a third of a second, settles at 2 seconds, then pushes in fast and low and ends exactly on the end image. Every tree, pillar, flower and crystal stays perfectly still.</pre></details><h3>생성 결과 영상</h3><div class="mbm-film"><video controls playsinline preload="metadata" aria-label="CASE 01 · 마법곰을 공격하는 츄파 생성 결과"><source src="../assets/magic-block-master/%EB%A7%A4%EB%B8%94%EB%A7%88%EC%86%8C%EC%8A%A4/MBM_Title_A_%EC%A0%91%EA%B7%BC_%EC%8B%9C%EB%8C%84%EC%8A%A4_S1_v1.mp4" type="video/mp4"></video></div><p class="mbm-caption">김작이 지정한 CASE 01 결과 영상 · 5초 · 제공 파일 3840×2160 · H.264 / AAC</p><p>생성 화면에 기록된 크기는 854×480이며, 제공된 결과 파일은 3840×2160이다. 두 기록을 구분해 표기하며, 해상도 변환 과정은 확인되지 않았다.</p></section><section id="case-02"><h2>CASE 02 / 골목의 어둠의 파로</h2><p>장소와 캐릭터를 별도 컨텍스트로 넣고, 고개를 드는 순간과 표정 변화의 타이밍을 설계한 사례다.</p><h3>생성 설정</h3><p>MiniMax H3 Max · 480p · 854×480<br>2026년 10월 8일 오후 5:33 · 제공된 생성 기록 기준</p><h3>입력 이미지</h3><p>프롬프트의 Image 1은 밤 골목의 공간, Image 2는 파로의 외형을 위한 참고 이미지다. 첨부 순서와 프롬프트 번호는 다르다.</p><div class="project-images mbm-cover"><figure><img src="../assets/magic-block-master/%EB%A7%A4%EB%B8%94%EB%A7%88%EC%86%8C%EC%8A%A4/still/MBM_Place_%EA%B3%A8%EB%AA%A9%EA%B1%B7%EA%B8%B0_%EB%B0%A4_v1.png" width="1920" height="1080" alt="Image 1 · 밤 골목의 공간 참고" loading="lazy"><figcaption>Image 1 · 밤 골목의 공간 참고</figcaption></figure></div><div class="project-images mbm-cover"><figure><img src="../assets/magic-block-master/case-02/%EC%82%AC%EB%A1%802-%ED%8C%8C%EB%A1%9C%20%EC%BA%90%EB%A6%AD%ED%84%B0%EC%8B%9C%ED%8A%B8.png" width="1774" height="887" alt="Image 2 · 파로 캐릭터 시트" loading="lazy"><figcaption>Image 2 · 얼굴, 모자, 머리카락, 푸른 눈, 의상과 펜던트의 기준</figcaption></figure></div><h3>연출 의도</h3><p>0–1.5초에는 모자로 눈을 가리고, 1.5–3.5초에는 고개를 들어 푸른 눈을 드러내며, 3.5–6초에는 입꼬리 한쪽의 희미한 냉소를 요청했다. 카메라는 천천히 전진하며 왼쪽에서 오른쪽으로 약 15도의 호를 그린다.</p><p>장소 시트의 따뜻한 등불은 배제하고 차가운 푸른 달빛을 사용하도록 지시했다. 사운드는 낮고 차가운 밤바람만 요청했다. 이는 프롬프트의 의도이며 아래 결과 영상과 함께 비교해 볼 수 있다.</p><h3>실제 영문 프롬프트</h3><details><summary>프롬프트 원문 전체 보기</summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%;font-size:13px;line-height:1.8">&lt;&lt;&lt;image_2&gt;&gt;&gt;= the dark craftsman: use strictly for his face, hat, hair, glowing blue eyes, robe, braided strap, black gem buttons and blue cube pendant. &lt;&lt;&lt;image_1&gt;&gt;&gt;= the night street look behind him only, no people.
+
+IMPORTANT: no music of any kind, no voices, no words, no text. Exactly one character, the dark craftsman. His design never changes.
+
+IMPORTANT, THE REVEAL: his eyes stay completely hidden in the shadow of the wide hat brim until he raises his head. He raises his head slowly and smoothly, and only then do his glowing blue eyes come out of the shadow, cold and fixed on the camera. His face is blank and cold, never smiling at the start.
+
+IMPORTANT: the camera pushes in slowly and steadily while gliding gently from left to right in a smooth arc of about 15 degrees, from a bust shot (chest up) to a tight close-up of his eyes, nose and mouth; he stays centered in the frame.
+
+IMPORTANT: the street behind him stays still and dark: no lit lantern, no fire, no warm light. The only strong light is the pale blue moonlight behind him that rims his hat brim and shoulders; the cube pendant glows softly. Nothing else moves.
+
+Soft stylized 3D look, 16:9, 6 seconds, one continuous shot, slightly low angle.
+
+0-1.5s: bust shot, his head bowed, the hat brim hiding his whole upper face, only his closed straight lips and chin faintly visible. He stands motionless. The camera starts a slow push-in with a gentle glide to the right.
+1.5-3.5s: he lifts his head slowly; the glowing blue eyes emerge from the shadow, cold and blank. The camera keeps pushing in and gliding right.
+3.5-6s: the push-in reaches a close-up of his face: his eyes narrow slightly with cold contempt and one corner of his lips rises in a faint, cynical smirk. He holds still. The last frame is a tight close-up.
+
+Sound: a low cold night wind.
+
+Avoid: his eyes visible before 1.5 s, a smile before 3.5 s, a second character, a lit lantern, warm light, a changing face, a static camera, a wide orbit, cuts, text, music.</pre></details><h3>생성 결과 영상</h3><div class="mbm-film"><video controls playsinline preload="metadata" aria-label="CASE 02 · 골목 어둠의 파로 생성 결과"><source src="../assets/magic-block-master/%EB%A7%A4%EB%B8%94%EB%A7%88%EC%86%8C%EC%8A%A4/%EA%B3%A8%EB%AA%A9%20%EC%96%B4%EB%91%A0%EC%9D%98%20%ED%8C%8C%EB%A1%9C.mp4" type="video/mp4"></video></div><p>제공 파일: 약 6.59초 · 3746×2160 · H.264/AAC. 프롬프트의 6초·16:9 및 생성 기록 854×480과 구분한다. 변환 과정은 확인되지 않았다.</p></section><section id="case-03"><h2>CASE 03 / 서울 항공비행</h2><p>시작 프레임으로 탑승자 뒤의 카메라 시점을 고정하고, 별도의 장소 이미지로 서울 도심의 모습과 색감을 지정한 비행 장면이다.</p><h3>생성 설정</h3><dl><dt>모델</dt><dd>Seedance 2.5</dd><dt>품질 / 비트레이트</dt><dd>480p / High</dd><dt>생성 크기</dt><dd>854×480</dd><dt>생성 시각</dt><dd>2026년 10월 8일 오후 9:22 · 제공된 기록 기준</dd></dl><h3>입력 이미지의 역할</h3><div class="project-images mbm-cover"><figure><img src="../assets/magic-block-master/case-03/%EC%82%AC%EB%A1%8003-%EC%9D%B4%EB%AF%B8%EC%A7%8001.png" width="2848" height="1600" alt="시작 프레임 · 탑승자 뒤의 시점과 용의 목 가시" loading="lazy" decoding="async"><figcaption>시작 프레임 · 탑승자 뒤의 시점과 용의 목 가시</figcaption></figure><figure><img src="../assets/magic-block-master/case-03/MBM_Place_%EC%84%9C%EC%9A%B8%EB%8F%84%EC%8B%AC_P1_%ED%98%91%EA%B3%A1_v1.png" width="2848" height="1600" alt="Image 2 · 서울 도심의 공간과 색감 참고" loading="lazy" decoding="async"><figcaption>Image 2 · 서울 도심의 공간과 색감 참고</figcaption></figure></div><p>시작 프레임은 왼쪽 가장자리의 탑승자 뒷머리와 아래 중앙의 붉은 용 목 가시를 화면에 고정하는 기준이다. Image 2는 유리 빌딩, 차량이 있는 대로, 황금빛 색감과 남산의 두 탑을 위한 공간 참고다. 카메라 구도는 장소 이미지가 아니라 시작 프레임과 숏 설명을 따르도록 구분했다.</p><h3>연출 의도</h3><p>프롬프트는 8초의 연속 숏을 요청한다. 0–1.5초에 흰 금빛이 걷히고, 1.5–4.5초에는 빌딩 사이를 빠르게 전진한다. 4.5–7초에는 빌딩 사이를 벗어나 남산과 두 탑을 오른쪽으로 지나치며, 7–8초에는 비어 있는 황금빛 하늘을 바라본다.</p><p>카메라는 용의 탑승자들과 함께 움직이고 전경의 위치는 유지한다. 마지막 2초에는 약하게 왼쪽으로 기울며, 건물과 산이 자체적으로 움직이는 대신 비행에 따른 시차로 공간이 지나가도록 지시했다. 다른 용이나 비행 생물은 등장시키지 않는다.</p><p>음악과 대사 없이 바람, 희미한 도시 소음과 멀리서 들리는 경적, 붉은 용의 묵직한 날갯짓만 요청했다.</p><p class="mbm-caption">위 내용은 프롬프트의 의도다. 생성 결과 영상과 함께 비교해 볼 수 있다.</p><h3>실제 영문 프롬프트</h3><details><summary>프롬프트 원문 전체 보기</summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%;font-size:13px;line-height:1.8">IMPORTANT: this clip has NO music of any kind. Its entire soundtrack is only real, in-world sound: rushing wind, a faint city hum, and the heavy beat of the red dragon&#x27;s wings. Nothing else.
+
+IMPORTANT: the clip opens exactly on the start frame, and its foreground stays at the same place on screen for the whole clip: the back of the curly-haired rider&#x27;s head at the left edge and the red block dragon&#x27;s golden neck spikes at the bottom center. The camera is locked to the riders and flies forward with them. Only the world moves past them. The camera position and composition come only from the start frame and the shot description below.
+
+IMPORTANT: there is no dragon, no other creature and no other flying figure anywhere in this clip except the red dragon the riders sit on. The sky ahead stays empty to the last frame.
+
+IMPORTANT: every building, the hill and both towers stay perfectly still in every second of the clip. The only movement of the scenery is the natural parallax made by the camera&#x27;s own forward flight, and the only moving things in the city are the small cars.
+
+Soft stylized 3D animated feature film, 8 seconds, one continuous shot, no cuts, the same look as the start frame: matte rounded forms, smooth surfaces, warm storybook golden-hour color. Everything moves in real time at high speed with real weight. The city&#x27;s look comes from &lt;&lt;&lt;image_2&gt;&gt;&gt;: its glass towers, its boulevard with cars, its golden-hour palette, and the green hill of Namsan with its two towers.
+
+THE PLACE: downtown Seoul at golden hour. Tall glass towers in teal, steel blue and soft grey-blue with warm orange rim light rise on both sides. Far below, a wide tree-lined boulevard is full of small toy-like cars (white, silver, black, yellow taxis, red and blue buses) moving in both lanes. Ahead stands the green hill of Namsan with exactly two towers on its ridge, side by side: the white N Seoul Tower with its grey barrel-shaped pod and red-and-white antenna, and to its left the smaller red-and-white lattice transmission tower with its red A-frame legs. The sky is a glowing gradient from pale gold at the horizon through peach and rose to soft lavender-blue, with long warm stratus clouds, and the sun hangs low ahead, just beyond the hill.
+
+THE CAMERA: the camera rides just behind the two riders on the red dragon, flying fast and level at mid-height between the towers and always moving forward. It never orbits, never cuts and never passes through a building. In the last two seconds it banks very slightly to the left so that the hill and its towers slide past on the right.
+
+PERFORMANCE, one continuous shot:
+0.0-1.5s: the clip opens on the start frame, with the whole background a swirl of white-gold light. The light thins from the center outward and clears within one and a half seconds, and Seoul&#x27;s glass towers appear ahead and on both sides, forming a canyon.
+1.5-4.5s: the riders fly forward fast down the canyon. The towers stream past on both sides at high speed, the boulevard far below is full of small moving cars, and the hill of Namsan with its two towers ahead grows steadily larger.
+4.5-7.0s: at the exact moment the last tall towers slide out of frame on both sides, the canyon ends and the sky opens wide. The riders sweep past the hill: the N Seoul Tower and the smaller transmission tower slide by on the right side of the frame, the tower reaching about one third of the frame height, and then leave the frame at the right edge.
+7.0-8.0s: the frame holds on the open golden sky ahead and the low sun, completely empty.
+
+Sound design (strict): the soundtrack contains ONLY real in-world sound. (1) Rushing wind in the ears, rising through the clip. (2) A low, faint city hum with a few distant car horns from far below. (3) The slow, heavy beat of the red dragon&#x27;s wings close by. There are no words and no speech. There is no music of any kind: no background music, no film score, no soundtrack, no melody, no strings, no choir, no drums, no percussion, no synth, no drone, no riser, no heartbeat, no rhythmic beat, no emotional underscore.
+
+Avoid: a cut, a fade, a black frame, the camera orbiting, the camera passing through a building, the foreground riders or the red dragon&#x27;s neck spikes changing place or disappearing, a building, the hill or a tower that moves, sways or slides by itself, any other dragon, bird or creature in the sky, more or fewer than two towers on Namsan, a live-action or photographic look, text, signs, logos, spoken words, music of any kind, score, soundtrack, piano, strings, drone, riser, heartbeat, drums, singing, humming.
+
+Reminder: no music, no words. The clip opens exactly on the start frame, and its white-gold light clears within one and a half seconds while the riders&#x27; foreground stays in place to the end. The riders fly fast down a canyon of glass towers with cars far below, then sweep past the hill of Namsan, where exactly two towers slide by on the right. The last second holds on the empty golden sky ahead. Everything in the city stands perfectly still except the cars.</pre></details><h3>생성 결과 영상</h3><div class="mbm-film"><video controls playsinline preload="metadata" aria-label="CASE 03 · 서울 항공비행 생성 결과"><source src="../assets/magic-block-master/%EB%A7%A4%EB%B8%94%EB%A7%88%EC%86%8C%EC%8A%A4/%EC%84%9C%EC%9A%B8%20%ED%95%AD%EA%B3%B5%EB%B9%84%ED%96%89.mp4" type="video/mp4"></video></div><p class="mbm-caption">서울 항공비행.mp4 · 약 8.06초 · 3840×2160 · H.264 / AAC</p><p>제공된 영상 파일의 해상도는 생성 화면에 기록된 854×480과 구분해 표기한다. 해상도 변환 과정은 확인되지 않았다.</p></section><section id="case-04"><h2>CASE 04 / 최종격돌</h2><p>서울의 노을을 배경으로 두 용이 서로를 향해 접근하는 장면이다. 시작과 끝의 구도를 이미지로 정하고, 그 사이의 접근 속도와 자세 변화를 프롬프트로 설계했다.</p><h3>생성 설정</h3><dl><dt>모델</dt><dd>Kling 3.0</dd><dt>생성 크기</dt><dd>1280×720</dd><dt>생성 시각</dt><dd>2026년 10월 8일 오후 11:16 · 제공된 기록 기준</dd></dl><h3>시작과 끝 프레임</h3><div class="project-images mbm-pair"><figure><img src="../assets/magic-block-master/%EB%A7%A4%EB%B8%94%EB%A7%88%EC%86%8C%EC%8A%A4/still/MBM_Frame_%EB%91%90%EC%9A%A9%EA%B2%A9%EB%8F%8C_%EC%8B%9C%EC%9E%91_v1.png" width="1920" height="1080" alt="시작 프레임 · 두 용의 격돌" loading="lazy" decoding="async"><figcaption>시작 프레임 · 두 용의 격돌</figcaption></figure><figure><img src="../assets/magic-block-master/%EB%A7%A4%EB%B8%94%EB%A7%88%EC%86%8C%EC%8A%A4/still/MBM_Frame_%EB%91%90%EC%9A%A9%EA%B2%A9%EB%8F%8C_%EB%81%9D_v1.png" width="1920" height="1080" alt="끝 프레임 · 두 용의 격돌" loading="lazy" decoding="async"><figcaption>끝 프레임 · 두 용의 격돌</figcaption></figure></div><p>시작은 붉은 용이 왼쪽 아래, 검은 용이 오른쪽 위에서 넓은 간격을 두고 마주 보는 구도다. 끝은 두 용의 주둥이가 화면 중앙에서 거의 맞닿고 주황색과 푸른 불꽃이 일어나는 구도다.</p><h3>연출 의도</h3><p>0–1초에는 일정한 날갯짓으로 접근하고, 1–3.8초에는 점차 속도를 높이며 화면에서 커지도록 요청했다. 3.8–5초에는 마지막 자세에 도달해 입을 벌리고 불꽃이 일어나도록 지시했다.</p><p>용 두 마리와 탑승자 세 명의 수, 각 용과 인물의 외형을 유지하도록 명시했다. 카메라는 흔들림이나 컷 없이 고정하고, 용들이 움직이며 가까워지도록 설계했다.</p><p class="mbm-caption">위 내용은 프롬프트의 의도이며 아래 결과 영상과 함께 비교해 볼 수 있다. 이 프롬프트에는 별도의 사운드 지시가 없다.</p><h3>실제 영문 프롬프트</h3><details><summary>프롬프트 원문 전체 보기</summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%;font-size:13px;line-height:1.8">Anime-style fantasy cinematic shot, 5 seconds, 16:9. Over Seoul at golden-hour dusk, a red block dragon carrying two riders and a black block dragon carrying one rider fly straight toward each other and meet head-on at the center of the frame.
+
+Start frame: the red dragon at the lower left flying to the right, the black dragon at the upper right flying to the left, a wide gap between them.
+End frame: both dragons much closer to the camera and to each other, snouts almost touching at the center, jaws open, orange and blue sparks flaring between them.
+
+0.0-1.0s: Both dragons fly toward each other with slow, steady wing beats. The riders lean forward. Golden clouds drift gently.
+1.0-3.8s: Both dragons close in toward the center at a smooth, steady, increasing speed. Their size grows gradually and continuously as they come closer to the camera. Every cube segment, scale, crystal and rider stays sharp and detailed as they grow larger.
+3.8-5.0s: The dragons arrive at the end-frame pose with snouts almost touching, jaws wide, wings angled forward. Sparks of orange and blue flare and flicker at the point between the snouts. The riders hold on, fierce and resolute.
+
+Constant throughout: exactly two dragons and three riders. The red dragon stays red and gold with orange wings, carrying a short-haired boy in a red hood and a curly-haired girl in a cream scarf. The black dragon stays black, made of stepped angular cubes with pale grey chest plates, blue-violet wings, electric-blue eyes and icy-blue crystal spikes, carrying a rider in a flat-brim black hat and dark cloak. The background stays fixed and unchanged: Namsan with the N Seoul Tower and the transmission tower, the Seoul skyline, the river with its bridge, and the low sun on the right horizon.
+
+Camera: locked and steady, no cuts, no shake. The dragons move; the camera stays still.</pre></details><h3>생성 결과 영상</h3><div class="mbm-film"><video controls playsinline preload="metadata" aria-label="CASE 04 · 최종격돌 생성 결과"><source src="../assets/magic-block-master/%EB%A7%A4%EB%B8%94%EB%A7%88%EC%86%8C%EC%8A%A4/%EC%B5%9C%EC%A2%85%EA%B2%A9%EB%8F%8C.mp4" type="video/mp4"></video></div><p class="mbm-caption">최종격돌.mp4 · 약 5.04초 · 3840×2160 · H.264 / AAC</p><p>제공된 결과 파일은 생성 기록의 1280×720과 해상도가 다르다. 변환 과정을 추정하지 않고 두 기록을 구분한다.</p></section><nav class="mbm-contents" aria-label="제작기 페이지"><a href="magic-block-master.html">PAGE 01 · 기획과 세계관</a><a href="magic-block-master-02.html">PAGE 02 · 첫 이미지와 Grok 영상 테스트</a><a href="magic-block-master-03.html">PAGE 03 · 실제 장면 제작</a></nav></div></article></main>
+
+<footer id="contact">
+  <p class="big">Let's build a <em>world</em> →</p>
+  <div class="grid-ft">
+    <div class="col c1"><h6>byKimjak Studio</h6><p style="font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0">IP Architect · Seoul, Korea. 시나리오·드라마 기획부터 AI 영상, 게임, 앱까지 — 한 사람이 하나의 세계관을 끝까지 설계합니다.</p></div>
+    <div class="col c2"><h6>Sections</h6><a href="../watch/">Watch <span class="ext">/01</span></a><a href="../make/">Make <span class="ext">/02</span></a><a href="../think/">Think <span class="ext">/03</span></a></div>
+    <div class="col c3"><h6>Social</h6><span class="unavailable-link">Instagram <span class="ext">↗</span></span><span class="unavailable-link">YouTube <span class="ext">↗</span></span><span class="unavailable-link">Vimeo <span class="ext">↗</span></span><span class="unavailable-link">Threads <span class="ext">↗</span></span></div>
+    <div class="col c4"><h6>Contact</h6><a href="mailto:oropa@kakao.com">oropa@kakao.com</a><span class="unavailable-link">Press kit <span class="ext">PDF</span></span><span class="unavailable-link">For PDs &amp; Investors <span class="ext">↗</span></span></div>
+  </div>
+  <div class="bottom"><span>byKimjak © 2026  ／  All rights, all worlds, reserved.</span><span>Built solo · with AI · in Seoul</span><span></span></div>
+</footer>
+
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+
+</script>
+<script src="lightbox.js"></script>
+<script src="/bykimjak/eastwar-hub.js"></script>
+<script src="../assets/js/site-navigation.js"></script>
+</body>
+</html>
