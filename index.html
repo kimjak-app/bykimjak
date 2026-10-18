@@ -630,7 +630,7 @@
 </style>
 <link rel="stylesheet" href="assets/css/home-trailer.css" />
 <link rel="stylesheet" href="assets/css/site-navigation.css" />
-</head>
+<style>.hero > .gallery-project-links{grid-column:1/-1;margin:0;gap:20px}.hero > .gallery-project-links a{border-bottom:1px solid currentColor;padding:10px 0}#gallery .t-wide{grid-column:span 6}@media(max-width:780px){#gallery .t-wide{grid-column:1/-1}}#gallery .featured-project{grid-column:span 4;min-height:300px}#gallery .featured-project img{object-fit:cover}#gallery .featured-project .t{font-size:clamp(18px,2vw,28px)}@media(max-width:780px){#gallery .featured-project{grid-column:1/-1}}</style></head>
 <body>
 
 <template id="__bundler_thumbnail">
@@ -685,14 +685,15 @@
 <!-- ─────────── HERO ─────────── -->
 <section class="hero" id="top" data-screen-label="01 Hero">
 
-  <div class="home-trailer" data-trailer-player data-video-path="assets/media/gappae/gappae-trailer-03.mp4">
-    <a class="home-trailer__journal" href="make/gappae-trailer.html" aria-label="갑패 트레일러 제작일지 보기">
-      <img class="trailer-poster" src="assets/gappae-trailer/keyart-master-01.png" alt="갑패 Trailer 03 · 기존 키아트" />
-      <video id="hero-video" hidden autoplay muted playsinline preload="metadata" aria-label="갑패 Trailer 03 전체 영상"></video>
-      <div class="home-trailer__caption"><h1>갑패 <span>Trailer 03</span></h1><p data-trailer-status>갑패 Trailer 03 · 제작일지 보기 →</p></div>
+  <div class="home-trailer" data-trailer-player data-title="호리병 · 최종 영상 보기 →" data-video-path="assets/horibyeong/horibyeong-final-20261013.mp4">
+    <a class="home-trailer__journal" href="watch/horibyeong.html" aria-label="호리병 최종 영상 보기">
+      <img class="trailer-poster" src="assets/horibyeong/HORI_W2_BurialChamber_Master_v1.png" alt="호리병 · 봉인의 공간" />
+      <video id="hero-video" hidden autoplay muted playsinline preload="metadata" aria-label="호리병 공식 최종 영상"></video>
+      <div class="home-trailer__caption"><h1>호리병 <span>HORIBYEONG</span></h1><p data-trailer-status>호리병 · 최종 영상 보기 →</p></div>
     </a>
     <div class="home-trailer__controls" hidden><button type="button" data-play>일시정지</button><button type="button" data-sound>소리 켜기</button></div>
   </div>
+  <div class="gallery-project-links"><a href="watch/horibyeong.html">호리병 영상 보기 →</a><a href="make/horibyeong.html">호리병 제작기 보기 →</a></div>
   <a class="home-trailer__skip" href="#gallery">아래 작품 둘러보기 ↓</a>
 
   <div class="hero__row">
@@ -746,7 +747,7 @@
       </p>
     </div>
 
-<div class="grid"><div class="tile t-wide t-video rev"><iframe loading="lazy" src="https://www.youtube.com/embed/PSWiWZCA8wk?rel=0" title="EASTWAR Teaser 01" allowfullscreen allow="autoplay;encrypted-media;picture-in-picture"></iframe><span class="badge">EASTWAR · TEASER 01</span></div><a href="watch/gappae.html" class="tile t-tall rev"><img src="assets/gappae-trailer/keyart-master-01.png" alt="GAPPAE / 갑패" loading="lazy" /><span class="badge">PROJECT</span><div class="meta"><div class="t">GAPPAE / 갑패<span class="ko">Trailer · Characters · Storyboard</span></div></div></a><div class="tile t-half t-video rev"><iframe loading="lazy" src="https://www.youtube.com/embed/fem7TBoZJi8?rel=0" title="GrandSlam Teaser 01" allowfullscreen allow="autoplay;encrypted-media;picture-in-picture"></iframe><span class="badge">GRANDSLAM · TEASER 01</span></div><a href="watch/takezero.html" class="tile t-half rev"><img src="assets/takezero/takezero-jimin.png" alt="TakeZero" loading="lazy" /><span class="badge">CHARACTER</span><div class="meta"><div class="t">TakeZero<span class="ko">AI 캐릭터 · 프롬프트 엔진</span></div></div></a><a href="watch/magic-block-master.html" class="tile t-half rev"><div class="ph s5"></div><span class="badge">PROJECT</span><div class="meta"><div class="t">MAGIC BLOCK MASTER<span class="ko">작업 중</span></div></div></a><a href="watch/ai-film.html" class="tile t-half rev"><img src="https://img.youtube.com/vi/8gXbT3S-Mpc/hqdefault.jpg" alt="Wish 01" loading="lazy" /><span class="badge">ANIMATION</span><div class="meta"><div class="t">Wish 01<span class="ko">AI 단편 애니메이션</span></div></div></a></div><div class="gallery-project-links"><a href="watch/eastwar.html">EASTWAR 작품 전체 →</a><a href="watch/grandslam.html">GrandSlam 티저 →</a><a href="watch/">WATCH 프로젝트 둘러보기 →</a></div>    <div class="marquee" aria-hidden="true">
+<div class="grid"><a href="watch/horibyeong.html" class="tile featured-project rev"><img src="assets/horibyeong/HORI_W2_BurialChamber_Master_v1.png" alt="호리병 / HORIBYEONG" loading="lazy"><span class="badge">PROJECT</span><div class="meta"><div class="t">호리병 / HORIBYEONG<span class="ko">영상과 시트 보기 →</span></div></div></a><a href="watch/gappae.html" class="tile featured-project rev"><img src="assets/gappae-trailer/keyart-master-01.png" alt="갑패 / GAPPAE" loading="lazy"><span class="badge">PROJECT</span><div class="meta"><div class="t">갑패 / GAPPAE<span class="ko">영상과 시트 보기 →</span></div></div></a><a href="watch/magic-block-master.html" class="tile featured-project rev"><img src="assets/magic-block-master/%EB%A7%A4%EB%B8%94%EB%A7%88%EC%86%8C%EC%8A%A4/still/MBM_Title_%EB%A1%9C%EA%B3%A0_v2.png" alt="매직블록마스터 / MAGIC BLOCK MASTER" loading="lazy"><span class="badge">PROJECT</span><div class="meta"><div class="t">매직블록마스터 / MAGIC BLOCK MASTER<span class="ko">영상과 시트 보기 →</span></div></div></a><div class="tile t-wide t-video rev"><iframe loading="lazy" src="https://www.youtube.com/embed/PSWiWZCA8wk?rel=0" title="EASTWAR Teaser 01" allowfullscreen allow="autoplay;encrypted-media;picture-in-picture"></iframe><span class="badge">EASTWAR · TEASER 01</span></div><div class="tile t-half t-video rev"><iframe loading="lazy" src="https://www.youtube.com/embed/fem7TBoZJi8?rel=0" title="GrandSlam Teaser 01" allowfullscreen allow="autoplay;encrypted-media;picture-in-picture"></iframe><span class="badge">GRANDSLAM · TEASER 01</span></div><a href="watch/takezero.html" class="tile t-half rev"><img src="assets/takezero/takezero-jimin.png" alt="TakeZero" loading="lazy" /><span class="badge">CHARACTER</span><div class="meta"><div class="t">TakeZero<span class="ko">AI 캐릭터 · 프롬프트 엔진</span></div></div></a><a href="watch/ai-film.html" class="tile t-half rev"><img src="https://img.youtube.com/vi/8gXbT3S-Mpc/hqdefault.jpg" alt="Wish 01" loading="lazy" /><span class="badge">ANIMATION</span><div class="meta"><div class="t">Wish 01<span class="ko">AI 단편 애니메이션</span></div></div></a></div><div class="gallery-project-links"><a href="watch/eastwar.html">EASTWAR 작품 전체 →</a><a href="watch/grandslam.html">GrandSlam 티저 →</a><a href="watch/">WATCH 프로젝트 둘러보기 →</a></div>    <div class="marquee" aria-hidden="true">
       <div class="marquee__track">
         <span>WORLDBUILDING <i></i> AI CINEMA <i></i> <em>solo studio</em> <i></i> SCENARIO <i></i> VIBE CODE <i></i> GAME DEV <i></i> <em>seoul, kr</em> <i></i> WORLDBUILDING <i></i> AI CINEMA <i></i> <em>solo studio</em> <i></i> SCENARIO <i></i> VIBE CODE <i></i> GAME DEV <i></i> <em>seoul, kr</em> <i></i></span>
         <span>WORLDBUILDING <i></i> AI CINEMA <i></i> <em>solo studio</em> <i></i> SCENARIO <i></i> VIBE CODE <i></i> GAME DEV <i></i> <em>seoul, kr</em> <i></i> WORLDBUILDING <i></i> AI CINEMA <i></i> <em>solo studio</em> <i></i> SCENARIO <i></i> VIBE CODE <i></i> GAME DEV <i></i> <em>seoul, kr</em> <i></i></span>
@@ -776,7 +777,7 @@
         </div>
       </div>
       <div class="desc kr">
-        GAPPAE, EASTWAR, MAGIC BLOCK MASTER의 결과물을 프로젝트별로 봅니다. 영상, 캐릭터, 스토리보드와 음악을 한 세계 안에서 만납니다.
+        호리병, 갑패, 매직블록마스터, EASTWAR의 결과물을 프로젝트별로 봅니다. 영상, 캐릭터, 스토리보드와 음악을 한 세계 안에서 만납니다.
       </div>
       <div class="tags">
         <span>AI Film</span><span>OST</span><span>Trailer</span><span>16∶9</span>

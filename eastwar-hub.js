@@ -1,5 +1,5 @@
 /**
- * byKimjak PROJECT HUB — GAPPAE + EASTWAR, 20261001-combined-02
+ * byKimjak PROJECT HUB — GAPPAE + EASTWAR, 20261018-projects-03
  * One widget; live HTML links; 640x960 web-optimized artwork from the supplied PNG.
  * Starts collapsed so the homepage trailer remains unobstructed.
  */
@@ -9,8 +9,8 @@
   window.__byKimjakProjectHubV1 = true;
 
   var BASE = '/bykimjak';
-  var VERSION = '20261001-combined-02';
-  var ART = BASE + '/assets/ui/gappae-eastwar-popup-bg-01.webp?v=' + VERSION;
+  var VERSION = '20261018-projects-03';
+  var ART = "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/thumb-a70b478cc483012b6e510b5c.webp";
   var POSITION_KEY = 'byKimjakProjectHubPositionV1';
   var HOME = new RegExp('^' + BASE + '/?(?:index\\.html)?$').test(location.pathname);
   var LINKS = [
@@ -110,28 +110,33 @@
       :host([data-art="missing"]) .ph-gappae{border-bottom:1px solid #b59b65;}
       @media(prefers-reduced-motion:no-preference){a,button{transition:filter .15s ease;}}
     `;
+    style.textContent += `
+      #ph-card{background-size:cover;background-position:center;color:#fff8e9;background-color:#17130f}
+      #ph-card::before,:host([data-art="ready"]) #ph-card::before{background:linear-gradient(#08070680,#080706f5 65%)}
+      .ph-header{height:44px;text-align:left;padding:16px 20px 0;font-size:10px;letter-spacing:.15em;color:#d8c49d}
+      .ph-feature{display:flex;flex-direction:column;gap:6px;padding:12px 20px 18px;height:112px}
+      .ph-feature strong{font-size:27px;display:flex;justify-content:space-between}.ph-feature small{font-size:11px;color:#e1d8c8}
+      .ph-projects{display:grid;grid-template-columns:1fr 1.3fr;margin:0 16px;border-block:1px solid #ffffff35}
+      .ph-projects a{padding:16px 5px;text-align:center;font-size:13px}.ph-projects a+a{border-left:1px solid #ffffff35}
+      .ph-eastwar{height:auto;padding:9px 16px}.ph-eastwar h2{font-size:12px;letter-spacing:.15em;margin-bottom:10px}
+      .ph-links{display:grid;grid-template-columns:1fr 1fr;gap:6px}.ph-link{min-height:42px;border:1px solid #ffffff30!important;border-radius:3px;background:#ffffff08!important;padding:6px}.ph-name{font-size:12px}
+      .ph-eyebrow{color:#ead8ac}
+    `;
     shadow.appendChild(style);
     var panel = document.createElement('section');
     panel.id = 'ph-panel';
     panel.setAttribute('role', 'region');
-    panel.setAttribute('aria-label', '갑패 트레일러와 EASTWAR 바로가기');
-    panel.innerHTML = '<div id="ph-card">' +
-      '<section class="ph-gappae" aria-labelledby="ph-gappae-title">' +
-      '<div class="ph-heading" title="드래그하여 이동">' +
-      '<span class="ph-eyebrow">GAPPAE TRAILER</span>' +
-      '<h2 id="ph-gappae-title">갑패 트레일러 작업</h2></div>' +
-      '<a id="ph-gappae-link" href="' + BASE + '/make/gappae-trailer.html">바로가기 <span aria-hidden="true">→</span></a>' +
-      '</section><section class="ph-eastwar" aria-labelledby="ph-eastwar-title">' +
-      '<h2 class="ph-heading" id="ph-eastwar-title" title="드래그하여 이동">EASTWAR HUB</h2>' +
-      '<nav class="ph-links" aria-label="EASTWAR 메뉴">' + LINKS.map(function (link) {
-        return '<a class="ph-link" href="' + BASE + link[3] + '"><span class="ph-label">' + link[0] +
-          '</span><span class="ph-name">' + link[1] + (link[2] ? '<span class="ph-en">(' + link[2] + ')</span>' : '') + '</span></a>';
-      }).join('') + '</nav><button id="ph-close" type="button">닫기 ✕</button></section></div>' +
-      '<button id="ph-top-close" type="button" aria-label="통합 팝업 접기">×</button>';
+    panel.setAttribute('aria-label', '호리병 · 갑패 · 매직블록마스터 · EASTWAR 바로가기');
+    panel.innerHTML = '<div id="ph-card"><div class="ph-heading ph-header" title="드래그하여 이동">PROJECTS</div>' +
+      '<a class="ph-feature" href="' + BASE + '/watch/horibyeong.html"><span class="ph-eyebrow">LATEST FILM</span><strong>호리병 <span aria-hidden="true">→</span></strong><small>HORIBYEONG · 영상과 제작기</small></a>' +
+      '<nav class="ph-projects" aria-label="작품 바로가기"><a href="' + BASE + '/watch/gappae.html">갑패 ↗</a><a href="' + BASE + '/watch/magic-block-master.html">매직블록마스터 ↗</a></nav>' +
+      '<section class="ph-eastwar"><h2 class="ph-heading" title="드래그하여 이동">EASTWAR</h2><nav class="ph-links" aria-label="EASTWAR 메뉴">' + LINKS.map(function (link) {
+        return '<a class="ph-link" href="' + BASE + link[3] + '"><span class="ph-name">' + link[1] + '</span></a>';
+      }).join('') + '</nav></section></div><button id="ph-top-close" type="button" aria-label="통합 팝업 접기">×</button>';
     var collapsed = document.createElement('button');
     collapsed.id = 'ph-collapsed';
     collapsed.type = 'button';
-    collapsed.setAttribute('aria-label', '갑패 · EASTWAR 통합 팝업 열기. 드래그하여 이동 가능');
+    collapsed.setAttribute('aria-label', '작품 메뉴 열기. 호리병 · 갑패 · 매직블록마스터 · EASTWAR');
     collapsed.setAttribute('aria-controls', 'ph-panel');
     collapsed.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-4 8-8 10-4-2-8-5-8-10V6l8-4z"/><path d="M8 9l8 8M16 9l-8 8M7 8l2 2M15 10l2-2"/></svg>';
     shadow.appendChild(panel);
@@ -158,7 +163,7 @@
       var view = viewport();
       if (view.width < 1 || view.height < 1) return;
       var width = Math.min(320, Math.max(1, view.width - 24));
-      var cardHeight = Math.max(420, width * 1.5);
+      var cardHeight = 350;
       var maxHeight = Math.max(44, view.height - 24);
       root.style.setProperty('--ph-width', width + 'px');
       root.style.setProperty('--ph-card-height', cardHeight + 'px');
@@ -195,7 +200,6 @@
       render();
       collapsed.focus({ preventScroll: true });
     }
-    shadow.getElementById('ph-close').addEventListener('click', closePanel);
     shadow.getElementById('ph-top-close').addEventListener('click', closePanel);
     document.addEventListener('keydown', function (event) {
       if (event.key === 'Escape' && isOpen) closePanel();
@@ -253,7 +257,7 @@
       render();
     }
     art.onload = function () {
-      if (art.naturalWidth !== 640 || art.naturalHeight !== 960) { finish(false); return; }
+      if (!art.naturalWidth) { finish(false); return; }
       if (art.decode) art.decode().then(function () { finish(true); }, function () { finish(false); });
       else finish(true);
     };

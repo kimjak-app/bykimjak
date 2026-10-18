@@ -8,7 +8,7 @@
       video.hidden = true; poster.hidden = false;
       if (controls) controls.hidden = true;
       if (pending) pending.hidden = false;
-      if (status) status.textContent = '영상을 불러올 수 없습니다 · 제작일지 보기 →';
+      if (status) status.textContent = '영상을 불러올 수 없습니다 · 작품 보기 →';
     }
     function label() {
       if (play) play.textContent = video.ended ? '처음부터 재생' : video.paused ? '재생' : '일시정지';
@@ -18,7 +18,7 @@
     video.addEventListener('loadedmetadata', function () {
       video.hidden = false; poster.hidden = true;
       if (pending) pending.hidden = true;
-      if (status) status.textContent = '갑패 Trailer 03 · 제작일지 보기 →';
+      if (status) status.textContent = root.dataset.title || '갑패 Trailer 03 · 제작일지 보기 →';
       if (controls) controls.hidden = false;
       label();
     });
