@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>호리병 — 레퍼런스로 이어 만든 장면들 · MAKE · byKimjak</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<style>
+:root{--bg:#FFFFFF;--bg-2:#F2F2F2;--ink:#0A0A0A;--ink-2:#2A2A2A;--ink-3:#6B6B6B;--rule:#0A0A0A1A;--dark:#0D0B09;--dark-2:#1A1714;--dark-ink:#FAF7F2;--dark-ink-2:#9C948A;--dark-rule:#FAF7F21A;--accent:oklch(68% 0.08 70);--accent-soft:oklch(68% 0.08 70 / 0.12);--f-display:"Space Grotesk","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-body:"Inter","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-mono:"JetBrains Mono",ui-monospace,monospace;--f-kr:"Pretendard Variable","Inter",ui-sans-serif,system-ui,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:var(--f-body);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.nav{position:fixed;inset:0 0 auto 0;z-index:100;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:18px clamp(20px,4vw,48px);transition:background .35s ease,backdrop-filter .35s ease,border-color .35s ease;border-bottom:1px solid transparent}
+.nav.scrolled{background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:saturate(1.2) blur(14px);-webkit-backdrop-filter:saturate(1.2) blur(14px);border-bottom-color:var(--rule)}
+.nav__logo{font-family:var(--f-display);font-weight:600;font-size:18px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.nav__logo .dot{width:8px;height:8px;border-radius:999px;background:var(--ink);display:inline-block;transform:translateY(-1px)}
+.nav__menu{display:flex;gap:36px;justify-content:center;align-items:center}
+.nav__menu > a,.nav__menu .has-drop > a{font-family:var(--f-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;position:relative;padding:6px 2px;color:var(--ink)}
+.nav__menu > a::after,.nav__menu .has-drop > a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.6,0,.2,1)}
+.nav__menu > a:hover::after,.nav__menu .has-drop:hover > a::after{transform:scaleX(1)}
+.nav__menu .idx{font-family:var(--f-mono);font-size:9px;vertical-align:super;margin-right:4px;color:var(--ink-3)}
+.nav__cta{justify-self:end;display:flex;align-items:center;gap:14px}
+.nav__cta .status{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+.nav__cta .pulse{width:6px;height:6px;border-radius:999px;background:#3CB371;animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px transparent}}
+.nav__cta a.contact{border:1px solid var(--ink);padding:10px 16px;border-radius:999px;font-family:var(--f-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .25s,color .25s}
+.nav__cta a.contact:hover{background:var(--ink);color:var(--bg)}
+.nav__menu .has-drop{position:relative}
+.nav__menu .drop{position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%) translateY(-10px);min-width:210px;background:var(--bg);border:1px solid var(--rule);padding:4px;opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s cubic-bezier(.2,.8,.2,1);z-index:200}
+.nav__menu .has-drop:hover .drop{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.nav__menu .drop a{display:block;padding:10px 14px;border-radius:2px;font-family:var(--f-kr);font-size:13px;font-weight:400;letter-spacing:-.01em;text-transform:none;color:var(--ink-2);transition:background .15s,color .15s}
+.nav__menu .drop a::after{content:none!important}
+.nav__menu .drop a:hover{background:var(--bg-2);color:var(--ink)}
+.sub-idx{display:block;font-family:var(--f-mono);font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin-bottom:2px}
+@media(max-width:780px){.nav{grid-template-columns:1fr auto;padding:14px 20px}.nav__menu{display:none}.nav__cta .status{display:none}}
+.listing-head{padding:120px clamp(20px,4vw,48px) 64px;border-bottom:1px solid var(--rule)}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:28px}
+.breadcrumb a{transition:color .2s}.breadcrumb a:hover{color:var(--ink)}
+.breadcrumb .sep{opacity:.4}
+.listing-head h1{font-family:var(--f-display);font-weight:500;font-size:clamp(44px,9vw,120px);letter-spacing:-.04em;line-height:.92;margin:0 0 8px}
+.listing-head .sub-ko{font-family:var(--f-kr);font-size:clamp(16px,2vw,22px);color:var(--ink-3);margin:0 0 20px;font-weight:400}
+.listing-head .listing-desc{font-family:var(--f-kr);font-size:15px;line-height:1.65;color:var(--ink-3);max-width:48ch}
+.lang-switch{display:inline-flex;align-items:center;margin-bottom:28px}
+.lang-current{font-family:var(--f-display);font-size:14px;font-weight:700;color:var(--ink);padding:10px 20px;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px;cursor:default;letter-spacing:.01em}
+.lang-sep{font-family:var(--f-mono);font-size:14px;color:var(--ink-3);opacity:.35;user-select:none;line-height:1}
+.lang-other{font-family:var(--f-display);font-size:14px;font-weight:400;color:var(--ink-3);padding:10px 20px;transition:color .2s;letter-spacing:.01em}
+.lang-other:hover{color:var(--ink)}
+footer{background:var(--dark);color:var(--dark-ink);padding:90px clamp(20px,4vw,48px) 36px;overflow:hidden}
+footer .big{font-family:var(--f-display);font-weight:400;font-size:clamp(44px,7vw,108px);letter-spacing:-.04em;line-height:.95;color:var(--dark-ink);margin:0 0 48px;text-wrap:balance}
+footer .big em{font-style:italic;font-family:"Times New Roman",serif;color:#A99A85}
+footer .grid-ft{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding-top:36px;border-top:1px solid var(--dark-rule)}
+footer .col{display:flex;flex-direction:column;gap:10px}
+footer .col h6{margin:0 0 6px;font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--dark-ink-2);font-weight:400}
+footer .col a{font-family:var(--f-display);font-size:15px;color:var(--dark-ink);transition:color .3s;display:inline-flex;align-items:center;gap:6px}
+footer .col a:hover{color:#A99A85}
+footer .col a .ext{font-family:var(--f-mono);font-size:9px;opacity:.5}
+footer .c1{grid-column:1/span 5}footer .c2{grid-column:6/span 2}footer .c3{grid-column:8/span 2}footer .c4{grid-column:10/span 3}
+footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-family:var(--f-mono);font-size:11px;color:var(--dark-ink-2);text-transform:uppercase;letter-spacing:.06em}
+@media(max-width:780px){footer .c1,footer .c2,footer .c3,footer .c4{grid-column:1/span 12}}
+.rev{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}.rev.in{opacity:1;transform:none}
+@media(max-width:780px){.devlog__body.rev{opacity:1!important;transform:none!important;transition:none!important}}
+/* ── Dev Log Article ── */
+.devlog{padding:0 0 140px}
+.devlog__body{padding:64px clamp(20px,4vw,48px) 0;max-width:760px}
+.devlog__body .log-num{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:12px}
+.devlog__body h1{font-family:var(--f-display);font-weight:500;font-size:clamp(26px,4vw,48px);letter-spacing:-.03em;line-height:1.1;margin:0 0 10px}
+.devlog__body h2{font-family:var(--f-kr);font-size:clamp(15px,1.8vw,20px);font-weight:400;color:var(--ink-3);margin:0;line-height:1.5}
+.devlog__body .log-date{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);display:block;margin:24px 0 40px;padding-top:20px;border-top:1px solid var(--rule)}
+.devlog__body h3{font-family:var(--f-display);font-weight:500;font-size:clamp(16px,2vw,22px);letter-spacing:-.02em;margin:56px 0 10px;padding-top:48px;border-top:1px solid var(--rule)}
+.devlog__body .section-date{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 28px;display:block}
+.devlog__body p{font-family:var(--f-kr);font-size:16px;line-height:1.95;color:var(--ink-2);margin:0 0 22px}
+.devlog__body strong{font-weight:700;color:var(--ink)}
+.devlog__body em{font-style:italic;color:var(--ink)}
+.devlog__body hr{border:none;border-top:1px solid var(--rule);margin:52px 0}
+.devlog__body ul{padding-left:20px;margin:0 0 24px}
+.devlog__body li{font-family:var(--f-kr);font-size:16px;line-height:1.85;color:var(--ink-2);margin-bottom:10px}
+.devlog__body blockquote{margin:28px 0;padding:20px 24px;border-left:3px solid var(--ink);background:var(--bg-2);font-family:var(--f-kr);font-size:16px;line-height:1.8;color:var(--ink)}
+.devlog__body blockquote p{margin:0;color:var(--ink)}
+.devlog__body pre{background:var(--bg-2);border:1px solid var(--rule);padding:20px 24px;margin:0 0 28px;overflow-x:auto;border-radius:2px}
+.devlog__body code{font-family:var(--f-mono);font-size:13px;line-height:1.7;color:var(--ink-2)}
+.devlog__body figure{margin:32px 0}
+.devlog__body figure img{width:100%;border-radius:2px}
+.devlog__body figure figcaption{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
+.devlog__body .fig-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0}
+.devlog__body .fig-2col figure{margin:0}
+.devlog__body .fig-4col{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin:32px 0}
+.devlog__body .fig-4col figure{margin:0}
+@media(max-width:640px){.devlog__body .fig-2col{grid-template-columns:1fr}.devlog__body .fig-4col{grid-template-columns:repeat(2,1fr)}}
+.devlog__body .dialogue{border-left:2px solid var(--rule);margin:2em 0;padding:0 0 0 24px}
+.devlog__body .dialogue p{margin:0 0 1em;font-size:.95em;color:var(--ink-2)}
+.devlog__body .dialogue p:last-child{margin-bottom:0}
+.devlog__body .dialogue .speaker{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:.3em}
+.devlog__body table{width:100%;border-collapse:collapse;margin:0 0 28px}
+.devlog__body thead th{font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:10px 14px;border-bottom:1px solid var(--ink);font-weight:500}
+.devlog__body tbody td{font-family:var(--f-kr);font-size:14px;line-height:1.6;color:var(--ink-2);padding:10px 14px;border-bottom:1px solid var(--rule)}
+.devlog__body tbody tr:hover{background:var(--bg-2)}
+/* ── Log Index ── */
+.log-index{padding:0 clamp(20px,4vw,48px)}
+.log-index__hd{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0;padding:32px 0 0}
+.log-index__item{display:grid;grid-template-columns:52px 1fr auto;gap:20px;align-items:baseline;padding:20px 0;border-top:1px solid var(--rule);transition:background .25s;text-decoration:none}
+.log-index__item:last-child{border-bottom:1px solid var(--rule);margin-bottom:48px}
+.log-index__item:hover{background:linear-gradient(90deg,transparent,var(--accent-soft) 20%,var(--accent-soft) 80%,transparent)}
+.log-index__num{font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
+.log-index__t{font-family:var(--f-display);font-size:clamp(14px,1.6vw,18px);font-weight:500;letter-spacing:-.01em;line-height:1.2;color:var(--ink)}
+.log-index__t .ko{display:block;font-family:var(--f-kr);font-size:12px;color:var(--ink-3);font-weight:400;margin-top:3px}
+.log-index__date{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);white-space:nowrap}
+.log-index__item--current{pointer-events:none;background:var(--accent-soft);display:grid}
+.log-index__item--current .log-index__num{color:var(--accent)}
+/* ── Log Pager ── */
+.log-pager{display:flex;gap:8px;padding:12px 0 0;margin-bottom:48px;justify-content:center;border-top:1px solid var(--rule)}
+.log-pager__btn{font-family:var(--f-mono);font-size:11px;width:32px;height:32px;border:1px solid var(--rule);background:none;cursor:pointer;color:var(--ink-3);transition:background .2s,color .2s;border-radius:2px}
+.log-pager__btn:hover{background:var(--bg-2);color:var(--ink)}
+.log-pager__btn--active{background:var(--ink);color:var(--bg);border-color:var(--ink);cursor:default}
+/* ── Log Nav ── */
+.log-nav{display:flex;justify-content:space-between;padding:52px clamp(20px,4vw,48px) 0;margin-top:64px;border-top:1px solid var(--rule)}
+.log-nav__prev,.log-nav__next{display:flex;flex-direction:column;gap:6px}
+.log-nav__next{align-items:flex-end;text-align:right}
+.log-nav__label{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.log-nav__title{font-family:var(--f-display);font-size:clamp(14px,1.8vw,20px);font-weight:500;letter-spacing:-.01em;color:var(--ink);transition:color .2s}
+.log-nav a:hover .log-nav__title{color:var(--accent)}
+.log-nav__next--disabled{opacity:.4;cursor:default}
+.devlog__body ol{padding-left:22px;margin:0 0 28px}.devlog__body h1{line-height:1.25}.devlog__body h4{font-family:var(--f-kr);font-size:18px;margin:32px 0 12px}.devlog__body pre{max-width:100%;box-sizing:border-box;white-space:pre-wrap;overflow-wrap:anywhere}.table-scroll{max-width:100%;overflow-x:auto;margin:24px 0 32px}.devlog__body table{width:100%;border-collapse:collapse;font-family:var(--f-kr);font-size:14px;line-height:1.8}.devlog__body th,.devlog__body td{border-bottom:1px solid var(--rule);padding:12px 10px;text-align:left;vertical-align:top;overflow-wrap:anywhere}.devlog__body th{background:var(--bg-2);font-weight:600}.devlog__body.rev{opacity:1;transform:none}</style>
+<link rel="stylesheet" href="../assets/css/site-navigation.css" />
+<meta name="description" content="호리병 봉분 장면의 입력 레퍼런스, 실제 프롬프트와 생성 결과 영상.">
+
+<link rel="stylesheet" href="../assets/css/project-watch.css">
+<link rel="stylesheet" href="../assets/css/horibyeong.css">
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav__logo"><span class="dot" aria-hidden="true"></span>byKimjak</a>
+  <div class="nav__menu" role="navigation">
+    <div class="has-drop">
+      <a href="../watch/"><span class="idx">01</span>WATCH</a>
+      <div class="drop"><a href="../watch/gappae.html"><span class="sub-idx">01–A</span>GAPPAE / 갑패</a><a href="../watch/eastwar.html"><span class="sub-idx">01–B</span>EASTWAR</a><a href="../watch/magic-block-master.html"><span class="sub-idx">01–C</span>MAGIC BLOCK MASTER</a></div>
+    </div>
+    <div class="has-drop">
+      <a href="../make/"><span class="idx">02</span>MAKE</a>
+      <div class="drop">
+        <a href="../make/eastwar.html"><span class="sub-idx">02–A</span>EASTWAR 개발일지</a>
+        <a href="../make/grandslam.html"><span class="sub-idx">02–B</span>GrandSlam 개발일지</a>
+        <a href="../make/takezero.html"><span class="sub-idx">02–C</span>TakeZero · 프롬프트 엔진</a>
+        <a href="../make/gappae-trailer.html"><span class="sub-idx">02–D</span>갑패 트레일러</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../think/"><span class="idx">03</span>THINK</a>
+      <div class="drop">
+        <a href="../think/ai-coach.html"><span class="sub-idx">03–A</span>AI 코치들과의 수다</a>
+        <a href="../think/morning-word.html"><span class="sub-idx">03–B</span>아침 말씀 with 채코치</a>
+        <a href="../think/personal-essay.html"><span class="sub-idx">03–C</span>개인 에세이</a>
+      </div>
+    </div>
+    <a href="../index.html#about"><span class="idx">04</span>ABOUT</a>
+  </div>
+  <div class="nav__cta">
+    <span class="status"><span class="pulse"></span>Available · Seoul</span>
+    <a href="../index.html#contact" class="contact">Contact ↗</a>
+  </div>
+</nav>
+
+<main class="hori hori-make"><header class="listing-head"><nav class="breadcrumb" aria-label="현재 위치"><a href="./">MAKE</a> / HORIBYEONG</nav><p class="hori-kicker">PRODUCTION NOTES / 02</p><h1>호리병<span style="display:block;font-size:clamp(20px,3vw,38px);margin-top:16px">HORIBYEONG</span></h1><p class="sub-ko">레퍼런스로 이어 만든 장면들</p><p class="listing-desc">인물과 공간의 기준을 제공하고,<br>행동과 카메라를 프롬프트로 설계하다.</p></header>
+<article class="devlog"><div class="devlog__body"><nav class="hori-contents" aria-label="페이지 목차"><a href="#references">01 · 입력 레퍼런스</a><a href="#direction">02 · 장면 설계</a><a href="#prompt">03 · 실제 프롬프트</a><a href="#result">04 · 사례 01 결과 영상</a><a href="#case02">CASE 02 · 모래폭풍 속 대결</a><a href="#case03">CASE 03 · 폭풍이 걷힌 뒤</a></nav>
+<p class="hori-kicker">CASE 01 / BURIAL VAULT</p><h2>봉분에 들어가 봉인을 푸는 해갈왕</h2><p>해갈왕이 봉분 안으로 들어와 중앙의 호리병을 집어 들고 봉인을 푸는 장면이다. 해갈왕의 캐릭터 시트와 봉분 내부의 장소 시트를 레퍼런스로 사용하고, 입장부터 봉인 해제까지 이어지는 행동을 네 개의 숏으로 지시했다.</p>
+<section id="references"><h2>01 / 입력 레퍼런스</h2><p>두 이미지는 인물과 공간의 기준이다. 시작 프레임을 지정하는 사례와 구분해, 프롬프트 속 참조 ID가 어느 자료를 가리키는지 함께 기록한다. 이미지를 누르면 원본 전체를 볼 수 있다.</p>
+<div class="project-images hori-cover"><figure><img src="../assets/horibyeong/Hae-gal_NoBG.png" width="2560" height="1440" alt="해갈왕 · 인물 레퍼런스" loading="lazy"><figcaption>CHARACTERS · Hae-gal_NoBG.png<br>얼굴과 의상 기준 · 참조 ID: 8c61530c-0081-462c-bafd-aab9641607dd</figcaption></figure><figure><img src="../assets/horibyeong/HORI_W2_BurialChamber_Master_v1.png" width="2848" height="1600" alt="봉분 내부 · 장소 레퍼런스" loading="lazy"><figcaption>PLATE · HORI_W2_BurialChamber_Master_v1.png<br>공간 구조와 탁자·호리병·조명 기준 · 참조 ID: 75ab1bf7-19c9-43f6-8def-e122cb0fd18b</figcaption></figure></div></section>
+<section id="direction"><h2>02 / 네 개의 숏으로 설계한 흐름</h2><p>아래 시간과 연출은 프롬프트에 지정한 내용이다. 실제 결과와 구분해 읽을 수 있도록 원문과 함께 남긴다.</p><ol><li><strong>0–6초 · 입장</strong> — 문이 열리고 해갈왕이 들어온다. 횃불이 바람에 기울고 중앙 탁자가 드러난다.</li><li><strong>6–12초 · 접근</strong> — 측면 이동 촬영으로 탁자를 향해 걷는 해갈왕을 따라간다.</li><li><strong>12–18초 · 대사</strong> — 어깨 너머의 작은 갈색 호리병을 보여주며 “하늘 아래 태양이 둘일 수는 없다.”라는 대사를 지시한다.</li><li><strong>18–25초 · 봉인 해제</strong> — 호리병을 집어 마개를 열자 돌풍이 일어난다. 모든 횃불은 계속 타는 상태로 마무리하도록 지정한다.</li></ol><p>인물 한 명과 중앙의 짙은 호리병 한 개를 유지하고, 배경음악 없이 공간음·효과음·한국어 대사로 장면을 구성하도록 요청했다.</p></section>
+<section id="prompt"><h2>03 / 실제 생성 프롬프트</h2><details><summary>영문 프롬프트 원문 펼치기</summary><pre><code>A king walks into a torch-lit burial vault and unseals the gourd that holds his enemy.
+
+PLATE `&lt;&lt;&lt;75ab1bf7-19c9-43f6-8def-e122cb0fd18b&gt;&gt;&gt;` — a circular vault of dark rough-hewn stone blocks under a domed ceiling; a low stone table at the dead center ringed by five light-grey polished ceramic gourds around one smaller dark-brown textured gourd; stone benches with carved lion heads along the walls; torches mounted on pillars throwing warm orange light; a faint cold shaft falling through a small opening in the dome onto the table; a dark arched doorway behind. Night.
+
+CHARACTERS
+`&lt;&lt;&lt;8c61530c-0081-462c-bafd-aab9641607dd&gt;&gt;&gt;` — the king, identity and robe per his sheet. He enters without hesitation, jaw set; one true acting tell — his breath only quickens when his eyes reach the dark gourd.
+
+SHOTS
+Shot 1 — 0:00–0:06, WS at eye level, locked, 35mm. The dark arched doorway fills the left third; the door grinds open away from camera and the king steps through into the vault, silhouetted, the wall flames leaning from the draft. He stops just inside; the ring of gourds glows on the central table ahead of him.
+
+Hard cut.
+
+Shot 2 — 0:06–0:12, MS in side profile, dolly tracking right-to-left at 0.5 m/s, 50mm, camera below his eyeline. He advances straight at the central table, robe hem brushing the flagstones, hands loose, gaze fixed forward. The five pale gourds and the dark center gourd slide into frame with him.
+
+Hard cut.
+
+Shot 3 — 0:12–0:18, MCU over his shoulder, 85mm. Past his shoulder the small dark-brown central gourd sits sharp in mid-frame, the pale gourds soft around it. He stares at it and speaks, low and final: &quot;하늘 아래 태양이 둘일 수는 없다.&quot;
+
+Hard cut.
+
+Shot 4 — 0:18–0:25, CU low over the table edge, 50mm. His hand comes in and lifts the plain dark gourd off the stone; his face tightens as he twists the stopper free. The seal breaks — a hard gust slaps the torches sideways and cracks his robe. Outgoing state: the dark gourd is open in his right hand, the wind rising, every torch still burning.
+
+CAMERA LAW
+35–85mm, locked and gimbal mix, camera always below his eyeline and never centred, table edge held 10–40 cm from lens, flame line never level.
+
+GRADE AND AUDIO
+Ember-night — orange-black, single firelight, deep negative space; high contrast; key from the wall torches with the cold ceiling shaft as a secondary; slight halation on flame edges and dust in the beam. Audio: continuous low stone-vault ambience; diegetic SFX — door grind, flagstone footsteps, torch crackle, a taut ceramic twist, then the gust. Korean dialogue in his own voice. No music, no score, no bgm.
+
+CONSTRAINTS
+Count of the king in frame: one. Count of the dark central gourd: one. Count of lit torches at the end of Shot 4: all still lit. Count of other people: zero.</code></pre></details><p class="hori-caption">원문은 수정 없이 수록했다. 참조 ID는 위 두 레퍼런스에 대응한다.</p></section>
+<section id="result"><h2>04 / 결과 영상</h2><p><strong>생성 당시 설정</strong><br>Seedance 2.5 · 480p로 생성해 내용 확인 · High 비트레이트<br>2026년 10월 9일 오후 5:04 생성</p><div class="hori-film"><video controls playsinline preload="metadata" aria-label="봉분 사례 01 결과 영상"><source src="../assets/horibyeong/호리병_비트1_4K.mp4" type="video/mp4">브라우저가 영상 재생을 지원하지 않습니다.</video></div><p class="hori-caption">제공된 결과 파일: 호리병_비트1_4K.mp4<br>실제 파일 사양: 3840×2160 · 25.05초 · HEVC / AAC. 480p로 생성해 내용을 확인한 뒤 4K로 업스케일하여 실제 편집에 사용했다. 아래에 전시한 파일은 편집용 4K 버전이다.</p><p><a href="../assets/horibyeong/호리병_비트1_4K.mp4">결과 영상 원본 열기 ↗</a></p></section>
+<section id="case02"><p class="hori-kicker">CASE 02 / DESERT CONFRONTATION</p><h2>모래폭풍 속 해갈왕과 흉골대장의 대결</h2><p>인물 두 명과 검의 레퍼런스를 분리해 제공하고, 거대한 모래폭풍 속 대결을 하나의 연속 숏으로 지시했다. 아래 설명은 프롬프트의 연출 의도를 정리한 것이다.</p><h3>입력 레퍼런스</h3><div class="project-images hori-cover"><figure><img src="../assets/horibyeong/HORI_W2_Hyunggol_Commander_Master_v2_NoBG.png" width="2816" height="1584" alt="Reference 1 · 흉골대장 — 얼굴·체격·의상 기준" loading="lazy"><figcaption>Reference 1 · 흉골대장 — 얼굴·체격·의상 기준</figcaption></figure><figure><img src="../assets/horibyeong/Hae-gal_NoBG.png" width="2560" height="1440" alt="Reference 2 · 해갈왕 — 얼굴·의상·표정 기준" loading="lazy"><figcaption>Reference 2 · 해갈왕 — 얼굴·의상·표정 기준</figcaption></figure><figure><img src="../assets/horibyeong/HORI_W2_Hyunggol_Commander_SwordRef_v2_NoBG.png" width="579" height="545" alt="Reference 3 · 검 상세 — 무기만 참조하며 얼굴에는 영향을 주지 않도록 지정" loading="lazy"><figcaption>Reference 3 · 검 상세 — 무기만 참조하며 얼굴에는 영향을 주지 않도록 지정</figcaption></figure></div><h3>장면 설계</h3><p>해갈왕과 흉골대장이 서로 달려들고, 검이 닿기 전에 해갈왕의 주먹이 상대의 얼굴에 닿는다. 흉골대장과 검은 피나 상처 없이 모래로 흩어지고 해갈왕은 계속 달려간다. 카메라는 낮은 와이드에서 위로 나선형 이동한 뒤 해갈왕 뒤를 돌아 정면 바스트 숏에 도달하도록 설계했다.</p><p>렌즈 앞·인물 주변·배경의 세 층에 모래를 유지하고, 바람 방향과 두 인물의 외형이 바뀌지 않도록 반복 지시했다. 대사와 음악 없이 폭풍·발걸음·검·천둥 소리로 구성하도록 요청했다.</p><h3>실제 프롬프트</h3><details><summary>영문 프롬프트 원문 펼치기</summary><pre><code>Photorealistic cinematic epic fantasy disaster-film shot, fine film grain, natural motion blur, 16:9. Use the attached reference images: reference 1 is the Hyunggol army commander, reference 2 is King Hae-gal, reference 3 is the commander&#x27;s sword only (it contains no face and must not affect any face). Keep the commander&#x27;s face, shaven head, short dark beard, sunburnt reddish skin and dark leather shoulder armor exactly as in reference 1, and Hae-gal&#x27;s face, upswept hair knot, scar on his cheek, leather shoulder armor and middle-aged warrior build exactly as in reference 2, from the first frame to the last. No face, ethnicity, age, skin tone or hairstyle ever changes, and no new people appear.
+
+The commander holds the straight single-edged sword in his right hand, exactly as in reference 3: a broad straight blade with a short crossguard, dark rough steel, tapering toward the tip. The straight sword stays gripped in his right hand and visible until the moment it dissolves. A separate curved blade stays sheathed at his belt. No second sword is ever drawn.
+
+Every moment of this shot takes place INSIDE the heart of a colossal sandstorm that has been raging for a long time; nothing about it is beginning or arriving. The air is never calm and never clear, visibility is only a few paces, and the whole space is dust-filled air with no sky, no horizon, no tents, no banners and no camp anywhere. Lens layer: a thick, dense curtain of sand and dust streams across the lens continuously for all ten seconds, never thinning, so the foreground is never clear. Actor layer: sand lashes both men and sweeps past them, whirling around shoulders and arms, racing along the ground and rising around their legs, cloth ends and leather straps whipping with the wind. Background layer: a colossal storm wall rises directly behind whichever man is farther from the camera, only a few steps back, from the ground to the top of the frame, billowing and rolling with whirlwinds spinning inside, mixed seamlessly with the same air the men stand in. The wind direction stays consistent in the world: it blows from Hae-gal&#x27;s side toward the commander&#x27;s side, so as the camera circles, the sand and the storm wall keep the same real direction. No clear air at any moment. Pale white-gold lightning flickers deep inside the dust at irregular moments, never striking the men, with rolling thunder after each flash.
+
+Blocking: at the start the commander stands on the left and Hae-gal on the right, facing each other, four or five paces apart. Hae-gal runs with real heavy strides, his feet driving into the sand and spraying it up, no floating, no gliding, no hopping. His face is cold and ruthless throughout: emotionless, brows very slightly lowered, mouth a flat line, jaw set, eyes exactly as in reference 2, no smile, no anger, no glow in his eyes.
+
+Camera: one continuous helix orbit around the two men, no cuts. It starts low to the ground in a wide view, spirals upward around them during the first half to a high angle at the moment of contact, then circles behind Hae-gal&#x27;s back and descends during the second half, ending in a front-facing bust shot of Hae-gal. No zoom.
+
+From zero to 1.5 seconds: low wide view. Hae-gal bursts into a full sprint straight at the commander. A half-second later the commander charges at him in heavy strides, the straight sword held low in his right hand. A thick curtain of sand streams across the lens.
+
+From 1.5 to 3.5 seconds: the camera begins to spiral upward. Hae-gal keeps sprinting and draws his right fist back. The commander raises the straight sword high above his head, his face fierce, ready to strike down. A thick curtain of sand still streams across the lens.
+
+From 3.5 to 4.5 seconds: the camera reaches its highest angle, high above and behind Hae-gal&#x27;s shoulder, so Hae-gal&#x27;s face is not in frame and the commander&#x27;s face is seen from the side. The commander begins to bring the straight sword down. Hae-gal dips his body slightly and tilts his head aside, and his right arm shoots out along the outside of the blade&#x27;s path. His fist meets the side of the commander&#x27;s face before the blade reaches him. The commander&#x27;s head snaps aside, his eyes wide in shock. The blade never touches Hae-gal; it passes through empty air beside his shoulder and stops. There is no glow, no light effect, no energy, no shockwave ring at the impact, purely physical. No lightning strikes at the moment of impact. A thick curtain of sand still streams across the lens.
+
+From 4.5 to 6.5 seconds: starting from the struck face, the commander&#x27;s head dissolves into fine sand grains that peel away and stream off with the wind, then his neck, shoulders, torso, arms and legs dissolve into sand the same way, his straight sword dissolving with him. No blood, no wound, only sand. Hae-gal keeps his momentum and passes straight through the space where the commander stood, running on. Hae-gal stays solid, whole and unaffected. A faint flash lights the dust far in the distance a beat after the impact, with a low roll of thunder. A thick curtain of sand still streams across the lens.
+
+From 6.5 to 8.5 seconds: the camera circles behind Hae-gal&#x27;s back as he runs a few more strides and slows to a stop. Behind him the last drifting sand grains of the commander blend into the storm and vanish; nothing is left where the commander stood but swirling dust. A thick curtain of sand still streams across the lens.
+
+From 8.5 to 10 seconds: the camera arrives in front of Hae-gal and slowly pushes in to a bust shot. Hae-gal stands facing the camera, his face exactly as in reference 2, cold, ruthless and emotionless, brows slightly lowered, mouth a flat line, eyes unchanged, staring into the lens. The storm is at full strength: the camera holds still but the sand never does. A thick curtain of sand still streams across the lens and the storm wall still billows behind him. Hold the final frame.
+
+One single color system: muted warm grey-brown dust, heavy dim dusty mood, never pink, purple, orange or blue. Sound: roaring sandstorm wind and hissing sand loud from the first second to the last, heavy footsteps pounding the sand, the blade cutting the air, a soft rushing hiss as the sand grains stream away, distant thunder a beat after the impact. No spoken words, no captions, no music of any kind.</code></pre></details><h3>결과 영상</h3><p>Seedance 2.5 · 480p · High · 854×480<br>2026년 10월 13일 오전 10:33 생성</p><p>480p로 생성해 내용을 확인한 뒤, 4K로 업스케일해 실제 편집에 사용했다. 전시 영상은 편집용 4K 버전이다.</p><div class="hori-film"><video controls playsinline preload="metadata" aria-label="최후대결06.mp4 결과 영상"><source src="../assets/horibyeong/최후대결06.mp4" type="video/mp4"></video></div><p class="hori-caption">제공 파일: 최후대결06.mp4 · 10.08초 · 3838×2158 · HEVC / AAC</p><p><a href="../assets/horibyeong/최후대결06.mp4">결과 영상 원본 열기 ↗</a></p></section><section id="case03"><p class="hori-kicker">CASE 03 / AFTER THE STORM</p><h2>폭풍이 걷힌 뒤 드러나는 해갈왕</h2><p>해갈왕의 캐릭터 시트 한 장을 기준으로, 폭풍 속 뒷모습에서 고요한 사막의 얼굴 클로즈업까지 이어지는 장면을 설계했다.</p><h3>입력 레퍼런스</h3><div class="project-images hori-cover"><figure><img src="../assets/horibyeong/Hae-gal_NoBG.png" width="2560" height="1440" alt="단일 레퍼런스 · 해갈왕 — 얼굴·머리·흉터·의상과 체격을 유지" loading="lazy"><figcaption>단일 레퍼런스 · 해갈왕 — 얼굴·머리·흉터·의상과 체격을 유지</figcaption></figure></div><h3>장면 설계</h3><p>카메라가 화면 왼쪽으로 움직이는 방향을 유지하며, 해갈왕의 회전과 빠른 휩팬·줌아웃을 결합해 모래폭풍에서 맑은 사막으로 전환하도록 지시했다. 이후 다시 가까워지면서 희미한 한쪽 미소와 홍채 안에만 머무는 푸른빛을 드러내고, 마지막에는 눈이 원래의 짙은 갈색으로 돌아오도록 구성했다.</p><p>폭풍이 사라질 때 소리도 함께 끊기고 잔잔한 사막 바람만 남도록 요청했다. 이 숏의 맑은 하늘에는 행성이 나오지 않도록 명시했다.</p><h3>실제 프롬프트</h3><details><summary>영문 프롬프트 원문 펼치기</summary><pre><code>Photorealistic cinematic epic fantasy disaster-film shot, fine film grain, natural motion blur, 16:9. Use the attached reference image: it is King Hae-gal. Keep Hae-gal&#x27;s face, upswept hair knot, scar on his cheek, leather shoulder armor and middle-aged warrior build exactly as in the reference, from the first frame to the last. No face, ethnicity, age, skin tone or hairstyle ever changes, and no new people appear. His face is the same in every frame of the shot.
+
+Camera direction rule for the whole shot: the camera always moves toward the left of the frame, a smooth counter-clockwise arc around Hae-gal, and never moves toward the right.
+
+From zero to 3.2 seconds the scene is INSIDE the heart of a colossal sandstorm that has been raging for a long time. The air is never calm and never clear, visibility is only a few paces, and the whole space is dust-filled air with no sky and no horizon. Lens layer: a thick, dense curtain of sand and dust streams across the lens continuously, never thinning. Actor layer: sand lashes Hae-gal and sweeps past him, whirling around his shoulders, his cloth ends whipping with the wind. Background layer: a colossal storm wall billows behind him, mixed seamlessly with the same air. Pale white-gold lightning flickers deep inside the dust, with rolling thunder. Muted warm grey-brown dust, heavy dim mood, never pink, purple, orange or blue.
+
+From zero to 0.8 seconds: a bust shot of Hae-gal seen from behind, close to the camera, his upswept hair knot and leather shoulder guards seen from behind, standing still in the storm, his back to the camera.
+
+From 0.8 to 2.3 seconds: Hae-gal turns his body toward the camera in under half a second and stops dead, his face exactly as in the reference, cold and ruthless. At the same instant the camera whips sharply toward the left of the frame in a fast whip pan while zooming out fast, with heavy motion blur, ending on a waist shot. During this blur the storm collapses and clears in an instant: the dust wall thins away, the curtain of sand across the lens disappears, and clear sky opens behind him. His body stays solid and unaffected.
+
+From 2.3 to 3.5 seconds: the storm is gone. At the widest point of the zoom-out the camera holds for a moment: a waist shot of Hae-gal standing alone in a vast flat open desert in golden hour. His body is already angled about thirty-five degrees toward the right of the frame, his face turned toward the camera. The low golden sun sits behind and to the left of him; the sky shifts from soft blue to gold near the horizon. The ground is flat and calm with gentle ripples in the sand, a low faint line of distant dunes far on the horizon, no large dunes nearby, nothing between him and the horizon. A few last grains of sand drift through the air. No tents, no banners, no buildings, no people, no planets. A soft, natural warm rim of light clearly traces the edge of his hair and shoulder, thin and realistic like real backlight in a film, never glowing, never a bright orange outline. His face stays softly lit from the front so his eyes read clearly. His expression is still cold and emotionless.
+
+From 3.5 to 7 seconds: the camera zooms back in smoothly while panning toward the left, arriving at a tight bust shot in a three-quarter view. Hae-gal&#x27;s body stays angled about thirty-five degrees toward the right of the frame, his head tilts clearly to one side, about fifteen degrees, and he holds the lens with a steady stare. The sun is low behind him on the left. From about 5 to 6.3 seconds the smile lifts only the corner of his mouth, one-sided, faint and quiet, and at the same time only the irises of his eyes turn a deep, clear blue, a soft inner glow confined to the irises, no light rays, no beams, no glow spilling onto his face. In the final 0.7 seconds the blue fades back to his natural dark brown eyes while the faint smile stays. Hold the final frame. His face stays exactly as in the reference throughout.
+
+Sound: the roar of the sandstorm and thunder cut away at the moment the storm clears, leaving a deep, calm silence with only a soft breath of desert wind and faint drifting grains. No spoken words, no captions, no music of any kind.</code></pre></details><h3>결과 영상</h3><div class="hori-film"><video controls playsinline preload="metadata" aria-label="최후대결07.mp4 결과 영상"><source src="../assets/horibyeong/최후대결07.mp4" type="video/mp4"></video></div><p class="hori-caption">제공 파일: 최후대결07.mp4 · 7.072초 · 3838×2158 · HEVC / AAC</p><p><a href="../assets/horibyeong/최후대결07.mp4">결과 영상 원본 열기 ↗</a></p></section><nav class="hori-contents" aria-label="제작기 구성"><a href="horibyeong.html">← PAGE 01 · 제작 의도와 세계관</a><span>PAGE 02 · 레퍼런스로 구성한 장면 — 현재 페이지</span><a href="horibyeong-03.html">PAGE 03 · 시작 프레임에서 이어진 장면 →</a></nav></div></article></main>
+
+<footer id="contact">
+  <p class="big">Let's build a <em>world</em> →</p>
+  <div class="grid-ft">
+    <div class="col c1"><h6>byKimjak Studio</h6><p style="font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0">IP Architect · Seoul, Korea. 시나리오·드라마 기획부터 AI 영상, 게임, 앱까지 — 한 사람이 하나의 세계관을 끝까지 설계합니다.</p></div>
+    <div class="col c2"><h6>Sections</h6><a href="../watch/">Watch <span class="ext">/01</span></a><a href="../make/">Make <span class="ext">/02</span></a><a href="../think/">Think <span class="ext">/03</span></a></div>
+    <div class="col c3"><h6>Social</h6><span class="unavailable-link">Instagram <span class="ext">↗</span></span><span class="unavailable-link">YouTube <span class="ext">↗</span></span><span class="unavailable-link">Vimeo <span class="ext">↗</span></span><span class="unavailable-link">Threads <span class="ext">↗</span></span></div>
+    <div class="col c4"><h6>Contact</h6><a href="mailto:oropa@kakao.com">oropa@kakao.com</a><span class="unavailable-link">Press kit <span class="ext">PDF</span></span><span class="unavailable-link">For PDs &amp; Investors <span class="ext">↗</span></span></div>
+  </div>
+  <div class="bottom"><span>byKimjak © 2026  ／  All rights, all worlds, reserved.</span><span>Built solo · with AI · in Seoul</span><span></span></div>
+</footer>
+
+
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+
+</script>
+<script src="lightbox.js"></script>
+<script src="/bykimjak/eastwar-hub.js"></script>
+<script src="../assets/js/site-navigation.js"></script>
+</body>
+</html>

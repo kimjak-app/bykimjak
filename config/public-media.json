@@ -6558,6 +6558,236 @@
       },
       "width": 1920,
       "height": 1080
+    },
+    {
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/hori-0d81f9e9ecc80ed1681b0cda.png",
+      "bytes": 5312570,
+      "sha256": "0d81f9e9ecc80ed1681b0cda57b9cf97c17f21b739719b4cb07565ac9a2d5108",
+      "path": "assets/horibyeong/Geuseondae.png",
+      "ip": "horibyeong",
+      "mime": "image/png",
+      "verified": true,
+      "width": 2720,
+      "height": 1536,
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/thumb-0d81f9e9ecc80ed1681b0cda.webp",
+        "bytes": 48648,
+        "sha256": "4f8180aab369a0e422b472b454f6f0000998c753981d2a6ba37deb3d2dbf1a4f"
+      }
+    },
+    {
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/hori-ea30ee8887c280b0e7355190.png",
+      "bytes": 6134099,
+      "sha256": "ea30ee8887c280b0e7355190f26ddf9655a5e902e74aa08f6d09f0b0fb7eba8f",
+      "path": "assets/horibyeong/Hae-gal_NoBG.png",
+      "ip": "horibyeong",
+      "mime": "image/png",
+      "verified": true,
+      "width": 2560,
+      "height": 1440,
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/thumb-ea30ee8887c280b0e7355190.webp",
+        "bytes": 85780,
+        "sha256": "5a5e26933b0586a2ef05fc8c1cc4efe9bafe17fe0170a99bba79210942779659"
+      }
+    },
+    {
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/hori-b24bb6e4ccc9b18c8d82d218.png",
+      "bytes": 8128704,
+      "sha256": "b24bb6e4ccc9b18c8d82d218737df0cc6489e2cc9ed11178fd8e453ef7c2fabe",
+      "path": "assets/horibyeong/HORI_W2_Hyunggol_Commander_Master_v2_NoBG.png",
+      "ip": "horibyeong",
+      "mime": "image/png",
+      "verified": true,
+      "width": 2816,
+      "height": 1584,
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/thumb-b24bb6e4ccc9b18c8d82d218.webp",
+        "bytes": 120856,
+        "sha256": "7e131490fccf04bd5375f5986f1b3d2a41e1c732536958249a7f89e6a3858ac4"
+      }
+    },
+    {
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/hori-96d9ec0b92de7bcdba7dd953.png",
+      "bytes": 6863111,
+      "sha256": "96d9ec0b92de7bcdba7dd95379224493b94a48c97272cfc7258a2d53c3e183c2",
+      "path": "assets/horibyeong/HORI_W2_JomunArmy_Master_v1.png",
+      "ip": "horibyeong",
+      "mime": "image/png",
+      "verified": true,
+      "width": 2816,
+      "height": 1584,
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/thumb-96d9ec0b92de7bcdba7dd953.webp",
+        "bytes": 163070,
+        "sha256": "beaff47294d5b0d66f8376b4ef843b96b1212600a61ec94a245729a301a25e95"
+      }
+    },
+    {
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/hori-6c9a6efdef9639f8e359dc78.png",
+      "bytes": 6504400,
+      "sha256": "6c9a6efdef9639f8e359dc7821cc6742aae0e377d3bb5396b622796ea4d88c20",
+      "path": "assets/horibyeong/HORI_W2_HyunggolArmy_Master_v1.png",
+      "ip": "horibyeong",
+      "mime": "image/png",
+      "verified": true,
+      "width": 2816,
+      "height": 1584,
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/thumb-6c9a6efdef9639f8e359dc78.webp",
+        "bytes": 142808,
+        "sha256": "94d66fa8a6e042bd3025178aeaba9f32c1071d4749a73ce515c8d6cc256dd8d3"
+      }
+    },
+    {
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/hori-a70b478cc483012b6e510b5c.png",
+      "bytes": 7087293,
+      "sha256": "a70b478cc483012b6e510b5c34d01a4efa1d10d467980905c3d12a2f6d9952c5",
+      "path": "assets/horibyeong/HORI_W2_BurialChamber_Master_v1.png",
+      "ip": "horibyeong",
+      "mime": "image/png",
+      "verified": true,
+      "width": 2848,
+      "height": 1600,
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/thumb-a70b478cc483012b6e510b5c.webp",
+        "bytes": 129534,
+        "sha256": "6b622ef4aa6191e6c93de2057d4fa5ee7cf0b4a34f1ab8b5f375d45ed4318229"
+      }
+    },
+    {
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/hori-b7be6036bff2b10a046abe03.png",
+      "bytes": 5917563,
+      "sha256": "b7be6036bff2b10a046abe0310a99c766a6623ce3f9b80cd36a549fabc1a535d",
+      "path": "assets/horibyeong/HORI_W2_DesertBattlefield_Master_v2.png",
+      "ip": "horibyeong",
+      "mime": "image/png",
+      "verified": true,
+      "width": 2816,
+      "height": 1584,
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/thumb-b7be6036bff2b10a046abe03.webp",
+        "bytes": 99260,
+        "sha256": "a668179e8f1ab7aee09e29c5370ca79cf940b285952165ef217be5853e9c57f1"
+      }
+    },
+    {
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/hori-97b1af78c1d1c6686c40d832.mp4",
+      "bytes": 158597875,
+      "sha256": "97b1af78c1d1c6686c40d832f2f8a5cd05d1c72745631857b246f24ff3006fe5",
+      "path": "assets/horibyeong/호리병_비트1_4K.mp4",
+      "ip": "horibyeong",
+      "mime": "video/mp4",
+      "verified": true
+    },
+    {
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/hori-a644f51eaba3e745f1d75aad.png",
+      "bytes": 462914,
+      "sha256": "a644f51eaba3e745f1d75aad0bed1cebb518bafb077c06fba5e7b5efe2cf3595",
+      "path": "assets/horibyeong/HORI_W2_Hyunggol_Commander_SwordRef_v2_NoBG.png",
+      "ip": "horibyeong",
+      "mime": "image/png",
+      "verified": true,
+      "width": 579,
+      "height": 545,
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/thumb-a644f51eaba3e745f1d75aad.webp",
+        "bytes": 33300,
+        "sha256": "06443b7e5fa88c4f64a29b5c4a2f186b96557d3b41c5d0e808ab63768f5bbfa2"
+      }
+    },
+    {
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/hori-a7f12045d0f3e2eee843430c.mp4",
+      "bytes": 125605982,
+      "sha256": "a7f12045d0f3e2eee843430cd9f8528c4edd70561efe0741152416564652c05e",
+      "path": "assets/horibyeong/최후대결06.mp4",
+      "ip": "horibyeong",
+      "mime": "video/mp4",
+      "verified": true
+    },
+    {
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/hori-023ba62c19824778f5273af4.mp4",
+      "bytes": 67096962,
+      "sha256": "023ba62c19824778f5273af493bdfad1c1d494293467b34c3728d0213a5f6b50",
+      "path": "assets/horibyeong/최후대결07.mp4",
+      "ip": "horibyeong",
+      "mime": "video/mp4",
+      "verified": true
+    },
+    {
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/hori-dc9109a83ce55747bac3735a.png",
+      "bytes": 3431551,
+      "sha256": "dc9109a83ce55747bac3735a7187cde0e5ee02805c41bf4b1a291a2d218d5fc0",
+      "path": "assets/horibyeong/01-버드아이뷰-모래폭풍습격-색감통일.png",
+      "ip": "horibyeong",
+      "mime": "image/png",
+      "verified": true,
+      "width": 1672,
+      "height": 941,
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/thumb-dc9109a83ce55747bac3735a.webp",
+        "bytes": 155198,
+        "sha256": "71e385893acc3f1013f2242e506df38157f7650610cc28892706b50ed5b1c274"
+      }
+    },
+    {
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/hori-06ff1a9b737343b894e2dad0.mp4",
+      "bytes": 61078994,
+      "sha256": "06ff1a9b737343b894e2dad02440bb6251fae4e6af5579ba051768c4d894cc28",
+      "path": "assets/horibyeong/GEN-f.mp4",
+      "ip": "horibyeong",
+      "mime": "video/mp4",
+      "verified": true
+    },
+    {
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/hori-0e494de2e0a2ddab41c36ad3.png",
+      "bytes": 2411101,
+      "sha256": "0e494de2e0a2ddab41c36ad3b54e6ed0bb531b8e2858b9d24c29068b08b4b83e",
+      "path": "assets/horibyeong/HORI_W2_B4_GenC6_RunWide_StartFrame_v2.png",
+      "ip": "horibyeong",
+      "mime": "image/png",
+      "verified": true,
+      "width": 1727,
+      "height": 910,
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/thumb-0e494de2e0a2ddab41c36ad3.webp",
+        "bytes": 147232,
+        "sha256": "c31db200c451b7ae6503cd0dbd8a25c1bd8ea892405ed2d02d5f26e40ebc59a2"
+      }
+    },
+    {
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/hori-82bd91fd0c187d1010ab37b4.mp4",
+      "bytes": 49996130,
+      "sha256": "82bd91fd0c187d1010ab37b49056c466b8c7b23cf9d7047ac717953f7bc1cbcc",
+      "path": "assets/horibyeong/GEN-h.mp4",
+      "ip": "horibyeong",
+      "mime": "video/mp4",
+      "verified": true
+    },
+    {
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/hori-b5ddfbdd53adcd3be03fd4fd.png",
+      "bytes": 10794715,
+      "sha256": "b5ddfbdd53adcd3be03fd4fddd8c8544b37c5fbec6ce0e008326b532518600fa",
+      "path": "assets/horibyeong/HORI_W2_B4_GenC7_RunClose_StartFrame_v2.png",
+      "ip": "horibyeong",
+      "mime": "image/png",
+      "verified": true,
+      "width": 3840,
+      "height": 2160,
+      "thumbnail": {
+        "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/thumb-b5ddfbdd53adcd3be03fd4fd.webp",
+        "bytes": 138286,
+        "sha256": "b89c00fdeaf8e3f0156c79f04c877721bffecb75d7d1f4677c81b57baa2de7e0"
+      }
+    },
+    {
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/hori-29df1545ce272683e8c08704.mp4",
+      "bytes": 31559252,
+      "sha256": "29df1545ce272683e8c087049e182a29d15c13dc36c5a47edb306e0b8c0a3a97",
+      "path": "assets/horibyeong/GEN-g-1.mp4",
+      "ip": "horibyeong",
+      "mime": "video/mp4",
+      "verified": true
     }
   ]
 }

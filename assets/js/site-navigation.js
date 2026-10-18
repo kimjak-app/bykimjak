@@ -58,6 +58,13 @@
     mbmLink.append(mbmIndex, document.createTextNode('매직블록마스터 제작기'));
     makeDrop.append(mbmLink);
   }
+  if (makeDrop && !makeDrop.querySelector('a[href$="make/horibyeong.html"]')) {
+    var horiLink = document.createElement('a'), horiIndex = document.createElement('span');
+    horiLink.href = '/bykimjak/make/horibyeong.html';
+    horiIndex.className = 'sub-idx'; horiIndex.textContent = '02–G';
+    horiLink.append(horiIndex, document.createTextNode('호리병 제작기 / HORIBYEONG'));
+    makeDrop.append(horiLink);
+  }
   document.querySelectorAll('footer a[href="#"]').forEach(function (link) {
     link.removeAttribute('href');
     link.classList.add('unavailable-link');
