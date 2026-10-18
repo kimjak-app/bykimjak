@@ -11,6 +11,7 @@ import shutil
 import urllib.request
 import subprocess
 from public_media import PublicMedia, TEXT_EXTENSIONS
+from studio_posts import augment_posts
 
 ROOT = Path(__file__).resolve().parents[1]
 LIMIT = 950 * 1024 * 1024  # headroom below GitHub's 1 GB published-site limit
@@ -65,7 +66,10 @@ def main():
         target = site / rel
         target.parent.mkdir(parents=True, exist_ok=True)
         if media and source.suffix in TEXT_EXTENSIONS:
-            target.write_text(media.rewrite(source.read_text(encoding='utf-8'), source.suffix), encoding='utf-8', newline='\n')
+            text = source.read_text(encoding='utf-8')
+            if rel.as_posix() == 'assets/js/posts-data.js':
+                text = augment_posts(ROOT, text)
+            target.write_text(media.rewrite(text, source.suffix), encoding='utf-8', newline='\n')
         else:
             shutil.copy2(source, target)
     if media:

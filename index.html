@@ -968,7 +968,7 @@
     STUDIO_CATS.forEach(function(cat, i) {
       var post = null;
       for (var j = 0; j < ALL_POSTS.length; j++) {
-        if (ALL_POSTS[j].catKey === cat.key) { post = ALL_POSTS[j]; break; }
+        if (cat.key === 'film-making' ? (ALL_POSTS[j].url.indexOf('make/') === 0 && !/^(eastwar|grandslam|takezero)/.test(ALL_POSTS[j].url.slice(5))) : ALL_POSTS[j].catKey === cat.key) { post = ALL_POSTS[j]; break; }
       }
       if (!post) return;
       var nextCat = STUDIO_CATS[i + 1];

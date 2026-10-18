@@ -796,6 +796,12 @@
     }
   ];
 
+  // Generated MAKE entries are inserted here by the Pages build.
+  // STUDIO_GENERATED_POSTS
+  window.ALL_POSTS.sort(function (a, b) {
+    return (b.publishedAt || b.date).localeCompare(a.publishedAt || a.date) || (b.sequence || 0) - (a.sequence || 0) || b.url.localeCompare(a.url);
+  });
+
   // THINK_POSTS: for think/index.html latest section.
   // URLs are root-relative — think/index.html must prefix with '../'.
   var THINK_CATS = ['ai-coach', 'morning-word', 'personal-essay'];
@@ -806,7 +812,7 @@
   // STUDIO_CATS: category order for FROM THE STUDIO in index.html.
   // Each category shows its most recent post from ALL_POSTS.
   window.STUDIO_CATS = [
-    { key: 'gappae-trailer', label: 'Gappae Trailer', dark: false },
+    { key: 'film-making', label: 'Film Making · 영상 제작기', dark: false },
     { key: 'ai-coach',     label: 'AI Conversations', dark: false },
     { key: 'eastwar',      label: 'Architect Notes',  dark: false },
     { key: 'grandslam',    label: 'Grand Slam',       dark: false },
