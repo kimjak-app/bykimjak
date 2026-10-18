@@ -1,5 +1,12 @@
 (function () {
   'use strict';
+  // Only one featured film plays at a time, including manual hero playback.
+  var featured = Array.from(document.querySelectorAll('.hero video'));
+  featured.forEach(function (active) {
+    active.addEventListener('play', function () {
+      featured.forEach(function (other) { if (other !== active) other.pause(); });
+    });
+  });
   document.querySelectorAll('[data-trailer-player]').forEach(function (root) {
     var video = root.querySelector('video'), poster = root.querySelector('.trailer-poster');
     var status = root.querySelector('[data-trailer-status]'), pending = root.querySelector('.asset-pending');
