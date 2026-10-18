@@ -6788,6 +6788,15 @@
       "ip": "horibyeong",
       "mime": "video/mp4",
       "verified": true
+    },
+    {
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/hori-68a296c061bf5c80b3c8e10a.mp4",
+      "bytes": 301457149,
+      "sha256": "68a296c061bf5c80b3c8e10aa9830c3de68e5941f593cf9e13fc81ce7397cf67",
+      "path": "assets/horibyeong/horibyeong-final-20261013.mp4",
+      "ip": "horibyeong",
+      "mime": "video/mp4",
+      "verified": true
     }
   ]
 }

@@ -29,6 +29,11 @@
     baegopaLink.append(baegopaIndex, document.createTextNode('깡셰프 배고파!'));
     drop.append(baegopaLink);
   }
+  if (drop && !drop.querySelector('a[href$="watch/horibyeong.html"]')) {
+    var hw = document.createElement('a'), hi = document.createElement('span');
+    hw.href = '/bykimjak/watch/horibyeong.html'; hi.className = 'sub-idx'; hi.textContent = '01–E';
+    hw.append(hi, document.createTextNode('호리병 / HORIBYEONG')); drop.append(hw);
+  }
   // Keep the WATCH label bilingual on both static and generated menus.
   var mbmWatchLink = drop && drop.querySelector('a[href$="magic-block-master.html"]');
   if (mbmWatchLink) {
