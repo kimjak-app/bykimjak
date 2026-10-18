@@ -1,5 +1,5 @@
 /**
- * byKimjak PROJECT HUB — GAPPAE + EASTWAR, 20261018-projects-03
+ * byKimjak PROJECT HUB — GAPPAE + EASTWAR, 20261019-projects-04
  * One widget; live HTML links; 640x960 web-optimized artwork from the supplied PNG.
  * Starts collapsed so the homepage trailer remains unobstructed.
  */
@@ -9,7 +9,7 @@
   window.__byKimjakProjectHubV1 = true;
 
   var BASE = '/bykimjak';
-  var VERSION = '20261018-projects-03';
+  var VERSION = '20261019-projects-04';
   var ART = "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/thumb-a70b478cc483012b6e510b5c.webp";
   var POSITION_KEY = 'byKimjakProjectHubPositionV1';
   var HOME = new RegExp('^' + BASE + '/?(?:index\\.html)?$').test(location.pathname);
@@ -114,11 +114,11 @@
       #ph-card{background-size:cover;background-position:center;color:#fff8e9;background-color:#17130f}
       #ph-card::before,:host([data-art="ready"]) #ph-card::before{background:linear-gradient(#08070680,#080706f5 65%)}
       .ph-header{height:44px;text-align:left;padding:16px 20px 0;font-size:10px;letter-spacing:.15em;color:#d8c49d}
-      .ph-feature{display:flex;flex-direction:column;gap:6px;padding:12px 20px 18px;height:112px}
+      .ph-feature{display:flex;flex-direction:column;gap:6px;padding:7px 20px 10px;height:88px}
       .ph-feature strong{font-size:27px;display:flex;justify-content:space-between}.ph-feature small{font-size:11px;color:#e1d8c8}
       .ph-projects{display:grid;grid-template-columns:1fr 1.3fr;margin:0 16px;border-block:1px solid #ffffff35}
-      .ph-projects a{padding:16px 5px;text-align:center;font-size:13px}.ph-projects a+a{border-left:1px solid #ffffff35}
-      .ph-eastwar{height:auto;padding:9px 16px}.ph-eastwar h2{font-size:12px;letter-spacing:.15em;margin-bottom:10px}
+      .ph-projects a{padding:12px 5px;text-align:center;font-size:13px}.ph-projects a+a{border-left:1px solid #ffffff35}
+      .ph-projects .ph-baegopa{grid-column:1/-1;border-left:0;border-top:1px solid #ffffff35}.ph-eastwar{height:auto;padding:5px 16px}.ph-eastwar h2{font-size:12px;letter-spacing:.15em;margin-bottom:10px}
       .ph-links{display:grid;grid-template-columns:1fr 1fr;gap:6px}.ph-link{min-height:42px;border:1px solid #ffffff30!important;border-radius:3px;background:#ffffff08!important;padding:6px}.ph-name{font-size:12px}
       .ph-eyebrow{color:#ead8ac}
     `;
@@ -126,17 +126,17 @@
     var panel = document.createElement('section');
     panel.id = 'ph-panel';
     panel.setAttribute('role', 'region');
-    panel.setAttribute('aria-label', '호리병 · 갑패 · 매직블록마스터 · EASTWAR 바로가기');
+    panel.setAttribute('aria-label', '호리병 · 갑패 · 매직블록마스터 · 깡셰프 배고파! · EASTWAR 바로가기');
     panel.innerHTML = '<div id="ph-card"><div class="ph-heading ph-header" title="드래그하여 이동">PROJECTS</div>' +
       '<a class="ph-feature" href="' + BASE + '/watch/horibyeong.html"><span class="ph-eyebrow">LATEST FILM</span><strong>호리병 <span aria-hidden="true">→</span></strong><small>HORIBYEONG · 영상과 제작기</small></a>' +
-      '<nav class="ph-projects" aria-label="작품 바로가기"><a href="' + BASE + '/watch/gappae.html">갑패 ↗</a><a href="' + BASE + '/watch/magic-block-master.html">매직블록마스터 ↗</a></nav>' +
+      '<nav class="ph-projects" aria-label="작품 바로가기"><a href="' + BASE + '/watch/gappae.html">갑패 ↗</a><a href="' + BASE + '/watch/magic-block-master.html">매직블록마스터 ↗</a><a class="ph-baegopa" href="' + BASE + '/watch/baegopa.html">깡셰프 배고파! ↗</a></nav>' +
       '<section class="ph-eastwar"><h2 class="ph-heading" title="드래그하여 이동">EASTWAR</h2><nav class="ph-links" aria-label="EASTWAR 메뉴">' + LINKS.map(function (link) {
         return '<a class="ph-link" href="' + BASE + link[3] + '"><span class="ph-name">' + link[1] + '</span></a>';
       }).join('') + '</nav></section></div><button id="ph-top-close" type="button" aria-label="통합 팝업 접기">×</button>';
     var collapsed = document.createElement('button');
     collapsed.id = 'ph-collapsed';
     collapsed.type = 'button';
-    collapsed.setAttribute('aria-label', '작품 메뉴 열기. 호리병 · 갑패 · 매직블록마스터 · EASTWAR');
+    collapsed.setAttribute('aria-label', '작품 메뉴 열기. 호리병 · 갑패 · 매직블록마스터 · 깡셰프 배고파! · EASTWAR');
     collapsed.setAttribute('aria-controls', 'ph-panel');
     collapsed.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-4 8-8 10-4-2-8-5-8-10V6l8-4z"/><path d="M8 9l8 8M16 9l-8 8M7 8l2 2M15 10l2-2"/></svg>';
     shadow.appendChild(panel);
