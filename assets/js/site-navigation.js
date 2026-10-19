@@ -34,6 +34,11 @@
     hw.href = '/bykimjak/watch/horibyeong.html'; hi.className = 'sub-idx'; hi.textContent = '01–E';
     hw.append(hi, document.createTextNode('호리병 / HORIBYEONG')); drop.append(hw);
   }
+  if (drop && !drop.querySelector('a[href$="watch/character-films.html"]')) {
+    var filmLink = document.createElement('a'), filmIndex = document.createElement('span');
+    filmLink.href = '/bykimjak/watch/character-films.html'; filmIndex.className = 'sub-idx'; filmIndex.textContent = '01–F';
+    filmLink.append(filmIndex, document.createTextNode('캐릭터 필름 / CHARACTER FILMS')); drop.append(filmLink);
+  }
   // Keep the WATCH label bilingual on both static and generated menus.
   var mbmWatchLink = drop && drop.querySelector('a[href$="magic-block-master.html"]');
   if (mbmWatchLink) {
