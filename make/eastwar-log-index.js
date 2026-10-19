@@ -223,6 +223,11 @@
       num: '044', date: '2026 · 09 · 18',
       ko: { href: 'eastwar-devlog-044.html',    title: '[3부작 후기] 사고 하나가 만든 안전한 습관', sub: 'worldmap_main.gd 리팩터링을 돌아보며' },
       en: { href: 'eastwar-devlog-044-en.html', title: '[Trilogy Retrospective] One Accident, One Safe Habit', sub: 'Looking Back on the worldmap_main.gd Refactor' }
+    },
+    {
+      num: '045', date: '2026 · 10 · 19',
+      ko: { href: 'eastwar-devlog-045.html',    title: '[3D 전환 시리즈] 2D에서 3D 게임을 꿈꾸다', sub: '3D 게임으로 개발가능성 테스트' },
+      en: { href: 'eastwar-devlog-045-en.html', title: '[3D Transition Series] Dreaming of 3D from 2D', sub: 'Testing Whether a 3D Version Is Even Possible' }
     }
   ];
 
