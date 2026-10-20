@@ -3,6 +3,7 @@
   // url: root-relative (from site root, no leading slash).
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
+{"url": "make/eastwar-devlog-046.html", "catKey": "eastwar", "cat": "EASTWAR 개발일지", "title": "[3D 전환 시리즈] 전장에 들어갈 병사들의 모습을 만들다", "sub": "문화권별 유닛과 고유 특수병, 그리고 2D 전장 위 3D 유닛 실험을 준비하며", "date": "2026-10-20", "dl": "2026 · 10 · 20"},
     {
       url: 'make/eastwar-devlog-045.html',
       catKey: 'eastwar', cat: 'EASTWAR 개발일지',

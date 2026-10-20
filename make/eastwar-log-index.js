@@ -229,6 +229,7 @@
       ko: { href: 'eastwar-devlog-045.html',    title: '[3D 전환 시리즈] 2D에서 3D 게임을 꿈꾸다', sub: '3D 게임으로 개발가능성 테스트' },
       en: { href: 'eastwar-devlog-045-en.html', title: '[3D Transition Series] Dreaming of 3D from 2D', sub: 'Testing Whether a 3D Version Is Even Possible' }
     }
+    ,{num:'046',date:'2026 · 10 · 20',ko:{"href": "eastwar-devlog-046.html", "title": "[3D 전환 시리즈] 전장에 들어갈 병사들의 모습을 만들다", "sub": "문화권별 유닛과 고유 특수병, 그리고 2D 전장 위 3D 유닛 실험을 준비하며"},en:{"href": "eastwar-devlog-046-en.html", "title": "[3D Transition Series] Designing the Soldiers for the Battlefield", "sub": "Unit identities, unique troops, and preparations for testing 3D units on a 2D battlefield"}}
   ];
 
   /* Find which page the current log falls on */
