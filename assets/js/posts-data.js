@@ -3,6 +3,7 @@
   // url: root-relative (from site root, no leading slash).
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
+{"url": "posts/think/ai-chat-013.html", "catKey": "ai-coach", "cat": "AI 코치들과의 수다", "title": "작년 말에 시작된 작은 변화, 그리고 지금의 큰 변화", "sub": "IP 아키텍트를 꿈꾸던 때부터 AI 제작팀을 꾸리는 오늘, 그리고 이 길을 걷는 이유", "date": "2026-10-22", "dl": "2026 · 10 · 22"},
 {"url":"make/eastwar-devlog-048.html","catKey":"eastwar","cat":"EASTWAR 개발일지","title":"[3D 전환 시리즈] 이제 책략을 쓰고, 증원을 기다린다","sub":"밤사이 맡긴 책략·증원 연결, 전투 판단과 화면 표현을 나누고 검증하다","date":"2026-10-22","dl":"2026 · 10 · 22"},
     {url:'make/eastwar-devlog-047.html',catKey:'eastwar',cat:'EASTWAR 개발일지',title:'[3D 전환 시리즈] 3D 전장에서 한 라운드를 끝까지',sub:'이동·공격·대기와 적의 차례를 연결한 10월 20일 작업 기록',date:'2026-10-21',dl:'2026 · 10 · 21'},
 {"url": "make/eastwar-devlog-046.html", "catKey": "eastwar", "cat": "EASTWAR 개발일지", "title": "[3D 전환 시리즈] 전장에 들어갈 병사들의 모습을 만들다", "sub": "문화권별 유닛과 고유 특수병, 그리고 2D 전장 위 3D 유닛 실험을 준비하며", "date": "2026-10-20", "dl": "2026 · 10 · 20"},
@@ -837,4 +838,5 @@
     { key: 'make',         label: 'Make · 02–C',      dark: true  }
   ];
 })();
+
 
