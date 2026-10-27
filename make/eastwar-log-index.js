@@ -234,6 +234,7 @@
     ,{"num":"048","date":"2026 · 10 · 22","ko":{"href":"eastwar-devlog-048.html","title":"[3D 전환 시리즈] 이제 책략을 쓰고, 증원을 기다린다","sub":"밤사이 맡긴 책략·증원 연결, 전투 판단과 화면 표현을 나누고 검증하다"},"en":{"href":"eastwar-devlog-048.html","title":"[3D Transition Series] Using Tactics and Waiting for Reinforcements","sub":"October 21–22 work log · Korean article"}}
     ,{"num":"049","date":"2026 · 10 · 26","ko":{"href":"eastwar-devlog-049.html","title":"2D HUD를 3D에 이식완료.","sub":"3D 변환을 위한 차곡차곡 진행"},"en":{"href":"eastwar-devlog-049.html","title":"The 2D HUD Is Now in 3D","sub":"October 25–26 work log · Korean article"}}
     ,{"num":"050","date":"2026 · 10 · 26","ko":{"href":"eastwar-devlog-050.html","title":"3D 전장에 풍경을 입히다","sub":"그록봇과 함께 더해본 흙과 언덕, 나무와 숲"},"en":{"href":"eastwar-devlog-050.html","title":"Adding Scenery to the 3D Battlefield","sub":"Soil, hills, trees and forests with Grok · Korean article"}}
+    ,{"num": "051", "date": "2026 · 10 · 27", "ko": {"href": "eastwar-devlog-051.html", "title": "소나무 한 그루를 전장에 심기까지", "sub": "록코치의 첫 본격 활약, 쿼럼으로 함께 고른 500삼각형 소나무"}, "en": {"href": "eastwar-devlog-051.html", "title": "Bringing a Pine Tree to the Battlefield", "sub": "Grok’s first major contribution and collaboration with Quorum · Korean article"}}
   ];
 
   /* Find which page the current log falls on */
@@ -302,4 +303,5 @@
 
   window.EASTWAR_LI = { render: render };
 })();
+
 
