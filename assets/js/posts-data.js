@@ -3,6 +3,7 @@
   // url: root-relative (from site root, no leading slash).
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
+{"url": "posts/think/ai-chat-014.html", "catKey": "ai-coach", "cat": "AI 코치들과의 수다", "title": "내년 11월, 우리는 무슨 말을 하고 있을까?", "sub": "IP 아키텍트를 꿈꾼 지 1년, 다시 1년 뒤를 묻다", "date": "2026-10-27", "dl": "2026 · 10 · 27"},
 {"url":"make/eastwar-devlog-050.html","catKey":"eastwar","cat":"EASTWAR 개발일지","title":"3D 전장에 풍경을 입히다","sub":"그록봇과 함께 더해본 흙과 언덕, 나무와 숲","date":"2026-10-26","dl":"2026 · 10 · 26"},
 {"url":"make/eastwar-devlog-049.html","catKey":"eastwar","cat":"EASTWAR 개발일지","title":"2D HUD를 3D에 이식완료.","sub":"3D 변환을 위한 차곡차곡 진행","date":"2026-10-26","dl":"2026 · 10 · 26"},
 {"url": "posts/think/ai-chat-013.html", "catKey": "ai-coach", "cat": "AI 코치들과의 수다", "title": "작년 말에 시작된 작은 변화, 그리고 지금의 큰 변화", "sub": "IP 아키텍트를 꿈꾸던 때부터 AI 제작팀을 꾸리는 오늘, 그리고 이 길을 걷는 이유", "date": "2026-10-22", "dl": "2026 · 10 · 22"},
@@ -840,5 +841,6 @@
     { key: 'make',         label: 'Make · 02–C',      dark: true  }
   ];
 })();
+
 
 
