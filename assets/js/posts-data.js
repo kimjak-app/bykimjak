@@ -3,6 +3,7 @@
   // url: root-relative (from site root, no leading slash).
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
+{"url": "make/quorum-devlog-001.html", "catKey": "quorum", "cat": "QUORUM 제작일지", "title": "네 명의 AI 코치를 한자리에, 쿼럼을 만들다", "sub": "EASTWAR의 3D 전장과 에셋 제작을 위해 시작한 AI 오케스트레이션", "date": "2026-10-27", "dl": "2026 · 10 · 27"},
 {"url": "posts/think/ai-chat-014.html", "catKey": "ai-coach", "cat": "AI 코치들과의 수다", "title": "내년 11월, 우리는 무슨 말을 하고 있을까?", "sub": "IP 아키텍트를 꿈꾼 지 1년, 다시 1년 뒤를 묻다", "date": "2026-10-27", "dl": "2026 · 10 · 27"},
 {"url":"make/eastwar-devlog-050.html","catKey":"eastwar","cat":"EASTWAR 개발일지","title":"3D 전장에 풍경을 입히다","sub":"그록봇과 함께 더해본 흙과 언덕, 나무와 숲","date":"2026-10-26","dl":"2026 · 10 · 26"},
 {"url":"make/eastwar-devlog-049.html","catKey":"eastwar","cat":"EASTWAR 개발일지","title":"2D HUD를 3D에 이식완료.","sub":"3D 변환을 위한 차곡차곡 진행","date":"2026-10-26","dl":"2026 · 10 · 26"},
@@ -833,6 +834,7 @@
   // STUDIO_CATS: category order for FROM THE STUDIO in index.html.
   // Each category shows its most recent post from ALL_POSTS.
   window.STUDIO_CATS = [
+    { key: 'quorum', label: 'QUORUM · AI Orchestration', dark: false },
     { key: 'film-making', label: 'Film Making · 영상 제작기', dark: false },
     { key: 'ai-coach',     label: 'AI Conversations', dark: false },
     { key: 'eastwar',      label: 'Architect Notes',  dark: false },
@@ -841,6 +843,7 @@
     { key: 'make',         label: 'Make · 02–C',      dark: true  }
   ];
 })();
+
 
 
 

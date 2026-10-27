@@ -52,6 +52,7 @@
     return link && link.textContent.toUpperCase().includes('MAKE');
   });
   var makeDrop = make && make.querySelector('.drop');
+
   if (makeDrop && !makeDrop.querySelector('a[href$="make/baegopa.html"]')) {
     var makingLink = document.createElement('a'), makingIndex = document.createElement('span');
     makingLink.href = '/bykimjak/make/baegopa.html';
@@ -75,6 +76,12 @@
     horiLink.append(horiIndex, document.createTextNode('호리병 제작기 / HORIBYEONG'));
     makeDrop.append(horiLink);
   }
+  if (makeDrop && !makeDrop.querySelector('a[href$="make/quorum.html"]')) {
+    var quorumLink = document.createElement('a'), quorumIndex = document.createElement('span');
+    quorumLink.href = '/bykimjak/make/quorum.html'; quorumIndex.className = 'sub-idx'; quorumIndex.textContent = '02–H';
+    quorumLink.append(quorumIndex, document.createTextNode('QUORUM · 쿼럼 제작일지')); makeDrop.append(quorumLink);
+  }
+
   document.querySelectorAll('footer a[href="#"]').forEach(function (link) {
     link.removeAttribute('href');
     link.classList.add('unavailable-link');
@@ -108,3 +115,4 @@
   document.addEventListener('click', function (event) { if (!nav.contains(event.target)) close(); });
   matchMedia('(min-width:781px)').addEventListener('change', close);
 })();
+
