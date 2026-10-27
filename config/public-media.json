@@ -6797,6 +6797,34 @@
       "ip": "horibyeong",
       "mime": "video/mp4",
       "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-051/pine-concept-final.png",
+      "ip": "eastwar",
+      "bytes": 1631677,
+      "sha256": "222a7f386e58d62ee1277c1aff483abd04b23566fba2d970113e1362afa0e345",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/bd86b5a21c904cf745c6835d3fcd8ebf0097ec78/make/assets/img/eastwar-051/pine-concept-final.png",
+      "aliases": [
+        "assets/img/eastwar-051/pine-concept-final.png"
+      ],
+      "width": 1086,
+      "height": 1448,
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-051/pine-decimation-comparison.png",
+      "ip": "eastwar",
+      "bytes": 3476396,
+      "sha256": "42c9ed405b5f6555f1f039cc3f2ac27b365300a578742a960379972df079255d",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/bd86b5a21c904cf745c6835d3fcd8ebf0097ec78/make/assets/img/eastwar-051/pine-decimation-comparison.png",
+      "aliases": [
+        "assets/img/eastwar-051/pine-decimation-comparison.png"
+      ],
+      "width": 2048,
+      "height": 1565,
+      "verified": true
     }
   ]
 }
