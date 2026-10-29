@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>EASTWAR Dev Log #051 — What It Took to Plant One Pine Tree on the Battlefield · byKimjak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<style>
+:root{--bg:#FFFFFF;--bg-2:#F2F2F2;--ink:#0A0A0A;--ink-2:#2A2A2A;--ink-3:#6B6B6B;--rule:#0A0A0A1A;--dark:#0D0B09;--dark-2:#1A1714;--dark-ink:#FAF7F2;--dark-ink-2:#9C948A;--dark-rule:#FAF7F21A;--accent:oklch(68% 0.08 70);--accent-soft:oklch(68% 0.08 70 / 0.12);--f-display:"Space Grotesk","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-body:"Inter","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-mono:"JetBrains Mono",ui-monospace,monospace;--f-kr:"Pretendard Variable","Inter",ui-sans-serif,system-ui,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:var(--f-body);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.nav{position:fixed;inset:0 0 auto 0;z-index:100;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:18px clamp(20px,4vw,48px);transition:background .35s ease,backdrop-filter .35s ease,border-color .35s ease;border-bottom:1px solid transparent}
+.nav.scrolled{background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:saturate(1.2) blur(14px);-webkit-backdrop-filter:saturate(1.2) blur(14px);border-bottom-color:var(--rule)}
+.nav__logo{font-family:var(--f-display);font-weight:600;font-size:18px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.nav__logo .dot{width:8px;height:8px;border-radius:999px;background:var(--ink);display:inline-block;transform:translateY(-1px)}
+.nav__menu{display:flex;gap:36px;justify-content:center;align-items:center}
+.nav__menu > a,.nav__menu .has-drop > a{font-family:var(--f-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;position:relative;padding:6px 2px;color:var(--ink)}
+.nav__menu > a::after,.nav__menu .has-drop > a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.6,0,.2,1)}
+.nav__menu > a:hover::after,.nav__menu .has-drop:hover > a::after{transform:scaleX(1)}
+.nav__menu .idx{font-family:var(--f-mono);font-size:9px;vertical-align:super;margin-right:4px;color:var(--ink-3)}
+.nav__cta{justify-self:end;display:flex;align-items:center;gap:14px}
+.nav__cta .status{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+.nav__cta .pulse{width:6px;height:6px;border-radius:999px;background:#3CB371;animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px transparent}}
+.nav__cta a.contact{border:1px solid var(--ink);padding:10px 16px;border-radius:999px;font-family:var(--f-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .25s,color .25s}
+.nav__cta a.contact:hover{background:var(--ink);color:var(--bg)}
+.nav__menu .has-drop{position:relative}
+.nav__menu .drop{position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%) translateY(-10px);min-width:210px;background:var(--bg);border:1px solid var(--rule);padding:4px;opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s cubic-bezier(.2,.8,.2,1);z-index:200}
+.nav__menu .has-drop:hover .drop{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.nav__menu .drop a{display:block;padding:10px 14px;border-radius:2px;font-family:var(--f-kr);font-size:13px;font-weight:400;letter-spacing:-.01em;text-transform:none;color:var(--ink-2);transition:background .15s,color .15s}
+.nav__menu .drop a::after{content:none!important}
+.nav__menu .drop a:hover{background:var(--bg-2);color:var(--ink)}
+.sub-idx{display:block;font-family:var(--f-mono);font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin-bottom:2px}
+@media(max-width:780px){.nav{grid-template-columns:1fr auto;padding:14px 20px}.nav__menu{display:none}.nav__cta .status{display:none}}
+.listing-head{padding:120px clamp(20px,4vw,48px) 64px;border-bottom:1px solid var(--rule)}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:28px}
+.breadcrumb a{transition:color .2s}.breadcrumb a:hover{color:var(--ink)}
+.breadcrumb .sep{opacity:.4}
+.listing-head h1{font-family:var(--f-display);font-weight:500;font-size:clamp(44px,9vw,120px);letter-spacing:-.04em;line-height:.92;margin:0 0 8px}
+.listing-head .sub-ko{font-family:var(--f-kr);font-size:clamp(16px,2vw,22px);color:var(--ink-3);margin:0 0 20px;font-weight:400}
+.listing-head .listing-desc{font-family:var(--f-kr);font-size:15px;line-height:1.65;color:var(--ink-3);max-width:48ch}
+.lang-switch{display:inline-flex;align-items:center;margin-bottom:28px}
+.lang-current{font-family:var(--f-display);font-size:14px;font-weight:700;color:var(--ink);padding:10px 20px;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px;cursor:default;letter-spacing:.01em}
+.lang-sep{font-family:var(--f-mono);font-size:14px;color:var(--ink-3);opacity:.35;user-select:none;line-height:1}
+.lang-other{font-family:var(--f-display);font-size:14px;font-weight:400;color:var(--ink-3);padding:10px 20px;transition:color .2s;letter-spacing:.01em}
+.lang-other:hover{color:var(--ink)}
+footer{background:var(--dark);color:var(--dark-ink);padding:90px clamp(20px,4vw,48px) 36px;overflow:hidden}
+footer .big{font-family:var(--f-display);font-weight:400;font-size:clamp(44px,7vw,108px);letter-spacing:-.04em;line-height:.95;color:var(--dark-ink);margin:0 0 48px;text-wrap:balance}
+footer .big em{font-style:italic;font-family:"Times New Roman",serif;color:#A99A85}
+footer .grid-ft{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding-top:36px;border-top:1px solid var(--dark-rule)}
+footer .col{display:flex;flex-direction:column;gap:10px}
+footer .col h6{margin:0 0 6px;font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--dark-ink-2);font-weight:400}
+footer .col a{font-family:var(--f-display);font-size:15px;color:var(--dark-ink);transition:color .3s;display:inline-flex;align-items:center;gap:6px}
+footer .col a:hover{color:#A99A85}
+footer .col a .ext{font-family:var(--f-mono);font-size:9px;opacity:.5}
+footer .c1{grid-column:1/span 5}footer .c2{grid-column:6/span 2}footer .c3{grid-column:8/span 2}footer .c4{grid-column:10/span 3}
+footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-family:var(--f-mono);font-size:11px;color:var(--dark-ink-2);text-transform:uppercase;letter-spacing:.06em}
+@media(max-width:780px){footer .c1,footer .c2,footer .c3,footer .c4{grid-column:1/span 12}}
+.rev{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}.rev.in{opacity:1;transform:none}
+/* ── Dev Log Article ── */
+.devlog{padding:0 0 140px}
+.devlog__body{padding:64px clamp(20px,4vw,48px) 0;max-width:760px}
+.devlog__body .log-num{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:12px}
+.devlog__body h1{font-family:var(--f-display);font-weight:500;font-size:clamp(26px,4vw,48px);letter-spacing:-.03em;line-height:1.1;margin:0 0 10px}
+.devlog__body h2{font-family:var(--f-kr);font-size:clamp(15px,1.8vw,20px);font-weight:400;color:var(--ink-3);margin:0;line-height:1.5}
+.devlog__body .log-date{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);display:block;margin:24px 0 40px;padding-top:20px;border-top:1px solid var(--rule)}
+.devlog__body h3{font-family:var(--f-display);font-weight:500;font-size:clamp(16px,2vw,22px);letter-spacing:-.02em;margin:56px 0 10px;padding-top:48px;border-top:1px solid var(--rule)}
+.devlog__body .section-date{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 28px;display:block}
+.devlog__body p{font-family:var(--f-kr);font-size:16px;line-height:1.95;color:var(--ink-2);margin:0 0 22px}
+.devlog__body strong{font-weight:700;color:var(--ink)}
+.devlog__body em{font-style:italic;color:var(--ink)}
+.devlog__body hr{border:none;border-top:1px solid var(--rule);margin:52px 0}
+.devlog__body ul{padding-left:20px;margin:0 0 24px}
+.devlog__body li{font-family:var(--f-kr);font-size:16px;line-height:1.85;color:var(--ink-2);margin-bottom:10px}
+.devlog__body blockquote{margin:28px 0;padding:20px 24px;border-left:3px solid var(--ink);background:var(--bg-2);font-family:var(--f-kr);font-size:16px;line-height:1.8;color:var(--ink)}
+.devlog__body blockquote p{margin:0;color:var(--ink)}
+.devlog__body pre{background:var(--bg-2);border:1px solid var(--rule);padding:20px 24px;margin:0 0 28px;overflow-x:auto;border-radius:2px}
+.devlog__body code{font-family:var(--f-mono);font-size:13px;line-height:1.7;color:var(--ink-2)}
+.devlog__body figure{margin:32px 0}
+.devlog__body figure img{width:100%;border-radius:2px}
+#log-051 .devlog__body figure img{display:block;width:100%;max-width:100%;height:auto}
+.devlog__body figure figcaption{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
+.devlog__body .fig-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0}
+.devlog__body .fig-2col figure{margin:0}
+@media(max-width:640px){.devlog__body .fig-2col{grid-template-columns:1fr}}
+/* ── Log Index ── */
+.log-index{padding:0 clamp(20px,4vw,48px)}
+.log-index__hd{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0;padding:32px 0 0}
+.log-index__item{display:grid;grid-template-columns:52px 1fr auto;gap:20px;align-items:baseline;padding:20px 0;border-top:1px solid var(--rule);transition:background .25s;text-decoration:none}
+.log-index__item:last-child{border-bottom:1px solid var(--rule);margin-bottom:48px}
+.log-index__item:hover{background:linear-gradient(90deg,transparent,var(--accent-soft) 20%,var(--accent-soft) 80%,transparent)}
+.log-index__num{font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
+.log-index__t{font-family:var(--f-display);font-size:clamp(14px,1.6vw,18px);font-weight:500;letter-spacing:-.01em;line-height:1.2;color:var(--ink)}
+.log-index__t .ko{display:block;font-family:var(--f-kr);font-size:12px;color:var(--ink-3);font-weight:400;margin-top:3px}
+.log-index__date{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);white-space:nowrap}
+.log-index__item--current{pointer-events:none;background:var(--accent-soft);display:grid}
+.log-index__item--current .log-index__num{color:var(--accent)}
+/* ── Log Pager ── */
+.log-pager{display:flex;gap:8px;padding:12px 0 0;margin-bottom:48px;justify-content:center;border-top:1px solid var(--rule)}
+.log-pager__btn{font-family:var(--f-mono);font-size:11px;width:32px;height:32px;border:1px solid var(--rule);background:none;cursor:pointer;color:var(--ink-3);transition:background .2s,color .2s;border-radius:2px}
+.log-pager__btn:hover{background:var(--bg-2);color:var(--ink)}
+.log-pager__btn--active{background:var(--ink);color:var(--bg);border-color:var(--ink);cursor:default}
+/* ── Log Nav ── */
+.log-nav{display:flex;justify-content:space-between;padding:52px clamp(20px,4vw,48px) 0;margin-top:64px;border-top:1px solid var(--rule)}
+.log-nav__prev,.log-nav__next{display:flex;flex-direction:column;gap:6px}
+.log-nav__next{align-items:flex-end;text-align:right}
+.log-nav__label{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.log-nav__title{font-family:var(--f-display);font-size:clamp(14px,1.8vw,20px);font-weight:500;letter-spacing:-.01em;color:var(--ink);transition:color .2s}
+.log-nav a:hover .log-nav__title{color:var(--accent)}
+.log-nav__next--disabled{opacity:.4;cursor:default}
+
+#log-051 .pine-concept{max-width:420px;margin-inline:auto}#log-051 .quorum-logo{max-width:280px;margin-inline:auto}#log-051 .related-link{text-decoration:underline;text-underline-offset:4px}
+</style>
+<link rel="stylesheet" href="../assets/css/site-navigation.css" />
+<style>.unit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:30px 0}.devlog__body .unit-grid figure{margin:0;min-width:0}.devlog__body .unit-grid img{display:block;width:100%;height:auto;object-fit:contain;background:#91a8c2}.unit-grid figcaption{line-height:1.6;font-size:13px}.unit-grid--single{max-width:440px;grid-template-columns:1fr;margin-inline:auto}.devlog__body ol{padding-left:24px;line-height:1.9}.devlog__body li{margin-bottom:14px}.concept-note{border-left:3px solid var(--ink);padding:16px 20px;background:var(--bg-2)}@media(max-width:500px){.unit-grid{grid-template-columns:1fr;gap:20px}.unit-grid figcaption{font-size:12px}}</style><meta name="description" content="Grok Coach's first major contribution: a 500-triangle pine chosen together through QUORUM"><link rel="canonical" href="https://kimjak-app.github.io/bykimjak/make/eastwar-devlog-051-en.html"></head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav__logo"><span class="dot" aria-hidden="true"></span>byKimjak</a>
+  <div class="nav__menu" role="navigation">
+    <div class="has-drop">
+      <a href="../watch/"><span class="idx">01</span>WATCH</a>
+      <div class="drop"><a href="../watch/gappae.html"><span class="sub-idx">01–A</span>GAPPAE</a><a href="../watch/eastwar.html"><span class="sub-idx">01–B</span>EASTWAR</a><a href="../watch/magic-block-master.html"><span class="sub-idx">01–C</span>MAGIC BLOCK MASTER</a></div>
+    </div>
+    <div class="has-drop">
+      <a href="../make/"><span class="idx">02</span>MAKE</a>
+      <div class="drop">
+        <a href="../make/eastwar.html"><span class="sub-idx">02–A</span>EASTWAR Dev Log</a>
+        <a href="../make/grandslam.html"><span class="sub-idx">02–B</span>GrandSlam Dev Log</a>
+        <a href="../make/takezero.html"><span class="sub-idx">02–C</span>TakeZero · Prompt Engine</a>
+        <a href="../make/gappae-trailer.html"><span class="sub-idx">02–D</span>Making the GAPPAE Trailer</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../think/"><span class="idx">03</span>THINK</a>
+      <div class="drop">
+        <a href="../think/ai-coach.html"><span class="sub-idx">03–A</span>Conversations with AI Coaches</a>
+        <a href="../think/morning-word.html"><span class="sub-idx">03–B</span>Morning Scripture with ChatCoach</a>
+        <a href="../think/personal-essay.html"><span class="sub-idx">03–C</span>Personal Essays</a>
+      </div>
+    </div>
+    <a href="../index.html#about"><span class="idx">04</span>ABOUT</a>
+  </div>
+  <div class="nav__cta">
+    <span class="status"><span class="pulse"></span>Available · Seoul</span>
+    <a href="../index.html#contact" class="contact">Contact ↗</a>
+  </div>
+</nav>
+
+<main>
+  <div class="listing-head">
+    <div class="breadcrumb rev">
+      <a href="../index.html">bykimjak</a>
+      <span class="sep">›</span>
+      <a href="eastwar-en.html">EASTWAR</a>
+      <span class="sep">›</span>
+      <span>Dev Log #051</span>
+    </div>
+    <div class="lang-switch rev">
+      <a href="eastwar-devlog-051.html" class="lang-other">🇰🇷 한국어</a>
+      <span class="lang-sep">|</span>
+      <span class="lang-current">🇺🇸 English</span>
+    </div>
+    <h1 class="rev">EASTWAR</h1>
+    <p class="sub-ko rev">EASTWAR Dev Log</p>
+    <p class="listing-desc rev">Strategic alt-history simulation — solo dev log</p>
+  </div>
+
+  <section class="log-index rev" id="log-index-sect"></section>
+
+  <article class="devlog" id="log-051">
+    <div class="devlog__body">
+<span class="log-num">Dev Log · #051</span>
+<h1>What It Took to Plant One Pine Tree on the Battlefield</h1>
+<h2>Grok Coach's first major contribution: a 500-triangle pine chosen together through QUORUM</h2>
+<span class="log-date">October 27, 2026 · Red pine asset creation and multi-AI collaboration</span>
+<p>Yesterday, I added ground textures and scenery to the battlefield. Today, I made a pine tree to go into it. Getting a picture of a tree I like and making it run comfortably with many copies planted in a game are different tasks. Today was about connecting those steps one by one.</p>
+<p>Grok, whom I call Grok Coach, played a particularly big role today. Yesterday, I had handed it the job of adding scenery to the battlefield. Today, it made an important contribution to refining a complex 3D model for use in the actual game. From there, I gathered the other coaches' opinions on the results and comparison sheets, made the final choice and checked it in the Godot engine.</p>
+<h3>It Started with a Picture I Liked</h3>
+<p>First, I worked out the red pine's appearance with ChatCoach. Its trunk curves in an S shape rather than rising straight, and its needles form clusters across several tiers. I wanted it to fit the battlefield's palette while retaining a distinctly pine-like silhouette, even from a little farther away.</p>
+<figure class="pine-concept"><img src="assets/img/eastwar-051/pine-concept-final.png" width="1086" height="1448" alt="Final 2D red pine concept art, featuring an S-curved red trunk and a tiered canopy" loading="lazy"><figcaption>The red pine concept developed with ChatCoach. I used this image as the starting point for a 3D model in Tripo.</figcaption></figure>
+<p>I turned this picture into 3D with Tripo AI. I liked the shape, but the generated original had 17,517 triangles: the small faces that make up a 3D model's surface. The budget I had set for all the trees was 16,000, so this model exceeded the limit with a single tree.</p>
+<p>At first, I had intended to keep each tree below 200 triangles. Claude Coach made a 187-triangle low-poly model in Blender and also tried Decimate, which automatically reduces the original's face count. But with so few faces, the needle clusters looked like diamonds or umbrellas. It was difficult to retain the curved trunk and tiered canopy I wanted.</p>
+<p>There was no reason to force it to fit the first number I had chosen. I needed to look at which shapes mattered, then reassess the budget required to preserve them.</p>
+<h3>Grok Coach Changed the Way We Reduced the Tree</h3>
+<p>At this point, Grok Coach brought a different approach. Rather than simply lowering the Decimate ratio, it first examined and cleaned up the original mesh's structure, then reduced it.</p>
+<p>Grok Coach's analysis reported that about a quarter of the faces were concentrated in fine roots at the base, and that the mesh contained 45 tiny topological tunnels and fragmented UV islands. UVs are the coordinates that determine how a texture is laid out over a 3D surface. Its diagnosis was that this structure made straightforward reduction difficult and caused the trunk to collapse first. That explanation of the cause was Grok Coach's report; afterward, I checked the resulting files and the actual view separately.</p>
+<p>The process began with Voxel Remesh. It reconstructed the surface using a small volumetric grid to clean up complex areas, then used Shrinkwrap to fit it back onto the original surface. After that, it reduced the faces in two stages while protecting the trunk. This was intended to prevent the trunk from disappearing and leaving only the needle clusters.</p>
+<p>Changing the shape also means adjusting the colors again. Grok Coach baked the original colors onto the new UVs. It explained that it used a 6D KDTree method comparing three position values and three surface-direction values together. Rather than distinguishing nearby needles and trunk by position alone, this method also considers which way each face points, aiming to reduce colors bleeding into the wrong places.</p>
+<p>This produced candidates with budgets of 1,000, 800, 500 and 200 triangles, along with a narrower, slim version. Grok Coach also made comparison sheets from the front and from a downward-looking angle close to the game camera. Compared with receiving files distinguished only by their numbers, this made it much easier to judge how much of the trunk and foliage shapes survived at each stage.</p>
+<figure><img src="assets/img/eastwar-051/pine-decimation-comparison.png" width="2048" height="1565" alt="Grok Coach's Tripo red pine reduction comparison sheet, comparing the original and 995-, 795-, 495- and 195-triangle candidates from front and downward-looking views." loading="lazy"><figcaption>Grok Coach's comparison sheet of successive reduction levels. The lower images are comparison renders based on the battlefield camera angle, not captures from a running Godot scene. Click to enlarge.</figcaption></figure>
+<p>This comparison sheet shows what Grok Coach accomplished today. It took a complex original, analyzed the causes of the problem and produced several levels of results to choose from. I had effectively given it the practical work of going beyond using a generated model as-is and adjusting its shape and computational weight for the game.</p>
+<h3>We Chose 500 Triangles</h3>
+<p>The four AI coaches and I shared our opinions on the candidates. Gemini Coach recommended 800 triangles, while ChatCoach, Grok Coach, Claude Coach and I chose 500. We kept 800 in reserve and decided to use the model with a 500-triangle budget for this battlefield.</p>
+<p>When Claude Coach opened the actual file and checked it, the face count was 495. It had one material and two 1024×1024 textures, totaling about 0.5MB. Its height was set to 3.45m to fit the battlefield, and the base was aligned to the origin to make it easy to place on the ground. I recorded the distinction between the name “500-triangle model” and the actual file's count of 495.</p>
+<p>I raised the per-tree budget from 200 to 500, but kept the total tree budget at 16,000. Placing 32 trees with 495 triangles each gives 15,840. We had gone from a single original tree exceeding the limit to being able to place 32 trees within the same total budget.</p>
+<h3>The Final Judgment Happens on the Actual Battlefield</h3>
+<p>Claude Code connected the model to Godot's terrain builder, and Claude Coach verified it through file comparisons and reproducing the tests. It uses MultiMesh to place the same mesh at multiple positions, with a setup that allows testing different tree counts.</p>
+<p>In this test, measured by Claude Code, 8, 16, 24 and 32 trees were placed and compared at zoom levels 42, 30 and 20. Recorded frame times were approximately 13.6, 10.0 and 7.8ms respectively by zoom level, with no clear difference when the tree count increased at the same zoom. This gave us evidence that the 500-triangle choice was reasonable in this environment and arrangement.</p>
+<p>We also checked the budget validation. 32 trees passed, but 33 trees came to 16,335 triangles and exceeded the limit. Trees being drawn outside the screen and the cost of shadows remain items to investigate. I do not want to extend these test results into a claim of no performance cost in every scene and on every PC.</p>
+<p>I also experimented with placing a 2.5D image forest outside the battlefield and making the trees denser. In the actual view, though, it did not suit the camera, so I decided to retain the existing clean outer terrain and the direction of a more natural arrangement. Adding more did not always make a better-looking scene.</p>
+<p>Today, I connected the whole process once: concept art, 3D generation, reduction that preserves form and color, candidate comparison, engine integration and performance checks. It was a process explored through one pine tree, but it gave me criteria for what to look at and how to choose when making rocks, fortress walls or soldiers next.</p>
+<p>I also set priorities for the forest's tactical role. For now, I plan to make it terrain that units cannot pass through. The translucent treatment for showing units inside a forest is excluded from tomorrow's work. This does not mean that the rule has already been implemented; it is the direction I have set for the next round of work.</p>
+<h3>QUORUM Brought Today's Collaboration Together</h3>
+<p>I also made QUORUM today for this work. It is a Windows app that brings the screens of ChatCoach, Claude Coach, Gemini Coach and Grok Coach together in one place, letting me send the same question to all of them or pass an opinion only to the coach who needs it. I developed it with Codex and used it for today's pine tree work.</p>
+<p>This is my first attempt at the AI orchestration I have really wanted to try. Concept art made by one coach was turned into 3D with another tool; I compared Grok Coach's reduced models with several coaches; Claude Code implemented the chosen result, and Claude Coach verified it. I made QUORUM to reduce the effort of switching windows and moving content between them during that process, and to see their opinions together.</p>
+<p>It is not yet a system where AIs debate and reach conclusions on their own. I am still the person asking the questions, choosing which opinions to share and ultimately deciding what to make. Today, I used that approach to put one pine tree on the battlefield.</p>
+<figure><img src="../assets/quorum/quorum-beta2-screen.png" width="2047" height="1110" alt="QUORUM running with four AI coaches' web interfaces in one window. Personal information is obscured." loading="lazy"><figcaption>QUORUM running during today's collaboration. Account information and private conversation URLs have been obscured in this public screenshot.</figcaption></figure>
+<figure class="quorum-logo"><img src="../assets/quorum/quorum-logo.png" width="1254" height="1254" alt="QUORUM logo" loading="lazy" data-nozoom><figcaption>QUORUM</figcaption></figure>
+<p><a class="related-link" href="quorum-devlog-001.html">Read the QUORUM dev log and see the attached Windows test build →</a></p>
+
+    </div>
+
+    <div class="log-nav">
+      <a href="eastwar-devlog-050-en.html" class="log-nav__prev">
+        <span class="log-nav__label">Previous</span>
+        <span class="log-nav__title">← #050</span>
+      </a>
+      <a href="eastwar-devlog-052-en.html" class="log-nav__next"><span class="log-nav__label">Next</span><span class="log-nav__title">#052 →</span></a>
+    </div>
+
+  </article>
+</main>
+
+<footer id="contact">
+  <p class="big">Let's build a <em>world</em> →</p>
+  <div class="grid-ft">
+    <div class="col c1"><h6>byKimjak Studio</h6><p style="font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0">IP Architect · Seoul, Korea. From screenplays and drama development to AI video, games and apps — one person designs a world from beginning to end.</p></div>
+    <div class="col c2"><h6>Sections</h6><a href="../watch/">Watch <span class="ext">/01</span></a><a href="../make/">Make <span class="ext">/02</span></a><a href="../think/">Think <span class="ext">/03</span></a></div>
+    <div class="col c3"><h6>Social</h6><span class="unavailable-link">Instagram <span class="ext">↗</span></span><span class="unavailable-link">YouTube <span class="ext">↗</span></span><span class="unavailable-link">Vimeo <span class="ext">↗</span></span><span class="unavailable-link">Threads <span class="ext">↗</span></span></div>
+    <div class="col c4"><h6>Contact</h6><a href="mailto:oropa@kakao.com">oropa@kakao.com</a><span class="unavailable-link">Press kit <span class="ext">PDF</span></span><span class="unavailable-link">For PDs &amp; Investors <span class="ext">↗</span></span></div>
+  </div>
+  <div class="bottom"><span>byKimjak © 2026  ／  All rights, all worlds, reserved.</span><span>Built solo · with AI · in Seoul</span><span></span></div>
+</footer>
+
+<script src="eastwar-log-index.js"></script>
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '051');
+</script>
+<script src="/bykimjak/eastwar-hub.js"></script>
+<script src="../assets/js/site-navigation.js"></script>
+<script src="lightbox.js"></script>
+</body>
+</html>
+
+
+
+

@@ -230,13 +230,13 @@
       en: { href: 'eastwar-devlog-045-en.html', title: '[3D Transition Series] Dreaming of 3D from 2D', sub: 'Testing Whether a 3D Version Is Even Possible' }
     }
     ,{num:'046',date:'2026 · 10 · 20',ko:{"href": "eastwar-devlog-046.html", "title": "[3D 전환 시리즈] 전장에 들어갈 병사들의 모습을 만들다", "sub": "문화권별 유닛과 고유 특수병, 그리고 2D 전장 위 3D 유닛 실험을 준비하며"},en:{"href": "eastwar-devlog-046-en.html", "title": "[3D Transition Series] Designing the Soldiers for the Battlefield", "sub": "Unit identities, unique troops, and preparations for testing 3D units on a 2D battlefield"}}
-    ,{num:'047',date:'2026 · 10 · 21',ko:{href:'eastwar-devlog-047.html',title:'[3D 전환 시리즈] 3D 전장에서 한 라운드를 끝까지',sub:'이동·공격·대기와 적의 차례를 연결한 10월 20일 작업 기록'},en:{href:'eastwar-devlog-047.html',title:'[3D Transition Series] A Full Round on the 3D Battlefield',sub:'October 20 work log · Korean article'}}
-    ,{"num":"048","date":"2026 · 10 · 22","ko":{"href":"eastwar-devlog-048.html","title":"[3D 전환 시리즈] 이제 책략을 쓰고, 증원을 기다린다","sub":"밤사이 맡긴 책략·증원 연결, 전투 판단과 화면 표현을 나누고 검증하다"},"en":{"href":"eastwar-devlog-048.html","title":"[3D Transition Series] Using Tactics and Waiting for Reinforcements","sub":"October 21–22 work log · Korean article"}}
-    ,{"num":"049","date":"2026 · 10 · 26","ko":{"href":"eastwar-devlog-049.html","title":"2D HUD를 3D에 이식완료.","sub":"3D 변환을 위한 차곡차곡 진행"},"en":{"href":"eastwar-devlog-049.html","title":"The 2D HUD Is Now in 3D","sub":"October 25–26 work log · Korean article"}}
-    ,{"num":"050","date":"2026 · 10 · 26","ko":{"href":"eastwar-devlog-050.html","title":"3D 전장에 풍경을 입히다","sub":"그록봇과 함께 더해본 흙과 언덕, 나무와 숲"},"en":{"href":"eastwar-devlog-050.html","title":"Adding Scenery to the 3D Battlefield","sub":"Soil, hills, trees and forests with Grok · Korean article"}}
-    ,{"num": "051", "date": "2026 · 10 · 27", "ko": {"href": "eastwar-devlog-051.html", "title": "소나무 한 그루를 전장에 심기까지", "sub": "록코치의 첫 본격 활약, 쿼럼으로 함께 고른 500삼각형 소나무"}, "en": {"href": "eastwar-devlog-051.html", "title": "Bringing a Pine Tree to the Battlefield", "sub": "Grok’s first major contribution and collaboration with Quorum · Korean article"}}
-    ,{"num": "052", "date": "2026 · 10 · 28", "ko": {"href": "eastwar-devlog-052.html", "title": "한밤중 긴급회의", "sub": "쿼럼으로 EASTWAR 3D 문제의 해법을 찾다"}, "en": {"href": "eastwar-devlog-052.html", "title": "An Emergency Meeting at Midnight", "sub": "Finding a path through EASTWAR’s 3D development problems with Quorum · Korean article"}}
-    ,{"num": "053", "date": "2026 · 10 · 29", "ko": {"href": "eastwar-devlog-053.html", "title": "699개의 삼각형으로 움직이는 병사들", "sub": "쿼럼으로 함께 만든 병사, 2D에서 Godot 검증까지"}, "en": {"href": "eastwar-devlog-053.html", "title": "Soldiers Moving with 699 Triangles", "sub": "Made together through Quorum, from 2D to Godot validation · Korean article"}}
+    ,{num:'047',date:'2026 · 10 · 21',ko:{href:'eastwar-devlog-047.html',title:'[3D 전환 시리즈] 3D 전장에서 한 라운드를 끝까지',sub:'이동·공격·대기와 적의 차례를 연결한 10월 20일 작업 기록'},en:{"href": "eastwar-devlog-047-en.html", "title": "[3D Transition Series] Playing a Full Round on the 3D Battlefield", "sub": "October 20 work log: connecting movement, attacks, waiting and enemy turns"}}
+    ,{"num":"048","date":"2026 · 10 · 22","ko":{"href":"eastwar-devlog-048.html","title":"[3D 전환 시리즈] 이제 책략을 쓰고, 증원을 기다린다","sub":"밤사이 맡긴 책략·증원 연결, 전투 판단과 화면 표현을 나누고 검증하다"},en:{"href": "eastwar-devlog-048-en.html", "title": "[3D Transition Series] Now I Can Use Tactics and Wait for Reinforcements", "sub": "Connecting tactics and reinforcements overnight, separating battle decisions from presentation and checking the results"}}
+    ,{"num":"049","date":"2026 · 10 · 26","ko":{"href":"eastwar-devlog-049.html","title":"2D HUD를 3D에 이식완료.","sub":"3D 변환을 위한 차곡차곡 진행"},en:{"href": "eastwar-devlog-049-en.html", "title": "The 2D HUD Is Now Ported to 3D.", "sub": "Steady progress toward the 3D transition"}}
+    ,{"num":"050","date":"2026 · 10 · 26","ko":{"href":"eastwar-devlog-050.html","title":"3D 전장에 풍경을 입히다","sub":"그록봇과 함께 더해본 흙과 언덕, 나무와 숲"},en:{"href": "eastwar-devlog-050-en.html", "title": "Adding Scenery to the 3D Battlefield", "sub": "Soil, hills, trees and forests, added with Grok Coach"}}
+    ,{"num": "051", "date": "2026 · 10 · 27", "ko": {"href": "eastwar-devlog-051.html", "title": "소나무 한 그루를 전장에 심기까지", "sub": "록코치의 첫 본격 활약, 쿼럼으로 함께 고른 500삼각형 소나무"}, en:{"href": "eastwar-devlog-051-en.html", "title": "What It Took to Plant One Pine Tree on the Battlefield", "sub": "Grok Coach's first major contribution: a 500-triangle pine chosen together through QUORUM"}}
+    ,{"num": "052", "date": "2026 · 10 · 28", "ko": {"href": "eastwar-devlog-052.html", "title": "한밤중 긴급회의", "sub": "쿼럼으로 EASTWAR 3D 문제의 해법을 찾다"}, en:{"href": "eastwar-devlog-052-en.html", "title": "An Emergency Meeting in the Middle of the Night", "sub": "Finding a way through EASTWAR's 3D problems with QUORUM"}}
+    ,{"num": "053", "date": "2026 · 10 · 29", "ko": {"href": "eastwar-devlog-053.html", "title": "699개의 삼각형으로 움직이는 병사들", "sub": "쿼럼으로 함께 만든 병사, 2D에서 Godot 검증까지"}, en:{"href": "eastwar-devlog-053-en.html", "title": "Soldiers Moving with 699 Triangles", "sub": "Building soldiers together through QUORUM, from 2D to verification in Godot"}}
   ];
 
   /* Find which page the current log falls on */
@@ -305,6 +305,7 @@
 
   window.EASTWAR_LI = { render: render };
 })();
+
 
 
 

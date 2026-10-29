@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>EASTWAR Dev Log #053 — Soldiers Moving with 699 Triangles · byKimjak</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<style>
+:root{--bg:#FFFFFF;--bg-2:#F2F2F2;--ink:#0A0A0A;--ink-2:#2A2A2A;--ink-3:#6B6B6B;--rule:#0A0A0A1A;--dark:#0D0B09;--dark-2:#1A1714;--dark-ink:#FAF7F2;--dark-ink-2:#9C948A;--dark-rule:#FAF7F21A;--accent:oklch(68% 0.08 70);--accent-soft:oklch(68% 0.08 70 / 0.12);--f-display:"Space Grotesk","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-body:"Inter","Pretendard Variable",ui-sans-serif,system-ui,sans-serif;--f-mono:"JetBrains Mono",ui-monospace,monospace;--f-kr:"Pretendard Variable","Inter",ui-sans-serif,system-ui,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:var(--f-body);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.nav{position:fixed;inset:0 0 auto 0;z-index:100;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:18px clamp(20px,4vw,48px);transition:background .35s ease,backdrop-filter .35s ease,border-color .35s ease;border-bottom:1px solid transparent}
+.nav.scrolled{background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:saturate(1.2) blur(14px);-webkit-backdrop-filter:saturate(1.2) blur(14px);border-bottom-color:var(--rule)}
+.nav__logo{font-family:var(--f-display);font-weight:600;font-size:18px;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.nav__logo .dot{width:8px;height:8px;border-radius:999px;background:var(--ink);display:inline-block;transform:translateY(-1px)}
+.nav__menu{display:flex;gap:36px;justify-content:center;align-items:center}
+.nav__menu > a,.nav__menu .has-drop > a{font-family:var(--f-display);font-size:13px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;position:relative;padding:6px 2px;color:var(--ink)}
+.nav__menu > a::after,.nav__menu .has-drop > a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.6,0,.2,1)}
+.nav__menu > a:hover::after,.nav__menu .has-drop:hover > a::after{transform:scaleX(1)}
+.nav__menu .idx{font-family:var(--f-mono);font-size:9px;vertical-align:super;margin-right:4px;color:var(--ink-3)}
+.nav__cta{justify-self:end;display:flex;align-items:center;gap:14px}
+.nav__cta .status{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:10px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+.nav__cta .pulse{width:6px;height:6px;border-radius:999px;background:#3CB371;animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px transparent}}
+.nav__cta a.contact{border:1px solid var(--ink);padding:10px 16px;border-radius:999px;font-family:var(--f-display);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;transition:background .25s,color .25s}
+.nav__cta a.contact:hover{background:var(--ink);color:var(--bg)}
+.nav__menu .has-drop{position:relative}
+.nav__menu .drop{position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%) translateY(-10px);min-width:210px;background:var(--bg);border:1px solid var(--rule);padding:4px;opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s cubic-bezier(.2,.8,.2,1);z-index:200}
+.nav__menu .has-drop:hover .drop{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.nav__menu .drop a{display:block;padding:10px 14px;border-radius:2px;font-family:var(--f-kr);font-size:13px;font-weight:400;letter-spacing:-.01em;text-transform:none;color:var(--ink-2);transition:background .15s,color .15s}
+.nav__menu .drop a::after{content:none!important}
+.nav__menu .drop a:hover{background:var(--bg-2);color:var(--ink)}
+.sub-idx{display:block;font-family:var(--f-mono);font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);margin-bottom:2px}
+@media(max-width:780px){.nav{grid-template-columns:1fr auto;padding:14px 20px}.nav__menu{display:none}.nav__cta .status{display:none}}
+.listing-head{padding:120px clamp(20px,4vw,48px) 64px;border-bottom:1px solid var(--rule)}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:28px}
+.breadcrumb a{transition:color .2s}.breadcrumb a:hover{color:var(--ink)}
+.breadcrumb .sep{opacity:.4}
+.listing-head h1{font-family:var(--f-display);font-weight:500;font-size:clamp(44px,9vw,120px);letter-spacing:-.04em;line-height:.92;margin:0 0 8px}
+.listing-head .sub-ko{font-family:var(--f-kr);font-size:clamp(16px,2vw,22px);color:var(--ink-3);margin:0 0 20px;font-weight:400}
+.listing-head .listing-desc{font-family:var(--f-kr);font-size:15px;line-height:1.65;color:var(--ink-3);max-width:48ch}
+.lang-switch{display:inline-flex;align-items:center;margin-bottom:28px}
+.lang-current{font-family:var(--f-display);font-size:14px;font-weight:700;color:var(--ink);padding:10px 20px;text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px;cursor:default;letter-spacing:.01em}
+.lang-sep{font-family:var(--f-mono);font-size:14px;color:var(--ink-3);opacity:.35;user-select:none;line-height:1}
+.lang-other{font-family:var(--f-display);font-size:14px;font-weight:400;color:var(--ink-3);padding:10px 20px;transition:color .2s;letter-spacing:.01em}
+.lang-other:hover{color:var(--ink)}
+footer{background:var(--dark);color:var(--dark-ink);padding:90px clamp(20px,4vw,48px) 36px;overflow:hidden}
+footer .big{font-family:var(--f-display);font-weight:400;font-size:clamp(44px,7vw,108px);letter-spacing:-.04em;line-height:.95;color:var(--dark-ink);margin:0 0 48px;text-wrap:balance}
+footer .big em{font-style:italic;font-family:"Times New Roman",serif;color:#A99A85}
+footer .grid-ft{display:grid;grid-template-columns:repeat(12,1fr);gap:24px;padding-top:36px;border-top:1px solid var(--dark-rule)}
+footer .col{display:flex;flex-direction:column;gap:10px}
+footer .col h6{margin:0 0 6px;font-family:var(--f-mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--dark-ink-2);font-weight:400}
+footer .col a{font-family:var(--f-display);font-size:15px;color:var(--dark-ink);transition:color .3s;display:inline-flex;align-items:center;gap:6px}
+footer .col a:hover{color:#A99A85}
+footer .col a .ext{font-family:var(--f-mono);font-size:9px;opacity:.5}
+footer .c1{grid-column:1/span 5}footer .c2{grid-column:6/span 2}footer .c3{grid-column:8/span 2}footer .c4{grid-column:10/span 3}
+footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;font-family:var(--f-mono);font-size:11px;color:var(--dark-ink-2);text-transform:uppercase;letter-spacing:.06em}
+@media(max-width:780px){footer .c1,footer .c2,footer .c3,footer .c4{grid-column:1/span 12}}
+.rev{opacity:0;transform:translateY(28px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}.rev.in{opacity:1;transform:none}
+/* ── Dev Log Article ── */
+.devlog{padding:0 0 140px}
+.devlog__body{padding:64px clamp(20px,4vw,48px) 0;max-width:760px}
+.devlog__body .log-num{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:12px}
+.devlog__body h1{font-family:var(--f-display);font-weight:500;font-size:clamp(26px,4vw,48px);letter-spacing:-.03em;line-height:1.1;margin:0 0 10px}
+.devlog__body h2{font-family:var(--f-kr);font-size:clamp(15px,1.8vw,20px);font-weight:400;color:var(--ink-3);margin:0;line-height:1.5}
+.devlog__body .log-date{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;color:var(--ink-3);display:block;margin:24px 0 40px;padding-top:20px;border-top:1px solid var(--rule)}
+.devlog__body h3{font-family:var(--f-display);font-weight:500;font-size:clamp(16px,2vw,22px);letter-spacing:-.02em;margin:56px 0 10px;padding-top:48px;border-top:1px solid var(--rule)}
+.devlog__body .section-date{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin:0 0 28px;display:block}
+.devlog__body p{font-family:var(--f-kr);font-size:16px;line-height:1.95;color:var(--ink-2);margin:0 0 22px}
+.devlog__body strong{font-weight:700;color:var(--ink)}
+.devlog__body em{font-style:italic;color:var(--ink)}
+.devlog__body hr{border:none;border-top:1px solid var(--rule);margin:52px 0}
+.devlog__body ul{padding-left:20px;margin:0 0 24px}
+.devlog__body li{font-family:var(--f-kr);font-size:16px;line-height:1.85;color:var(--ink-2);margin-bottom:10px}
+.devlog__body blockquote{margin:28px 0;padding:20px 24px;border-left:3px solid var(--ink);background:var(--bg-2);font-family:var(--f-kr);font-size:16px;line-height:1.8;color:var(--ink)}
+.devlog__body blockquote p{margin:0;color:var(--ink)}
+.devlog__body pre{background:var(--bg-2);border:1px solid var(--rule);padding:20px 24px;margin:0 0 28px;overflow-x:auto;border-radius:2px}
+.devlog__body code{font-family:var(--f-mono);font-size:13px;line-height:1.7;color:var(--ink-2)}
+.devlog__body figure{margin:32px 0}
+.devlog__body figure img{width:100%;border-radius:2px}
+#log-053 .devlog__body figure img{display:block;width:100%;max-width:100%;height:auto}
+.devlog__body figure figcaption{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
+.devlog__body .fig-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0}
+.devlog__body .fig-2col figure{margin:0}
+@media(max-width:640px){.devlog__body .fig-2col{grid-template-columns:1fr}}
+/* ── Log Index ── */
+.log-index{padding:0 clamp(20px,4vw,48px)}
+.log-index__hd{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin:0;padding:32px 0 0}
+.log-index__item{display:grid;grid-template-columns:52px 1fr auto;gap:20px;align-items:baseline;padding:20px 0;border-top:1px solid var(--rule);transition:background .25s;text-decoration:none}
+.log-index__item:last-child{border-bottom:1px solid var(--rule);margin-bottom:48px}
+.log-index__item:hover{background:linear-gradient(90deg,transparent,var(--accent-soft) 20%,var(--accent-soft) 80%,transparent)}
+.log-index__num{font-family:var(--f-mono);font-size:11px;color:var(--ink-3)}
+.log-index__t{font-family:var(--f-display);font-size:clamp(14px,1.6vw,18px);font-weight:500;letter-spacing:-.01em;line-height:1.2;color:var(--ink)}
+.log-index__t .ko{display:block;font-family:var(--f-kr);font-size:12px;color:var(--ink-3);font-weight:400;margin-top:3px}
+.log-index__date{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);white-space:nowrap}
+.log-index__item--current{pointer-events:none;background:var(--accent-soft);display:grid}
+.log-index__item--current .log-index__num{color:var(--accent)}
+/* ── Log Pager ── */
+.log-pager{display:flex;gap:8px;padding:12px 0 0;margin-bottom:48px;justify-content:center;border-top:1px solid var(--rule)}
+.log-pager__btn{font-family:var(--f-mono);font-size:11px;width:32px;height:32px;border:1px solid var(--rule);background:none;cursor:pointer;color:var(--ink-3);transition:background .2s,color .2s;border-radius:2px}
+.log-pager__btn:hover{background:var(--bg-2);color:var(--ink)}
+.log-pager__btn--active{background:var(--ink);color:var(--bg);border-color:var(--ink);cursor:default}
+/* ── Log Nav ── */
+.log-nav{display:flex;justify-content:space-between;padding:52px clamp(20px,4vw,48px) 0;margin-top:64px;border-top:1px solid var(--rule)}
+.log-nav__prev,.log-nav__next{display:flex;flex-direction:column;gap:6px}
+.log-nav__next{align-items:flex-end;text-align:right}
+.log-nav__label{font-family:var(--f-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.log-nav__title{font-family:var(--f-display);font-size:clamp(14px,1.8vw,20px);font-weight:500;letter-spacing:-.01em;color:var(--ink);transition:color .2s}
+.log-nav a:hover .log-nav__title{color:var(--accent)}
+.log-nav__next--disabled{opacity:.4;cursor:default}
+
+#log-053 .pine-concept{max-width:420px;margin-inline:auto}#log-053 .quorum-logo{max-width:280px;margin-inline:auto}#log-053 .related-link{text-decoration:underline;text-underline-offset:4px}
+</style>
+<link rel="stylesheet" href="../assets/css/site-navigation.css" />
+<style>.unit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:30px 0}.devlog__body .unit-grid figure{margin:0;min-width:0}.devlog__body .unit-grid img{display:block;width:100%;height:auto;object-fit:contain;background:#91a8c2}.unit-grid figcaption{line-height:1.6;font-size:13px}.unit-grid--single{max-width:440px;grid-template-columns:1fr;margin-inline:auto}.devlog__body ol{padding-left:24px;line-height:1.9}.devlog__body li{margin-bottom:14px}.concept-note{border-left:3px solid var(--ink);padding:16px 20px;background:var(--bg-2)}@media(max-width:500px){.unit-grid{grid-template-columns:1fr;gap:20px}.unit-grid figcaption{font-size:12px}}</style><meta name="description" content="Building soldiers together through QUORUM, from 2D to verification in Godot"><link rel="canonical" href="https://kimjak-app.github.io/bykimjak/make/eastwar-devlog-053-en.html"></head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav__logo"><span class="dot" aria-hidden="true"></span>byKimjak</a>
+  <div class="nav__menu" role="navigation">
+    <div class="has-drop">
+      <a href="../watch/"><span class="idx">01</span>WATCH</a>
+      <div class="drop"><a href="../watch/gappae.html"><span class="sub-idx">01–A</span>GAPPAE</a><a href="../watch/eastwar.html"><span class="sub-idx">01–B</span>EASTWAR</a><a href="../watch/magic-block-master.html"><span class="sub-idx">01–C</span>MAGIC BLOCK MASTER</a></div>
+    </div>
+    <div class="has-drop">
+      <a href="../make/"><span class="idx">02</span>MAKE</a>
+      <div class="drop">
+        <a href="../make/eastwar.html"><span class="sub-idx">02–A</span>EASTWAR Dev Log</a>
+        <a href="../make/grandslam.html"><span class="sub-idx">02–B</span>GrandSlam Dev Log</a>
+        <a href="../make/takezero.html"><span class="sub-idx">02–C</span>TakeZero · Prompt Engine</a>
+        <a href="../make/gappae-trailer.html"><span class="sub-idx">02–D</span>Making the GAPPAE Trailer</a>
+      </div>
+    </div>
+    <div class="has-drop">
+      <a href="../think/"><span class="idx">03</span>THINK</a>
+      <div class="drop">
+        <a href="../think/ai-coach.html"><span class="sub-idx">03–A</span>Conversations with AI Coaches</a>
+        <a href="../think/morning-word.html"><span class="sub-idx">03–B</span>Morning Scripture with ChatCoach</a>
+        <a href="../think/personal-essay.html"><span class="sub-idx">03–C</span>Personal Essays</a>
+      </div>
+    </div>
+    <a href="../index.html#about"><span class="idx">04</span>ABOUT</a>
+  </div>
+  <div class="nav__cta">
+    <span class="status"><span class="pulse"></span>Available · Seoul</span>
+    <a href="../index.html#contact" class="contact">Contact ↗</a>
+  </div>
+</nav>
+
+<main>
+  <div class="listing-head">
+    <div class="breadcrumb rev">
+      <a href="../index.html">bykimjak</a>
+      <span class="sep">›</span>
+      <a href="eastwar.html">EASTWAR</a>
+      <span class="sep">›</span>
+      <span>Dev Log #053</span>
+    </div>
+    <div class="lang-switch rev">
+      <a href="eastwar-devlog-053.html" class="lang-other">🇰🇷 한국어</a>
+      <span class="lang-sep">|</span>
+      <span class="lang-current">🇺🇸 English</span>
+    </div>
+    <h1 class="rev">EASTWAR</h1>
+    <p class="sub-ko rev">EASTWAR Dev Log</p>
+    <p class="listing-desc rev">Strategic alt-history simulation — solo dev log</p>
+  </div>
+
+  <section class="log-index rev" id="log-index-sect"></section>
+
+  <article class="devlog" id="log-053">
+    <div class="devlog__body">
+<span class="log-num">Dev Log · #053</span>
+<h1>Soldiers Moving with 699 Triangles</h1>
+<h2>Building soldiers together through QUORUM, from 2D to verification in Godot</h2>
+<span class="log-date">October 29, 2026 · Creating EASTWAR's 3D unit types and load testing</span>
+
+<p>Yesterday, the forest led us into an emergency QUORUM meeting in the middle of the night. Today I focused on making the soldiers who would move across the battlefield of EASTWAR (project name: Samguk WAR): spear-carrying infantry, bow-wielding archers, gunners, and mounted cavalry. The starting point was the 2D draft of a base soldier I made with ChatCoach.</p>
+<p>Creating a soldier I liked in a picture and getting many of them moving together in a game were different tasks. They had to stay lightweight without losing their appearance, and their hands had to line up when holding weapons. Running and attack motions also had to suit the actual pace of the game. Today I divided these tasks among the coaches and checked the results one by one in Godot.</p>
+
+<h3>From a 2D draft to an A-pose, then to 3D</h3>
+<p>First, Grok Coach converted ChatCoach's 2D draft into an A-pose. With the arms slightly away from the body and extended downward, I put that image into Tripo to create a 3D model. We could now see how the armor and clothing we had viewed from the front continued around the sides and back.</p>
+<div class="devlog-gallery" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:28px 0"><figure style="margin:0"><a href="assets/img/eastwar-053/soldier-apose.png"><img src="assets/img/eastwar-053/soldier-apose.png" width="864" height="1152" style="width:100%;height:auto;object-fit:contain" alt="ChatCoach's 2D soldier draft converted into an A-pose by Grok Coach" loading="lazy"></a><figcaption>Figure 1. The working image in which Grok Coach converted ChatCoach's 2D draft into an A-pose.</figcaption></figure><figure style="margin:0"><a href="assets/img/eastwar-053/tripo-front.png"><img src="assets/img/eastwar-053/tripo-front.png" width="700" height="932" style="width:100%;height:auto;object-fit:contain" alt="Front view of the base soldier generated in 3D by Tripo" loading="lazy"></a><figcaption>Figure 2. Front view of the 3D soldier created in Tripo.</figcaption></figure><figure style="margin:0"><a href="assets/img/eastwar-053/tripo-back.png"><img src="assets/img/eastwar-053/tripo-back.png" width="597" height="896" style="width:100%;height:auto;object-fit:contain" alt="Rear view of the base soldier generated in 3D by Tripo" loading="lazy"></a><figcaption>Figure 3. A look at the same 3D soldier from behind.</figcaption></figure></div>
+<h3>One soldier in 699 triangles</h3>
+<p>The surface of a 3D model is made up of small triangles. Reducing their number can make the model lighter, but reducing it too far can damage the body's silhouette or the shape of its armor. The detail needed for a close view of one soldier also differs from what is needed when placing dozens on a battlefield.</p>
+<p>Once again, I discussed the direction with the coaches in QUORUM. Grok Coach refined the 3D model obtained from Tripo using ChatCoach's 2D soldier draft, reducing the base soldier's body to <strong>699 triangles</strong>. At the size I intended to use in the game, enough of the character and form I wanted remained. More than simply lowering a number, what mattered was whether it was still a soldier I wanted to use.</p>
+<p>Grok Coach's hands-on contribution was particularly helpful today. Grok did more than refine the model, directly working on rigging and animation as well. That made it much easier to receive revised assets, compare them, and move on to the next decision. I could feel the time savings, and it helped us maintain quality while continually checking the motion and form.</p>
+
+<h3>Giving a lightweight soldier movement</h3>
+<p>Rigging means putting a skeleton inside the soldier so the body can move. This base soldier uses 22 bones. Motions such as walking, running, thrusting, and firing a gun were <strong>downloaded from Mixamo and applied.</strong> Grok Coach retargeted these motions to our soldier's skeleton and corrected awkward parts. We prepared seven motions in all: two idles, walking, running, a spear thrust, archery, and gunfire.</p>
+<p>We could not simply use the imported motions unchanged. We fixed the bow-drawing hand where it clipped into the face, and adjusted the motion so it could return after firing and loop. For the long spear thrust, we made a separate short version and adjusted its playback speed to match the game's attack timing. Even with a lightweight model, awkward details like these can stop a soldier from feeling as though it is moving properly.</p>
+<figure><a href="assets/img/eastwar-053/animation-contact-sheet.png"><img src="assets/img/eastwar-053/animation-contact-sheet.png" width="1420" height="1898" style="max-width:100%;height:auto" alt="Keyframe comparison sheet for seven Mixamo animations retargeted to the base soldier" loading="lazy"></a><figcaption>Figure 4. A keyframe comparison sheet of Mixamo motions retargeted to the base soldier. We checked running, walking, the two idle motions, and spear, bow, and gun attacks in sequence.</figcaption></figure>
+<p>The files Grok Coach produced went on to Claude Coach and Claude Code. Claude Coach, who is Claude, organized the integration order and the items to check, then reviewed the reports. Claude Code put the files into Godot and built the test scenes. I ran the scenes with F6 and watched the blue-army and red-army soldiers walk, run, hold their weapons, and attack.</p>
+<figure><a href="assets/img/eastwar-053/base-motion.png"><img src="assets/img/eastwar-053/base-motion.png" width="1855" height="1039" style="max-width:100%;height:auto" alt="Blue-army and red-army base soldiers checking the running motion in a Godot test scene" loading="lazy"></a><figcaption>Figure 5. A Godot test scene checking the running motion of the blue-army and red-army base soldiers.</figcaption></figure>
+
+<h3>Different weapons for the same soldier</h3>
+<p>For the weapons, I also prepared draft images first. We developed the shapes of the bow and quiver, gun, and spear separately, then refined them for the game while checking their size and movement when attached to a soldier. The images below are the weapon drafts that served as our starting points.</p>
+<div class="devlog-gallery" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:28px 0"><figure style="margin:0"><a href="assets/img/eastwar-053/weapon-bow-concept.png"><img src="assets/img/eastwar-053/weapon-bow-concept.png" width="1024" height="1024" style="width:100%;height:auto;object-fit:contain" alt="Production draft for a bow and quiver" loading="lazy"></a><figcaption>Figure 6. Draft of the bow and quiver.</figcaption></figure><figure style="margin:0"><a href="assets/img/eastwar-053/weapon-gun-concept.png"><img src="assets/img/eastwar-053/weapon-gun-concept.png" width="1280" height="720" style="width:100%;height:auto;object-fit:contain" alt="Shape draft for making the gun" loading="lazy"></a><figcaption>Figure 7. Gun shape draft. Refining it into a matchlock-style appearance remained a follow-up task.</figcaption></figure><figure style="margin:0"><a href="assets/img/eastwar-053/weapon-spear-concept.png"><img src="assets/img/eastwar-053/weapon-spear-concept.png" width="720" height="1280" style="width:100%;height:auto;object-fit:contain" alt="Shape draft for making the spear" loading="lazy"></a><figcaption>Figure 8. Spear shape draft. We later adjusted its length and thickness to suit the game view.</figcaption></figure></div>
+<p>We decided to keep the spear, bow, quiver, and matchlock gun in separate files rather than combine them with the soldier's body. By swapping weapons and motions on the same base soldier, we could create infantry, archers, and gunners. It also helped that we would not need to change the entire soldier again whenever we revised a weapon.</p>
+<p>That meant we had to get the attachment positions right. We set each weapon's origin at its grip and added reference points named <code>Tip</code> at the spear tip, <code>Muzzle</code> at the gun muzzle, and <code>ArrowNock</code> at the arrow's reference position. These points are used to attach weapons to the hands and check firing positions and directions. The quiver attached to a bone on the back.</p>
+<p>Comparing its proportions on screen, we shortened the spear to 1m. Even then, the shaft looked too thick when the soldier held it. So we reduced its thickness once more and applied a version with a shaft diameter about 62% of the previous one. We adjusted the thickness while retaining the length, grip origin, and tip reference point. The plan is to carry it in one hand normally and use both hands when thrusting. We also compared the shiny material in Godot. The final defaults were roughness 1.0, metallic 0, and specular 0 for a matte finish.</p>
+<figure><a href="assets/img/eastwar-053/spear-thickness-compare.png"><img src="assets/img/eastwar-053/spear-thickness-compare.png" width="2048" height="853" style="max-width:100%;height:auto" alt="Comparison of spear v3 and the further-thinned v4, shown held by soldiers and in grip close-ups" loading="lazy"></a><figcaption>Figure 9. A comparison of v3 and v4 after another adjustment because the spear looked too thick. We checked both the full view of the soldier holding it and the area around the grip.</figcaption></figure>
+<figure><a href="assets/img/eastwar-053/weapons-test.png"><img src="assets/img/eastwar-053/weapons-test.png" width="1866" height="1052" style="max-width:100%;height:auto" alt="Test screen with spears, bows, quivers, and matchlock guns attached to blue-army and red-army soldiers" loading="lazy"></a><figcaption>Figure 10. Comparing the same base soldier with a spear, bow and quiver, and matchlock gun attached. The blue army is at the back, the red army at the front.</figcaption></figure>
+
+<h3>What happens when 90 soldiers run?</h3>
+<p>With the appearance and motions chosen, it was time to move many soldiers at once. In the load test Claude Code built, we measured performance while varying soldier count, weapons, shadows, and camera distance.</p>
+<p>The test PC had a <strong>GTX 1660 and i5-9400F</strong>, at a resolution of <strong>1920×1080</strong>. VSync was off, and the scene contained only a flat floor, with no terrain or trees. With 90 spear-carrying infantry running and shadows enabled, the average was about <strong>296~308 FPS</strong>, with each frame taking about <strong>3.2~3.4ms</strong>. A test with 180 soldiers still averaged about <strong>167 FPS</strong>, or about <strong>6.0ms</strong> per frame.</p>
+<p>Under these conditions, there was ample headroom even with many 699-triangle soldiers moving. Of course, we still need to measure performance on the actual battlefield with terrain, forests, and the HUD. But we had evidence to move to the next stage with our current structure of base soldiers and separate weapons.</p>
+<p>There had also been concern that separate weapons might greatly increase draw calls, the number of drawing operations. Yet adding 90 spears increased the measured count by 3 with shadows off and about 9~15 with shadows on. That differed from the expectation that each weapon would necessarily add one call. Discussing the issue in QUORUM and checking it with actual measurements let us keep the weapons separate.</p>
+
+<h3>We checked the bows and guns all the way through firing</h3>
+<p>For archers and gunners, we could not stop at how they looked holding weapons. We also checked whether arrows appeared and flew in time with the hand motions, and whether firing effects appeared at the gun muzzles. Comparing the arrow's reference direction and the muzzle position, then adding sound, made the ranged units feel distinctly alive.</p>
+<p>We tested the ranged effects with 36 soldiers. After 30 consecutive volleys, we also checked whether the number of spawned effect nodes returned to its initial state. In this repetition test, we did not see effects remaining and accumulating. After seeing and hearing the firing myself, I said, “Very good.”</p>
+<figure><a href="assets/img/eastwar-053/ranged-test.png"><img src="assets/img/eastwar-053/ranged-test.png" width="1858" height="1041" style="max-width:100%;height:auto" alt="Godot test scene checking group firing and ranged effects for archers and gunners" loading="lazy"></a><figcaption>Figure 11. A group-firing effects test for archers and gunners. We checked the arrows, muzzle effects, and sound. The FPS displayed on screen is the value at the moment of this capture, separate from the load-test figures above.</figcaption></figure>
+
+<h3>Putting a soldier on a horse</h3>
+<p>For the cavalry, we started by preparing a horse. The horse, converted from a 2D image to 3D in Tripo and then refined, ended up at 801 triangles. According to Grok Coach's work log, the imported horse motions were difficult to use as they were, so the idle, walk, and run were newly made. We also corrected jolting while walking, the hind legs spreading apart, and legs that looked bent awkwardly during idle.</p>
+<p>The horse's running looked particularly strange from behind. Grok Coach refined the hind-leg movement again, and we compared rear-view frames of the run side by side. Reducing the excessive spread of the hind legs was another necessary part of preparing the cavalry.</p>
+<figure><a href="assets/img/eastwar-053/horse-rear-motion-compare.png"><img src="assets/img/eastwar-053/horse-rear-motion-compare.png" width="2048" height="845" style="max-width:100%;height:auto" alt="Rear-view frame comparison of the horse running before and after correction" loading="lazy"></a><figcaption>Figure 12. A rear-view frame comparison of the horse's run. The top row is v2 before the correction; the bottom is v3 with the hind legs adjusted inward. This records the process of refining the awkward running motion seen from behind.</figcaption></figure>
+<p>The rider used the same base soldier's skeleton. The left hand stayed near the reins, the right held the spear, and the feet were aligned with the stirrups. We raised the stirrups to suit the soldier's short legs. The rider was attached to the saddle's <code>Saddle</code> reference point so it would follow the horse's movement.</p>
+<p>For the spear thrust, we kept the rein-holding hand and legs fixed and completed the attack pose by leaning the upper body 15 degrees farther forward than the base soldier's pose. After comparing upright and forward-leaning versions from several angles, I chose the leaning thrust. Claude Coach also calculated and checked the gap between the spear tip and the horse's head in the delivered assets. The same workflow continued with cavalry: Grok Coach produced the assets, Claude Coach reviewed the structure and numbers, and Claude Code applied them in Godot.</p>
+<figure><a href="assets/img/eastwar-053/cavalry-thrust-compare.png"><img src="assets/img/eastwar-053/cavalry-thrust-compare.png" width="2048" height="952" style="max-width:100%;height:auto" alt="Impact-frame comparison of an upright cavalry rider and a rider leaning forward into the thrust" loading="lazy"></a><figcaption>Figure 13. Comparing the cavalry at the moment of impact. The upper row has an upright torso; the lower row leans farther forward into the thrust. The final motion was refined to lean the upper body 15 degrees farther forward than the base pose.</figcaption></figure>
+<figure><a href="assets/img/eastwar-053/cavalry-test.png"><img src="assets/img/eastwar-053/cavalry-test.png" width="1897" height="1067" style="max-width:100%;height:auto" alt="Screen showing blue-army and red-army cavalry formations undergoing integration testing in Godot" loading="lazy"></a><figcaption>Figure 14. Cavalry integration testing in Godot is in progress. We are checking blue-army and red-army cavalry arranged in formation.</figcaption></figure>
+<p>The cavalry tests are still running as I write this. We have checked the assets and attack pose and have a Godot test screen, but I am still waiting for the final cavalry load-test results. The infantry performance figures cannot simply be carried over to cavalry.</p>
+
+<h3>Bringing the direction chosen in QUORUM onto the screen</h3>
+<p>It was clear where QUORUM helped today. Starting from ChatCoach's 2D draft, we reviewed the soldier's lightness and quality together. Grok Coach handled the A-pose, model optimization, rigging, and application and correction of Mixamo motions. The horse's motions were created separately. Claude Coach organized this into an integration sequence and verification checklist, and Claude Code implemented and tested it in Godot. I watched the results and chose the appearance and motions.</p>
+<p>According to Claude Coach's records, the infantry load-test, ranged-effects, and thinner-spear replacement stages all passed the 72 existing validators and 196 Godot tests. We were also checking that adding the new soldiers had not broken existing features. Each work branch was pushed to the remote repository, but the full merge and connection to the actual 3D battlefield are still ahead.</p>
+<p>Next, I need to check the cavalry test results and connect the soldiers to a battlefield with terrain and trees. We will align soldier scale and orientation, troop count per unit, attack handling, and firing effects, then measure performance again in that state.</p>
+<p>What we gained today was one soldier made of 699 triangles, and a production process that lets that soldier move as several unit types. The work progressed as we gathered opinions in QUORUM, Grok Coach directly refined what needed changing, and Claude Coach and Claude Code checked it in the engine. Today's most welcome result was seeing a soldier on the actual screen that retained the look I wanted while moving lightly.</p>
+
+    </div>
+
+    <div class="log-nav">
+      <a href="eastwar-devlog-052-en.html" class="log-nav__prev">
+        <span class="log-nav__label">Previous</span>
+        <span class="log-nav__title">← #052</span>
+      </a>
+      <span class="log-nav__next log-nav__next--disabled">Next entry coming soon →</span>
+    </div>
+
+  </article>
+</main>
+
+<footer id="contact">
+  <p class="big">Let's build a <em>world</em> →</p>
+  <div class="grid-ft">
+    <div class="col c1"><h6>byKimjak Studio</h6><p style="font-family:var(--f-kr);color:var(--dark-ink-2);font-size:14px;line-height:1.6;max-width:32ch;margin:0">IP Architect · Seoul, Korea. From screenplays and drama concepts to AI video, games, and apps — one person designs an entire world from start to finish.</p></div>
+    <div class="col c2"><h6>Sections</h6><a href="../watch/">Watch <span class="ext">/01</span></a><a href="../make/">Make <span class="ext">/02</span></a><a href="../think/">Think <span class="ext">/03</span></a></div>
+    <div class="col c3"><h6>Social</h6><span class="unavailable-link">Instagram <span class="ext">↗</span></span><span class="unavailable-link">YouTube <span class="ext">↗</span></span><span class="unavailable-link">Vimeo <span class="ext">↗</span></span><span class="unavailable-link">Threads <span class="ext">↗</span></span></div>
+    <div class="col c4"><h6>Contact</h6><a href="mailto:oropa@kakao.com">oropa@kakao.com</a><span class="unavailable-link">Press kit <span class="ext">PDF</span></span><span class="unavailable-link">For PDs &amp; Investors <span class="ext">↗</span></span></div>
+  </div>
+  <div class="bottom"><span>byKimjak © 2026  ／  All rights, all worlds, reserved.</span><span>Built solo · with AI · in Seoul</span><span></span></div>
+</footer>
+
+<script src="eastwar-log-index.js"></script>
+<script>
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>24)},{passive:true});
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rev').forEach(el=>io.observe(el));
+EASTWAR_LI.render(document.getElementById('log-index-sect'), 'en', '053');
+</script>
+<script src="/bykimjak/eastwar-hub.js"></script>
+<script src="../assets/js/site-navigation.js"></script>
+<script src="lightbox.js"></script>
+</body>
+</html>
+
+
+
+
+
