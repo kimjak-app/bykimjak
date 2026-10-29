@@ -3,6 +3,7 @@
   // url: root-relative (from site root, no leading slash).
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
+{"url": "make/eastwar-devlog-053.html", "catKey": "eastwar", "cat": "EASTWAR 개발일지", "title": "699개의 삼각형으로 움직이는 병사들", "sub": "쿼럼으로 함께 만든 병사, 2D에서 Godot 검증까지", "date": "2026-10-29", "dl": "2026 · 10 · 29"},
 {"url": "make/eastwar-devlog-052.html", "catKey": "eastwar", "cat": "EASTWAR 개발일지", "title": "한밤중 긴급회의", "sub": "쿼럼으로 EASTWAR 3D 문제의 해법을 찾다", "date": "2026-10-28", "dl": "2026 · 10 · 28"},
 {"url": "make/eastwar-devlog-051.html", "catKey": "eastwar", "cat": "EASTWAR 개발일지", "title": "소나무 한 그루를 전장에 심기까지", "sub": "록코치의 첫 본격 활약, 쿼럼으로 함께 고른 500삼각형 소나무", "date": "2026-10-27", "dl": "2026 · 10 · 27"},
 {"url": "make/quorum-devlog-001.html", "catKey": "quorum", "cat": "QUORUM 제작일지", "title": "네 명의 AI 코치를 한자리에, 쿼럼을 만들다", "sub": "EASTWAR의 3D 전장과 에셋 제작을 위해 시작한 AI 오케스트레이션", "date": "2026-10-27", "dl": "2026 · 10 · 27"},
@@ -845,6 +846,7 @@
     { key: 'make',         label: 'Make · 02–C',      dark: true  }
   ];
 })();
+
 
 
 

@@ -6825,6 +6825,202 @@
       "width": 2048,
       "height": 1565,
       "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-053/animation-contact-sheet.png",
+      "bytes": 3301235,
+      "sha256": "4737790e92c9866702e01d476f2dbd01bf18c6ade4eaf57265a81896e49986ac",
+      "width": 1420,
+      "height": 1898,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/6f1be88b2dca3b2834c6a6bf5675b7c33e882d15/make/assets/img/eastwar-053/animation-contact-sheet.png",
+      "aliases": [
+        "assets/img/eastwar-053/animation-contact-sheet.png"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-053/base-motion.png",
+      "bytes": 217001,
+      "sha256": "a119c8b310b7c7525c6f4d57e39e71f93099ee1f6589cd57c6b50132d3e7ef32",
+      "width": 1855,
+      "height": 1039,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/6f1be88b2dca3b2834c6a6bf5675b7c33e882d15/make/assets/img/eastwar-053/base-motion.png",
+      "aliases": [
+        "assets/img/eastwar-053/base-motion.png"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-053/cavalry-test.png",
+      "bytes": 723332,
+      "sha256": "1635d059eba1d56c6f2a37cca098dc0f2a1fdfd448cf6ca90942cc96678ebae8",
+      "width": 1897,
+      "height": 1067,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/6f1be88b2dca3b2834c6a6bf5675b7c33e882d15/make/assets/img/eastwar-053/cavalry-test.png",
+      "aliases": [
+        "assets/img/eastwar-053/cavalry-test.png"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-053/cavalry-thrust-compare.png",
+      "bytes": 2368448,
+      "sha256": "3e2defd9d79c65b1ec6f3702a08c8291e9d5b7431a1e8fb0e5a4ca08c6a655a3",
+      "width": 2048,
+      "height": 952,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/6f1be88b2dca3b2834c6a6bf5675b7c33e882d15/make/assets/img/eastwar-053/cavalry-thrust-compare.png",
+      "aliases": [
+        "assets/img/eastwar-053/cavalry-thrust-compare.png"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-053/horse-rear-motion-compare.png",
+      "bytes": 1787383,
+      "sha256": "00bfda77b1aac45bb7fc4c32ec3e670d3dc7c301349e13dfd78ec0b0fa2eb2f0",
+      "width": 2048,
+      "height": 845,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/6f1be88b2dca3b2834c6a6bf5675b7c33e882d15/make/assets/img/eastwar-053/horse-rear-motion-compare.png",
+      "aliases": [
+        "assets/img/eastwar-053/horse-rear-motion-compare.png"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-053/ranged-test.png",
+      "bytes": 310824,
+      "sha256": "dc6d4329fa0c00f5b581288a61240532f6add4c3e71ebcd8faae8509cee74e7b",
+      "width": 1858,
+      "height": 1041,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/6f1be88b2dca3b2834c6a6bf5675b7c33e882d15/make/assets/img/eastwar-053/ranged-test.png",
+      "aliases": [
+        "assets/img/eastwar-053/ranged-test.png"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-053/soldier-apose.png",
+      "bytes": 869262,
+      "sha256": "07160bea7c5a767a6c1bf38ebbae742411a02ce4d34cd2eb1f88be66239c9bdb",
+      "width": 864,
+      "height": 1152,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/6f1be88b2dca3b2834c6a6bf5675b7c33e882d15/make/assets/img/eastwar-053/soldier-apose.png",
+      "aliases": [
+        "assets/img/eastwar-053/soldier-apose.png"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-053/spear-thickness-compare.png",
+      "bytes": 1291104,
+      "sha256": "06e60162f2811d78fca68f1a04f2da058af23595bc410224b735e6e0a741288f",
+      "width": 2048,
+      "height": 853,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/6f1be88b2dca3b2834c6a6bf5675b7c33e882d15/make/assets/img/eastwar-053/spear-thickness-compare.png",
+      "aliases": [
+        "assets/img/eastwar-053/spear-thickness-compare.png"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-053/tripo-back.png",
+      "bytes": 608822,
+      "sha256": "f539c41c2a113e6bc95e8706ea9f945fb83d72aab365d7cf0ccc1058f00574ff",
+      "width": 597,
+      "height": 896,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/6f1be88b2dca3b2834c6a6bf5675b7c33e882d15/make/assets/img/eastwar-053/tripo-back.png",
+      "aliases": [
+        "assets/img/eastwar-053/tripo-back.png"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-053/tripo-front.png",
+      "bytes": 734679,
+      "sha256": "8aabfeb2e796765934dc27ae6386e0b561a85356cb2049c59d9c32c0ba3211ee",
+      "width": 700,
+      "height": 932,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/6f1be88b2dca3b2834c6a6bf5675b7c33e882d15/make/assets/img/eastwar-053/tripo-front.png",
+      "aliases": [
+        "assets/img/eastwar-053/tripo-front.png"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-053/weapon-bow-concept.png",
+      "bytes": 748987,
+      "sha256": "875dfb779b39b29a216916b3ce60b39afa90619c3dd051f95b7c53c0cd6fbe33",
+      "width": 1024,
+      "height": 1024,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/6f1be88b2dca3b2834c6a6bf5675b7c33e882d15/make/assets/img/eastwar-053/weapon-bow-concept.png",
+      "aliases": [
+        "assets/img/eastwar-053/weapon-bow-concept.png"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-053/weapon-gun-concept.png",
+      "bytes": 533775,
+      "sha256": "c225cd5de52aef3567718f4bceee88aae795b56173e0790ff213ae184bea6252",
+      "width": 1280,
+      "height": 720,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/6f1be88b2dca3b2834c6a6bf5675b7c33e882d15/make/assets/img/eastwar-053/weapon-gun-concept.png",
+      "aliases": [
+        "assets/img/eastwar-053/weapon-gun-concept.png"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-053/weapon-spear-concept.png",
+      "bytes": 512447,
+      "sha256": "c4c74c4db80c2e4f87c2baf427c1f231cebded3d25cb650dc4d7412ef3eea8d4",
+      "width": 720,
+      "height": 1280,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/6f1be88b2dca3b2834c6a6bf5675b7c33e882d15/make/assets/img/eastwar-053/weapon-spear-concept.png",
+      "aliases": [
+        "assets/img/eastwar-053/weapon-spear-concept.png"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-053/weapons-test.png",
+      "bytes": 497985,
+      "sha256": "641c5f146c35141e38b4df5fe8f884920e85d30ef15cde34d98383be297c326a",
+      "width": 1866,
+      "height": 1052,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/6f1be88b2dca3b2834c6a6bf5675b7c33e882d15/make/assets/img/eastwar-053/weapons-test.png",
+      "aliases": [
+        "assets/img/eastwar-053/weapons-test.png"
+      ],
+      "verified": true
     }
   ]
 }

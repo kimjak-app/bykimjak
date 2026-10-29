@@ -236,6 +236,7 @@
     ,{"num":"050","date":"2026 · 10 · 26","ko":{"href":"eastwar-devlog-050.html","title":"3D 전장에 풍경을 입히다","sub":"그록봇과 함께 더해본 흙과 언덕, 나무와 숲"},"en":{"href":"eastwar-devlog-050.html","title":"Adding Scenery to the 3D Battlefield","sub":"Soil, hills, trees and forests with Grok · Korean article"}}
     ,{"num": "051", "date": "2026 · 10 · 27", "ko": {"href": "eastwar-devlog-051.html", "title": "소나무 한 그루를 전장에 심기까지", "sub": "록코치의 첫 본격 활약, 쿼럼으로 함께 고른 500삼각형 소나무"}, "en": {"href": "eastwar-devlog-051.html", "title": "Bringing a Pine Tree to the Battlefield", "sub": "Grok’s first major contribution and collaboration with Quorum · Korean article"}}
     ,{"num": "052", "date": "2026 · 10 · 28", "ko": {"href": "eastwar-devlog-052.html", "title": "한밤중 긴급회의", "sub": "쿼럼으로 EASTWAR 3D 문제의 해법을 찾다"}, "en": {"href": "eastwar-devlog-052.html", "title": "An Emergency Meeting at Midnight", "sub": "Finding a path through EASTWAR’s 3D development problems with Quorum · Korean article"}}
+    ,{"num": "053", "date": "2026 · 10 · 29", "ko": {"href": "eastwar-devlog-053.html", "title": "699개의 삼각형으로 움직이는 병사들", "sub": "쿼럼으로 함께 만든 병사, 2D에서 Godot 검증까지"}, "en": {"href": "eastwar-devlog-053.html", "title": "Soldiers Moving with 699 Triangles", "sub": "Made together through Quorum, from 2D to Godot validation · Korean article"}}
   ];
 
   /* Find which page the current log falls on */
@@ -304,6 +305,7 @@
 
   window.EASTWAR_LI = { render: render };
 })();
+
 
 
 
