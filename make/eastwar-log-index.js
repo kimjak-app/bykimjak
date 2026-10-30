@@ -237,6 +237,7 @@
     ,{"num": "051", "date": "2026 · 10 · 27", "ko": {"href": "eastwar-devlog-051.html", "title": "소나무 한 그루를 전장에 심기까지", "sub": "록코치의 첫 본격 활약, 쿼럼으로 함께 고른 500삼각형 소나무"}, en:{"href": "eastwar-devlog-051-en.html", "title": "What It Took to Plant One Pine Tree on the Battlefield", "sub": "Grok Coach's first major contribution: a 500-triangle pine chosen together through QUORUM"}}
     ,{"num": "052", "date": "2026 · 10 · 28", "ko": {"href": "eastwar-devlog-052.html", "title": "한밤중 긴급회의", "sub": "쿼럼으로 EASTWAR 3D 문제의 해법을 찾다"}, en:{"href": "eastwar-devlog-052-en.html", "title": "An Emergency Meeting in the Middle of the Night", "sub": "Finding a way through EASTWAR's 3D problems with QUORUM"}}
     ,{"num": "053", "date": "2026 · 10 · 29", "ko": {"href": "eastwar-devlog-053.html", "title": "699개의 삼각형으로 움직이는 병사들", "sub": "쿼럼으로 함께 만든 병사, 2D에서 Godot 검증까지"}, en:{"href": "eastwar-devlog-053-en.html", "title": "Soldiers Moving with 699 Triangles", "sub": "Building soldiers together through QUORUM, from 2D to verification in Godot"}}
+    ,{"num": "054", "date": "2026 · 10 · 30", "ko": {"href": "eastwar-devlog-054.html", "title": "꿈꾸던 월드맵이 모습을 드러냈다", "sub": "두 시간 넘는 쿼럼 회의, 록코치의 제안으로 완성한 3D 한반도 시안"}, "en": {"href": "eastwar-devlog-054-en.html", "title": "The World Map I Dreamed of Takes Shape", "sub": "More than two hours in QUORUM: a 3D Korean Peninsula prototype built from Grok Coach’s proposal"}}
   ];
 
   /* Find which page the current log falls on */
@@ -305,6 +306,7 @@
 
   window.EASTWAR_LI = { render: render };
 })();
+
 
 
 

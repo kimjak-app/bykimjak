@@ -7021,6 +7021,118 @@
         "assets/img/eastwar-053/weapons-test.png"
       ],
       "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-054/accepted-korea-far.jpg",
+      "bytes": 520603,
+      "sha256": "5525418676cffe3a2c92314c9ebcf4b0e16332e9205fd856351e52a741120663",
+      "width": 1920,
+      "height": 1080,
+      "ip": "eastwar",
+      "mime": "image/jpeg",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/2cea969d0d574d4abd5f235c77c627fb8d21a8ff/make/assets/img/eastwar-054/accepted-korea-far.jpg",
+      "aliases": [
+        "assets/img/eastwar-054/accepted-korea-far.jpg"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-054/accepted-korea-junction.jpg",
+      "bytes": 709866,
+      "sha256": "b6924afb21c327429c95d51ff3097fe43f654b2e40dac63229a998ffa793c88d",
+      "width": 1920,
+      "height": 1080,
+      "ip": "eastwar",
+      "mime": "image/jpeg",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/2cea969d0d574d4abd5f235c77c627fb8d21a8ff/make/assets/img/eastwar-054/accepted-korea-junction.jpg",
+      "aliases": [
+        "assets/img/eastwar-054/accepted-korea-junction.jpg"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-054/accepted-korea-mid.jpg",
+      "bytes": 698616,
+      "sha256": "291fd9374c90135969f27b90cff9b700515577de2f9ab77ed32d9ac3491cf79c",
+      "width": 1920,
+      "height": 1080,
+      "ip": "eastwar",
+      "mime": "image/jpeg",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/2cea969d0d574d4abd5f235c77c627fb8d21a8ff/make/assets/img/eastwar-054/accepted-korea-mid.jpg",
+      "aliases": [
+        "assets/img/eastwar-054/accepted-korea-mid.jpg"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-054/accepted-korea-west-coast.jpg",
+      "bytes": 738650,
+      "sha256": "acc3ba2d44331aef9005ba5877bf44e31e4515fa54f6bfc403e9676d7e5038ac",
+      "width": 1920,
+      "height": 1080,
+      "ip": "eastwar",
+      "mime": "image/jpeg",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/2cea969d0d574d4abd5f235c77c627fb8d21a8ff/make/assets/img/eastwar-054/accepted-korea-west-coast.jpg",
+      "aliases": [
+        "assets/img/eastwar-054/accepted-korea-west-coast.jpg"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-054/eastasia-terrain-study.png",
+      "bytes": 3761207,
+      "sha256": "aae6cd12e0c7b85b9aec502c4b9a439bf35cedc385baa0e1c49346ab937cd636",
+      "width": 1672,
+      "height": 941,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/2cea969d0d574d4abd5f235c77c627fb8d21a8ff/make/assets/img/eastwar-054/eastasia-terrain-study.png",
+      "aliases": [
+        "assets/img/eastwar-054/eastasia-terrain-study.png"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-054/original-2d-worldmap.png",
+      "bytes": 4288452,
+      "sha256": "84cede7df0734a921ffd29549d5c3b23196114c89710baea99375bcdf24a4f72",
+      "width": 1908,
+      "height": 1074,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/2cea969d0d574d4abd5f235c77c627fb8d21a8ff/make/assets/img/eastwar-054/original-2d-worldmap.png",
+      "aliases": [
+        "assets/img/eastwar-054/original-2d-worldmap.png"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-054/rejected-illustrated-proposal.png",
+      "bytes": 3384905,
+      "sha256": "e02406edde8b5bc86a707d5c6102bf1a3deca21aa642c4bf37ccaa143616c553",
+      "width": 1672,
+      "height": 941,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/2cea969d0d574d4abd5f235c77c627fb8d21a8ff/make/assets/img/eastwar-054/rejected-illustrated-proposal.png",
+      "aliases": [
+        "assets/img/eastwar-054/rejected-illustrated-proposal.png"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-054/rejected-simple-3d.png",
+      "bytes": 1758354,
+      "sha256": "32d31b47fd195281047571e11f64f72c0254cf2b27266e2a265bfd6c143f749a",
+      "width": 1440,
+      "height": 960,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/2cea969d0d574d4abd5f235c77c627fb8d21a8ff/make/assets/img/eastwar-054/rejected-simple-3d.png",
+      "aliases": [
+        "assets/img/eastwar-054/rejected-simple-3d.png"
+      ],
+      "verified": true
     }
   ]
 }
