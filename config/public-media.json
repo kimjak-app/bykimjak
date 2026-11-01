@@ -7133,6 +7133,76 @@
         "assets/img/eastwar-054/rejected-simple-3d.png"
       ],
       "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-055/eastasia-overview.png",
+      "bytes": 4258727,
+      "sha256": "621cfd8795c9c21ab283b05d1fd5cc1affff50199371f7545a3ce97a9d32354d",
+      "width": 1922,
+      "height": 1159,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/1f17befc6a5980dbc265ee3984497b5c111bbe78/make/assets/img/eastwar-055/eastasia-overview.png",
+      "aliases": [
+        "assets/img/eastwar-055/eastasia-overview.png"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-055/eastasia-regions-midrange.png",
+      "bytes": 3947378,
+      "sha256": "9ddf5348d4b02594bf1b0bb390dec9a5444e6dffb10af3d6cd6316864eb3bc1d",
+      "width": 1925,
+      "height": 1154,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/1f17befc6a5980dbc265ee3984497b5c111bbe78/make/assets/img/eastwar-055/eastasia-regions-midrange.png",
+      "aliases": [
+        "assets/img/eastwar-055/eastasia-regions-midrange.png"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-055/existing-2d-mvp-hud.png",
+      "bytes": 4288452,
+      "sha256": "84cede7df0734a921ffd29549d5c3b23196114c89710baea99375bcdf24a4f72",
+      "width": 1908,
+      "height": 1074,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/1f17befc6a5980dbc265ee3984497b5c111bbe78/make/assets/img/eastwar-055/existing-2d-mvp-hud.png",
+      "aliases": [
+        "assets/img/eastwar-055/existing-2d-mvp-hud.png"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-055/korea-castles-labels.png",
+      "bytes": 3974685,
+      "sha256": "9e7079f7dc0aff1ec3150895d8223f0e14757b2bbf8b0f1b3034e11364b646a1",
+      "width": 1921,
+      "height": 1148,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/1f17befc6a5980dbc265ee3984497b5c111bbe78/make/assets/img/eastwar-055/korea-castles-labels.png",
+      "aliases": [
+        "assets/img/eastwar-055/korea-castles-labels.png"
+      ],
+      "verified": true
+    },
+    {
+      "path": "make/assets/img/eastwar-055/korea-rotated-terrain.png",
+      "bytes": 4346136,
+      "sha256": "0f9cef9197c5ed2345c0a05a04b1c8f18b556991403018d47a16a27a90c7538a",
+      "width": 1925,
+      "height": 1146,
+      "ip": "eastwar",
+      "mime": "image/png",
+      "url": "https://raw.githubusercontent.com/kimjak-app/bykimjak/1f17befc6a5980dbc265ee3984497b5c111bbe78/make/assets/img/eastwar-055/korea-rotated-terrain.png",
+      "aliases": [
+        "assets/img/eastwar-055/korea-rotated-terrain.png"
+      ],
+      "verified": true
     }
   ]
 }
