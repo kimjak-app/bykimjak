@@ -3,6 +3,7 @@
   // url: root-relative (from site root, no leading slash).
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
+{"url": "posts/think/ai-chat-015.html", "catKey": "ai-coach", "cat": "AI 코치들과의 수다", "title": "깨지러 가는 게 아니라, 더 강해지러 가는 거야", "sub": "모두의 창업 2라운드 사업계획서 초안을 마치고 채코치와 나눈 이야기", "date": "2026-11-05", "dl": "2026 · 11 · 05"},
 {"url": "make/quorum-devlog-004.html", "catKey": "quorum", "cat": "QUORUM 제작일지", "title": "내가 원하던 모습을 거의 갖춘 쿼럼", "sub": "이젠 AI 4명을 넘어 6명까지 품다", "date": "2026-11-05", "dl": "2026 · 11 · 05"},
 {"url": "make/quorum-devlog-003.html", "catKey": "quorum", "cat": "QUORUM 제작일지", "title": "원하는 쿼럼이 되어간다", "sub": "원하는 답 대신 질문만 늘어놓던 쿼럼을 고치다", "date": "2026-11-03", "dl": "2026 · 11 · 03"},
 {"url": "make/quorum-devlog-002.html", "catKey": "quorum", "cat": "QUORUM 제작일지", "title": "쿼럼, 회의의 규칙을 세우다", "sub": "독립 의견부터 사용자 승인까지, API 기반 쿼럼의 첫 설계", "date": "2026-11-02", "dl": "2026 · 11 · 02"},
@@ -851,6 +852,7 @@
     { key: 'make',         label: 'Make · 02–C',      dark: true  }
   ];
 })();
+
 
 
 
