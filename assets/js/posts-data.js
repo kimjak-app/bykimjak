@@ -3,6 +3,7 @@
   // url: root-relative (from site root, no leading slash).
   // In think/index.html, prefix with '../' when using as href.
   window.ALL_POSTS = [
+{"url": "make/quorum-devlog-003.html", "catKey": "quorum", "cat": "QUORUM 제작일지", "title": "원하는 쿼럼이 되어간다", "sub": "원하는 답 대신 질문만 늘어놓던 쿼럼을 고치다", "date": "2026-11-03", "dl": "2026 · 11 · 03"},
 {"url": "make/quorum-devlog-002.html", "catKey": "quorum", "cat": "QUORUM 제작일지", "title": "쿼럼, 회의의 규칙을 세우다", "sub": "독립 의견부터 사용자 승인까지, API 기반 쿼럼의 첫 설계", "date": "2026-11-02", "dl": "2026 · 11 · 02"},
 {"url": "make/eastwar-devlog-055.html", "catKey": "eastwar", "cat": "EASTWAR 개발일지", "title": "3D 월드맵이 서다", "sub": "한반도에서 한·중·일로, 기존 2D MVP를 이어받을 무대", "date": "2026-11-01", "dl": "2026 · 11 · 01"},
 {"url": "make/eastwar-devlog-054.html", "catKey": "eastwar", "cat": "EASTWAR 개발일지", "title": "꿈꾸던 월드맵이 모습을 드러냈다", "sub": "두 시간 넘는 쿼럼 회의, 록코치의 제안으로 완성한 3D 한반도 시안", "date": "2026-10-30", "dl": "2026 · 10 · 30"},
