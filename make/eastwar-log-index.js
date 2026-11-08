@@ -239,6 +239,7 @@
     ,{"num": "053", "date": "2026 · 10 · 29", "ko": {"href": "eastwar-devlog-053.html", "title": "699개의 삼각형으로 움직이는 병사들", "sub": "쿼럼으로 함께 만든 병사, 2D에서 Godot 검증까지"}, en:{"href": "eastwar-devlog-053-en.html", "title": "Soldiers Moving with 699 Triangles", "sub": "Building soldiers together through QUORUM, from 2D to verification in Godot"}}
     ,{"num": "054", "date": "2026 · 10 · 30", "ko": {"href": "eastwar-devlog-054.html", "title": "꿈꾸던 월드맵이 모습을 드러냈다", "sub": "두 시간 넘는 쿼럼 회의, 록코치의 제안으로 완성한 3D 한반도 시안"}, "en": {"href": "eastwar-devlog-054-en.html", "title": "The World Map I Dreamed of Takes Shape", "sub": "More than two hours in QUORUM: a 3D Korean Peninsula prototype built from Grok Coach’s proposal"}}
     ,{"num": "055", "date": "2026 · 11 · 01", "ko": {"href": "eastwar-devlog-055.html", "title": "3D 월드맵이 서다", "sub": "한반도에서 한·중·일로, 기존 2D MVP를 이어받을 무대"}, "en": {"href": "eastwar-devlog-055-en.html", "title": "The 3D World Map Takes Shape", "sub": "From a Korean prototype to Korea, China, and Japan: a new setting for the existing 2D MVP"}}
+    ,{"num": "056", "date": "2026 · 11 · 07", "ko": {"href": "eastwar-devlog-056.html", "title": "월드맵 위에 살아나는 도시들", "sub": "한·중·일 건물과 성 발전 HUD, 낮밤 턴 버튼을 만들다"}, "en": {"href": "eastwar-devlog-056-en.html", "title": "Cities Coming to Life on the World Map", "sub": "Building Korean, Chinese, and Japanese City Assets, a City Development HUD, and a Day–Night Turn Button"}}
   ];
 
   /* Find which page the current log falls on */
@@ -307,6 +308,7 @@
 
   window.EASTWAR_LI = { render: render };
 })();
+
 
 
 
