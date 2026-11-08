@@ -82,7 +82,14 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 .devlog__body code{font-family:var(--f-mono);font-size:13px;line-height:1.7;color:var(--ink-2)}
 .devlog__body figure{margin:32px 0}
 .devlog__body figure img{width:100%;border-radius:2px}
-#log-056 .devlog__body figure img{display:block;width:100%;max-width:100%;height:auto}
+#log-056 .devlog__body figure img{display:block;width:auto;max-width:100%;height:auto}
+#log-056 .building-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 20px;margin:32px 0}
+#log-056 .building-gallery figure{margin:0;min-width:0;text-align:center}
+#log-056 .building-gallery figure a{display:block}
+#log-056 .building-gallery figure img{margin-inline:auto}
+#log-056 .building-gallery figcaption{line-height:1.6;letter-spacing:.02em}
+@media(max-width:600px){#log-056 .building-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:360px){#log-056 .building-gallery{grid-template-columns:1fr}}
 .devlog__body figure figcaption{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
 .devlog__body .fig-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0}
 .devlog__body .fig-2col figure{margin:0}
@@ -182,12 +189,16 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 <p>창은 화면 왼쪽에 작게 두기로 했다. 지금 비어 있는 몽골 지역 위에 배치해 지도와 도시의 모습을 함께 볼 수 있게 하려는 선택이다.</p>
 <p>도시 화면을 위한 샘플 다섯 곳을 승인했고, 한성·평양·건업·에도·교토에는 한·중·일 건물 세트를 배치했다. 이번에 보여 주는 시장과 관청 그림에서도 나라별 모습이 다르다. 도시를 들여다봤을 때 어느 문화권의 성인지 알아볼 수 있도록 만드는 재료들이다.</p>
 <figure><a href="assets/img/eastwar-056/city-development-hud.webp"><img src="assets/img/eastwar-056/city-development-hud.webp" width="1917" height="1078" alt="월드맵에 성 내부를 살펴볼 수 있는 성 발전 HUD 창을 더했다." loading="lazy"></a><figcaption>그림 1. 월드맵에 성 내부를 살펴볼 수 있는 성 발전 HUD 창을 더했다.</figcaption></figure>
+<div class="building-gallery">
 <figure><a href="assets/img/eastwar-056/market-kr.webp"><img src="assets/img/eastwar-056/market-kr.webp" width="128" height="128" alt="한국 시장 건물 이미지." loading="lazy"></a><figcaption>그림 2. 한국 시장 건물 이미지.</figcaption></figure>
 <figure><a href="assets/img/eastwar-056/market-cn.webp"><img src="assets/img/eastwar-056/market-cn.webp" width="128" height="128" alt="중국 시장 건물 이미지." loading="lazy"></a><figcaption>그림 3. 중국 시장 건물 이미지.</figcaption></figure>
 <figure><a href="assets/img/eastwar-056/market-jp.webp"><img src="assets/img/eastwar-056/market-jp.webp" width="128" height="128" alt="일본 시장 건물 이미지." loading="lazy"></a><figcaption>그림 4. 일본 시장 건물 이미지.</figcaption></figure>
+</div>
+<div class="building-gallery">
 <figure><a href="assets/img/eastwar-056/office-kr.webp"><img src="assets/img/eastwar-056/office-kr.webp" width="192" height="192" alt="한국 관청 건물 이미지." loading="lazy"></a><figcaption>그림 5. 한국 관청 건물 이미지.</figcaption></figure>
 <figure><a href="assets/img/eastwar-056/office-cn.webp"><img src="assets/img/eastwar-056/office-cn.webp" width="192" height="192" alt="중국 관청 건물 이미지." loading="lazy"></a><figcaption>그림 6. 중국 관청 건물 이미지.</figcaption></figure>
 <figure><a href="assets/img/eastwar-056/office-jp.webp"><img src="assets/img/eastwar-056/office-jp.webp" width="192" height="192" alt="일본 관청 건물 이미지." loading="lazy"></a><figcaption>그림 7. 일본 관청 건물 이미지.</figcaption></figure>
+</div>
 <h3>그림을 바꿀 때마다 코드를 고치지 않도록</h3>
 <p>도시 HUD 작업에서는 일곱 가지 결정 사항을 추천안대로 승인했다. 그중 중요한 부분은 건물을 어디에 놓을지, 어느 점을 기준으로 맞출지, 무엇을 앞에 그릴지를 데이터로 나누어 둔 것이다.</p>
 <p>쉽게 말하면 도시 그림의 배치 설명서를 따로 만든 셈이다. 건물 그림을 교체할 때마다 프로그램 코드를 다시 고치지 않아도 되도록 구조를 잡았다. 앞으로 성의 모습을 다듬어 갈 때도 이 기준을 활용하게 된다.</p>

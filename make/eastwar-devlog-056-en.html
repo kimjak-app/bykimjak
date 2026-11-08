@@ -82,7 +82,14 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 .devlog__body code{font-family:var(--f-mono);font-size:13px;line-height:1.7;color:var(--ink-2)}
 .devlog__body figure{margin:32px 0}
 .devlog__body figure img{width:100%;border-radius:2px}
-#log-056 .devlog__body figure img{display:block;width:100%;max-width:100%;height:auto}
+#log-056 .devlog__body figure img{display:block;width:auto;max-width:100%;height:auto}
+#log-056 .building-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 20px;margin:32px 0}
+#log-056 .building-gallery figure{margin:0;min-width:0;text-align:center}
+#log-056 .building-gallery figure a{display:block}
+#log-056 .building-gallery figure img{margin-inline:auto}
+#log-056 .building-gallery figcaption{line-height:1.6;letter-spacing:.02em}
+@media(max-width:600px){#log-056 .building-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:360px){#log-056 .building-gallery{grid-template-columns:1fr}}
 .devlog__body figure figcaption{font-family:var(--f-mono);font-size:11px;color:var(--ink-3);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
 .devlog__body .fig-2col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:32px 0}
 .devlog__body .fig-2col figure{margin:0}
@@ -182,12 +189,16 @@ footer .bottom{margin-top:60px;padding-top:24px;border-top:1px solid var(--dark-
 <p>I decided to keep the window small and position it on the left side of the screen. Placing it over the currently empty Mongolian area is intended to let players see the map and the city view together.</p>
 <p>I approved five sample city views, and Korean, Chinese, and Japanese building sets were placed in Hanseong, Pyongyang, Jianye, Edo, and Kyoto. The market and government-office images shown here also differ by country. These are the visual ingredients for making a city’s cultural setting recognizable when players look inside.</p>
 <figure><a href="assets/img/eastwar-056/city-development-hud.webp"><img src="assets/img/eastwar-056/city-development-hud.webp" width="1917" height="1078" alt="A city development HUD window has been added to the world map to show the city interior." loading="lazy"></a><figcaption>Figure 1. A city development HUD window has been added to the world map to show the city interior.</figcaption></figure>
+<div class="building-gallery">
 <figure><a href="assets/img/eastwar-056/market-kr.webp"><img src="assets/img/eastwar-056/market-kr.webp" width="128" height="128" alt="Korean market building artwork." loading="lazy"></a><figcaption>Figure 2. Korean market building artwork.</figcaption></figure>
 <figure><a href="assets/img/eastwar-056/market-cn.webp"><img src="assets/img/eastwar-056/market-cn.webp" width="128" height="128" alt="Chinese market building artwork." loading="lazy"></a><figcaption>Figure 3. Chinese market building artwork.</figcaption></figure>
 <figure><a href="assets/img/eastwar-056/market-jp.webp"><img src="assets/img/eastwar-056/market-jp.webp" width="128" height="128" alt="Japanese market building artwork." loading="lazy"></a><figcaption>Figure 4. Japanese market building artwork.</figcaption></figure>
+</div>
+<div class="building-gallery">
 <figure><a href="assets/img/eastwar-056/office-kr.webp"><img src="assets/img/eastwar-056/office-kr.webp" width="192" height="192" alt="Korean government-office building artwork." loading="lazy"></a><figcaption>Figure 5. Korean government-office building artwork.</figcaption></figure>
 <figure><a href="assets/img/eastwar-056/office-cn.webp"><img src="assets/img/eastwar-056/office-cn.webp" width="192" height="192" alt="Chinese government-office building artwork." loading="lazy"></a><figcaption>Figure 6. Chinese government-office building artwork.</figcaption></figure>
 <figure><a href="assets/img/eastwar-056/office-jp.webp"><img src="assets/img/eastwar-056/office-jp.webp" width="192" height="192" alt="Japanese government-office building artwork." loading="lazy"></a><figcaption>Figure 7. Japanese government-office building artwork.</figcaption></figure>
+</div>
 <h3>Replacing Artwork Without Rewriting Code</h3>
 <p>For the city HUD, I approved the recommended options for all seven decisions. An important part of this was separating building placement, anchor points, and drawing order into data.</p>
 <p>In simple terms, we created a separate set of layout instructions for the city artwork. The structure allows building images to be replaced without rewriting the program code each time. These rules will also serve as a basis for refining the city views later.</p>
