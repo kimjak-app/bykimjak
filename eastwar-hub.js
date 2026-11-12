@@ -6,7 +6,7 @@
 
   var BASE = '/bykimjak';
   var VERSION = '20261112-eastwar-01';
-  var ART = BASE + '/assets/ui/eastwar-popup-20261112.webp';
+  var ART = '/bykimjak/assets/ui/eastwar-popup-20261112.webp';
   var POSITION_KEY = 'byKimjakProjectHubPositionV2';
   var HOME = new RegExp('^' + BASE + '/?(?:index\\.html)?$').test(location.pathname);
   var LINKS = [
