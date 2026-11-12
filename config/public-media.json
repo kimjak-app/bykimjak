@@ -7203,6 +7203,17 @@
         "assets/img/eastwar-055/korea-rotated-terrain.png"
       ],
       "verified": true
+    },
+    {
+      "path": "assets/ui/eastwar-popup-20261112.webp",
+      "ip": "eastwar",
+      "bytes": 212080,
+      "sha256": "387dbef638c65694788c4026e21f369023d0a42fd511016b85521b470a46eaf3",
+      "mime": "image/webp",
+      "url": "https://github.com/kimjak-app/bykimjak/releases/download/eastwar-popup-public-v1-20261112/eastwar-popup-20261112.webp",
+      "width": 960,
+      "height": 960,
+      "verified": true
     }
   ]
 }
