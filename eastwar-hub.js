@@ -1,17 +1,13 @@
-/**
- * byKimjak PROJECT HUB — GAPPAE + EASTWAR, 20261019-projects-04
- * One widget; live HTML links; 640x960 web-optimized artwork from the supplied PNG.
- * Starts collapsed so the homepage trailer remains unobstructed.
- */
+/** EASTWAR featured project popup — approved 2026-11-12. Live HTML text and links. */
 (function () {
   'use strict';
   if (window.__byKimjakProjectHubV1) return;
   window.__byKimjakProjectHubV1 = true;
 
   var BASE = '/bykimjak';
-  var VERSION = '20261019-projects-04';
-  var ART = "https://github.com/kimjak-app/bykimjak/releases/download/media-horibyeong-20261018/thumb-a70b478cc483012b6e510b5c.webp";
-  var POSITION_KEY = 'byKimjakProjectHubPositionV1';
+  var VERSION = '20261112-eastwar-01';
+  var ART = BASE + '/assets/ui/eastwar-popup-20261112.webp';
+  var POSITION_KEY = 'byKimjakProjectHubPositionV2';
   var HOME = new RegExp('^' + BASE + '/?(?:index\\.html)?$').test(location.pathname);
   var LINKS = [
     ['DEVLOG · 02–A', '개발일지', 'Devlog', '/make/eastwar.html'],
@@ -50,103 +46,80 @@
     var shadow = root.attachShadow({ mode: 'open' });
     var style = document.createElement('style');
     style.textContent = `
-      :host{color-scheme:light;font-family:var(--f-kr,"Pretendard Variable",system-ui,sans-serif);}
-      *,*::before,*::after{box-sizing:border-box;}
-      [hidden]{display:none!important;}
-      button,a{-webkit-tap-highlight-color:transparent;}
-      button{font:inherit;cursor:pointer;}
-      a{color:inherit;text-decoration:none;}
-      #ph-panel{position:relative;width:var(--ph-width,320px);max-height:var(--ph-max-height,650px);
-        overflow:auto;overscroll-behavior:contain;border-radius:7px;
-        box-shadow:0 16px 42px rgba(0,0,0,.35);scrollbar-width:thin;}
-      #ph-card{position:relative;isolation:isolate;width:100%;height:var(--ph-card-height,480px);
-        background:#f3eee5 center top/100% 100% no-repeat;color:#29241d;}
-      #ph-card::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;}
-      :host([data-art="ready"]) #ph-card{color:#fff8e9;background-color:#211d18;}
-      :host([data-art="ready"]) #ph-card::before{background:linear-gradient(180deg,
-        rgba(0,0,0,.08) 0%,rgba(0,0,0,.16) 34.375%,rgba(0,0,0,.26) 34.375%,rgba(0,0,0,.36) 100%);}
-      .ph-gappae{height:34.375%;display:flex;flex-direction:column;align-items:center;
-        justify-content:center;padding:19px 28px 17px;}
-      .ph-heading{margin:0;text-align:center;cursor:grab;touch-action:none;user-select:none;}
-      .ph-heading:active{cursor:grabbing;}
-      .ph-eyebrow{display:block;font-family:var(--f-mono,monospace);font-size:9px;line-height:1.4;
-        font-weight:500;letter-spacing:.16em;color:#66532f;}
-      .ph-gappae h2{margin:6px 0 0;font-size:18px;font-weight:650;line-height:1.35;letter-spacing:-.015em;}
-      #ph-gappae-link{display:flex;align-items:center;justify-content:center;gap:16px;
-        min-height:44px;width:158px;margin-top:13px;border:1px solid #b59b65;border-radius:3px;
-        font-size:14px;font-weight:650;letter-spacing:.03em;background:rgba(255,255,255,.5);}
-      .ph-eastwar{height:65.625%;padding:15px 28px 7px;display:flex;flex-direction:column;}
-      .ph-eastwar h2{margin:0;font-family:var(--f-display,system-ui,sans-serif);font-size:16px;
-        font-weight:600;line-height:1.4;letter-spacing:.12em;text-align:center;}
-      .ph-links{display:flex;flex:1;min-height:0;flex-direction:column;justify-content:center;gap:3px;}
-      .ph-link{display:flex;flex-direction:column;align-items:center;justify-content:center;
-        min-height:44px;padding:4px 4px 6px;border-bottom:1px solid rgba(112,89,43,.25);}
-      .ph-link:last-child{border-bottom:0;}
-      .ph-label{font-family:var(--f-mono,monospace);font-size:9px;line-height:1.25;
-        letter-spacing:.11em;font-weight:500;color:#66532f;}
-      .ph-name{font-size:14px;font-weight:600;line-height:1.45;}
-      .ph-en{font-size:10px;font-weight:400;margin-left:4px;}
-      #ph-close{flex-shrink:0;align-self:center;min-width:130px;min-height:44px;padding:7px 12px;
-        border:0;background:none;font-size:11px;letter-spacing:.1em;color:inherit;}
-      #ph-top-close{position:absolute;right:2px;top:2px;z-index:3;width:44px;height:44px;
-        padding:0;border:0;border-radius:50%;background:transparent;color:inherit;font-size:18px;}
-      :host([data-art="ready"]) .ph-heading,
-      :host([data-art="ready"]) .ph-name,
-      :host([data-art="ready"]) #ph-close,
-      :host([data-art="ready"]) #ph-top-close{text-shadow:0 1px 3px #000,0 0 10px rgba(0,0,0,.85);}
-      :host([data-art="ready"]) #ph-top-close{color:#fff8e9;}
-      :host([data-art="ready"]) .ph-eyebrow,
-      :host([data-art="ready"]) .ph-label{color:#ead8ac;text-shadow:0 1px 3px #000;}
-      :host([data-art="ready"]) #ph-gappae-link{background:rgba(15,12,9,.7);border-color:#c8a86a;color:#fff4dc;}
-      :host([data-art="ready"]) .ph-link{border-color:rgba(230,205,150,.32);
-        background:linear-gradient(90deg,transparent,rgba(10,8,6,.32) 25%,rgba(10,8,6,.32) 75%,transparent);}
-      a:hover{filter:brightness(1.12);}
-      a:focus-visible,button:focus-visible{outline:2px solid #d8b65e;outline-offset:-3px;}
-      #ph-collapsed{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
-        background:#17130f;border:1px solid #c8a86a;box-shadow:0 6px 18px rgba(0,0,0,.28);
-        color:#dec38d;touch-action:none;cursor:grab;padding:0;}
-      #ph-collapsed svg{width:25px;height:25px;pointer-events:none;}
-      #ph-collapsed:active{cursor:grabbing;}
-      :host([data-art="missing"]) .ph-gappae{border-bottom:1px solid #b59b65;}
-      @media(prefers-reduced-motion:no-preference){a,button{transition:filter .15s ease;}}
-    `;
-    style.textContent += `
-      #ph-card{background-size:cover;background-position:center;color:#fff8e9;background-color:#17130f}
-      #ph-card::before,:host([data-art="ready"]) #ph-card::before{background:linear-gradient(#08070680,#080706f5 65%)}
-      .ph-header{height:44px;text-align:left;padding:16px 20px 0;font-size:10px;letter-spacing:.15em;color:#d8c49d}
-      .ph-feature{display:flex;flex-direction:column;gap:6px;padding:7px 20px 10px;height:88px}
-      .ph-feature strong{font-size:27px;display:flex;justify-content:space-between}.ph-feature small{font-size:11px;color:#e1d8c8}
-      .ph-projects{display:grid;grid-template-columns:1fr 1.3fr;margin:0 16px;border-block:1px solid #ffffff35}
-      .ph-projects a{padding:12px 5px;text-align:center;font-size:13px}.ph-projects a+a{border-left:1px solid #ffffff35}
-      .ph-projects .ph-baegopa{grid-column:1/-1;border-left:0;border-top:1px solid #ffffff35}.ph-eastwar{height:auto;padding:5px 16px}.ph-eastwar h2{font-size:12px;letter-spacing:.15em;margin-bottom:10px}
-      .ph-links{display:grid;grid-template-columns:1fr 1fr;gap:6px}.ph-link{min-height:42px;border:1px solid #ffffff30!important;border-radius:3px;background:#ffffff08!important;padding:6px}.ph-name{font-size:12px}
-      .ph-eyebrow{color:#ead8ac}
+      :host{color-scheme:dark;font-family:"Pretendard Variable","Malgun Gothic",system-ui,sans-serif;color:#f7edd7;}
+      *,*::before,*::after{box-sizing:border-box} [hidden]{display:none!important}
+      button,a{-webkit-tap-highlight-color:transparent} button{font:inherit;cursor:pointer}
+      a{color:inherit;text-decoration:none}
+      #ph-panel{position:relative;width:var(--ph-width,380px);max-height:var(--ph-max-height,700px);overflow:auto;
+        overscroll-behavior:contain;border:1px solid #b99a62;border-radius:6px;background:#10100f;
+        box-shadow:0 16px 48px #0008, inset 0 0 0 2px #d5b57530;scrollbar-width:thin;scrollbar-color:#907747 #181714}
+      #ph-card{background:#10100f;color:#f7edd7;padding-bottom:10px}
+      .ph-hero{position:relative;height:min(calc(var(--ph-width,380px) - 2px),max(200px,calc(var(--ph-max-height,740px) - 390px)));background:#161615 center top/cover no-repeat;isolation:isolate;padding:20px 16px 0}
+      .ph-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#0004,transparent 42%,transparent 72%,#10100f)}
+      .ph-heading{cursor:grab;touch-action:none;user-select:none}.ph-heading:active{cursor:grabbing}
+      .ph-eyebrow{display:block;color:#e5c991;font:8px/1.5 Georgia,serif;letter-spacing:.22em;padding-right:28px}
+      .ph-title{margin:7px 0 2px;color:#f6df9d;font:bold clamp(36px,12vw,53px)/1 Georgia,"Times New Roman",serif;letter-spacing:-.035em;text-shadow:0 2px 8px #0009}
+      .ph-tagline{margin:8px 0;color:#fff1d7;font-size:14px;line-height:1.55;font-weight:600;text-shadow:0 2px 4px #000,0 0 10px #000}
+      .ph-tagline span{display:block}
+      .ph-cta{display:flex;align-items:center;justify-content:center;gap:16px;min-height:46px;margin:-2px 16px 12px;
+        border:1px solid #e4c98c;border-radius:4px;background:linear-gradient(120deg,#dfc085,#c09a51 55%,#d6b46c);color:#18130d;font-size:20px;font-weight:800;box-shadow:inset 0 0 0 2px #fff2}
+      .ph-links{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:0 16px 14px}
+      .ph-link{display:flex;align-items:center;justify-content:center;min-height:44px;border:1px solid #b49762;border-radius:3px;font-size:16px;font-weight:600;background:#ffffff03}
+      .ph-videos{margin:0 16px;border-top:1px solid #aa926366;text-align:center;padding-top:12px}
+      .ph-videos h2{font-size:25px;line-height:1.3;margin:0 0 10px;font-weight:800;letter-spacing:.04em}
+      .ph-category{display:flex;align-items:center;gap:10px;margin:5px 12px 0;color:#ddba79;font-size:15px;font-weight:700}
+      .ph-category::before,.ph-category::after{content:"";height:1px;background:#a6895455;flex:1}
+      .ph-film-links{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;column-gap:5px;margin:0;font-size:14px;line-height:1.5}
+      .ph-film-links a,.ph-coming{display:inline-flex;align-items:center;min-height:40px;white-space:nowrap}
+      .ph-sep{color:#b4a286}.ph-coming{color:#c4bbab}.ph-coming small{font-size:11px;margin-left:3px}
+      .ph-footer{text-align:center;margin:8px 0 0;color:#c6aa72;font:italic 12px/1.5 Georgia,serif}
+      #ph-top-close{position:absolute;right:6px;top:6px;z-index:3;width:36px;height:36px;border:1px solid #d6bd7825;border-radius:50%;padding:0;background:#121211ed;color:#fff0ce;font-size:27px;line-height:1}
+      a:hover{filter:brightness(1.18);background-color:#d6b46c18}a:focus-visible,button:focus-visible{outline:3px solid #ffe6a5;outline-offset:2px}
+      #ph-collapsed{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#17130f;border:1px solid #c8a86a;
+        box-shadow:0 6px 18px #0005;color:#dec38d;touch-action:none;cursor:grab;padding:0}
+      #ph-collapsed svg{width:25px;height:25px;pointer-events:none}#ph-collapsed:active{cursor:grabbing}
+      @media(max-width:360px){.ph-title{font-size:44px}.ph-eyebrow{font-size:7px}.ph-tagline{font-size:13px}.ph-film-links{font-size:12px;column-gap:4px}.ph-coming small{font-size:10px}}
+      @media(prefers-reduced-motion:no-preference){a,button{transition:filter .15s ease}}
     `;
     shadow.appendChild(style);
     var panel = document.createElement('section');
     panel.id = 'ph-panel';
     panel.setAttribute('role', 'region');
-    panel.setAttribute('aria-label', '호리병 · 갑패 · 매직블록마스터 · 깡셰프 배고파! · EASTWAR 바로가기');
-    panel.innerHTML = '<div id="ph-card"><div class="ph-heading ph-header" title="드래그하여 이동">PROJECTS</div>' +
-      '<a class="ph-feature" href="' + BASE + '/watch/horibyeong.html"><span class="ph-eyebrow">LATEST FILM</span><strong>호리병 <span aria-hidden="true">→</span></strong><small>HORIBYEONG · 영상과 제작기</small></a>' +
-      '<nav class="ph-projects" aria-label="작품 바로가기"><a href="' + BASE + '/watch/gappae.html">갑패 ↗</a><a href="' + BASE + '/watch/magic-block-master.html">매직블록마스터 ↗</a><a class="ph-baegopa" href="' + BASE + '/watch/baegopa.html">깡셰프 배고파! ↗</a></nav>' +
-      '<section class="ph-eastwar"><h2 class="ph-heading" title="드래그하여 이동">EASTWAR</h2><nav class="ph-links" aria-label="EASTWAR 메뉴">' + LINKS.map(function (link) {
-        return '<a class="ph-link" href="' + BASE + link[3] + '"><span class="ph-name">' + link[1] + '</span></a>';
-      }).join('') + '</nav></section></div><button id="ph-top-close" type="button" aria-label="통합 팝업 접기">×</button>';
+    panel.setAttribute('aria-label', 'EASTWAR 및 영상 프로젝트 바로가기');
+    panel.innerHTML = '<div id="ph-card"><header class="ph-hero" id="ph-hero">' +
+      '<div class="ph-heading" title="드래그하여 이동"><span class="ph-eyebrow">BYKIMJAK · FEATURED PROJECT</span><h2 class="ph-title">EASTWAR</h2></div>' +
+      '<p class="ph-tagline"><span>시대를 넘어, 길드와 함께</span><span>천하를 다시 쓰다</span></p></header>' +
+      '<a class="ph-cta" href="' + BASE + '/watch/eastwar.html">EASTWAR 작품 보기 <span aria-hidden="true">→</span></a>' +
+      '<nav class="ph-links" aria-label="EASTWAR 메뉴">' + LINKS.map(function (link) {
+        return '<a class="ph-link" href="' + BASE + link[3] + '">' + link[1] + '</a>';
+      }).join('') + '</nav>' +
+      '<section class="ph-videos" aria-labelledby="ph-video-title"><h2 id="ph-video-title">영상 프로젝트</h2>' +
+      '<h3 class="ph-category">실사</h3><nav class="ph-film-links" aria-label="실사 영상 프로젝트">' +
+      '<a href="' + BASE + '/watch/horibyeong.html">호리병</a><span class="ph-sep" aria-hidden="true">·</span>' +
+      '<a href="' + BASE + '/watch/gappae.html">갑패</a><span class="ph-sep" aria-hidden="true">·</span>' +
+      '<a href="' + BASE + '/watch/baegopa.html">깡셰프 배고파!</a></nav>' +
+      '<h3 class="ph-category">애니메이션</h3><nav class="ph-film-links" aria-label="애니메이션 영상 프로젝트">' +
+      '<a href="' + BASE + '/watch/magic-block-master.html">매직블럭마스터</a><span class="ph-sep" aria-hidden="true">·</span>' +
+      '<span class="ph-coming">아크니멜스<small>(준비중)</small></span></nav></section>' +
+      '<p class="ph-footer">byKimjak — IP Architect</p></div><button id="ph-top-close" type="button" aria-label="팝업 접기">×</button>';
     var collapsed = document.createElement('button');
     collapsed.id = 'ph-collapsed';
     collapsed.type = 'button';
-    collapsed.setAttribute('aria-label', '작품 메뉴 열기. 호리병 · 갑패 · 매직블록마스터 · 깡셰프 배고파! · EASTWAR');
+    collapsed.setAttribute('aria-label', 'EASTWAR 및 영상 프로젝트 메뉴 열기');
     collapsed.setAttribute('aria-controls', 'ph-panel');
     collapsed.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l8 4v6c0 5-4 8-8 10-4-2-8-5-8-10V6l8-4z"/><path d="M8 9l8 8M16 9l-8 8M7 8l2 2M15 10l2-2"/></svg>';
     shadow.appendChild(panel);
     shadow.appendChild(collapsed);
+    var topClose = shadow.getElementById('ph-top-close');
+    shadow.appendChild(topClose);
     document.body.appendChild(root);
 
-    var isOpen = false;
+    var CLOSED_KEY = 'byKimjakProjectHubClosed20261112';
+    var isOpen = HOME;
+    try { if (sessionStorage.getItem(CLOSED_KEY) === '1') isOpen = false; } catch (e) {}
     var position = null;
     var ready = false;
-    var card = shadow.getElementById('ph-card');
+    var card = shadow.getElementById('ph-hero');
     try {
       var stored = JSON.parse(localStorage.getItem(POSITION_KEY));
       if (stored && typeof stored.left === 'number' && isFinite(stored.left) &&
@@ -162,17 +135,15 @@
     function place() {
       var view = viewport();
       if (view.width < 1 || view.height < 1) return;
-      var width = Math.min(320, Math.max(1, view.width - 24));
-      var cardHeight = 350;
+      var width = Math.min(380, Math.max(1, view.width - 24));
       var maxHeight = Math.max(44, view.height - 24);
       root.style.setProperty('--ph-width', width + 'px');
-      root.style.setProperty('--ph-card-height', cardHeight + 'px');
       root.style.setProperty('--ph-max-height', maxHeight + 'px');
       var actualWidth = isOpen ? width : 56;
-      var actualHeight = isOpen ? Math.min(cardHeight, maxHeight) : 56;
+      var actualHeight = isOpen ? Math.min(panel.scrollHeight + 2, maxHeight) : 56;
       var margin = view.width <= 760 ? 12 : 20;
       var defaultTop = view.width <= 760 ? view.top + view.height - actualHeight - 12 : view.top + 92;
-      var desired = position || { left: view.left + view.width - actualWidth - margin, top: defaultTop };
+      var desired = position || { left: view.left + margin, top: defaultTop };
       var maxLeft = Math.max(view.left + 4, view.left + view.width - actualWidth - 4);
       var maxTop = Math.max(view.top + 4, view.top + view.height - actualHeight - 4);
       root.style.left = Math.max(view.left + 4, Math.min(desired.left, maxLeft)) + 'px';
@@ -188,14 +159,16 @@
     function render() {
       root.dataset.open = isOpen ? 'true' : 'false';
       panel.hidden = !isOpen;
+      topClose.hidden = !isOpen;
       collapsed.hidden = isOpen;
       collapsed.setAttribute('aria-expanded', String(isOpen));
       place();
-      if (ready || !HOME) root.style.visibility = 'visible';
+      root.style.visibility = 'visible';
     }
-    function openPanel() { isOpen = true; render(); }
+    function openPanel() { isOpen = true; render(); shadow.getElementById('ph-top-close').focus({ preventScroll: true }); }
     function closePanel() {
       isOpen = false;
+      try { sessionStorage.setItem(CLOSED_KEY, '1'); } catch (e) {}
       savePosition();
       render();
       collapsed.focus({ preventScroll: true });
@@ -237,6 +210,7 @@
     }
     draggable(collapsed, openPanel);
     shadow.querySelectorAll('.ph-heading').forEach(function (heading) { draggable(heading); });
+    if (window.ResizeObserver) new ResizeObserver(place).observe(shadow.getElementById('ph-card'));
     window.addEventListener('resize', place);
     if (window.visualViewport) {
       window.visualViewport.addEventListener('resize', place);
